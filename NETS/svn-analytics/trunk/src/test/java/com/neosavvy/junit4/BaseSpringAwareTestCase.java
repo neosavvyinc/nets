@@ -26,7 +26,8 @@ public class BaseSpringAwareTestCase {
         logger.info("Setting up testcase");
 
         AbstractApplicationContext ctx = new ClassPathXmlApplicationContext(
-                new String[] { "svnAnalyticsContext.xml" });
+                new String[] { "svnAnalyticsContext.xml",
+                        "svnRepositoryConfigurations.xml" });
         ctx.registerShutdownHook();
         context = ctx;
 

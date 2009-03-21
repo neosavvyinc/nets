@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+
+    <bean id="usaRepository" class="com.neosavvy.svn.analytics.importer.model.SVNRepositoryModel">
+
+        <property name="url" value="https://svn.roundarch.com/repos/USA"/>
+        <property name="name" value="aparrish"/>
+        <property name="password" value="subw@y1"/>
+        <property name="startRevision" value="0"/>
+        <property name="endRevision" value="-1"/>
+        
+    </bean>
+
+    <bean id="usaDSRepository" class="com.neosavvy.svn.analytics.importer.model.SVNRepositoryModel">
+
+        <property name="url" value="https://svn.roundarch.com/repos/USADS"/>
+        <property name="name" value="aparrish"/>
+        <property name="password" value="subw@y1"/>
+        <property name="startRevision" value="0"/>
+        <property name="endRevision" value="-1"/>
+        
+    </bean>
+    
+    <bean id="svnRepositoryConverter" class="com.neosavvy.svn.analytics.importer.SVNRepositoryDatabaseConverterImpl">
+        <property name="repositories">
+            <list>
+                <ref bean="usaRepository"/>
+                <ref bean="usaDSRepository"/>
+            </list>
+        </property>    
+        <property name="dao" ref="svnAnalyticsDAO"/>
+    </bean>
+
+</beans>
