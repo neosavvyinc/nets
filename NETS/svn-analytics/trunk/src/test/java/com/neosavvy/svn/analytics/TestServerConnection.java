@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
@@ -20,6 +21,7 @@ import com.neosavvy.svn.analytics.util.SvnKitUtil;
 public class TestServerConnection {
 
     @Test
+    @Ignore
     public void testServerConnection() {
         /*
          * Default values:

@@ -1,7 +1,6 @@
 package com.neosavvy.svn.analytics.dao.ibatis;
 
 import java.sql.SQLException;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -24,10 +23,12 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
         execute(new SqlMapClientCallback() {
             public Object doInSqlMapClient(SqlMapExecutor executor)
                     throws SQLException {
-                Iterator<SVNStatistic> itr = statistics.iterator();
 
                 executor.startBatch();
-                executor.insert(SVNSTATISTICS_INSERT_STATISTIC, itr.next());
+                for (SVNStatistic stat : statistics) {
+                    logger.info("Executing insert for: " + stat.toString());
+                    executor.insert(SVNSTATISTICS_INSERT_STATISTIC, stat);
+                }
                 int rowsaffected = executor.executeBatch();
 
                 if (logger.isInfoEnabled()) {

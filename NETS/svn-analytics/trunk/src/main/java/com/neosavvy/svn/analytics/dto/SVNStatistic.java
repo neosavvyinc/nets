@@ -15,182 +15,186 @@ import org.tmatesoft.svn.core.SVNLogEntryPath;
  */
 public class SVNStatistic {
 
-	public SVNStatistic() {
-		super();
-	}
+    public SVNStatistic() {
+        super();
+    }
 
-	public SVNStatistic(SVNLogEntry entry) {
-		this.setAuthor(entry.getAuthor());
-		this.setDate(entry.getDate());
-		this.setMessage(entry.getMessage());
-		this.setNumFilesInRevision(entry.getChangedPaths().keySet().size());
-		calculatePathEntryStatistics(entry);
-	}
+    public SVNStatistic(SVNLogEntry entry) {
+        this.setAuthor(entry.getAuthor());
+        this.setRevision(entry.getRevision());
+        this.setDate(entry.getDate());
+        this.setMessage(entry.getMessage());
+        this.setNumFilesInRevision(entry.getChangedPaths().keySet().size());
+        calculatePathEntryStatistics(entry);
+    }
 
-	protected void calculatePathEntryStatistics(SVNLogEntry entry) {
+    protected void calculatePathEntryStatistics(SVNLogEntry entry) {
 
-		numFilesAddedInRevision = 0;
-		numFilesDeletedInRevision = 0;
-		numFilesModifiedInRevision = 0;
-		for (Object pathKey : entry.getChangedPaths().keySet()) {
-			SVNLogEntryPath path = (SVNLogEntryPath) entry.getChangedPaths()
-					.get(pathKey);
-			char type = path.getType();
-			if (type == 'A') {
-				numFilesAddedInRevision++;
-			} else if (type == 'D') {
-				numFilesDeletedInRevision++;
-			} else if (type == 'M') {
-				numFilesModifiedInRevision++;
-			}
-		}
-	}
+        numFilesAddedInRevision = 0;
+        numFilesDeletedInRevision = 0;
+        numFilesModifiedInRevision = 0;
+        for (Object pathKey : entry.getChangedPaths().keySet()) {
+            SVNLogEntryPath path = (SVNLogEntryPath) entry.getChangedPaths()
+                    .get(pathKey);
+            char type = path.getType();
+            if (type == 'A') {
+                numFilesAddedInRevision++;
+            } else if (type == 'D') {
+                numFilesDeletedInRevision++;
+            } else if (type == 'M') {
+                numFilesModifiedInRevision++;
+            }
+        }
+    }
 
-	/**
-	 * The author for the revision
-	 * 
-	 * @see org.tmatesoft.svn.core.SVNLogEntry#getAuthor()
-	 */
-	private String author;
+    /**
+     * The author for the revision
+     * 
+     * @see org.tmatesoft.svn.core.SVNLogEntry#getAuthor()
+     */
+    private String author;
 
-	/**
-	 * The revision of the current statistic
-	 * 
-	 * @see org.tmatesoft.svn.core.SVNLogEntry#getRevision()
-	 */
-	private long revision;
+    /**
+     * The revision of the current statistic
+     * 
+     * @see org.tmatesoft.svn.core.SVNLogEntry#getRevision()
+     */
+    private long revision;
 
-	/**
-	 * The date of the revision's creation
-	 * 
-	 * @see org.tmatesoft.svn.core.SVNLogEntry#getDate()
-	 */
-	private Date date;
+    /**
+     * The date of the revision's creation
+     * 
+     * @see org.tmatesoft.svn.core.SVNLogEntry#getDate()
+     */
+    private Date date;
 
-	/**
-	 * The message entered by the user during commit
-	 * 
-	 * @see org.tmatesoft.svn.core.SVNLogEntry#getMessage()
-	 */
-	private String message;
+    /**
+     * The message entered by the user during commit
+     * 
+     * @see org.tmatesoft.svn.core.SVNLogEntry#getMessage()
+     */
+    private String message;
 
-	/**
-	 * Derived via taking the count of the keySet SVNLogEntry.getChangedPaths()
-	 * 
-	 * @see org.tmatesoft.svn.core.SVNLogEntry#getChangedPaths()
-	 */
-	private int numFilesInRevision;
+    /**
+     * Derived via taking the count of the keySet SVNLogEntry.getChangedPaths()
+     * 
+     * @see org.tmatesoft.svn.core.SVNLogEntry#getChangedPaths()
+     */
+    private int numFilesInRevision;
 
-	/**
-	 * Derived via taking the count of the values from
-	 * SVNLogEntry.getChangedPaths() who have a value of 'A'
-	 * 
-	 * @see org.tmatesoft.svn.core.SVNLogEntryPath#getType()
-	 */
-	private int numFilesAddedInRevision;
+    /**
+     * Derived via taking the count of the values from
+     * SVNLogEntry.getChangedPaths() who have a value of 'A'
+     * 
+     * @see org.tmatesoft.svn.core.SVNLogEntryPath#getType()
+     */
+    private int numFilesAddedInRevision;
 
-	/**
-	 * Derived via taking the count of the values from
-	 * SVNLogEntry.getChangedPaths() who have a value of 'D'
-	 * 
-	 * @see org.tmatesoft.svn.core.SVNLogEntryPath#getType()
-	 */
-	private int numFilesDeletedInRevision;
+    /**
+     * Derived via taking the count of the values from
+     * SVNLogEntry.getChangedPaths() who have a value of 'D'
+     * 
+     * @see org.tmatesoft.svn.core.SVNLogEntryPath#getType()
+     */
+    private int numFilesDeletedInRevision;
 
-	/**
-	 * Derived via taking the count of the values from
-	 * SVNLogEntry.getChangedPaths() who have a value of 'M'
-	 * 
-	 * @see org.tmatesoft.svn.core.SVNLogEntryPath#getType()
-	 */
-	private int numFilesModifiedInRevision;
+    /**
+     * Derived via taking the count of the values from
+     * SVNLogEntry.getChangedPaths() who have a value of 'M'
+     * 
+     * @see org.tmatesoft.svn.core.SVNLogEntryPath#getType()
+     */
+    private int numFilesModifiedInRevision;
 
-	public String getAuthor() {
-		return author;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setAuthor(String author) {
+        if (author != null)
+            this.author = author;
+        else
+            this.author = "";
+    }
 
-	public long getRevision() {
-		return revision;
-	}
+    public long getRevision() {
+        return revision;
+    }
 
-	public void setRevision(long revision) {
-		this.revision = revision;
-	}
+    public void setRevision(long revision) {
+        this.revision = revision;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public Date getDate() {
+        return date;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-	public String getMessage() {
-		return message;
-	}
+    public String getMessage() {
+        return message;
+    }
 
-	public void setMessage(String message) {
-		this.message = message;
-	}
+    public void setMessage(String message) {
+        this.message = message;
+    }
 
-	public int getNumFilesInRevision() {
-		return numFilesInRevision;
-	}
+    public int getNumFilesInRevision() {
+        return numFilesInRevision;
+    }
 
-	public void setNumFilesInRevision(int numFilesInRevision) {
-		this.numFilesInRevision = numFilesInRevision;
-	}
+    public void setNumFilesInRevision(int numFilesInRevision) {
+        this.numFilesInRevision = numFilesInRevision;
+    }
 
-	public int getNumFilesAddedInRevision() {
-		return numFilesAddedInRevision;
-	}
+    public int getNumFilesAddedInRevision() {
+        return numFilesAddedInRevision;
+    }
 
-	public void setNumFilesAddedInRevision(int numFilesAddedInRevision) {
-		this.numFilesAddedInRevision = numFilesAddedInRevision;
-	}
+    public void setNumFilesAddedInRevision(int numFilesAddedInRevision) {
+        this.numFilesAddedInRevision = numFilesAddedInRevision;
+    }
 
-	public int getNumFilesDeletedInRevision() {
-		return numFilesDeletedInRevision;
-	}
+    public int getNumFilesDeletedInRevision() {
+        return numFilesDeletedInRevision;
+    }
 
-	public void setNumFilesDeletedInRevision(int numFilesDeletedInRevision) {
-		this.numFilesDeletedInRevision = numFilesDeletedInRevision;
-	}
+    public void setNumFilesDeletedInRevision(int numFilesDeletedInRevision) {
+        this.numFilesDeletedInRevision = numFilesDeletedInRevision;
+    }
 
-	public int getNumFilesModifiedInRevision() {
-		return numFilesModifiedInRevision;
-	}
+    public int getNumFilesModifiedInRevision() {
+        return numFilesModifiedInRevision;
+    }
 
-	public void setNumFilesModifiedInRevision(int numFilesModifiedInRevision) {
-		this.numFilesModifiedInRevision = numFilesModifiedInRevision;
-	}
+    public void setNumFilesModifiedInRevision(int numFilesModifiedInRevision) {
+        this.numFilesModifiedInRevision = numFilesModifiedInRevision;
+    }
 
-	/**
-	 * Constructs a <code>String</code> with all attributes in name = value
-	 * format.
-	 * 
-	 * @return a <code>String</code> representation of this object.
-	 */
-	public String toString() {
-		final String TAB = "    ";
+    /**
+     * Constructs a <code>String</code> with all attributes in name = value
+     * format.
+     * 
+     * @return a <code>String</code> representation of this object.
+     */
+    public String toString() {
+        final String TAB = "    ";
 
-		String retValue = "";
+        String retValue = "";
 
-		retValue = "SVNStatistic ( " + super.toString() + TAB + "author = "
-				+ this.author + TAB + "revision = " + this.revision + TAB
-				+ "date = " + this.date + TAB + "message = " + this.message
-				+ TAB + "numFilesInRevision = " + this.numFilesInRevision + TAB
-				+ "numFilesAddedInRevision = " + this.numFilesAddedInRevision
-				+ TAB + "numFilesDeletedInRevision = "
-				+ this.numFilesDeletedInRevision + TAB
-				+ "numFilesModifiedInRevision = "
-				+ this.numFilesModifiedInRevision + TAB + " )";
+        retValue = "SVNStatistic ( " + super.toString() + TAB + "author = "
+                + this.author + TAB + "revision = " + this.revision + TAB
+                + "date = " + this.date + TAB + "message = " + this.message
+                + TAB + "numFilesInRevision = " + this.numFilesInRevision + TAB
+                + "numFilesAddedInRevision = " + this.numFilesAddedInRevision
+                + TAB + "numFilesDeletedInRevision = "
+                + this.numFilesDeletedInRevision + TAB
+                + "numFilesModifiedInRevision = "
+                + this.numFilesModifiedInRevision + TAB + " )";
 
-		return retValue;
-	}
+        return retValue;
+    }
 
 }
