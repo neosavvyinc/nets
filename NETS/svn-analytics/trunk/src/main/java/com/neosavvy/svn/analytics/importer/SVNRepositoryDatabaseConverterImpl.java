@@ -140,7 +140,8 @@ public class SVNRepositoryDatabaseConverterImpl implements
     }
 
     public void tearDown() {
-        // TODO Auto-generated method stub
+
+        initializedRepositories = new HashMap<SVNRepositoryModel, SVNRepository>();
 
     }
 

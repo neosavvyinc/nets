@@ -31,5 +31,23 @@
         </property>    
         <property name="dao" ref="svnAnalyticsDAO"/>
     </bean>
+    
+    <bean id="conversionJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="svnRepositoryConverter"/>
+        <property name="targetMethod" value="run"/>
+    </bean>
+    
+    <bean id="cronConversionTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="conversionJob"/>
+        <property name="cronExpression" value="0 * 19 * * ?"/>
+    </bean>
+    
+    <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="cronConversionTrigger"/>
+            </list>
+        </property>
+    </bean>
 
 </beans>
