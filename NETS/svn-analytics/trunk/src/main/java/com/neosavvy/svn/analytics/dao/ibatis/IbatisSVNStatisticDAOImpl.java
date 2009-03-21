@@ -15,6 +15,7 @@ import com.neosavvy.svn.analytics.dto.SVNStatistic;
 public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
         SVNStatisticDAO {
 
+    public static final String SVNSTATISTICS_INSERT_STATISTIC = "SVNStatistics.insertStatistic";
     private static final Logger logger = Logger
             .getLogger(IbatisSVNStatisticDAOImpl.class);
 
@@ -26,7 +27,7 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
                 Iterator<SVNStatistic> itr = statistics.iterator();
 
                 executor.startBatch();
-                executor.insert("", itr.next());
+                executor.insert(SVNSTATISTICS_INSERT_STATISTIC, itr.next());
                 int rowsaffected = executor.executeBatch();
 
                 if (logger.isInfoEnabled()) {
