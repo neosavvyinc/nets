@@ -39,7 +39,7 @@
     
     <bean id="cronConversionTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
         <property name="jobDetail" ref="conversionJob"/>
-        <property name="cronExpression" value="0 * 19 * * ?"/>
+        <property name="cronExpression" value="0 0 2 * * ?"/>
     </bean>
     
     <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

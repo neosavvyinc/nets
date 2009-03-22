@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.tmatesoft.svn.core.SVNException;
@@ -17,6 +18,7 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 import com.neosavvy.junit4.BaseSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
+import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
 import com.neosavvy.svn.analytics.util.SvnKitUtil;
 
@@ -75,5 +77,11 @@ public class TestSvnLogEntryDAO extends BaseSpringAwareTestCase {
             dao.saveStatistics(stats);
             startRevision += 100;
         }
+    }
+
+    @Test
+    public void testGetOverallStats() {
+        OverallTeamStatistic[] overallTeamStats = dao.getOverallTeamStats();
+        Assert.assertNotNull(overallTeamStats);
     }
 }

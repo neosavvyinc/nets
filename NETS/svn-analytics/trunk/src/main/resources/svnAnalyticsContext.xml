@@ -10,6 +10,10 @@
         <property name="sqlMapClient" ref="sqlMapClient"/>
     </bean>
     
+    <bean id="svnStatService" class="com.neosavvy.svn.analytics.service.SvnStatServiceImpl">
+        <property name="dao" ref="svnAnalyticsDAO"/>
+    </bean>
+    
 <!--    <bean id="daoParent" class="mil.af.gcssdsrf.nsn.dao.AbstractDao" abstract="true">-->
 <!--        <property name="sqlMapClient" ref="sqlMapClient"/>-->
 <!--    </bean>-->

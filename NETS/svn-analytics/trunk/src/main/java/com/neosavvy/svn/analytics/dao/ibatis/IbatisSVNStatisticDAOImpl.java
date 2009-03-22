@@ -9,6 +9,7 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
+import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
 
 public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
@@ -42,4 +43,11 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 
     }
 
+    @SuppressWarnings("unchecked")
+    public OverallTeamStatistic[] getOverallTeamStats() {
+
+        List<OverallTeamStatistic> overallStats = queryForList("OverallTeamStats.getOverallStatistics");
+        return overallStats.toArray(new OverallTeamStatistic[] {});
+
+    }
 }

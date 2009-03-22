@@ -12,11 +12,11 @@
         <channel ref="secure-svn-analytics-amf" />
     </default-channels>
 
-<!--    <destination id="authorizationService">-->
-<!--        <properties>-->
-<!--            <factory>spring</factory>-->
-<!--            <source>authorizationService</source>-->
-<!--        </properties>-->
-<!--    </destination>-->
+    <destination id="svnStatService">
+        <properties>
+            <factory>spring</factory>
+            <source>svnStatService</source>
+        </properties>
+    </destination>
 
 </service>

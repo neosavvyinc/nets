@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="OverallTeamStats">
+
+    <typeAlias alias="OverallStatistic" type="com.neosavvy.svn.analytics.dto.OverallTeamStatistic" />
+    
+    <resultMap class="OverallStatistic" id="OverallStatisticResultMap">
+        <result column="author" property="author"/>
+        <result column="numberOfCommits" property="numberOfCommits"/>
+        <result column="numberOfFilesTouched" property="numberOfFilesTouched"/>
+        <result column="firstCommitDate" property="firstCommitDate"/>
+        <result column="lastCommitDate" property="lastCommitDate"/>
+    </resultMap>
+    
+    <select id="getOverallStatistics" resultMap="OverallStatisticResultMap">
+        SELECT 
+            author
+            ,count(*) as numberOfCommits
+            ,sum(num_files_in_rev) as numberOfFilesTouched
+            ,min(rev_date) as firstCommitDate
+            ,max(rev_date) as lastCommitDate 
+        FROM 
+            SVN_STATISTIC 
+        GROUP BY 
+            author 
+        ORDER BY
+            numberOfCommits DESC
+    </select>
+  
+
+</sqlMap>
