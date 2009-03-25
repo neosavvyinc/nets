@@ -1,7 +1,6 @@
 package com.neosavvy.junit4;
 
 import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
 import org.junit.After;
 import org.junit.Before;
 import org.springframework.context.ApplicationContext;
@@ -15,10 +14,10 @@ public class BaseSpringAwareTestCase {
 
     private static ApplicationContext context;
 
-    static {
-        PropertyConfigurator
-                .configure("target/test-classes/log4j.test.properties");
-    }
+    // static {
+    // PropertyConfigurator
+    // .configure("target/test-classes/log4j.test.properties");
+    // }
 
     @Before
     public void setup() {

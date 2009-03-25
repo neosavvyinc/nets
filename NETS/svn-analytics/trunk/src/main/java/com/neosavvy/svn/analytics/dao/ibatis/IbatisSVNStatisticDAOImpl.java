@@ -9,6 +9,8 @@ import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
+import com.neosavvy.svn.analytics.dto.Author;
+import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
 import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
 
@@ -48,6 +50,22 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 
         List<OverallTeamStatistic> overallStats = queryForList("OverallTeamStats.getOverallStatistics");
         return overallStats.toArray(new OverallTeamStatistic[] {});
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public HistoricalTeamStatistic[] getHistoricalTeamStats() {
+
+        List<HistoricalTeamStatistic> historicalStats = queryForList("HistoricalTeamStatistics.getHistoricalStatistics");
+        return historicalStats.toArray(new HistoricalTeamStatistic[] {});
+
+    }
+
+    @SuppressWarnings("unchecked")
+    public Author[] getAuthors() {
+
+        List<Author> authors = queryForList("Author.getAuthors");
+        return authors.toArray(new Author[] {});
 
     }
 }

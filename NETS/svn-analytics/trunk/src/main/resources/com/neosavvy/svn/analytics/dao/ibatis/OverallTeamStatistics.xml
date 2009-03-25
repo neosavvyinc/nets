@@ -8,6 +8,9 @@
         <result column="author" property="author"/>
         <result column="numberOfCommits" property="numberOfCommits"/>
         <result column="numberOfFilesTouched" property="numberOfFilesTouched"/>
+        <result column="numberOfFilesAdded" property="numberOfFilesAdded"/>
+        <result column="numberOfFilesModified" property="numberOfFilesModified"/>
+        <result column="numberOfFilesDeleted" property="numberOfFilesDeleted"/>
         <result column="firstCommitDate" property="firstCommitDate"/>
         <result column="lastCommitDate" property="lastCommitDate"/>
     </resultMap>
@@ -17,6 +20,9 @@
             author
             ,count(*) as numberOfCommits
             ,sum(num_files_in_rev) as numberOfFilesTouched
+            ,sum(num_files_added_in_rev) as numberOfFilesAdded
+            ,sum(num_files_deleted_in_rev) as numberOfFilesDeleted
+            ,sum(num_files_modified_in_rev) as numberOfFilesModified
             ,min(rev_date) as firstCommitDate
             ,max(rev_date) as lastCommitDate 
         FROM 
@@ -26,6 +32,5 @@
         ORDER BY
             numberOfCommits DESC
     </select>
-  
 
 </sqlMap>

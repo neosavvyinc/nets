@@ -18,6 +18,8 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 import com.neosavvy.junit4.BaseSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
+import com.neosavvy.svn.analytics.dto.Author;
+import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
 import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
 import com.neosavvy.svn.analytics.util.SvnKitUtil;
@@ -83,5 +85,17 @@ public class TestSvnLogEntryDAO extends BaseSpringAwareTestCase {
     public void testGetOverallStats() {
         OverallTeamStatistic[] overallTeamStats = dao.getOverallTeamStats();
         Assert.assertNotNull(overallTeamStats);
+    }
+
+    @Test
+    public void testGetHistoricalStats() {
+        HistoricalTeamStatistic[] stats = dao.getHistoricalTeamStats();
+        Assert.assertNotNull(stats);
+    }
+
+    @Test
+    public void testGetAuthors() {
+        Author[] authors = dao.getAuthors();
+        Assert.assertNotNull(authors);
     }
 }

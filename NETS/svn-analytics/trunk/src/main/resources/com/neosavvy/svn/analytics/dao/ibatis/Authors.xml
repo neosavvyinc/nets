@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="Author">
+
+    <typeAlias alias="Author" type="com.neosavvy.svn.analytics.dto.Author" />
+    
+    <resultMap class="Author" id="AuthorResultMap">
+        <result column="author" property="author"/>
+    </resultMap>
+    
+    <select id="getAuthors" resultMap="AuthorResultMap">
+        SELECT 
+            AUTHOR 
+        FROM 
+            SVN_STATISTIC 
+        WHERE AUTHOR IS NOT NULL 
+        GROUP BY 
+            AUTHOR 
+        ORDER BY 
+            AUTHOR
+    </select>
+
+</sqlMap>
