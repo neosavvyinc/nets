@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+        <modelVersion>4.0.0</modelVersion>
+        <parent>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-flex-super-pom</artifactId>
+                <version>3.0.0</version>
+        </parent>
+	<groupId>com.neosavvy.svn.analytics</groupId>
+    	<artifactId>svn-analytics-client</artifactId>
+    	<version>1.0-SNAPSHOT</version>
+    	<name>SVN Analytics Tool</name>
+    	<url>http://neosavvy.com</url>
+
+        <packaging>swf</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>info.flex-mojos</groupId>
+				<artifactId>html-wrapper-mojo</artifactId>
+				<version>2.0.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>wrapper</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>	
+        
+	<dependencies>
+		<dependency>
+			<groupId>com.adobe.flex.sdk</groupId>
+            		<artifactId>datavisualization</artifactId>
+            		<version>3.0.0.477</version>
+			<type>swc</type>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.sdk</groupId>
+            		<artifactId>datavisualization</artifactId>
+            		<version>3.0.0.477</version>
+			<classifier>en_US</classifier>
+			<type>swc</type>
+		</dependency>
+	</dependencies>
+        
+</project>
