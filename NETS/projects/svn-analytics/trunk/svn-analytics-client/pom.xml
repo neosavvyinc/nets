@@ -1,51 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
 
-    <parent>
-        <artifactId>svn-analytics-toplevel</artifactId>
-        <groupId>com.neosavvy.svn.analytics</groupId>
-        <version>1.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
-    </parent>
+	<parent>
+		<artifactId>svn-analytics-toplevel</artifactId>
+		<groupId>com.neosavvy.svn.analytics</groupId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
 
-    <groupId>com.neosavvy.svn.analytics</groupId>
-    <artifactId>svn-analytics-client</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <name>SVN Analytics Client</name>
-    <url>http://neosavvy.com</url>
-    <packaging>swf</packaging>
-    
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>info.flex-mojos</groupId>
-                <artifactId>html-wrapper-mojo</artifactId>
-                <version>2.0.3</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>wrapper</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-        </plugins>
-    </build>
+	<groupId>com.neosavvy.svn.analytics</groupId>
+	<artifactId>svn-analytics-client</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>SVN Analytics Client</name>
+	<url>http://neosavvy.com</url>
+	<packaging>swf</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>com.adobe.flex.sdk</groupId>
-            <artifactId>datavisualization</artifactId>
-            <type>swc</type>
-        </dependency>
-        <dependency>
-            <groupId>com.adobe.flex.sdk</groupId>
-            <artifactId>datavisualization</artifactId>
-            <classifier>en_US</classifier>
-            <type>swc</type>
-        </dependency>
-    </dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<configuration>
+					<debug>true</debug>
+				</configuration>
+            </plugin> 
+			<plugin>
+				<groupId>info.flex-mojos</groupId>
+				<artifactId>html-wrapper-mojo</artifactId>
+				<version>2.0.3</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>wrapper</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.adobe.flex.sdk</groupId>
+			<artifactId>datavisualization</artifactId>
+			<type>swc</type>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.sdk</groupId>
+			<artifactId>datavisualization</artifactId>
+			<classifier>en_US</classifier>
+			<type>swc</type>
+		</dependency>
+	</dependencies>
 
 </project>
