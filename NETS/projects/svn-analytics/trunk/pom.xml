@@ -8,13 +8,11 @@
 	<version>1.0-SNAPSHOT</version>
 	<name>svn-analytics-toplevel</name>
 	<url>http://neosavvy.com</url>
-
 	<parent>
 		<groupId>org.sonatype.flexmojos</groupId>
 		<artifactId>flexmojos-flex-super-pom</artifactId>
 		<version>3.0.0</version>
 	</parent>
-
 	<modules>
 		<module>svn-analytics</module>
 		<module>svn-analytics-client</module>
@@ -150,4 +148,11 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+
+	<scm>
+		<connection>scm:svn:http://127.0.0.1/svn/neosavvy/projects/svn-analytics</connection>
+		<developerConnection>scm:svn:http://127.0.0.1/svn/neosavvy/projects/svn-analytics</developerConnection>
+		<tag>HEAD</tag>
+		<url>http://127.0.0.1/svn/neosavvy/projects/svn-analytics</url>
+	</scm>
 </project>
