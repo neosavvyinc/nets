@@ -150,8 +150,8 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:svn:http://127.0.0.1/svn/neosavvy/projects/svn-analytics</connection>
-		<developerConnection>scm:svn:http://127.0.0.1/svn/neosavvy/projects/svn-analytics</developerConnection>
+		<connection>scm:svn:http://127.0.0.1/svn/neosavvy/projects/svn-analytics/trunk</connection>
+		<developerConnection>scm:svn:http://127.0.0.1/svn/neosavvy/projects/svn-analytics/trunk</developerConnection>
 		<tag>HEAD</tag>
 		<url>http://127.0.0.1/svn/neosavvy/projects/svn-analytics</url>
 	</scm>
