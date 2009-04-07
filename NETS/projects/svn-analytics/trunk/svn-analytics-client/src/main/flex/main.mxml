@@ -22,6 +22,9 @@
             [Bindable]
             private var authorService:RemoteObject;
 
+			[Bindable]
+            private var svnIntervalService:RemoteObject;
+
             [Bindable]
             private var stats:Array = new Array();
             
@@ -30,7 +33,7 @@
 
             [Bindable]
             private var authors:Array = new Array();
-
+            
 			public function faultHandler (event:FaultEvent):void {
 				Alert.show(event.fault.faultString, 'Error');
 			}
@@ -39,6 +42,7 @@
 				getAuthors();
 				getTeamStats();
 				getHistoricalStats();
+				getSvnRepositoryInterval();
 			}
 			
 			public function getTeamStats():void {
@@ -107,13 +111,51 @@
             	var data:ResultEvent = object as ResultEvent;
             	authors = data.result as Array;
             }
+            
+            public function getSvnRepositoryInterval():void {
+                var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://localhost:9090/svn-analytics-webapp/messagebroker/amf");
+                
+                var channelSet:ChannelSet = new ChannelSet();
+                channelSet.addChannel(channel);
+                
+                svnIntervalService = new RemoteObject();
+                svnIntervalService.destination = "svnStatService";
+                svnIntervalService.channelSet = channelSet;
+                svnIntervalService.addEventListener(FaultEvent.FAULT, faultHandler);
+                svnIntervalService.addEventListener(ResultEvent.RESULT, interval_resultHandler);
+                
+                svnIntervalService.getRepositoryInterval();    
+            }
+            
+            public function interval_resultHandler( object:Object ):void {
+            	
+            	var data:ResultEvent = object as ResultEvent;
+            	
+            	var startDateFromService:Date = data.result.startDayLevelDate as Date;
+            	var endDateFromService:Date = data.result.endDayLevelDate as Date;
+            	
+            	startDate.selectedDate = startDateFromService;
+            	startDate.selectableRange = {rangeStart: startDateFromService, rangeEnd: endDateFromService};
+
+            	endDate.selectedDate = endDateFromService
+            	startDate.selectableRange = {rangeStart: startDateFromService, rangeEnd: endDateFromService};
+            	
+            }
+            
+            public function refineSearch() : void {
+            	
+            }
 			
 			
 		]]>
 	</mx:Script>
 	
-	<mx:HBox backgroundColor="0xFFFFFF" width="100%" height="15%">
+	<mx:HBox backgroundColor="0xFFFFFF" width="100%" height="15%" verticalAlign="middle">
 		<mx:ComboBox id="authorsSelector" dataProvider="{authors}" labelField="author"/>
+		<mx:DateField id="startDate"/>
+		<mx:DateField id="endDate"/>
+		
+		<mx:Button label="Refine Search" click="{refineSearch()}"/>
 	</mx:HBox>
 	
 	<mx:VBox backgroundColor="0xFFFFFF" width="100%" height="70%">
