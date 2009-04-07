@@ -1,11 +1,14 @@
 package com.neosavvy.junit4;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.After;
 import org.junit.Before;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.neosavvy.svn.dao.TestSvnLogEntryDAO;
 
 public class BaseSpringAwareTestCase {
 
@@ -14,14 +17,11 @@ public class BaseSpringAwareTestCase {
 
     private static ApplicationContext context;
 
-    // static {
-    // PropertyConfigurator
-    // .configure("target/test-classes/log4j.test.properties");
-    // }
-
     @Before
     public void setup() {
 
+    	PropertyConfigurator.configure(BaseSpringAwareTestCase.class.getClassLoader().getResource("log4j.test.properties"));
+    	
         logger.info("Setting up testcase");
 
         AbstractApplicationContext ctx = new ClassPathXmlApplicationContext(

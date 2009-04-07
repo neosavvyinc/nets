@@ -1,12 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<groupId>com.neosavvy.svn.analytics</groupId>
 	<artifactId>svn-analytics</artifactId>
 	<packaging>jar</packaging>
 	<name>svn-analytics</name>
-	
+
 	<parent>
 		<artifactId>svn-analytics-toplevel</artifactId>
 		<groupId>com.neosavvy.svn.analytics</groupId>
@@ -26,6 +26,39 @@
 					<source>1.5</source>
 					<target>1.5</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<excludes>
+						<exclude>**/*BaseSpringAwareTestCase.java</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>optimize</goal> 
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<includeJavaClasses>
+								<includeClass>com.neosavvy.svn.analytics.dto.Author</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.OverallTeamStatistic</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.SVNRepositoryInterval</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.SVNStatistic</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.request.RefineSearchRequest</includeClass>
+							</includeJavaClasses>
+							<useTransitiveDependencies>true</useTransitiveDependencies> 
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

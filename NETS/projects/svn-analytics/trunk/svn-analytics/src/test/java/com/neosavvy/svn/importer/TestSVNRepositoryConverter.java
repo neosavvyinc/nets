@@ -1,6 +1,7 @@
 package com.neosavvy.svn.importer;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import com.neosavvy.junit4.BaseSpringAwareTestCase;
@@ -33,6 +34,7 @@ public class TestSVNRepositoryConverter extends BaseSpringAwareTestCase {
     // }
 
     @Test
+    @Ignore
     public void testRun() {
         converter.run();
     }

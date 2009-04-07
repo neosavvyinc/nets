@@ -4,6 +4,7 @@ import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.Author;
 import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
 import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
+import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 
 public class SvnStatServiceImpl implements SvnStatService {
 
@@ -29,4 +30,8 @@ public class SvnStatServiceImpl implements SvnStatService {
         return dao.getAuthors();
     }
 
+    public SVNRepositoryInterval getRepositoryInterval() {
+    	return dao.getRepositoryInterval();
+    }
+    
 }

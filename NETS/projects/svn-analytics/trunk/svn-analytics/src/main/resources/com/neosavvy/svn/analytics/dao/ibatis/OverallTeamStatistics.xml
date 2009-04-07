@@ -3,6 +3,7 @@
 <sqlMap namespace="OverallTeamStats">
 
     <typeAlias alias="OverallStatistic" type="com.neosavvy.svn.analytics.dto.OverallTeamStatistic" />
+    <typeAlias alias="RefineSearch" type="com.neosavvy.svn.analytics.dto.request.RefineSearchRequest" />
     
     <resultMap class="OverallStatistic" id="OverallStatisticResultMap">
         <result column="author" property="author"/>
@@ -15,7 +16,16 @@
         <result column="lastCommitDate" property="lastCommitDate"/>
     </resultMap>
     
-    <select id="getOverallStatistics" resultMap="OverallStatisticResultMap">
+    <parameterMap class="RefineSearch" 
+    	id="RefineSearchRequestParameterMap">
+    	<parameter property="startDate"/>
+    	<parameter property="endDate"/>
+    	<parameter property="userNames"/>
+   	</parameterMap>
+    
+    <select id="getOverallStatistics" 
+    	resultMap="OverallStatisticResultMap"
+    	parameterMap="RefineSearchRequestParameterMap">
         SELECT 
             author
             ,count(*) as numberOfCommits
@@ -26,11 +36,24 @@
             ,min(rev_date) as firstCommitDate
             ,max(rev_date) as lastCommitDate 
         FROM 
-            SVN_STATISTIC 
+            SVN_STATISTIC
+        <isParameterPresent prepend="WHERE">
+        	<isNotEmpty property="userNames">
+        		<iterate property="userNames" prepend="AUTHOR IN" open="(" close=")" conjunction=","> 
+        			#userNames[]#
+        		</iterate>
+        	</isNotEmpty>     
+            <isNotEmpty property="startDate" prepend="AND">
+            	REV_DATE &gt;= #startDate#
+            </isNotEmpty>
+            <isNotEmpty property="endDate" prepend="AND">
+            	REV_DATE &lt;= #endDate#
+            </isNotEmpty>
+        </isParameterPresent>    
         GROUP BY 
             author 
         ORDER BY
-            numberOfCommits DESC
+ 	        numberOfCommits DESC
     </select>
 
 </sqlMap>

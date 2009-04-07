@@ -12,60 +12,77 @@ import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.Author;
 import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
 import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
+import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
+import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 
 public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
-        SVNStatisticDAO {
+		SVNStatisticDAO {
 
-    public static final String SVNSTATISTICS_INSERT_STATISTIC = "SVNStatistics.insertStatistic";
-    private static final Logger logger = Logger
-            .getLogger(IbatisSVNStatisticDAOImpl.class);
+	public static final String SVNSTATISTICS_INSERT_STATISTIC = "SVNStatistics.insertStatistic";
+	private static final Logger logger = Logger
+			.getLogger(IbatisSVNStatisticDAOImpl.class);
 
-    public void saveStatistics(final List<SVNStatistic> statistics) {
+	public void saveStatistics(final List<SVNStatistic> statistics) {
 
-        execute(new SqlMapClientCallback() {
-            public Object doInSqlMapClient(SqlMapExecutor executor)
-                    throws SQLException {
+		execute(new SqlMapClientCallback() {
+			public Object doInSqlMapClient(SqlMapExecutor executor)
+					throws SQLException {
 
-                executor.startBatch();
-                for (SVNStatistic stat : statistics) {
-                    logger.info("Executing insert for: " + stat.toString());
-                    executor.insert(SVNSTATISTICS_INSERT_STATISTIC, stat);
-                }
-                int rowsaffected = executor.executeBatch();
+				executor.startBatch();
+				for (SVNStatistic stat : statistics) {
+					logger.info("Executing insert for: " + stat.toString());
+					executor.insert(SVNSTATISTICS_INSERT_STATISTIC, stat);
+				}
+				int rowsaffected = executor.executeBatch();
 
-                if (logger.isInfoEnabled()) {
-                    logger.info("Inserted " + rowsaffected
-                            + " for SVNStatistics");
-                }
+				if (logger.isInfoEnabled()) {
+					logger.info("Inserted " + rowsaffected
+							+ " for SVNStatistics");
+				}
 
-                return new Integer(rowsaffected);
-            }
-        });
+				return new Integer(rowsaffected);
+			}
+		});
 
-    }
+	}
 
-    @SuppressWarnings("unchecked")
-    public OverallTeamStatistic[] getOverallTeamStats() {
+	@SuppressWarnings("unchecked")
+	public OverallTeamStatistic[] getOverallTeamStats() {
 
-        List<OverallTeamStatistic> overallStats = queryForList("OverallTeamStats.getOverallStatistics");
-        return overallStats.toArray(new OverallTeamStatistic[] {});
+		List<OverallTeamStatistic> overallStats = queryForList("OverallTeamStats.getOverallStatistics");
+		return overallStats.toArray(new OverallTeamStatistic[] {});
 
-    }
+	}
+	
+	@SuppressWarnings("unchecked")
+	public OverallTeamStatistic[] getRefinedTeamStates(
+			RefineSearchRequest request) {
+		
+		List<OverallTeamStatistic> refinedStats = queryForList("OverallTeamStats.getOverallStatistics", request);
+		return refinedStats.toArray(new OverallTeamStatistic[] {});
 
-    @SuppressWarnings("unchecked")
-    public HistoricalTeamStatistic[] getHistoricalTeamStats() {
+	}
 
-        List<HistoricalTeamStatistic> historicalStats = queryForList("HistoricalTeamStatistics.getHistoricalStatistics");
-        return historicalStats.toArray(new HistoricalTeamStatistic[] {});
+	@SuppressWarnings("unchecked")
+	public HistoricalTeamStatistic[] getHistoricalTeamStats() {
 
-    }
+		List<HistoricalTeamStatistic> historicalStats = queryForList("HistoricalTeamStatistics.getHistoricalStatistics");
+		return historicalStats.toArray(new HistoricalTeamStatistic[] {});
 
-    @SuppressWarnings("unchecked")
-    public Author[] getAuthors() {
+	}
 
-        List<Author> authors = queryForList("Author.getAuthors");
-        return authors.toArray(new Author[] {});
+	@SuppressWarnings("unchecked")
+	public Author[] getAuthors() {
 
-    }
+		List<Author> authors = queryForList("Author.getAuthors");
+		return authors.toArray(new Author[] {});
+
+	}
+
+	public SVNRepositoryInterval getRepositoryInterval() {
+		SVNRepositoryInterval interval = (SVNRepositoryInterval) queryForObject("SvnRepositoryInterval.getSvnRepositoryInterval");
+		return interval;
+	}
+
 }
