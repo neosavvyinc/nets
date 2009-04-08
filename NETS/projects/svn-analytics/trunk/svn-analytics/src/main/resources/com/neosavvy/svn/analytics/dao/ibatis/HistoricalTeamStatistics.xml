@@ -21,6 +21,20 @@
             ,SUM(NUM_FILES_MODIFIED_IN_REV) as numberOfFilesModified
         FROM 
             SVN_STATISTIC
+			<isParameterPresent prepend="WHERE">
+				<isNotEmpty property="userNames">
+					<iterate property="userNames" prepend="AUTHOR IN" open="("
+						close=")" conjunction=",">
+						#userNames[]#
+			       		</iterate>
+				</isNotEmpty>
+				<isNotEmpty property="startDate" prepend="AND">
+					REV_DATE &gt;= #startDate#
+	            </isNotEmpty>
+	            <isNotEmpty property="endDate" prepend="AND">
+	           		REV_DATE &lt;= #endDate#
+	            </isNotEmpty>
+			</isParameterPresent>
         GROUP BY to_char(REV_DATE,'YYYY-MM')
         ORDER BY to_char(REV_DATE,'YYYY-MM')
     </select>

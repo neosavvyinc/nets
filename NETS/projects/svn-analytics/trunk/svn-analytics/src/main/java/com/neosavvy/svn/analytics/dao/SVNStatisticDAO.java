@@ -15,9 +15,11 @@ public interface SVNStatisticDAO {
 
     public OverallTeamStatistic[] getOverallTeamStats();
     
-    public OverallTeamStatistic[] getRefinedTeamStates(RefineSearchRequest request);
+    public OverallTeamStatistic[] getRefinedTeamStats(RefineSearchRequest request);
 
     public HistoricalTeamStatistic[] getHistoricalTeamStats();
+    
+    public HistoricalTeamStatistic[] getRefinedHistoricalStats(RefineSearchRequest request);
 
     public Author[] getAuthors();
 

@@ -152,7 +152,7 @@
             public function refineSearch() : void {
             	
             	var refineRequest:RefineSearchRequest = new RefineSearchRequest();
-            	refineRequest.userNames = [authorsSelector.selectedItem];
+            	refineRequest.userNames = [authorsSelector.selectedItem.author];
             	refineRequest.startDate = startDate.selectedDate;
             	refineRequest.endDate = endDate.selectedDate;
             	
@@ -168,8 +168,6 @@
                 svnRefineOverallService.addEventListener(ResultEvent.RESULT, team_resultHandler);
                 
                 svnRefineOverallService.getRefinedTeamStatistics(refineRequest);    
-                
-                
                 
                 svnRefineHistoryService = new RemoteObject();
                 svnRefineHistoryService.destination = "svnStatService";

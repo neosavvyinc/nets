@@ -56,7 +56,7 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 	}
 	
 	@SuppressWarnings("unchecked")
-	public OverallTeamStatistic[] getRefinedTeamStates(
+	public OverallTeamStatistic[] getRefinedTeamStats(
 			RefineSearchRequest request) {
 		
 		List<OverallTeamStatistic> refinedStats = queryForList("OverallTeamStats.getOverallStatistics", request);
@@ -68,6 +68,14 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 	public HistoricalTeamStatistic[] getHistoricalTeamStats() {
 
 		List<HistoricalTeamStatistic> historicalStats = queryForList("HistoricalTeamStatistics.getHistoricalStatistics");
+		return historicalStats.toArray(new HistoricalTeamStatistic[] {});
+
+	}
+	
+	@SuppressWarnings("unchecked")
+	public HistoricalTeamStatistic[] getRefinedHistoricalStats(RefineSearchRequest request) {
+
+		List<HistoricalTeamStatistic> historicalStats = queryForList("HistoricalTeamStatistics.getHistoricalStatistics", request);
 		return historicalStats.toArray(new HistoricalTeamStatistic[] {});
 
 	}

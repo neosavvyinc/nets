@@ -88,16 +88,28 @@ public class TestSvnLogEntryDAO extends BaseSpringAwareTestCase {
     }
     
     @Test
-    public void testRefinedStats() {
+    public void testRefinedTeamStats() {
     	
     	RefineSearchRequest request = new RefineSearchRequest();
     	request.setUserNames(new String[]{"aparrish"});
     	request.setStartDate(getDate("2008-01-01"));
     	request.setEndDate(getDate("2009-01-01"));
-    	OverallTeamStatistic[] overallTeamStatistics = dao.getRefinedTeamStates(request);
+    	OverallTeamStatistic[] overallTeamStatistics = dao.getRefinedTeamStats(request);
     	Assert.assertNotNull(overallTeamStatistics);
     	Assert.assertEquals(1, overallTeamStatistics.length);
     	
+    }
+    
+    @Test
+    public void testRefinedHistoricalStats() {
+    	
+    	RefineSearchRequest request = new RefineSearchRequest();
+    	request.setUserNames(new String[]{"aparrish"});
+    	request.setStartDate(getDate("2008-01-01"));
+    	request.setEndDate(getDate("2009-01-01"));
+    	HistoricalTeamStatistic[] stats = dao.getRefinedHistoricalStats(request);
+    	Assert.assertNotNull(stats);
+    	Assert.assertEquals(12, stats.length);
     }
     
     public Date getDate(String date) {

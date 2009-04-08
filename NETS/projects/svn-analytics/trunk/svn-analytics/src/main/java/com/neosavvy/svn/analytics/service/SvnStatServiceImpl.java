@@ -42,14 +42,12 @@ public class SvnStatServiceImpl implements SvnStatService {
 
 	public HistoricalTeamStatistic[] getRefinedHistoricalTeamStatistics(
 			RefineSearchRequest request) {
-		logger.info("Testing historical refine request");
-		return null;
+		return dao.getRefinedHistoricalStats(request);
 	}
 
 	public OverallTeamStatistic[] getRefinedTeamStatistics(
 			RefineSearchRequest request) {
-		logger.info("Testing overall refine request");
-		return null;
+		return dao.getRefinedTeamStats(request);
 	}
 
 }
