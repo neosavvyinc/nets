@@ -34,7 +34,6 @@ public class TestSVNRepositoryConverter extends BaseSpringAwareTestCase {
     // }
 
     @Test
-    @Ignore
     public void testRun() {
         converter.run();
     }
