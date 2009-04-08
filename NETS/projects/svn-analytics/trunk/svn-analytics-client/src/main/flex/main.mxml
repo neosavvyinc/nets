@@ -4,6 +4,7 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 			import flash.utils.getTimer;
 			import mx.collections.ArrayCollection;
 			import mx.rpc.events.ResultEvent;
@@ -24,6 +25,12 @@
 
 			[Bindable]
             private var svnIntervalService:RemoteObject;
+
+			[Bindable]
+            private var svnRefineOverallService:RemoteObject;
+
+			[Bindable]
+            private var svnRefineHistoryService:RemoteObject;
 
             [Bindable]
             private var stats:Array = new Array();
@@ -144,6 +151,33 @@
             
             public function refineSearch() : void {
             	
+            	var refineRequest:RefineSearchRequest = new RefineSearchRequest();
+            	refineRequest.userNames = [authorsSelector.selectedItem];
+            	refineRequest.startDate = startDate.selectedDate;
+            	refineRequest.endDate = endDate.selectedDate;
+            	
+            	var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://localhost:9090/svn-analytics-webapp/messagebroker/amf");
+                
+                var channelSet:ChannelSet = new ChannelSet();
+                channelSet.addChannel(channel);
+                
+                svnRefineOverallService = new RemoteObject();
+                svnRefineOverallService.destination = "svnStatService";
+                svnRefineOverallService.channelSet = channelSet;
+                svnRefineOverallService.addEventListener(FaultEvent.FAULT, faultHandler);
+                svnRefineOverallService.addEventListener(ResultEvent.RESULT, team_resultHandler);
+                
+                svnRefineOverallService.getRefinedTeamStatistics(refineRequest);    
+                
+                
+                
+                svnRefineHistoryService = new RemoteObject();
+                svnRefineHistoryService.destination = "svnStatService";
+                svnRefineHistoryService.channelSet = channelSet;
+                svnRefineHistoryService.addEventListener(FaultEvent.FAULT, faultHandler);
+                svnRefineHistoryService.addEventListener(ResultEvent.RESULT, historical_resultHandler);
+                
+                svnRefineHistoryService.getRefinedHistoricalTeamStatistics(refineRequest);    
             }
 			
 			

@@ -43,7 +43,7 @@
 				<executions>
 					<execution>
 						<goals>
-							<goal>optimize</goal> 
+<!--							<goal>optimize</goal> -->
 							<goal>generate</goal>
 						</goals>
 						<configuration>
@@ -55,7 +55,7 @@
 								<includeClass>com.neosavvy.svn.analytics.dto.SVNStatistic</includeClass>
 								<includeClass>com.neosavvy.svn.analytics.dto.request.RefineSearchRequest</includeClass>
 							</includeJavaClasses>
-							<useTransitiveDependencies>true</useTransitiveDependencies> 
+							<useTransitiveDependencies>false</useTransitiveDependencies> 
 						</configuration>
 					</execution>
 				</executions>
