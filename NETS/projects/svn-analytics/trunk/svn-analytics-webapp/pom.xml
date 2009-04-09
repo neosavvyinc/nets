@@ -17,15 +17,23 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>com.neosavvy.svn.analytics</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>svn-analytics</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>com.neosavvy.svn.analytics</groupId>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>svn-analytics-client</artifactId>
 			<version>1.0-SNAPSHOT</version>
 			<type>swf</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>svn-analytics-config</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<classifier>resources</classifier>
+			<type>zip</type>
+			<scope>provided</scope>
 		</dependency>
 
 		<dependency>
@@ -73,17 +81,37 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin> 
+			</plugin>
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>maven-jetty-plugin</artifactId>
 				<version>6.1.15</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-config</id>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/flex</outputDirectory>
+							<includeArtifacIds>svn-analytics-config</includeArtifacIds>
+							<includeGroupIds>${project.groupId}</includeGroupIds>
+							<includeClassifiers>resources</includeClassifiers>
+							<excludeTransitive>true</excludeTransitive>
+							<excludeTypes>jar,swf</excludeTypes>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 		</plugins>
 	</build>
 
 
-	
-	
+
+
 </project>

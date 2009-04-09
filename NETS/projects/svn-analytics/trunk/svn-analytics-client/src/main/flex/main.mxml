@@ -53,14 +53,9 @@
 			}
 			
 			public function getTeamStats():void {
-                var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://localhost:9090/svn-analytics-webapp/messagebroker/amf");
-	            
-	            var channelSet:ChannelSet = new ChannelSet();
-	            channelSet.addChannel(channel);
 	            
 	            svnStatService = new RemoteObject();
 	            svnStatService.destination = "svnStatService";
-	            svnStatService.channelSet = channelSet;
 	            svnStatService.addEventListener(FaultEvent.FAULT, faultHandler);
 	            svnStatService.addEventListener(ResultEvent.RESULT, team_resultHandler);
 	            
@@ -77,14 +72,9 @@
             }
 			
 			public function getHistoricalStats():void {
-                var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://localhost:9090/svn-analytics-webapp/messagebroker/amf");
-                
-                var channelSet:ChannelSet = new ChannelSet();
-                channelSet.addChannel(channel);
                 
                 historicalService = new RemoteObject();
                 historicalService.destination = "svnStatService";
-                historicalService.channelSet = channelSet;
                 historicalService.addEventListener(FaultEvent.FAULT, faultHandler);
                 historicalService.addEventListener(ResultEvent.RESULT, historical_resultHandler);
                 
@@ -99,14 +89,8 @@
             }
             
             public function getAuthors():void {
-                var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://localhost:9090/svn-analytics-webapp/messagebroker/amf");
-                
-                var channelSet:ChannelSet = new ChannelSet();
-                channelSet.addChannel(channel);
-                
                 authorService = new RemoteObject();
                 authorService.destination = "svnStatService";
-                authorService.channelSet = channelSet;
                 authorService.addEventListener(FaultEvent.FAULT, faultHandler);
                 authorService.addEventListener(ResultEvent.RESULT, author_resultHandler);
                 
@@ -120,14 +104,8 @@
             }
             
             public function getSvnRepositoryInterval():void {
-                var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://localhost:9090/svn-analytics-webapp/messagebroker/amf");
-                
-                var channelSet:ChannelSet = new ChannelSet();
-                channelSet.addChannel(channel);
-                
                 svnIntervalService = new RemoteObject();
                 svnIntervalService.destination = "svnStatService";
-                svnIntervalService.channelSet = channelSet;
                 svnIntervalService.addEventListener(FaultEvent.FAULT, faultHandler);
                 svnIntervalService.addEventListener(ResultEvent.RESULT, interval_resultHandler);
                 
@@ -156,14 +134,8 @@
             	refineRequest.startDate = startDate.selectedDate;
             	refineRequest.endDate = endDate.selectedDate;
             	
-            	var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://localhost:9090/svn-analytics-webapp/messagebroker/amf");
-                
-                var channelSet:ChannelSet = new ChannelSet();
-                channelSet.addChannel(channel);
-                
                 svnRefineOverallService = new RemoteObject();
                 svnRefineOverallService.destination = "svnStatService";
-                svnRefineOverallService.channelSet = channelSet;
                 svnRefineOverallService.addEventListener(FaultEvent.FAULT, faultHandler);
                 svnRefineOverallService.addEventListener(ResultEvent.RESULT, team_resultHandler);
                 
@@ -171,7 +143,6 @@
                 
                 svnRefineHistoryService = new RemoteObject();
                 svnRefineHistoryService.destination = "svnStatService";
-                svnRefineHistoryService.channelSet = channelSet;
                 svnRefineHistoryService.addEventListener(FaultEvent.FAULT, faultHandler);
                 svnRefineHistoryService.addEventListener(ResultEvent.RESULT, historical_resultHandler);
                 

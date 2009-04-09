@@ -51,6 +51,10 @@
 						<!-- Mac OS X -->
 						<charts>1377-4001-0346-3601-2775-6383</charts>
 					</licenses>
+					<locales>
+						<param>en_US</param>
+					</locales>
+					<contextRoot>svn-analytics-webapp</contextRoot>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -72,10 +76,63 @@
 					</execution>
 				</executions>
 			</plugin>
+<!--			<plugin>-->
+<!--				<groupId>info.flex-mojos</groupId>-->
+<!--				<artifactId>flex-compiler-mojo</artifactId>-->
+<!--				<version>2.0.3</version>-->
+<!--				<extensions>true</extensions>-->
+<!--				<configuration>-->
+<!---->
+<!--				</configuration>-->
+<!--			</plugin>-->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-config</id>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
+							<includeArtifacIds>svn-analytics-config</includeArtifacIds>
+							<includeGroupIds>${project.groupId}</includeGroupIds>
+							<excludeTransitive>true</excludeTransitive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
+
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${basedir}/target/generated-resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
 	</build>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.neosavvy.svn.analytics</groupId>
+			<artifactId>svn-analytics</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>svn-analytics-config</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<classifier>resources</classifier>
+			<type>zip</type>
+			<scope>provided</scope>
+		</dependency>
+
 		<dependency>
 			<groupId>com.adobe.flex.sdk</groupId>
 			<artifactId>datavisualization</artifactId>
@@ -86,12 +143,6 @@
 			<artifactId>datavisualization</artifactId>
 			<classifier>en_US</classifier>
 			<type>swc</type>
-		</dependency>
-		<dependency>
-			<groupId>com.neosavvy.svn.analytics</groupId>
-			<artifactId>svn-analytics</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.adobe.blazeds</groupId>
