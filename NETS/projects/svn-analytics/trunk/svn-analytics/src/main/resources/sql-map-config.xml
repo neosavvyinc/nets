@@ -8,8 +8,8 @@
 	<transactionManager type="JDBC" commitRequired="false">
 		<dataSource type="SIMPLE">
 			<property name="JDBC.Driver" value="oracle.jdbc.driver.OracleDriver" />
-<!--			<property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@sv-itchy.roundarch.com:1521:ORACLEDB" />-->
-			<property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@172.16.0.128:1521:XE" />
+			<property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@sv-itchy.roundarch.com:1521:ORACLEDB" />
+<!--			<property name="JDBC.ConnectionURL" value="jdbc:oracle:thin:@172.16.0.128:1521:XE" />-->
 			<property name="JDBC.Username" value="svnanalytics" />
 			<property name="JDBC.Password" value="svnanalytics" />
 			<property name="JDBC.Class" value="oracle.jdbc.pool.OracleDataSource" />

@@ -43,6 +43,9 @@
             
 			public function faultHandler (event:FaultEvent):void {
 				Alert.show(event.fault.faultString, 'Error');
+				trace("Fault: " + event.fault.faultCode);
+				trace("FaultDetail: " + event.fault.faultDetail);
+				trace("FaultString: " + event.fault.faultString);
 			}
 
 			public function init():void {
@@ -53,9 +56,14 @@
 			}
 			
 			public function getTeamStats():void {
+                /* var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://sv-scratchy.roundarch.com:9080/svn-analytics/messagebroker/amf");
+	            
+	            var channelSet:ChannelSet = new ChannelSet();
+	            channelSet.addChannel(channel); */
 	            
 	            svnStatService = new RemoteObject();
 	            svnStatService.destination = "svnStatService";
+/* 	            svnStatService.channelSet = channelSet; */
 	            svnStatService.addEventListener(FaultEvent.FAULT, faultHandler);
 	            svnStatService.addEventListener(ResultEvent.RESULT, team_resultHandler);
 	            
@@ -73,7 +81,13 @@
 			
 			public function getHistoricalStats():void {
                 
+                /* var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://sv-scratchy.roundarch.com:9080/svn-analytics/messagebroker/amf");
+	            
+	            var channelSet:ChannelSet = new ChannelSet();
+	            channelSet.addChannel(channel); */
+                
                 historicalService = new RemoteObject();
+                /* historicalService.channelSet = channelSet; */
                 historicalService.destination = "svnStatService";
                 historicalService.addEventListener(FaultEvent.FAULT, faultHandler);
                 historicalService.addEventListener(ResultEvent.RESULT, historical_resultHandler);
@@ -89,7 +103,14 @@
             }
             
             public function getAuthors():void {
+            	
+            	/* var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://sv-scratchy.roundarch.com:9080/svn-analytics/messagebroker/amf");
+	            
+	            var channelSet:ChannelSet = new ChannelSet();
+	            channelSet.addChannel(channel); */
+            	
                 authorService = new RemoteObject();
+                /* authorService.channelSet = channelSet; */
                 authorService.destination = "svnStatService";
                 authorService.addEventListener(FaultEvent.FAULT, faultHandler);
                 authorService.addEventListener(ResultEvent.RESULT, author_resultHandler);
@@ -104,7 +125,13 @@
             }
             
             public function getSvnRepositoryInterval():void {
+            	/* var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://sv-scratchy.roundarch.com:9080/svn-analytics/messagebroker/amf");
+	            
+	            var channelSet:ChannelSet = new ChannelSet();
+	            channelSet.addChannel(channel); */
+            	
                 svnIntervalService = new RemoteObject();
+                /* svnIntervalService.channelSet = channelSet; */
                 svnIntervalService.destination = "svnStatService";
                 svnIntervalService.addEventListener(FaultEvent.FAULT, faultHandler);
                 svnIntervalService.addEventListener(ResultEvent.RESULT, interval_resultHandler);
@@ -129,12 +156,18 @@
             
             public function refineSearch() : void {
             	
+            	/* var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://sv-scratchy.roundarch.com:9080/svn-analytics/messagebroker/amf");
+	            
+	            var channelSet:ChannelSet = new ChannelSet();
+	            channelSet.addChannel(channel); */
+            	
             	var refineRequest:RefineSearchRequest = new RefineSearchRequest();
             	refineRequest.userNames = [authorsSelector.selectedItem.author];
             	refineRequest.startDate = startDate.selectedDate;
             	refineRequest.endDate = endDate.selectedDate;
             	
                 svnRefineOverallService = new RemoteObject();
+                /* svnRefineOverallService.channelSet = channelSet; */
                 svnRefineOverallService.destination = "svnStatService";
                 svnRefineOverallService.addEventListener(FaultEvent.FAULT, faultHandler);
                 svnRefineOverallService.addEventListener(ResultEvent.RESULT, team_resultHandler);
@@ -142,6 +175,7 @@
                 svnRefineOverallService.getRefinedTeamStatistics(refineRequest);    
                 
                 svnRefineHistoryService = new RemoteObject();
+                /* svnRefineHistoryService.channelSet = channelSet; */
                 svnRefineHistoryService.destination = "svnStatService";
                 svnRefineHistoryService.addEventListener(FaultEvent.FAULT, faultHandler);
                 svnRefineHistoryService.addEventListener(ResultEvent.RESULT, historical_resultHandler);

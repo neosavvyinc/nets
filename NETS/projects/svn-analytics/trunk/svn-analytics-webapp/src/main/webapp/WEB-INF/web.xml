@@ -4,7 +4,7 @@
 
 <web-app>
     
-    <display-name>SVN Analytics Service</display-name>
+  	<display-name>SVN Analytics Service</display-name>
   	
   	<context-param>
         <param-name>contextConfigLocation</param-name>
@@ -35,12 +35,5 @@
         <servlet-name>MessageBrokerServlet</servlet-name>
         <url-pattern>/messagebroker/*</url-pattern>
     </servlet-mapping>
-    
-<!--    <resource-ref>-->
-<!--        <res-ref-name>jdbc/SvnAnalyticsDataSource</res-ref-name>-->
-<!--        <res-type>javax.sql.DataSource</res-type>-->
-<!--        <res-auth>Container</res-auth>-->
-<!--        <res-sharing-scope>Shareable</res-sharing-scope>-->
-<!--    </resource-ref>-->
      
 </web-app>

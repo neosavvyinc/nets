@@ -68,7 +68,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>svn-analytics-webapp</finalName>
+		<finalName>svn-analytics</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.sonatype.flexmojos</groupId>

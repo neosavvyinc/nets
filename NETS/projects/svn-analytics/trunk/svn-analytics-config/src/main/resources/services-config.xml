@@ -13,7 +13,6 @@
         <!-- Default channels -->
         <default-channels>
             <channel ref="svn-analytics-amf" />
-            <channel ref="secure-svn-analytics-amf" />
         </default-channels>
     </services>
 
@@ -43,30 +42,6 @@
             </properties>
         </channel-definition>
 
-        <channel-definition id="secure-svn-analytics-amf"
-            class="mx.messaging.channels.SecureAMFChannel">
-            <endpoint
-                url="https://{server.name}:{server.port}/{context.root}/messagebroker/amfsecure"
-                class="flex.messaging.endpoints.SecureAMFEndpoint" />
-            <properties>
-                <polling-enabled>false</polling-enabled>
-                <!--
-                    HTTPS requests on some browsers do not work when
-                    pragma "no-cache" are set
-                -->
-                <add-no-cache-headers>false</add-no-cache-headers>
-                <!--
-                    Optional. Use this to limit the client channel's
-                    connect attempt to the specified time interval.
-                    <connect-timeout-seconds>5</connect-timeout-seconds>
-                -->
-                <!-- removes headers from request if true -->
-                <serialization>
-                    <enable-small-messages>false
-                    </enable-small-messages>
-                </serialization>
-            </properties>
-        </channel-definition>
     </channels>
 
     <logging>

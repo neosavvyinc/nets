@@ -9,7 +9,6 @@
 
     <default-channels>
         <channel ref="svn-analytics-amf" />
-        <channel ref="secure-svn-analytics-amf" />
     </default-channels>
 
     <destination id="svnStatService">
