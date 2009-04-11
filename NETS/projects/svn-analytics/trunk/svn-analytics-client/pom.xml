@@ -22,6 +22,13 @@
 				<groupId>org.sonatype.flexmojos</groupId>
 				<artifactId>flexmojos-maven-plugin</artifactId>
 				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>wrapper</goal>
+						</goals>
+					</execution>
+				</executions>
 				<configuration>
 					<debug>true</debug>
 					<licenses>
@@ -43,27 +50,6 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<plugin>
-				<groupId>info.flex-mojos</groupId>
-				<artifactId>html-wrapper-mojo</artifactId>
-				<version>2.0.3</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>wrapper</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-<!--			<plugin>-->
-<!--				<groupId>info.flex-mojos</groupId>-->
-<!--				<artifactId>flex-compiler-mojo</artifactId>-->
-<!--				<version>2.0.3</version>-->
-<!--				<extensions>true</extensions>-->
-<!--				<configuration>-->
-<!---->
-<!--				</configuration>-->
-<!--			</plugin>-->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-dependency-plugin</artifactId>
@@ -97,12 +83,6 @@
 	</build>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.neosavvy.svn.analytics</groupId>
-			<artifactId>svn-analytics</artifactId>
-			<version>1.0-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
 		<dependency>
 			<groupId>com.neosavvy.svn.analytics</groupId>
 			<artifactId>svn-analytics-common</artifactId>
