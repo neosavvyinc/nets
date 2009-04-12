@@ -2,9 +2,11 @@ package com.neosavvy.svn.analytics
 {
 	import com.neosavvy.svn.analytics.model.HistoricalTeamStatisticProxy;
 	import com.neosavvy.svn.analytics.model.OverallTeamStatisticProxy;
+	import com.neosavvy.svn.analytics.model.SvnAnalyticsProxy;
 	
 	import mx.charts.LineChart;
 	import mx.controls.AdvancedDataGrid;
+	import mx.controls.ComboBox;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -23,6 +25,7 @@ package com.neosavvy.svn.analytics
 				ApplicationFacade.STARTUP
 				,ApplicationFacade.LOADED_SUMMARY_STATS
 				,ApplicationFacade.LOADED_HISTORICAL_STATS
+				,ApplicationFacade.LOADED_AUTHORS
 			];
 		}
 		
@@ -37,6 +40,10 @@ package com.neosavvy.svn.analytics
 					var historyProxy:HistoricalTeamStatisticProxy = facade.retrieveProxy( HistoricalTeamStatisticProxy.NAME ) as HistoricalTeamStatisticProxy;
 					historicalStatisticsChart.dataProvider = historyProxy.historicalStats;
 					break;
+				case ApplicationFacade.LOADED_AUTHORS:
+					var svnAnalyticsProxy:SvnAnalyticsProxy = facade.retrieveProxy( SvnAnalyticsProxy.NAME ) as SvnAnalyticsProxy;
+					authorsSelector.dataProvider = svnAnalyticsProxy.authors;
+					break;
 				default:
 					break;
 			}
@@ -48,15 +55,15 @@ package com.neosavvy.svn.analytics
 		}
 		
 		protected function get summaryGrid():AdvancedDataGrid {
-			
-			var grid:AdvancedDataGrid = this.application.summaryStatisticsGrid;
-			return grid;
-			
+			return this.application.summaryStatisticsGrid;
 		}
 		
 		protected function get historicalStatisticsChart():LineChart {
-			var chart:LineChart = this.application.historicalStatisticsChart;
-			return chart;
+			return this.application.historicalStatisticsChart;
+		}
+		
+		protected function get authorsSelector():ComboBox {
+			return this.application.authorsSelector;
 		}
 		
 		/**

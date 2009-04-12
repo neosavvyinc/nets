@@ -11,8 +11,11 @@ package com.neosavvy.svn.analytics
 		public static const LOAD_SUMMARY_STATS:String = "loadSummaryStats";
 		public static const LOADED_SUMMARY_STATS:String = "loadedSummaryStats";
 		
-		public static const LOAD_HISTORICAL_STATS:String = "loadedHistoricalStats";
+		public static const LOAD_HISTORICAL_STATS:String = "loadHistoricalStats";
 		public static const LOADED_HISTORICAL_STATS:String = "loadedHistoricalStats";
+		
+		public static const LOAD_AUTHORS:String = "loadAuthors";
+		public static const LOADED_AUTHORS:String = "loadedAuthors";
 		
 		public static function getInstance():ApplicationFacade { 
 			if( instance == null) {

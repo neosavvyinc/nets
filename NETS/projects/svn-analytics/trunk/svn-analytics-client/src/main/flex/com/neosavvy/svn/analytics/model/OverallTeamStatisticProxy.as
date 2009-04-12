@@ -10,7 +10,7 @@ package com.neosavvy.svn.analytics.model
 
 	public class OverallTeamStatisticProxy extends Proxy
 	{
-		public static var NAME:String = "svnAnalyticsProxy";
+		public static var NAME:String = "svnSummaryProxy";
 		
 		private var svnAnalyticsService:RemoteObject;
 		
