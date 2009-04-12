@@ -1,12 +1,14 @@
 package com.neosavvy.svn.analytics
 {
+	import com.neosavvy.svn.analytics.model.AuthorProxy;
 	import com.neosavvy.svn.analytics.model.HistoricalTeamStatisticProxy;
 	import com.neosavvy.svn.analytics.model.OverallTeamStatisticProxy;
-	import com.neosavvy.svn.analytics.model.SvnAnalyticsProxy;
+	import com.neosavvy.svn.analytics.model.ReportIntervalProxy;
 	
 	import mx.charts.LineChart;
 	import mx.controls.AdvancedDataGrid;
 	import mx.controls.ComboBox;
+	import mx.controls.DateField;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -26,6 +28,7 @@ package com.neosavvy.svn.analytics
 				,ApplicationFacade.LOADED_SUMMARY_STATS
 				,ApplicationFacade.LOADED_HISTORICAL_STATS
 				,ApplicationFacade.LOADED_AUTHORS
+				,ApplicationFacade.LOADED_REPOSITORY_INTERVAL
 			];
 		}
 		
@@ -41,8 +44,20 @@ package com.neosavvy.svn.analytics
 					historicalStatisticsChart.dataProvider = historyProxy.historicalStats;
 					break;
 				case ApplicationFacade.LOADED_AUTHORS:
-					var svnAnalyticsProxy:SvnAnalyticsProxy = facade.retrieveProxy( SvnAnalyticsProxy.NAME ) as SvnAnalyticsProxy;
+					var svnAnalyticsProxy:AuthorProxy = facade.retrieveProxy( AuthorProxy.NAME ) as AuthorProxy;
 					authorsSelector.dataProvider = svnAnalyticsProxy.authors;
+					break;
+				case ApplicationFacade.LOADED_REPOSITORY_INTERVAL:
+					var svnRepositoryIntervalProxy:ReportIntervalProxy = facade.retrieveProxy( ReportIntervalProxy.NAME ) as ReportIntervalProxy;
+				
+					var startDateFromService:Date = svnRepositoryIntervalProxy.reportInterval.startDayLevelDate;
+	            	var endDateFromService:Date = svnRepositoryIntervalProxy.reportInterval.endDayLevelDate;
+	            	
+	            	startDate.selectedDate = startDateFromService;
+	            	startDate.selectableRange = {rangeStart: startDateFromService, rangeEnd: endDateFromService};
+	
+	            	endDate.selectedDate = endDateFromService
+	            	startDate.selectableRange = {rangeStart: startDateFromService, rangeEnd: endDateFromService};
 					break;
 				default:
 					break;
@@ -64,6 +79,14 @@ package com.neosavvy.svn.analytics
 		
 		protected function get authorsSelector():ComboBox {
 			return this.application.authorsSelector;
+		}
+		
+		protected function get startDate():DateField {
+			return this.application.startDate;
+		}
+		
+		protected function get endDate():DateField {
+			return this.application.endDate;
 		}
 		
 		/**

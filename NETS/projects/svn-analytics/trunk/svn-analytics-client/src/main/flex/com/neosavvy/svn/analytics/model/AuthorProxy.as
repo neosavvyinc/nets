@@ -8,13 +8,13 @@ package com.neosavvy.svn.analytics.model
 	
 	import org.puremvc.as3.patterns.proxy.Proxy;
 
-	public class SvnAnalyticsProxy extends Proxy
+	public class AuthorProxy extends Proxy
 	{
-		public static var NAME:String = "svnAnalyticsProxy";
+		public static var NAME:String = "authorProxy";
 		
 		private var svnAnalyticsService:RemoteObject;
 		
-		public function SvnAnalyticsProxy()
+		public function AuthorProxy()
 		{
 			super(NAME, new Array());
 			svnAnalyticsService = new RemoteObject();

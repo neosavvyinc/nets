@@ -12,6 +12,7 @@ package com.neosavvy.svn.analytics.controller.startup
 			addSubCommand( ModelPrepCommand ); 
 			addSubCommand( ViewPrepCommand ); 
 			
+			addSubCommand( GetRepositoryReportIntervalCommand );
 			addSubCommand( GetAuthorsCommand );
 			addSubCommand( GetOverallTeamStatsCommand );
 			addSubCommand( GetHistoricalTeamStatsCommand );

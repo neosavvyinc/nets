@@ -17,6 +17,9 @@ package com.neosavvy.svn.analytics
 		public static const LOAD_AUTHORS:String = "loadAuthors";
 		public static const LOADED_AUTHORS:String = "loadedAuthors";
 		
+		public static const LOAD_REPOSITORY_INTERVAL:String = "loadRepositoryInterval";
+		public static const LOADED_REPOSITORY_INTERVAL:String = "loadedRepositoryInterval";
+		
 		public static function getInstance():ApplicationFacade { 
 			if( instance == null) {
 				instance = new ApplicationFacade();
