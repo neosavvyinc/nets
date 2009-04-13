@@ -1,5 +1,7 @@
 package com.neosavvy.svn.analytics
 {
+	import com.neosavvy.svn.analytics.controller.search.RefineSearchCommand;
+	import com.neosavvy.svn.analytics.controller.search.ResetSearchCommand;
 	import com.neosavvy.svn.analytics.controller.startup.StartupCommand;
 	
 	import org.puremvc.as3.patterns.facade.Facade;
@@ -20,6 +22,9 @@ package com.neosavvy.svn.analytics
 		public static const LOAD_REPOSITORY_INTERVAL:String = "loadRepositoryInterval";
 		public static const LOADED_REPOSITORY_INTERVAL:String = "loadedRepositoryInterval";
 		
+		public static const REFINE_SEARCH_REQUEST:String = "refineSearchRequest";
+		public static const RESET_SEARCH_REQUEST:String = "resetSearchRequest";
+		
 		public static function getInstance():ApplicationFacade { 
 			if( instance == null) {
 				instance = new ApplicationFacade();
@@ -31,6 +36,8 @@ package com.neosavvy.svn.analytics
 		override protected function initializeController():void {
 			super.initializeController();
 			registerCommand( STARTUP, StartupCommand );
+			registerCommand( REFINE_SEARCH_REQUEST, RefineSearchCommand );
+			registerCommand( RESET_SEARCH_REQUEST, ResetSearchCommand );
 		}
 		
 		public function startup( app:SvnAnalyticsApplication ) : void  

@@ -26,4 +26,5 @@
 		resource="com/neosavvy/svn/analytics/dao/ibatis/HistoricalTeamStatistics.xml" />
 	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/Authors.xml" />
 	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/SVNRepositoryInterval.xml" />
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/SVNRepositoryConversionInfo.xml"/>
 </sqlMapConfig>

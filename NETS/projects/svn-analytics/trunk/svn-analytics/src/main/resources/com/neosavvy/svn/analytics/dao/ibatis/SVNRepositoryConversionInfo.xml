@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SVNRepositoryConversionInfo">
+
+    <typeAlias alias="SVNRepositoryConversionInfo" 
+    	type="com.neosavvy.svn.analytics.dto.SVNRepositoryConversionInfo" />
+    
+    <resultMap class="SVNRepositoryConversionInfo" id="SVNRepositoryConversionInfoResultMap">
+		<result property="lastUpdateRevision" column="LAST_UPDATE_REV"/>
+		<result property="repositoryURL" column="SVN_REPOSITORY_URL"/>
+    </resultMap>
+    
+    <select id="getRepositoryInfo" 
+    	resultMap="SVNRepositoryConversionInfoResultMap" 
+    	parameterClass="java.lang.String">
+        SELECT 
+        	MAX(REVISION) AS LAST_UPDATE_REV
+        	,SVN_REPOSITORY_URL 
+        FROM 
+        	SVN_STATISTIC 
+        WHERE 
+        	SVN_REPOSITORY_URL LIKE #value#
+        GROUP BY 
+        	SVN_REPOSITORY_URL
+    </select>
+  
+
+</sqlMap>

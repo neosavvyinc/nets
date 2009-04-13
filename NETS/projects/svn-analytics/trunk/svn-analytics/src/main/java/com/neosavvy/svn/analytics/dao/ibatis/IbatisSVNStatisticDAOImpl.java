@@ -12,6 +12,7 @@ import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.Author;
 import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
 import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
+import com.neosavvy.svn.analytics.dto.SVNRepositoryConversionInfo;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
 import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
@@ -89,8 +90,22 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 	}
 
 	public SVNRepositoryInterval getRepositoryInterval() {
+		
 		SVNRepositoryInterval interval = (SVNRepositoryInterval) queryForObject("SvnRepositoryInterval.getSvnRepositoryInterval");
 		return interval;
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public SVNRepositoryConversionInfo getRepositoryInfo(String url) {
+		
+		List<SVNRepositoryConversionInfo> conversionInfo = queryForList("SVNRepositoryConversionInfo.getRepositoryInfo", url);
+		if(conversionInfo != null && conversionInfo.size() > 0) {
+			return conversionInfo.get(0);
+		} else {
+			return new SVNRepositoryConversionInfo();
+		}
+		
 	}
 
 }

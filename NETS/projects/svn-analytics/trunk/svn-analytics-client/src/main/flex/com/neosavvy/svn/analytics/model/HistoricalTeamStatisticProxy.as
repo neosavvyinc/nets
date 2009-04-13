@@ -1,6 +1,7 @@
 package com.neosavvy.svn.analytics.model
 {
 	import com.neosavvy.svn.analytics.ApplicationFacade;
+	import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 	
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
@@ -26,6 +27,12 @@ package com.neosavvy.svn.analytics.model
 		public function getHistoricalTeamStatistics():void {
 			
 			svnAnalyticsService.getHistoricalTeamStatistics();
+			
+		}
+		
+		public function getRefinedHistoricalTeamStatistics(refineRequest:RefineSearchRequest):void {
+			
+			svnAnalyticsService.getRefinedHistoricalTeamStatistics(refineRequest);
 			
 		}
 		

@@ -1,9 +1,12 @@
 package com.neosavvy.svn.analytics
 {
+	import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 	import com.neosavvy.svn.analytics.model.AuthorProxy;
 	import com.neosavvy.svn.analytics.model.HistoricalTeamStatisticProxy;
 	import com.neosavvy.svn.analytics.model.OverallTeamStatisticProxy;
 	import com.neosavvy.svn.analytics.model.ReportIntervalProxy;
+	
+	import flash.events.Event;
 	
 	import mx.charts.LineChart;
 	import mx.controls.AdvancedDataGrid;
@@ -20,6 +23,8 @@ package com.neosavvy.svn.analytics
 		public function ApplicationMediator( viewComponent:Object )
 		{
 			super(MEDIATOR_NAME, viewComponent);
+			this.application.addEventListener(SvnAnalyticsApplication.REFINE_SEARCH, refineSearch);
+			this.application.addEventListener(SvnAnalyticsApplication.RESET_SEARCH, resetSearch);
 		}
 		
 		override public function listNotificationInterests():Array {
@@ -92,9 +97,18 @@ package com.neosavvy.svn.analytics
 		/**
 		 * Event listeners for View spawned actions / user gestures go here
 		 **/ 
-		protected function refineSearch():void {
-			//TODO: Execute refine search
+		protected function refineSearch(event:Event):void {
+			var refineRequest:RefineSearchRequest = new RefineSearchRequest();
+        	refineRequest.userNames = [authorsSelector.selectedItem.author];
+        	refineRequest.startDate = startDate.selectedDate;
+        	refineRequest.endDate = endDate.selectedDate;
+        	
+        	sendNotification( ApplicationFacade.REFINE_SEARCH_REQUEST, refineRequest );
 		} 
 		 
+		protected function resetSearch(event:Event):void {
+			
+			sendNotification( ApplicationFacade.RESET_SEARCH_REQUEST );
+		} 
 	}
 }

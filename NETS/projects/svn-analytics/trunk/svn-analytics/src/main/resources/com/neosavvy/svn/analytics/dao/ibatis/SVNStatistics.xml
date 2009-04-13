@@ -14,6 +14,7 @@
             ,NUM_FILES_ADDED_IN_REV
             ,NUM_FILES_DELETED_IN_REV
             ,NUM_FILES_MODIFIED_IN_REV
+            ,SVN_REPOSITORY_URL
         )
         VALUES
         (
@@ -25,6 +26,7 @@
             ,#numFilesAddedInRevision#
             ,#numFilesDeletedInRevision#
             ,#numFilesModifiedInRevision#
+            ,#svnRepositoryUrl#
         )
     </insert>   
   

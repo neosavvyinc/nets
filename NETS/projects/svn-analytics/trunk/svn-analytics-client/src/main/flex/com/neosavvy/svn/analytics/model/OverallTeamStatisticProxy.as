@@ -1,6 +1,7 @@
 package com.neosavvy.svn.analytics.model
 {
 	import com.neosavvy.svn.analytics.ApplicationFacade;
+	import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 	
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
@@ -28,6 +29,10 @@ package com.neosavvy.svn.analytics.model
 			svnAnalyticsService.getOverallTeamStatistics();
 			
 		}
+		
+		public function getRefinedTeamStatistics(refineRequest:RefineSearchRequest):void {
+			svnAnalyticsService.getRefinedTeamStatistics(refineRequest);
+		}    
 		
 		public function onTeamStatisticResult( object:Object ):void {
 			var data:ResultEvent = object as ResultEvent;

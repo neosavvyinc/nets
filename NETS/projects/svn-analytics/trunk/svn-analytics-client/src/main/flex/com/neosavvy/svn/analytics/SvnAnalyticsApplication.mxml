@@ -7,6 +7,17 @@
 	<mx:Script>
 		<![CDATA[
 			private var facade:ApplicationFacade = ApplicationFacade.getInstance();
+			
+			public static var REFINE_SEARCH:String = "refineSearch";
+			public static var RESET_SEARCH:String = "resetSearch";
+			
+			private function refineSearch():void {
+				dispatchEvent(new Event(REFINE_SEARCH));
+			}
+			
+			private function resetSearch():void {
+				dispatchEvent(new Event(RESET_SEARCH));
+			}
 		]]>
 	</mx:Script>
 	
@@ -14,7 +25,8 @@
 		<mx:ComboBox id="authorsSelector" labelField="author"/>
 		<mx:DateField id="startDate"/>
 		<mx:DateField id="endDate"/>
-		<mx:Button label="Refine Search"/>
+		<mx:Button label="Refine Search" click="{refineSearch()}"/>
+		<mx:Button label="Reset" click="{resetSearch()}"/>
 	</mx:ApplicationControlBar>
 	<mx:VBox 
 		backgroundColor="0xFFFFFF" 

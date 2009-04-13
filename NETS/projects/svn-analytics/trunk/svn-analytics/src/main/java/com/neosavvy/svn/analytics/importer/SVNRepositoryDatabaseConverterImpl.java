@@ -16,6 +16,7 @@ import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
+import com.neosavvy.svn.analytics.dto.SVNRepositoryConversionInfo;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
 import com.neosavvy.svn.analytics.importer.model.SVNRepositoryModel;
 import com.neosavvy.svn.analytics.util.SvnKitUtil;
@@ -98,10 +99,15 @@ public class SVNRepositoryDatabaseConverterImpl implements
 
             long startRevision = modelKey.getStartRevision();
             long endRevision = modelKey.getEndRevision();
-
+            
+            SVNRepositoryConversionInfo info = getDao().getRepositoryInfo(modelKey.getUrl());
+            if(info.getLastUpdateRevision() > startRevision) {
+            	startRevision = info.getLastUpdateRevision() + 1;
+            }
+            
             try {
                 batchConvertRevisionsIntoDatabase(repository, startRevision,
-                        endRevision);
+                        endRevision, modelKey);
             } catch (SVNException e) {
                 logger.error(
                         "There was an error converting the repository from "
@@ -116,7 +122,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
 
     @SuppressWarnings("unchecked")
     protected void batchConvertRevisionsIntoDatabase(SVNRepository repository,
-            long startRevision, long endRevision) throws SVNException {
+            long startRevision, long endRevision, SVNRepositoryModel svnRepositoryModel) throws SVNException {
         Collection<SVNLogEntry> log;
         while (startRevision <= endRevision) {
 
@@ -125,12 +131,12 @@ public class SVNRepositoryDatabaseConverterImpl implements
                         endRevision, true, true);
             } else {
                 log = repository.log(new String[] { "" }, null, startRevision,
-                        startRevision + 100, true, true);
+                        startRevision + 99, true, true);
             }
             List<SVNStatistic> stats = new ArrayList<SVNStatistic>();
             for (Object entry : log.toArray()) {
                 if (entry instanceof SVNLogEntry) {
-                    stats.add(new SVNStatistic((SVNLogEntry) entry));
+                    stats.add(new SVNStatistic((SVNLogEntry) entry, svnRepositoryModel));
                 }
             }
 

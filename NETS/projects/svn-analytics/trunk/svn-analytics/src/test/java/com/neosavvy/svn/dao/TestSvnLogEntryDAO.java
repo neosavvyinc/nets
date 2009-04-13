@@ -9,7 +9,6 @@ import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.internal.runners.statements.Fail;
 
 import com.neosavvy.junit4.BaseSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
