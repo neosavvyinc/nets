@@ -3,6 +3,8 @@ package com.neosavvy.svn.analytics.model
 	import com.neosavvy.svn.analytics.ApplicationFacade;
 	import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 	
+	import mx.messaging.ChannelSet;
+	import mx.messaging.channels.AMFChannel;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
 	import mx.rpc.remoting.mxml.RemoteObject;
@@ -19,6 +21,10 @@ package com.neosavvy.svn.analytics.model
 		{
 			super(NAME, SVNRepositoryInterval);
 			svnAnalyticsService = new RemoteObject();
+			var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://sv-scratchy.roundarch.com:9080/svn-analytics/messagebroker/amf");
+			var channelSet:ChannelSet = new ChannelSet();
+			channelSet.addChannel(channel); 
+			svnAnalyticsService.channelSet = channelSet; 
             svnAnalyticsService.destination = "svnStatService";
             svnAnalyticsService.addEventListener(ResultEvent.RESULT, onReportIntervalResult );
             svnAnalyticsService.addEventListener(FaultEvent.FAULT, onReportIntervalFault );
@@ -34,8 +40,11 @@ package com.neosavvy.svn.analytics.model
 			sendNotification( ApplicationFacade.LOADED_REPOSITORY_INTERVAL );
 		}
 		
-		public function onReportIntervalFault( fault:Object ):void {
-			trace("FAULT");
+		public function onReportIntervalFault( faultObject:Object ):void {
+			var fault:FaultEvent = faultObject as FaultEvent;
+			trace("Fault: " + fault.fault.faultCode);
+			trace("FaultDetail: " + fault.fault.faultDetail);
+			trace("FaultString: " + fault.fault.faultString);
 		}
 		
 		public function get reportInterval():SVNRepositoryInterval {

@@ -13,6 +13,7 @@
 	<name>svn-analytics-common</name>
 	<url>http://neosavvy.com</url>
 	<packaging>swc</packaging>
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -57,8 +58,7 @@
 						<!-- Windows -->
 						<!--<flexbuilder3>1377-4008-6804-0543-0443-9238</flexbuilder3>-->
 						<!-- Mac OS X -->
-						<charts>1377-4001-0346-3601-2775-6383
-						</charts>
+						<flexbuilder3>1377-4001-0346-3601-2775-6383</flexbuilder3>
 					</licenses>
 					<locales>
 						<param>en_US</param>
@@ -66,9 +66,15 @@
 				</configuration>
 				<dependencies>
 					<dependency>
+						<groupId>com.adobe.flex</groupId>
+						<artifactId>compiler</artifactId>
+						<version>${flex.version}</version>
+						<type>pom</type>
+					</dependency>
+					<dependency>
 						<groupId>com.adobe.flex.license</groupId>
-						<artifactId>license</artifactId>
-						<version>3.0.0.477</version>
+						<artifactId>license-flexbuilder-pro-roundarch</artifactId>
+						<version>${flex.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
@@ -83,6 +89,12 @@
 			<version>1.0-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex.version}</version>
+			<type>pom</type>
+		</dependency>
 
 		<dependency>
 			<groupId>org.puremvc.as3</groupId>
@@ -91,16 +103,5 @@
 			<type>swc</type>
 		</dependency>
 
-		<dependency>
-			<groupId>com.adobe.flex.sdk</groupId>
-			<artifactId>datavisualization</artifactId>
-			<type>swc</type>
-		</dependency>
-		<dependency>
-			<groupId>com.adobe.flex.sdk</groupId>
-			<artifactId>datavisualization</artifactId>
-			<classifier>en_US</classifier>
-			<type>swc</type>
-		</dependency>
 	</dependencies>
 </project>
