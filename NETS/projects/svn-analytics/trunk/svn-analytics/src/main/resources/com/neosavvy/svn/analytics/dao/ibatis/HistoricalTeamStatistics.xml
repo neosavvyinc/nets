@@ -12,9 +12,28 @@
         <result column="numberOfFilesModified" property="numberOfFilesModified"/>
     </resultMap>
     
-    <select id="getHistoricalStatistics" resultMap="HistoricalTeamStatisticResultMap">
+    <parameterMap class="com.neosavvy.svn.analytics.dto.request.RefineSearchRequest" id="refineRequest">
+    	<parameter property="incrementType" javaType="java.lang.String"/>
+    	<parameter property="userNames"/>
+    	<parameter property="startDate"/>
+    	<parameter property="endDate"/>
+    </parameterMap>
+    
+    <select id="getHistoricalStatistics" 
+    	resultMap="HistoricalTeamStatisticResultMap"
+    	parameterMap="refineRequest">
         SELECT 
-            to_char(REV_DATE,'YYYY-MM') as revisionDate
+        	<isParameterPresent>
+        		<isEqual property="incrementType" compareValue="monthly">
+	        		to_char(REV_DATE,'YYYY-MM')
+	        	</isEqual>
+	        	<isEqual property="incrementType" compareValue="daily">
+	        		to_char(REV_DATE,'YYYY-MM-DD')
+	        	</isEqual>
+        	</isParameterPresent>
+        	<isNotParameterPresent>
+        		to_char(REV_DATE,'YYYY-MM')
+        	</isNotParameterPresent> as revisionDate
             ,SUM(NUM_FILES_IN_REV) as numberfOfFiles
             ,SUM(NUM_FILES_ADDED_IN_REV) as numberOfFilesAdded
             ,SUM(NUM_FILES_DELETED_IN_REV) as numberOfFilesDeleted  
@@ -35,8 +54,30 @@
 	           		REV_DATE &lt;= #endDate#
 	            </isNotEmpty>
 			</isParameterPresent>
-        GROUP BY to_char(REV_DATE,'YYYY-MM')
-        ORDER BY to_char(REV_DATE,'YYYY-MM')
+        GROUP BY 
+        	<isParameterPresent>
+        		<isEqual property="incrementType" compareValue="monthly">
+	        		to_char(REV_DATE,'YYYY-MM')
+	        	</isEqual>
+	        	<isEqual property="incrementType" compareValue="daily">
+	        		to_char(REV_DATE,'YYYY-MM-DD')
+	        	</isEqual>
+        	</isParameterPresent>
+        	<isNotParameterPresent>
+        		to_char(REV_DATE,'YYYY-MM')
+        	</isNotParameterPresent>
+        ORDER BY 
+        	<isParameterPresent>
+        		<isEqual property="incrementType" compareValue="monthly">
+	        		to_char(REV_DATE,'YYYY-MM')
+	        	</isEqual>
+	        	<isEqual property="incrementType" compareValue="daily">
+	        		to_char(REV_DATE,'YYYY-MM-DD')
+	        	</isEqual>
+        	</isParameterPresent>
+        	<isNotParameterPresent>
+        		to_char(REV_DATE,'YYYY-MM')
+        	</isNotParameterPresent>
     </select>
 
 </sqlMap>

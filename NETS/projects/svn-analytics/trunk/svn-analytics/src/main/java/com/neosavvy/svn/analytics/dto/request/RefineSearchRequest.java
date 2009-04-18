@@ -4,8 +4,13 @@ import java.util.Date;
 
 public class RefineSearchRequest {
 
+	public static String CONST_DAILY = "daily";
+	public static String CONST_MONTHLY = "monthly";
+	
 	private Date startDate;
 	private Date endDate;
+	
+	private String incrementType = CONST_DAILY;
 
 	private String[] userNames;
 
@@ -31,6 +36,14 @@ public class RefineSearchRequest {
 
 	public void setUserNames(String[] userNames) {
 		this.userNames = userNames;
+	}
+
+	public String getIncrementType() {
+		return incrementType;
+	}
+
+	public void setIncrementType(String incrementType) {
+		this.incrementType = incrementType;
 	}
 
 }

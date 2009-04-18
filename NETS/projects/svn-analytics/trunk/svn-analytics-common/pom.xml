@@ -13,13 +13,12 @@
 	<name>svn-analytics-common</name>
 	<url>http://neosavvy.com</url>
 	<packaging>swc</packaging>
-	
+
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.sonatype.flexmojos</groupId>
-				<artifactId>flexmojos-maven-plugin
-				</artifactId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
 				<version>3.0.0</version>
 				<executions>
 					<execution>
@@ -55,10 +54,7 @@
 				<configuration>
 					<debug>true</debug>
 					<licenses>
-						<!-- Windows -->
-						<!--<flexbuilder3>1377-4008-6804-0543-0443-9238</flexbuilder3>-->
-						<!-- Mac OS X -->
-						<flexbuilder3>1377-4001-0346-3601-2775-6383</flexbuilder3>
+						<flexbuilder3>137740010346360127756383</flexbuilder3>
 					</licenses>
 					<locales>
 						<param>en_US</param>

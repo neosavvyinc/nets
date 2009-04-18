@@ -35,49 +35,6 @@ public class TestSvnLogEntryDAO extends BaseSpringAwareTestCase {
         logger.info("Setup Complete");
     }
     
-    /*
-    @SuppressWarnings("unchecked")
-    @Test
-    @Ignore
-    public void testSaveBatchStatistics() throws SVNException {
-
-    	logger.info("Running testSaveBatchStatistics()");
-    	
-        String url = "https://svn.roundarch.com/repos/USADS";
-        String name = "aparrish";
-        String password = "subw@y1";
-        long startRevision = 0;
-        long endRevision = -1;// HEAD (the latest) revision
-        SvnKitUtil.setupLibrary();
-        SVNRepository repository = null;
-        repository = SVNRepositoryFactory.create(SVNURL.parseURIEncoded(url));
-        ISVNAuthenticationManager authManager = SVNWCUtil
-                .createDefaultAuthenticationManager(name, password);
-        repository.setAuthenticationManager(authManager);
-        endRevision = repository.getLatestRevision();
-
-        Collection log = null;
-
-        while (startRevision <= endRevision) {
-
-            if (startRevision + 100 >= endRevision) {
-                log = repository.log(new String[] { "" }, null, startRevision,
-                        endRevision, true, true);
-            } else {
-                log = repository.log(new String[] { "" }, null, startRevision,
-                        startRevision + 100, true, true);
-            }
-            List<SVNStatistic> stats = new ArrayList<SVNStatistic>();
-            for (Object entry : log.toArray()) {
-                if (entry instanceof SVNLogEntry) {
-                    stats.add(new SVNStatistic((SVNLogEntry) entry));
-                }
-            }
-
-            dao.saveStatistics(stats);
-            startRevision += 100;
-        }
-    }*/
 
     @Test
     public void testGetOverallStats() {
@@ -106,6 +63,7 @@ public class TestSvnLogEntryDAO extends BaseSpringAwareTestCase {
     	request.setUserNames(new String[]{"aparrish"});
     	request.setStartDate(getDate("2008-01-01"));
     	request.setEndDate(getDate("2009-01-01"));
+    	request.setIncrementType(RefineSearchRequest.CONST_MONTHLY);
     	HistoricalTeamStatistic[] stats = dao.getRefinedHistoricalStats(request);
     	Assert.assertNotNull(stats);
     	Assert.assertEquals(12, stats.length);

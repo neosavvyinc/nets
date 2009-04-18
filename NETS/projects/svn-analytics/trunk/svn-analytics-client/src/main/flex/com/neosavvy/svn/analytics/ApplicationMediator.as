@@ -94,6 +94,16 @@ package com.neosavvy.svn.analytics
 			return this.application.endDate;
 		}
 		
+		protected function get increment():String {
+			if( this.application.daily ) {
+				return "daily";
+			} else if ( this.application.monthly ) {
+				return "monthly";
+			}
+			
+			return "monthly";
+		}
+		
 		/**
 		 * Event listeners for View spawned actions / user gestures go here
 		 **/ 
@@ -102,6 +112,7 @@ package com.neosavvy.svn.analytics
         	refineRequest.userNames = [authorsSelector.selectedItem.author];
         	refineRequest.startDate = startDate.selectedDate;
         	refineRequest.endDate = endDate.selectedDate;
+        	refineRequest.incrementType = increment;
         	
         	sendNotification( ApplicationFacade.REFINE_SEARCH_REQUEST, refineRequest );
 		} 

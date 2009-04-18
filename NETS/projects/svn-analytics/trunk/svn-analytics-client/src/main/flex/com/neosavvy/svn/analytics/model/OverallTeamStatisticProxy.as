@@ -17,14 +17,18 @@ package com.neosavvy.svn.analytics.model
 		
 		private var svnAnalyticsService:RemoteObject;
 		
+		private var remote:Boolean = ProxyConstants.isRemoteEnabled;
+		
 		public function OverallTeamStatisticProxy()
 		{
 			super(NAME, new Array());
 			svnAnalyticsService = new RemoteObject();
-			var channel:AMFChannel = new AMFChannel("svn-analytics-amf", "http://sv-scratchy.roundarch.com:9080/svn-analytics/messagebroker/amf");
-			var channelSet:ChannelSet = new ChannelSet();
-			channelSet.addChannel(channel); 
-			svnAnalyticsService.channelSet = channelSet; 
+			if(remote) {
+				var channel:AMFChannel = new AMFChannel("svn-analytics-amf", ProxyConstants.url);
+				var channelSet:ChannelSet = new ChannelSet();
+				channelSet.addChannel(channel); 
+				svnAnalyticsService.channelSet = channelSet;
+			} 
             svnAnalyticsService.destination = "svnStatService";
             svnAnalyticsService.addEventListener(ResultEvent.RESULT, onTeamStatisticResult );
             svnAnalyticsService.addEventListener(FaultEvent.FAULT, onTeamStatisticFault );

@@ -27,6 +27,11 @@
 		<mx:DateField id="endDate"/>
 		<mx:Button label="Refine Search" click="{refineSearch()}"/>
 		<mx:Button label="Reset" click="{resetSearch()}"/>
+		<mx:RadioButtonGroup
+			id="increments"
+			/>
+		<mx:RadioButton id="monthly" label="Monthly" groupName="{increments}" selected="true"/>
+		<mx:RadioButton id="daily" label="Daily" groupName="{increments}"/>
 	</mx:ApplicationControlBar>
 	<mx:VBox 
 		backgroundColor="0xFFFFFF" 
