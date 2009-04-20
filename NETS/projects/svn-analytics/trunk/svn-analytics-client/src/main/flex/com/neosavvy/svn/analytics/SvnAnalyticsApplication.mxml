@@ -37,7 +37,7 @@
 		backgroundColor="0xFFFFFF" 
 		width="100%" 
 		height="70%">
-		<mx:LineChart 
+		<mx:ColumnChart 
 			id="historicalStatisticsChart" 
 			showDataTips="true" 
 			width="100%" 
@@ -49,24 +49,25 @@
 	            />
 	        </mx:horizontalAxis>
 	        <mx:series>
-	           <mx:LineSeries 
+	           <mx:ColumnSeries 
 	                yField="numberfOfFiles" 
 	                displayName="Files"
+	                
 	           />
-	           <mx:LineSeries 
+	           <mx:ColumnSeries 
                     yField="numberOfFilesAdded" 
                     displayName="Added"
                />
-               <mx:LineSeries 
+               <mx:ColumnSeries 
                     yField="numberOfFilesDeleted" 
                     displayName="Deleted"
                />
-               <mx:LineSeries 
+               <mx:ColumnSeries 
                     yField="numberOfFilesModified" 
                     displayName="Modified"
                />
 	        </mx:series>
-	     </mx:LineChart>
+	     </mx:ColumnChart>
         <mx:Legend direction="horizontal" dataProvider="{historicalStatisticsChart}"/>
      </mx:VBox>
 	<mx:AdvancedDataGrid id="summaryStatisticsGrid" width="100%" height="25%"/>

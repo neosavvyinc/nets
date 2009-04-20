@@ -8,7 +8,7 @@ package com.neosavvy.svn.analytics
 	
 	import flash.events.Event;
 	
-	import mx.charts.LineChart;
+	import mx.charts.ColumnChart;
 	import mx.controls.AdvancedDataGrid;
 	import mx.controls.ComboBox;
 	import mx.controls.DateField;
@@ -78,7 +78,7 @@ package com.neosavvy.svn.analytics
 			return this.application.summaryStatisticsGrid;
 		}
 		
-		protected function get historicalStatisticsChart():LineChart {
+		protected function get historicalStatisticsChart():ColumnChart {
 			return this.application.historicalStatisticsChart;
 		}
 		
