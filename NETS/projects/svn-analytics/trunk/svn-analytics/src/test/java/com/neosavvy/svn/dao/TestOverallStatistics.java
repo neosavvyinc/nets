@@ -19,10 +19,10 @@ import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 
-public class TestSvnLogEntryDAO extends BaseSpringAwareTestCase {
+public class TestOverallStatistics extends BaseSpringAwareTestCase {
 
     private static final Logger logger = Logger
-            .getLogger(TestSvnLogEntryDAO.class);
+            .getLogger(TestOverallStatistics.class);
 
     private SVNStatisticDAO dao;
 
@@ -38,38 +38,24 @@ public class TestSvnLogEntryDAO extends BaseSpringAwareTestCase {
     
 
     @Test
-    public void testRefinedHistoricalStats() {
+    public void testGetOverallStats() {
+    	logger.info("Running testGetOverallStats()");
+        OverallTeamStatistic[] overallTeamStats = dao.getOverallTeamStats();
+        Assert.assertNotNull(overallTeamStats);
+    }
+    
+    @Test
+    public void testRefinedTeamStats() {
     	
     	RefineSearchRequest request = new RefineSearchRequest();
     	request.setUserNames(new String[]{"aparrish"});
     	request.setStartDate(TestUtils.getDate("2008-01-01"));
     	request.setEndDate(TestUtils.getDate("2009-01-01"));
-    	request.setIncrementType(RefineSearchRequest.CONST_MONTHLY);
-    	HistoricalTeamStatistic[] stats = dao.getRefinedHistoricalStats(request);
-    	Assert.assertNotNull(stats);
-    	Assert.assertEquals(12, stats.length);
-    }
-    
-    @Test
-    public void testGetHistoricalStats() {
-    	logger.info("Running testGetHistoricalStats()");
-        HistoricalTeamStatistic[] stats = dao.getHistoricalTeamStats();
-        Assert.assertNotNull(stats);
-    }
-
-    @Test
-    public void testGetAuthors() {
-    	logger.info("Running testGetAuthors()");
-        Author[] authors = dao.getAuthors();
-        Assert.assertNotNull(authors);
-    }
-
-    @Test
-    public void testInterval() {
-    	logger.info("Running testInterval()");
-    	SVNRepositoryInterval interval = dao.getRepositoryInterval();
-    	Assert.assertNotNull(interval);
+    	OverallTeamStatistic[] overallTeamStatistics = dao.getRefinedTeamStats(request);
+    	Assert.assertNotNull(overallTeamStatistics);
+    	Assert.assertEquals(1, overallTeamStatistics.length);
     	
     }
+    
     
 }

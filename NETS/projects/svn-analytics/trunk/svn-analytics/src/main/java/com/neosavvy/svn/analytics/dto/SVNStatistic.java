@@ -109,6 +109,20 @@ public class SVNStatistic {
 	 */
 	private int numFilesModifiedInRevision;
 
+	/**
+	 * Derived via checking the length of the message when it is set.
+	 * 
+	 * 0 - message had a length of 0 1 - message had a length >= 1
+	 */
+	private int validComment = 0;
+
+	/**
+	 * Derived via checking the length of the message when it is set
+	 * 
+	 * 0 - message had a length >= 1 1 - message had a length of 0
+	 */
+	private int invalidComment = 0;
+
 	private String svnRepositoryUrl;
 
 	public String getAuthor() {
@@ -143,6 +157,12 @@ public class SVNStatistic {
 	}
 
 	public void setMessage(String message) {
+
+		if (message != null && message.trim().length() >= 1)
+			this.validComment = 1;
+		else
+			this.invalidComment = 1;
+
 		this.message = message;
 	}
 
@@ -185,6 +205,22 @@ public class SVNStatistic {
 	public void setSvnRepositoryUrl(String svnRepositoryUrl) {
 		this.svnRepositoryUrl = svnRepositoryUrl;
 	}
+	
+	public int getValidComment() {
+		return validComment;
+	}
+
+	public void setValidComment(int validComment) {
+		this.validComment = validComment;
+	}
+
+	public int getInvalidComment() {
+		return invalidComment;
+	}
+
+	public void setInvalidComment(int invalidComment) {
+		this.invalidComment = invalidComment;
+	}
 
 	/**
 	 * Constructs a <code>String</code> with all attributes in name = value
@@ -205,7 +241,9 @@ public class SVNStatistic {
 				+ TAB + "numFilesDeletedInRevision = "
 				+ this.numFilesDeletedInRevision + TAB
 				+ "numFilesModifiedInRevision = "
-				+ this.numFilesModifiedInRevision + TAB + "svnRepositoryUrl = "
+				+ this.numFilesModifiedInRevision + TAB + "validComment = "
+				+ this.validComment + TAB + "invalidComment = "
+				+ this.invalidComment + TAB + "svnRepositoryUrl = "
 				+ this.svnRepositoryUrl + TAB + " )";
 
 		return retValue;

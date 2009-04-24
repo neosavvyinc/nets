@@ -66,6 +66,14 @@
                     yField="numberOfFilesModified" 
                     displayName="Modified"
                />
+               <mx:ColumnSeries 
+                    yField="numberOfCommentedCommits" 
+                    displayName="Commented Commits"
+               />
+               <mx:ColumnSeries 
+                    yField="numberOfUnCommentedCommits" 
+                    displayName="Uncommented Commits"
+               />
 	        </mx:series>
 	     </mx:ColumnChart>
         <mx:Legend direction="horizontal" dataProvider="{historicalStatisticsChart}"/>

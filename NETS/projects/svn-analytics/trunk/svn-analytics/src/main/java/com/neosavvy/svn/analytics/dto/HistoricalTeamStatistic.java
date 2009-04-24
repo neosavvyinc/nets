@@ -1,52 +1,70 @@
 package com.neosavvy.svn.analytics.dto;
 
-
 public class HistoricalTeamStatistic {
 
-    private String revisionDate;
-    private long numberfOfFiles;
-    private long numberOfFilesAdded;
-    private long numberOfFilesDeleted;
-    private long numberOfFilesModified;
+	private String revisionDate;
+	private long numberfOfFiles;
+	private long numberOfFilesAdded;
+	private long numberOfFilesDeleted;
+	private long numberOfFilesModified;
 
-    public String getRevisionDate() {
-        return revisionDate;
-    }
+	private long numberOfCommentedCommits;
+	private long numberOfUnCommentedCommits;
 
-    public void setRevisionDate(String revisionDate) {
-        this.revisionDate = revisionDate;
-    }
+	public String getRevisionDate() {
+		return revisionDate;
+	}
 
-    public long getNumberfOfFiles() {
-        return numberfOfFiles;
-    }
+	public void setRevisionDate(String revisionDate) {
+		this.revisionDate = revisionDate;
+	}
 
-    public void setNumberfOfFiles(long numberfOfFiles) {
-        this.numberfOfFiles = numberfOfFiles;
-    }
+	public long getNumberfOfFiles() {
+		return numberfOfFiles;
+	}
 
-    public long getNumberOfFilesAdded() {
-        return numberOfFilesAdded;
-    }
+	public void setNumberfOfFiles(long numberfOfFiles) {
+		this.numberfOfFiles = numberfOfFiles;
+	}
 
-    public void setNumberOfFilesAdded(long numberOfFilesAdded) {
-        this.numberOfFilesAdded = numberOfFilesAdded;
-    }
+	public long getNumberOfFilesAdded() {
+		return numberOfFilesAdded;
+	}
 
-    public long getNumberOfFilesDeleted() {
-        return numberOfFilesDeleted;
-    }
+	public void setNumberOfFilesAdded(long numberOfFilesAdded) {
+		this.numberOfFilesAdded = numberOfFilesAdded;
+	}
 
-    public void setNumberOfFilesDeleted(long numberOfFilesDeleted) {
-        this.numberOfFilesDeleted = numberOfFilesDeleted;
-    }
+	public long getNumberOfFilesDeleted() {
+		return numberOfFilesDeleted;
+	}
 
-    public long getNumberOfFilesModified() {
-        return numberOfFilesModified;
-    }
+	public void setNumberOfFilesDeleted(long numberOfFilesDeleted) {
+		this.numberOfFilesDeleted = numberOfFilesDeleted;
+	}
 
-    public void setNumberOfFilesModified(long numberOfFilesModified) {
-        this.numberOfFilesModified = numberOfFilesModified;
-    }
+	public long getNumberOfFilesModified() {
+		return numberOfFilesModified;
+	}
+
+	public void setNumberOfFilesModified(long numberOfFilesModified) {
+		this.numberOfFilesModified = numberOfFilesModified;
+	}
+
+	public long getNumberOfCommentedCommits() {
+		return numberOfCommentedCommits;
+	}
+
+	public void setNumberOfCommentedCommits(long numberOfCommentedCommits) {
+		this.numberOfCommentedCommits = numberOfCommentedCommits;
+	}
+
+	public long getNumberOfUnCommentedCommits() {
+		return numberOfUnCommentedCommits;
+	}
+
+	public void setNumberOfUnCommentedCommits(long numberOfUnCommentedCommits) {
+		this.numberOfUnCommentedCommits = numberOfUnCommentedCommits;
+	}
 
 }

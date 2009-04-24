@@ -12,6 +12,8 @@
         <result column="numberOfFilesAdded" property="numberOfFilesAdded"/>
         <result column="numberOfFilesModified" property="numberOfFilesModified"/>
         <result column="numberOfFilesDeleted" property="numberOfFilesDeleted"/>
+        <result column="validComments" property="numberOfCommentedCommits"/>
+        <result column="invalidComments" property="numberOfUnCommentedCommits"/>
         <result column="firstCommitDate" property="firstCommitDate"/>
         <result column="lastCommitDate" property="lastCommitDate"/>
     </resultMap>
@@ -33,6 +35,8 @@
             ,sum(num_files_added_in_rev) as numberOfFilesAdded
             ,sum(num_files_deleted_in_rev) as numberOfFilesDeleted
             ,sum(num_files_modified_in_rev) as numberOfFilesModified
+            ,sum(valid_comment) as validComments
+            ,sum(invalid_comment) as invalidComments
             ,min(rev_date) as firstCommitDate
             ,max(rev_date) as lastCommitDate 
         FROM 

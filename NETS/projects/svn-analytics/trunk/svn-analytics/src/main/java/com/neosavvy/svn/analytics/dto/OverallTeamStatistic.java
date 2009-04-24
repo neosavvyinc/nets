@@ -4,79 +4,98 @@ import java.util.Date;
 
 public class OverallTeamStatistic {
 
-    private String author;
-    private long numberOfCommits;
+	private String author;
+	private long numberOfCommits;
 
-    private long numberOfFilesTouched;
-    private long numberOfFilesAdded;
-    private long numberOfFilesModified;
-    private long numberOfFilesDeleted;
+	private long numberOfFilesTouched;
+	private long numberOfFilesAdded;
+	private long numberOfFilesModified;
+	private long numberOfFilesDeleted;
 
-    private Date firstCommitDate;
-    private Date lastCommitDate;
+	private long numberOfCommentedCommits;
+	private long numberOfUnCommentedCommits;
 
-    public String getAuthor() {
-        return author;
-    }
+	private Date firstCommitDate;
+	private Date lastCommitDate;
 
-    public void setAuthor(String author) {
-        this.author = author;
-    }
+	public String getAuthor() {
+		return author;
+	}
 
-    public long getNumberOfCommits() {
-        return numberOfCommits;
-    }
+	public void setAuthor(String author) {
+		this.author = author;
+	}
 
-    public void setNumberOfCommits(long numberOfCommits) {
-        this.numberOfCommits = numberOfCommits;
-    }
+	public long getNumberOfCommits() {
+		return numberOfCommits;
+	}
 
-    public long getNumberOfFilesTouched() {
-        return numberOfFilesTouched;
-    }
+	public void setNumberOfCommits(long numberOfCommits) {
+		this.numberOfCommits = numberOfCommits;
+	}
 
-    public void setNumberOfFilesTouched(long numberOfFilesTouched) {
-        this.numberOfFilesTouched = numberOfFilesTouched;
-    }
+	public long getNumberOfFilesTouched() {
+		return numberOfFilesTouched;
+	}
 
-    public long getNumberOfFilesAdded() {
-        return numberOfFilesAdded;
-    }
+	public void setNumberOfFilesTouched(long numberOfFilesTouched) {
+		this.numberOfFilesTouched = numberOfFilesTouched;
+	}
 
-    public void setNumberOfFilesAdded(long numberOfFilesAdded) {
-        this.numberOfFilesAdded = numberOfFilesAdded;
-    }
+	public long getNumberOfFilesAdded() {
+		return numberOfFilesAdded;
+	}
 
-    public long getNumberOfFilesModified() {
-        return numberOfFilesModified;
-    }
+	public void setNumberOfFilesAdded(long numberOfFilesAdded) {
+		this.numberOfFilesAdded = numberOfFilesAdded;
+	}
 
-    public void setNumberOfFilesModified(long numberOfFilesModified) {
-        this.numberOfFilesModified = numberOfFilesModified;
-    }
+	public long getNumberOfFilesModified() {
+		return numberOfFilesModified;
+	}
 
-    public long getNumberOfFilesDeleted() {
-        return numberOfFilesDeleted;
-    }
+	public void setNumberOfFilesModified(long numberOfFilesModified) {
+		this.numberOfFilesModified = numberOfFilesModified;
+	}
 
-    public void setNumberOfFilesDeleted(long numberOfFilesDeleted) {
-        this.numberOfFilesDeleted = numberOfFilesDeleted;
-    }
+	public long getNumberOfFilesDeleted() {
+		return numberOfFilesDeleted;
+	}
 
-    public Date getFirstCommitDate() {
-        return firstCommitDate;
-    }
+	public void setNumberOfFilesDeleted(long numberOfFilesDeleted) {
+		this.numberOfFilesDeleted = numberOfFilesDeleted;
+	}
 
-    public void setFirstCommitDate(Date firstCommitDate) {
-        this.firstCommitDate = firstCommitDate;
-    }
+	public Date getFirstCommitDate() {
+		return firstCommitDate;
+	}
 
-    public Date getLastCommitDate() {
-        return lastCommitDate;
-    }
+	public void setFirstCommitDate(Date firstCommitDate) {
+		this.firstCommitDate = firstCommitDate;
+	}
 
-    public void setLastCommitDate(Date lastCommitDate) {
-        this.lastCommitDate = lastCommitDate;
-    }
+	public Date getLastCommitDate() {
+		return lastCommitDate;
+	}
+
+	public void setLastCommitDate(Date lastCommitDate) {
+		this.lastCommitDate = lastCommitDate;
+	}
+
+	public long getNumberOfCommentedCommits() {
+		return numberOfCommentedCommits;
+	}
+
+	public void setNumberOfCommentedCommits(long numberOfCommentedCommits) {
+		this.numberOfCommentedCommits = numberOfCommentedCommits;
+	}
+
+	public long getNumberOfUnCommentedCommits() {
+		return numberOfUnCommentedCommits;
+	}
+
+	public void setNumberOfUnCommentedCommits(long numberOfUnCommentedCommits) {
+		this.numberOfUnCommentedCommits = numberOfUnCommentedCommits;
+	}
 
 }
