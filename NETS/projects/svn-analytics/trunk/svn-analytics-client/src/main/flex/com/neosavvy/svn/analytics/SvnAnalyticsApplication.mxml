@@ -2,7 +2,7 @@
 <mx:Application 
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	layout="vertical"
-	creationComplete="{facade.startup(this)}">
+	creationComplete="{facade.startup(this)}" xmlns:chart="com.neosavvy.svn.analytics.components.chart.*">
 	
 	<mx:Script>
 		<![CDATA[
@@ -33,51 +33,7 @@
 		<mx:RadioButton id="monthly" label="Monthly" groupName="{increments}" selected="true"/>
 		<mx:RadioButton id="daily" label="Daily" groupName="{increments}"/>
 	</mx:ApplicationControlBar>
-	<mx:VBox 
-		backgroundColor="0xFFFFFF" 
-		width="100%" 
-		height="70%">
-		<mx:ColumnChart 
-			id="historicalStatisticsChart" 
-			showDataTips="true" 
-			width="100%" 
-			height="100%">
-			<mx:horizontalAxis>
-	           <mx:CategoryAxis
-	                dataProvider="{historicalStatisticsChart.dataProvider}" 
-	                categoryField="revisionDate"
-	            />
-	        </mx:horizontalAxis>
-	        <mx:series>
-	           <mx:ColumnSeries 
-	                yField="numberfOfFiles" 
-	                displayName="Files"
-	                
-	           />
-	           <mx:ColumnSeries 
-                    yField="numberOfFilesAdded" 
-                    displayName="Added"
-               />
-               <mx:ColumnSeries 
-                    yField="numberOfFilesDeleted" 
-                    displayName="Deleted"
-               />
-               <mx:ColumnSeries 
-                    yField="numberOfFilesModified" 
-                    displayName="Modified"
-               />
-               <mx:ColumnSeries 
-                    yField="numberOfCommentedCommits" 
-                    displayName="Commented Commits"
-               />
-               <mx:ColumnSeries 
-                    yField="numberOfUnCommentedCommits" 
-                    displayName="Uncommented Commits"
-               />
-	        </mx:series>
-	     </mx:ColumnChart>
-        <mx:Legend direction="horizontal" dataProvider="{historicalStatisticsChart}"/>
-     </mx:VBox>
+    <chart:ChartContainer backgroundColor="0xFFFFFF" id="chartContainer" width="100%" height="70%"/>
 	<mx:AdvancedDataGrid id="summaryStatisticsGrid" width="100%" height="25%"/>
 	
 </mx:Application>

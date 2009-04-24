@@ -31,7 +31,6 @@ package com.neosavvy.svn.analytics
 			return [
 				ApplicationFacade.STARTUP
 				,ApplicationFacade.LOADED_SUMMARY_STATS
-				,ApplicationFacade.LOADED_HISTORICAL_STATS
 				,ApplicationFacade.LOADED_AUTHORS
 				,ApplicationFacade.LOADED_REPOSITORY_INTERVAL
 			];
@@ -43,10 +42,6 @@ package com.neosavvy.svn.analytics
 				case ApplicationFacade.LOADED_SUMMARY_STATS:
 					var summaryProxy:OverallTeamStatisticProxy = facade.retrieveProxy( OverallTeamStatisticProxy.NAME ) as OverallTeamStatisticProxy;
 					summaryGrid.dataProvider = summaryProxy.overallTeamStats;
-					break;
-				case ApplicationFacade.LOADED_HISTORICAL_STATS:
-					var historyProxy:HistoricalTeamStatisticProxy = facade.retrieveProxy( HistoricalTeamStatisticProxy.NAME ) as HistoricalTeamStatisticProxy;
-					historicalStatisticsChart.dataProvider = historyProxy.historicalStats;
 					break;
 				case ApplicationFacade.LOADED_AUTHORS:
 					var svnAnalyticsProxy:AuthorProxy = facade.retrieveProxy( AuthorProxy.NAME ) as AuthorProxy;
@@ -76,10 +71,6 @@ package com.neosavvy.svn.analytics
 		
 		protected function get summaryGrid():AdvancedDataGrid {
 			return this.application.summaryStatisticsGrid;
-		}
-		
-		protected function get historicalStatisticsChart():ColumnChart {
-			return this.application.historicalStatisticsChart;
 		}
 		
 		protected function get authorsSelector():ComboBox {
