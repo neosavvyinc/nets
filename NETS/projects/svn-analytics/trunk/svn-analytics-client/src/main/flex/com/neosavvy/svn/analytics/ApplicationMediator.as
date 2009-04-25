@@ -30,7 +30,6 @@ package com.neosavvy.svn.analytics
 		override public function listNotificationInterests():Array {
 			return [
 				ApplicationFacade.STARTUP
-				,ApplicationFacade.LOADED_SUMMARY_STATS
 				,ApplicationFacade.LOADED_AUTHORS
 				,ApplicationFacade.LOADED_REPOSITORY_INTERVAL
 			];
@@ -39,10 +38,6 @@ package com.neosavvy.svn.analytics
 		override public function handleNotification(notification:INotification):void {
 			
 			switch ( notification.getName() ) {
-				case ApplicationFacade.LOADED_SUMMARY_STATS:
-					var summaryProxy:OverallTeamStatisticProxy = facade.retrieveProxy( OverallTeamStatisticProxy.NAME ) as OverallTeamStatisticProxy;
-					summaryGrid.dataProvider = summaryProxy.overallTeamStats;
-					break;
 				case ApplicationFacade.LOADED_AUTHORS:
 					var svnAnalyticsProxy:AuthorProxy = facade.retrieveProxy( AuthorProxy.NAME ) as AuthorProxy;
 					authorsSelector.dataProvider = svnAnalyticsProxy.authors;
@@ -67,10 +62,6 @@ package com.neosavvy.svn.analytics
 		
 		protected function get application():SvnAnalyticsApplication {
 			return viewComponent as SvnAnalyticsApplication;
-		}
-		
-		protected function get summaryGrid():AdvancedDataGrid {
-			return this.application.summaryStatisticsGrid;
 		}
 		
 		protected function get authorsSelector():ComboBox {
@@ -109,7 +100,6 @@ package com.neosavvy.svn.analytics
 		} 
 		 
 		protected function resetSearch(event:Event):void {
-			
 			sendNotification( ApplicationFacade.RESET_SEARCH_REQUEST );
 		} 
 	}

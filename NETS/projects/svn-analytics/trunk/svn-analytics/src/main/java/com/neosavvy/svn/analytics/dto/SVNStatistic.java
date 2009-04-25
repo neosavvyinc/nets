@@ -5,8 +5,6 @@ import java.util.Date;
 import org.tmatesoft.svn.core.SVNLogEntry;
 import org.tmatesoft.svn.core.SVNLogEntryPath;
 
-import com.neosavvy.svn.analytics.importer.model.SVNRepositoryModel;
-
 /**
  * This class encapsulates the Data calculated to help generate statistics on
  * SVN commits from a SVN Repository
@@ -21,7 +19,7 @@ public class SVNStatistic {
 		super();
 	}
 
-	public SVNStatistic(SVNLogEntry entry, SVNRepositoryModel svnRepositoryModel) {
+	public SVNStatistic(SVNLogEntry entry, SVNRepositoryDTO svnRepositoryModel) {
 		this.setAuthor(entry.getAuthor());
 		this.setRevision(entry.getRevision());
 		this.setDate(entry.getDate());

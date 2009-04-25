@@ -1,6 +1,6 @@
-package com.neosavvy.svn.analytics.importer.model;
+package com.neosavvy.svn.analytics.dto;
 
-public class SVNRepositoryModel {
+public class SVNRepositoryDTO {
 
     private String url;
     private String name;

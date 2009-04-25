@@ -1,24 +1,24 @@
 package com.neosavvy.svn;
 
-import junit.framework.Assert;
-
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
+import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
-import com.neosavvy.junit4.BaseSpringAwareTestCase;
-
-public class SpringIntegrationTest extends BaseSpringAwareTestCase {
-
-    @Before
-    public void setup() {
-        super.setup();
-    }
+public class SpringIntegrationTest extends AbstractDependencyInjectionSpringContextTests {
+   
+	@Override
+	protected String[] getConfigLocations() {
+		 return 
+		 	new String[] { 
+				"classpath:svnAnalyticsContext.xml",
+		 		"classpath:svnRepositoryConfigurations.xml" };
+	}
 
     @Test
     public void testSpringContextNotNull() {
-        if (getContext() == null) {
-            Assert.fail("Spring context is not valid, must be misconfigured");
-        }
+    	if(applicationContext == null) {
+    		Assert.fail("Application context failed to load");
+    	}
     }
 
 }

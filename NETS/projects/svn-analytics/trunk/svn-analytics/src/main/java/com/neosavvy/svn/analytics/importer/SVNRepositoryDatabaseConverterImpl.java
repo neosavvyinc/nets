@@ -15,10 +15,11 @@ import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
+import com.neosavvy.svn.analytics.dao.SVNRepositoryDAO;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryConversionInfo;
+import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
-import com.neosavvy.svn.analytics.importer.model.SVNRepositoryModel;
 import com.neosavvy.svn.analytics.util.SvnKitUtil;
 
 public class SVNRepositoryDatabaseConverterImpl implements
@@ -34,7 +35,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
      * 
      * This is a Spring Configurable property.
      */
-    private List<SVNRepositoryModel> repositories;
+    private List<SVNRepositoryDTO> repositories;
 
     /**
      * This map maintains a reference to the configuration in its key and then a
@@ -43,9 +44,10 @@ public class SVNRepositoryDatabaseConverterImpl implements
      * 
      * This is not a Spring configurable property as it is derived on startup.
      */
-    private Map<SVNRepositoryModel, SVNRepository> initializedRepositories = new HashMap<SVNRepositoryModel, SVNRepository>();
+    private Map<SVNRepositoryDTO, SVNRepository> initializedRepositories = new HashMap<SVNRepositoryDTO, SVNRepository>();
 
-    private SVNStatisticDAO dao;
+    private SVNRepositoryDAO svnRepositoryDAO;
+    private SVNStatisticDAO svnStatisticsDAO;
 
     public void run() {
 
@@ -63,7 +65,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
     }
 
     protected void initializeSVNRepositoryObjects() {
-        for (SVNRepositoryModel model : repositories) {
+        for (SVNRepositoryDTO model : repositories) {
             try {
                 SVNRepository repository = SVNRepositoryFactory.create(SVNURL
                         .parseURIEncoded(model.getUrl()));
@@ -88,7 +90,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
                     .info("Beginning conversion of all configured repositories...");
         }
 
-        for (SVNRepositoryModel modelKey : initializedRepositories.keySet()) {
+        for (SVNRepositoryDTO modelKey : initializedRepositories.keySet()) {
 
             if (logger.isInfoEnabled()) {
                 logger.info("Conversion of repository named: "
@@ -100,7 +102,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
             long startRevision = modelKey.getStartRevision();
             long endRevision = modelKey.getEndRevision();
             
-            SVNRepositoryConversionInfo info = getDao().getRepositoryInfo(modelKey.getUrl());
+            SVNRepositoryConversionInfo info = getSvnStatisticsDAO().getRepositoryInfo(modelKey.getUrl());
             if(info.getLastUpdateRevision() > startRevision) {
             	startRevision = info.getLastUpdateRevision() + 1;
             }
@@ -122,7 +124,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
 
     @SuppressWarnings("unchecked")
     protected void batchConvertRevisionsIntoDatabase(SVNRepository repository,
-            long startRevision, long endRevision, SVNRepositoryModel svnRepositoryModel) throws SVNException {
+            long startRevision, long endRevision, SVNRepositoryDTO svnRepositoryModel) throws SVNException {
         Collection<SVNLogEntry> log;
         while (startRevision <= endRevision) {
 
@@ -140,31 +142,39 @@ public class SVNRepositoryDatabaseConverterImpl implements
                 }
             }
 
-            getDao().saveStatistics(stats);
+            getSvnStatisticsDAO().saveStatistics(stats);
             startRevision += 100;
         }
     }
 
     public void tearDown() {
 
-        initializedRepositories = new HashMap<SVNRepositoryModel, SVNRepository>();
+        initializedRepositories = new HashMap<SVNRepositoryDTO, SVNRepository>();
 
     }
 
-    public List<SVNRepositoryModel> getRepositories() {
+    public List<SVNRepositoryDTO> getRepositories() {
         return repositories;
     }
 
-    public void setRepositories(List<SVNRepositoryModel> repositories) {
+    public void setRepositories(List<SVNRepositoryDTO> repositories) {
         this.repositories = repositories;
     }
 
-    public SVNStatisticDAO getDao() {
-        return dao;
-    }
+	public SVNRepositoryDAO getSvnRepositoryDAO() {
+		return svnRepositoryDAO;
+	}
 
-    public void setDao(SVNStatisticDAO dao) {
-        this.dao = dao;
-    }
+	public void setSvnRepositoryDAO(SVNRepositoryDAO svnRepositoryDAO) {
+		this.svnRepositoryDAO = svnRepositoryDAO;
+	}
+
+	public SVNStatisticDAO getSvnStatisticsDAO() {
+		return svnStatisticsDAO;
+	}
+
+	public void setSvnStatisticsDAO(SVNStatisticDAO svnStatisticsDAO) {
+		this.svnStatisticsDAO = svnStatisticsDAO;
+	}
 
 }
