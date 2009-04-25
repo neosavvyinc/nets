@@ -5,26 +5,24 @@ import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.junit.Before;
 import org.junit.Test;
 
-import com.neosavvy.junit4.BaseSpringAwareTestCase;
+import com.neosavvy.junit4.BaseTransactionalSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
 
-public class TestSvnLogEntryDAOCRUD extends BaseSpringAwareTestCase {
+public class TestSvnLogEntryDAOCRUD extends BaseTransactionalSpringAwareTestCase {
 
 	private static final Logger logger = Logger
 			.getLogger(TestSvnLogEntryDAOCRUD.class);
 
 	private SVNStatisticDAO dao;
 
-	@Before
 	@Override
-	public void setup() {
-		super.setup();
+	protected void onSetUp() {
+		super.onSetUp();
 
-		dao = (SVNStatisticDAO) getContext().getBean("svnAnalyticsDAO");
+		dao = (SVNStatisticDAO) applicationContext.getBean("svnAnalyticsDAO");
 
 		logger.info("Setup Complete");
 	}

@@ -6,6 +6,8 @@ import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
 public class SpringIntegrationTest extends AbstractDependencyInjectionSpringContextTests {
    
+	
+	
 	@Override
 	protected String[] getConfigLocations() {
 		 return 

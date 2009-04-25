@@ -97,6 +97,10 @@
 			<artifactId>ojdbc14_g</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>commons-dbcp</groupId>
+			<artifactId>commons-dbcp</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>quartz</groupId>
 			<artifactId>quartz</artifactId>
 		</dependency>

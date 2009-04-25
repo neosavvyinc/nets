@@ -6,6 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 import org.springframework.orm.ibatis.SqlMapClientCallback;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
+import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
@@ -17,7 +18,7 @@ import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
 import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 
-public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
+public class IbatisSVNStatisticDAOImpl extends SqlMapClientDaoSupport implements
 		SVNStatisticDAO {
 
 	public static final String SVNSTATISTICS_INSERT_STATISTIC = "SVNStatistics.insertStatistic";
@@ -26,7 +27,7 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 
 	public void saveStatistics(final List<SVNStatistic> statistics) {
 
-		execute(new SqlMapClientCallback() {
+		getSqlMapClientTemplate().execute(new SqlMapClientCallback() {
 			public Object doInSqlMapClient(SqlMapExecutor executor)
 					throws SQLException {
 
@@ -51,7 +52,7 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 	@SuppressWarnings("unchecked")
 	public OverallTeamStatistic[] getOverallTeamStats() {
 
-		List<OverallTeamStatistic> overallStats = queryForList("OverallTeamStats.getOverallStatistics");
+		List<OverallTeamStatistic> overallStats = getSqlMapClientTemplate().queryForList("OverallTeamStats.getOverallStatistics");
 		return overallStats.toArray(new OverallTeamStatistic[] {});
 
 	}
@@ -60,7 +61,7 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 	public OverallTeamStatistic[] getRefinedTeamStats(
 			RefineSearchRequest request) {
 		
-		List<OverallTeamStatistic> refinedStats = queryForList("OverallTeamStats.getOverallStatistics", request);
+		List<OverallTeamStatistic> refinedStats = getSqlMapClientTemplate().queryForList("OverallTeamStats.getOverallStatistics", request);
 		return refinedStats.toArray(new OverallTeamStatistic[] {});
 
 	}
@@ -68,7 +69,7 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 	@SuppressWarnings("unchecked")
 	public HistoricalTeamStatistic[] getHistoricalTeamStats() {
 
-		List<HistoricalTeamStatistic> historicalStats = queryForList("HistoricalTeamStatistics.getHistoricalStatistics");
+		List<HistoricalTeamStatistic> historicalStats = getSqlMapClientTemplate().queryForList("HistoricalTeamStatistics.getHistoricalStatistics");
 		return historicalStats.toArray(new HistoricalTeamStatistic[] {});
 
 	}
@@ -76,7 +77,7 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 	@SuppressWarnings("unchecked")
 	public HistoricalTeamStatistic[] getRefinedHistoricalStats(RefineSearchRequest request) {
 
-		List<HistoricalTeamStatistic> historicalStats = queryForList("HistoricalTeamStatistics.getHistoricalStatistics", request);
+		List<HistoricalTeamStatistic> historicalStats = getSqlMapClientTemplate().queryForList("HistoricalTeamStatistics.getHistoricalStatistics", request);
 		return historicalStats.toArray(new HistoricalTeamStatistic[] {});
 
 	}
@@ -84,14 +85,14 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 	@SuppressWarnings("unchecked")
 	public Author[] getAuthors() {
 
-		List<Author> authors = queryForList("Author.getAuthors");
+		List<Author> authors = getSqlMapClientTemplate().queryForList("Author.getAuthors");
 		return authors.toArray(new Author[] {});
 
 	}
 
 	public SVNRepositoryInterval getRepositoryInterval() {
 		
-		SVNRepositoryInterval interval = (SVNRepositoryInterval) queryForObject("SvnRepositoryInterval.getSvnRepositoryInterval");
+		SVNRepositoryInterval interval = (SVNRepositoryInterval) getSqlMapClientTemplate().queryForObject("SvnRepositoryInterval.getSvnRepositoryInterval");
 		return interval;
 		
 	}
@@ -99,7 +100,7 @@ public class IbatisSVNStatisticDAOImpl extends SqlMapClientTemplate implements
 	@SuppressWarnings("unchecked")
 	public SVNRepositoryConversionInfo getRepositoryInfo(String url) {
 		
-		List<SVNRepositoryConversionInfo> conversionInfo = queryForList("SVNRepositoryConversionInfo.getRepositoryInfo", url);
+		List<SVNRepositoryConversionInfo> conversionInfo = getSqlMapClientTemplate().queryForList("SVNRepositoryConversionInfo.getRepositoryInfo", url);
 		if(conversionInfo != null && conversionInfo.size() > 0) {
 			return conversionInfo.get(0);
 		} else {

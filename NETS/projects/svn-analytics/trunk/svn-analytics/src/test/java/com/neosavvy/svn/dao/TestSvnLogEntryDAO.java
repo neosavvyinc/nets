@@ -1,13 +1,7 @@
 package com.neosavvy.svn.dao;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.TimeZone;
-
 import org.apache.log4j.Logger;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import com.neosavvy.junit4.BaseSpringAwareTestCase;
@@ -15,7 +9,6 @@ import com.neosavvy.svn.TestUtils;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.Author;
 import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
-import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 
@@ -26,13 +19,12 @@ public class TestSvnLogEntryDAO extends BaseSpringAwareTestCase {
 
     private SVNStatisticDAO dao;
 
-    @Before
     @Override
-    public void setup() {
-        super.setup();
+    protected void onSetUp() {
+        super.onSetUp();
         
-        dao = (SVNStatisticDAO) getContext().getBean("svnAnalyticsDAO");
-
+        dao = (SVNStatisticDAO) applicationContext.getBean("svnAnalyticsDAO");
+	
         logger.info("Setup Complete");
     }
     

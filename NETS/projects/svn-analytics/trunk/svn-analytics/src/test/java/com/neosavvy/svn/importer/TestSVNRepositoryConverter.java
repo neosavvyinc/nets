@@ -1,6 +1,5 @@
 package com.neosavvy.svn.importer;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import com.neosavvy.junit4.BaseSpringAwareTestCase;
@@ -10,10 +9,10 @@ public class TestSVNRepositoryConverter extends BaseSpringAwareTestCase {
 
     private SVNRepositoryDatabaseConverter converter;
 
-    @Before
-    public void setup() {
-        super.setup();
-        converter = (SVNRepositoryDatabaseConverter) getContext().getBean(
+    @Override
+    public void onSetUp() {
+        super.onSetUp();
+        converter = (SVNRepositoryDatabaseConverter) applicationContext.getBean(
                 "svnRepositoryConverter");
     }
 
