@@ -4,6 +4,7 @@ package com.neosavvy.svn.analytics.controller.startup
 	import com.neosavvy.svn.analytics.model.HistoricalTeamStatisticProxy;
 	import com.neosavvy.svn.analytics.model.OverallTeamStatisticProxy;
 	import com.neosavvy.svn.analytics.model.ReportIntervalProxy;
+	import com.neosavvy.svn.analytics.model.SVNRepositoryProxy;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -17,6 +18,7 @@ package com.neosavvy.svn.analytics.controller.startup
 			facade.registerProxy( new ReportIntervalProxy() );
 			facade.registerProxy( new OverallTeamStatisticProxy() );
 			facade.registerProxy( new HistoricalTeamStatisticProxy() );
+			facade.registerProxy( new SVNRepositoryProxy() );
 		}
 		
 	}

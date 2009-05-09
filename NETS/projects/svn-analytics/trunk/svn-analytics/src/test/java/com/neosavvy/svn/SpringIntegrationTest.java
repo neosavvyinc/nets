@@ -2,19 +2,10 @@ package com.neosavvy.svn;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.springframework.test.AbstractDependencyInjectionSpringContextTests;
 
-public class SpringIntegrationTest extends AbstractDependencyInjectionSpringContextTests {
-   
-	
-	
-	@Override
-	protected String[] getConfigLocations() {
-		 return 
-		 	new String[] { 
-				"classpath:svnAnalyticsContext.xml",
-		 		"classpath:svnRepositoryConfigurations.xml" };
-	}
+import com.neosavvy.junit4.BaseSpringAwareTestCase;
+
+public class SpringIntegrationTest extends BaseSpringAwareTestCase {
 
     @Test
     public void testSpringContextNotNull() {

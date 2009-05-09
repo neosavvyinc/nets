@@ -1,25 +1,20 @@
 package com.neosavvy.junit4;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.PropertyConfigurator;
-import org.springframework.test.AbstractTransactionalSpringContextTests;
+import org.junit.Before;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
-public class BaseTransactionalSpringAwareTestCase extends
-		AbstractTransactionalSpringContextTests {
 
-	private static final Logger logger = Logger
-			.getLogger(BaseTransactionalSpringAwareTestCase.class);
+@ContextConfiguration(locations = {
+		"classpath:baseApplicationContext.xml"
+		,"classpath:ibatisDataContext.xml"
+		,"classpath:serviceContext.xml"
+		,"classpath:svnRepositoryConfigurations.xml"
+        })
+public abstract class BaseTransactionalSpringAwareTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
-	@Override
-	protected String[] getConfigLocations() {
-		return new String[] { "classpath:svnAnalyticsContext.xml",
-				"classpath:svnRepositoryConfigurations.xml" };
-	}
-
-	@Override
-	protected void onSetUp() {
-		PropertyConfigurator.configure(BaseSpringAwareTestCase.class
-				.getClassLoader().getResource("log4j.test.properties"));
+	@Before
+	public void setUp() {
 		logger.info("Setting up testcase");
 	}
 }

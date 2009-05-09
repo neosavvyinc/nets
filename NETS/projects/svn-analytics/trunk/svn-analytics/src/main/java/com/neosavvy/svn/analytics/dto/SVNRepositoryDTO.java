@@ -2,12 +2,14 @@ package com.neosavvy.svn.analytics.dto;
 
 public class SVNRepositoryDTO {
 
+	private long id;
     private String url;
     private String name;
     private String password;
     private long startRevision = 0;
     private long endRevision = -1;
 
+    
     public String getUrl() {
         return url;
     }
@@ -47,5 +49,13 @@ public class SVNRepositoryDTO {
     public void setEndRevision(long endRevision) {
         this.endRevision = endRevision;
     }
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 }

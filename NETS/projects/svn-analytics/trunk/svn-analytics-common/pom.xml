@@ -27,20 +27,12 @@
 						</goals>
 						<configuration>
 							<includeJavaClasses>
-								<includeClass>com.neosavvy.svn.analytics.dto.Author
-								</includeClass>
-								<includeClass>
-									com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic
-								</includeClass>
-								<includeClass>
-									com.neosavvy.svn.analytics.dto.OverallTeamStatistic
-								</includeClass>
-								<includeClass>
-									com.neosavvy.svn.analytics.dto.SVNRepositoryInterval
-								</includeClass>
-								<includeClass>
-									com.neosavvy.svn.analytics.dto.request.RefineSearchRequest
-								</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.Author</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.OverallTeamStatistic</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.SVNRepositoryInterval</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.request.RefineSearchRequest</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.SVNRepositoryDTO</includeClass>
 							</includeJavaClasses>
 							<beanTemplate>
 								<template>${basedir}/src/main/template/beanBase.gsp

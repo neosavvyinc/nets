@@ -18,4 +18,11 @@
         </properties>
     </destination>
 
+	<destination id="svnRepositoryService">
+        <properties>
+            <factory>spring</factory>
+            <source>svnRepositoryService</source>
+        </properties>
+    </destination>
+
 </service>

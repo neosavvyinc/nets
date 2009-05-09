@@ -4,31 +4,23 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.neosavvy.junit4.BaseTransactionalSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
+import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
 
+@Transactional
 public class TestSvnLogEntryDAOCRUD extends BaseTransactionalSpringAwareTestCase {
 
-	private static final Logger logger = Logger
-			.getLogger(TestSvnLogEntryDAOCRUD.class);
-
+	@Autowired
 	private SVNStatisticDAO dao;
 
-	@Override
-	protected void onSetUp() {
-		super.onSetUp();
-
-		dao = (SVNStatisticDAO) applicationContext.getBean("svnAnalyticsDAO");
-
-		logger.info("Setup Complete");
-	}
-
 	@Test
-	public void testInsert() {
+	public void saveStatistic() {
 
 		SVNStatistic statisticWithMessage = new SVNStatistic();
 		statisticWithMessage.setAuthor("svn.integration.test");
@@ -59,6 +51,7 @@ public class TestSvnLogEntryDAOCRUD extends BaseTransactionalSpringAwareTestCase
 		
 		dao.saveStatistics(listToSave);
 		
+		OverallTeamStatistic[] stats = dao.getOverallTeamStats();
 	}
-
+    
 }

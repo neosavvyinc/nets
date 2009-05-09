@@ -12,6 +12,7 @@
 			
 			public static var REFINE_SEARCH:String = "refineSearch";
 			public static var RESET_SEARCH:String = "resetSearch";
+			public static var MANAGE_REPOSITORIES:String = "manageRepositories";
 			
 			private function refineSearch():void {
 				dispatchEvent(new Event(REFINE_SEARCH));
@@ -20,20 +21,42 @@
 			private function resetSearch():void {
 				dispatchEvent(new Event(RESET_SEARCH));
 			}
+			
+			private function manageRepositories():void {
+				dispatchEvent(new Event(MANAGE_REPOSITORIES));
+			}
 		]]>
 	</mx:Script>
 	
-	<mx:ApplicationControlBar dock="true">
-		<mx:ComboBox id="authorsSelector" labelField="author"/>
-		<mx:DateField id="startDate"/>
-		<mx:DateField id="endDate"/>
-		<mx:Button label="Refine Search" click="{refineSearch()}"/>
-		<mx:Button label="Reset" click="{resetSearch()}"/>
-		<mx:RadioButtonGroup
-			id="increments"
-			/>
-		<mx:RadioButton id="monthly" label="Monthly" groupName="{increments}" selected="true"/>
-		<mx:RadioButton id="daily" label="Daily" groupName="{increments}"/>
+	<mx:ApplicationControlBar dock="true" verticalAlign="top">
+		<mx:Panel title="Select the user(s) to analyze">
+			<mx:List 
+				id="authorsSelector" 
+				labelField="author"
+				allowMultipleSelection="true"
+				width="200"/>
+		</mx:Panel>
+		<mx:Panel title="Select the increment level:" height="100%"
+			paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
+			<mx:RadioButtonGroup
+				id="increments"
+				/>
+			<mx:RadioButton id="monthly" label="Monthly" groupName="{increments}" selected="true"/>
+			<mx:RadioButton id="daily" label="Daily" groupName="{increments}"/>
+		</mx:Panel>
+		<mx:Panel title="Choose your start and end date" height="100%"
+			paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
+			<mx:Label text="Start Date"/>
+			<mx:DateField id="startDate"/>
+			<mx:Label text="End Date"/>
+			<mx:DateField id="endDate"/>
+		</mx:Panel>
+		<mx:HBox height="100%" width="100%" verticalAlign="bottom" horizontalAlign="right">
+			<mx:Button label="Refine Search" click="{refineSearch()}"/>
+			<mx:Button label="Reset" click="{resetSearch()}"/>
+			<mx:Button label="Manage Repositories" click="{manageRepositories()}"/>
+		</mx:HBox>
+		
 	</mx:ApplicationControlBar>
     <chart:ChartContainer backgroundColor="0xFFFFFF" id="chartContainer" width="100%" height="70%"/>
 	<grid:GridContainer id="gridContainer" width="100%" height="30%"/>	

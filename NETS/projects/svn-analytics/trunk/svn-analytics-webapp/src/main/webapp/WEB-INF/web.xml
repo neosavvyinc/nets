@@ -9,8 +9,10 @@
   	<context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-        classpath:svnAnalyticsContext.xml
-        classpath:svnRepositoryConfigurations.xml
+        classpath:baseApplicationContext.xml
+		classpath:ibatisDataContext.xml
+		classpath:serviceContext.xml
+		classpath:svnRepositoryConfigurations.xml
         </param-value>
     </context-param> 
   

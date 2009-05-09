@@ -1,17 +1,14 @@
 package com.neosavvy.svn.analytics
 {
+	import com.neosavvy.svn.analytics.dto.Author;
 	import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 	import com.neosavvy.svn.analytics.model.AuthorProxy;
-	import com.neosavvy.svn.analytics.model.HistoricalTeamStatisticProxy;
-	import com.neosavvy.svn.analytics.model.OverallTeamStatisticProxy;
 	import com.neosavvy.svn.analytics.model.ReportIntervalProxy;
 	
 	import flash.events.Event;
 	
-	import mx.charts.ColumnChart;
-	import mx.controls.AdvancedDataGrid;
-	import mx.controls.ComboBox;
 	import mx.controls.DateField;
+	import mx.controls.List;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -25,6 +22,7 @@ package com.neosavvy.svn.analytics
 			super(MEDIATOR_NAME, viewComponent);
 			this.application.addEventListener(SvnAnalyticsApplication.REFINE_SEARCH, refineSearch);
 			this.application.addEventListener(SvnAnalyticsApplication.RESET_SEARCH, resetSearch);
+			this.application.addEventListener(SvnAnalyticsApplication.MANAGE_REPOSITORIES, manageRepositories);
 		}
 		
 		override public function listNotificationInterests():Array {
@@ -64,7 +62,7 @@ package com.neosavvy.svn.analytics
 			return viewComponent as SvnAnalyticsApplication;
 		}
 		
-		protected function get authorsSelector():ComboBox {
+		protected function get authorsSelector():List {
 			return this.application.authorsSelector;
 		}
 		
@@ -77,9 +75,9 @@ package com.neosavvy.svn.analytics
 		}
 		
 		protected function get increment():String {
-			if( this.application.daily ) {
+			if( this.application.daily.selected ) {
 				return "daily";
-			} else if ( this.application.monthly ) {
+			} else if ( this.application.monthly.selected ) {
 				return "monthly";
 			}
 			
@@ -91,7 +89,13 @@ package com.neosavvy.svn.analytics
 		 **/ 
 		protected function refineSearch(event:Event):void {
 			var refineRequest:RefineSearchRequest = new RefineSearchRequest();
-        	refineRequest.userNames = [authorsSelector.selectedItem.author];
+			
+			var authors:Array = authorsSelector.selectedItems;
+			var authorStrings:Array = new Array();
+			for each (var author:Author in authors) {
+				authorStrings.push(author.author);
+			}
+        	refineRequest.userNames = authorStrings;
         	refineRequest.startDate = startDate.selectedDate;
         	refineRequest.endDate = endDate.selectedDate;
         	refineRequest.incrementType = increment;
@@ -102,5 +106,9 @@ package com.neosavvy.svn.analytics
 		protected function resetSearch(event:Event):void {
 			sendNotification( ApplicationFacade.RESET_SEARCH_REQUEST );
 		} 
+		
+		protected function manageRepositories(event:Event):void {
+			sendNotification( ApplicationFacade.DISPLAY_MANAGE_REPOSITORIES_DIALOG);
+		}
 	}
 }
