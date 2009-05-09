@@ -16,7 +16,7 @@ package com.neosavvy.svn.analytics.components.popup
 	{
 		public static var MEDIATOR_NAME:String = "PopupMediator";
 		
-		var repositoryPopup:IFlexDisplayObject;
+		private var repositoryPopup:IFlexDisplayObject;
 		
 		public function PopupMediator( viewComponent:Object )
 		{
