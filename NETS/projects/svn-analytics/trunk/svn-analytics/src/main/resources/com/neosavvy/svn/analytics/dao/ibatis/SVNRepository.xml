@@ -6,6 +6,7 @@
     	type="com.neosavvy.svn.analytics.dto.SVNRepositoryDTO" />
     
     <resultMap class="SvnRepository" id="SvnRepositoryResultMap">
+    	<result property="id" column="ID"/>
     	<result property="url" column="URL"/>
 	    <result property="name" column="NAME"/>
 	    <result property="password" column="PASSWORD"/>
@@ -47,5 +48,11 @@
 		    ,#endRevision#
 		)
     </insert>
+
+	<delete id="deleteRepository" parameterClass="SvnRepository">
+		DELETE FROM SVN_REPOSITORY 
+		WHERE
+			ID = #id# 
+	</delete>
 
 </sqlMap>

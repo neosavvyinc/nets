@@ -5,7 +5,6 @@ import org.apache.log4j.Logger;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
@@ -19,7 +18,11 @@ public class IbatisSVNRepositoryDAOImpl extends SqlMapClientDaoSupport implement
 			.getLogger(IbatisSVNRepositoryDAOImpl.class);
 
 	public void deleteRepository(SVNRepositoryDTO repository) {
-		// TODO Auto-generated method stub
+		try {
+			getSqlMapClient().delete("SvnRepository.deleteRepository", repository);
+		} catch (SQLException e) {
+			logger.error("deleteRepository(SVNRepositoryDTO) - Error deleting repository: ", e);
+		}
 
 	}
 

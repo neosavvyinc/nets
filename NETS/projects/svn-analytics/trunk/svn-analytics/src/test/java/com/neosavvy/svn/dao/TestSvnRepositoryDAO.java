@@ -59,7 +59,23 @@ public class TestSvnRepositoryDAO extends BaseTransactionalSpringAwareTestCase {
 	@Test
 	public void delete() {
 		
+		deleteFromTables("SVN_REPOSITORY");
 		
+		SVNRepositoryDTO testDTO = new SVNRepositoryDTO();
+		testDTO.setName("Test SVN Repository");
+		testDTO.setPassword("Password");
+		testDTO.setUrl("http://url.location.of.repos");
+		
+		repositoryDAO.saveRepository(testDTO);
+		List<SVNRepositoryDTO> repositories = repositoryDAO.getRepositories();
+		
+		Assert.assertEquals(1, repositories.size());
+		
+		repositoryDAO.deleteRepository(testDTO);
+		
+		repositories = repositoryDAO.getRepositories();
+
+		Assert.assertEquals(0, repositories.size());
 		
 	}
 	

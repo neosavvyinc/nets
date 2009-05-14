@@ -3,6 +3,8 @@ package com.neosavvy.svn.analytics
 	import com.neosavvy.svn.analytics.controller.search.RefineSearchCommand;
 	import com.neosavvy.svn.analytics.controller.search.ResetSearchCommand;
 	import com.neosavvy.svn.analytics.controller.startup.StartupCommand;
+	import com.neosavvy.svn.analytics.controller.svnrepository.AddSvnRepositoriesCommand;
+	import com.neosavvy.svn.analytics.controller.svnrepository.DeleteSvnRepositoriesCommand;
 	import com.neosavvy.svn.analytics.controller.svnrepository.GetSvnRepositoriesCommand;
 	
 	import org.puremvc.as3.patterns.facade.Facade;
@@ -30,6 +32,10 @@ package com.neosavvy.svn.analytics
 		public static const RESET_SEARCH_REQUEST:String = "resetSearchRequest";
 		
 		public static const DISPLAY_MANAGE_REPOSITORIES_DIALOG:String = "displayManageRepositoriesDialog";
+		public static const ADD_REPOSITORY:String = "addRepositoryNotification";
+		public static const REPOSITORY_ADDED:String = "repositoryAdded";
+		public static const DELETE_REPOSITORY:String = "deleteRepositoryNotification";
+		public static const REPOSITORY_DELETED:String = "repositoryDeleted";
 		
 		public static function getInstance():ApplicationFacade { 
 			if( instance == null) {
@@ -45,6 +51,8 @@ package com.neosavvy.svn.analytics
 			registerCommand( REFINE_SEARCH_REQUEST, RefineSearchCommand );
 			registerCommand( RESET_SEARCH_REQUEST, ResetSearchCommand );
 			registerCommand( LOAD_REPOSITORIES, GetSvnRepositoriesCommand );
+			registerCommand( ADD_REPOSITORY, AddSvnRepositoriesCommand );
+			registerCommand( DELETE_REPOSITORY, DeleteSvnRepositoriesCommand );
 		}
 		
 		public function startup( app:SvnAnalyticsApplication ) : void  

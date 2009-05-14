@@ -12,34 +12,9 @@
 		http://www.springframework.org/schema/tx/spring-tx-2.0.xsd"
 >
 
-    <bean id="usaRepository" class="com.neosavvy.svn.analytics.dto.SVNRepositoryDTO">
-
-        <property name="url" value="https://svn.roundarch.com/repos/USA"/>
-        <property name="name" value="aparrish"/>
-        <property name="password" value="subw@y1"/>
-        <property name="startRevision" value="0"/>
-        <property name="endRevision" value="-1"/>
-        
-    </bean>
-
-    <bean id="usaDSRepository" class="com.neosavvy.svn.analytics.dto.SVNRepositoryDTO">
-
-        <property name="url" value="https://svn.roundarch.com/repos/USADS"/>
-        <property name="name" value="aparrish"/>
-        <property name="password" value="subw@y1"/>
-        <property name="startRevision" value="0"/>
-        <property name="endRevision" value="-1"/>
-        
-    </bean>
-    
     <bean id="svnRepositoryConverter" class="com.neosavvy.svn.analytics.importer.SVNRepositoryDatabaseConverterImpl">
-        <property name="repositories">
-            <list>
-                <ref bean="usaRepository"/>
-                <ref bean="usaDSRepository"/>
-            </list>
-        </property>    
         <property name="svnStatisticsDAO" ref="svnAnalyticsDAO"/>
+        <property name="svnRepositoryDAO" ref="svnRepositoryDAO"/>
     </bean>
     
     <bean id="conversionJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">

@@ -35,7 +35,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
      * 
      * This is a Spring Configurable property.
      */
-    private List<SVNRepositoryDTO> repositories;
+    //private List<SVNRepositoryDTO> repositories;
 
     /**
      * This map maintains a reference to the configuration in its key and then a
@@ -65,6 +65,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
     }
 
     protected void initializeSVNRepositoryObjects() {
+    	List<SVNRepositoryDTO> repositories = svnRepositoryDAO.getRepositories();
         for (SVNRepositoryDTO model : repositories) {
             try {
                 SVNRepository repository = SVNRepositoryFactory.create(SVNURL
@@ -151,14 +152,6 @@ public class SVNRepositoryDatabaseConverterImpl implements
 
         initializedRepositories = new HashMap<SVNRepositoryDTO, SVNRepository>();
 
-    }
-
-    public List<SVNRepositoryDTO> getRepositories() {
-        return repositories;
-    }
-
-    public void setRepositories(List<SVNRepositoryDTO> repositories) {
-        this.repositories = repositories;
     }
 
 	public SVNRepositoryDAO getSvnRepositoryDAO() {

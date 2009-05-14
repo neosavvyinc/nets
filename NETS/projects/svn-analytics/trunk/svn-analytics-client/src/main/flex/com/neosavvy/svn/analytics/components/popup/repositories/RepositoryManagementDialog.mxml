@@ -2,6 +2,7 @@
 <mx:TitleWindow 
 	title="Manage Repositories"
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:flexlib="http://code.google.com/p/flexlib/"
 	width="1000" 
 	height="600"
 	showCloseButton="true"
@@ -10,11 +11,39 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
+			import com.neosavvy.svn.analytics.components.popup.repositories.event.RepositoryEvent;
 			import mx.managers.PopUpManager;
-			public function close():void {
+			
+			private function close():void {
 				PopUpManager.removePopUp(this);
+			}
+			
+			private function addRepositoryClickHandler():void {
+				var repository:SVNRepositoryDTO = new SVNRepositoryDTO();
+				repository.endRevision = -1;
+				repository.startRevision = 0;
+				repository.name = this.username.text;
+				repository.password = this.password.text;
+				repository.url = this.url.text;
+				dispatchEvent(new RepositoryEvent(RepositoryEvent.REP_EVENT_TYPE_ADD, repository));
 			}
 		]]>
 	</mx:Script>
-	<mx:AdvancedDataGrid id="repositoryGrid" width="100%" height="100%"/>
+	<mx:HBox>
+		<flexlib:PromptingTextInput id="username" prompt="Username"/>
+		<flexlib:PromptingTextInput id="password" prompt="Password" />
+		<flexlib:PromptingTextInput id="url" prompt="Url"/>
+		<mx:Button id="addRepository" label="Add Repository" click="{addRepositoryClickHandler()}"/>
+	</mx:HBox>
+	<mx:AdvancedDataGrid id="repositoryGrid" width="100%" height="100%">
+		<mx:columns>
+			<mx:AdvancedDataGridColumn dataField="name"/>
+			<mx:AdvancedDataGridColumn dataField="url"/>
+			<mx:AdvancedDataGridColumn dataField="startRevision"/>
+			<mx:AdvancedDataGridColumn dataField="endRevision"/>
+			<mx:AdvancedDataGridColumn 
+				itemRenderer="com.neosavvy.svn.analytics.components.popup.repositories.RepositoryActionsItemRenderer"/>
+		</mx:columns>
+	</mx:AdvancedDataGrid>
 </mx:TitleWindow>

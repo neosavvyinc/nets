@@ -12,7 +12,6 @@ public class SVNRepositoryServiceImpl implements SvnRepositoryService {
 	}
 
 	public SVNRepositoryDTO[] getRepositories() {
-		System.out.println("GETTING REPOS's");
 		return repositoryDAO.getRepositories().toArray(new SVNRepositoryDTO[]{});
 	}
 
