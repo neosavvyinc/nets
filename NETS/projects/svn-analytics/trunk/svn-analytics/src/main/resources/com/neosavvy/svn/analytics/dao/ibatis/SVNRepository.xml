@@ -8,7 +8,7 @@
     <resultMap class="SvnRepository" id="SvnRepositoryResultMap">
     	<result property="id" column="ID"/>
     	<result property="url" column="URL"/>
-	    <result property="name" column="NAME"/>
+	    <result property="userName" column="NAME"/>
 	    <result property="password" column="PASSWORD"/>
 	    <result property="startRevision" column="START_REV"/>
 	    <result property="endRevision" column="END_REV"/>
@@ -42,7 +42,7 @@
 		) VALUES (
 			#id#
 			,#url#
-		    ,#name#
+		    ,#userName#
 		    ,#password#
 		    ,#startRevision#
 		    ,#endRevision#

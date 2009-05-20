@@ -4,7 +4,7 @@ public class SVNRepositoryDTO {
 
 	private long id;
     private String url;
-    private String name;
+    private String userName;
     private String password;
     private long startRevision = 0;
     private long endRevision = -1;
@@ -18,13 +18,13 @@ public class SVNRepositoryDTO {
         this.url = url;
     }
 
-    public String getName() {
-        return name;
-    }
+	public String getUserName() {
+		return userName;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}    
 
     public String getPassword() {
         return password;
@@ -57,5 +57,6 @@ public class SVNRepositoryDTO {
 	public void setId(long id) {
 		this.id = id;
 	}
+
 
 }

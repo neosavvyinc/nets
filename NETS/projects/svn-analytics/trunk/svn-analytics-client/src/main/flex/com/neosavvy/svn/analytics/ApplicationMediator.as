@@ -39,6 +39,15 @@ package com.neosavvy.svn.analytics
 				case ApplicationFacade.LOADED_AUTHORS:
 					var svnAnalyticsProxy:AuthorProxy = facade.retrieveProxy( AuthorProxy.NAME ) as AuthorProxy;
 					authorsSelector.dataProvider = svnAnalyticsProxy.authors;
+					
+					var allindices:Array = new Array();
+					var index:Number = 0;
+					for each (var obj:Object in svnAnalyticsProxy.authors) {
+						allindices.push(index);
+						index = index + 1;	
+					}
+					
+					authorsSelector.selectedIndices = allindices;
 					break;
 				case ApplicationFacade.LOADED_REPOSITORY_INTERVAL:
 					var svnRepositoryIntervalProxy:ReportIntervalProxy = facade.retrieveProxy( ReportIntervalProxy.NAME ) as ReportIntervalProxy;

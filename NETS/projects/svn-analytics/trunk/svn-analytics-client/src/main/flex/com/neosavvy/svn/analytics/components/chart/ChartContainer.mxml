@@ -18,7 +18,7 @@
 			<mx:Legend direction="horizontal" dataProvider="{statChartColumn}"/>
 		</mx:HBox>
 		<mx:ColumnChart 
-			id="statChartColumn" 
+			id="statChartColumn"
 			showDataTips="true" 
 			width="100%" 
 			height="100%"
@@ -34,7 +34,6 @@
 	           <mx:ColumnSeries 
 	                yField="numberfOfFiles" 
 	                displayName="Files"
-	                
 	           />
 	           <mx:ColumnSeries 
                     yField="numberOfFilesAdded" 
@@ -76,7 +75,6 @@
 	           <mx:LineSeries 
 	                yField="numberfOfFiles" 
 	                displayName="Files"
-	                
 	           />
 	           <mx:LineSeries 
                     yField="numberOfFilesAdded" 

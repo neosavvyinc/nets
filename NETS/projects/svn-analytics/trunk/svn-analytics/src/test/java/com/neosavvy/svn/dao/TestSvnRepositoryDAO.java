@@ -22,7 +22,7 @@ public class TestSvnRepositoryDAO extends BaseTransactionalSpringAwareTestCase {
 		deleteFromTables("SVN_REPOSITORY");
 		
 		SVNRepositoryDTO testDTO = new SVNRepositoryDTO();
-		testDTO.setName("Test SVN Repository");
+		testDTO.setUserName("aparrish");
 		testDTO.setPassword("Password");
 		testDTO.setUrl("http://url.location.of.repos");
 		
@@ -39,12 +39,12 @@ public class TestSvnRepositoryDAO extends BaseTransactionalSpringAwareTestCase {
 		deleteFromTables("SVN_REPOSITORY");
 		
 		SVNRepositoryDTO testDTO = new SVNRepositoryDTO();
-		testDTO.setName("Test SVN Repository");
+		testDTO.setUserName("aparrish");
 		testDTO.setPassword("Password");
 		testDTO.setUrl("http://url.location.of.repos");
 		
 		SVNRepositoryDTO testDTO1 = new SVNRepositoryDTO();
-		testDTO1.setName("Test SVN Repository 1");
+		testDTO1.setUserName("aparrish");
 		testDTO1.setPassword("Password");
 		testDTO1.setUrl("http://url.location.of.repos.o");
 		
@@ -62,7 +62,7 @@ public class TestSvnRepositoryDAO extends BaseTransactionalSpringAwareTestCase {
 		deleteFromTables("SVN_REPOSITORY");
 		
 		SVNRepositoryDTO testDTO = new SVNRepositoryDTO();
-		testDTO.setName("Test SVN Repository");
+		testDTO.setUserName("aparrish");
 		testDTO.setPassword("Password");
 		testDTO.setUrl("http://url.location.of.repos");
 		

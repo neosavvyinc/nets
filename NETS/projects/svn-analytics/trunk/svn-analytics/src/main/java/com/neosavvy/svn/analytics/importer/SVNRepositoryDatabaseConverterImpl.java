@@ -72,7 +72,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
                         .parseURIEncoded(model.getUrl()));
 
                 ISVNAuthenticationManager authManager = SVNWCUtil
-                        .createDefaultAuthenticationManager(model.getName(),
+                        .createDefaultAuthenticationManager(model.getUserName(),
                                 model.getPassword());
                 repository.setAuthenticationManager(authManager);
                 model.setEndRevision(repository.getLatestRevision());

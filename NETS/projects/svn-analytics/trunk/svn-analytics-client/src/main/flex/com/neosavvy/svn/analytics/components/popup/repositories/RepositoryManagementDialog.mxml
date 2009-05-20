@@ -23,7 +23,7 @@
 				var repository:SVNRepositoryDTO = new SVNRepositoryDTO();
 				repository.endRevision = -1;
 				repository.startRevision = 0;
-				repository.name = this.username.text;
+				repository.userName = this.username.text;
 				repository.password = this.password.text;
 				repository.url = this.url.text;
 				dispatchEvent(new RepositoryEvent(RepositoryEvent.REP_EVENT_TYPE_ADD, repository));
@@ -38,8 +38,8 @@
 	</mx:HBox>
 	<mx:AdvancedDataGrid id="repositoryGrid" width="100%" height="100%">
 		<mx:columns>
-			<mx:AdvancedDataGridColumn dataField="name"/>
 			<mx:AdvancedDataGridColumn dataField="url"/>
+			<mx:AdvancedDataGridColumn dataField="userName"/>
 			<mx:AdvancedDataGridColumn dataField="startRevision"/>
 			<mx:AdvancedDataGridColumn dataField="endRevision"/>
 			<mx:AdvancedDataGridColumn 

@@ -3,6 +3,7 @@
     PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
     "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
 <sqlMapConfig>
+	
 	<settings useStatementNamespaces="true" />
 
 	<!-- Data Module Mappings -->
@@ -13,4 +14,5 @@
 	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/SVNRepositoryInterval.xml" />
 	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/SVNRepositoryConversionInfo.xml"/>
 	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/SVNRepository.xml"/>
+	
 </sqlMapConfig>
