@@ -4,6 +4,7 @@ package com.neosavvy.svn.analytics
 	import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 	import com.neosavvy.svn.analytics.model.AuthorProxy;
 	import com.neosavvy.svn.analytics.model.ReportIntervalProxy;
+	import com.neosavvy.svn.analytics.model.SVNRepositoryProxy;
 	
 	import flash.events.Event;
 	
@@ -30,6 +31,7 @@ package com.neosavvy.svn.analytics
 				ApplicationFacade.STARTUP
 				,ApplicationFacade.LOADED_AUTHORS
 				,ApplicationFacade.LOADED_REPOSITORY_INTERVAL
+				,ApplicationFacade.LOADED_REPOSITORIES
 			];
 		}
 		
@@ -61,6 +63,21 @@ package com.neosavvy.svn.analytics
 	            	endDate.selectedDate = endDateFromService
 	            	startDate.selectableRange = {rangeStart: startDateFromService, rangeEnd: endDateFromService};
 					break;
+					
+				case ApplicationFacade.LOADED_REPOSITORIES:
+					var svnRepositoryProxy:SVNRepositoryProxy = facade.retrieveProxy( SVNRepositoryProxy.NAME ) as SVNRepositoryProxy;
+					svnRepositorySelector.dataProvider = svnRepositoryProxy.repositories;
+					
+					var allindices:Array = new Array();
+					var index:Number = 0;
+					for each (var obj:Object in svnRepositoryProxy.repositories) {
+						allindices.push(index);
+						index = index + 1;	
+					}
+					
+					svnRepositorySelector.selectedIndices = allindices;
+					
+					break;
 				default:
 					break;
 			}
@@ -81,6 +98,10 @@ package com.neosavvy.svn.analytics
 		
 		protected function get endDate():DateField {
 			return this.application.endDate;
+		}
+		
+		protected function get svnRepositorySelector():List {
+			return this.application.svnRepositorySelector;
 		}
 		
 		protected function get increment():String {
@@ -108,6 +129,8 @@ package com.neosavvy.svn.analytics
         	refineRequest.startDate = startDate.selectedDate;
         	refineRequest.endDate = endDate.selectedDate;
         	refineRequest.incrementType = increment;
+        	
+        	refineRequest.repositories = svnRepositorySelector.selectedItems;
         	
         	sendNotification( ApplicationFacade.REFINE_SEARCH_REQUEST, refineRequest );
 		} 

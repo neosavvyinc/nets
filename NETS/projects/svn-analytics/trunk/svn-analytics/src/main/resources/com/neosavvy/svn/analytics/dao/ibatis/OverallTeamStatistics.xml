@@ -46,6 +46,11 @@
         		<iterate property="userNames" prepend="AUTHOR IN" open="(" close=")" conjunction=","> 
         			#userNames[]#
         		</iterate>
+        	</isNotEmpty>
+        	<isNotEmpty property="repositories" prepend="AND">
+        		<iterate property="repositories" prepend="SVN_REPOSITORY_URL IN" open="(" close=")" conjunction=","> 
+        			#repositories[].url#
+        		</iterate>
         	</isNotEmpty>     
             <isNotEmpty property="startDate" prepend="AND">
             	REV_DATE &gt;= #startDate#

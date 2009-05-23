@@ -3,13 +3,13 @@ package com.neosavvy.svn.analytics.dto;
 public class SVNRepositoryDTO {
 
 	private long id;
+	private String name;
     private String url;
     private String userName;
     private String password;
     private long startRevision = 0;
     private long endRevision = -1;
 
-    
     public String getUrl() {
         return url;
     }
@@ -58,5 +58,12 @@ public class SVNRepositoryDTO {
 		this.id = id;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 
 }

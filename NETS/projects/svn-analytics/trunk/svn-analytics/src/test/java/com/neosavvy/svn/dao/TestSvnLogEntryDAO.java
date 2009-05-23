@@ -10,6 +10,7 @@ import com.neosavvy.svn.TestUtils;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.Author;
 import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
+import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 
@@ -29,6 +30,9 @@ public class TestSvnLogEntryDAO extends BaseSpringAwareTestCase {
     	request.setStartDate(TestUtils.getDate("2008-01-01"));
     	request.setEndDate(TestUtils.getDate("2009-01-01"));
     	request.setIncrementType(RefineSearchRequest.CONST_MONTHLY);
+    	SVNRepositoryDTO repositoryTest = new SVNRepositoryDTO();
+    	repositoryTest.setUrl("TestURL");
+    	request.setRepositories(new SVNRepositoryDTO[]{repositoryTest});
     	HistoricalTeamStatistic[] stats = dao.getRefinedHistoricalStats(request);
     	Assert.assertNotNull(stats);
     	//Assert.assertEquals(12, stats.length);

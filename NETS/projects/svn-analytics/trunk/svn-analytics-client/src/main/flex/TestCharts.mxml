@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<!-- charts/BasicSeriesSlideEffect.mxml -->
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml">
+  <mx:Script><![CDATA[
+     import mx.collections.ArrayCollection;
+
+     [Bindable]
+     public var expenses1:ArrayCollection = new ArrayCollection([
+        {Month:"Jan", Income:2000, Expenses:1500},
+        {Month:"Feb", Income:1000, Expenses:200},
+        {Month:"Mar", Income:1500, Expenses:500}
+     ]);
+
+     [Bindable]
+     public var expenses2:ArrayCollection = new ArrayCollection([
+        {Month:"Jan", Income:1200, Expenses:800},
+        {Month:"Feb", Income:2500, Expenses:300},
+        {Month:"Mar", Income:575, Expenses:490}
+     ]);
+
+     public function changeProvider():void {
+        myChart.dataProvider=expenses2;
+     }
+
+  ]]></mx:Script>
+
+  <!-- Define chart effects -->
+  <mx:SeriesSlide 
+    id="slideIn" 
+    duration="1000" 
+    direction="up"
+  />
+  <mx:SeriesSlide 
+    id="slideOut" 
+    duration="1000" 
+    direction="down"
+  />
+
+  <mx:Panel title="Column Chart with Basic Series Slide Effect">
+     <mx:ColumnChart id="myChart" dataProvider="{expenses1}">
+        <mx:horizontalAxis>
+           <mx:CategoryAxis 
+                dataProvider="{expenses1}" 
+                categoryField="Month"
+           />
+        </mx:horizontalAxis>
+
+        <mx:verticalAxis>
+           <mx:LinearAxis minimum="0" maximum="3000"/>
+        </mx:verticalAxis>
+
+        <mx:series>
+           <mx:ColumnSeries
+            xField="Month"
+            yField="Income"
+            displayName="Income"
+            showDataEffect="slideIn"
+            hideDataEffect="slideOut"
+           />
+           <mx:ColumnSeries
+            xField="Month"
+            yField="Expenses"
+            displayName="Expenses"
+            showDataEffect="slideIn"
+            hideDataEffect="slideOut"
+           />
+        </mx:series>
+     </mx:ColumnChart>
+     <mx:Legend dataProvider="{myChart}"/>
+  </mx:Panel>
+
+  <mx:Button id="b1" click="changeProvider()" 
+    label="Change Data Provider"
+  />
+
+</mx:Application>

@@ -23,6 +23,8 @@ package com.neosavvy.svn.analytics.components.popup
 		
 		private var repositoryPopup:IFlexDisplayObject;
 		
+		private var showRequested:Boolean = false;
+		
 		public function PopupMediator( viewComponent:Object )
 		{
 			super(MEDIATOR_NAME, viewComponent);
@@ -40,23 +42,27 @@ package com.neosavvy.svn.analytics.components.popup
 		override public function handleNotification(notification:INotification):void {
 			
 			switch ( notification.getName() ) {
+				case ApplicationFacade.DISPLAY_MANAGE_REPOSITORIES_DIALOG:
+					showRequested = true;
 				case ApplicationFacade.REPOSITORY_DELETED:
 				case ApplicationFacade.REPOSITORY_ADDED:
-				case ApplicationFacade.DISPLAY_MANAGE_REPOSITORIES_DIALOG:
 					sendNotification( ApplicationFacade.LOAD_REPOSITORIES );
-					break; 
+					break;
 				case ApplicationFacade.LOADED_REPOSITORIES:
-					var repositoryProxy:SVNRepositoryProxy = facade.retrieveProxy( SVNRepositoryProxy.NAME ) as SVNRepositoryProxy;
-					
-					if( !repositoryPopup ) { 
-						repositoryPopup = PopUpManager.createPopUp( viewComponent as DisplayObject, RepositoryManagementDialog, true);
-						repositoryPopup.addEventListener(RepositoryEvent.REP_EVENT_TYPE_ADD, addRepository);
-						repositoryPopup.addEventListener(RepositoryEvent.REP_EVENT_TYPE_DELETE, deleteRepository);
-						repositoryPopup.addEventListener(CloseEvent.CLOSE, cleanupPopup);
-						PopUpManager.centerPopUp(repositoryPopup);
+				
+					if(showRequested) {
+						var repositoryProxy:SVNRepositoryProxy = facade.retrieveProxy( SVNRepositoryProxy.NAME ) as SVNRepositoryProxy;
+						
+						if( !repositoryPopup ) { 
+							repositoryPopup = PopUpManager.createPopUp( viewComponent as DisplayObject, RepositoryManagementDialog, true);
+							repositoryPopup.addEventListener(RepositoryEvent.REP_EVENT_TYPE_ADD, addRepository);
+							repositoryPopup.addEventListener(RepositoryEvent.REP_EVENT_TYPE_DELETE, deleteRepository);
+							repositoryPopup.addEventListener(CloseEvent.CLOSE, cleanupPopup);
+							PopUpManager.centerPopUp(repositoryPopup);
+						}
+						
+						(repositoryPopup as RepositoryManagementDialog).repositoryGrid.dataProvider = repositoryProxy.repositories;
 					}
-					
-					(repositoryPopup as RepositoryManagementDialog).repositoryGrid.dataProvider = repositoryProxy.repositories;
 					
 					break;
 				default:
@@ -88,6 +94,7 @@ package com.neosavvy.svn.analytics.components.popup
 			repositoryPopup.removeEventListener(RepositoryEvent.REP_EVENT_TYPE_DELETE, deleteRepository);
 			repositoryPopup.removeEventListener(CloseEvent.CLOSE, cleanupPopup);
 			repositoryPopup = null;
+			showRequested = false;
 		}
 		
 	}
