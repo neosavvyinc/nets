@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml">
+		<mx:Script>
+			<![CDATA[
+				import com.neosavvy.svn.analytics.components.chart.event.SelectChartTypeEvent;
+			
+				private function selectChartType(chartType:String):void {
+					dispatchEvent( new SelectChartTypeEvent(chartType) );
+				}
+			]]>
+		</mx:Script>
+		
+		<mx:HBox id="chartControls">
+			<mx:RadioButtonGroup
+				id="chartTypes"/>
+			<mx:RadioButton id="barChart" label="Bar Chart" groupName="{chartTypes}" selected="true" click="{selectChartType(SelectChartTypeEvent.BAR_CHART)}"/>
+			<mx:RadioButton id="lineChart" label="Line Chart" groupName="{chartTypes}" click="{selectChartType(SelectChartTypeEvent.LINE_CHART)}"/>	
+			<mx:Legend direction="horizontal" dataProvider="{statChartColumn}"/>
+		</mx:HBox>
+		<mx:ColumnChart 
+			id="statChartColumn"
+			showDataTips="true" 
+			width="100%" 
+			height="100%"
+			y="{chartControls.y + chartControls.height + 5}"
+			>
+			<mx:horizontalAxis>
+	           <mx:CategoryAxis
+	                dataProvider="{statChartColumn.dataProvider}" 
+	                categoryField="revisionDate"
+	            />
+	        </mx:horizontalAxis>
+	        <mx:series>
+	           <mx:ColumnSeries 
+	                yField="numberfOfFiles" 
+	                displayName="Files"
+	           />
+	           <mx:ColumnSeries 
+                    yField="numberOfFilesAdded" 
+                    displayName="Added"
+               />
+               <mx:ColumnSeries 
+                    yField="numberOfFilesDeleted" 
+                    displayName="Deleted"
+               />
+               <mx:ColumnSeries 
+                    yField="numberOfFilesModified" 
+                    displayName="Modified"
+               />
+               <mx:ColumnSeries 
+                    yField="numberOfCommentedCommits" 
+                    displayName="Commented Commits"
+               />
+               <mx:ColumnSeries 
+                    yField="numberOfUnCommentedCommits" 
+                    displayName="Uncommented Commits"
+               />
+	        </mx:series>
+	     </mx:ColumnChart>
+	     <mx:LineChart 
+	     	visible="false"
+			id="statChartLine" 
+			showDataTips="true" 
+			width="100%" 
+			height="100%"
+			y="{chartControls.y + chartControls.height + 5}"
+			>
+			<mx:horizontalAxis>
+	           <mx:CategoryAxis
+	                dataProvider="{statChartLine.dataProvider}" 
+	                categoryField="revisionDate"
+	            />
+	        </mx:horizontalAxis>
+	        <mx:series>
+	           <mx:LineSeries 
+	                yField="numberfOfFiles" 
+	                displayName="Files"
+	           />
+	           <mx:LineSeries 
+                    yField="numberOfFilesAdded" 
+                    displayName="Added"
+               />
+               <mx:LineSeries 
+                    yField="numberOfFilesDeleted" 
+                    displayName="Deleted"
+               />
+               <mx:LineSeries 
+                    yField="numberOfFilesModified" 
+                    displayName="Modified"
+               />
+               <mx:LineSeries 
+                    yField="numberOfCommentedCommits" 
+                    displayName="Commented Commits"
+               />
+               <mx:LineSeries 
+                    yField="numberOfUnCommentedCommits" 
+                    displayName="Uncommented Commits"
+               />
+	        </mx:series>
+	     </mx:LineChart>
+</mx:Canvas>

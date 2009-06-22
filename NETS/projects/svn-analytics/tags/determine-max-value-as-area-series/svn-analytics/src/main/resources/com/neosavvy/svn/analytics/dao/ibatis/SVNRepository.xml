@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SvnRepository">
+
+    <typeAlias alias="SvnRepository" 
+    	type="com.neosavvy.svn.analytics.dto.SVNRepositoryDTO" />
+    
+    <resultMap class="SvnRepository" id="SvnRepositoryResultMap">
+		<result property="id" column="ID"/>
+		<result property="name" column="NAME"/>
+		<result property="url" column="URL"/>
+		<result property="userName" column="USERNAME"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="startRevision" column="START_REV"/>
+		<result property="endRevision" column="END_REV"/>
+    </resultMap>
+    
+    <select id="getSvnRepositories" resultMap="SvnRepositoryResultMap">
+        SELECT 
+		    ID
+		    ,NAME
+		    ,URL
+		    ,USERNAME
+		    ,PASSWORD
+		    ,START_REV
+		    ,END_REV
+		FROM 
+		    SVN_REPOSITORY
+    </select>
+    
+    <insert 
+    	id="saveSvnRepository" 
+    	parameterClass="SvnRepository">
+	    <selectKey keyProperty="id" resultClass="int">
+			SELECT SVN_REPOSITORY_SEQ.NEXTVAL AS VALUE FROM DUAL 
+		</selectKey>
+    	INSERT INTO SVN_REPOSITORY ( 
+			ID
+			,NAME
+			,URL
+			,USERNAME
+			,PASSWORD
+			,START_REV
+			,END_REV
+		) VALUES (
+			#id#
+			,#name#
+			,#url#
+		    ,#userName#
+		    ,#password#
+		    ,#startRevision#
+		    ,#endRevision#
+		)
+    </insert>
+
+	<delete id="deleteRepository" parameterClass="SvnRepository">
+		DELETE FROM SVN_REPOSITORY 
+		WHERE
+			ID = #id# 
+	</delete>
+
+</sqlMap>
