@@ -12,6 +12,7 @@
         <result column="numberOfFilesModified" property="numberOfFilesModified"/>
         <result column="validComments" property="numberOfCommentedCommits"/>
         <result column="invalidComments" property="numberOfUnCommentedCommits"/>
+        <result column="maxValue" property="maxValue"/>
     </resultMap>
     
     <parameterMap class="com.neosavvy.svn.analytics.dto.request.RefineSearchRequest" id="refineRequest">
@@ -21,27 +22,87 @@
     	<parameter property="endDate"/>
     </parameterMap>
     
+    <sql id="maxValueCalculation">
+	    (
+		    SELECT MAX(MAX_VALUE) as MAX_VALUE_OF_MEASURES FROM 
+		    (
+				SELECT
+				    <include refid="revisionDateInclude"/>
+				    ,SUM(NUM_FILES_IN_REV) AS MAX_VALUE
+				FROM
+				    SVN_STATISTIC
+				GROUP BY 
+				    <include refid="revisionDateInclude"/>
+				UNION
+				SELECT
+				    <include refid="revisionDateInclude"/>
+				    ,SUM(NUM_FILES_ADDED_IN_REV) AS MAX_VALUE
+				FROM
+				    SVN_STATISTIC
+				GROUP BY 
+				    <include refid="revisionDateInclude"/>
+				UNION
+				SELECT
+				    <include refid="revisionDateInclude"/>
+				    ,SUM(NUM_FILES_DELETED_IN_REV) AS MAX_VALUE
+				FROM
+				    SVN_STATISTIC
+				GROUP BY 
+				    <include refid="revisionDateInclude"/>
+				UNION
+				SELECT
+				    <include refid="revisionDateInclude"/>
+				    ,SUM(NUM_FILES_MODIFIED_IN_REV) AS MAX_VALUE
+				FROM
+				    SVN_STATISTIC
+				GROUP BY 
+				    <include refid="revisionDateInclude"/>
+				UNION
+				SELECT
+				    <include refid="revisionDateInclude"/>
+				    ,SUM(valid_comment) AS MAX_VALUE
+				FROM
+				    SVN_STATISTIC
+				GROUP BY 
+				    <include refid="revisionDateInclude"/>
+				UNION
+				SELECT
+				    <include refid="revisionDateInclude"/>
+				    ,SUM(invalid_comment) AS MAX_VALUE
+				FROM
+				    SVN_STATISTIC
+				GROUP BY 
+				    <include refid="revisionDateInclude"/>
+			)
+		) 
+    </sql>
+    
+    <sql id="revisionDateInclude">
+    	<isParameterPresent>
+       		<isEqual property="incrementType" compareValue="monthly">
+        		to_char(REV_DATE,'YYYY-MM')
+        	</isEqual>
+        	<isEqual property="incrementType" compareValue="daily">
+        		to_char(REV_DATE,'YYYY-MM-DD')
+        	</isEqual>
+       	</isParameterPresent>
+       	<isNotParameterPresent>
+       		to_char(REV_DATE,'YYYY-MM')
+       	</isNotParameterPresent>
+    </sql>
+    
     <select id="getHistoricalStatistics" 
     	resultMap="HistoricalTeamStatisticResultMap"
     	parameterMap="refineRequest">
         SELECT 
-        	<isParameterPresent>
-        		<isEqual property="incrementType" compareValue="monthly">
-	        		to_char(REV_DATE,'YYYY-MM')
-	        	</isEqual>
-	        	<isEqual property="incrementType" compareValue="daily">
-	        		to_char(REV_DATE,'YYYY-MM-DD')
-	        	</isEqual>
-        	</isParameterPresent>
-        	<isNotParameterPresent>
-        		to_char(REV_DATE,'YYYY-MM')
-        	</isNotParameterPresent> as revisionDate
+        	<include refid="revisionDateInclude"/> as revisionDate
             ,SUM(NUM_FILES_IN_REV) as numberfOfFiles
             ,SUM(NUM_FILES_ADDED_IN_REV) as numberOfFilesAdded
             ,SUM(NUM_FILES_DELETED_IN_REV) as numberOfFilesDeleted  
             ,SUM(NUM_FILES_MODIFIED_IN_REV) as numberOfFilesModified
             ,sum(valid_comment) as validComments
             ,sum(invalid_comment) as invalidComments
+            ,<include refid="maxValueCalculation"/> as maxValue
         FROM 
             SVN_STATISTIC
 			<isParameterPresent prepend="WHERE">
@@ -64,29 +125,10 @@
 	            </isNotEmpty>
 			</isParameterPresent>
         GROUP BY 
-        	<isParameterPresent>
-        		<isEqual property="incrementType" compareValue="monthly">
-	        		to_char(REV_DATE,'YYYY-MM')
-	        	</isEqual>
-	        	<isEqual property="incrementType" compareValue="daily">
-	        		to_char(REV_DATE,'YYYY-MM-DD')
-	        	</isEqual>
-        	</isParameterPresent>
-        	<isNotParameterPresent>
-        		to_char(REV_DATE,'YYYY-MM')
-        	</isNotParameterPresent>
+        	<include refid="revisionDateInclude"/>
         ORDER BY 
-        	<isParameterPresent>
-        		<isEqual property="incrementType" compareValue="monthly">
-	        		to_char(REV_DATE,'YYYY-MM')
-	        	</isEqual>
-	        	<isEqual property="incrementType" compareValue="daily">
-	        		to_char(REV_DATE,'YYYY-MM-DD')
-	        	</isEqual>
-        	</isParameterPresent>
-        	<isNotParameterPresent>
-        		to_char(REV_DATE,'YYYY-MM')
-        	</isNotParameterPresent>
+        	<include refid="revisionDateInclude"/>
     </select>
-
+    
+    
 </sqlMap>

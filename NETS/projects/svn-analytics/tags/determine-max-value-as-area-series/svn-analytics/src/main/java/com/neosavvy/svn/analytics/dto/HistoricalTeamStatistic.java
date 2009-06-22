@@ -11,6 +11,8 @@ public class HistoricalTeamStatistic {
 	private long numberOfCommentedCommits;
 	private long numberOfUnCommentedCommits;
 
+	private long maxValue;
+	
 	public String getRevisionDate() {
 		return revisionDate;
 	}
@@ -65,6 +67,14 @@ public class HistoricalTeamStatistic {
 
 	public void setNumberOfUnCommentedCommits(long numberOfUnCommentedCommits) {
 		this.numberOfUnCommentedCommits = numberOfUnCommentedCommits;
+	}
+
+	public long getMaxValue() {
+		return maxValue;
+	}
+
+	public void setMaxValue(long maxValue) {
+		this.maxValue = maxValue;
 	}
 
 }

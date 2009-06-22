@@ -2,16 +2,15 @@ package com.neosavvy.svn.analytics.components.chart
 {
 	import com.neosavvy.svn.analytics.ApplicationFacade;
 	import com.neosavvy.svn.analytics.components.chart.event.SelectChartTypeEvent;
+	import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
 	import com.neosavvy.svn.analytics.model.HistoricalTeamStatisticProxy;
 	
-	import flash.events.Event;
+	import flexlib.controls.HSlider;
 	
 	import mx.charts.ColumnChart;
 	import mx.charts.LineChart;
 	import mx.charts.effects.SeriesSlide;
-	import mx.charts.series.ColumnSeries;
-	import mx.charts.series.LineSeries;
-	import mx.events.EffectEvent;
+	import mx.collections.ArrayCollection;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -42,6 +41,7 @@ package com.neosavvy.svn.analytics.components.chart
 					addEffect();
 					columnChart.dataProvider = historyProxy.historicalStats;
 					lineChart.dataProvider = historyProxy.historicalStats;
+					initializeIncrementSelector(historyProxy.historicalStats);
 					break;
 				default:
 					break;
@@ -57,15 +57,50 @@ package com.neosavvy.svn.analytics.components.chart
 			slideDown.duration = 1000;
 			slideDown.direction = "down";
 
-			for each ( var colSer:ColumnSeries in columnChart.series ) {
+			for each ( var colSer:Object in columnChart.series ) {
 				colSer.setStyle("showDataEffect", slideUp);
 				colSer.setStyle("hideDataEffect", slideDown);
 			}
-			
-			for each ( var lineSer:LineSeries in lineChart.series ) {
+
+			for each ( var lineSer:Object in lineChart.series ) {
 				lineSer.setStyle("showDataEffect", slideUp);
 				lineSer.setStyle("hideDataEffect", slideDown);
 			}
+		}
+		
+		protected function initializeIncrementSelector(stats:Array):void {
+			incrementSelector.minimum = 0;
+			incrementSelector.maximum = stats.length;
+			incrementSelector.snapInterval = 1;
+			
+			var labels:Array = new Array();
+			var tickInt:Number = 5;
+			var tickCount:Number = tickInt - 1;
+			for each (var stat:HistoricalTeamStatistic in stats) {
+				tickCount = tickCount+1;
+				if( tickCount == tickInt) {
+					labels.push( stat.revisionDate );
+					tickCount = 0;
+				}
+			}
+			labels.push(stat.revisionDate);
+			incrementSelector.labels = labels;
+			//incrementSelector.tickInterval = tickInt;
+			incrementSelector.dataTipFormatFunction = showDateFunction;
+			incrementSelector.allowThumbOverlap = true;
+		}
+		
+		protected function showDateFunction( val:String ):String {
+			 var stats:ArrayCollection = lineChart.dataProvider as ArrayCollection;
+			var stat:HistoricalTeamStatistic
+			if( Number(val) >= stats.length) {
+			 stat = stats.getItemAt( stats.length - 1 ) as HistoricalTeamStatistic;	
+			} else {
+			 stat = stats.getItemAt( Number(val) ) as HistoricalTeamStatistic;
+			}
+			trace("stat"+ stat.revisionDate);
+			trace("val:" + val);
+			return stat.revisionDate; 
 		}
 
 		protected function get chartContainer():ChartContainer {
@@ -78,6 +113,10 @@ package com.neosavvy.svn.analytics.components.chart
 		
 		protected function get lineChart():LineChart {
 			return chartContainer.statChartLine;
+		}
+		
+		protected function get incrementSelector():HSlider {
+			return chartContainer.incrementSelector;
 		}
 		
 		protected function selectChartType(event:SelectChartTypeEvent):void {
