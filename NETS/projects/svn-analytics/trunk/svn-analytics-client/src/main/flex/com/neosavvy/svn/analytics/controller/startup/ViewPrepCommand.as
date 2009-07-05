@@ -18,7 +18,7 @@ package com.neosavvy.svn.analytics.controller.startup
 			facade.registerMediator( new ApplicationMediator( application ) );
 			facade.registerMediator( new PopupMediator( application ) );
 			facade.registerMediator( new ChartMediator( application.chartContainer ) );
-			facade.registerMediator( new GridMediator( application.gridContainer ) );
+			 facade.registerMediator( new GridMediator( application.gridContainer ) ); 
 		}
 		
 	}

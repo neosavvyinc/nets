@@ -1,17 +1,13 @@
 package com.neosavvy.svn.analytics.components.chart
 {
 	import com.neosavvy.svn.analytics.ApplicationFacade;
-	import com.neosavvy.svn.analytics.components.chart.event.SelectChartTypeEvent;
 	import com.neosavvy.svn.analytics.model.HistoricalTeamStatisticProxy;
 	
-	import flash.events.Event;
-	
-	import mx.charts.ColumnChart;
-	import mx.charts.LineChart;
-	import mx.charts.effects.SeriesSlide;
-	import mx.charts.series.ColumnSeries;
-	import mx.charts.series.LineSeries;
-	import mx.events.EffectEvent;
+	import mx.charts.AreaChart;
+	import mx.charts.chartClasses.CartesianChart;
+	import mx.collections.ArrayCollection;
+	import mx.containers.DividedBox;
+	import mx.controls.VRule;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.mediator.Mediator;
@@ -23,8 +19,6 @@ package com.neosavvy.svn.analytics.components.chart
 		public function ChartMediator( viewComponent:Object )
 		{
 			super(MEDIATOR_NAME, viewComponent);
-			
-			this.chartContainer.addEventListener(SelectChartTypeEvent.SELECT_CHART_TYPE, selectChartType);
 		}
 		
 		override public function listNotificationInterests():Array {
@@ -39,9 +33,19 @@ package com.neosavvy.svn.analytics.components.chart
 			switch ( notification.getName() ) {
 				case ApplicationFacade.LOADED_HISTORICAL_STATS:
 					var historyProxy:HistoricalTeamStatisticProxy = facade.retrieveProxy( HistoricalTeamStatisticProxy.NAME ) as HistoricalTeamStatisticProxy;
-					addEffect();
-					columnChart.dataProvider = historyProxy.historicalStats;
-					lineChart.dataProvider = historyProxy.historicalStats;
+					var data:Array = historyProxy.historicalStats;
+					
+					mainChart.dataProvider = new ArrayCollection(data);
+					smallChart.dataProvider = new ArrayCollection(data);
+					intervalChart.dataProvider = new ArrayCollection(data); 
+					
+					
+					leftIndicator.x = data.length - 100;
+					rightIndicator.x = data.length;
+
+					chartContainer.setMainData( new ArrayCollection( data ) );
+					chartContainer.setRangeData( new ArrayCollection( data ) );
+					chartContainer.setRangeDataRatio(((dividedBox.width - 30) / chartContainer.getRangeData().length) ); 
 					break;
 				default:
 					break;
@@ -49,52 +53,34 @@ package com.neosavvy.svn.analytics.components.chart
 			
 		}
 
-		protected function addEffect():void {
-			var slideUp:SeriesSlide = new SeriesSlide();
-			slideUp.duration = 1000;
-			slideUp.direction = "up";
-			var slideDown:SeriesSlide = new SeriesSlide();
-			slideDown.duration = 1000;
-			slideDown.direction = "down";
-
-			for each ( var colSer:ColumnSeries in columnChart.series ) {
-				colSer.setStyle("showDataEffect", slideUp);
-				colSer.setStyle("hideDataEffect", slideDown);
-			}
-			
-			for each ( var lineSer:LineSeries in lineChart.series ) {
-				lineSer.setStyle("showDataEffect", slideUp);
-				lineSer.setStyle("hideDataEffect", slideDown);
-			}
-		}
-
 		protected function get chartContainer():ChartContainer {
 			return this.viewComponent as ChartContainer;
 		}
 		
-		protected function get columnChart():ColumnChart {
-			return chartContainer.statChartColumn;
+		protected function get mainChart():AreaChart {
+			return chartContainer.mainChart;
 		}
 		
-		protected function get lineChart():LineChart {
-			return chartContainer.statChartLine;
+		protected function get smallChart():CartesianChart {
+			return chartContainer.smallChart;
 		}
 		
-		protected function selectChartType(event:SelectChartTypeEvent):void {
-			
-			this.lineChart.visible = false;
-			this.columnChart.visible = false;
-			
-			switch ( event.chartType ) {
-				case SelectChartTypeEvent.BAR_CHART:
-					this.columnChart.visible = true;
-					break;
-				case SelectChartTypeEvent.LINE_CHART:
-					this.lineChart.visible = true;
-					break;
-			}
-			
+		protected function get intervalChart():AreaChart {
+			return chartContainer.intervalChart;
 		}
+		
+		protected function get leftIndicator():VRule {
+			return chartContainer.leftIndicator;
+		}
+		
+		protected function get rightIndicator():VRule {
+			return chartContainer.rightIndicator;
+		}
+		
+		protected function get dividedBox():DividedBox {
+			return chartContainer.dividedBox;
+		}
+		
 
 	}
 }

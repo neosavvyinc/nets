@@ -57,11 +57,11 @@ package com.neosavvy.svn.analytics
 					var startDateFromService:Date = svnRepositoryIntervalProxy.reportInterval.startDayLevelDate;
 	            	var endDateFromService:Date = svnRepositoryIntervalProxy.reportInterval.endDayLevelDate;
 	            	
-	            	startDate.selectedDate = startDateFromService;
+	            	/* startDate.selectedDate = startDateFromService;
 	            	startDate.selectableRange = {rangeStart: startDateFromService, rangeEnd: endDateFromService};
 	
-	            	endDate.selectedDate = endDateFromService
-	            	startDate.selectableRange = {rangeStart: startDateFromService, rangeEnd: endDateFromService};
+		            	endDate.selectedDate = endDateFromService
+	            	startDate.selectableRange = {rangeStart: startDateFromService, rangeEnd: endDateFromService}; */
 					break;
 					
 				case ApplicationFacade.LOADED_REPOSITORIES:
@@ -90,21 +90,21 @@ package com.neosavvy.svn.analytics
 		
 		protected function get authorsSelector():List {
 			return this.application.authorsSelector;
-		}
-		
+		} 
+		/* 
 		protected function get startDate():DateField {
 			return this.application.startDate;
 		}
 		
 		protected function get endDate():DateField {
 			return this.application.endDate;
-		}
+		} */
 		
 		protected function get svnRepositorySelector():List {
 			return this.application.svnRepositorySelector;
-		}
+		} 
 		
-		protected function get increment():String {
+		/* protected function get increment():String {
 			if( this.application.daily.selected ) {
 				return "daily";
 			} else if ( this.application.monthly.selected ) {
@@ -112,7 +112,7 @@ package com.neosavvy.svn.analytics
 			}
 			
 			return "monthly";
-		}
+		} */
 		
 		/**
 		 * Event listeners for View spawned actions / user gestures go here
@@ -126,9 +126,9 @@ package com.neosavvy.svn.analytics
 				authorStrings.push(author.author);
 			}
         	refineRequest.userNames = authorStrings;
-        	refineRequest.startDate = startDate.selectedDate;
-        	refineRequest.endDate = endDate.selectedDate;
-        	refineRequest.incrementType = increment;
+        	/* refineRequest.startDate = startDate.selectedDate;
+        	refineRequest.endDate = endDate.selectedDate; */
+        	//refineRequest.incrementType = increment;
         	
         	refineRequest.repositories = svnRepositorySelector.selectedItems;
         	
