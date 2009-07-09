@@ -34,7 +34,7 @@
 	        	</isEqual>
         	</isParameterPresent>
         	<isNotParameterPresent>
-        		to_char(REV_DATE,'YYYY-MM')
+        		to_char(REV_DATE,'YYYY-MM-DD')
         	</isNotParameterPresent> as revisionDate
             ,SUM(NUM_FILES_IN_REV) as numberfOfFiles
             ,SUM(NUM_FILES_ADDED_IN_REV) as numberOfFilesAdded
@@ -73,7 +73,7 @@
 	        	</isEqual>
         	</isParameterPresent>
         	<isNotParameterPresent>
-        		to_char(REV_DATE,'YYYY-MM')
+        		to_char(REV_DATE,'YYYY-MM-DD')
         	</isNotParameterPresent>
         ORDER BY 
         	<isParameterPresent>
@@ -85,7 +85,7 @@
 	        	</isEqual>
         	</isParameterPresent>
         	<isNotParameterPresent>
-        		to_char(REV_DATE,'YYYY-MM')
+        		to_char(REV_DATE,'YYYY-MM-DD')
         	</isNotParameterPresent>
     </select>
 

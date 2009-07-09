@@ -73,8 +73,6 @@
 			private function dateParse(value:String):Date
 			{
 				if (value) {
-					trace("value:"+ value);
-					
 					var dateArray:Array = value.split('-');
 					if( dateArray.length == 3) {
 						return new Date(dateArray[0], dateArray[1] - 1, dateArray[2]);
@@ -98,11 +96,12 @@
 				dateValue.setTime(value + ((dateValue.timezoneOffset + 60) * 60 * 1000));
 				switch(axis.labelUnits)
 				{
-					case "days":
-						return labelDayFormatter.format(dateValue);
 					case "months":
-					default:
 						return labelMonthFormatter.format(dateValue);
+						break;
+					case "days":
+					default:
+						return labelDayFormatter.format(dateValue);
 						break;
 				}
 			}
@@ -282,7 +281,7 @@
 						  styleName="mainChartStyle" backgroundElements="{backgroundContents}">
 		        
 		        <mx:horizontalAxis>
-		        	<mx:DateTimeAxis dataUnits="months" parseFunction="dateParse" labelFunction="formatDateLabel" />
+		        	<mx:DateTimeAxis dataUnits="days" parseFunction="{dateParse}" labelFunction="{formatDateLabel}" />
 		        </mx:horizontalAxis>
 		        <mx:horizontalAxisRenderer>
 		        	<skins:InnerAxisRenderer axisPosition="right" axisWidth="20" 
@@ -523,7 +522,7 @@
 		
 	
     <mx:DateFormatter id="labelMonthFormatter" formatString="MM/YY" />
-    <mx:DateFormatter id="labelDayFormatter" formatString="MMM DD" />
+    <mx:DateFormatter id="labelDayFormatter" formatString="MMM DD YYYY" />
     <!--<mx:DateFormatter id="labelDefaultFormatter" formatString="EEE MMM D" />-->
 	     
 </mx:Canvas>
