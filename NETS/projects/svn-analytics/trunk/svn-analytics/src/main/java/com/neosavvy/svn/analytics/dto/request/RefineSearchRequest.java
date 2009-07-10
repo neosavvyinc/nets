@@ -42,6 +42,9 @@ public class RefineSearchRequest {
 	}
 
 	public String getIncrementType() {
+		if( incrementType == null ) {
+			return CONST_DAILY;
+		}
 		return incrementType;
 	}
 

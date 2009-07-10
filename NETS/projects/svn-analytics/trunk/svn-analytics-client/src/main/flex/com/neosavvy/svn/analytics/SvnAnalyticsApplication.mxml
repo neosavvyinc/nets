@@ -60,7 +60,7 @@
 				<mx:Text 
 					width="350"
 					height="100%"
-					text="This tool is constantly archiving metadata gathered from repositories who have owners that have signed their repository up for analysis. So far minimal statistics are being generated and all files are being archived. Later more information will be archivted so please check back as future updates are made. Please email me at aparrish@neosavvy.com if you have any ideas to help improve the usefulness of this tool."/>
+					text="This tool is constantly archiving metadata gathered from repositories who have owners that have signed their repository up for analysis. So far minimal statistics are being generated and all files are being archived. Later more information will be archived so please check back as future updates are made. Please email me at aparrish@neosavvy.com if you have any ideas to help improve the usefulness of this tool."/>
 			</mx:Panel>
 			<mx:HBox>
 				<mx:Panel title="Select the user(s) to analyze">
