@@ -9,11 +9,11 @@ import com.neosavvy.svn.analytics.importer.SVNRepositoryDatabaseConverter;
 public class TestSVNRepositoryConverter extends BaseSpringAwareTestCase {
 
 	@Autowired
-    private SVNRepositoryDatabaseConverter converter;
+	private SVNRepositoryDatabaseConverter converter;
 
 	@Test
-    public void testRun() {
-        converter.run();
-    }
+	public void testRun() {
+		converter.run();
+	}
 
 }

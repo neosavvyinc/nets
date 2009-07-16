@@ -15,6 +15,7 @@
     <bean id="svnRepositoryConverter" class="com.neosavvy.svn.analytics.importer.SVNRepositoryDatabaseConverterImpl">
         <property name="svnStatisticsDAO" ref="svnAnalyticsDAO"/>
         <property name="svnRepositoryDAO" ref="svnRepositoryDAO"/>
+        <property name="entryHandler" ref="entryHandler"/>
     </bean>
     
     <bean id="conversionJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
@@ -33,6 +34,10 @@
                 <ref bean="cronConversionTrigger"/>
             </list>
         </property>
+    </bean>
+    
+    <bean id="entryHandler" class="com.neosavvy.svn.analytics.importer.handler.EntryHandler">
+    	<property name="fileSystemDao" ref="svnFileNodeStatisticDAO"/>
     </bean>
 
 </beans>

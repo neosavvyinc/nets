@@ -11,8 +11,11 @@ import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
 import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.internal.wc.DefaultSVNOptions;
 import org.tmatesoft.svn.core.io.SVNRepository;
 import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
+import org.tmatesoft.svn.core.wc.SVNLogClient;
+import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 import com.neosavvy.svn.analytics.dao.SVNRepositoryDAO;
@@ -20,6 +23,7 @@ import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryConversionInfo;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
+import com.neosavvy.svn.analytics.importer.handler.EntryHandler;
 import com.neosavvy.svn.analytics.util.SvnKitUtil;
 
 public class SVNRepositoryDatabaseConverterImpl implements
@@ -48,6 +52,8 @@ public class SVNRepositoryDatabaseConverterImpl implements
 
     private SVNRepositoryDAO svnRepositoryDAO;
     private SVNStatisticDAO svnStatisticsDAO;
+    private EntryHandler entryHandler;
+    
 
     public void run() {
 
@@ -108,16 +114,23 @@ public class SVNRepositoryDatabaseConverterImpl implements
             	startRevision = info.getLastUpdateRevision() + 1;
             }
             
+//            try {
+//                batchConvertRevisionsIntoDatabase(repository, startRevision,
+//                        endRevision, modelKey);
+//            } catch (SVNException e) {
+//                logger.error(
+//                        "There was an error converting the repository from "
+//                                + startRevision + " to " + endRevision
+//                                + " for the " + modelKey.getUrl()
+//                                + " repository.", e);
+//            }
+            
             try {
-                batchConvertRevisionsIntoDatabase(repository, startRevision,
-                        endRevision, modelKey);
+            	batchConvertFileAndRepositoryStatisticsIntoDatabase(repository, startRevision, endRevision, modelKey);
             } catch (SVNException e) {
-                logger.error(
-                        "There was an error converting the repository from "
-                                + startRevision + " to " + endRevision
-                                + " for the " + modelKey.getUrl()
-                                + " repository.", e);
-            }
+				logger.error("There was an error converting the files in the repository: " + modelKey.getUrl() + 
+						" from " + startRevision + " to " + endRevision, e);
+			}
 
         }
 
@@ -147,6 +160,39 @@ public class SVNRepositoryDatabaseConverterImpl implements
             startRevision += 100;
         }
     }
+    
+    protected void batchConvertFileAndRepositoryStatisticsIntoDatabase(
+			SVNRepository repository, long startRevision, long endRevision,
+			SVNRepositoryDTO svnRepositoryModel) throws SVNException {
+    	
+    	while (startRevision <= endRevision) {
+    		
+			if (logger.isDebugEnabled()) {
+				logger
+						.info("batchConvertFileAndRepositoryStatisticsIntoDatabase(SVNRepository, long, long, SVNRepositoryDTO) - Converting files for - startRevision="
+								+ startRevision
+								+ ", svnRepositoryModel="
+								+ svnRepositoryModel.getName()
+								+ ", endRevision="
+								+ endRevision);
+			}
+    		
+    		processRepositoryTree( repository, startRevision );
+    		getEntryHandler().flushStatistics( startRevision );
+    		startRevision++;
+    	}
+	}
+    
+    protected void processRepositoryTree(SVNRepository repository, long revision) throws SVNException {
+		SVNLogClient logClient = new SVNLogClient(repository.getAuthenticationManager(), new DefaultSVNOptions());
+		logClient.doList(
+					repository.getLocation(), 
+					SVNRevision.create(revision), 
+					SVNRevision.create(revision), 
+					false, 
+					true, 
+					getEntryHandler());
+	}
 
     public void tearDown() {
 
@@ -168,6 +214,14 @@ public class SVNRepositoryDatabaseConverterImpl implements
 
 	public void setSvnStatisticsDAO(SVNStatisticDAO svnStatisticsDAO) {
 		this.svnStatisticsDAO = svnStatisticsDAO;
+	}
+
+	public EntryHandler getEntryHandler() {
+		return entryHandler;
+	}
+
+	public void setEntryHandler(EntryHandler entryHandler) {
+		this.entryHandler = entryHandler;
 	}
 
 }

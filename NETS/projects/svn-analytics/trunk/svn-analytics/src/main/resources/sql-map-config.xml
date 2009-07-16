@@ -14,5 +14,7 @@
 	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/SVNRepositoryInterval.xml" />
 	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/SVNRepositoryConversionInfo.xml"/>
 	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/SVNRepository.xml"/>
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/SVNFileStatistic.xml"/>
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/SVNDirectoryStatistic.xml"/>
 	
 </sqlMapConfig>

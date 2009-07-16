@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SVNFileStatistics">
+
+    <insert id="insertStatistic" parameterClass="com.neosavvy.svn.analytics.dto.file.FileNode">
+        <selectKey keyProperty="id" type="pre" resultClass="int">
+			SELECT SVN_FILE_STATISTIC_SEQ.NEXTVAL AS VALUE FROM DUAL
+		</selectKey>
+        INSERT INTO 
+            SVN_FILE_STATISTIC
+        (
+            ID
+			,REVISION
+			,REVISION_DATE
+			,LAST_CHANGED_REVISION
+			,AUTHOR
+			,RELATIVE_PATH
+			,PARENT_DIRECTORY 
+			,FILE_NAME
+			,NUMBER_OF_LINES
+        )
+        VALUES
+        (
+            #id#
+            ,#revision#
+            ,#revisionDate#
+            ,#lastChangedRevision#
+            ,#author#
+            ,#relativePath#
+            ,#parentDirectory#
+            ,#fileName#
+            ,#numberLines#
+        )
+    </insert>   
+  
+
+</sqlMap>
