@@ -10,6 +10,7 @@
             SVN_FILE_STATISTIC
         (
             ID
+            ,REPOSITORY_ID
 			,REVISION
 			,REVISION_DATE
 			,LAST_CHANGED_REVISION
@@ -22,6 +23,7 @@
         VALUES
         (
             #id#
+            ,#repositoryId#
             ,#revision#
             ,#revisionDate#
             ,#lastChangedRevision#

@@ -1,5 +1,7 @@
 package com.neosavvy.svn.analytics.importer.handler;
 
+import org.apache.log4j.Logger;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,10 +11,13 @@ import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNNodeKind;
 
 import com.neosavvy.svn.analytics.dao.SVNFileSystemNodeDAO;
+import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.dto.file.DirectoryNode;
 import com.neosavvy.svn.analytics.dto.file.FileNode;
 
 public class EntryHandler implements ISVNDirEntryHandler {
+
+	private static final Logger logger = Logger.getLogger(EntryHandler.class);
 
 	private SVNFileSystemNodeDAO fileSystemDao;
 	
@@ -22,6 +27,11 @@ public class EntryHandler implements ISVNDirEntryHandler {
 	List<SVNDirEntry> unknown = new ArrayList<SVNDirEntry>();
 	
 	public void handleDirEntry(SVNDirEntry entry) throws SVNException {
+
+		if (logger.isInfoEnabled()) {
+			logger.info("handleDirEntry(SVNDirEntry) - Logging entry:" + entry);
+		}
+		
 		if( entry.getKind() == SVNNodeKind.DIR ) {
 			directories.add( entry );
 		} else if (entry.getKind() == SVNNodeKind.FILE ) {
@@ -33,10 +43,10 @@ public class EntryHandler implements ISVNDirEntryHandler {
 		}
 	}
 	
-	public void flushStatistics(long revision) {
+	public void flushStatistics(long revision, SVNRepositoryDTO repository) {
 		
-		getFileSystemDao().saveDirectories( convertDirectoryEntries( directories, revision ) );
-		getFileSystemDao().saveFiles( convertFileEntries( files, revision ) );
+		getFileSystemDao().saveDirectories( convertDirectoryEntries( directories, revision, repository ) );
+		getFileSystemDao().saveFiles( convertFileEntries( files, revision, repository ) );
 		
 		directories = new ArrayList<SVNDirEntry>();
 		files = new ArrayList<SVNDirEntry>();
@@ -45,18 +55,18 @@ public class EntryHandler implements ISVNDirEntryHandler {
 		
 	}
 
-	public List<DirectoryNode> convertDirectoryEntries( List<SVNDirEntry> directories, long revision ) {
+	public List<DirectoryNode> convertDirectoryEntries( List<SVNDirEntry> directories, long revision, SVNRepositoryDTO repository ) {
 		List<DirectoryNode> returnObj = new ArrayList<DirectoryNode>();
 		for (SVNDirEntry dirEntry : directories) {
-			returnObj.add( new DirectoryNode( dirEntry, revision ));
+			returnObj.add( new DirectoryNode( dirEntry, revision, repository ));
 		}
 		return returnObj;
 	}
 	
-	public List<FileNode> convertFileEntries( List<SVNDirEntry> files, long revision ) {
+	public List<FileNode> convertFileEntries( List<SVNDirEntry> files, long revision, SVNRepositoryDTO repository  ) {
 		List<FileNode> returnObj = new ArrayList<FileNode>();
 		for (SVNDirEntry dirEntry : files) {
-			returnObj.add( new FileNode( dirEntry, revision ));
+			returnObj.add( new FileNode( dirEntry, revision, repository ));
 		}
 		return returnObj;
 	}

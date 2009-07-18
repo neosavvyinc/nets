@@ -18,6 +18,7 @@ import org.tmatesoft.svn.core.wc.SVNLogClient;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
+import com.neosavvy.svn.analytics.dao.SVNFileSystemNodeDAO;
 import com.neosavvy.svn.analytics.dao.SVNRepositoryDAO;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryConversionInfo;
@@ -52,7 +53,8 @@ public class SVNRepositoryDatabaseConverterImpl implements
 
     private SVNRepositoryDAO svnRepositoryDAO;
     private SVNStatisticDAO svnStatisticsDAO;
-    private EntryHandler entryHandler;
+    private SVNFileSystemNodeDAO fileSystemDao;
+	private EntryHandler entryHandler;
     
 
     public void run() {
@@ -125,6 +127,10 @@ public class SVNRepositoryDatabaseConverterImpl implements
 //                                + " repository.", e);
 //            }
             
+            SVNRepositoryConversionInfo fileBasedRepositoryInfo = fileSystemDao.getFileBasedRepositoryInfo(modelKey.getId());
+            if(fileBasedRepositoryInfo.getLastUpdateRevision() > startRevision) {
+            	startRevision = fileBasedRepositoryInfo.getLastUpdateRevision() + 1;
+            }
             try {
             	batchConvertFileAndRepositoryStatisticsIntoDatabase(repository, startRevision, endRevision, modelKey);
             } catch (SVNException e) {
@@ -178,7 +184,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
 			}
     		
     		processRepositoryTree( repository, startRevision );
-    		getEntryHandler().flushStatistics( startRevision );
+    		getEntryHandler().flushStatistics( startRevision, svnRepositoryModel );
     		startRevision++;
     	}
 	}
@@ -222,6 +228,14 @@ public class SVNRepositoryDatabaseConverterImpl implements
 
 	public void setEntryHandler(EntryHandler entryHandler) {
 		this.entryHandler = entryHandler;
+	}
+	
+    public SVNFileSystemNodeDAO getFileSystemDao() {
+		return fileSystemDao;
+	}
+
+	public void setFileSystemDao(SVNFileSystemNodeDAO fileSystemDao) {
+		this.fileSystemDao = fileSystemDao;
 	}
 
 }

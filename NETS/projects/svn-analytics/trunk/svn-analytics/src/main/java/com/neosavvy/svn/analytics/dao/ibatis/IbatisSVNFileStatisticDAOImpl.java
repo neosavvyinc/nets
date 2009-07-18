@@ -9,6 +9,7 @@ import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.ibatis.sqlmap.client.SqlMapExecutor;
 import com.neosavvy.svn.analytics.dao.SVNFileSystemNodeDAO;
+import com.neosavvy.svn.analytics.dto.SVNRepositoryConversionInfo;
 import com.neosavvy.svn.analytics.dto.file.DirectoryNode;
 import com.neosavvy.svn.analytics.dto.file.FileNode;
 
@@ -72,6 +73,16 @@ public class IbatisSVNFileStatisticDAOImpl extends SqlMapClientDaoSupport implem
 				return new Integer(rowsaffected);
 			}
 		});
+	}
+
+	@SuppressWarnings("unchecked")
+	public SVNRepositoryConversionInfo getFileBasedRepositoryInfo(Long id) {
+		List<SVNRepositoryConversionInfo> conversionInfo = getSqlMapClientTemplate().queryForList("SVNRepositoryConversionInfo.getFileBasedRepositoryInfo", id);
+		if(conversionInfo != null && conversionInfo.size() > 0) {
+			return conversionInfo.get(0);
+		} else {
+			return new SVNRepositoryConversionInfo();
+		}
 	}
 
 }

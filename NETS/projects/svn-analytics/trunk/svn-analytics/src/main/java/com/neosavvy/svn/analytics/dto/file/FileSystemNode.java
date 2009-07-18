@@ -4,6 +4,8 @@ import java.util.Date;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
 
+import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
+
 /**
  * This class is abstract to allow for directories or files to be handled
  * a bit differently and also stored in two tables separately.
@@ -33,6 +35,8 @@ public abstract class FileSystemNode {
 	
 	private long id;
 	
+	private long repositoryId;
+	
 	private long revision;
 	
 	private Date revisionDate;
@@ -49,9 +53,10 @@ public abstract class FileSystemNode {
 		super();
 	}
 
-	public FileSystemNode( SVNDirEntry entry, long revision ) {
+	public FileSystemNode( SVNDirEntry entry, long revision, SVNRepositoryDTO repository ) {
 		this.id = -1;
 		this.revision = revision;
+		this.repositoryId = repository.getId();
 		
 		this.author = entry.getAuthor();
 		this.lastChangedRevision = entry.getRevision();
@@ -114,6 +119,14 @@ public abstract class FileSystemNode {
 
 	public void setParentDirectory(String parentDirectory) {
 		this.parentDirectory = parentDirectory;
+	}
+
+	public long getRepositoryId() {
+		return repositoryId;
+	}
+
+	public void setRepositoryId(long repositoryId) {
+		this.repositoryId = repositoryId;
 	}
 
 	/**

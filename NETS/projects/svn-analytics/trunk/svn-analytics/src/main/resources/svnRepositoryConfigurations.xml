@@ -15,6 +15,7 @@
     <bean id="svnRepositoryConverter" class="com.neosavvy.svn.analytics.importer.SVNRepositoryDatabaseConverterImpl">
         <property name="svnStatisticsDAO" ref="svnAnalyticsDAO"/>
         <property name="svnRepositoryDAO" ref="svnRepositoryDAO"/>
+        <property name="fileSystemDao" ref="svnFileNodeStatisticDAO"/>
         <property name="entryHandler" ref="entryHandler"/>
     </bean>
     

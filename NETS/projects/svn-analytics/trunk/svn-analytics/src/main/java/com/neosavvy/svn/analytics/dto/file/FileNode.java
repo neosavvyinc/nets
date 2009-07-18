@@ -2,6 +2,8 @@ package com.neosavvy.svn.analytics.dto.file;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
 
+import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
+
 public class FileNode extends FileSystemNode {
 	
 	private long numberLines;
@@ -11,8 +13,8 @@ public class FileNode extends FileSystemNode {
 		super();
 	}
 	
-	public FileNode(SVNDirEntry dirEntry, long revision) {
-		super( dirEntry, revision );
+	public FileNode(SVNDirEntry dirEntry, long revision, SVNRepositoryDTO repository) {
+		super( dirEntry, revision, repository );
 		
 		this.fileName = deriveFileName( dirEntry.getRelativePath() );
 	}
@@ -21,7 +23,7 @@ public class FileNode extends FileSystemNode {
 		if( relativePath.lastIndexOf("/") == -1) 
 			return relativePath;
 		
-		return relativePath.substring(relativePath.lastIndexOf("/"), relativePath.length());
+		return relativePath.substring(relativePath.lastIndexOf("/") + 1, relativePath.length());
 	}
 
 	public long getNumberLines() {
