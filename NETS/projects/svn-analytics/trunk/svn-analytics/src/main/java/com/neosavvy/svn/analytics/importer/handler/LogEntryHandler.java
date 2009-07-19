@@ -19,7 +19,9 @@ import org.tmatesoft.svn.core.wc.SVNLogClient;
 import org.tmatesoft.svn.core.wc.SVNRevision;
 
 import com.neosavvy.svn.analytics.dao.SVNFileSystemNodeDAO;
+import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
+import com.neosavvy.svn.analytics.dto.SVNStatistic;
 import com.neosavvy.svn.analytics.dto.file.DirectoryNode;
 import com.neosavvy.svn.analytics.dto.file.FileNode;
 import com.neosavvy.svn.analytics.util.SvnKitUtil;
@@ -32,14 +34,16 @@ public class LogEntryHandler implements ISVNLogEntryHandler {
 
 	private SVNFileSystemNodeDAO fileSystemDao;
 	
+	private SVNStatisticDAO svnStatisticsDAO;
+	
 	private SVNRepositoryDTO repositoryModel;
 	
 	private SVNRepository repository;
 	
+	
+	List<SVNStatistic> entryStats = new ArrayList<SVNStatistic>();
 	List<DirectoryNode> directories = new ArrayList<DirectoryNode>();
 	List<FileNode> files = new ArrayList<FileNode>();
-	List<SVNLogEntryPath> none = new ArrayList<SVNLogEntryPath>();
-	List<SVNLogEntryPath> unknown = new ArrayList<SVNLogEntryPath>();
 	
 	public SVNFileSystemNodeDAO getFileSystemDao() {
 		return fileSystemDao;
@@ -55,6 +59,9 @@ public class LogEntryHandler implements ISVNLogEntryHandler {
 		if (logger.isInfoEnabled()) {
 			logger.info("handleDirEntry(SVNDirEntry) - Logging entry:" + entry);
 		}
+		
+		entryStats.add(new SVNStatistic((SVNLogEntry) entry, repositoryModel));
+		
 		Set entryKeys = entry.getChangedPaths().keySet();
 		for (Object key : entryKeys) {
 			Object entryObject = entry.getChangedPaths().get(key);
@@ -107,9 +114,11 @@ public class LogEntryHandler implements ISVNLogEntryHandler {
 
 		getFileSystemDao().saveDirectories( directories );
 		getFileSystemDao().saveFiles( files );
+		getSvnStatisticsDAO().saveStatistics( entryStats );
 
 		directories = new ArrayList<DirectoryNode>();
 		files = new ArrayList<FileNode>();
+		entryStats = new ArrayList<SVNStatistic>();
 	}
 
 
@@ -132,6 +141,14 @@ public class LogEntryHandler implements ISVNLogEntryHandler {
 		this.repository = repository;
 	}
 
-	
+
+	public SVNStatisticDAO getSvnStatisticsDAO() {
+		return svnStatisticsDAO;
+	}
+
+
+	public void setSvnStatisticsDAO(SVNStatisticDAO svnStatisticsDAO) {
+		this.svnStatisticsDAO = svnStatisticsDAO;
+	}
 	
 }

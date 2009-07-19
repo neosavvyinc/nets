@@ -1,14 +1,11 @@
 package com.neosavvy.svn.analytics.importer;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNLogEntry;
 import org.tmatesoft.svn.core.SVNURL;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.wc.DefaultSVNOptions;
@@ -23,7 +20,6 @@ import com.neosavvy.svn.analytics.dao.SVNRepositoryDAO;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryConversionInfo;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
-import com.neosavvy.svn.analytics.dto.SVNStatistic;
 import com.neosavvy.svn.analytics.importer.handler.LogEntryHandler;
 import com.neosavvy.svn.analytics.util.SvnKitUtil;
 
@@ -32,15 +28,6 @@ public class SVNRepositoryDatabaseConverterImpl implements
 
     private static final Logger logger = Logger
             .getLogger(SVNRepositoryDatabaseConverterImpl.class);
-
-    /**
-     * This member contains the list of repository configuration model objects
-     * that will be initialized during a conversion step and then later used to
-     * drive authentication to the remote SVN repository
-     * 
-     * This is a Spring Configurable property.
-     */
-    //private List<SVNRepositoryDTO> repositories;
 
     /**
      * This map maintains a reference to the configuration in its key and then a

@@ -39,6 +39,7 @@
     
     <bean id="entryHandler" class="com.neosavvy.svn.analytics.importer.handler.LogEntryHandler">
     	<property name="fileSystemDao" ref="svnFileNodeStatisticDAO"/>
+    	<property name="svnStatisticsDAO" ref="svnAnalyticsDAO"/>
     </bean>
 
 </beans>
