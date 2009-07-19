@@ -3,6 +3,8 @@ package com.neosavvy.svn.analytics.dto.file;
 import java.util.Date;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
+import org.tmatesoft.svn.core.SVNLogEntry;
+import org.tmatesoft.svn.core.SVNLogEntryPath;
 
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 
@@ -53,16 +55,16 @@ public abstract class FileSystemNode {
 		super();
 	}
 
-	public FileSystemNode( SVNDirEntry entry, long revision, SVNRepositoryDTO repository ) {
+	public FileSystemNode( SVNLogEntry entry, SVNLogEntryPath entryPath, SVNRepositoryDTO repository ) {
 		this.id = -1;
-		this.revision = revision;
+		this.revision = entry.getRevision();
 		this.repositoryId = repository.getId();
 		
 		this.author = entry.getAuthor();
 		this.lastChangedRevision = entry.getRevision();
 		this.revisionDate = entry.getDate();
-		this.relativePath = entry.getRelativePath();
-		this.parentDirectory = deriveParentPath(entry.getRelativePath());
+		this.relativePath = entryPath.getPath();
+		this.parentDirectory = deriveParentPath(entryPath.getPath());
 		
 	}
 	

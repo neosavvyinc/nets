@@ -1,6 +1,7 @@
 package com.neosavvy.svn.analytics.dto.file;
 
-import org.tmatesoft.svn.core.SVNDirEntry;
+import org.tmatesoft.svn.core.SVNLogEntry;
+import org.tmatesoft.svn.core.SVNLogEntryPath;
 
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 
@@ -13,10 +14,10 @@ public class FileNode extends FileSystemNode {
 		super();
 	}
 	
-	public FileNode(SVNDirEntry dirEntry, long revision, SVNRepositoryDTO repository) {
-		super( dirEntry, revision, repository );
+	public FileNode(SVNLogEntry log, SVNLogEntryPath path, SVNRepositoryDTO repository) {
+		super( log, path, repository );
 		
-		this.fileName = deriveFileName( dirEntry.getRelativePath() );
+		this.fileName = deriveFileName( path.getPath() );
 	}
 	
 	protected String deriveFileName( String relativePath ) {

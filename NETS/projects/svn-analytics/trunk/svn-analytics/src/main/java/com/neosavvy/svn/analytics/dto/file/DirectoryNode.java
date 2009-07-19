@@ -1,6 +1,7 @@
 package com.neosavvy.svn.analytics.dto.file;
 
-import org.tmatesoft.svn.core.SVNDirEntry;
+import org.tmatesoft.svn.core.SVNLogEntry;
+import org.tmatesoft.svn.core.SVNLogEntryPath;
 
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 
@@ -10,8 +11,8 @@ public class DirectoryNode extends FileSystemNode {
 		super();
 	}
 	
-	public DirectoryNode(SVNDirEntry dirEntry, long revision, SVNRepositoryDTO repository) {
-		super( dirEntry, revision, repository);
+	public DirectoryNode(SVNLogEntry entry, SVNLogEntryPath path, SVNRepositoryDTO repository) {
+		super( entry, path, repository);
 	}
 
 	/**
