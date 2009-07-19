@@ -59,6 +59,12 @@ package com.neosavvy.svn.analytics.model
 			
 		}
 		
+		public function requestConversion( repository:SVNRepositoryDTO ):void {
+			svnRepositoryService.addEventListener(ResultEvent.RESULT, onRefreshRepositoryResult, false, 0, true);
+			svnRepositoryService.addEventListener(FaultEvent.FAULT, onRefreshRepositoryFault, false, 0, true);
+			svnRepositoryService.requestConversion( repository );
+		}
+		
 		/**
 		 * Event Listeners
 		 */
@@ -117,6 +123,25 @@ package com.neosavvy.svn.analytics.model
 			
 			svnRepositoryService.removeEventListener(ResultEvent.RESULT, onDeleteRepositoryResult, false);
             svnRepositoryService.removeEventListener(FaultEvent.FAULT, onDeleteRepositoryFault, false);
+		}
+		
+		public function onRefreshRepositoryResult( object:Object ):void {
+			var data:ResultEvent = object as ResultEvent;
+            setData(data.result);
+			sendNotification( ApplicationFacade.REPOSITORY_REFRESHED );
+			
+			svnRepositoryService.removeEventListener(ResultEvent.RESULT, onRefreshRepositoryResult, false);
+            svnRepositoryService.removeEventListener(FaultEvent.FAULT, onRefreshRepositoryResult, false);
+		}
+		
+		public function onRefreshRepositoryFault( faultObject:Object ):void {
+			var fault:FaultEvent = faultObject as FaultEvent;
+			trace("Fault: " + fault.fault.faultCode);
+			trace("FaultDetail: " + fault.fault.faultDetail);
+			trace("FaultString: " + fault.fault.faultString);
+			
+			svnRepositoryService.removeEventListener(ResultEvent.RESULT, onRefreshRepositoryResult, false);
+            svnRepositoryService.removeEventListener(FaultEvent.FAULT, onRefreshRepositoryResult, false);
 		}
 		
 	}

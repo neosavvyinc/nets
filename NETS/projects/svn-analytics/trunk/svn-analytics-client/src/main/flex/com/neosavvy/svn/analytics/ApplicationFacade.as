@@ -6,6 +6,7 @@ package com.neosavvy.svn.analytics
 	import com.neosavvy.svn.analytics.controller.svnrepository.AddSvnRepositoriesCommand;
 	import com.neosavvy.svn.analytics.controller.svnrepository.DeleteSvnRepositoriesCommand;
 	import com.neosavvy.svn.analytics.controller.svnrepository.GetSvnRepositoriesCommand;
+	import com.neosavvy.svn.analytics.controller.svnrepository.RefreshSvnRepositoriesCommand;
 	
 	import org.puremvc.as3.patterns.facade.Facade;
 	
@@ -36,6 +37,8 @@ package com.neosavvy.svn.analytics
 		public static const REPOSITORY_ADDED:String = "repositoryAdded";
 		public static const DELETE_REPOSITORY:String = "deleteRepositoryNotification";
 		public static const REPOSITORY_DELETED:String = "repositoryDeleted";
+		public static const REFRESH_REPOSITORY:String = "refreshRepositoryNotification";
+		public static const REPOSITORY_REFRESHED:String = "repositoryRefresh";
 		
 		public static function getInstance():ApplicationFacade { 
 			if( instance == null) {
@@ -53,6 +56,7 @@ package com.neosavvy.svn.analytics
 			registerCommand( LOAD_REPOSITORIES, GetSvnRepositoriesCommand );
 			registerCommand( ADD_REPOSITORY, AddSvnRepositoriesCommand );
 			registerCommand( DELETE_REPOSITORY, DeleteSvnRepositoriesCommand );
+			registerCommand( REFRESH_REPOSITORY, RefreshSvnRepositoriesCommand );
 		}
 		
 		public function startup( app:SvnAnalyticsApplication ) : void  

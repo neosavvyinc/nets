@@ -5,6 +5,7 @@ package com.neosavvy.svn.analytics.controller.startup
 	import com.neosavvy.svn.analytics.components.chart.ChartMediator;
 	import com.neosavvy.svn.analytics.components.grid.GridMediator;
 	import com.neosavvy.svn.analytics.components.popup.PopupMediator;
+	import com.neosavvy.svn.analytics.components.repository.RepositoryBrowserMediator;
 	
 	import org.puremvc.as3.interfaces.INotification;
 	import org.puremvc.as3.patterns.command.SimpleCommand;
@@ -18,7 +19,8 @@ package com.neosavvy.svn.analytics.controller.startup
 			facade.registerMediator( new ApplicationMediator( application ) );
 			facade.registerMediator( new PopupMediator( application ) );
 			facade.registerMediator( new ChartMediator( application.chartContainer ) );
-			 facade.registerMediator( new GridMediator( application.gridContainer ) ); 
+			facade.registerMediator( new GridMediator( application.gridContainer ) );
+			facade.registerMediator( new RepositoryBrowserMediator( application.repositoryBrowser ) ); 
 		}
 		
 	}

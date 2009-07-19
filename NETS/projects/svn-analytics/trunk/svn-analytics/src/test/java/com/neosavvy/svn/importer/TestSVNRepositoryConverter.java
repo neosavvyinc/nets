@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.neosavvy.junit4.BaseSpringAwareTestCase;
+import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.importer.SVNRepositoryDatabaseConverter;
 
 public class TestSVNRepositoryConverter extends BaseSpringAwareTestCase {
@@ -18,6 +19,28 @@ public class TestSVNRepositoryConverter extends BaseSpringAwareTestCase {
 	@Test
 	public void testRun() {
 		converter.run();
+	}
+	
+	@Test
+	public void testRefreshRequest() {
+		SVNRepositoryDTO repository = new SVNRepositoryDTO();
+		repository.setId(34);
+		repository.setUrl("http://neosavvy.com/svn/neosavvy");
+		repository.setUserName("aparrish");
+		repository.setPassword("subw@y1");
+		
+		converter.requestRefresh(repository);
+	}
+	
+	@Test
+	public void testRefreshRequest1() {
+		SVNRepositoryDTO repository = new SVNRepositoryDTO();
+		repository.setId(34);
+		repository.setUrl("https://svn.roundarch.com/repos/USADS");
+		repository.setUserName("aparrish");
+		repository.setPassword("subw@y1");
+		
+		converter.requestRefresh(repository);
 	}
 
 }

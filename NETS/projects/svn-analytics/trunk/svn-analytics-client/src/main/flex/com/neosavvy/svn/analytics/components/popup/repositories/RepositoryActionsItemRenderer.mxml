@@ -14,13 +14,14 @@
 		}
 		
 		private function handleScheduleUpdateClicked():void {
-			trace("scheduling an update");
+			var repository:SVNRepositoryDTO = data as SVNRepositoryDTO;
+			dispatchEvent( new RepositoryEvent(RepositoryEvent.REP_EVENT_TYPE_REFRESH, repository) );
 		}
 		
 		]]>
 	</mx:Script>
 	
 	<mx:LinkButton label="Delete" click="handleDeleteClicked()"/>
-	<!--<mx:LinkButton label="Schedule Update" click="handleScheduleUpdateClicked()"/>-->
+	<mx:LinkButton label="Schedule Update" click="handleScheduleUpdateClicked()"/>
 	
 </mx:HBox>

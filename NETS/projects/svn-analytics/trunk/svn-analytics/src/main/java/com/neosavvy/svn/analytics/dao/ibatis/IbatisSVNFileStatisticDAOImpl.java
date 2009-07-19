@@ -85,4 +85,16 @@ public class IbatisSVNFileStatisticDAOImpl extends SqlMapClientDaoSupport implem
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public DirectoryNode[] getDirectories(DirectoryNode parent) {
+		List<DirectoryNode> directories = getSqlMapClientTemplate().queryForList("SVNDirectoryStatistics.getChildren", parent);
+		return directories.toArray(new DirectoryNode[]{});
+	}
+
+	@SuppressWarnings("unchecked")
+	public FileNode[] getFiles(DirectoryNode parent) {
+		List<FileNode> files = getSqlMapClientTemplate().queryForList("SVNFileStatistics.getChildren", parent);
+		return files.toArray(new FileNode[]{});
+	}
+
 }

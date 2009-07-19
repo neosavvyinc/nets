@@ -57,6 +57,7 @@ package com.neosavvy.svn.analytics.components.popup
 							repositoryPopup = PopUpManager.createPopUp( viewComponent as DisplayObject, RepositoryManagementDialog, true);
 							repositoryPopup.addEventListener(RepositoryEvent.REP_EVENT_TYPE_ADD, addRepository);
 							repositoryPopup.addEventListener(RepositoryEvent.REP_EVENT_TYPE_DELETE, deleteRepository);
+							repositoryPopup.addEventListener(RepositoryEvent.REP_EVENT_TYPE_REFRESH, refreshRepository);
 							repositoryPopup.addEventListener(CloseEvent.CLOSE, cleanupPopup);
 							PopUpManager.centerPopUp(repositoryPopup);
 						}
@@ -86,6 +87,13 @@ package com.neosavvy.svn.analytics.components.popup
 			if(event is RepositoryEvent) {
 				var svnRepos:SVNRepositoryDTO = (event as RepositoryEvent).svnRepositoryDto;
 				sendNotification( ApplicationFacade.DELETE_REPOSITORY, svnRepos );
+			}
+		}
+		
+		protected function refreshRepository(event:Event):void {
+			if(event is RepositoryEvent) {
+				var svnRepos:SVNRepositoryDTO = (event as RepositoryEvent).svnRepositoryDto;
+				sendNotification( ApplicationFacade.REFRESH_REPOSITORY, svnRepos );
 			}
 		}
 		

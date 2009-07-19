@@ -44,11 +44,11 @@ public class SqlMapClientLoggerAdvice implements MethodBeforeAdvice, AfterReturn
 
   private static final Logger logger = Logger.getLogger(SqlMapClientLoggerAdvice.class);
   
-  protected SqlContextHolder sqlContextHolder;
+//  protected SqlContextHolder sqlContextHolder;
   
-  public void setSqlContextHolder(SqlContextHolder sqlContextHolder) {
-    this.sqlContextHolder = sqlContextHolder;
-  }
+//  public void setSqlContextHolder(SqlContextHolder sqlContextHolder) {
+//    this.sqlContextHolder = sqlContextHolder;
+//  }
 
   private StackTraceElement[] getStackTrace() {
     //return Thread.getStackTrace();  // Java 1.5 method (more efficient)
@@ -101,18 +101,23 @@ public class SqlMapClientLoggerAdvice implements MethodBeforeAdvice, AfterReturn
         param = args[1];  // in all other cases, second argument is the parameterObject (according to their API)
       }
     }
-    String sql = IbatisDebugger.getSqlForIbatisRequest((SqlMapClient) target, ibatisId, param);
-    logger.debug(sql);
-    if (sqlContextHolder != null) {
-      try {
-        sqlContextHolder.addSqlContext(sql);
-      } catch (BeanCreationException e) {
-        // this exception will happen if there is no holder in the context
-        // for instance, if you are using a spring request-scoped bean and are doing something outside that scope (i.e. in another thread)
-        // just write a log message
-        logger.debug("Caught BeanCreationException when calling sqlContextHolder.addSqlContext(sql), likely there is no sqlContextHolder in scope");
-      }
+    
+    try {
+	    String sql = IbatisDebugger.getSqlForIbatisRequest((SqlMapClient) target, ibatisId, param);
+	    logger.debug(sql);
+    } catch (Exception e) {
+    	logger.error(e);
     }
+//    if (sqlContextHolder != null) {
+//      try {
+//        sqlContextHolder.addSqlContext(sql);
+//      } catch (BeanCreationException e) {
+//        // this exception will happen if there is no holder in the context
+//        // for instance, if you are using a spring request-scoped bean and are doing something outside that scope (i.e. in another thread)
+//        // just write a log message
+//        logger.debug("Caught BeanCreationException when calling sqlContextHolder.addSqlContext(sql), likely there is no sqlContextHolder in scope");
+//      }
+//    }
   }
   
   public void afterThrowing(Method method, Object[] args, Object target, Exception ex) {

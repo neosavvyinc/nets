@@ -6,7 +6,7 @@
 	xmlns:chart="com.neosavvy.svn.analytics.components.chart.*" 
 	xmlns:grid="com.neosavvy.svn.analytics.components.grid.*"
 	backgroundGradientAlphas="[1.0, 1.0]" 
-	backgroundGradientColors="[#FFFFFF, #FFFFFF]">
+	backgroundGradientColors="[#FFFFFF, #FFFFFF]" xmlns:repository="com.neosavvy.svn.analytics.components.repository.*">
 	
 	<mx:Script>
 		<![CDATA[
@@ -31,29 +31,11 @@
 	</mx:Script>
 	
 	<mx:Style source="com/neosavvy/svn/analytics/styles/ChartStyles.css"/>
-	<!--
-	<mx:HBox
-		backgroundColor="0xFFFFFF"
-		width="100%"
-		>
-		
-		<mx:Panel title="Select the increment level" height="100%"
-			paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
-			<mx:RadioButtonGroup
-				id="increments"
-				/>
-			<mx:RadioButton id="monthly" label="Monthly" groupName="{increments}" selected="true"/>
-			<mx:RadioButton id="daily" label="Daily" groupName="{increments}"/>
-		</mx:Panel>
-		<mx:Panel title="Choose your start and end date" height="100%"
-			paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
-			<mx:Label text="Start Date"/>
-			<mx:DateField id="startDate"/>
-			<mx:Label text="End Date"/>
-			<mx:DateField id="endDate"/>
-		</mx:Panel>
-		
-	</mx:HBox>-->
+	<mx:ApplicationControlBar dock="true">
+		<mx:Button label="Refine Search" click="{refineSearch()}"/>
+		<mx:Button label="Reset" click="{resetSearch()}"/>
+		<mx:Button label="Manage Repositories" click="{manageRepositories()}"/>
+	</mx:ApplicationControlBar>
 	<mx:HBox width="100%">
 		<mx:VBox>
 			<mx:Panel width="100%" height="25%" title="Welcome to SVN Spy">
@@ -84,14 +66,9 @@
 						width="175"/>
 				</mx:Panel>
 			</mx:HBox>
-			<mx:Panel height="100%" width="100%" layout="horizontal"
-				paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
-				<mx:Button label="Refine Search" click="{refineSearch()}"/>
-				<mx:Button label="Reset" click="{resetSearch()}"/>
-				<mx:Button label="Manage Repositories" click="{manageRepositories()}"/>
-			</mx:Panel>
 		</mx:VBox>	
 		<chart:ChartContainer backgroundColor="0xFFFFFF" id="chartContainer" height="100%"/>
+		<repository:RepositoryBrowser id="repositoryBrowser" width="100%" height="100%"/>
 	</mx:HBox>
     
 	<grid:GridContainer id="gridContainer" width="100%" height="30%"/>	

@@ -17,6 +17,8 @@
     
     <bean id="svnRepositoryService" class="com.neosavvy.svn.analytics.service.SVNRepositoryServiceImpl">
     	<property name="repositoryDAO" ref="svnRepositoryDAO"/>
+    	<property name="fileSystemDAO" ref="svnFileNodeStatisticDAO"/>
+    	<property name="converter" ref="svnRepositoryConverter"/>
     </bean>
     
 </beans>

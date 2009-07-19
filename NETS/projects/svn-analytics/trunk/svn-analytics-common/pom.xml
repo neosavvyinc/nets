@@ -33,6 +33,9 @@
 								<includeClass>com.neosavvy.svn.analytics.dto.SVNRepositoryInterval</includeClass>
 								<includeClass>com.neosavvy.svn.analytics.dto.request.RefineSearchRequest</includeClass>
 								<includeClass>com.neosavvy.svn.analytics.dto.SVNRepositoryDTO</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.file.DirectoryNode</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.file.FileNode</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.file.FileSystemNode</includeClass>
 							</includeJavaClasses>
 							<beanTemplate>
 								<template>${basedir}/src/main/template/beanBase.gsp

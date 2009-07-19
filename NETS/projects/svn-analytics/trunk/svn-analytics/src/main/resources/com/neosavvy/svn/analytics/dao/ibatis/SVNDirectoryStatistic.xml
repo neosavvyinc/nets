@@ -16,6 +16,7 @@
 			,AUTHOR
 			,RELATIVE_PATH
 			,PARENT_DIRECTORY
+			,REPOSITORY_ID
         )
         VALUES
         (
@@ -26,8 +27,33 @@
             ,#author#
             ,#relativePath#
             ,#parentDirectory#
+            ,#repositoryId#
         )
-    </insert>   
+    </insert> 
+    
+    <resultMap 
+    	class="com.neosavvy.svn.analytics.dto.file.DirectoryNode" 
+	    id="DirectoryNodeResultMap">
+		<result property="relativePath" column="RELATIVE_PATH"/>
+		<result property="lastChangedRevision" column="LAST_CHANGED_REVISION"/>
+    </resultMap>  
   
+  	<select id="getChildren" 
+  		parameterClass="com.neosavvy.svn.analytics.dto.file.DirectoryNode"
+  		resultMap="DirectoryNodeResultMap">
+	  	SELECT 
+		    RELATIVE_PATH 
+		    ,MAX( LAST_CHANGED_REVISION ) AS LAST_CHANGED_REVISION
+		FROM 
+		    SVN_DIRECTORY_STATISTIC 
+		WHERE 
+		    NVL(PARENT_DIRECTORY,'/') = #parentDirectory#
+		   	AND REPOSITORY_ID = #repositoryId#
+		    AND RELATIVE_PATH IS NOT NULL
+		GROUP BY 
+		    RELATIVE_PATH
+		ORDER BY 
+		    RELATIVE_PATH
+  	</select>
 
 </sqlMap>

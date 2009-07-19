@@ -131,6 +131,14 @@ public abstract class FileSystemNode {
 		this.repositoryId = repositoryId;
 	}
 
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
 	/**
 	 * Constructs a <code>String</code> with all attributes
 	 * in name = value format.
@@ -146,6 +154,8 @@ public abstract class FileSystemNode {
 	    
 	    retValue = "FileSystemNode ( "
 	        + super.toString() + TAB
+	        + "id = " + this.id + TAB
+	        + "repositoryId = " + this.repositoryId + TAB
 	        + "revision = " + this.revision + TAB
 	        + "revisionDate = " + this.revisionDate + TAB
 	        + "lastChangedRevision = " + this.lastChangedRevision + TAB
@@ -156,15 +166,5 @@ public abstract class FileSystemNode {
 	
 	    return retValue;
 	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
-	
-	
 
 }

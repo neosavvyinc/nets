@@ -1,5 +1,6 @@
 package com.neosavvy.svn.analytics.importer;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +30,8 @@ public class SVNRepositoryDatabaseConverterImpl implements
     private static final Logger logger = Logger
             .getLogger(SVNRepositoryDatabaseConverterImpl.class);
 
+    private static boolean svnConverterRunning = false;
+    
     /**
      * This map maintains a reference to the configuration in its key and then a
      * reference to the initialized repository after the repository is
@@ -45,22 +48,39 @@ public class SVNRepositoryDatabaseConverterImpl implements
     
 
     public void run() {
-
-        initialize();
-        convert();
-        tearDown();
-
+    	synchronized (initializedRepositories) {
+    		if( !svnConverterRunning ) {
+    	        initialize(null);
+    	        convert();
+    	        tearDown();
+        	} else {
+        		throw new IllegalStateException("Could not begin SVN Repository conversion because it is already running");
+        	}
+		}
     }
 
-    public void initialize() {
-
+    public void requestRefresh( SVNRepositoryDTO repository ) {
+    	synchronized ( initializedRepositories ) {
+    		initialize(repository);
+    		convert();
+    		tearDown();
+		}
+    }
+    
+    public void initialize(SVNRepositoryDTO repositoryToRefresh) {
+    	svnConverterRunning = true;
         SvnKitUtil.setupLibrary();
-        initializeSVNRepositoryObjects();
-
+        initializeSVNRepositoryObjects(repositoryToRefresh);
     }
 
-    protected void initializeSVNRepositoryObjects() {
+    protected void initializeSVNRepositoryObjects(SVNRepositoryDTO repositoryToRefresh) {
     	List<SVNRepositoryDTO> repositories = svnRepositoryDAO.getRepositories();
+    	if( repositoryToRefresh == null ) {
+    		repositories = svnRepositoryDAO.getRepositories();
+    	} else {
+    		repositories = new ArrayList<SVNRepositoryDTO>();
+    		repositories.add(repositoryToRefresh);
+    	}
         for (SVNRepositoryDTO model : repositories) {
             try {
                 SVNRepository repository = SVNRepositoryFactory.create(SVNURL
@@ -140,7 +160,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
     					SVNRevision.create(endRevision), 
     					false, 
     					true, 
-    					true,
+    					false,
     					0,
     					null,
     					getEntryHandler());
@@ -154,7 +174,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
 	    					SVNRevision.create(startRevision + 99), 
 	    					false, 
 	    					true, 
-	    					true,
+	    					false,
 	    					0,
 	    					null,
 	    					getEntryHandler());
@@ -165,9 +185,8 @@ public class SVNRepositoryDatabaseConverterImpl implements
     }
     
     public void tearDown() {
-
         initializedRepositories = new HashMap<SVNRepositoryDTO, SVNRepository>();
-
+        svnConverterRunning = false;
     }
 
 	public SVNRepositoryDAO getSvnRepositoryDAO() {

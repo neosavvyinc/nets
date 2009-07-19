@@ -8,6 +8,7 @@ package com.neosavvy.svn.analytics.components.popup.repositories.event
 	{
 		public static var REP_EVENT_TYPE_ADD:String = "add";
 		public static var REP_EVENT_TYPE_DELETE:String = "delete";
+		public static var REP_EVENT_TYPE_REFRESH:String = "refresh";
 		
 		private var _repEventType:String;
 		private var _svnRepositoryDto:SVNRepositoryDTO;
