@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
-<sqlMap namespace="SVNFileStatistics">
+<sqlMap namespace="SVNFileSystemStatistics">
 
-    <insert id="insertStatistic" parameterClass="com.neosavvy.svn.analytics.dto.file.FileNode">
+    <insert id="insertStatistic" 
+    	parameterClass="com.neosavvy.svn.analytics.dto.file.FileSystemNode">
         <selectKey keyProperty="id" type="pre" resultClass="int">
-			SELECT SVN_FILE_STATISTIC_SEQ.NEXTVAL AS VALUE FROM DUAL
+			SELECT SVN_FILE_SYSTEM_STATISTIC_SEQ.NEXTVAL AS VALUE FROM DUAL
 		</selectKey>
         INSERT INTO 
-            SVN_FILE_STATISTIC
+            SVN_FILE_SYSTEM_STATISTIC
         (
             ID
             ,REPOSITORY_ID
@@ -17,26 +18,28 @@
 			,AUTHOR
 			,RELATIVE_PATH
 			,PARENT_DIRECTORY 
-			,FILE_NAME
 			,NUMBER_OF_LINES
+			,FILE_NAME
+			,FILE_TYPE
         )
         VALUES
         (
             #id#
-            ,#repositoryId#
-            ,#revision#
-            ,#revisionDate#
-            ,#lastChangedRevision#
-            ,#author#
-            ,#relativePath#
-            ,#parentDirectory#
-            ,#fileName#
-            ,#numberLines#
+			,#repositoryId#
+			,#revision#
+			,#revisionDate#
+			,#lastChangedRevision#
+			,#author#
+			,#relativePath#
+			,#parentDirectory#
+			,#numberLines#
+			,#fileName#
+			,#fileType#
         )
     </insert>   
     
     <resultMap 
-    	class="com.neosavvy.svn.analytics.dto.file.FileNode" 
+    	class="com.neosavvy.svn.analytics.dto.file.FileSystemNode" 
 	    id="FileNodeResultMap">
 		<result property="relativePath" column="RELATIVE_PATH"/>
 		<result property="lastChangedRevision" column="LAST_CHANGED_REVISION"/>
@@ -44,13 +47,13 @@
     
     <select 
     	id="getChildren" 
-    	parameterClass="com.neosavvy.svn.analytics.dto.file.DirectoryNode"
+    	parameterClass="com.neosavvy.svn.analytics.dto.file.FileSystemNode"
     	resultMap="FileNodeResultMap">
 	  	SELECT 
 		    RELATIVE_PATH 
 		    ,MAX( LAST_CHANGED_REVISION ) AS LAST_CHANGED_REVISION
 		FROM 
-		    SVN_FILE_STATISTIC 
+		    SVN_FILE_SYSTEM_STATISTIC 
 		WHERE 
 		    NVL(PARENT_DIRECTORY,'/') = #parentDirectory#
 		   	AND REPOSITORY_ID = #repositoryId#

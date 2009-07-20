@@ -3,8 +3,7 @@ package com.neosavvy.svn.analytics.service;
 import com.neosavvy.svn.analytics.dao.SVNFileSystemNodeDAO;
 import com.neosavvy.svn.analytics.dao.SVNRepositoryDAO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
-import com.neosavvy.svn.analytics.dto.file.DirectoryNode;
-import com.neosavvy.svn.analytics.dto.file.FileNode;
+import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 import com.neosavvy.svn.analytics.importer.SVNRepositoryDatabaseConverter;
 
 public class SVNRepositoryServiceImpl implements SvnRepositoryService {
@@ -31,18 +30,11 @@ public class SVNRepositoryServiceImpl implements SvnRepositoryService {
 		repositoryDAO.updateRepository(repository);
 	}
 
-	public DirectoryNode[] getDirectoriesForRepository(
-			SVNRepositoryDTO repository, DirectoryNode parent) {
+	public FileSystemNode[] getDirectoriesForRepository(
+			SVNRepositoryDTO repository, FileSystemNode parent) {
 		parent.setRepositoryId(repository.getId());
-		DirectoryNode[] directories = fileSystemDAO.getDirectories(parent);
+		FileSystemNode[] directories = fileSystemDAO.getNodes(parent);
 		return directories;
-	}
-
-	public FileNode[] getFilesForRepository(SVNRepositoryDTO repository,
-			DirectoryNode parent) {
-		parent.setRepositoryId(repository.getId());
-		FileNode[] files = fileSystemDAO.getFiles(parent);
-		return files;
 	}
 
 	public void requestConversion(SVNRepositoryDTO repository) {

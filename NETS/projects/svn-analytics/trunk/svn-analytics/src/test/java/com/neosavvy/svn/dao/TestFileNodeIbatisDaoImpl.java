@@ -9,13 +9,10 @@ import junit.framework.Assert;
 import org.apache.log4j.PropertyConfigurator;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 
-import com.neosavvy.junit4.BaseSpringAwareTestCase;
 import com.neosavvy.junit4.BaseTransactionalSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dao.SVNFileSystemNodeDAO;
-import com.neosavvy.svn.analytics.dto.file.DirectoryNode;
-import com.neosavvy.svn.analytics.dto.file.FileNode;
+import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 
 public class TestFileNodeIbatisDaoImpl extends
 		BaseTransactionalSpringAwareTestCase {
@@ -25,10 +22,10 @@ public class TestFileNodeIbatisDaoImpl extends
 	
 	@Test
 	public void testSingleFileSave() {
-	
-		deleteFromTables("SVN_FILE_STATISTIC");
+		PropertyConfigurator.configure(TestFileNodeIbatisDaoImpl.class.getClassLoader().getResource("log4j.test.properties"));
+		deleteFromTables("SVN_FILE_SYSTEM_STATISTIC");
 		
-		FileNode node = new FileNode();
+		FileSystemNode node = new FileSystemNode();
 		node.setAuthor("adam");
 		node.setFileName("test");
 		node.setId(1);
@@ -38,21 +35,22 @@ public class TestFileNodeIbatisDaoImpl extends
 		node.setRelativePath("relativePath");
 		node.setRevision(1);
 		node.setRevisionDate(new Date());
+		node.setFileType(FileSystemNode.TYPE_FILE);
 		
-		svnFileNodeStatisticDAO.saveFile(node);
+		svnFileNodeStatisticDAO.saveFileSystemNode(node);
 		
-		int numRows = countRowsInTable("SVN_FILE_STATISTIC");
+		int numRows = countRowsInTable("SVN_FILE_SYSTEM_STATISTIC");
 		Assert.assertEquals(numRows, 1);
 	}
 	
 	@Test
 	public void testMultipleFileSave() {
 
-		deleteFromTables("SVN_FILE_STATISTIC");
+		deleteFromTables("SVN_FILE_SYSTEM_STATISTIC");
 		
-		List<FileNode> nodes = new ArrayList<FileNode>();
+		List<FileSystemNode> nodes = new ArrayList<FileSystemNode>();
 		
-		FileNode node = new FileNode();
+		FileSystemNode node = new FileSystemNode();
 		node.setAuthor("adam");
 		node.setFileName("test");
 		node.setId(1);
@@ -64,7 +62,7 @@ public class TestFileNodeIbatisDaoImpl extends
 		node.setRevisionDate(new Date());
 		nodes.add(node);
 		
-		FileNode node1 = new FileNode();
+		FileSystemNode node1 = new FileSystemNode();
 		node1.setAuthor("adam1");
 		node1.setFileName("test1");
 		node1.setId(1);
@@ -76,9 +74,9 @@ public class TestFileNodeIbatisDaoImpl extends
 		node1.setRevisionDate(new Date());
 		nodes.add(node1);
 		
-		svnFileNodeStatisticDAO.saveFiles(nodes);
+		svnFileNodeStatisticDAO.saveFileSystemNodes(nodes);
 		
-		int numRows = countRowsInTable("SVN_FILE_STATISTIC");
+		int numRows = countRowsInTable("SVN_FILE_SYSTEM_STATISTIC");
 		Assert.assertEquals(numRows, 2);
 		
 	}
@@ -86,9 +84,9 @@ public class TestFileNodeIbatisDaoImpl extends
 	@Test
 	public void testSingleDirectorySave() {
 		
-		deleteFromTables("SVN_DIRECTORY_STATISTIC");
+		deleteFromTables("SVN_FILE_SYSTEM_STATISTIC");
 		
-		DirectoryNode node1 = new DirectoryNode();
+		FileSystemNode node1 = new FileSystemNode();
 		node1.setAuthor("adam1");
 		node1.setId(1);
 		node1.setLastChangedRevision(1);
@@ -97,20 +95,20 @@ public class TestFileNodeIbatisDaoImpl extends
 		node1.setRevision(1);
 		node1.setRevisionDate(new Date());
 		
-		svnFileNodeStatisticDAO.saveDirectory(node1);
+		svnFileNodeStatisticDAO.saveFileSystemNode(node1);
 		
-		int numRows = countRowsInTable("SVN_DIRECTORY_STATISTIC");
+		int numRows = countRowsInTable("SVN_FILE_SYSTEM_STATISTIC");
 		Assert.assertEquals(numRows, 1);
 	}
 	
 	@Test
 	public void testMultipleDirectorySave() {
 		
-		deleteFromTables("SVN_DIRECTORY_STATISTIC");
+		deleteFromTables("SVN_FILE_SYSTEM_STATISTIC");
 		
-		List<DirectoryNode> nodes = new ArrayList<DirectoryNode>();
+		List<FileSystemNode> nodes = new ArrayList<FileSystemNode>();
 		
-		DirectoryNode node = new DirectoryNode();
+		FileSystemNode node = new FileSystemNode();
 		node.setAuthor("adam1");
 		node.setId(1);
 		node.setLastChangedRevision(1);
@@ -120,7 +118,7 @@ public class TestFileNodeIbatisDaoImpl extends
 		node.setRevisionDate(new Date());
 		nodes.add(node);
 		
-		DirectoryNode node1 = new DirectoryNode();
+		FileSystemNode node1 = new FileSystemNode();
 		node1.setAuthor("adam1");
 		node1.setId(1);
 		node1.setLastChangedRevision(1);
@@ -130,9 +128,9 @@ public class TestFileNodeIbatisDaoImpl extends
 		node1.setRevisionDate(new Date());
 		nodes.add(node1);
 		
-		svnFileNodeStatisticDAO.saveDirectories(nodes);
+		svnFileNodeStatisticDAO.saveFileSystemNodes(nodes);
 		
-		int numRows = countRowsInTable("SVN_DIRECTORY_STATISTIC");
+		int numRows = countRowsInTable("SVN_FILE_SYSTEM_STATISTIC");
 		Assert.assertEquals(numRows, 2);
 		
 		
@@ -141,11 +139,11 @@ public class TestFileNodeIbatisDaoImpl extends
 	@Test
 	public void testGetChildDirectories() {
 		PropertyConfigurator.configure(TestFileNodeIbatisDaoImpl.class.getClassLoader().getResource("log4j.test.properties"));
-		deleteFromTables("SVN_DIRECTORY_STATISTIC");
+		deleteFromTables("SVN_FILE_SYSTEM_STATISTIC");
 		
-		List<DirectoryNode> nodes = new ArrayList<DirectoryNode>();
+		List<FileSystemNode> nodes = new ArrayList<FileSystemNode>();
 		
-		DirectoryNode node = new DirectoryNode();
+		FileSystemNode node = new FileSystemNode();
 		node.setAuthor("adam1");
 		node.setId(1);
 		node.setLastChangedRevision(1);
@@ -156,7 +154,7 @@ public class TestFileNodeIbatisDaoImpl extends
 		node.setRepositoryId(4);
 		nodes.add(node);
 		
-		DirectoryNode node1 = new DirectoryNode();
+		FileSystemNode node1 = new FileSystemNode();
 		node1.setAuthor("adam1");
 		node1.setId(1);
 		node1.setLastChangedRevision(1);
@@ -167,16 +165,16 @@ public class TestFileNodeIbatisDaoImpl extends
 		node1.setRepositoryId(4);
 		nodes.add(node1);
 		
-		svnFileNodeStatisticDAO.saveDirectories(nodes);
+		svnFileNodeStatisticDAO.saveFileSystemNodes(nodes);
 
-		int numRows = countRowsInTable("SVN_DIRECTORY_STATISTIC");
+		int numRows = countRowsInTable("SVN_FILE_SYSTEM_STATISTIC");
 		Assert.assertEquals(numRows, 2);
 		
-		DirectoryNode searchParent = new DirectoryNode();
+		FileSystemNode searchParent = new FileSystemNode();
 		searchParent.setRepositoryId(4);
 		searchParent.setParentDirectory("/");
 		
-		DirectoryNode[] directories = svnFileNodeStatisticDAO.getDirectories(searchParent);
+		FileSystemNode[] directories = svnFileNodeStatisticDAO.getNodes(searchParent);
 		Assert.assertNotNull(directories);
 		Assert.assertEquals(2, directories.length);
 		
@@ -185,11 +183,11 @@ public class TestFileNodeIbatisDaoImpl extends
 	@Test
 	public void testGetChildFiles() {
 		PropertyConfigurator.configure(TestFileNodeIbatisDaoImpl.class.getClassLoader().getResource("log4j.test.properties"));
-		deleteFromTables("SVN_FILE_STATISTIC");
+		deleteFromTables("SVN_FILE_SYSTEM_STATISTIC");
 		
-		List<FileNode> nodes = new ArrayList<FileNode>();
+		List<FileSystemNode> nodes = new ArrayList<FileSystemNode>();
 		
-		FileNode node = new FileNode();
+		FileSystemNode node = new FileSystemNode();
 		node.setAuthor("adam1");
 		node.setId(1);
 		node.setLastChangedRevision(1);
@@ -198,9 +196,10 @@ public class TestFileNodeIbatisDaoImpl extends
 		node.setRevision(1);
 		node.setRevisionDate(new Date());
 		node.setRepositoryId(4);
+		node.setFileType(FileSystemNode.TYPE_FILE);
 		nodes.add(node);
 		
-		FileNode node1 = new FileNode();
+		FileSystemNode node1 = new FileSystemNode();
 		node1.setAuthor("adam1");
 		node1.setId(1);
 		node1.setLastChangedRevision(1);
@@ -209,18 +208,19 @@ public class TestFileNodeIbatisDaoImpl extends
 		node1.setRevision(1);
 		node1.setRevisionDate(new Date());
 		node1.setRepositoryId(4);
+		node1.setFileType(FileSystemNode.TYPE_FILE);
 		nodes.add(node1);
 		
-		svnFileNodeStatisticDAO.saveFiles(nodes);
+		svnFileNodeStatisticDAO.saveFileSystemNodes(nodes);
 
-		int numRows = countRowsInTable("SVN_FILE_STATISTIC");
+		int numRows = countRowsInTable("SVN_FILE_SYSTEM_STATISTIC");
 		Assert.assertEquals(numRows, 2);
 		
-		DirectoryNode searchParent = new DirectoryNode();
+		FileSystemNode searchParent = new FileSystemNode();
 		searchParent.setRepositoryId(4);
 		searchParent.setParentDirectory("/");
 		
-		FileNode[] files = svnFileNodeStatisticDAO.getFiles(searchParent);
+		FileSystemNode[] files = svnFileNodeStatisticDAO.getNodes(searchParent);
 		Assert.assertNotNull(files);
 		Assert.assertEquals(2, files.length);
 		

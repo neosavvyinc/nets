@@ -4,8 +4,7 @@ package com.neosavvy.svn.analytics.components.repository
 	
 	import com.neosavvy.svn.analytics.ApplicationFacade;
 	import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
-	import com.neosavvy.svn.analytics.dto.file.DirectoryNode;
-	import com.neosavvy.svn.analytics.dto.file.FileNode;
+	import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 	import com.neosavvy.svn.analytics.model.SVNRepositoryProxy;
 	
 	import mx.events.ListEvent;
@@ -32,7 +31,6 @@ package com.neosavvy.svn.analytics.components.repository
 				ApplicationFacade.STARTUP
 				,ApplicationFacade.LOADED_REPOSITORIES
 				,ApplicationFacade.ROOT_FILE_NODES_FOR_REPOSITORY_LOADED
-				,ApplicationFacade.ROOT_DIRECTORY_NODES_FOR_REPOSITORY_LOADED
 			];
 		}
 		
@@ -59,11 +57,8 @@ package com.neosavvy.svn.analytics.components.repository
 		    if( item is SVNRepositoryDTO) {
 		    	label = (item as SVNRepositoryDTO).name;
 		    }
-		    else if ( item is DirectoryNode ) {
-		    	label = (item as DirectoryNode).relativePath;
-		    }
-		    else if ( item is FileNode ) {
-		    	label = (item as FileNode).fileName;
+		    else if ( item is FileSystemNode ) {
+		    	label = (item as FileSystemNode).relativePath;
 		    }
 		    
 		    return label;
@@ -75,11 +70,12 @@ package com.neosavvy.svn.analytics.components.repository
 		    if( item is SVNRepositoryDTO) {
 		    	icon = FileIcons.folder;
 		    }
-		    else if ( item is DirectoryNode ) {
-		    	icon = FileIcons.folder;
-		    }
-		    else if ( item is FileNode ) {
-		    	icon = FileIcons.folder;
+		    else if ( item is FileSystemNode ) {
+		    	if( (item as FileSystemNode).fileType == 'F') {
+		    		icon = FileIcons.folder;	
+		    	} else {
+		    		icon = FileIcons.folder;	
+		    	}
 		    }
 		    
 		    return icon;
@@ -90,7 +86,7 @@ package com.neosavvy.svn.analytics.components.repository
 			var target:RepositoryBrowser = event.target as RepositoryBrowser;
 			var selectedItem:Object = target.selectedItem;
 			
-			if( selectedItem is SVNRepositoryDTO) {
+			/* if( selectedItem is SVNRepositoryDTO) {
 				var selectedRepository:SVNRepositoryDTO = selectedItem as SVNRepositoryDTO;
 				var rootNode:DirectoryNode = new DirectoryNode();
 				rootNode.parentDirectory = "/";
@@ -105,7 +101,7 @@ package com.neosavvy.svn.analytics.components.repository
 				var repository:SVNRepositoryDTO = repositoryProxy.findRepositoryForDirectory( node );
 				sendNotification(ApplicationFacade.LOAD_ROOT_NODES_FOR_REPOSITORY, [repository, searchNode]);
 				
-			}
+			} */
 			
 		}
 	}

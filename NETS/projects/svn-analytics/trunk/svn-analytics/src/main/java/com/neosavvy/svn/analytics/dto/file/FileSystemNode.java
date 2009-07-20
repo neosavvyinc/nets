@@ -33,7 +33,10 @@ import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
  * , lastchangeddate=Fri Mar 20 20:52:39 EDT 2009 
  * , path: svn-analytics/trunk/src/test/java/log4j.test.properties
  */
-public abstract class FileSystemNode {
+public class FileSystemNode {
+	
+	public static String TYPE_FILE = "F";
+	public static String TYPE_DIRECTORY = "D";
 	
 	private long id;
 	
@@ -51,21 +54,27 @@ public abstract class FileSystemNode {
 
 	private String parentDirectory;
 
+	private long numberLines;
+	
+	private String fileName;
+	
+	private String fileType;
+	
 	public FileSystemNode() {
 		super();
 	}
 
-	public FileSystemNode( SVNLogEntry entry, SVNLogEntryPath entryPath, SVNRepositoryDTO repository ) {
+	public FileSystemNode( SVNLogEntry entry, SVNLogEntryPath entryPath, SVNRepositoryDTO repository, String fileType ) {
 		this.id = -1;
 		this.revision = entry.getRevision();
 		this.repositoryId = repository.getId();
-		
+		this.fileName = deriveFileName( entryPath.getPath() );
 		this.author = entry.getAuthor();
 		this.lastChangedRevision = entry.getRevision();
 		this.revisionDate = entry.getDate();
 		this.relativePath = entryPath.getPath();
 		this.parentDirectory = deriveParentPath(entryPath.getPath());
-		
+		this.fileType = fileType;
 	}
 	
 	protected String deriveParentPath( String relativePath ) {
@@ -74,6 +83,15 @@ public abstract class FileSystemNode {
 		
 		return relativePath.substring(0, relativePath.lastIndexOf("/"));
 	}
+	
+	protected String deriveFileName( String relativePath ) {
+		if( relativePath.lastIndexOf("/") == -1) 
+			return relativePath;
+		
+		return relativePath.substring(relativePath.lastIndexOf("/") + 1, relativePath.length());
+	}
+	
+	
 	
 	public long getRevision() {
 		return revision;
@@ -138,6 +156,30 @@ public abstract class FileSystemNode {
 	public void setId(long id) {
 		this.id = id;
 	}
+	
+	public long getNumberLines() {
+		return numberLines;
+	}
+
+	public void setNumberLines(long numberLines) {
+		this.numberLines = numberLines;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
 
 	/**
 	 * Constructs a <code>String</code> with all attributes
@@ -162,9 +204,12 @@ public abstract class FileSystemNode {
 	        + "author = " + this.author + TAB
 	        + "relativePath = " + this.relativePath + TAB
 	        + "parentDirectory = " + this.parentDirectory + TAB
+	        + "numberLines = " + this.numberLines + TAB
+	        + "fileName = " + this.fileName + TAB
+	        + "fileType = " + this.fileType + TAB
 	        + " )";
 	
 	    return retValue;
 	}
-
+	
 }

@@ -1,5 +1,9 @@
 package com.neosavvy.svn.analytics.dto;
 
+import java.util.List;
+
+import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
+
 public class SVNRepositoryDTO {
 
 	private long id;
@@ -9,6 +13,8 @@ public class SVNRepositoryDTO {
     private String password;
     private long startRevision = 0;
     private long endRevision = -1;
+    
+    private List<FileSystemNode> children;
 
     public String getUrl() {
         return url;
@@ -64,6 +70,14 @@ public class SVNRepositoryDTO {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public List<FileSystemNode> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<FileSystemNode> children) {
+		this.children = children;
 	}
 
 }

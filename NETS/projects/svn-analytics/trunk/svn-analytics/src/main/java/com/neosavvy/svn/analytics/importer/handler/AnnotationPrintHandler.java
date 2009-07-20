@@ -6,17 +6,17 @@ import java.util.Date;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.wc.ISVNAnnotateHandler;
 
-import com.neosavvy.svn.analytics.dto.file.FileNode;
+import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 
 public class AnnotationPrintHandler implements ISVNAnnotateHandler {
 
-	private FileNode node;
+	private FileSystemNode node;
 	
 	public AnnotationPrintHandler() {
 		
 	}
 	
-	public AnnotationPrintHandler(FileNode node) {
+	public AnnotationPrintHandler(FileSystemNode node) {
 		this.node = node;
 	}
 	
@@ -51,7 +51,7 @@ public class AnnotationPrintHandler implements ISVNAnnotateHandler {
 		return false;
 	}
 
-	public FileNode getNode() {
+	public FileSystemNode getNode() {
 		return node;
 	}
 

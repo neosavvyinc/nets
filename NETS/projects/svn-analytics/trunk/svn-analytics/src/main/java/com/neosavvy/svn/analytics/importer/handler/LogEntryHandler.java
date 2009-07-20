@@ -1,5 +1,8 @@
 package com.neosavvy.svn.analytics.importer.handler;
 
+import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -7,7 +10,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.tmatesoft.svn.core.ISVNLogEntryHandler;
-import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNLogEntry;
 import org.tmatesoft.svn.core.SVNLogEntryPath;
@@ -22,9 +24,7 @@ import com.neosavvy.svn.analytics.dao.SVNFileSystemNodeDAO;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
-import com.neosavvy.svn.analytics.dto.file.DirectoryNode;
-import com.neosavvy.svn.analytics.dto.file.FileNode;
-import com.neosavvy.svn.analytics.util.SvnKitUtil;
+import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 
 public class LogEntryHandler implements ISVNLogEntryHandler {
 
@@ -42,8 +42,8 @@ public class LogEntryHandler implements ISVNLogEntryHandler {
 	
 	
 	List<SVNStatistic> entryStats = new ArrayList<SVNStatistic>();
-	List<DirectoryNode> directories = new ArrayList<DirectoryNode>();
-	List<FileNode> files = new ArrayList<FileNode>();
+	List<FileSystemNode> directories = new ArrayList<FileSystemNode>();
+	List<FileSystemNode> files = new ArrayList<FileSystemNode>();
 	
 	public SVNFileSystemNodeDAO getFileSystemDao() {
 		return fileSystemDao;
@@ -76,7 +76,7 @@ public class LogEntryHandler implements ISVNLogEntryHandler {
 					SVNURL appendPath = repository.getLocation().appendPath(entryPath.getPath(), true);
 					
 					try {
-						AnnotationPrintHandler handler = new AnnotationPrintHandler(new FileNode(entry, entryPath, repositoryModel));
+						AnnotationPrintHandler handler = new AnnotationPrintHandler(new FileSystemNode(entry, entryPath, repositoryModel, FileSystemNode.TYPE_FILE));
 						logClient.doAnnotate(appendPath
 								,SVNRevision.create(entry.getRevision())
 								,SVNRevision.create(entry.getRevision())
@@ -88,21 +88,15 @@ public class LogEntryHandler implements ISVNLogEntryHandler {
 							logger.debug("Failed to annotate entry: " + entryPath + " so it must be a directory or a binary file");
 						}
 						
-						try {
-							@SuppressWarnings("unused")
-							Collection entriesFromDirectory = repository.getDir(entryPath.getPath(), entry.getRevision(), null,(Collection)null);
-							directories.add(new DirectoryNode(entry, entryPath, repositoryModel));
-						} catch (SVNException binException) {
-							if( entryPath.getType() == SVNLogEntryPath.TYPE_DELETED) {
-								if(logger.isDebugEnabled()) {
-									logger.debug("Failed to list the directory and it was deleted, so ignoring for now");
-								}
-								continue;
-							}
+						
+						if( e.toString().indexOf("is not a file in revision") > -1) {
+							//must be a directory or deleted directory
+							directories.add(new FileSystemNode(entry, entryPath, repositoryModel,FileSystemNode.TYPE_DIRECTORY));
+						} else {
 							if(logger.isDebugEnabled()) {
-								logger.debug("Failed to list the directory so the entry must actually be a binary file" + entryPath.getPath());
+								logger.debug("This is a binary file:" + entryPath.getPath());
 							}
-							files.add(new FileNode(entry,entryPath,repositoryModel));
+							files.add(new FileSystemNode(entry,entryPath,repositoryModel,FileSystemNode.TYPE_FILE));
 						}
 					} 
 				}
@@ -112,12 +106,12 @@ public class LogEntryHandler implements ISVNLogEntryHandler {
 	
 	public void saveCachedStatistics() {
 
-		getFileSystemDao().saveDirectories( directories );
-		getFileSystemDao().saveFiles( files );
+		getFileSystemDao().saveFileSystemNodes( directories );
+		getFileSystemDao().saveFileSystemNodes( files );
 		getSvnStatisticsDAO().saveStatistics( entryStats );
 
-		directories = new ArrayList<DirectoryNode>();
-		files = new ArrayList<FileNode>();
+		directories = new ArrayList<FileSystemNode>();
+		files = new ArrayList<FileSystemNode>();
 		entryStats = new ArrayList<SVNStatistic>();
 	}
 

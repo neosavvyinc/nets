@@ -12,15 +12,5 @@ package com.neosavvy.svn.analytics.dto {
     [Bindable]
     [RemoteClass(alias="com.neosavvy.svn.analytics.dto.SVNRepositoryDTO")]
     public class SVNRepositoryDTO extends SVNRepositoryDTOBase {
-    	
-    	private var _children:ArrayCollection;
-    	
-    	public function get children():ArrayCollection {
-    		return _children;
-    	}
-    	
-    	public function set children( children:ArrayCollection ):void{
-    		_children = children;
-    	}
     }
 }

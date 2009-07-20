@@ -1,7 +1,7 @@
 package com.neosavvy.svn.analytics.controller.svnrepository
 {
 	import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
-	import com.neosavvy.svn.analytics.dto.file.DirectoryNode;
+	import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 	import com.neosavvy.svn.analytics.model.SVNRepositoryProxy;
 	
 	import org.puremvc.as3.interfaces.INotification;
@@ -14,10 +14,10 @@ package com.neosavvy.svn.analytics.controller.svnrepository
 			var body:Object = note.getBody();
 			
 			var parentRepository:SVNRepositoryDTO;
-			var parentDirectory:DirectoryNode;
+			var parentDirectory:FileSystemNode;
 			if( body is Array && body != null && (body as Array).length == 2) {
 				parentRepository = (body as Array)[0] as SVNRepositoryDTO;
-				parentDirectory = (body as Array)[1] as DirectoryNode;
+				parentDirectory = (body as Array)[1] as FileSystemNode;
 			}
 			
 			repositoryProxy.getFilesForRepository(parentRepository, parentDirectory);
