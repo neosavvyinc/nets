@@ -33,14 +33,16 @@ public class SVNRepositoryServiceImpl implements SvnRepositoryService {
 
 	public DirectoryNode[] getDirectoriesForRepository(
 			SVNRepositoryDTO repository, DirectoryNode parent) {
-		parent.setId(repository.getId());
-		return fileSystemDAO.getDirectories(parent);
+		parent.setRepositoryId(repository.getId());
+		DirectoryNode[] directories = fileSystemDAO.getDirectories(parent);
+		return directories;
 	}
 
 	public FileNode[] getFilesForRepository(SVNRepositoryDTO repository,
 			DirectoryNode parent) {
-		parent.setId(repository.getId());
-		return fileSystemDAO.getFiles(parent);
+		parent.setRepositoryId(repository.getId());
+		FileNode[] files = fileSystemDAO.getFiles(parent);
+		return files;
 	}
 
 	public void requestConversion(SVNRepositoryDTO repository) {

@@ -6,6 +6,7 @@ package com.neosavvy.svn.analytics
 	import com.neosavvy.svn.analytics.controller.svnrepository.AddSvnRepositoriesCommand;
 	import com.neosavvy.svn.analytics.controller.svnrepository.DeleteSvnRepositoriesCommand;
 	import com.neosavvy.svn.analytics.controller.svnrepository.GetSvnRepositoriesCommand;
+	import com.neosavvy.svn.analytics.controller.svnrepository.LoadRootNodesForRepositoryCommand;
 	import com.neosavvy.svn.analytics.controller.svnrepository.RefreshSvnRepositoriesCommand;
 	
 	import org.puremvc.as3.patterns.facade.Facade;
@@ -40,6 +41,10 @@ package com.neosavvy.svn.analytics
 		public static const REFRESH_REPOSITORY:String = "refreshRepositoryNotification";
 		public static const REPOSITORY_REFRESHED:String = "repositoryRefresh";
 		
+		public static const LOAD_ROOT_NODES_FOR_REPOSITORY:String = "loadRootNodesForRepository";
+		public static const ROOT_DIRECTORY_NODES_FOR_REPOSITORY_LOADED:String = "rootDirectoryNodesForRepositoryLoaded";
+		public static const ROOT_FILE_NODES_FOR_REPOSITORY_LOADED:String = "rootFileNodesForRepositoryLoaded";
+		
 		public static function getInstance():ApplicationFacade { 
 			if( instance == null) {
 				instance = new ApplicationFacade();
@@ -57,6 +62,7 @@ package com.neosavvy.svn.analytics
 			registerCommand( ADD_REPOSITORY, AddSvnRepositoriesCommand );
 			registerCommand( DELETE_REPOSITORY, DeleteSvnRepositoriesCommand );
 			registerCommand( REFRESH_REPOSITORY, RefreshSvnRepositoriesCommand );
+			registerCommand( LOAD_ROOT_NODES_FOR_REPOSITORY, LoadRootNodesForRepositoryCommand );
 		}
 		
 		public function startup( app:SvnAnalyticsApplication ) : void  

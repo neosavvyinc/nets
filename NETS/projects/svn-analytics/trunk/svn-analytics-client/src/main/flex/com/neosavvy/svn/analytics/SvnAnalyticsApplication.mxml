@@ -68,7 +68,7 @@
 			</mx:HBox>
 		</mx:VBox>	
 		<chart:ChartContainer backgroundColor="0xFFFFFF" id="chartContainer" height="100%"/>
-		<repository:RepositoryBrowser id="repositoryBrowser" width="100%" height="100%"/>
+		<repository:RepositoryBrowser id="repositoryBrowser" width="100%" height="100%" />
 	</mx:HBox>
     
 	<grid:GridContainer id="gridContainer" width="100%" height="30%"/>	
