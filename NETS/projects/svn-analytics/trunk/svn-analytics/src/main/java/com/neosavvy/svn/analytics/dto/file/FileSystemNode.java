@@ -1,6 +1,7 @@
 package com.neosavvy.svn.analytics.dto.file;
 
 import java.util.Date;
+import java.util.List;
 
 import org.tmatesoft.svn.core.SVNDirEntry;
 import org.tmatesoft.svn.core.SVNLogEntry;
@@ -59,6 +60,8 @@ public class FileSystemNode {
 	private String fileName;
 	
 	private String fileType;
+	
+	private List<FileSystemNode> children;
 	
 	public FileSystemNode() {
 		super();
@@ -179,6 +182,14 @@ public class FileSystemNode {
 
 	public void setFileType(String fileType) {
 		this.fileType = fileType;
+	}
+
+	public List<FileSystemNode> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<FileSystemNode> children) {
+		this.children = children;
 	}
 
 	/**

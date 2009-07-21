@@ -52,6 +52,8 @@
 		    ,PARENT_DIRECTORY 
 		    ,FILE_NAME
 		    ,FILE_TYPE
+		 ORDER BY
+		 	FILE_TYPE
     </select>
 
     <insert 

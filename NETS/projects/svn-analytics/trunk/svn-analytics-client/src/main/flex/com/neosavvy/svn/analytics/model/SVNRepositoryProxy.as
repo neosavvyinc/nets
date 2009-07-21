@@ -4,6 +4,9 @@ package com.neosavvy.svn.analytics.model
 	import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 	import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 	
+	import flash.errors.IllegalOperationError;
+	
+	import mx.collections.ArrayCollection;
 	import mx.messaging.ChannelSet;
 	import mx.messaging.channels.AMFChannel;
 	import mx.rpc.events.FaultEvent;
@@ -19,6 +22,8 @@ package com.neosavvy.svn.analytics.model
 		private var svnRepositoryService:RemoteObject;
 		
 		private var remote:Boolean = ProxyConstants.isRemoteEnabled;
+		
+		private var parentDirectory:FileSystemNode;
 		
 		public function SVNRepositoryProxy()
 		{
@@ -47,7 +52,7 @@ package com.neosavvy.svn.analytics.model
 		public function getFilesForRepository( parentRepository:SVNRepositoryDTO, parentDirectory:FileSystemNode):void {
 			svnRepositoryService.addEventListener(ResultEvent.RESULT, onDirectoriesResult, false, 0, true);
             svnRepositoryService.addEventListener(FaultEvent.FAULT, onDirectoriesFault, false, 0, true);
-            
+            this.parentDirectory = parentDirectory;
 			//This operation is part of a macro command, so both responses are required to consider it complete            
 			svnRepositoryService.getDirectoriesForRepository( parentRepository, parentDirectory );
 		}
@@ -72,6 +77,15 @@ package com.neosavvy.svn.analytics.model
 			svnRepositoryService.addEventListener(ResultEvent.RESULT, onRefreshRepositoryResult, false, 0, true);
 			svnRepositoryService.addEventListener(FaultEvent.FAULT, onRefreshRepositoryFault, false, 0, true);
 			svnRepositoryService.requestConversion( repository );
+		}
+		
+		public function findRepositoryForDirectory( directory:FileSystemNode ):SVNRepositoryDTO {
+			for each ( var repos:SVNRepositoryDTO in repositories ) {
+				if( repos.id = directory.repositoryId ) {
+					return repos;
+				}
+			}
+			throw IllegalOperationError("Failed to find repository by id: " + directory.repositoryId );
 		}
 		
 		/**
@@ -99,7 +113,9 @@ package com.neosavvy.svn.analytics.model
 		protected function onDirectoriesResult( object:Object ):void {
 			var data:ResultEvent = object as ResultEvent;
             var directories:Array = data.result as Array;
-			sendNotification( ApplicationFacade.ROOT_FILE_NODES_FOR_REPOSITORY_LOADED );
+            this.parentDirectory.children = new ArrayCollection(directories);
+			sendNotification( ApplicationFacade.ROOT_FILE_NODES_FOR_REPOSITORY_LOADED, parentDirectory );
+			this.parentDirectory = null;
 			svnRepositoryService.removeEventListener(ResultEvent.RESULT, onDirectoriesResult, false);
             svnRepositoryService.removeEventListener(FaultEvent.FAULT, onDirectoriesFault, false);
 		}

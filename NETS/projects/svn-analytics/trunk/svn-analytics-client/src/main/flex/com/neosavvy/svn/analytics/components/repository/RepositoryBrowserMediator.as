@@ -41,6 +41,30 @@ package com.neosavvy.svn.analytics.components.repository
 					var svnRepositoryProxy:SVNRepositoryProxy = facade.retrieveProxy( SVNRepositoryProxy.NAME ) as SVNRepositoryProxy;
 					repositoryBrowser.dataProvider = svnRepositoryProxy.repositories;
 					break;
+				case ApplicationFacade.ROOT_FILE_NODES_FOR_REPOSITORY_LOADED:
+					var svnRepositoryProxy:SVNRepositoryProxy = facade.retrieveProxy( SVNRepositoryProxy.NAME ) as SVNRepositoryProxy;
+					var dataToUpdate:ArrayCollection = svnRepositoryProxy.repositories;
+					var parentToUpdate:Object = notification.getBody();
+					for each (var repos:SVNRepositoryDTO in dataToUpdate ) {
+						
+						if ( repos.id == parentToUpdate.repositoryId ) {
+							
+							for each ( var fileSysNode:FileSystemNode in repos.children ) {
+								
+								if( parentToUpdate.parentDirectory == fileSysNode.relativePath &&
+									parentToUpdate.fileType == fileSysNode.fileType ) {
+										
+										fileSysNode.children = parentToUpdate.children;
+										
+									}
+								
+							}
+							
+							
+						} 
+						
+					}
+					
 				default:
 					break;
 			}
@@ -72,8 +96,8 @@ package com.neosavvy.svn.analytics.components.repository
 		    }
 		    else if ( item is FileSystemNode ) {
 		    	if( (item as FileSystemNode).fileType == 'F') {
-		    		icon = FileIcons.folder;	
-		    	} else {
+		    		icon = FileIcons.file;	
+		    	} else if( (item as FileSystemNode).fileType == 'D') {
 		    		icon = FileIcons.folder;	
 		    	}
 		    }
@@ -86,23 +110,21 @@ package com.neosavvy.svn.analytics.components.repository
 			var target:RepositoryBrowser = event.target as RepositoryBrowser;
 			var selectedItem:Object = target.selectedItem;
 			
-			/* if( selectedItem is SVNRepositoryDTO) {
-				var selectedRepository:SVNRepositoryDTO = selectedItem as SVNRepositoryDTO;
-				var rootNode:DirectoryNode = new DirectoryNode();
-				rootNode.parentDirectory = "/";
-				sendNotification(ApplicationFacade.LOAD_ROOT_NODES_FOR_REPOSITORY, [selectedRepository,rootNode]);
-			}
-			else if ( selectedItem is DirectoryNode ) {
-				
-				var node:DirectoryNode = selectedItem as DirectoryNode;
-				var searchNode:DirectoryNode = new DirectoryNode();
+			if ( selectedItem is FileSystemNode && (selectedItem as FileSystemNode).fileType == 'D' ) {
+				trace("clicking directory");
+				var node:FileSystemNode = selectedItem as FileSystemNode;
+				var searchNode:FileSystemNode = new FileSystemNode();
 				searchNode.parentDirectory = node.relativePath;
+				searchNode.repositoryId = node.repositoryId;
+				searchNode.fileType = node.fileType;
+				 
 				var repositoryProxy:SVNRepositoryProxy = facade.retrieveProxy( SVNRepositoryProxy.NAME ) as SVNRepositoryProxy;
 				var repository:SVNRepositoryDTO = repositoryProxy.findRepositoryForDirectory( node );
 				sendNotification(ApplicationFacade.LOAD_ROOT_NODES_FOR_REPOSITORY, [repository, searchNode]);
 				
-			} */
+			} 
 			
 		}
+		
 	}
 }

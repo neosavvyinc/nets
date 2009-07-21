@@ -48,25 +48,38 @@
 		<result property="parentDirectory" column="PARENT_DIRECTORY"/>
 		<result property="fileName" column="FILE_NAME"/>
 		<result property="fileType" column="FILE_TYPE"/>
+		<result property="repositoryId" column="REPOSITORY_ID"/>
     </resultMap>
     
     <select 
     	id="getChildren" 
     	parameterClass="com.neosavvy.svn.analytics.dto.file.FileSystemNode"
     	resultMap="FileNodeResultMap">
-	  	SELECT 
-		    RELATIVE_PATH 
+		SELECT 
+		    REPOSITORY_ID
+		    ,MAX( REVISION ) AS REVISION
+		    ,MAX( REVISION_DATE ) AS REVISION_DATE
 		    ,MAX( LAST_CHANGED_REVISION ) AS LAST_CHANGED_REVISION
+		    ,AUTHOR
+		    ,RELATIVE_PATH
+		    ,PARENT_DIRECTORY 
+		    ,FILE_NAME
+		    ,FILE_TYPE
 		FROM 
 		    SVN_FILE_SYSTEM_STATISTIC 
 		WHERE 
 		    NVL(PARENT_DIRECTORY,'/') = #parentDirectory#
 		   	AND REPOSITORY_ID = #repositoryId#
 		    AND RELATIVE_PATH IS NOT NULL
-		GROUP BY 
-		    RELATIVE_PATH
+		GROUP BY
+		    REPOSITORY_ID
+		    ,AUTHOR
+		    ,RELATIVE_PATH
+		    ,PARENT_DIRECTORY
+		    ,FILE_NAME
+		    ,FILE_TYPE
 		ORDER BY 
-		    RELATIVE_PATH
+		    RELATIVE_PATH    
   	</select>
   
 
