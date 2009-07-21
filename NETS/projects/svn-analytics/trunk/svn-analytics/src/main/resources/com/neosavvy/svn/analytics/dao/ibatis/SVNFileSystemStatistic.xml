@@ -41,8 +41,13 @@
     <resultMap 
     	class="com.neosavvy.svn.analytics.dto.file.FileSystemNode" 
 	    id="FileNodeResultMap">
-		<result property="relativePath" column="RELATIVE_PATH"/>
+		<result property="revision" column="REVISION"/>
+		<result property="revisionDate" column="REVISION_DATE"/>
 		<result property="lastChangedRevision" column="LAST_CHANGED_REVISION"/>
+		<result property="relativePath" column="RELATIVE_PATH"/>
+		<result property="parentDirectory" column="PARENT_DIRECTORY"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="fileType" column="FILE_TYPE"/>
     </resultMap>
     
     <select 
