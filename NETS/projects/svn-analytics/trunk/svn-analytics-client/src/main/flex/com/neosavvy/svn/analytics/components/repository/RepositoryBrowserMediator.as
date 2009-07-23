@@ -7,6 +7,7 @@ package com.neosavvy.svn.analytics.components.repository
 	import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 	import com.neosavvy.svn.analytics.model.SVNRepositoryProxy;
 	
+	import mx.collections.ArrayCollection;
 	import mx.events.ListEvent;
 	
 	import org.puremvc.as3.interfaces.INotification;
@@ -35,40 +36,53 @@ package com.neosavvy.svn.analytics.components.repository
 		}
 		
 		override public function handleNotification(notification:INotification):void {
-			
+			var svnRepositoryProxy:SVNRepositoryProxy = facade.retrieveProxy( SVNRepositoryProxy.NAME ) as SVNRepositoryProxy;
 			switch ( notification.getName() ) {
 				case ApplicationFacade.LOADED_REPOSITORIES:
-					var svnRepositoryProxy:SVNRepositoryProxy = facade.retrieveProxy( SVNRepositoryProxy.NAME ) as SVNRepositoryProxy;
 					repositoryBrowser.dataProvider = svnRepositoryProxy.repositories;
 					break;
 				case ApplicationFacade.ROOT_FILE_NODES_FOR_REPOSITORY_LOADED:
-					var svnRepositoryProxy:SVNRepositoryProxy = facade.retrieveProxy( SVNRepositoryProxy.NAME ) as SVNRepositoryProxy;
-					var dataToUpdate:ArrayCollection = svnRepositoryProxy.repositories;
+					var dataToUpdate:Array = svnRepositoryProxy.repositories;
 					var parentToUpdate:Object = notification.getBody();
 					for each (var repos:SVNRepositoryDTO in dataToUpdate ) {
-						
 						if ( repos.id == parentToUpdate.repositoryId ) {
-							
-							for each ( var fileSysNode:FileSystemNode in repos.children ) {
-								
-								if( parentToUpdate.parentDirectory == fileSysNode.relativePath &&
-									parentToUpdate.fileType == fileSysNode.fileType ) {
-										
-										fileSysNode.children = parentToUpdate.children;
-										
-									}
-								
-							}
-							
-							
+							findNodeInTree( repos.children as ArrayCollection, parentToUpdate as FileSystemNode, 1 );
 						} 
-						
 					}
-					
 				default:
 					break;
 			}
 			
+		}
+		
+		protected function findNodeInTree( children:ArrayCollection, parentToUpdate:FileSystemNode, depth:int ) : void {
+			trace("parentToUpdatePath:" + parentToUpdate.parentDirectory);
+			var directoryPath:Array = parentToUpdate.parentDirectory.split("/");
+			var directoryToLoad:String = "";
+			for ( var i:int = 0; i <= depth; i++) {
+				directoryToLoad = directoryToLoad + directoryPath[i] + "/";
+			}
+			trace("directoryToLoad:::"+directoryToLoad);
+			directoryToLoad = directoryToLoad.substr(0, directoryToLoad.lastIndexOf("/") );
+			trace("directoryToLoad:::"+directoryToLoad);
+			for each ( var fileSysNode:FileSystemNode in children ) {
+				trace("fileSysNode:" + fileSysNode.relativePath);				
+				if( directoryToLoad == fileSysNode.relativePath &&
+					fileSysNode.fileType == "D" ) {
+					
+						if( parentToUpdate.parentDirectory == fileSysNode.relativePath &&
+						parentToUpdate.fileType == fileSysNode.fileType ) {
+							
+							fileSysNode.children = parentToUpdate.children;
+							
+						} else {
+							findNodeInTree( fileSysNode.children as ArrayCollection, parentToUpdate, depth+1 );
+						}
+						
+					}
+				
+				
+			}
 		}
 
 		protected function get repositoryBrowser():RepositoryBrowser {
@@ -117,7 +131,9 @@ package com.neosavvy.svn.analytics.components.repository
 				searchNode.parentDirectory = node.relativePath;
 				searchNode.repositoryId = node.repositoryId;
 				searchNode.fileType = node.fileType;
-				 
+				trace("Loading child directories for: " + searchNode.parentDirectory);
+				trace("For Repository by ID: " + searchNode.repositoryId);
+				trace("For file type: " + searchNode.fileType);
 				var repositoryProxy:SVNRepositoryProxy = facade.retrieveProxy( SVNRepositoryProxy.NAME ) as SVNRepositoryProxy;
 				var repository:SVNRepositoryDTO = repositoryProxy.findRepositoryForDirectory( node );
 				sendNotification(ApplicationFacade.LOAD_ROOT_NODES_FOR_REPOSITORY, [repository, searchNode]);

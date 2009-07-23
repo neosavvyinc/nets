@@ -8,6 +8,8 @@ public interface SVNRepositoryDAO {
 	
 	public List<SVNRepositoryDTO> getRepositories();
 	
+	public List<SVNRepositoryDTO> getRepositoriesShallow();
+	
 	public void saveRepository(SVNRepositoryDTO repository);
 	
 	public void deleteRepository(SVNRepositoryDTO repository);

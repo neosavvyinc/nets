@@ -36,6 +36,17 @@ public class IbatisSVNRepositoryDAOImpl extends SqlMapClientDaoSupport implement
 			throw new DataRetrievalFailureException("Error retrieving svn repositories", e);
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<SVNRepositoryDTO> getRepositoriesShallow() {
+		try {
+			List<SVNRepositoryDTO> repositories = (List<SVNRepositoryDTO>) getSqlMapClient().queryForList("SvnRepository.getSvnRepositoriesShallow");
+			return repositories;
+		} catch (SQLException e) {
+			logger.error("Error retrieving svn repositories", e);
+			throw new DataRetrievalFailureException("Error retrieving svn repositories", e);
+		}
+	}
 
 	public void saveRepository(SVNRepositoryDTO repository) {
 		try {

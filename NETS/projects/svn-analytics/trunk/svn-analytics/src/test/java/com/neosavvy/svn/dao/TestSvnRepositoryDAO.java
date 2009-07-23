@@ -54,7 +54,7 @@ public class TestSvnRepositoryDAO extends BaseTransactionalSpringAwareTestCase {
 		repositoryDAO.saveRepository(testDTO);
 		repositoryDAO.saveRepository(testDTO1);
 		
-		List<SVNRepositoryDTO> repositories = repositoryDAO.getRepositories();
+		List<SVNRepositoryDTO> repositories = repositoryDAO.getRepositoriesShallow();
 		
 		Assert.assertEquals(2, repositories.size());
 	}
@@ -71,7 +71,7 @@ public class TestSvnRepositoryDAO extends BaseTransactionalSpringAwareTestCase {
 		testDTO.setUrl("http://url.location.of.repos");
 		
 		repositoryDAO.saveRepository(testDTO);
-		List<SVNRepositoryDTO> repositories = repositoryDAO.getRepositories();
+		List<SVNRepositoryDTO> repositories = repositoryDAO.getRepositoriesShallow();
 		
 		Assert.assertEquals(1, repositories.size());
 		

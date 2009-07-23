@@ -76,7 +76,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
     protected void initializeSVNRepositoryObjects(SVNRepositoryDTO repositoryToRefresh) {
     	List<SVNRepositoryDTO> repositories = svnRepositoryDAO.getRepositories();
     	if( repositoryToRefresh == null ) {
-    		repositories = svnRepositoryDAO.getRepositories();
+    		repositories = svnRepositoryDAO.getRepositoriesShallow();
     	} else {
     		repositories = new ArrayList<SVNRepositoryDTO>();
     		repositories.add(repositoryToRefresh);

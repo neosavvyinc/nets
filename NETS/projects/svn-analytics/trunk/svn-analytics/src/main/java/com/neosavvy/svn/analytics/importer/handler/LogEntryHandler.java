@@ -1,8 +1,5 @@
 package com.neosavvy.svn.analytics.importer.handler;
 
-import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -88,15 +85,21 @@ public class LogEntryHandler implements ISVNLogEntryHandler {
 							logger.debug("Failed to annotate entry: " + entryPath + " so it must be a directory or a binary file");
 						}
 						
-						
-						if( e.toString().indexOf("is not a file in revision") > -1) {
-							//must be a directory or deleted directory
-							directories.add(new FileSystemNode(entry, entryPath, repositoryModel,FileSystemNode.TYPE_DIRECTORY));
-						} else {
-							if(logger.isDebugEnabled()) {
-								logger.debug("This is a binary file:" + entryPath.getPath());
+						try {
+							@SuppressWarnings("unused")
+							Collection entriesFromDirectory = repository.getDir(entryPath.getPath(), entry.getRevision(), null,(Collection)null);
+							directories.add(new FileSystemNode(entry, entryPath, repositoryModel, FileSystemNode.TYPE_DIRECTORY));
+						} catch (SVNException binException) {
+							if( entryPath.getType() == SVNLogEntryPath.TYPE_DELETED) {
+								if(logger.isDebugEnabled()) {
+									logger.debug("Failed to list the directory and it was deleted, so ignoring for now");
+								}
+								continue;
 							}
-							files.add(new FileSystemNode(entry,entryPath,repositoryModel,FileSystemNode.TYPE_FILE));
+							if(logger.isDebugEnabled()) {
+								logger.debug("Failed to list the directory so the entry must actually be a binary file" + entryPath.getPath());
+							}
+							files.add(new FileSystemNode(entry,entryPath,repositoryModel, FileSystemNode.TYPE_FILE));
 						}
 					} 
 				}
