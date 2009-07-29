@@ -2,7 +2,7 @@
 <mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:skins="skins.*" 
 	xmlns:code="http://code.google.com/p/flexlib/"
-	horizontalScrollPolicy="off" verticalScrollPolicy="off">
+	horizontalScrollPolicy="off" verticalScrollPolicy="off" xmlns:chart="com.neosavvy.svn.analytics.components.chart.*">
 		<mx:Script>
 			<![CDATA[
 				import mx.events.SliderEvent;
@@ -297,43 +297,61 @@
 		        							 labelFontSize="10" labelFontColor="#000000" />
 		        </mx:verticalAxisRenderer>
 		        <mx:series>
-		            <mx:AreaSeries id="numberfOfFilesSeries" name="close" xField="revisionDate" yField="numberfOfFiles" 
-		            			   areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
-		            			   areaStroke="{new Stroke(0x0066DD, 1)}"
-		            			   fill="{new SolidColor(0x0066DD, 1)}" 
-		            			   radius="3" form="segment"
-		            			   updateComplete="seriesComplete()"  />
-					<mx:AreaSeries id="numberOfUnCommentedCommitsSeries" name="close" xField="revisionDate" yField="numberOfUnCommentedCommits" 
-		            			   areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
-		            			   areaStroke="{new Stroke(0x0066DD, 1)}"
-		            			   fill="{new SolidColor(0x0066DD, 1)}" 
-		            			   radius="3" form="segment"
-		            			   updateComplete="seriesComplete()"  />
-					<mx:AreaSeries id="numberOfFilesModifiedSeries" name="close" xField="revisionDate" yField="numberOfFilesModified" 
-		            			   areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
-		            			   areaStroke="{new Stroke(0x0066DD, 1)}"
-		            			   fill="{new SolidColor(0x0066DD, 1)}" 
-		            			   radius="3" form="segment"
-		            			   updateComplete="seriesComplete()"  />
-					<mx:AreaSeries id="numberOfCommentedCommitsSeries" name="close" xField="revisionDate" yField="numberOfCommentedCommits" 
-		            			   areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
-		            			   areaStroke="{new Stroke(0x0066DD, 1)}"
-		            			   fill="{new SolidColor(0x0066DD, 1)}" 
-		            			   radius="3" form="segment"
-		            			   updateComplete="seriesComplete()"  />
-					<mx:AreaSeries id="numberOfFilesAddedSeries" name="close" xField="revisionDate" yField="numberOfFilesAdded" 
-		            			   areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
-		            			   areaStroke="{new Stroke(0x0066DD, 1)}"
-		            			   fill="{new SolidColor(0x0066DD, 1)}" 
-		            			   radius="3" form="segment"
-		            			   updateComplete="seriesComplete()"  />
-					<mx:AreaSeries id="numberOfFilesDeletedSeries" name="close" xField="revisionDate" yField="numberOfFilesDeleted" 
-		            			   areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
-		            			   areaStroke="{new Stroke(0x0066DD, 1)}"
-		            			   fill="{new SolidColor(0x0066DD, 1)}" 
-		            			   radius="3" form="segment"
-		            			   updateComplete="seriesComplete()"  />
-		        </mx:series>
+		            <mx:AreaSeries id="numberfOfFilesSeries" 
+								displayName="Total Files"
+								name="close" xField="revisionDate" 
+								yField="numberfOfFiles" 
+								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
+								areaStroke="{new Stroke(0x0066DD, 1)}"
+								fill="{new SolidColor(0x0066DD, 1)}" 
+								radius="3" form="segment"
+								updateComplete="seriesComplete()"  />
+					<mx:AreaSeries id="numberOfFilesModifiedSeries" 
+								displayName="Modified"
+								name="close" xField="revisionDate" 
+								yField="numberOfFilesModified" 
+								areaFill="{new SolidColor(0xCEE2F8, 0.20)}"
+								areaStroke="{new Stroke(0x00DD55, 1)}"
+								fill="{new SolidColor(0x00DD55, 1)}" 
+								radius="3" form="segment"
+								updateComplete="seriesComplete()"  />
+					<mx:AreaSeries id="numberOfFilesAddedSeries" 
+								displayName="Added"
+								name="close" xField="revisionDate" 
+								yField="numberOfFilesAdded" 
+								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
+								areaStroke="{new Stroke(0x0066DD, 1)}"
+								fill="{new SolidColor(0x0066DD, 1)}" 
+								radius="3" form="segment"
+								updateComplete="seriesComplete()"  />
+					<mx:AreaSeries id="numberOfFilesDeletedSeries" 
+								displayName="Deleted"
+								name="close" xField="revisionDate" 
+								yField="numberOfFilesDeleted" 
+								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
+								areaStroke="{new Stroke(0x0066DD, 1)}"
+								fill="{new SolidColor(0x0066DD, 1)}" 
+								radius="3" form="segment"
+								updateComplete="seriesComplete()"  />
+					<mx:AreaSeries id="numberOfUnCommentedCommitsSeries" 
+								displayName="Uncommented Commits"
+								name="close" xField="revisionDate" 
+								yField="numberOfUnCommentedCommits" 
+								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
+								areaStroke="{new Stroke(0x0066DD, 1)}"
+								fill="{new SolidColor(0x0066DD, 1)}" 
+								radius="3" form="segment"
+								updateComplete="seriesComplete()"  />
+					<mx:AreaSeries id="numberOfCommentedCommitsSeries" 
+								displayName="Commented Commits"
+								name="close" xField="revisionDate" 
+								yField="numberOfCommentedCommits" 
+								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
+								areaStroke="{new Stroke(0x0066DD, 1)}"
+								fill="{new SolidColor(0x0066DD, 1)}" 
+								radius="3" form="segment"
+								updateComplete="seriesComplete()"  />
+		     </mx:series>
 		        
 		        <mx:annotationElements>
 		            <mx:Canvas id="mainChartArea" width="100%" height="100%" buttonMode="true" 
@@ -519,7 +537,7 @@
 						   click="moveSlider(leftIndicator, 0, true); moveSlider(rightIndicator, rangeData.length, true);" />
 		</mx:HBox>
 		
-		
+	<chart:AdvancedLegend x="{mainChart.width + 20}" dataProvider="{mainChart}"/>	
 	
     <mx:DateFormatter id="labelMonthFormatter" formatString="MM/YY" />
     <mx:DateFormatter id="labelDayFormatter" formatString="MMM DD YYYY" />

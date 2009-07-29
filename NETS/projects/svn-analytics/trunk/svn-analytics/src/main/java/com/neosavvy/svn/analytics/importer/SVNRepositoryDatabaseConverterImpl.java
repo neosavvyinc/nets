@@ -45,6 +45,8 @@ public class SVNRepositoryDatabaseConverterImpl implements
     private SVNStatisticDAO svnStatisticsDAO;
     private SVNFileSystemNodeDAO fileSystemDao;
 	private LogEntryHandler entryHandler;
+	
+	private int flushThreshHold = 10;
     
 
     public void run() {
@@ -150,7 +152,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
         getEntryHandler().setRepository(repository);
         while (startRevision <= endRevision) {
 
-            if (startRevision + 100 >= endRevision) {
+            if (startRevision + flushThreshHold >= endRevision) {
 	        	SVNLogClient logClient = new SVNLogClient(repository.getAuthenticationManager(), new DefaultSVNOptions());
 	    		logClient.doLog(
 	    				repository.getLocation(), 
@@ -171,7 +173,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
 	    					null,
 	    					SVNRevision.create(startRevision), 
 	    					SVNRevision.create(startRevision), 
-	    					SVNRevision.create(startRevision + 99), 
+	    					SVNRevision.create(startRevision + flushThreshHold - 1), 
 	    					false, 
 	    					true, 
 	    					false,
@@ -180,7 +182,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
 	    					getEntryHandler());
             }
             getEntryHandler().saveCachedStatistics();
-            startRevision += 100;
+            startRevision += flushThreshHold;
         }
     }
     
@@ -221,4 +223,12 @@ public class SVNRepositoryDatabaseConverterImpl implements
 		this.fileSystemDao = fileSystemDao;
 	}
 
+	public int getFlushThreshHold() {
+		return flushThreshHold;
+	}
+
+	public void setFlushThreshHold(int flushThreshHold) {
+		this.flushThreshHold = flushThreshHold;
+	}
+	
 }
