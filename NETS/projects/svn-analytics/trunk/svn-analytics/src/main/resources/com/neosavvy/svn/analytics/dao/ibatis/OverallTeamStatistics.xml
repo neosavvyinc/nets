@@ -39,6 +39,9 @@
             ,sum(invalid_comment) as invalidComments
             ,min(rev_date) as firstCommitDate
             ,max(rev_date) as lastCommitDate 
+            ,sum(num_files_added_in_rev) / sum(num_files_in_rev) * 100 as numberOfFilesAddedRate
+            ,sum(num_files_deleted_in_rev) / sum(num_files_in_rev) * 100 as numberOfFilesDeletedRate
+            ,sum(num_files_modified_in_rev) / sum(num_files_in_rev) * 100 as numberOfFilesModifiedRate
         FROM 
             SVN_STATISTIC
         <isParameterPresent prepend="WHERE">

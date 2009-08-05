@@ -72,12 +72,30 @@
 				dataTipFunction="{firstCommitDateFunction}"
 				dataField="firstCommitDate"
 				showDataTips="true" 
-				headerText="First Seen"/>
+				headerText="First Seen">
+				<mx:itemRenderer>
+	          		<mx:Component>
+		                <mx:VBox horizontalAlign="center">
+		                    <mx:DateFormatter id="formatDateTime" formatString="MM/DD/YY" />
+		                    <mx:Label text="{formatDateTime.format(data.firstCommitDate) }"/>
+		                </mx:VBox>
+		            </mx:Component>
+	            </mx:itemRenderer>
+			</mx:AdvancedDataGridColumn>
 			<mx:AdvancedDataGridColumn 
 				dataTipFunction="{lastCommitDateFunction}"
 				dataField="lastCommitDate"
 				showDataTips="true" 
-				headerText="Last Seen"/>
+				headerText="Last Seen">
+				<mx:itemRenderer>
+	          		<mx:Component>
+		                <mx:VBox horizontalAlign="center">
+		                    <mx:DateFormatter id="formatDateTime" formatString="MM/DD/YY" />
+		                    <mx:Label text="{formatDateTime.format(data.lastCommitDate) }"/>
+		                </mx:VBox>
+		            </mx:Component>
+	            </mx:itemRenderer>
+			</mx:AdvancedDataGridColumn>
 			<mx:AdvancedDataGridColumn 
 				dataTipFunction="{numberOfCommitsFunction}"
 				dataField="numberOfCommits"

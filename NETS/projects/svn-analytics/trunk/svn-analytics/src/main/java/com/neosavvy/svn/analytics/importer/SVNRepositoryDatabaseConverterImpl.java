@@ -46,7 +46,20 @@ public class SVNRepositoryDatabaseConverterImpl implements
     private SVNFileSystemNodeDAO fileSystemDao;
 	private LogEntryHandler entryHandler;
 	
-	private int flushThreshHold = 10;
+	/**
+	 * This is the number of log entries for files and repositories that will be maintained in memory
+	 * before they are flushed to the database. Increasing this value will cause more memory to be consumed
+	 * during the conversion of a repository, but it will cause less database traffic during the conversion
+	 * process of a repository
+	 */
+	private int flushThreshHold = 1;
+	
+	/**
+	 * This is the number of times to attempt to log and convert a repository. If the number of 
+	 * retries to log and convert exceeds this amount then a failure will occur for the repository 
+	 * that is attempting to be converted
+	 */
+	private int retryFailureThreshHold = 5;
     
 
     public void run() {
@@ -153,38 +166,56 @@ public class SVNRepositoryDatabaseConverterImpl implements
         while (startRevision <= endRevision) {
 
             if (startRevision + flushThreshHold >= endRevision) {
-	        	SVNLogClient logClient = new SVNLogClient(repository.getAuthenticationManager(), new DefaultSVNOptions());
-	    		logClient.doLog(
-	    				repository.getLocation(), 
-    					null,
-    					SVNRevision.create(startRevision), 
-    					SVNRevision.create(startRevision), 
-    					SVNRevision.create(endRevision), 
-    					false, 
-    					true, 
-    					false,
-    					0,
-    					null,
-    					getEntryHandler());
+	        	convertRepositoryFromStartToEndRevision(repository,
+						startRevision, endRevision);
             } else {
-            	SVNLogClient logClient = new SVNLogClient(repository.getAuthenticationManager(), new DefaultSVNOptions());
-	    		logClient.doLog(
-	    					repository.getLocation(), 
-	    					null,
-	    					SVNRevision.create(startRevision), 
-	    					SVNRevision.create(startRevision), 
-	    					SVNRevision.create(startRevision + flushThreshHold - 1), 
-	    					false, 
-	    					true, 
-	    					false,
-	    					0,
-	    					null,
-	    					getEntryHandler());
+            	convertRepositoryFromStartToEndRevision(repository,
+						startRevision, startRevision + flushThreshHold - 1);
             }
             getEntryHandler().saveCachedStatistics();
             startRevision += flushThreshHold;
         }
     }
+
+	protected void convertRepositoryFromStartToEndRevision(
+			SVNRepository repository, long startRevision, long endRevision)
+			throws SVNException {
+		int retries = 0;
+		while( retries <= retryFailureThreshHold ) {
+			
+			try {
+		    	SVNLogClient logClient = new SVNLogClient(repository.getAuthenticationManager(), new DefaultSVNOptions());
+				logClient.doLog(
+						repository.getLocation(), 
+						null,
+						SVNRevision.create(startRevision), 
+						SVNRevision.create(startRevision), 
+						SVNRevision.create(endRevision), 
+						false, 
+						true, 
+						false,
+						0,
+						null,
+						getEntryHandler());
+				//no failures occurred so leave the retry loop
+				break;
+			} catch (SVNException e) {
+				retries++;
+				logger.info("Failed to " +
+						"" +
+						"" +
+						", retrying for the " + retries + "(st,nd,rd,th) time" , e);
+				
+				if( retries == retryFailureThreshHold) {
+					logger.info("Exiting conversion for repository: " + repository.toString() + 
+							" because the retry count was exceeded " +
+							"while trying to convert between start:" + startRevision + " and end:" + endRevision);
+					throw e;
+				}
+			}
+			
+		}
+	}
     
     public void tearDown() {
         initializedRepositories = new HashMap<SVNRepositoryDTO, SVNRepository>();

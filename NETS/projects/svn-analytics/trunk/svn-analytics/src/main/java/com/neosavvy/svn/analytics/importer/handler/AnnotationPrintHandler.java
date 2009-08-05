@@ -38,9 +38,6 @@ public class AnnotationPrintHandler implements ISVNAnnotateHandler {
 			String mergedAuthor,// - author of merge
 			String mergedPath,// - absolute repository path of the merged file
 			int lineNumber) throws SVNException {
-		System.out.println("r" + revision + ":: " + lineNumber + "  " + author
-				+ "  " + date + "  " + line);
-		
 		node.setNumberLines(node.getNumberLines()+1);
 
 	}
