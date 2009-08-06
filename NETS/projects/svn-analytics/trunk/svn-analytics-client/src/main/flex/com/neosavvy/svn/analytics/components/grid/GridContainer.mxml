@@ -131,6 +131,18 @@
 				dataField="numberOfUnCommentedCommits"
 				showDataTips="true" 
 				headerText="Uncommented Commits"/>
+			<mx:AdvancedDataGridColumn 
+				dataField="numberOfFilesAddedRate"
+				showDataTips="true" 
+				headerText="Files Added / Files Touched"/>
+			<mx:AdvancedDataGridColumn 
+				dataField="numberOfFilesDeletedRate"
+				showDataTips="true" 
+				headerText="Files Deleted / Files Touched"/>
+			<mx:AdvancedDataGridColumn 
+				dataField="numberOfFilesModifiedRate"
+				showDataTips="true" 
+				headerText="Files Modified / Files Touched"/>
 		</mx:columns>
 	</mx:AdvancedDataGrid>
 	

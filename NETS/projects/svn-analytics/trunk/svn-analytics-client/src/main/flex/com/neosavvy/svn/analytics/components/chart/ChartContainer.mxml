@@ -310,9 +310,9 @@
 								displayName="Modified"
 								name="close" xField="revisionDate" 
 								yField="numberOfFilesModified" 
-								areaFill="{new SolidColor(0xCEE2F8, 0.20)}"
-								areaStroke="{new Stroke(0x00DD55, 1)}"
-								fill="{new SolidColor(0x00DD55, 1)}" 
+								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
+								areaStroke="{new Stroke(0x0066DD, 1)}"
+								fill="{new SolidColor(0x0066DD, 1)}" 
 								radius="3" form="segment"
 								updateComplete="seriesComplete()"  />
 					<mx:AreaSeries id="numberOfFilesAddedSeries" 
@@ -351,6 +351,33 @@
 								fill="{new SolidColor(0x0066DD, 1)}" 
 								radius="3" form="segment"
 								updateComplete="seriesComplete()"  />
+					<mx:AreaSeries id="numberOfFilesAddedRateSeries" 
+								displayName="Files Added Rate"
+								name="close" xField="revisionDate" 
+								yField="numberOfFilesAddedRate" 
+								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
+								areaStroke="{new Stroke(0x0066DD, 1)}"
+								fill="{new SolidColor(0x0066DD, 1)}" 
+								radius="3" form="segment"
+								updateComplete="seriesComplete()"  />			
+					<mx:AreaSeries id="numberOfFilesDeletedRateSeries" 
+								displayName="Files Deleted Rate"
+								name="close" xField="revisionDate" 
+								yField="numberOfFilesDeletedRate" 
+								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
+								areaStroke="{new Stroke(0x0066DD, 1)}"
+								fill="{new SolidColor(0x0066DD, 1)}" 
+								radius="3" form="segment"
+								updateComplete="seriesComplete()"  />			
+					<mx:AreaSeries id="numberOfFilesModifiedRateSeries" 
+								displayName="Files Modified Rate"
+								name="close" xField="revisionDate" 
+								yField="numberOfFilesModifiedRate" 
+								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
+								areaStroke="{new Stroke(0x0066DD, 1)}"
+								fill="{new SolidColor(0x0066DD, 1)}" 
+								radius="3" form="segment"
+								updateComplete="seriesComplete()"  />			
 		     </mx:series>
 		        
 		        <mx:annotationElements>
@@ -411,6 +438,15 @@
 		            <mx:ColumnSeries id="numberOfFilesDeletedSmallSeries" name="close" xField="revisionDate" yField="numberOfFilesDeleted"
 		            			   	 fill="{new SolidColor(0x0066DD, 0.5)}" 
 		            			   	 maxColumnWidth="3" />
+		            <mx:ColumnSeries id="numberOfFilesAddedRateSmallSeries" name="close" xField="revisionDate" yField="numberOfFilesAddedRate"
+		            			   	 fill="{new SolidColor(0x0066DD, 0.5)}" 
+		            			   	 maxColumnWidth="3" />
+		            <mx:ColumnSeries id="numberOfFilesDeletedRateSmallSeries" name="close" xField="revisionDate" yField="numberOfFilesDeletedRate"
+		            			   	 fill="{new SolidColor(0x0066DD, 0.5)}" 
+		            			   	 maxColumnWidth="3" />
+		            <mx:ColumnSeries id="numberOfFilesModifiedRateSmallSeries" name="close" xField="revisionDate" yField="numberOfFilesModifiedRate"
+		            			   	 fill="{new SolidColor(0x0066DD, 0.5)}" 
+		            			   	 maxColumnWidth="3" />			   	 
 		        </mx:series>	        
 		        
 		    </mx:CartesianChart>

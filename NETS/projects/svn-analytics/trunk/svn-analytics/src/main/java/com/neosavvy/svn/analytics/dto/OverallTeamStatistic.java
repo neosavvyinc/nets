@@ -14,7 +14,11 @@ public class OverallTeamStatistic {
 
 	private long numberOfCommentedCommits;
 	private long numberOfUnCommentedCommits;
-
+	
+	private long numberOfFilesAddedRate;
+	private long numberOfFilesDeletedRate;
+	private long numberOfFilesModifiedRate;
+	
 	private Date firstCommitDate;
 	private Date lastCommitDate;
 
@@ -96,6 +100,30 @@ public class OverallTeamStatistic {
 
 	public void setNumberOfUnCommentedCommits(long numberOfUnCommentedCommits) {
 		this.numberOfUnCommentedCommits = numberOfUnCommentedCommits;
+	}
+
+	public long getNumberOfFilesAddedRate() {
+		return numberOfFilesAddedRate;
+	}
+
+	public void setNumberOfFilesAddedRate(long numberOfFilesAddedRate) {
+		this.numberOfFilesAddedRate = numberOfFilesAddedRate;
+	}
+
+	public long getNumberOfFilesDeletedRate() {
+		return numberOfFilesDeletedRate;
+	}
+
+	public void setNumberOfFilesDeletedRate(long numberOfFilesDeletedRate) {
+		this.numberOfFilesDeletedRate = numberOfFilesDeletedRate;
+	}
+
+	public long getNumberOfFilesModifiedRate() {
+		return numberOfFilesModifiedRate;
+	}
+
+	public void setNumberOfFilesModifiedRate(long numberOfFilesModifiedRate) {
+		this.numberOfFilesModifiedRate = numberOfFilesModifiedRate;
 	}
 
 }

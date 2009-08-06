@@ -12,6 +12,9 @@
         <result column="numberOfFilesModified" property="numberOfFilesModified"/>
         <result column="validComments" property="numberOfCommentedCommits"/>
         <result column="invalidComments" property="numberOfUnCommentedCommits"/>
+        <result column="numberOfFilesAddedRate" property="numberOfFilesAddedRate"/>
+        <result column="numberOfFilesDeletedRate" property="numberOfFilesDeletedRate"/>
+        <result column="numberOfFilesModifiedRate" property="numberOfFilesModifiedRate"/>
     </resultMap>
     
     <parameterMap class="com.neosavvy.svn.analytics.dto.request.RefineSearchRequest" id="refineRequest">
@@ -42,6 +45,10 @@
             ,SUM(NUM_FILES_MODIFIED_IN_REV) as numberOfFilesModified
             ,sum(valid_comment) as validComments
             ,sum(invalid_comment) as invalidComments
+            
+            ,sum(num_files_added_in_rev) / sum(num_files_in_rev) * 100 as numberOfFilesAddedRate
+            ,sum(num_files_deleted_in_rev) / sum(num_files_in_rev) * 100 as numberOfFilesDeletedRate
+            ,sum(num_files_modified_in_rev) / sum(num_files_in_rev) * 100 as numberOfFilesModifiedRate
         FROM 
             SVN_STATISTIC
 			<isParameterPresent prepend="WHERE">

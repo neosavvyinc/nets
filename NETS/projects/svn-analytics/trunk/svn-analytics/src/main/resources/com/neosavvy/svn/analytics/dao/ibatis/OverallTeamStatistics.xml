@@ -16,6 +16,9 @@
         <result column="invalidComments" property="numberOfUnCommentedCommits"/>
         <result column="firstCommitDate" property="firstCommitDate"/>
         <result column="lastCommitDate" property="lastCommitDate"/>
+        <result column="numberOfFilesAddedRate" property="numberOfFilesAddedRate"/>
+        <result column="numberOfFilesDeletedRate" property="numberOfFilesDeletedRate"/>
+        <result column="numberOfFilesModifiedRate" property="numberOfFilesModifiedRate"/>
     </resultMap>
     
     <parameterMap class="RefineSearch" 
