@@ -7,8 +7,10 @@ package com.neosavvy.svn.analytics
 	import com.neosavvy.svn.analytics.model.SVNRepositoryProxy;
 	
 	import flash.events.Event;
+	import flash.events.KeyboardEvent;
+	import flash.ui.Keyboard;
 	
-	import mx.controls.DateField;
+	import mx.controls.Button;
 	import mx.controls.List;
 	
 	import org.puremvc.as3.interfaces.INotification;
@@ -24,6 +26,8 @@ package com.neosavvy.svn.analytics
 			this.application.addEventListener(SvnAnalyticsApplication.REFINE_SEARCH, refineSearch);
 			this.application.addEventListener(SvnAnalyticsApplication.RESET_SEARCH, resetSearch);
 			this.application.addEventListener(SvnAnalyticsApplication.MANAGE_REPOSITORIES, manageRepositories);
+			this.application.resetButton.addEventListener(KeyboardEvent.KEY_DOWN, debugKeyDownHandler);
+			
 		}
 		
 		override public function listNotificationInterests():Array {
@@ -88,6 +92,10 @@ package com.neosavvy.svn.analytics
 			return viewComponent as SvnAnalyticsApplication;
 		}
 		
+		protected function get managementButton():Button {
+			return application.managementButton;
+		}
+		
 		protected function get authorsSelector():List {
 			return this.application.authorsSelector;
 		} 
@@ -141,6 +149,12 @@ package com.neosavvy.svn.analytics
 		
 		protected function manageRepositories(event:Event):void {
 			sendNotification( ApplicationFacade.DISPLAY_MANAGE_REPOSITORIES_DIALOG);
+		}
+		
+		protected function debugKeyDownHandler( event:KeyboardEvent ):void {
+			if( event.ctrlKey && event.shiftKey ) {
+				managementButton.visible = !managementButton.visible;
+			}
 		}
 	}
 }

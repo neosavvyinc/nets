@@ -27,14 +27,18 @@
 			private function manageRepositories():void {
 				dispatchEvent(new Event(MANAGE_REPOSITORIES));
 			}
+			
+			private function hiddenManagementConsoleEvent( event:Event ):void {
+				
+			}
 		]]>
 	</mx:Script>
 	
 	<mx:Style source="com/neosavvy/svn/analytics/styles/ChartStyles.css"/>
 	<mx:ApplicationControlBar dock="true">
 		<mx:Button label="Refine Search" click="{refineSearch()}"/>
-		<mx:Button label="Reset" click="{resetSearch()}"/>
-		<mx:Button label="Manage Repositories" click="{manageRepositories()}"/>
+		<mx:Button id="resetButton" label="Reset" click="{resetSearch()}"/>
+		<mx:Button id="managementButton" label="Manage Repositories" visible="false" click="{manageRepositories()}"/>
 	</mx:ApplicationControlBar>
 	<mx:VDividedBox width="100%" height="100%">
 		<mx:HDividedBox width="100%" borderStyle="none">
