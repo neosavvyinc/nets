@@ -6,7 +6,7 @@
 	xmlns:chart="com.neosavvy.svn.analytics.components.chart.*" 
 	xmlns:grid="com.neosavvy.svn.analytics.components.grid.*"
 	backgroundGradientAlphas="[1.0, 1.0]" 
-	backgroundGradientColors="[#FFFFFF, #FFFFFF]" xmlns:repository="com.neosavvy.svn.analytics.components.repository.*">
+	backgroundGradientColors="[#FFFFFF, #FFFFFF]" xmlns:repository="com.neosavvy.svn.analytics.components.repository.*" xmlns:rateChart="com.neosavvy.svn.analytics.components.rateChart.*">
 	
 	<mx:Script>
 		<![CDATA[
@@ -82,7 +82,10 @@
 							height="100%"/>
 				</mx:VBox>
 			</mx:TabNavigator>	
-			<chart:ChartContainer backgroundColor="0xFFFFFF" id="chartContainer" height="100%"/>
+			<mx:TabNavigator creationPolicy="all" height="100%">
+				<chart:ChartContainer label="Numeric Metrics" backgroundColor="0xFFFFFF" id="chartContainer" height="100%"/>
+				<rateChart:RateChartContainer label="Rate Metrics" backgroundColor="0xFFFFFF" id="rateChartContainer" height="100%"/>	
+			</mx:TabNavigator>
 		</mx:HDividedBox>
 		<grid:GridContainer id="gridContainer" width="100%" height="30%"/>	
 	</mx:VDividedBox>

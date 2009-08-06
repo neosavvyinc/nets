@@ -297,60 +297,33 @@
 		        							 labelFontSize="10" labelFontColor="#000000" />
 		        </mx:verticalAxisRenderer>
 		        <mx:series>
-		            <mx:AreaSeries id="numberfOfFilesSeries" 
-								displayName="Total Files"
+					<mx:AreaSeries id="numberOfFilesAddedRateSeries" 
+								displayName="Files Added Rate"
 								name="close" xField="revisionDate" 
-								yField="numberfOfFiles" 
+								yField="numberOfFilesAddedRate" 
 								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
 								areaStroke="{new Stroke(0x0066DD, 1)}"
 								fill="{new SolidColor(0x0066DD, 1)}" 
 								radius="3" form="segment"
-								updateComplete="seriesComplete()"  />
-					<mx:AreaSeries id="numberOfFilesModifiedSeries" 
-								displayName="Modified"
+								updateComplete="seriesComplete()"  />			
+					<mx:AreaSeries id="numberOfFilesDeletedRateSeries" 
+								displayName="Files Deleted Rate"
 								name="close" xField="revisionDate" 
-								yField="numberOfFilesModified" 
+								yField="numberOfFilesDeletedRate" 
 								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
 								areaStroke="{new Stroke(0x0066DD, 1)}"
 								fill="{new SolidColor(0x0066DD, 1)}" 
 								radius="3" form="segment"
-								updateComplete="seriesComplete()"  />
-					<mx:AreaSeries id="numberOfFilesAddedSeries" 
-								displayName="Added"
+								updateComplete="seriesComplete()"  />			
+					<mx:AreaSeries id="numberOfFilesModifiedRateSeries" 
+								displayName="Files Modified Rate"
 								name="close" xField="revisionDate" 
-								yField="numberOfFilesAdded" 
+								yField="numberOfFilesModifiedRate" 
 								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
 								areaStroke="{new Stroke(0x0066DD, 1)}"
 								fill="{new SolidColor(0x0066DD, 1)}" 
 								radius="3" form="segment"
-								updateComplete="seriesComplete()"  />
-					<mx:AreaSeries id="numberOfFilesDeletedSeries" 
-								displayName="Deleted"
-								name="close" xField="revisionDate" 
-								yField="numberOfFilesDeleted" 
-								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
-								areaStroke="{new Stroke(0x0066DD, 1)}"
-								fill="{new SolidColor(0x0066DD, 1)}" 
-								radius="3" form="segment"
-								updateComplete="seriesComplete()"  />
-					<mx:AreaSeries id="numberOfUnCommentedCommitsSeries" 
-								displayName="Uncommented Commits"
-								name="close" xField="revisionDate" 
-								yField="numberOfUnCommentedCommits" 
-								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
-								areaStroke="{new Stroke(0x0066DD, 1)}"
-								fill="{new SolidColor(0x0066DD, 1)}" 
-								radius="3" form="segment"
-								updateComplete="seriesComplete()"  />
-					<mx:AreaSeries id="numberOfCommentedCommitsSeries" 
-								displayName="Commented Commits"
-								name="close" xField="revisionDate" 
-								yField="numberOfCommentedCommits" 
-								areaFill="{new SolidColor(0xCDE2F8, 0.20)}"
-								areaStroke="{new Stroke(0x0066DD, 1)}"
-								fill="{new SolidColor(0x0066DD, 1)}" 
-								radius="3" form="segment"
-								updateComplete="seriesComplete()"  />
+								updateComplete="seriesComplete()"  />			
 		     </mx:series>
 		        
 		        <mx:annotationElements>
@@ -393,24 +366,15 @@
 		        </mx:verticalAxisRenderer>
 		        
 		        <mx:series>
-		            <mx:ColumnSeries id="numberfOfFilesSmallSeries" name="close" xField="revisionDate" yField="numberfOfFiles"
+		            <mx:ColumnSeries id="numberOfFilesAddedRateSmallSeries" name="close" xField="revisionDate" yField="numberOfFilesAddedRate"
 		            			   	 fill="{new SolidColor(0x0066DD, 0.5)}" 
 		            			   	 maxColumnWidth="3" />
-		            <mx:ColumnSeries id="numberOfUnCommentedCommitsSmallSeries" name="close" xField="revisionDate" yField="numberOfUnCommentedCommits"
+		            <mx:ColumnSeries id="numberOfFilesDeletedRateSmallSeries" name="close" xField="revisionDate" yField="numberOfFilesDeletedRate"
 		            			   	 fill="{new SolidColor(0x0066DD, 0.5)}" 
 		            			   	 maxColumnWidth="3" />
-		            <mx:ColumnSeries id="numberOfFilesModifiedSmallSeries" name="close" xField="revisionDate" yField="numberOfFilesModified"
+		            <mx:ColumnSeries id="numberOfFilesModifiedRateSmallSeries" name="close" xField="revisionDate" yField="numberOfFilesModifiedRate"
 		            			   	 fill="{new SolidColor(0x0066DD, 0.5)}" 
-		            			   	 maxColumnWidth="3" />
-		            <mx:ColumnSeries id="numberOfCommentedCommitsSmallSeries" name="close" xField="revisionDate" yField="numberOfCommentedCommits"
-		            			   	 fill="{new SolidColor(0x0066DD, 0.5)}" 
-		            			   	 maxColumnWidth="3" />
-		            <mx:ColumnSeries id="numberOfFilesAddedSmallSeries" name="close" xField="revisionDate" yField="numberOfFilesAdded"
-		            			   	 fill="{new SolidColor(0x0066DD, 0.5)}" 
-		            			   	 maxColumnWidth="3" />
-		            <mx:ColumnSeries id="numberOfFilesDeletedSmallSeries" name="close" xField="revisionDate" yField="numberOfFilesDeleted"
-		            			   	 fill="{new SolidColor(0x0066DD, 0.5)}" 
-		            			   	 maxColumnWidth="3" />
+		            			   	 maxColumnWidth="3" />			   	 
 		        </mx:series>	        
 		        
 		    </mx:CartesianChart>
