@@ -48,4 +48,5 @@
     <bean parent="abstractDao" id="svnAnalyticsDAO" class="com.neosavvy.svn.analytics.dao.ibatis.IbatisSVNStatisticDAOImpl"/>
     <bean parent="abstractDao" id="svnRepositoryDAO" class="com.neosavvy.svn.analytics.dao.ibatis.IbatisSVNRepositoryDAOImpl"/>
 	<bean parent="abstractDao" id="svnFileNodeStatisticDAO" class="com.neosavvy.svn.analytics.dao.ibatis.IbatisSVNFileStatisticDAOImpl"/>
+	<bean parent="abstractDao" id="codeOwnershipDAO" class="com.neosavvy.svn.analytics.dao.ibatis.IbatisCodeOwnershipDAOImpl"/>
 </beans>

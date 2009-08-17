@@ -4,6 +4,7 @@ package com.neosavvy.svn.analytics.controller.startup
 	import com.neosavvy.svn.analytics.SvnAnalyticsApplication;
 	import com.neosavvy.svn.analytics.components.chart.ChartMediator;
 	import com.neosavvy.svn.analytics.components.grid.GridMediator;
+	import com.neosavvy.svn.analytics.components.ownership.OwnershipChartMediator;
 	import com.neosavvy.svn.analytics.components.popup.PopupMediator;
 	import com.neosavvy.svn.analytics.components.rateChart.RateChartMediator;
 	import com.neosavvy.svn.analytics.components.repository.RepositoryBrowserMediator;
@@ -23,6 +24,7 @@ package com.neosavvy.svn.analytics.controller.startup
 			facade.registerMediator( new RateChartMediator( application.rateChartContainer ) );
 			facade.registerMediator( new GridMediator( application.gridContainer ) );
 			facade.registerMediator( new RepositoryBrowserMediator( application.repositoryBrowser ) ); 
+			facade.registerMediator( new OwnershipChartMediator( application.ownershipContainer) );
 		}
 		
 	}

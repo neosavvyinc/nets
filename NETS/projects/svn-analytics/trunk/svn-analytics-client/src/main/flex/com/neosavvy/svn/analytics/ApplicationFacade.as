@@ -44,6 +44,9 @@ package com.neosavvy.svn.analytics
 		public static const LOAD_ROOT_NODES_FOR_REPOSITORY:String = "loadRootNodesForRepository";
 		public static const ROOT_FILE_NODES_FOR_REPOSITORY_LOADED:String = "rootFileNodesForRepositoryLoaded";
 		
+		public static const LOAD_FILE_OWNERSHIP_FOR_PARENT:String = "loadCodeOwnershipForParent";
+		public static const LOADED_FILE_OWNERSHIP_FOR_PARENT:String = "codeOwnershipForParentLoaded";
+		
 		public static function getInstance():ApplicationFacade { 
 			if( instance == null) {
 				instance = new ApplicationFacade();

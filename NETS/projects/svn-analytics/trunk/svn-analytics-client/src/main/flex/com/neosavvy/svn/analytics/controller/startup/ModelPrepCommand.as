@@ -1,6 +1,7 @@
 package com.neosavvy.svn.analytics.controller.startup
 {
 	import com.neosavvy.svn.analytics.model.AuthorProxy;
+	import com.neosavvy.svn.analytics.model.CodeOwnershipProxy;
 	import com.neosavvy.svn.analytics.model.HistoricalTeamStatisticProxy;
 	import com.neosavvy.svn.analytics.model.OverallTeamStatisticProxy;
 	import com.neosavvy.svn.analytics.model.ReportIntervalProxy;
@@ -19,6 +20,7 @@ package com.neosavvy.svn.analytics.controller.startup
 			facade.registerProxy( new OverallTeamStatisticProxy() );
 			facade.registerProxy( new HistoricalTeamStatisticProxy() );
 			facade.registerProxy( new SVNRepositoryProxy() );
+			facade.registerProxy( new CodeOwnershipProxy() );
 		}
 		
 	}

@@ -2,11 +2,14 @@ package com.neosavvy.svn.analytics.service;
 
 import org.apache.log4j.Logger;
 
+import com.neosavvy.svn.analytics.dao.CodeOwnershipDAO;
 import com.neosavvy.svn.analytics.dao.SVNStatisticDAO;
 import com.neosavvy.svn.analytics.dto.Author;
+import com.neosavvy.svn.analytics.dto.CodeOwnershipDTO;
 import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
 import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
+import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 
 public class SvnStatServiceImpl implements SvnStatService {
@@ -15,6 +18,8 @@ public class SvnStatServiceImpl implements SvnStatService {
 			.getLogger(SvnStatServiceImpl.class);
 
 	private SVNStatisticDAO dao;
+	
+	private CodeOwnershipDAO codeOwnershipDAO;
 
 	public SVNStatisticDAO getDao() {
 		return dao;
@@ -24,6 +29,14 @@ public class SvnStatServiceImpl implements SvnStatService {
 		this.dao = dao;
 	}
 
+	public CodeOwnershipDAO getCodeOwnershipDAO() {
+		return codeOwnershipDAO;
+	}
+
+	public void setCodeOwnershipDAO(CodeOwnershipDAO codeOwnershipDAO) {
+		this.codeOwnershipDAO = codeOwnershipDAO;
+	}
+	
 	public OverallTeamStatistic[] getOverallTeamStatistics() {
 		return dao.getOverallTeamStats();
 	}
@@ -48,6 +61,10 @@ public class SvnStatServiceImpl implements SvnStatService {
 	public OverallTeamStatistic[] getRefinedTeamStatistics(
 			RefineSearchRequest request) {
 		return dao.getRefinedTeamStats(request);
+	}
+
+	public CodeOwnershipDTO[] getOwnership(FileSystemNode parent) {
+		return getCodeOwnershipDAO().getCodeOwnership( parent );
 	}
 
 }

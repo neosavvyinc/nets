@@ -96,7 +96,7 @@ package com.neosavvy.svn.analytics.components.repository
 		    	label = (item as SVNRepositoryDTO).name;
 		    }
 		    else if ( item is FileSystemNode ) {
-		    	label = (item as FileSystemNode).relativePath;
+		    	label = (item as FileSystemNode).fileName;
 		    }
 		    
 		    return label;

@@ -13,6 +13,7 @@
 	
     <bean id="svnStatService" class="com.neosavvy.svn.analytics.service.SvnStatServiceImpl">
         <property name="dao" ref="svnAnalyticsDAO"/>
+        <property name="codeOwnershipDAO" ref="codeOwnershipDAO"/>
     </bean>
     
     <bean id="svnRepositoryService" class="com.neosavvy.svn.analytics.service.SVNRepositoryServiceImpl">

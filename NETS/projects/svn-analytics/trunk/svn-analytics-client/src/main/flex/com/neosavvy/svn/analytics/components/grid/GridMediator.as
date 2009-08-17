@@ -29,6 +29,7 @@ package com.neosavvy.svn.analytics.components.grid
 				case ApplicationFacade.LOADED_SUMMARY_STATS:
 					var summaryProxy:OverallTeamStatisticProxy = facade.retrieveProxy( OverallTeamStatisticProxy.NAME ) as OverallTeamStatisticProxy;
 					grid.dataProvider = summaryProxy.overallTeamStats;
+					rateGrid.dataProvider = summaryProxy.overallTeamStats;
 					break;
 				default:
 					break;
@@ -42,6 +43,10 @@ package com.neosavvy.svn.analytics.components.grid
 		
 		protected function get grid():AdvancedDataGrid {
 			return this.gridContainer.summaryStatisticsGrid;
+		}
+		
+		protected function get rateGrid():AdvancedDataGrid {
+			return this.gridContainer.rateSummaryGrid;
 		}
 	}
 }
