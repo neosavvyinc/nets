@@ -36,6 +36,7 @@
 								<includeClass>com.neosavvy.svn.analytics.dto.file.DirectoryNode</includeClass>
 								<includeClass>com.neosavvy.svn.analytics.dto.file.FileNode</includeClass>
 								<includeClass>com.neosavvy.svn.analytics.dto.file.FileSystemNode</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.CodeOwnershipDTO</includeClass>
 							</includeJavaClasses>
 							<beanTemplate>
 								<template>${basedir}/src/main/template/beanBase.gsp
