@@ -1,6 +1,7 @@
 package com.neosavvy.svn.analytics
 {
 	import com.neosavvy.svn.analytics.dto.Author;
+	import com.neosavvy.svn.analytics.dto.request.CodeOwnershipRefineRequest;
 	import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 	import com.neosavvy.svn.analytics.model.AuthorProxy;
 	import com.neosavvy.svn.analytics.model.ReportIntervalProxy;
@@ -8,7 +9,6 @@ package com.neosavvy.svn.analytics
 	
 	import flash.events.Event;
 	import flash.events.KeyboardEvent;
-	import flash.ui.Keyboard;
 	
 	import mx.controls.Button;
 	import mx.controls.List;
@@ -141,6 +141,12 @@ package com.neosavvy.svn.analytics
         	refineRequest.repositories = svnRepositorySelector.selectedItems;
         	
         	sendNotification( ApplicationFacade.REFINE_SEARCH_REQUEST, refineRequest );
+        	
+        	var codeOwnshipRefineSearchRequest:CodeOwnershipRefineRequest = new CodeOwnershipRefineRequest();
+        	codeOwnshipRefineSearchRequest.userNames = refineRequest.userNames;
+        	codeOwnshipRefineSearchRequest.repositories = refineRequest.repositories;
+        	
+        	sendNotification( ApplicationFacade.CODE_OWNERSHIP_REFINE_SEARCH_REQUEST, codeOwnshipRefineSearchRequest );
 		} 
 		 
 		protected function resetSearch(event:Event):void {

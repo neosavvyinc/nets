@@ -10,6 +10,7 @@ import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
 import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
+import com.neosavvy.svn.analytics.dto.request.CodeOwnershipRefineRequest;
 import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 
 public class SvnStatServiceImpl implements SvnStatService {
@@ -63,8 +64,8 @@ public class SvnStatServiceImpl implements SvnStatService {
 		return dao.getRefinedTeamStats(request);
 	}
 
-	public CodeOwnershipDTO[] getOwnership(FileSystemNode parent) {
-		return getCodeOwnershipDAO().getCodeOwnership( parent );
+	public CodeOwnershipDTO[] getOwnership(CodeOwnershipRefineRequest refineRequest) {
+		return getCodeOwnershipDAO().getCodeOwnership( refineRequest );
 	}
 
 }

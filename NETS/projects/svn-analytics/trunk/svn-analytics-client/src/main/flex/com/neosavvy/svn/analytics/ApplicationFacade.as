@@ -1,5 +1,6 @@
 package com.neosavvy.svn.analytics
 {
+	import com.neosavvy.svn.analytics.controller.ownership.GetCodeOwnershipCommand;
 	import com.neosavvy.svn.analytics.controller.search.RefineSearchCommand;
 	import com.neosavvy.svn.analytics.controller.search.ResetSearchCommand;
 	import com.neosavvy.svn.analytics.controller.startup.StartupCommand;
@@ -32,6 +33,7 @@ package com.neosavvy.svn.analytics
 		
 		public static const REFINE_SEARCH_REQUEST:String = "refineSearchRequest";
 		public static const RESET_SEARCH_REQUEST:String = "resetSearchRequest";
+		public static const CODE_OWNERSHIP_REFINE_SEARCH_REQUEST:String = "codeOwnershipRefineSearchRequest";
 		
 		public static const DISPLAY_MANAGE_REPOSITORIES_DIALOG:String = "displayManageRepositoriesDialog";
 		public static const ADD_REPOSITORY:String = "addRepositoryNotification";
@@ -65,6 +67,7 @@ package com.neosavvy.svn.analytics
 			registerCommand( DELETE_REPOSITORY, DeleteSvnRepositoriesCommand );
 			registerCommand( REFRESH_REPOSITORY, RefreshSvnRepositoriesCommand );
 			registerCommand( LOAD_ROOT_NODES_FOR_REPOSITORY, LoadFilesForRepositoryCommand );
+			registerCommand( CODE_OWNERSHIP_REFINE_SEARCH_REQUEST, GetCodeOwnershipCommand );
 		}
 		
 		public function startup( app:SvnAnalyticsApplication ) : void  

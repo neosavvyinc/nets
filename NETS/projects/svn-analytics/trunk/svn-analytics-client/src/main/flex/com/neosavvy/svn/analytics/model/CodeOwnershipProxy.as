@@ -2,6 +2,7 @@ package com.neosavvy.svn.analytics.model
 {
 	import com.neosavvy.svn.analytics.ApplicationFacade;
 	import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
+	import com.neosavvy.svn.analytics.dto.request.CodeOwnershipRefineRequest;
 	
 	import mx.messaging.ChannelSet;
 	import mx.messaging.channels.AMFChannel;
@@ -34,17 +35,21 @@ package com.neosavvy.svn.analytics.model
             svnAnalyticsService.addEventListener(FaultEvent.FAULT, onOwnershipFault );
 		}
 		
-		public function getCodeOwnership( parent:FileSystemNode ):void {
+		public function getCodeOwnership( refineRequest:CodeOwnershipRefineRequest ):void {
 			
-			if( parent == null) {
-				parent = new FileSystemNode();
+			if( refineRequest == null ) {
+				refineRequest = new CodeOwnershipRefineRequest();
 			}
 			
-			if( parent.relativePath == null || parent.relativePath == "" ) {
-				parent.relativePath = "/";
+			if( refineRequest.parentNode == null) {
+				refineRequest.parentNode = new FileSystemNode();
 			}
 			
-			svnAnalyticsService.getOwnership( parent );
+			if( refineRequest.parentNode.relativePath == null || refineRequest.parentNode.relativePath == "" ) {
+				refineRequest.parentNode.relativePath = "/";
+			}
+			
+			svnAnalyticsService.getOwnership( refineRequest );
 			sendNotification( ApplicationFacade.LOAD_FILE_OWNERSHIP_FOR_PARENT );
 		}
 		

@@ -11,10 +11,32 @@
 		<result column="CONTRIBUTION_RATE" property="contributionRatio"/>
     </resultMap>
     
+     <sql id="commonWhereFragment">
+    	RELATIVE_PATH LIKE #parentNode.relativePath#
+   		<isNotEmpty property="userNames">
+	    	AND
+			<iterate property="userNames" prepend="AUTHOR IN" open="("
+				close=")" conjunction=",">
+				#userNames[]#
+	       		</iterate>
+		</isNotEmpty>
+		<isNotEmpty property="repositories" prepend="AND">
+       		<iterate property="repositories" prepend="REPOSITORY_ID IN" open="(" close=")" conjunction=","> 
+       			#repositories[].id#
+       		</iterate>
+       	</isNotEmpty>  
+		<isNotEmpty property="startDate" prepend="AND">
+			REV_DATE &gt;= #startDate#
+        </isNotEmpty>
+        <isNotEmpty property="endDate" prepend="AND">
+       		REV_DATE &lt;= #endDate#
+        </isNotEmpty>
+    </sql>
+    
     <select 
     	id="getOwnership" 
     	resultMap="CodeOwnershipDTOResultMap"
-    	parameterClass="com.neosavvy.svn.analytics.dto.file.FileSystemNode">
+    	parameterClass="com.neosavvy.svn.analytics.dto.request.CodeOwnershipRefineRequest">
         SELECT 
 		    AUTHOR
 		    ,NUM_LINES_IN_REVISION
@@ -27,7 +49,7 @@
 		FROM 
 		    SVN_FILE_SYSTEM_STATISTIC 
 		WHERE 
-		    RELATIVE_PATH LIKE #relativePath#
+	    	<include refid="commonWhereFragment"/>
 		GROUP BY
 		    AUTHOR) A,
 		(SELECT 
@@ -35,7 +57,7 @@
 		FROM 
 		    SVN_FILE_SYSTEM_STATISTIC 
 		WHERE 
-		    RELATIVE_PATH LIKE #relativePath#
+		   	<include refid="commonWhereFragment"/>
 		) B
     </select>
 

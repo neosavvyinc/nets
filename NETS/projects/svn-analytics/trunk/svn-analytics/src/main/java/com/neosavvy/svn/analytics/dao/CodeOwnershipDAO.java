@@ -1,10 +1,10 @@
 package com.neosavvy.svn.analytics.dao;
 
 import com.neosavvy.svn.analytics.dto.CodeOwnershipDTO;
-import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
+import com.neosavvy.svn.analytics.dto.request.CodeOwnershipRefineRequest;
 
 public interface CodeOwnershipDAO {
 	
-	public CodeOwnershipDTO[] getCodeOwnership(FileSystemNode parent);
+	public CodeOwnershipDTO[] getCodeOwnership(CodeOwnershipRefineRequest parent);
 
 }

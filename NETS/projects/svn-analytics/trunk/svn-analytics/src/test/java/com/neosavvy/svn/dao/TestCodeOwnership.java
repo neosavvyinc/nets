@@ -7,7 +7,9 @@ import org.springframework.util.Assert;
 import com.neosavvy.junit4.BaseSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dao.CodeOwnershipDAO;
 import com.neosavvy.svn.analytics.dto.CodeOwnershipDTO;
+import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
+import com.neosavvy.svn.analytics.dto.request.CodeOwnershipRefineRequest;
 
 public class TestCodeOwnership extends BaseSpringAwareTestCase {
 
@@ -20,7 +22,30 @@ public class TestCodeOwnership extends BaseSpringAwareTestCase {
 		FileSystemNode parent = new FileSystemNode();
 		parent.setRelativePath("/");
 		
-		CodeOwnershipDTO[] repositoryOwnership = codeOwnershipDAO.getCodeOwnership(parent);
+		CodeOwnershipRefineRequest request = new CodeOwnershipRefineRequest();
+		request.setParentNode(parent);
+		
+		CodeOwnershipDTO[] repositoryOwnership = codeOwnershipDAO.getCodeOwnership(request);
+		
+		Assert.notNull(repositoryOwnership);
+		
+	}
+	
+	@Test
+	public void testGetOwnershipOfRootDirectoryByRepository() {
+		
+		FileSystemNode parent = new FileSystemNode();
+		parent.setRelativePath("/");
+		
+		CodeOwnershipRefineRequest request = new CodeOwnershipRefineRequest();
+		request.setParentNode(parent);
+		
+		SVNRepositoryDTO repository = new SVNRepositoryDTO();
+		repository.setId(41);
+		
+		request.setRepositories(new SVNRepositoryDTO[]{repository});
+		
+		CodeOwnershipDTO[] repositoryOwnership = codeOwnershipDAO.getCodeOwnership(request);
 		
 		Assert.notNull(repositoryOwnership);
 		

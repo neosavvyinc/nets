@@ -59,5 +59,31 @@ public class RefineSearchRequest {
 	public void setRepositories(SVNRepositoryDTO[] repositories) {
 		this.repositories = repositories;
 	}
+
+	/**
+	 * Constructs a <code>String</code> with all attributes
+	 * in name = value format.
+	 *
+	 * @return a <code>String</code> representation 
+	 * of this object.
+	 */
+	public String toString()
+	{
+	    final String TAB = "    ";
+	    
+	    String retValue = "";
+	    
+	    retValue = "RefineSearchRequest ( "
+	        + super.toString() + TAB
+	        + "startDate = " + this.startDate + TAB
+	        + "endDate = " + this.endDate + TAB
+	        + "incrementType = " + this.incrementType + TAB
+	        + "userNames = " + this.userNames + TAB
+	        + "repositories = " + this.repositories + TAB
+	        + " )";
+	
+	    return retValue;
+	}
+
 	
 }

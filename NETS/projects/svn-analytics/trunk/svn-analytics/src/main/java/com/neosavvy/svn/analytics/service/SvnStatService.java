@@ -6,6 +6,7 @@ import com.neosavvy.svn.analytics.dto.HistoricalTeamStatistic;
 import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
+import com.neosavvy.svn.analytics.dto.request.CodeOwnershipRefineRequest;
 import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 
 public interface SvnStatService {
@@ -22,6 +23,6 @@ public interface SvnStatService {
 
 	public SVNRepositoryInterval getRepositoryInterval();
 	
-	public CodeOwnershipDTO[] getOwnership( FileSystemNode parent );
+	public CodeOwnershipDTO[] getOwnership( CodeOwnershipRefineRequest refineRequest );
 
 }

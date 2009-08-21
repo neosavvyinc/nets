@@ -32,6 +32,7 @@
 								<includeClass>com.neosavvy.svn.analytics.dto.OverallTeamStatistic</includeClass>
 								<includeClass>com.neosavvy.svn.analytics.dto.SVNRepositoryInterval</includeClass>
 								<includeClass>com.neosavvy.svn.analytics.dto.request.RefineSearchRequest</includeClass>
+								<includeClass>com.neosavvy.svn.analytics.dto.request.CodeOwnershipRefineRequest</includeClass>
 								<includeClass>com.neosavvy.svn.analytics.dto.SVNRepositoryDTO</includeClass>
 								<includeClass>com.neosavvy.svn.analytics.dto.file.DirectoryNode</includeClass>
 								<includeClass>com.neosavvy.svn.analytics.dto.file.FileNode</includeClass>
