@@ -1,0 +1,15 @@
+<project name="SVN Spy">
+  <bannerLeft>
+    <name>SVN Spy</name>
+    <src>http://maven.apache.org/images/apache-maven-project.png</src>
+    <href>http://www.neosavvy.com/svn-analytics-webapp/</href>
+  </bannerLeft>
+  <bannerRight>
+    <src>http://maven.apache.org/images/maven-small.gif</src>
+  </bannerRight>
+  <body>
+    <links>
+      <item name="Neosavvy" href="http://www.neosavvy.com/" />
+    </links>
+  </body>
+</project>

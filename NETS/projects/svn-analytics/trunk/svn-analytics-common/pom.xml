@@ -18,7 +18,7 @@
 			<plugin>
 				<groupId>org.sonatype.flexmojos</groupId>
 				<artifactId>flexmojos-maven-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>${flexmojos.version}</version>
 				<executions>
 					<execution>
 						<goals>
