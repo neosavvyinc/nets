@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    
+    <parent>
+		<groupId>com.neosavvy.skeleton</groupId>
+        <artifactId>maven-flex-webapp-skeleton-toplevel</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.neosavvy.skeleton</groupId>
+	<artifactId>skeleton-flex-model-lib</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>skeleton-flex-model-lib</name>
+    <packaging>swc</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<version>3.0.0</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<includeJavaClasses>
+								<includeClass>com.neosavvy.skeleton.dto.MessageDTO</includeClass>
+                            </includeJavaClasses>
+							<beanTemplate>
+								<template>${basedir}/src/main/template/beanBase.gsp</template>
+								<template>${basedir}/src/main/template/bean.gsp
+								</template>
+							</beanTemplate>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<debug>true</debug>
+					<locales>
+						<param>en_US</param>
+					</locales>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.neosavvy.skeleton</groupId>
+			<artifactId>skeleton-java-lib</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex.version}</version>
+			<type>pom</type>
+		</dependency>
+	</dependencies>
+</project>

@@ -1,0 +1,113 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+    <parent>
+		<groupId>com.neosavvy.skeleton</groupId>
+        <artifactId>maven-flex-webapp-skeleton-toplevel</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<groupId>com.neosavvy.skeleton</groupId>
+	<artifactId>skeleton-webapp</artifactId>
+	<packaging>war</packaging>
+	<name>skeleton-webapp</name>
+
+	<build>
+		<finalName>skeleton-webapp</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-swf-resources</id>
+						<goals>
+							<goal>copy-flex-resources</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<version>6.1.15</version>
+			</plugin>
+			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-config</id>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/flex</outputDirectory>
+							<includeArtifacIds>skeleton-config</includeArtifacIds>
+							<includeGroupIds>${project.groupId}</includeGroupIds>
+							<includeClassifiers>resources</includeClassifiers>
+							<excludeTransitive>true</excludeTransitive>
+							<excludeTypes>jar,swf</excludeTypes>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
+    
+    <dependencies>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>skeleton-java-lib</artifactId>
+			<version>1.0-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>skeleton-flex-client</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<type>swf</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>skeleton-config</artifactId>
+			<version>1.0-SNAPSHOT</version>
+			<classifier>resources</classifier>
+			<type>zip</type>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.blazeds</groupId>
+			<artifactId>blazeds-remoting</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.blazeds</groupId>
+			<artifactId>blazeds-common</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.blazeds</groupId>
+			<artifactId>blazeds-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.blazeds</groupId>
+			<artifactId>blazeds-proxy</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.blazeds</groupId>
+			<artifactId>blazeds-opt</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>javax.j2ee</groupId>
+			<artifactId>j2ee</artifactId>
+		</dependency>
+
+	</dependencies>
+
+</project>
