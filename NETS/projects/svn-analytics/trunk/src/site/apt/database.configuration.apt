@@ -1,0 +1,42 @@
+SVN Spy Environment Configuration
+
+	To configure the SVN Spy application it is necessary to point to an oracle database 
+	that has the schema necessary to support the application. There is a plan to 
+	eventually expose more support for other databases but at this time Oracle is the 
+	primary target database as it appears to be widely supported behind most corporate 
+	firewalls where this software is intended for use. 
+
+* Create a svnanalytics.properties file in /tmp for staging or development purposes. 
+
+	In your /tmp directory the Spring application context is configured to search for 
+	a file named svnanalytics.properties to override the default values. Placing the 
+	following properties in a file on a line by themselves is the proper way to 
+	override the default values. 
+
++----
+jdbc.url=jdbc:oracle:thin:@<hostname>:<port>:<sid>
+jdbc.user=<username>
+jdbc.pass=<password>
++----
+
+	The \< and \> should be left off and replaced by actual values. If you do not 
+	wish to override any defaults then just leave the property out of the file and 
+	the default will be used.	
+
+* Add a Java parameter to the JVM used to startup the deployed application
+
+	In a production environment it may be bad practice to leave the properties 
+	file in the /tmp directory where often times other users will have access 
+	to read and write and even delete the file. In that case create the file 
+	in a secure location that the application server is allowed to read from 
+	and add the following line to the JVM arguments that are used to start 
+	the application server process that runs the WAR. 
+	
++----	
+-DconfigOverrideFilePath=/path/to/svnanalytics.properties
++----
+
+	Placing any of the values from the previous section in this file will 
+	take precendence over the defaults and any values in the 
+	/tmp/svnanalytics.properties file. 
+

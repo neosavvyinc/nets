@@ -45,8 +45,50 @@
 		<spring.version>2.5.6</spring.version>
 	</properties>
 
+	<licenses>
+		<license>
+			<name></name>
+			<url></url>
+			<distribution></distribution>
+			<comments></comments>
+		</license>
+	</licenses>
+	<organization>
+		<name>Neosavvy, Inc</name>
+		<url>www.neosavvy.com</url>
+	</organization>
+	<developers>
+		<developer>
+			<id>aparrish</id>
+			<name>Adam Parrish</name>
+			<email>aparrish@neosavvy.com</email>
+			<url>http://www.neosavvy.com</url>
+			<organization>Neosavvy, Inc</organization>
+			<organizationUrl>http://www.neosavvy.com</organizationUrl>
+			<roles>
+				<role>developer</role>
+				<role>documentation</role>
+				<role>management</role>
+			</roles>
+			<timezone>-5</timezone>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>Adam Parrish</name>
+			<email>aparrish@neosavvy.com</email>
+			<url>http://www.neosavvy.com</url>
+			<organization>Neosavvy, Inc</organization>
+			<organizationUrl>http://www.neosavvy.com</organizationUrl>
+			<roles>
+				<role>developer</role>
+				<role>documentation</role>
+				<role>management</role>
+			</roles>
+			<timezone>-5</timezone>
+		</contributor>
+	</contributors>
 	
-
 	<build>
 		<pluginManagement>
 			<plugins>
