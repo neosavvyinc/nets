@@ -12,10 +12,16 @@
 		http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
 
 	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-		<property name="location" value="classpath:svnanalytics.properties"/>
+		class="com.neosavvy.spring.PropertyPlaceHolderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:svnanalyticsDefaults.properties</value>
+				<value>${configOverridePath}/svnanalytics.properties</value>
+				<value>${configOverrideFilePath}</value>
+			</list>
+		</property>
 	</bean>
-
+	
 	<bean id="localOracleDataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="oracle.jdbc.pool.OracleDataSource"/>
 		<property name="url" value="${jdbc.url}"/>
