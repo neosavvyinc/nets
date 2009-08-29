@@ -75,15 +75,13 @@
 	</developers>
 	<contributors>
 		<contributor>
-			<name>Adam Parrish</name>
-			<email>aparrish@neosavvy.com</email>
-			<url>http://www.neosavvy.com</url>
-			<organization>Neosavvy, Inc</organization>
-			<organizationUrl>http://www.neosavvy.com</organizationUrl>
+			<name>Jaivin Anzalota</name>
+			<email>janzalota@gmail.com</email>
+			<organization>Roundarch, Inc</organization>
+			<organizationUrl>http://www.roundarch.com</organizationUrl>
 			<roles>
-				<role>developer</role>
-				<role>documentation</role>
-				<role>management</role>
+				<role>Visual Designer</role>
+				<role>Logo extraordinaire</role>
 			</roles>
 			<timezone>-5</timezone>
 		</contributor>
