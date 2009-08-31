@@ -38,10 +38,10 @@ public class TestSvnLogEntryDAOCRUD extends BaseTransactionalSpringAwareTestCase
 		statisticWithOutMessage.setAuthor("svn.integration.test");
 		statisticWithOutMessage.setDate(new Date());
 		statisticWithOutMessage.setMessage("   ");
-		statisticWithOutMessage.setNumFilesAddedInRevision(0);
-		statisticWithOutMessage.setNumFilesDeletedInRevision(0);
-		statisticWithOutMessage.setNumFilesInRevision(0);
-		statisticWithOutMessage.setNumFilesModifiedInRevision(0);
+		statisticWithOutMessage.setNumFilesAddedInRevision(10);
+		statisticWithOutMessage.setNumFilesDeletedInRevision(10);
+		statisticWithOutMessage.setNumFilesInRevision(10);
+		statisticWithOutMessage.setNumFilesModifiedInRevision(10);
 		statisticWithOutMessage.setRevision(103);
 		statisticWithOutMessage.setSvnRepositoryUrl("http://test.url/fake");
 		
