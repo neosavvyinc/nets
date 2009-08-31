@@ -1,6 +1,7 @@
 package com.neosavvy.svn.importer;
 
 import org.apache.log4j.Logger;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -17,11 +18,13 @@ public class TestSVNRepositoryConverter extends BaseSpringAwareTestCase {
 	private SVNRepositoryDatabaseConverter converter;
 
 	@Test
+	@Ignore
 	public void testRun() {
 		converter.run();
 	}
 	
 	@Test
+	@Ignore
 	public void testRefreshRequest() {
 		SVNRepositoryDTO repository = new SVNRepositoryDTO();
 		repository.setId(34);
@@ -33,6 +36,7 @@ public class TestSVNRepositoryConverter extends BaseSpringAwareTestCase {
 	}
 	
 	@Test
+	@Ignore
 	public void testRefreshRequest1() {
 		SVNRepositoryDTO repository = new SVNRepositoryDTO();
 		repository.setId(34);
