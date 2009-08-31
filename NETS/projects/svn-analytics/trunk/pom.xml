@@ -22,10 +22,20 @@
 	</scm>
 
 	<distributionManagement>
+		<repository>
+			<id>nexus</id>
+			<name>Nexus Releases Repository</name>
+			<url>http://www.neosavvy.com:8081/nexus/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>nexus</id>
+			<name>Nexus Snapshots Repository</name>
+			<url>http://www.neosavvy.com:8081/nexus/content/repositories/snapshots</url>
+		</snapshotRepository>
 		<site>
 			<id>www.neosavvy.com</id>
-      			<url>scp://www.neosavvy.com/var/www/svn-analytics/</url>
-		</site>	
+			<url>scp://www.neosavvy.com/var/www/svn-analytics/</url>
+		</site>
 	</distributionManagement>
 	
 	<modules>
