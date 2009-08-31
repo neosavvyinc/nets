@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<bean id="propertyConfigurer"
+		class="com.neosavvy.spring.PropertyPlaceHolderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:svnanalyticsDefaults.properties</value>
+				<value>${configOverridePath}/svnanalytics.properties</value>
+				<value>${configOverrideFilePath}</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="localOracleDataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="oracle.jdbc.pool.OracleDataSource"/>
+		<property name="url" value="${jdbc.url}"/>
+		<property name="username" value="${jdbc.user}"/>
+		<property name="password" value="${jdbc.pass}"/>
+		<property name="initialSize" value="5"/>
+		<property name="maxActive" value="10"/>
+	</bean>
+
+<!--	<bean id="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">-->
+<!--		<property name="jndiName" value="jdbc/SvnAnalyticsDatasource"/>-->
+<!--		<property name="resourceRef" value="true"/>-->
+<!--	</bean>-->
+
+</beans>
