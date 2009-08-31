@@ -24,7 +24,7 @@
 	<distributionManagement>
 		<site>
 			<id>www.neosavvy.com</id>
-      		<url>scp://www.neosavvy.com/var/www/svn-analytics/</url>
+      			<url>scp://www.neosavvy.com/var/www/svn-analytics/</url>
 		</site>	
 	</distributionManagement>
 	
