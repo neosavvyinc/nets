@@ -12,6 +12,9 @@
 		<href>http://www.neosavvy.com/</href>
 	</bannerLeft>
 	<body>
+		<menu name="Installation">
+			<item name="First Steps" href="installation.html"/>
+		</menu>
 		<menu name="Configuration">
 			<item name="Database Configuration" href="database.configuration.html"/>
 		</menu>
