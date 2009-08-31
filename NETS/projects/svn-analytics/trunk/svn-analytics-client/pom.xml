@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>svn-analytics-toplevel</artifactId>
 		<groupId>com.neosavvy.svn.analytics</groupId>
-		<version>1.0.0</version>
+		<version>1.0.1-SNAPSHOT</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -91,13 +91,13 @@
 		<dependency>
 			<groupId>com.neosavvy.svn.analytics</groupId>
 			<artifactId>svn-analytics-common</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1-SNAPSHOT</version>
 			<type>swc</type>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>svn-analytics-config</artifactId>
-			<version>1.0.0</version>
+			<version>1.0.1-SNAPSHOT</version>
 			<classifier>resources</classifier>
 			<type>zip</type>
 			<scope>provided</scope>
