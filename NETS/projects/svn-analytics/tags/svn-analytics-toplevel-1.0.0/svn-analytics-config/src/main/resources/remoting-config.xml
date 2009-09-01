@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<service id="remoting-service" class="flex.messaging.services.RemotingService">
+
+    <adapters>
+        <adapter-definition id="java-object"
+            class="flex.messaging.services.remoting.adapters.JavaAdapter"
+            default="true" />
+    </adapters>
+
+    <default-channels>
+        <channel ref="svn-analytics-amf" />
+    </default-channels>
+
+    <destination id="svnStatService">
+        <properties>
+            <factory>spring</factory>
+            <source>svnStatService</source>
+        </properties>
+    </destination>
+
+	<destination id="svnRepositoryService">
+        <properties>
+            <factory>spring</factory>
+            <source>svnRepositoryService</source>
+        </properties>
+    </destination>
+
+</service>

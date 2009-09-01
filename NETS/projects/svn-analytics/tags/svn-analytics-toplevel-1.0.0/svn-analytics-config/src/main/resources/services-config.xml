@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services-config>
+
+    <factories>
+        <factory id="spring"
+            class="com.neosavvy.flex.SpringFactory" />
+    </factories>
+
+    <services>
+        <!-- Remote services -->
+        <service-include file-path="remoting-config.xml" />
+
+        <!-- Default channels -->
+        <default-channels>
+            <channel ref="svn-analytics-amf" />
+        </default-channels>
+    </services>
+
+    <channels>
+        <channel-definition id="svn-analytics-amf"
+            class="mx.messaging.channels.AMFChannel">
+            <endpoint
+                url="http://{server.name}:{server.port}/{context.root}/messagebroker/amf"
+                class="flex.messaging.endpoints.AMFEndpoint" />
+            <properties>
+                <polling-enabled>false</polling-enabled>
+                <!--
+                    HTTPS requests on some browsers do not work when
+                    pragma "no-cache" are set
+                -->
+                <add-no-cache-headers>false</add-no-cache-headers>
+                <!--
+                    Optional. Use this to limit the client channel's
+                    connect attempt to the specified time interval.
+                    <connect-timeout-seconds>5</connect-timeout-seconds>
+                -->
+                <!-- removes headers from request if true -->
+                <serialization>
+                    <enable-small-messages>false
+                    </enable-small-messages>
+                </serialization>
+            </properties>
+        </channel-definition>
+
+    </channels>
+
+    <logging>
+        <target class="flex.messaging.log.ConsoleTarget" level="Debug">
+            <properties>
+                <prefix>[BlazeDS] </prefix>
+                <includeDate>true</includeDate>
+                <includeTime>true</includeTime>
+                <includeLevel>false</includeLevel>
+                <includeCategory>false</includeCategory>
+            </properties>
+            <filters>
+                <pattern>Endpoint.*</pattern>
+                <pattern>Service.*</pattern>
+                <pattern>Configuration</pattern>
+            </filters>
+        </target>
+    </logging>
+    <logging>
+        <target class="flex.messaging.log.ServletLogTarget"
+            level="Error">
+            <properties>
+                <prefix>[BlazeDS] </prefix>
+                <includeDate>true</includeDate>
+                <includeTime>true</includeTime>
+                <includeLevel>false</includeLevel>
+                <includeCategory>false</includeCategory>
+            </properties>
+            <filters>
+                <pattern>Endpoint.*</pattern>
+                <pattern>Service.*</pattern>
+                <pattern>Configuration</pattern>
+                <pattern>Status.*</pattern>
+            </filters>
+        </target>
+    </logging>
+
+    <system>
+        <manageable>false</manageable>
+        <redeploy>
+            <enabled>false</enabled>
+            <!--
+                <watch-interval>20</watch-interval>
+                <watch-file>{context.root}/WEB-INF/flex/services-config.xml</watch-file>
+                <watch-file>{context.root}/WEB-INF/flex/proxy-config.xml</watch-file>
+                <watch-file>{context.root}/WEB-INF/flex/remoting-config.xml</watch-file>
+                <watch-file>{context.root}/WEB-INF/flex/messaging-config.xml</watch-file>
+                <watch-file>{context.root}/WEB-INF/flex/data-management-config.xml</watch-file>
+                <touch-file>{context.root}/WEB-INF/web.xml</touch-file>
+            -->
+        </redeploy>
+    </system>
+
+</services-config>
