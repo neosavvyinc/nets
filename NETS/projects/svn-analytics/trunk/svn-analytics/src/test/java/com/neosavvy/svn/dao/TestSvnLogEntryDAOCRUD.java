@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.neosavvy.junit4.BaseTransactionalSpringAwareTestCase;
@@ -16,7 +19,11 @@ import com.neosavvy.svn.analytics.dto.SVNStatistic;
 @Transactional
 public class TestSvnLogEntryDAOCRUD extends BaseTransactionalSpringAwareTestCase {
 
-	@Autowired
+	@Override @Autowired
+    public void setDataSource(@Qualifier("oracleDataSource") DataSource dataSource) {
+        super.setDataSource(dataSource);
+    }
+
 	private SVNStatisticDAO dao;
 
 	@Test

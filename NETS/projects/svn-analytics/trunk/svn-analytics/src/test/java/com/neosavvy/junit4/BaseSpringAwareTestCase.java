@@ -7,6 +7,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 @ContextConfiguration(locations = {
 		"classpath:baseApplicationContext.xml"
+		,"classpath:oracleDataSource.xml"
 		,"classpath:ibatisDataContext.xml"
 		,"classpath:serviceContext.xml"
 		,"classpath:svnRepositoryConfigurations.xml"

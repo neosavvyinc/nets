@@ -53,7 +53,6 @@ public class TestFileNodeIbatisDaoImpl extends
 		FileSystemNode node = new FileSystemNode();
 		node.setAuthor("adam");
 		node.setFileName("test");
-		node.setId(1);
 		node.setLastChangedRevision(1);
 		node.setNumberLines(1);
 		node.setParentDirectory("parentDir");
@@ -65,7 +64,6 @@ public class TestFileNodeIbatisDaoImpl extends
 		FileSystemNode node1 = new FileSystemNode();
 		node1.setAuthor("adam1");
 		node1.setFileName("test1");
-		node1.setId(1);
 		node1.setLastChangedRevision(1);
 		node1.setNumberLines(1);
 		node1.setParentDirectory("parentDir1");
@@ -110,7 +108,6 @@ public class TestFileNodeIbatisDaoImpl extends
 		
 		FileSystemNode node = new FileSystemNode();
 		node.setAuthor("adam1");
-		node.setId(1);
 		node.setLastChangedRevision(1);
 		node.setParentDirectory("parentDir1");
 		node.setRelativePath("relativePath1");
@@ -120,7 +117,6 @@ public class TestFileNodeIbatisDaoImpl extends
 		
 		FileSystemNode node1 = new FileSystemNode();
 		node1.setAuthor("adam1");
-		node1.setId(1);
 		node1.setLastChangedRevision(1);
 		node1.setParentDirectory("parentDir1");
 		node1.setRelativePath("relativePath1");
@@ -145,7 +141,6 @@ public class TestFileNodeIbatisDaoImpl extends
 		
 		FileSystemNode node = new FileSystemNode();
 		node.setAuthor("adam1");
-		node.setId(1);
 		node.setLastChangedRevision(1);
 		node.setParentDirectory(null);
 		node.setRelativePath("relativePath1");
@@ -156,7 +151,6 @@ public class TestFileNodeIbatisDaoImpl extends
 		
 		FileSystemNode node1 = new FileSystemNode();
 		node1.setAuthor("adam1");
-		node1.setId(1);
 		node1.setLastChangedRevision(1);
 		node1.setParentDirectory(null);
 		node1.setRelativePath("relativePath2");
@@ -189,7 +183,6 @@ public class TestFileNodeIbatisDaoImpl extends
 		
 		FileSystemNode node = new FileSystemNode();
 		node.setAuthor("adam1");
-		node.setId(1);
 		node.setLastChangedRevision(1);
 		node.setParentDirectory(null);
 		node.setRelativePath("relativePath1");
@@ -201,7 +194,6 @@ public class TestFileNodeIbatisDaoImpl extends
 		
 		FileSystemNode node1 = new FileSystemNode();
 		node1.setAuthor("adam1");
-		node1.setId(1);
 		node1.setLastChangedRevision(1);
 		node1.setParentDirectory(null);
 		node1.setRelativePath("relativePath2");

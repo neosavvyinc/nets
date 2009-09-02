@@ -2,7 +2,11 @@ package com.neosavvy.svn.analytics.dao.ibatis;
 
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 import com.neosavvy.svn.analytics.dao.CodeOwnershipDAO;
