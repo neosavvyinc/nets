@@ -5,7 +5,7 @@ import org.junit.Test;
 
 import com.neosavvy.junit4.BaseSpringAwareTestCase;
 
-public class SpringIntegrationTest extends BaseSpringAwareTestCase {
+public abstract class AbstractSpringIntegrationTest extends BaseSpringAwareTestCase {
 
     @Test
     public void testSpringContextNotNull() {

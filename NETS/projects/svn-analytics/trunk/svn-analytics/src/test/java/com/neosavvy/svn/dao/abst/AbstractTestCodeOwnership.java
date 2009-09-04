@@ -1,4 +1,4 @@
-package com.neosavvy.svn.dao;
+package com.neosavvy.svn.dao.abst;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 import com.neosavvy.svn.analytics.dto.request.CodeOwnershipRefineRequest;
 
-public class TestCodeOwnership extends BaseSpringAwareTestCase {
+public abstract class AbstractTestCodeOwnership extends BaseSpringAwareTestCase {
 
 	@Autowired
 	protected CodeOwnershipDAO codeOwnershipDAO;

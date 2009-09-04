@@ -1,4 +1,4 @@
-package com.neosavvy.svn.dao;
+package com.neosavvy.svn.dao.abst;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,13 +17,9 @@ import com.neosavvy.svn.analytics.dto.OverallTeamStatistic;
 import com.neosavvy.svn.analytics.dto.SVNStatistic;
 
 @Transactional
-public class TestSvnLogEntryDAOCRUD extends BaseTransactionalSpringAwareTestCase {
+public abstract class AbstractTestSvnLogEntryDAOCRUD extends BaseTransactionalSpringAwareTestCase {
 
-	@Override @Autowired
-    public void setDataSource(@Qualifier("oracleDataSource") DataSource dataSource) {
-        super.setDataSource(dataSource);
-    }
-
+	@Autowired
 	private SVNStatisticDAO dao;
 
 	@Test

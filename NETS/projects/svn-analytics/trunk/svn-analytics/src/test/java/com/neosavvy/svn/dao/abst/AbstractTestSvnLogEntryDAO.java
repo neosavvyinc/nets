@@ -1,4 +1,4 @@
-package com.neosavvy.svn.dao;
+package com.neosavvy.svn.dao.abst;
 
 import org.apache.log4j.Logger;
 import org.junit.Assert;
@@ -14,10 +14,10 @@ import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryInterval;
 import com.neosavvy.svn.analytics.dto.request.RefineSearchRequest;
 
-public class TestSvnLogEntryDAO extends BaseSpringAwareTestCase {
+public abstract class AbstractTestSvnLogEntryDAO extends BaseSpringAwareTestCase {
 
     private static final Logger logger = Logger
-            .getLogger(TestSvnLogEntryDAO.class);
+            .getLogger(AbstractTestSvnLogEntryDAO.class);
 
     @Autowired
     private SVNStatisticDAO dao;

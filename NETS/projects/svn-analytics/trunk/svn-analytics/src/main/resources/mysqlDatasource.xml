@@ -13,6 +13,17 @@
 	
 	<tx:annotation-driven/>
 
+	<bean id="propertyConfigurer"
+		class="com.neosavvy.spring.PropertyPlaceHolderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:com/neosavvy/svn/analytics/dao/ibatis/mysql/svnanalyticsDefaults.properties</value>
+				<value>${configOverridePath}/svnanalytics.properties</value>
+				<value>${configOverrideFilePath}</value>
+			</list>
+		</property>
+	</bean>
+
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="mysqlDataSource"/>	
 	</bean>

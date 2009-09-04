@@ -1,4 +1,4 @@
-package com.neosavvy.svn.dao;
+package com.neosavvy.svn.dao.abst;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,7 +14,7 @@ import com.neosavvy.junit4.BaseTransactionalSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dao.SVNFileSystemNodeDAO;
 import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 
-public class TestFileNodeIbatisDaoImpl extends
+public abstract class AbstractTestFileNodeIbatisDaoImpl extends
 		BaseTransactionalSpringAwareTestCase {
 	
 	@Autowired
@@ -22,7 +22,7 @@ public class TestFileNodeIbatisDaoImpl extends
 	
 	@Test
 	public void testSingleFileSave() {
-		PropertyConfigurator.configure(TestFileNodeIbatisDaoImpl.class.getClassLoader().getResource("log4j.test.properties"));
+		PropertyConfigurator.configure(AbstractTestFileNodeIbatisDaoImpl.class.getClassLoader().getResource("log4j.test.properties"));
 		deleteFromTables("SVN_FILE_SYSTEM_STATISTIC");
 		
 		FileSystemNode node = new FileSystemNode();
@@ -134,7 +134,7 @@ public class TestFileNodeIbatisDaoImpl extends
 	
 	@Test
 	public void testGetChildDirectories() {
-		PropertyConfigurator.configure(TestFileNodeIbatisDaoImpl.class.getClassLoader().getResource("log4j.test.properties"));
+		PropertyConfigurator.configure(AbstractTestFileNodeIbatisDaoImpl.class.getClassLoader().getResource("log4j.test.properties"));
 		deleteFromTables("SVN_FILE_SYSTEM_STATISTIC");
 		
 		List<FileSystemNode> nodes = new ArrayList<FileSystemNode>();
@@ -176,7 +176,7 @@ public class TestFileNodeIbatisDaoImpl extends
 	
 	@Test
 	public void testGetChildFiles() {
-		PropertyConfigurator.configure(TestFileNodeIbatisDaoImpl.class.getClassLoader().getResource("log4j.test.properties"));
+		PropertyConfigurator.configure(AbstractTestFileNodeIbatisDaoImpl.class.getClassLoader().getResource("log4j.test.properties"));
 		deleteFromTables("SVN_FILE_SYSTEM_STATISTIC");
 		
 		List<FileSystemNode> nodes = new ArrayList<FileSystemNode>();

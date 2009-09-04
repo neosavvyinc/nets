@@ -4,11 +4,15 @@ import org.apache.log4j.Logger;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
 
 import com.neosavvy.junit4.BaseSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.importer.SVNRepositoryDatabaseConverter;
 
+@ContextConfiguration(locations = {
+		"classpath:mysqlDatasource.xml"
+        })
 public class TestSVNRepositoryConverter extends BaseSpringAwareTestCase {
 
 	private static final Logger logger = Logger

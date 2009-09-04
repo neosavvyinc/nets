@@ -1,4 +1,4 @@
-package com.neosavvy.svn.dao;
+package com.neosavvy.svn.dao.abst;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import com.neosavvy.junit4.BaseTransactionalSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dao.SVNRepositoryDAO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 
-public class TestSvnRepositoryDAO extends BaseTransactionalSpringAwareTestCase {
+public abstract class AbstractTestSvnRepositoryDAO extends BaseTransactionalSpringAwareTestCase {
 
 	@Autowired
 	private SVNRepositoryDAO repositoryDAO;
