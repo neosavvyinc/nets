@@ -9,7 +9,7 @@
   	<context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
-        classpath:baseApplicationContext.xml
+		classpath:${database.type}Datasource.xml
 		classpath:ibatisDataContext.xml
 		classpath:serviceContext.xml
 		classpath:svnRepositoryConfigurations.xml

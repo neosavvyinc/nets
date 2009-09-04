@@ -72,6 +72,15 @@
 	</dependencies>
 	<build>
 		<finalName>svn-analytics</finalName>
+		<resources>
+            <resource>
+                <directory>src/main/webapp/WEB-INF</directory>
+                <filtering>true</filtering>
+                <includes>
+                	<include>**/*web.xml</include>
+                </includes>
+            </resource>
+        </resources>
 		<plugins>
 			<plugin>
 				<groupId>org.sonatype.flexmojos</groupId>
@@ -110,11 +119,43 @@
 					</execution>
 				</executions>
 			</plugin>
-
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<configuration>
+				    <webResources>
+				      <webResource>
+				        <directory>${basedir}/src/main/webapp/WEB-INF</directory>
+				        <includes>
+				          <include>web.xml</include>
+				        </includes>
+				        <targetPath>WEB-INF</targetPath>
+				        <filtering>true</filtering>
+				      </webResource>
+				    </webResources>
+				  </configuration> 
+			</plugin>
 		</plugins>
 	</build>
-
-
-
+	
+	<profiles>
+		<profile>
+			<id>oracle</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<database.type>oracle</database.type>
+			</properties>
+		</profile>
+		<profile>
+			<id>mysql</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<properties>
+				<database.type>mysql</database.type>
+			</properties>
+		</profile>
+	</profiles>
 
 </project>
