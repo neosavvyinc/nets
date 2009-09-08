@@ -81,23 +81,15 @@
     <insert 
     	id="saveSvnRepository" 
     	parameterClass="SvnRepository">
-<!--	    <selectKey keyProperty="id" resultClass="int">-->
-<!--			SELECT SVN_REPOSITORY_SEQ.NEXTVAL AS VALUE FROM DUAL -->
-<!--		</selectKey>-->
-		<selectKey type="post" resultClass="int" keyProperty="id">
-		    SELECT LAST_INSERT_ID() AS VALUE
-		</selectKey>
     	INSERT INTO SVN_REPOSITORY ( 
-			ID
-			,NAME
+			NAME
 			,URL
 			,USERNAME
 			,PASSWORD
 			,START_REV
 			,END_REV
 		) VALUES (
-			#id#
-			,#name#
+			#name#
 			,#url#
 		    ,#userName#
 		    ,#password#
@@ -109,7 +101,7 @@
 	<delete id="deleteRepository" parameterClass="SvnRepository">
 		DELETE FROM SVN_REPOSITORY 
 		WHERE
-			ID = #id# 
+			URL = #url#
 	</delete>
 
 </sqlMap>

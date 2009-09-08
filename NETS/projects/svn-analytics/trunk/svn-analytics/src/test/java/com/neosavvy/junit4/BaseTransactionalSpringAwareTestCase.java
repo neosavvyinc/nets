@@ -1,5 +1,6 @@
 package com.neosavvy.junit4;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.junit.Before;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
@@ -14,6 +15,6 @@ public abstract class BaseTransactionalSpringAwareTestCase extends AbstractTrans
 
 	@Before
 	public void setUp() {
-		logger.info("Setting up testcase");
+		PropertyConfigurator.configure(BaseSpringAwareTestCase.class.getClassLoader().getResource("log4j.test.properties"));
 	}
 }

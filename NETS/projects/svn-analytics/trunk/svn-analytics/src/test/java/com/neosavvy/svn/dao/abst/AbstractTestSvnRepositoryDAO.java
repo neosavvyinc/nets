@@ -5,7 +5,6 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.Rollback;
 
 import com.neosavvy.junit4.BaseTransactionalSpringAwareTestCase;
 import com.neosavvy.svn.analytics.dao.SVNRepositoryDAO;
@@ -34,7 +33,6 @@ public abstract class AbstractTestSvnRepositoryDAO extends BaseTransactionalSpri
 	}
 	
 	@Test
-	@Rollback(false)
 	public void testSaveAndGetRepositories() {
 		
 		deleteFromTables("SVN_REPOSITORY");

@@ -4,17 +4,10 @@
 
     <insert id="insertStatistic" 
     	parameterClass="com.neosavvy.svn.analytics.dto.file.FileSystemNode">
-<!--        <selectKey keyProperty="id" type="pre" resultClass="int">-->
-<!--			SELECT SVN_FILE_SYSTEM_STATISTIC_SEQ.NEXTVAL AS VALUE FROM DUAL-->
-<!--		</selectKey>-->
-		<selectKey type="post" resultClass="int" keyProperty="id">
-		    SELECT LAST_INSERT_ID() AS VALUE
-		</selectKey>
         INSERT INTO 
             SVN_FILE_SYSTEM_STATISTIC
         (
-            ID
-            ,REPOSITORY_ID
+            REPOSITORY_ID
 			,REVISION
 			,REVISION_DATE
 			,LAST_CHANGED_REVISION
@@ -27,8 +20,7 @@
         )
         VALUES
         (
-            #id#
-			,#repositoryId#
+            #repositoryId#
 			,#revision#
 			,#revisionDate#
 			,#lastChangedRevision#

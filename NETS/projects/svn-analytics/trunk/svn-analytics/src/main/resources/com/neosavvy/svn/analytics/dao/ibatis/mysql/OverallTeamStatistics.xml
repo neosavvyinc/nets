@@ -42,9 +42,24 @@
             ,sum(invalid_comment) as invalidComments
             ,min(rev_date) as firstCommitDate
             ,max(rev_date) as lastCommitDate 
-            ,COALESCE(0,sum(num_files_added_in_rev) / sum(num_files_in_rev) * 100) as numberOfFilesAddedRate
-            ,COALESCE(0,sum(num_files_deleted_in_rev) / sum(num_files_in_rev) * 100) as numberOfFilesDeletedRate
-            ,COALESCE(0,sum(num_files_modified_in_rev) / sum(num_files_in_rev) * 100) as numberOfFilesModifiedRate
+            ,CASE sum(num_files_in_rev) 
+            	WHEN NULL THEN 0
+            	WHEN 0 THEN 0
+            	ELSE 
+            		COALESCE(0,sum(num_files_added_in_rev) / sum(num_files_in_rev) * 100) 
+            END as numberOfFilesAddedRate
+            ,CASE sum(num_files_in_rev) 
+            	WHEN NULL THEN 0
+            	WHEN 0 THEN 0
+            	ELSE
+            		COALESCE(0,sum(num_files_deleted_in_rev) / sum(num_files_in_rev) * 100) 
+            END as numberOfFilesDeletedRate
+            ,CASE sum(num_files_in_rev) 
+            	WHEN NULL THEN 0
+            	WHEN 0 THEN 0
+            	ELSE
+            		COALESCE(0,sum(num_files_modified_in_rev) / sum(num_files_in_rev) * 100) 
+            END as numberOfFilesModifiedRate
         FROM 
             SVN_STATISTIC
         <isParameterPresent prepend="WHERE">
