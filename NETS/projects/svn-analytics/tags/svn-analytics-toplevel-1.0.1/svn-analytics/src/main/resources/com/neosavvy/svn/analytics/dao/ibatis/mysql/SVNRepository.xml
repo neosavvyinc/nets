@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SvnRepository">
+
+    <typeAlias alias="SvnRepository" 
+    	type="com.neosavvy.svn.analytics.dto.SVNRepositoryDTO" />
+    
+    <resultMap class="SvnRepository" id="SvnRepositoryResultMap" groupBy="id">
+		<result property="id" column="ID"/>
+		<result property="name" column="NAME"/>
+		<result property="url" column="URL"/>
+		<result property="userName" column="USERNAME"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="startRevision" column="START_REV"/>
+		<result property="endRevision" column="END_REV"/>
+		<result property="children" resultMap="SVNFileSystemStatistics.FileNodeResultMap"/>
+    </resultMap>
+    
+    <resultMap class="SvnRepository" id="SvnRepositoryShallowResultMap" groupBy="id">
+		<result property="id" column="ID"/>
+		<result property="name" column="NAME"/>
+		<result property="url" column="URL"/>
+		<result property="userName" column="USERNAME"/>
+		<result property="password" column="PASSWORD"/>
+		<result property="startRevision" column="START_REV"/>
+		<result property="endRevision" column="END_REV"/>
+    </resultMap>
+    
+    <select id="getSvnRepositoriesShallow" resultMap="SvnRepositoryShallowResultMap">
+        SELECT 
+		    ID
+		    ,NAME
+		    ,URL
+		    ,USERNAME
+		    ,PASSWORD
+		    ,START_REV
+		    ,END_REV
+	    FROM 
+	    	SVN_REPOSITORY
+   	</select>
+    
+    <select id="getSvnRepositories" resultMap="SvnRepositoryResultMap">
+        SELECT 
+		    T1.ID AS ID
+		    ,NAME
+		    ,URL
+		    ,USERNAME
+		    ,PASSWORD
+		    ,START_REV
+		    ,END_REV
+		    ,REPOSITORY_ID
+		    ,MAX( REVISION ) AS REVISION
+		    ,MAX( REVISION_DATE ) AS REVISION_DATE
+		    ,MAX( LAST_CHANGED_REVISION ) AS LAST_CHANGED_REVISION
+		    ,RELATIVE_PATH
+		    ,PARENT_DIRECTORY 
+		    ,FILE_NAME
+		    ,FILE_TYPE
+		FROM 
+		    SVN_REPOSITORY AS T1 LEFT OUTER JOIN SVN_FILE_SYSTEM_STATISTIC AS T2
+                    ON T1.ID = T2.REPOSITORY_ID
+		WHERE
+                    PARENT_DIRECTORY = '' OR PARENT_DIRECTORY IS NULL
+		GROUP BY
+		    T1.ID
+		    ,NAME
+		    ,URL
+		    ,USERNAME
+		    ,PASSWORD
+		    ,START_REV
+		    ,END_REV
+		    ,REPOSITORY_ID
+		    ,RELATIVE_PATH
+		    ,PARENT_DIRECTORY 
+		    ,FILE_NAME
+		    ,FILE_TYPE
+		 ORDER BY
+		 	FILE_TYPE
+    </select>
+
+    <insert 
+    	id="saveSvnRepository" 
+    	parameterClass="SvnRepository">
+    	INSERT INTO SVN_REPOSITORY ( 
+			NAME
+			,URL
+			,USERNAME
+			,PASSWORD
+			,START_REV
+			,END_REV
+		) VALUES (
+			#name#
+			,#url#
+		    ,#userName#
+		    ,#password#
+		    ,#startRevision#
+		    ,#endRevision#
+		)
+    </insert>
+
+	<delete id="deleteRepository" parameterClass="SvnRepository">
+		DELETE FROM SVN_REPOSITORY 
+		WHERE
+			URL = #url#
+	</delete>
+
+</sqlMap>

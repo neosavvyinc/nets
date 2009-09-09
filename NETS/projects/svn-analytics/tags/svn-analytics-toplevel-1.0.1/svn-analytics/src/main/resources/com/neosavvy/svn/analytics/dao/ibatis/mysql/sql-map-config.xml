@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMapConfig      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map Config 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	
+	<settings useStatementNamespaces="true" />
+
+	<!-- Data Module Mappings -->
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/mysql/SVNStatistics.xml" />
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/mysql/OverallTeamStatistics.xml" />
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/mysql/HistoricalTeamStatistics.xml" />
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/mysql/Authors.xml" />
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/mysql/SVNRepositoryInterval.xml" />
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/mysql/SVNRepositoryConversionInfo.xml"/>
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/mysql/SVNRepository.xml"/>
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/mysql/SVNFileSystemStatistic.xml"/>
+	<sqlMap resource="com/neosavvy/svn/analytics/dao/ibatis/mysql/CodeOwnership.xml"/>
+	
+</sqlMapConfig>

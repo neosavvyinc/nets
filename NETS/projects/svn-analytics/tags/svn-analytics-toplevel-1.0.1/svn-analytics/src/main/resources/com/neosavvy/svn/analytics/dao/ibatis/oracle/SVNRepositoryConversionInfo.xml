@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SVNRepositoryConversionInfo">
+
+    <typeAlias alias="SVNRepositoryConversionInfo" 
+    	type="com.neosavvy.svn.analytics.dto.SVNRepositoryConversionInfo" />
+    
+    <resultMap class="SVNRepositoryConversionInfo" id="SVNRepositoryConversionInfoResultMap">
+		<result property="lastUpdateRevision" column="LAST_UPDATE_REV"/>
+		<result property="repositoryURL" column="SVN_REPOSITORY_URL"/>
+    </resultMap>
+    
+    <select id="getRepositoryInfo" 
+    	resultMap="SVNRepositoryConversionInfoResultMap" 
+    	parameterClass="java.lang.String">
+        SELECT 
+        	MAX(REVISION) AS LAST_UPDATE_REV
+        	,SVN_REPOSITORY_URL 
+        FROM 
+        	SVN_STATISTIC 
+        WHERE 
+        	SVN_REPOSITORY_URL LIKE #value#
+        GROUP BY 
+        	SVN_REPOSITORY_URL
+    </select>
+    
+    <select id="getFileBasedRepositoryInfo" 
+    	resultMap="SVNRepositoryConversionInfoResultMap" 
+    	parameterClass="java.lang.Long">
+    	SELECT URL AS SVN_REPOSITORY_URL, MAX(REVISION) AS LAST_UPDATE_REV
+		FROM (
+		        SELECT REPOSITORY_ID, MAX(REVISION) AS REVISION FROM SVN_FILE_STATISTIC GROUP BY REPOSITORY_ID
+		        UNION
+		        SELECT REPOSITORY_ID, MAX(REVISION) AS REVISION FROM SVN_DIRECTORY_STATISTIC GROUP BY REPOSITORY_ID
+		) T1 JOIN SVN_REPOSITORY T2 ON T1.REPOSITORY_ID = T2.ID
+		WHERE REPOSITORY_ID = #value#
+		GROUP BY URL
+	</select>
+    
+
+</sqlMap>
