@@ -17,6 +17,8 @@
 		</menu>
 		<menu name="Configuration">
 			<item name="Database Configuration" href="database.configuration.html"/>
+			<item name="Mysql Database Setup" href="mysql.database.setup.html"/>
+			<item name="Oracle Database Setup" href="oracle.database.setup.html"/>
 		</menu>
 		<menu ref="modules"/>
 		<menu ref="reports"/>

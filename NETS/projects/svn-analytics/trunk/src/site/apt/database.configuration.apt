@@ -1,10 +1,12 @@
 SVN Spy Environment Configuration
 
-	To configure the SVN Spy application it is necessary to point to an oracle database 
-	that has the schema necessary to support the application. There is a plan to 
-	eventually expose more support for other databases but at this time Oracle is the 
-	primary target database as it appears to be widely supported behind most corporate 
-	firewalls where this software is intended for use. 
+	To configure the SVN Spy application it is necessary to point to either an oracle or
+	mysql database schema. The current default is oracle, but can easily be overridden by
+	following the steps below to configure database overrides. 
+	
+	Oracle Schema Installation Instructions can be found {{{oracle.database.setup.html}here}}
+	
+	MySQL Schema Installation Instructions can be found {{{mysql.database.setup.html}here}}
 
 * Add a Java parameter to the JVM used to startup the deployed application
 
