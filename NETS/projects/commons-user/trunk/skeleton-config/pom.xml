@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<project>
+	
+    <parent>
+		<groupId>com.neosavvy.skeleton</groupId>
+        <artifactId>maven-flex-webapp-skeleton-toplevel</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	
+    <modelVersion>4.0.0</modelVersion>
+	<groupId>com.neosavvy.skeleton</groupId>
+	<artifactId>skeleton-config</artifactId>
+	<name>skeleton-config</name>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	
+    <build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>make shared resources</id>
+						<goals>
+							<goal>single</goal>
+						</goals>
+						<phase>package</phase>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/assembly/resources.xml
+								</descriptor>
+							</descriptors>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>
