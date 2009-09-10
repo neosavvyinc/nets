@@ -2,22 +2,22 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.neosavvy.skeleton</groupId>
-	<artifactId>maven-flex-webapp-skeleton-toplevel</artifactId>
+	<groupId>com.neosavvy.commons.user</groupId>
+	<artifactId>maven-flex-webapp-commons-user-toplevel</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>maven-flex-webapp-skeleton-toplevel</name>
+	<name>maven-flex-webapp-commons-user-toplevel</name>
 	<parent>
 		<groupId>org.sonatype.flexmojos</groupId>
 		<artifactId>flexmojos-flex-super-pom</artifactId>
 		<version>3.0.0</version>
 	</parent>
 	<modules>
-		<module>skeleton-config</module>
-		<module>skeleton-flex-client</module>
-		<module>skeleton-flex-model-lib</module>
-		<module>skeleton-java-lib</module>
-		<module>skeleton-webapp</module>
+		<module>commons-user-config</module>
+		<module>commons-user-flex-client</module>
+		<module>commons-user-flex-model-lib</module>
+		<module>commons-user-java-lib</module>
+		<module>commons-user-webapp</module>
 	</modules>
 
 	<properties>

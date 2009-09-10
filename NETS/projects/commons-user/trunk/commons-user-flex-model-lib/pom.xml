@@ -2,17 +2,16 @@
 <project>
     
     <parent>
-		<groupId>com.neosavvy.skeleton</groupId>
-        <artifactId>maven-flex-webapp-skeleton-toplevel</artifactId>
+		<groupId>com.neosavvy.commons.user</groupId>
+        <artifactId>maven-flex-webapp-commons-user-toplevel</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.neosavvy.skeleton</groupId>
-	<artifactId>skeleton-flex-model-lib</artifactId>
+	<groupId>com.neosavvy.commons.user</groupId>
+	<artifactId>commons-user-flex-model-lib</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>skeleton-flex-model-lib</name>
+	<name>commons-user-flex-model-lib</name>
     <packaging>swc</packaging>
 
 	<build>

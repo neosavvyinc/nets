@@ -3,18 +3,18 @@
 	<modelVersion>4.0.0</modelVersion>
 
     <parent>
-		<groupId>com.neosavvy.skeleton</groupId>
-        <artifactId>maven-flex-webapp-skeleton-toplevel</artifactId>
+		<groupId>com.neosavvy.commons.user</groupId>
+        <artifactId>maven-flex-webapp-commons-user-toplevel</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.neosavvy.skeleton</groupId>
-	<artifactId>skeleton-webapp</artifactId>
+	<groupId>com.neosavvy.commons.user</groupId>
+	<artifactId>commons-user-webapp</artifactId>
 	<packaging>war</packaging>
-	<name>skeleton-webapp</name>
+	<name>commons-user-webapp</name>
 
 	<build>
-		<finalName>skeleton-webapp</finalName>
+		<finalName>commons-user-webapp</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.sonatype.flexmojos</groupId>
@@ -44,7 +44,7 @@
 						<phase>generate-resources</phase>
 						<configuration>
 							<outputDirectory>${project.build.directory}/${project.build.finalName}/WEB-INF/flex</outputDirectory>
-							<includeArtifacIds>skeleton-config</includeArtifacIds>
+							<includeArtifacIds>commons-user-config</includeArtifacIds>
 							<includeGroupIds>${project.groupId}</includeGroupIds>
 							<includeClassifiers>resources</includeClassifiers>
 							<excludeTransitive>true</excludeTransitive>
@@ -61,19 +61,19 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skeleton-java-lib</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>commons-user-java-lib</artifactId>
+			<version>${project.parent.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skeleton-flex-client</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>commons-user-flex-client</artifactId>
+			<version>${project.parent.version}</version>
 			<type>swf</type>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>skeleton-config</artifactId>
-			<version>1.0-SNAPSHOT</version>
+			<artifactId>commons-user-config</artifactId>
+			<version>${project.parent.version}</version>
 			<classifier>resources</classifier>
 			<type>zip</type>
 			<scope>provided</scope>
