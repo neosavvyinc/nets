@@ -25,7 +25,10 @@ public class UserDTO {
 	
 	@Column(name="EMAIL_ADDRESS")
 	private String emailAddress;
-	
+
+    @Column(name="USERNAME")
+    private String username;
+
 	@Column(name="PASSWORD")
 	private String password;
 	
@@ -59,6 +62,12 @@ public class UserDTO {
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
 	public String getPassword() {
 		return password;
 	}
