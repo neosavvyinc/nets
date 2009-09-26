@@ -2,16 +2,18 @@ package com.neosavvy.user.dao;
 
 import com.neosavvy.user.dto.UserDTO;
 
+import java.util.List;
+
 public interface UserDAO {
 
-	public UserDTO[] getUsers();
+	public List<UserDTO> getUsers();
 
-	public Integer saveUser(UserDTO user);
+	public void saveUser(UserDTO user);
 
 	public UserDTO findUserById(int id);
 
-	public UserDTO[] findUsers(UserDTO user);
+	public List<UserDTO> findUsers(UserDTO user);
 
-	public boolean deleteUser(UserDTO user);
+	public void deleteUser(UserDTO user);
 
 }

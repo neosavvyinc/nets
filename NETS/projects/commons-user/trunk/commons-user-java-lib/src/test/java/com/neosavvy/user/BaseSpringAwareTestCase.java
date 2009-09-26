@@ -7,6 +7,6 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 @ContextConfiguration(locations = {
 		"classpath:applicationContext.xml"
         })
-public abstract class BaseSpringAwareTestCase extends AbstractJUnit4SpringContextTests {
+public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit4SpringContextTests {
 
 }
