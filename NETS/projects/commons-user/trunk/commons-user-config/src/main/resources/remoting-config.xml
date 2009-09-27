@@ -8,13 +8,13 @@
     </adapters>
 
     <default-channels>
-        <channel ref="skeleton-amf" />
+        <channel ref="user-amf" />
     </default-channels>
 
-    <destination id="skeletonService">
+    <destination id="userService">
         <properties>
             <factory>spring</factory>
-            <source>skeletonService</source>
+            <source>userService</source>
         </properties>
     </destination>
 

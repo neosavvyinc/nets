@@ -5,14 +5,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name="USER")
-public class UserDTO {
+public class UserDTO implements Serializable {
 
-	@Id @GeneratedValue
-	@Column(name="USER_ID" )
-	private Integer id;
+	@Id
+    @GeneratedValue
+	@Column(name="USER_ID")
+	private int id;
 	
 	@Column(name="FIRST_NAME")
 	private String firstName;
@@ -32,10 +34,10 @@ public class UserDTO {
 	@Column(name="PASSWORD")
 	private String password;
 	
-	public Integer getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Integer id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getFirstName() {

@@ -53,11 +53,73 @@
 					</execution>
 				</executions>
 			</plugin>
-
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>maven-hsqldb-plugin</artifactId>
+                <version>1.0-SNAPSHOT</version>
+                <configuration>
+              		<dbName>test</dbName>
+              		<mode>server</mode>
+              		<silent>true</silent>
+              		<trace>false</trace>
+              		<isTransient>false</isTransient>
+              	</configuration>
+                <executions>
+                    <execution>
+                        <phase>test</phase>
+                    </execution>
+                </executions>
+            </plugin>
 		</plugins>
 	</build>
     
     <dependencies>
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>jsr250-api</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
+            <groupId>howl</groupId>
+            <artifactId>howl-logger</artifactId>
+            <version>0.1.11</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>jta</artifactId>
+            <version>1.0.1B</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-dbcp</groupId>
+            <artifactId>commons-dbcp</artifactId>
+            <version>1.2.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-pool</groupId>
+            <artifactId>commons-pool</artifactId>
+            <version>1.3</version>
+        </dependency>
+        <dependency>
+            <groupId>jotm</groupId>
+            <artifactId>jotm</artifactId>
+            <version>${jotm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>jotm</groupId>
+            <artifactId>jotm_jrmp_stubs</artifactId>
+            <version>${jotm.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-j2ee-connector_1.5_spec</artifactId>
+            <version>${container-spec.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.objectweb.carol</groupId>
+            <artifactId>carol</artifactId>
+            <version>${carol.version}</version>
+        </dependency>
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>

@@ -8,8 +8,6 @@ http://www.springframework.org/schema/beans http://www.springframework.org/schem
 http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
 
-    <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl"/>
-    
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
 		<property name="url" value="jdbc:hsqldb:mem:test"/>
@@ -45,6 +43,10 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 
     <bean id="userDAO" class="com.neosavvy.user.dao.UserDAOImpl">
     	<property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
+        <property name="userDao" ref="userDAO"/>
     </bean>
     
 </beans>

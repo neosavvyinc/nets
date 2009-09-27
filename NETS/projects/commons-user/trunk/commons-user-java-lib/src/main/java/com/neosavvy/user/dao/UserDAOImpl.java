@@ -52,6 +52,7 @@ public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
 
 	public void saveUser(UserDTO user) {
 		getCurrentSession().saveOrUpdate(user);
+        getCurrentSession().flush();
 	}
 
     protected Session getCurrentSession() {

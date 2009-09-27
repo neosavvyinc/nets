@@ -12,12 +12,6 @@
 	<packaging>jar</packaging>
 	<name>commons-user-java-lib</name>
 
-    <properties>
-        <carol.version>2.0.5</carol.version>
-        <container-spec.version>1.0.1</container-spec.version>
-        <jotm.version>2.0.10</jotm.version>
-    </properties>
-
 	<build>
 		<sourceDirectory>src/main/java</sourceDirectory>
 		<testSourceDirectory>src/test/java</testSourceDirectory>
@@ -49,61 +43,52 @@
 		</plugins>
 	</build>
 
-	<dependencies>
+    <dependencies>
         <!-- Transaction Manager Dependencies -->
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>jsr250-api</artifactId>
             <version>1.0</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>howl</groupId>
             <artifactId>howl-logger</artifactId>
             <version>0.1.11</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.transaction</groupId>
             <artifactId>jta</artifactId>
             <version>1.0.1B</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
             <artifactId>commons-dbcp</artifactId>
             <version>1.2.2</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>commons-pool</groupId>
             <artifactId>commons-pool</artifactId>
             <version>1.3</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>jotm</groupId>
             <artifactId>jotm</artifactId>
             <version>${jotm.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>jotm</groupId>
             <artifactId>jotm_jrmp_stubs</artifactId>
             <version>${jotm.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
             <artifactId>geronimo-j2ee-connector_1.5_spec</artifactId>
             <version>${container-spec.version}</version>
-            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.objectweb.carol</groupId>
             <artifactId>carol</artifactId>
             <version>${carol.version}</version>
-            <scope>provided</scope>
         </dependency>
         <!-- End Transaction Manager Dependencies -->
 

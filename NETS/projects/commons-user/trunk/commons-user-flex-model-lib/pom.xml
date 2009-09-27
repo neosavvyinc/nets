@@ -19,15 +19,15 @@
 			<plugin>
 				<groupId>org.sonatype.flexmojos</groupId>
 				<artifactId>flexmojos-maven-plugin</artifactId>
-				<version>3.0.0</version>
-				<executions>
+				<version>3.3.0</version>
+				<!--<executions>
 					<execution>
 						<goals>
 							<goal>generate</goal>
 						</goals>
 						<configuration>
 							<includeJavaClasses>
-								<includeClass>com.neosavvy.skeleton.dto.MessageDTO</includeClass>
+								<includeClass>com.neosavvy.user.dto.*</includeClass>
                             </includeJavaClasses>
 							<beanTemplate>
 								<template>${basedir}/src/main/template/beanBase.gsp</template>
@@ -36,8 +36,9 @@
 							</beanTemplate>
 						</configuration>
 					</execution>
-				</executions>
+				</executions>-->
 				<configuration>
+                    <configurationReport>true</configurationReport>
 					<debug>true</debug>
 					<locales>
 						<param>en_US</param>
@@ -60,5 +61,21 @@
 			<version>${flex.version}</version>
 			<type>pom</type>
 		</dependency>
+        <dependency>
+            <groupId>org.graniteds</groupId>
+            <artifactId>granite-core</artifactId>
+            <version>${property.org.graniteds.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graniteds</groupId>
+            <artifactId>granite-gas</artifactId>
+            <version>${property.org.graniteds.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.graniteds</groupId>
+            <artifactId>granite-core-swc</artifactId>
+            <version>${property.org.graniteds.version}</version>
+            <type>swc</type>
+        </dependency>
 	</dependencies>
 </project>

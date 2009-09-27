@@ -12,12 +12,12 @@
 
         <!-- Default channels -->
         <default-channels>
-            <channel ref="skeleton-amf" />
+            <channel ref="user-amf" />
         </default-channels>
     </services>
 
     <channels>
-        <channel-definition id="skeleton-amf"
+        <channel-definition id="user-amf"
             class="mx.messaging.channels.AMFChannel">
             <endpoint
                 url="http://{server.name}:{server.port}/{context.root}/messagebroker/amf"

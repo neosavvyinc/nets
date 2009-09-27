@@ -22,7 +22,12 @@
 
 	<properties>
 		<flex.version>3.2.0.3958</flex.version>
-	</properties>
+        <property.org.graniteds.version>1.2.0</property.org.graniteds.version>
+        <carol.version>2.0.5</carol.version>
+        <container-spec.version>1.0.1</container-spec.version>
+        <jotm.version>2.0.10</jotm.version>
+    </properties>
+
 
 	<build>
 		<pluginManagement>
