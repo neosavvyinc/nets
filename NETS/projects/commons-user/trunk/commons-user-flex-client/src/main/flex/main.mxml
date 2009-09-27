@@ -10,94 +10,123 @@
 		<![CDATA[
         import com.neosavvy.user.dto.UserDTO;
 
-        import flash.utils.getTimer;
-			import mx.collections.ArrayCollection;
-            import mx.messaging.Channel;
-            import mx.rpc.events.ResultEvent;
-			import mx.messaging.ChannelSet;
-			import mx.messaging.channels.AMFChannel;
-			import mx.controls.Alert;
-			import mx.rpc.remoting.mxml.RemoteObject;
-			import mx.rpc.events.FaultEvent;
-	
-		    [Bindable]
-		    private var userService:RemoteObject;
-		    
-		    public function initializeService():void {
-                userService = new RemoteObject();
+        import mx.collections.ArrayCollection;
+        import mx.events.ItemClickEvent;
+        import mx.events.ListEvent;
+        import mx.messaging.ChannelSet;
+        import mx.messaging.channels.AMFChannel;
+        import mx.rpc.events.FaultEvent;
+        import mx.rpc.events.ResultEvent;
+        import mx.rpc.remoting.mxml.RemoteObject;
 
-                var channel:AMFChannel = new AMFChannel("user-amf","http://localhost:9090/commons-user-webapp/messagebroker/amf" );
-                var channelSet:ChannelSet = new ChannelSet();
-                channelSet.addChannel(channel);
-                userService.channelSet = channelSet;
-                
+        [Bindable]
+        private var userService:RemoteObject;
 
-                userService.destination = "userService";
-                userService.addEventListener(FaultEvent.FAULT, faultHandler);
-                userService.addEventListener(ResultEvent.RESULT, resultHandler);
-                userService.getUsers();	
-			}
-			
-			private function faultHandler( faultEvent:FaultEvent ):void {
-				trace("faultEvent: " + faultEvent.message );
-				trace("faultEvent: " + faultEvent.fault.toString() );
-			}
-			
-			private function resultHandler( resultEvent:ResultEvent ):void {
-				var data:ArrayCollection = resultEvent.result as ArrayCollection;
-				grid.dataProvider = data;
-			}
+        public function initializeService():void {
+            userService = new RemoteObject();
 
-            protected function getUserFromTextInput():UserDTO {
-                var userFromTextInputs:UserDTO = new UserDTO();
-                userFromTextInputs.firstName = fName.text;
-                userFromTextInputs.middleName = mName.text;
-                userFromTextInputs.lastName = lName.text;
-                userFromTextInputs.username = username.text;
-                userFromTextInputs.password = password.text;
-                return userFromTextInputs;
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:9090/commons-user-webapp/messagebroker/amf");
+            var channelSet:ChannelSet = new ChannelSet();
+            channelSet.addChannel(channel);
+            userService.channelSet = channelSet;
+
+
+            userService.destination = "userService";
+            userService.addEventListener(FaultEvent.FAULT, faultHandler);
+            userService.addEventListener(ResultEvent.RESULT, resultHandler);
+            userService.getUsers();
+            clearClick();
+        }
+
+        private function faultHandler(faultEvent:FaultEvent):void {
+            trace("faultEvent: " + faultEvent.message);
+            trace("faultEvent: " + faultEvent.fault.toString());
+        }
+
+        private function resultHandler(resultEvent:ResultEvent):void {
+            var data:ArrayCollection = resultEvent.result as ArrayCollection;
+            grid.dataProvider = data;
+        }
+
+        protected function getUserFromTextInput():UserDTO {
+            var userFromTextInputs:UserDTO = new UserDTO();
+            if(identifier.text != null) {
+                userFromTextInputs.id = Number(identifier.text);
             }
+            userFromTextInputs.firstName = fName.text;
+            userFromTextInputs.middleName = mName.text;
+            userFromTextInputs.lastName = lName.text;
+            userFromTextInputs.username = username.text;
+            userFromTextInputs.password = password.text;
+            return userFromTextInputs;
+        }
 
-            protected function addUserClick():void {
-                userService = new RemoteObject();
+        protected function addUserClick():void {
+            userService = new RemoteObject();
 
-                var channel:AMFChannel = new AMFChannel("user-amf","http://localhost:9090/commons-user-webapp/messagebroker/amf" );
-                var channelSet:ChannelSet = new ChannelSet();
-                channelSet.addChannel(channel);
-                userService.channelSet = channelSet;
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:9090/commons-user-webapp/messagebroker/amf");
+            var channelSet:ChannelSet = new ChannelSet();
+            channelSet.addChannel(channel);
+            userService.channelSet = channelSet;
 
 
-                userService.destination = "userService";
-                userService.addEventListener(FaultEvent.FAULT, savefaultHandler);
-                userService.addEventListener(ResultEvent.RESULT, saveresultHandler);
-                userService.saveUser(getUserFromTextInput());
-            }
+            userService.destination = "userService";
+            userService.addEventListener(FaultEvent.FAULT, savefaultHandler);
+            userService.addEventListener(ResultEvent.RESULT, saveresultHandler);
+            userService.saveUser(getUserFromTextInput());
+        }
 
-            private function savefaultHandler( faultEvent:FaultEvent ):void {
-				trace("faultEvent: " + faultEvent.message );
-				trace("faultEvent: " + faultEvent.fault.toString() );
-			}
+        protected function clearClick() {
+            identifier.text = null;
+            fName.text = null;
+            mName.text = null;
+            lName.text = null;
+            username.text = null;
+            password.text = null;
+        }
 
-			private function saveresultHandler( resultEvent:ResultEvent ):void {
-				var data:Array = resultEvent.result as Array;
-				initializeService();
-			}
+        private function savefaultHandler(faultEvent:FaultEvent):void {
+            trace("faultEvent: " + faultEvent.message);
+            trace("faultEvent: " + faultEvent.fault.toString());
+        }
+
+        private function saveresultHandler(resultEvent:ResultEvent):void {
+            var data:Array = resultEvent.result as Array;
+            initializeService();
+        }
+
+        private function handleItemClick():void {
+            var selectedItem:UserDTO = grid.selectedItem as UserDTO;
+            fName.text = selectedItem.firstName;
+            mName.text = selectedItem.middleName;
+            lName.text = selectedItem.lastName;
+            username.text = selectedItem.username;
+            password.text = selectedItem.password;
+            identifier.text = String(selectedItem.id);
+        }
 			
 		]]>
 	</mx:Script>
+
+    
+
     <mx:HBox width="100%" height="100%">
         <mx:VBox>
-            <flexlib:PromptingTextInput id="fName" prompt="First Name"/>
-            <flexlib:PromptingTextInput id="mName" prompt="Middle Name"/>
-            <flexlib:PromptingTextInput id="lName" prompt="Last Name"/>
-            <flexlib:PromptingTextInput id="username" prompt="Username"/>
-            <flexlib:PromptingTextInput id="password" prompt="Password" displayAsPassword="true"/>
-            <mx:Button id="addUser" label="Add" click="{addUserClick()}"/>
+                <flexlib:PromptingTextInput id="identifier" editable="false" prompt="NoId"/>
+                <flexlib:PromptingTextInput id="fName" prompt="First Name"/>
+                <flexlib:PromptingTextInput id="mName" prompt="Middle Name"/>
+                <flexlib:PromptingTextInput id="lName" prompt="Last Name"/>
+                <flexlib:PromptingTextInput id="username" prompt="Username"/>
+                <flexlib:PromptingTextInput id="password" prompt="Password" displayAsPassword="true"/>
+                <mx:Button id="addUser" label="Add/Update" click="{addUserClick()}"/>
+                <mx:Button id="clear" label="Clear" click="{clearClick()}"/>
         </mx:VBox>
 	    <mx:AdvancedDataGrid
                 id="grid"
                 width="100%"
-                height="25%">
+                height="25%"
+                itemClick="{handleItemClick()}"
+                >
             <mx:columns>
                 <mx:AdvancedDataGridColumn
                         id="fNameCol"
