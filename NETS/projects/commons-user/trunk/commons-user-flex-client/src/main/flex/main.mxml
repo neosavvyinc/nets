@@ -23,7 +23,7 @@
 		    [Bindable]
 		    private var userService:RemoteObject;
 		    
-		    private function initializeService():void {
+		    public function initializeService():void {
                 userService = new RemoteObject();
 
                 var channel:AMFChannel = new AMFChannel("user-amf","http://localhost:9090/commons-user-webapp/messagebroker/amf" );
@@ -94,6 +94,37 @@
             <flexlib:PromptingTextInput id="password" prompt="Password" displayAsPassword="true"/>
             <mx:Button id="addUser" label="Add" click="{addUserClick()}"/>
         </mx:VBox>
-	    <mx:AdvancedDataGrid id="grid" width="100%" height="25%"/>
+	    <mx:AdvancedDataGrid
+                id="grid"
+                width="100%"
+                height="25%">
+            <mx:columns>
+                <mx:AdvancedDataGridColumn
+                        id="fNameCol"
+                        dataField="firstName"
+                        headerText="First Name"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="mNameCol"
+                        dataField="middleName"
+                        headerText="Middle Name"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="lNameCol"
+                        dataField="lastName"
+                        headerText="Last Name"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="usernameCol"
+                        dataField="username"
+                        headerText="Username"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="actions"
+                        headerText="Actions"
+                        itemRenderer="com.neosavvy.user.Actions"
+                        />
+            </mx:columns>
+        </mx:AdvancedDataGrid>
 	</mx:HBox>
 </mx:Application>
