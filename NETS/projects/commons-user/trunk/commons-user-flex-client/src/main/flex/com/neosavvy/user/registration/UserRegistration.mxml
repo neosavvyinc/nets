@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<mx:VBox
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/">
+
+    <mx:Script><![CDATA[
+        protected function handleCreate():void {
+            dispatchEvent(new Event("createClicked"));
+        }
+
+        protected function handleCancel():void {
+            dispatchEvent(new Event("cancelClicked"));
+        }
+]]></mx:Script>
+
+    <flexlib:PromptingTextInput
+        prompt="Username"
+        />
+    <flexlib:PromptingTextInput
+        prompt="First Name"
+        />
+    <flexlib:PromptingTextInput
+        prompt="Middle Name"
+        />
+    <flexlib:PromptingTextInput
+        prompt="Last Name"
+        />
+    <flexlib:PromptingTextInput
+        prompt="Password"
+        />
+    <flexlib:PromptingTextInput
+        prompt="Confirm Password"
+        />
+
+    <mx:Button id="cancelButton" label="Cancel" click="{handleCancel()}"/>
+    <mx:Button id="createButton" label="Create" click="{handleCreate()}"/>
+
+</mx:VBox>

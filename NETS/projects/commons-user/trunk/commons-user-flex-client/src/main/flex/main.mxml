@@ -8,11 +8,14 @@
 	
 	<mx:Script>
 		<![CDATA[
+        import com.neosavvy.user.RegistrationAndLoginWindow;
         import com.neosavvy.user.dto.UserDTO;
 
         import mx.collections.ArrayCollection;
+        import mx.core.IFlexDisplayObject;
         import mx.events.ItemClickEvent;
         import mx.events.ListEvent;
+        import mx.managers.PopUpManager;
         import mx.messaging.ChannelSet;
         import mx.messaging.channels.AMFChannel;
         import mx.rpc.events.FaultEvent;
@@ -104,11 +107,17 @@
             password.text = selectedItem.password;
             identifier.text = String(selectedItem.id);
         }
+
+        protected function showRegistrationLoginWindow():void {
+            var regAndLoginWindow:IFlexDisplayObject = PopUpManager.createPopUp(this as DisplayObject, RegistrationAndLoginWindow, true);
+            PopUpManager.centerPopUp(regAndLoginWindow);
+        }
 			
 		]]>
 	</mx:Script>
 
-    
+
+    <mx:Button id="showRegistrationLoginWindowBtn" click="{showRegistrationLoginWindow()}"/>
 
     <mx:HBox width="100%" height="100%">
         <mx:VBox>

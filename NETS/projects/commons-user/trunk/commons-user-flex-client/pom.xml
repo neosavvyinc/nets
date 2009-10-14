@@ -19,7 +19,7 @@
 			<plugin>
 				<groupId>org.sonatype.flexmojos</groupId>
 				<artifactId>flexmojos-maven-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>${flex.mojos.maven.version}</version>
 				<executions>
 					<execution>
 						<goals>
@@ -41,6 +41,7 @@
                         -->
 					<contextRoot>commons-user-webapp</contextRoot>
 					<sourceFile>./main.mxml</sourceFile>
+                    <targetPlayer>10.0.0</targetPlayer>
 				</configuration>
 				<dependencies>
 					<dependency>
@@ -51,7 +52,7 @@
 					</dependency>
 					<dependency>
 						<groupId>com.adobe.flex.license</groupId>
-						<artifactId>license-flexbuilder-pro-roundarch</artifactId>
+						<artifactId>license-flashbuilder</artifactId>
 						<version>${flex.version}</version>
 					</dependency>
 				</dependencies>
@@ -128,7 +129,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.adobe.flex.license</groupId>
-			<artifactId>license-flexbuilder-pro-roundarch</artifactId>
+			<artifactId>license-flashbuilder</artifactId>
 			<version>${flex.version}</version>
 		</dependency>
 		<dependency>
@@ -162,6 +163,13 @@
 			<version>1.2.1</version>
 			<scope>provided</scope>
 		</dependency>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>playerglobal</artifactId>
+            <version>${flex.version}</version>
+            <classifier>10</classifier>
+            <type>swc</type>
+        </dependency>
 	</dependencies>
 
 </project>

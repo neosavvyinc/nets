@@ -19,7 +19,7 @@
 			<plugin>
 				<groupId>org.sonatype.flexmojos</groupId>
 				<artifactId>flexmojos-maven-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>${flex.mojos.maven.version}</version>
 				<!--<executions>
 					<execution>
 						<goals>
@@ -43,6 +43,7 @@
 					<locales>
 						<param>en_US</param>
 					</locales>
+                    <targetPlayer>10.0.0</targetPlayer>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -75,6 +76,13 @@
             <groupId>org.graniteds</groupId>
             <artifactId>granite-core-swc</artifactId>
             <version>${property.org.graniteds.version}</version>
+            <type>swc</type>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>playerglobal</artifactId>
+            <version>${flex.version}</version>
+            <classifier>10</classifier>
             <type>swc</type>
         </dependency>
 	</dependencies>

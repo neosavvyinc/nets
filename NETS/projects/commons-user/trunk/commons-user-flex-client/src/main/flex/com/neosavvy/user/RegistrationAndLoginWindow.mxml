@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<mx:TitleWindow
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:login="com.neosavvy.user.login.*"
+        xmlns:registration="com.neosavvy.user.registration.*"
+        layout="horizontal"
+        title="Commons User Registration / Login"
+        initialize="{init()}"
+        >
+
+    <mx:Script>
+        <![CDATA[
+            protected function init():void {
+                newUserReg.addEventListener("newUserButtonClicked", newUserEvent);
+                userReg.addEventListener("cancelClicked",cancelButtonEvent);
+            }
+
+            protected function newUserEvent(event:Event):void {
+                newUserReg.visible = false;
+                userReg.visible = true;
+            }
+
+            protected function cancelButtonEvent(event:Event):void {
+                newUserReg.visible = true;
+                userReg.visible = false;
+            }
+
+            var list:Array
+        ]]>
+    </mx:Script>
+
+    <mx:Canvas>
+        <registration:UserRegistration visible="false" id="userReg"/>
+        <registration:NewUserRegistration id="newUserReg"/>
+    </mx:Canvas>
+    <mx:VRule height="95%"/>
+    <login:Login/>
+
+</mx:TitleWindow>
