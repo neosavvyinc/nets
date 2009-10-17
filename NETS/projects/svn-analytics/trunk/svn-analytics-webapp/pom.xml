@@ -158,7 +158,7 @@
 		<profile>
 			<id>oracle</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<activeByDefault>false</activeByDefault>
 			</activation>
 			<properties>
 				<database.type>oracle</database.type>
@@ -173,6 +173,15 @@
 				<database.type>mysql</database.type>
 			</properties>
 		</profile>
+        <profile>
+            <id>hsqldb</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <database.type>hsqldb</database.type>
+            </properties>
+        </profile>
 	</profiles>
 
 </project>
