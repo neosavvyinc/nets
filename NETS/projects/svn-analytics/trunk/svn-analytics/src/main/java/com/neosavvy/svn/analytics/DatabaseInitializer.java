@@ -50,6 +50,7 @@ public class DatabaseInitializer implements InitializingBean {
                 ",PASSWORD VARCHAR(1024) NOT NULL "+
                 ",START_REV INT "+
                 ",END_REV INT "+
+                ",PARENT_DIR VARCHAR(1024)"+
                 ");"
             );
             template.execute(
