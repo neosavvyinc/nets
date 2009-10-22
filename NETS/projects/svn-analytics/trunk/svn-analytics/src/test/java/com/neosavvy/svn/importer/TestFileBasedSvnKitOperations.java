@@ -4,12 +4,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.junit.Assert;
 import org.junit.Test;
-import org.tmatesoft.svn.core.ISVNDirEntryHandler;
-import org.tmatesoft.svn.core.SVNDirEntry;
-import org.tmatesoft.svn.core.SVNException;
-import org.tmatesoft.svn.core.SVNNodeKind;
-import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.*;
 import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
 import org.tmatesoft.svn.core.internal.wc.DefaultSVNOptions;
 import org.tmatesoft.svn.core.io.SVNRepository;
@@ -23,11 +20,47 @@ import com.neosavvy.svn.analytics.util.SvnKitUtil;
 
 public class TestFileBasedSvnKitOperations {
 
+
+    @Test
+    public void testFindFirstRevisionForDirectory() throws SVNException {
+        SvnKitUtil.setupLibrary();
+        SVNRepository repository = SVNRepositoryFactory.create(SVNURL.parseURIEncoded("http://neosavvy.com/svn/projects/commons-user/"));
+        ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager("aparrish", "aparrish");
+        repository.setAuthenticationManager(authManager);
+        SVNLogClient logClient = new SVNLogClient(repository
+				.getAuthenticationManager(), new DefaultSVNOptions());
+
+        logClient.doLog(
+                repository.getLocation()
+                ,new String[]{}
+                ,SVNRevision.create(0L)
+                ,SVNRevision.HEAD
+                ,SVNRevision.create(0L)
+                ,true
+                ,false
+                ,0L
+                ,new ISVNLogEntryHandler(){
+                    public void handleLogEntry(SVNLogEntry svnLogEntry) throws SVNException {
+                       if(minValueForBranch > svnLogEntry.getRevision()) {
+                           minValueForBranch = svnLogEntry.getRevision();
+                       }
+                       System.out.println(minValueForBranch);
+                    }
+                }
+
+        );
+
+        Assert.assertEquals("The value determined did not match the value expected",minValueForBranch, 162L);
+    }
+
+    private long minValueForBranch=Long.MAX_VALUE;
+
+
 	@Test
 	public void testFileConversion() throws SVNException {
 		SvnKitUtil.setupLibrary();
 		SVNRepository repository = SVNRepositoryFactory.create(SVNURL.parseURIEncoded("http://neosavvy.com/svn/neosavvy/"));
-		ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager("aparrish", "subw@y1");
+		ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager("aparrish", "aparrish");
 		repository.setAuthenticationManager(authManager);
 		
 		int revision = 5;

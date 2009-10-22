@@ -7,7 +7,8 @@ package com.neosavvy.svn.analytics.model
 	import flash.errors.IllegalOperationError;
 	
 	import mx.collections.ArrayCollection;
-	import mx.messaging.ChannelSet;
+import mx.controls.Alert;
+import mx.messaging.ChannelSet;
 	import mx.messaging.channels.AMFChannel;
 	import mx.rpc.events.FaultEvent;
 	import mx.rpc.events.ResultEvent;
@@ -105,7 +106,7 @@ package com.neosavvy.svn.analytics.model
 			trace("Fault: " + fault.fault.faultCode);
 			trace("FaultDetail: " + fault.fault.faultDetail);
 			trace("FaultString: " + fault.fault.faultString);
-			
+
 			svnRepositoryService.removeEventListener(ResultEvent.RESULT, onRepositoriesResult, false);
             svnRepositoryService.removeEventListener(FaultEvent.FAULT, onRepositoriesFault, false);
 		}
@@ -144,7 +145,7 @@ package com.neosavvy.svn.analytics.model
 			trace("Fault: " + fault.fault.faultCode);
 			trace("FaultDetail: " + fault.fault.faultDetail);
 			trace("FaultString: " + fault.fault.faultString);
-			
+			Alert.show(fault.fault.faultString);
 			svnRepositoryService.removeEventListener(ResultEvent.RESULT, onSaveRepositoriesResult, false);
             svnRepositoryService.removeEventListener(FaultEvent.FAULT, onSaveRepositoriesFault, false);
 		}

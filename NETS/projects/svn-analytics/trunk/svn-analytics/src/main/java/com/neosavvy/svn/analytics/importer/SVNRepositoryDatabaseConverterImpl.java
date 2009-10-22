@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.neosavvy.svn.analytics.importer.helper.RepositoryMinRevisionHelper;
 import org.apache.log4j.Logger;
 import org.tmatesoft.svn.core.SVNException;
 import org.tmatesoft.svn.core.SVNURL;
@@ -105,6 +106,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
                         .createDefaultAuthenticationManager(model.getUserName(),
                                 model.getPassword());
                 repository.setAuthenticationManager(authManager);
+                model.setStartRevision(new RepositoryMinRevisionHelper().determineMinRevisionForRepository(model.getUrl(), model.getUserName(), model.getPassword()));
                 model.setEndRevision(repository.getLatestRevision());
                 initializedRepositories.put(model, repository);
             } catch (SVNException e) {
@@ -137,7 +139,7 @@ public class SVNRepositoryDatabaseConverterImpl implements
             if(info.getLastUpdateRevision() > startRevision) {
             	startRevision = info.getLastUpdateRevision() + 1;
             }
-            
+
             convertRevisionsWithLogClientAndLog(modelKey, repository,
 					startRevision, endRevision);
 

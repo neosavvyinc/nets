@@ -60,6 +60,7 @@
                         <path>${basedir}/src/main/resources</path>
                         <path>${basedir}/target/generated-sources/flexmojos</path>
                     </sourcePaths>
+                    <configurationReport>true</configurationReport>
 				</configuration>
 				<dependencies>
 					<dependency>

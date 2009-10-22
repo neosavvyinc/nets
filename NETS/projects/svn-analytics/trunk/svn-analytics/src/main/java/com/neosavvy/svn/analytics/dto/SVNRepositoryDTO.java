@@ -3,6 +3,12 @@ package com.neosavvy.svn.analytics.dto;
 import java.util.List;
 
 import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
+import com.neosavvy.svn.analytics.util.SvnKitUtil;
+import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.io.SVNRepository;
+import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
+import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 public class SVNRepositoryDTO {
 
@@ -80,4 +86,24 @@ public class SVNRepositoryDTO {
 		this.children = children;
 	}
 
+    public String getRoot() {
+
+        SvnKitUtil.setupLibrary();
+        try {
+            SVNRepository repository = SVNRepositoryFactory.create(SVNURL.parseURIEncoded(this.getUrl()));
+            ISVNAuthenticationManager authManager = SVNWCUtil.createDefaultAuthenticationManager(getUserName(), getPassword());
+            repository.setAuthenticationManager(authManager);
+            String path = repository.getLocation().getPath();
+            String root = repository.getRepositoryRoot(true).getPath();
+            if( path.equals(root) ) {
+                return null;
+            } else if( !path.equals(root) ) {
+                String derivedRoot = path.substring(root.length(), path.lastIndexOf("/"));
+                return derivedRoot;
+            }
+            return path;
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

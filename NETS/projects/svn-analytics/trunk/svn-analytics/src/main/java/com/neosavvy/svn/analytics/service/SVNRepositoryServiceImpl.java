@@ -5,6 +5,13 @@ import com.neosavvy.svn.analytics.dao.SVNRepositoryDAO;
 import com.neosavvy.svn.analytics.dto.SVNRepositoryDTO;
 import com.neosavvy.svn.analytics.dto.file.FileSystemNode;
 import com.neosavvy.svn.analytics.importer.SVNRepositoryDatabaseConverter;
+import com.neosavvy.svn.analytics.util.SvnKitUtil;
+import org.tmatesoft.svn.core.SVNException;
+import org.tmatesoft.svn.core.SVNURL;
+import org.tmatesoft.svn.core.auth.ISVNAuthenticationManager;
+import org.tmatesoft.svn.core.io.SVNRepository;
+import org.tmatesoft.svn.core.io.SVNRepositoryFactory;
+import org.tmatesoft.svn.core.wc.SVNWCUtil;
 
 public class SVNRepositoryServiceImpl implements SvnRepositoryService {
 
@@ -23,6 +30,19 @@ public class SVNRepositoryServiceImpl implements SvnRepositoryService {
 	}
 
 	public void saveRepository(SVNRepositoryDTO repository) {
+        SvnKitUtil.setupLibrary();
+        try {
+        SVNRepository initializedRepository = SVNRepositoryFactory.create(SVNURL
+                        .parseURIEncoded(repository.getUrl()));
+
+                ISVNAuthenticationManager authManager = SVNWCUtil
+                        .createDefaultAuthenticationManager(repository.getUserName(),
+                                repository.getPassword());
+                initializedRepository.setAuthenticationManager(authManager);
+            initializedRepository.testConnection();
+        } catch (SVNException e) {
+            throw new RuntimeException("Repository URL was wrong, or user/pass was incorrect",e);
+        }
 		repositoryDAO.saveRepository(repository);
 	}
 
