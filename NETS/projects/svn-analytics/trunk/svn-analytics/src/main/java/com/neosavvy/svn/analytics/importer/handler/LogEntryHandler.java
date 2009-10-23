@@ -70,8 +70,15 @@ public class LogEntryHandler implements ISVNLogEntryHandler {
 				 */
 				if( entryPath.getKind() == SVNNodeKind.NONE || entryPath.getKind() == SVNNodeKind.UNKNOWN) {
 					SVNLogClient logClient = new SVNLogClient(repository.getAuthenticationManager(), new DefaultSVNOptions());
-					SVNURL appendPath = repository.getLocation().appendPath(entryPath.getPath(), true);
-					
+                    String entryPathString = entryPath.getPath();
+                    SVNURL appendPath = repository.getRepositoryRoot(true).appendPath(entryPathString, true);
+
+
+                    if(logger.isDebugEnabled()) {
+                        logger.debug("About to annotate file: " + entryPathString);
+                        logger.debug("At the location: " + appendPath.toString() );
+                    }
+
 					try {
 						AnnotationPrintHandler handler = new AnnotationPrintHandler(new FileSystemNode(entry, entryPath, repositoryModel, FileSystemNode.TYPE_FILE));
 						logClient.doAnnotate(appendPath
