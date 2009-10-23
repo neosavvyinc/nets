@@ -53,6 +53,13 @@
 		<blazeds.version>3.0</blazeds.version>
 		<blazeds.fullversion>3.0.0.544</blazeds.fullversion>
 		<spring.version>2.5.6</spring.version>
+
+        <!--<cargo.container.id>resin3x</cargo.container.id>-->
+        <!--<cargo.download.url>http://www.caucho.com/download/resin-3.0.28.zip</cargo.download.url>-->
+        <cargo.container.id>tomcat6x</cargo.container.id>
+        <cargo.download.url>http://www.ibiblio.org/pub/mirrors/apache/tomcat/tomcat-6/v6.0.20/bin/apache-tomcat-6.0.20.zip</cargo.download.url>
+        <cargo.install.dir>${java.io.tmpdir}/cargo/installs</cargo.install.dir>
+        <cargo.servlet.port>8080</cargo.servlet.port>
 	</properties>
 
 	<licenses>
