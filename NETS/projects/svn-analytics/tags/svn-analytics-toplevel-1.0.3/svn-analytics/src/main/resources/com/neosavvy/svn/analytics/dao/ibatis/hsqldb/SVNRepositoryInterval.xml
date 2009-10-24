@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SvnRepositoryInterval">
+
+    <typeAlias alias="SvnRepositoryInterval" 
+    	type="com.neosavvy.svn.analytics.dto.SVNRepositoryInterval" />
+    
+    <resultMap class="SvnRepositoryInterval" id="SvnRepositoryIntervalResultMap">
+		<!--<result property="startMonthDate" column="START_DATE_MONTH"/>-->
+		<!--<result property="endMonthDate" column="END_DATE_MONTH"/>-->
+        <!--,TO_CHAR(MIN(REV_DATE), 'YYYY-MM') as START_DATE_MONTH-->
+        <!--,TO_CHAR(MAX(REV_DATE), 'YYYY-MM') as END_DATE_MONTH-->
+
+		<result property="startDayLevelDate" column="START_DATE_DAY_LEVEL" javaType="java.util.Date" jdbcType="DATE"/>
+		<result property="endDayLevelDate" column="END_DATE_DAY_LEVEL" javaType="java.util.Date" jdbcType="DATE"/>
+
+    </resultMap>
+    
+    <select id="getSvnRepositoryInterval" resultMap="SvnRepositoryIntervalResultMap">
+        SELECT 
+		    MIN(REV_DATE) as START_DATE_DAY_LEVEL
+		    ,MAX(REV_DATE) as END_DATE_DAY_LEVEL
+
+		FROM SVN_STATISTIC
+    </select>
+
+</sqlMap>

@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<artifactId>svn-analytics-toplevel</artifactId>
+		<groupId>com.neosavvy.svn.analytics</groupId>
+		<version>1.0.3</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.neosavvy.svn.analytics</groupId>
+	<artifactId>svn-analytics-client</artifactId>
+	<name>SVN Analytics Client</name>
+	<packaging>swf</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<version>${flexmojos.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>wrapper</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<debug>true</debug>
+					<licenses>
+						<!-- Windows -->
+						<!--<flexbuilder3>1377-4008-6804-0543-0443-9238</flexbuilder3>-->
+						<!-- Mac OS X -->
+						<!--<charts>1377-4001-0346-3601-2775-6383</charts>-->
+						<flexbuilder3>1377-4001-0346-3601-2775-6383</flexbuilder3>
+					</licenses>
+					<locales>
+						<param>en_US</param>
+					</locales>
+					<contextRoot>svn-analytics-webapp</contextRoot>
+					<sourceFile>./com/neosavvy/svn/analytics/SvnAnalyticsApplication.mxml</sourceFile>
+                    <configurationReport>true</configurationReport>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.adobe.flex</groupId>
+						<artifactId>compiler</artifactId>
+						<version>${flex.version}</version>
+						<type>pom</type>
+					</dependency>
+					<dependency>
+						<groupId>com.adobe.flex.license</groupId>
+						<artifactId>license-flexbuilder-pro-roundarch</artifactId>
+						<version>${flex.version}</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-config</id>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
+							<includeArtifacIds>svn-analytics-config</includeArtifacIds>
+							<includeGroupIds>${project.groupId}</includeGroupIds>
+							<excludeTransitive>true</excludeTransitive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${basedir}/target/generated-resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.neosavvy.svn.analytics</groupId>
+			<artifactId>svn-analytics-common</artifactId>
+			<version>1.0.3</version>
+			<type>swc</type>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>svn-analytics-config</artifactId>
+			<version>1.0.3</version>
+			<classifier>resources</classifier>
+			<type>zip</type>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.puremvc.as3</groupId>
+			<artifactId>PureMVC</artifactId>
+			<version>2.0.4</version>
+			<type>swc</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.flexlib</groupId>
+			<artifactId>flexlib</artifactId>
+			<version>2.4</version>
+			<type>swc</type>
+		</dependency>
+
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex.version}</version>
+			<type>pom</type>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.sdk</groupId>
+			<artifactId>datavisualization</artifactId>
+			<type>swc</type>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.sdk</groupId>
+			<artifactId>datavisualization</artifactId>
+			<classifier>en_US</classifier>
+			<type>swc</type>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.license</groupId>
+			<artifactId>license-flexbuilder-pro-roundarch</artifactId>
+			<version>${flex.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.adobe.blazeds</groupId>
+			<artifactId>blazeds-remoting</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.blazeds</groupId>
+			<artifactId>blazeds-common</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.blazeds</groupId>
+			<artifactId>blazeds-core</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.blazeds</groupId>
+			<artifactId>blazeds-proxy</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.j2ee</groupId>
+			<artifactId>j2ee</artifactId>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.jmx</groupId>
+			<artifactId>jmxri</artifactId>
+			<version>1.2.1</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+</project>

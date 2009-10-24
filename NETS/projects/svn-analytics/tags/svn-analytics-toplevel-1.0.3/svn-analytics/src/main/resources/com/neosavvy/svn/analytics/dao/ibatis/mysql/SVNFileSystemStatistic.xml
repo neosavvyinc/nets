@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+<sqlMap namespace="SVNFileSystemStatistics">
+
+    <insert id="insertStatistic" 
+    	parameterClass="com.neosavvy.svn.analytics.dto.file.FileSystemNode">
+        INSERT INTO 
+            SVN_FILE_SYSTEM_STATISTIC
+        (
+            REPOSITORY_ID
+			,REVISION
+			,REVISION_DATE
+			,LAST_CHANGED_REVISION
+			,AUTHOR
+			,RELATIVE_PATH
+			,PARENT_DIRECTORY 
+			,NUMBER_OF_LINES
+			,FILE_NAME
+			,FILE_TYPE
+        )
+        VALUES
+        (
+            #repositoryId#
+			,#revision#
+			,#revisionDate#
+			,#lastChangedRevision#
+			,#author#
+			,#relativePath#
+			,#parentDirectory#
+			,#numberLines#
+			,#fileName#
+			,#fileType#
+        )
+    </insert>   
+    
+    <resultMap 
+    	class="com.neosavvy.svn.analytics.dto.file.FileSystemNode" 
+	    id="FileNodeResultMap">
+		<result property="revision" column="REVISION"/>
+		<result property="revisionDate" column="REVISION_DATE"/>
+		<result property="lastChangedRevision" column="LAST_CHANGED_REVISION"/>
+		<result property="relativePath" column="RELATIVE_PATH"/>
+		<result property="parentDirectory" column="PARENT_DIRECTORY"/>
+		<result property="fileName" column="FILE_NAME"/>
+		<result property="fileType" column="FILE_TYPE"/>
+		<result property="repositoryId" column="REPOSITORY_ID"/>
+    </resultMap>
+    
+    <select 
+    	id="getChildren" 
+    	parameterClass="com.neosavvy.svn.analytics.dto.file.FileSystemNode"
+    	resultMap="FileNodeResultMap">
+		SELECT 
+		    REPOSITORY_ID
+		    ,MAX( REVISION ) AS REVISION
+		    ,MAX( REVISION_DATE ) AS REVISION_DATE
+		    ,MAX( LAST_CHANGED_REVISION ) AS LAST_CHANGED_REVISION
+		    ,AUTHOR
+		    ,RELATIVE_PATH
+		    ,PARENT_DIRECTORY 
+		    ,FILE_NAME
+		    ,FILE_TYPE
+		FROM 
+		    SVN_FILE_SYSTEM_STATISTIC 
+		WHERE 
+		    COALESCE(PARENT_DIRECTORY,'/') = #parentDirectory#
+		   	AND REPOSITORY_ID = #repositoryId#
+		    AND RELATIVE_PATH IS NOT NULL
+		GROUP BY
+		    REPOSITORY_ID
+		    ,AUTHOR
+		    ,RELATIVE_PATH
+		    ,PARENT_DIRECTORY
+		    ,FILE_NAME
+		    ,FILE_TYPE
+		ORDER BY 
+		    RELATIVE_PATH    
+  	</select>
+  
+
+</sqlMap>
