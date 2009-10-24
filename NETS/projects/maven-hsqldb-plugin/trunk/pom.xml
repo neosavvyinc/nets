@@ -3,15 +3,15 @@
     <artifactId>maven-hsqldb-plugin</artifactId>
     <groupId>org.codehaus.mojo</groupId>
     <packaging>maven-plugin</packaging>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <name>Maven HSQLDB Plugin</name>
     <description>A simple hsqldb maven plugin</description>
     <url>http://maven.apache.org</url>
 
     <scm>
-        <connection>scm:svn:http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/tags/maven-hsqldb-plugin-1.0</connection>
-        <developerConnection>scm:svn:http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/tags/maven-hsqldb-plugin-1.0</developerConnection>
-        <url>http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/tags/maven-hsqldb-plugin-1.0</url>
+        <connection>scm:svn:http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/trunk</connection>
+        <developerConnection>scm:svn:http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/trunk</developerConnection>
+        <url>http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/trunk</url>
     </scm>
 
     <distributionManagement>
