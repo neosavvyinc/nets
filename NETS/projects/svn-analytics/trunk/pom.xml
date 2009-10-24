@@ -11,14 +11,14 @@
 	<groupId>com.neosavvy.svn.analytics</groupId>
 	<artifactId>svn-analytics-toplevel</artifactId>
 	<packaging>pom</packaging>
-	<version>1.0.2-SNAPSHOT</version>
+	<version>1.0.2</version>
 	<name>svn-analytics-toplevel</name>
 	<url>http://neosavvy.com</url>
 	
 	<scm>
-		<connection>scm:svn:http://www.neosavvy.com/svn/projects/svn-analytics/trunk/</connection>
-		<developerConnection>scm:svn:http://www.neosavvy.com/svn/projects/svn-analytics/trunk/</developerConnection>
-		<url>http://www.neosavvy.com/svn/projects/svn-analytics/trunk/</url>
+		<connection>scm:svn:http://www.neosavvy.com/svn/projects/svn-analytics/tags/svn-analytics-toplevel-1.0.2</connection>
+		<developerConnection>scm:svn:http://www.neosavvy.com/svn/projects/svn-analytics/tags/svn-analytics-toplevel-1.0.2</developerConnection>
+		<url>http://www.neosavvy.com/svn/projects/svn-analytics/tags/svn-analytics-toplevel-1.0.2</url>
 	</scm>
 
 	<distributionManagement>

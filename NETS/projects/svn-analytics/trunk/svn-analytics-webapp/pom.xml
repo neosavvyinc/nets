@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>svn-analytics-toplevel</artifactId>
 		<groupId>com.neosavvy.svn.analytics</groupId>
-		<version>1.0.2-SNAPSHOT</version>
+		<version>1.0.2</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -17,18 +17,18 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>svn-analytics</artifactId>
-			<version>1.0.2-SNAPSHOT</version>
+			<version>1.0.2</version>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>svn-analytics-client</artifactId>
-			<version>1.0.2-SNAPSHOT</version>
+			<version>1.0.2</version>
 			<type>swf</type>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>svn-analytics-config</artifactId>
-			<version>1.0.2-SNAPSHOT</version>
+			<version>1.0.2</version>
 			<classifier>resources</classifier>
 			<type>zip</type>
 			<scope>provided</scope>
