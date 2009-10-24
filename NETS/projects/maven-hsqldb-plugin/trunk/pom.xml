@@ -11,9 +11,9 @@
     <url>http://maven.apache.org</url>
 
     <scm>
-        <connection>scm:svn:http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/</connection>
-        <developerConnection>scm:svn:http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/</developerConnection>
-        <url>http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/</url>
+        <connection>scm:svn:http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/trunk</connection>
+        <developerConnection>scm:svn:http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/trunk</developerConnection>
+        <url>http://www.neosavvy.com/svn/projects/maven-hsqldb-plugin/trunk</url>
     </scm>
 
     <distributionManagement>
