@@ -71,7 +71,7 @@
 
 	</dependencies>
 	<build>
-		<finalName>svn-analytics</finalName>
+		<finalName>svn-analytics-webapp</finalName>
 		<resources>
             <resource>
                 <directory>src/main/webapp/WEB-INF</directory>
@@ -162,6 +162,13 @@
 				          <include>web.xml</include>
 				        </includes>
 				        <targetPath>WEB-INF</targetPath>
+				        <filtering>true</filtering>
+				      </webResource>
+                      <webResource>
+				        <directory>${basedir}/src/main/resources/</directory>
+				        <includes>
+				          <include>index.html</include>
+				        </includes>
 				        <filtering>true</filtering>
 				      </webResource>
 				    </webResources>

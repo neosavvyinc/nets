@@ -12,7 +12,7 @@
 	<artifactId>svn-analytics-toplevel</artifactId>
 	<packaging>pom</packaging>
 	<version>1.0.3-SNAPSHOT</version>
-	<name>svn-analytics-toplevel</name>
+	<name>SVN Spy</name>
 	<url>http://neosavvy.com</url>
 	
 	<scm>
@@ -82,6 +82,8 @@
         <cargo.download.url>http://www.ibiblio.org/pub/mirrors/apache/tomcat/tomcat-6/v6.0.20/bin/apache-tomcat-6.0.20.zip</cargo.download.url>
         <cargo.install.dir>${java.io.tmpdir}/cargo/installs</cargo.install.dir>
         <cargo.servlet.port>8080</cargo.servlet.port>
+
+        <currentBuildVersion>${project.version}</currentBuildVersion>
 	</properties>
 
 	<licenses>

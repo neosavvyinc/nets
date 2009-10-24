@@ -38,7 +38,7 @@
 					<locales>
 						<param>en_US</param>
 					</locales>
-					<contextRoot>svn-analytics</contextRoot>
+					<contextRoot>svn-analytics-webapp</contextRoot>
 					<sourceFile>./com/neosavvy/svn/analytics/SvnAnalyticsApplication.mxml</sourceFile>
                     <configurationReport>true</configurationReport>
 				</configuration>
