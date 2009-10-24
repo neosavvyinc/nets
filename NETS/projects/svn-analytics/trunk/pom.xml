@@ -37,7 +37,29 @@
 			<url>scp://www.neosavvy.com/var/www/svn-analytics/</url>
 		</site>
 	</distributionManagement>
-	
+
+    <ciManagement>
+        <system>bamboo</system>
+        <url>http://bamboo.neosavvy.com/bamboo/</url>
+        <notifiers>
+            <notifier>
+                <type>mail</type>
+                <sendOnError>true</sendOnError>
+                <sendOnFailure>true</sendOnFailure>
+                <sendOnSuccess>false</sendOnSuccess>
+                <sendOnWarning>false</sendOnWarning>
+                <configuration>
+                    <address>aparrish@neosavvy.com</address>
+                </configuration>
+            </notifier>
+        </notifiers>
+    </ciManagement>
+
+    <issueManagement>
+        <system>jira</system>
+        <url>http://jira.neosavvy.com/jira/</url>
+    </issueManagement>
+
 	<modules>
 		<module>svn-analytics</module>
 		<module>svn-analytics-client</module>
@@ -81,12 +103,26 @@
 			<organization>Neosavvy, Inc</organization>
 			<organizationUrl>http://www.neosavvy.com</organizationUrl>
 			<roles>
-				<role>developer</role>
-				<role>documentation</role>
-				<role>management</role>
+				<role>Developer</role>
+				<role>Documentation</role>
+				<role>Management</role>
 			</roles>
 			<timezone>-5</timezone>
 		</developer>
+        <developer>
+            <id>gschwartzbard</id>
+			<name>Gary Schwartzbard</name>
+			<email>gschwartzbard@roundarch.com</email>
+			<url>http://www.roundarch.com</url>
+			<organization>Roundarch, Inc</organization>
+			<organizationUrl>http://www.roundarch.com</organizationUrl>
+			<roles>
+				<role>Quality Assurance</role>
+				<role>Verification</role>
+				<role>IdeaMan</role>
+			</roles>
+			<timezone>-6</timezone>
+        </developer>
 	</developers>
 	<contributors>
 		<contributor>

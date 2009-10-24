@@ -13,6 +13,7 @@
 	</bannerLeft>
 	<body>
 		<menu name="Installation">
+            <item name="Download" href="download.html"/>
 			<item name="First Steps" href="installation.html"/>
 		</menu>
 		<menu name="Configuration">
