@@ -44,7 +44,6 @@ public class AnnotationPrintHandler implements ISVNAnnotateHandler {
 
 	public boolean handleRevision(Date arg0, long arg1, String arg2, File arg3)
 			throws SVNException {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

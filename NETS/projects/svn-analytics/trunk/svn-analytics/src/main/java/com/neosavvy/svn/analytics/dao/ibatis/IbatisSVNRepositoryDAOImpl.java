@@ -59,7 +59,6 @@ public class IbatisSVNRepositoryDAOImpl extends SqlMapClientDaoSupport implement
 
 	public void updateRepository(SVNRepositoryDTO repository) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

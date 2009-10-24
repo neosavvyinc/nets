@@ -23,8 +23,6 @@ public class IbatisDebugger {
 	 * 
 	 * @param Object
 	 * @param dao
-	 *            TODO
-	 * 
 	 * @return
 	 */
 	public static String getSqlForIbatisRequest(SqlMapClientDaoSupport dao,
