@@ -3,7 +3,7 @@
 
     <mx:Script><![CDATA[
         protected function newUserClick():void {
-            dispatchEvent(new Event("newUserButtonClicked"));
+            dispatchEvent(new Event("newUser", true));
         }
 ]]></mx:Script>
 

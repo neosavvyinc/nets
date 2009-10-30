@@ -1,14 +1,16 @@
 package com.neosavvy.user.dto;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="USER")
+@Table(
+    name="USER" ,
+    uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"USER_ID"})
+            ,@UniqueConstraint(columnNames = {"USERNAME"})
+    }
+)
 public class UserDTO implements Serializable {
 
 	@Id

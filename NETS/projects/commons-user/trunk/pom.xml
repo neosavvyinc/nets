@@ -27,6 +27,7 @@
         <container-spec.version>1.0.1</container-spec.version>
         <jotm.version>2.0.10</jotm.version>
         <flex.mojos.maven.version>3.4-SNAPSHOT</flex.mojos.maven.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
     </properties>
 
 

@@ -6,6 +6,7 @@
         import com.neosavvy.user.dto.UserDTO;
 
         import mx.core.Application;
+        import mx.core.FlexGlobals;
         import mx.messaging.ChannelSet;
         import mx.messaging.channels.AMFChannel;
         import mx.rpc.events.FaultEvent;
@@ -14,7 +15,7 @@
 
         protected var userService:RemoteObject;
 
-        protected function deleteHandler() {
+        protected function deleteHandler():void {
             userService = new RemoteObject();
 
             var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:9090/commons-user-webapp/messagebroker/amf");
@@ -37,7 +38,7 @@
 
         protected function deleteresultHandler( resultEvent:ResultEvent ):void {
 				var data:Array = resultEvent.result as Array;
-				main(Application.application).initializeService();
+				FlexGlobals.topLevelApplication.initializeService();
         }
         ]]>
     </mx:Script>

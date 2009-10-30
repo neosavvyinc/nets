@@ -2,9 +2,11 @@ package com.neosavvy.user;
 
 import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.dto.UserDTO;
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
@@ -138,6 +140,19 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
         List<UserDTO> usersFounds = userDAO.findUsers(searchCriteria);
 
         assertSearchCriteriaResults(usersFounds,2);        
+    }
+
+    @Test
+    public void testSaveTwoUsersSameUserName() {
+        deleteFromTables("USER");
+        userDAO.saveUser(createTestUser());
+        try {
+            Assert.assertEquals("Should be a row in the table for the user",countRowsInTable("USER"),1);
+            userDAO.saveUser(createTestUser());
+        } catch (ConstraintViolationException e) {
+            return;
+        }
+        Assert.fail("No data access exception was thrown when saving a user by the same id");
     }
 
     private void setupCriteriaBasedSearchTest() {
