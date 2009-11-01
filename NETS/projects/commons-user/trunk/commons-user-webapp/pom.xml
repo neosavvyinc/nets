@@ -28,12 +28,37 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<version>6.1.15</version>
-			</plugin>
-			<plugin>
+            <plugin>
+                <groupId>org.codehaus.cargo</groupId>
+                <artifactId>cargo-maven2-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>install</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>install</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <container>
+                        <containerId>${cargo.container.id}</containerId>
+                        <zipUrlInstaller>
+                            <url>${cargo.download.url}</url>
+                            <installDir>${cargo.install.dir}</installDir>
+                        </zipUrlInstaller>
+                    </container>
+                    <configuration>
+                        <home>${basedir}/target/${cargo.container.id}/home</home>
+                        <properties>
+                            <cargo.jvmargs>
+                                <![CDATA[-Xdebug -Xrunjdwp:transport=dt_socket,address=4001,server=y,suspend=n]]></cargo.jvmargs>
+                            <cargo.servlet.port>${cargo.servlet.port}</cargo.servlet.port>
+                        </properties>
+                    </configuration>
+                </configuration>
+            </plugin>
+            <plugin>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>

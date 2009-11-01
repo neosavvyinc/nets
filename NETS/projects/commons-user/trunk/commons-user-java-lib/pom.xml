@@ -44,6 +44,13 @@
 	</build>
 
     <dependencies>
+        <!-- Provided Scope Dependencies -->
+        <dependency>
+			<groupId>javax.j2ee</groupId>
+			<artifactId>j2ee</artifactId>
+            <scope>provided</scope>
+		</dependency>
+
         <!-- Transaction Manager Dependencies -->
         <dependency>
             <groupId>javax.annotation</groupId>
@@ -101,11 +108,14 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>2.5.6</version>
-		</dependency>
+        <dependency>
+            <groupId>org.springframework.flex</groupId>
+            <artifactId>spring-flex</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -116,10 +126,7 @@
 			<version>1.5.2</version>
 			<type>jar</type>
 		</dependency>
-		<dependency>
-			<groupId>javax.j2ee</groupId>
-			<artifactId>j2ee</artifactId>
-		</dependency>
+		
 		<dependency>
 			<groupId>com.adobe.blazeds</groupId>
 			<artifactId>blazeds-remoting</artifactId>
@@ -165,5 +172,13 @@
 			<artifactId>hsqldb</artifactId>
 			<version>1.8.0.7</version>
 		</dependency>
+
+        <dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>2.5.6</version>
+		    <scope>test</scope>
+        </dependency>
+
 	</dependencies>
 </project>

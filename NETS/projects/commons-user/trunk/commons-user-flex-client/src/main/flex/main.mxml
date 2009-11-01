@@ -28,7 +28,7 @@
         public function initializeService():void {
             userService = new RemoteObject();
 
-            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:9090/commons-user-webapp/messagebroker/amf");
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:8080/commons-user-webapp/messagebroker/amf");
             var channelSet:ChannelSet = new ChannelSet();
             channelSet.addChannel(channel);
             userService.channelSet = channelSet;

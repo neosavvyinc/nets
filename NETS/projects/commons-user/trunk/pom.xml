@@ -35,7 +35,6 @@
             <url>scp://www.neosavvy.com/var/www/commons-user/</url>
         </site>
     </distributionManagement>
-    
 
 	<modules>
 		<module>commons-user-config</module>
@@ -52,9 +51,13 @@
         <container-spec.version>1.0.1</container-spec.version>
         <jotm.version>2.0.10</jotm.version>
         <flex.mojos.maven.version>3.4-SNAPSHOT</flex.mojos.maven.version>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
-    </properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <cargo.container.id>tomcat6x</cargo.container.id>
+        <cargo.download.url>http://www.ibiblio.org/pub/mirrors/apache/tomcat/tomcat-6/v6.0.20/bin/apache-tomcat-6.0.20.zip</cargo.download.url>
+        <cargo.install.dir>${java.io.tmpdir}/cargo/installs</cargo.install.dir>
+        <cargo.servlet.port>8080</cargo.servlet.port>
+    </properties>
 
 	<build>
 		<pluginManagement>
@@ -161,6 +164,16 @@
 				<artifactId>spring</artifactId>
 				<version>2.5.6</version>
 			</dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-webmvc</artifactId>
+                <version>2.5.6</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.flex</groupId>
+                <artifactId>spring-flex</artifactId>
+                <version>1.0.1.RELEASE</version>
+            </dependency>
 			<dependency>
 				<groupId>log4j</groupId>
 				<artifactId>log4j</artifactId>
@@ -174,27 +187,27 @@
 			<dependency>
 				<groupId>com.adobe.blazeds</groupId>
 				<artifactId>blazeds-remoting</artifactId>
-				<version>3.0</version>
+				<version>3.2.0.3978</version>
 			</dependency>
 			<dependency>
 				<groupId>com.adobe.blazeds</groupId>
 				<artifactId>blazeds-common</artifactId>
-				<version>3.0</version>
+				<version>3.2.0.3978</version>
 			</dependency>
 			<dependency>
 				<groupId>com.adobe.blazeds</groupId>
 				<artifactId>blazeds-core</artifactId>
-				<version>3.0</version>
+				<version>3.2.0.3978</version>
 			</dependency>
 			<dependency>
 				<groupId>com.adobe.blazeds</groupId>
 				<artifactId>blazeds-proxy</artifactId>
-				<version>3.0.0.544</version>
+				<version>3.2.0.3978</version>
 			</dependency>
 			<dependency>
 				<groupId>com.adobe.blazeds</groupId>
 				<artifactId>blazeds-opt</artifactId>
-				<version>3.0.0.544</version>
+				<version>3.2.0.3978</version>
 			</dependency>
             <dependency>
                 <groupId>com.adobe.flex.framework</groupId>

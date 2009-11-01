@@ -4,35 +4,29 @@
 
 <web-app>
     
-  	<display-name>Skeleton Service</display-name>
-  	
-  	<context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>
-        classpath*:applicationContext.xml
-        </param-value>
-    </context-param> 
-  
-    <listener>
-        <listener-class>org.springframework.web.context.ContextLoaderListener </listener-class> 
-    </listener>
+  	<display-name>COMMONS-USER-SERVICE</display-name>
+
     <listener>
         <listener-class>flex.messaging.HttpFlexSession</listener-class>
     </listener>
-    
+
     <servlet>
-        <servlet-name>MessageBrokerServlet</servlet-name>
-        <servlet-class>flex.messaging.MessageBrokerServlet</servlet-class>
+        <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
         <init-param>
-            <param-name>service.configuration.file</param-name>
-            <param-value>/WEB-INF/flex/services-config.xml</param-value>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                classpath*:applicationContext.xml
+                classpath:flexContext.xml
+            </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
+
     <servlet-mapping>
-        <servlet-name>MessageBrokerServlet</servlet-name>
+        <servlet-name>Spring MVC Dispatcher Servlet</servlet-name>
         <url-pattern>/messagebroker/*</url-pattern>
     </servlet-mapping>
+
      
 </web-app>
