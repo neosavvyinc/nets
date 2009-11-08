@@ -8,6 +8,7 @@ http://www.springframework.org/schema/flex http://www.springframework.org/schema
 
     <flex:message-broker>
         <flex:remoting-service default-channels="user-amf" />
+        <flex:secured/>
     </flex:message-broker>
 
     <flex:remoting-destination ref="userService" />

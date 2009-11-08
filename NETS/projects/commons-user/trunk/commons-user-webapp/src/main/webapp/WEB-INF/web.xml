@@ -18,6 +18,7 @@
             <param-value>
                 classpath*:applicationContext.xml
                 classpath:flexContext.xml
+                classpath:securityContext.xml
             </param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>

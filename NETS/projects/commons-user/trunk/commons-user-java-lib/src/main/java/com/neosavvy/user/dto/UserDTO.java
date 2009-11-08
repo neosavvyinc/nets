@@ -1,7 +1,7 @@
 package com.neosavvy.user.dto;
 
 import javax.persistence.*;
-import java.io.Serializable;
+import java.io.*;
 
 @Entity
 @Table(
@@ -11,7 +11,7 @@ import java.io.Serializable;
             ,@UniqueConstraint(columnNames = {"USERNAME"})
     }
 )
-public class UserDTO implements Serializable {
+public class UserDTO implements Externalizable {
 
 	@Id
     @GeneratedValue
@@ -79,4 +79,22 @@ public class UserDTO implements Serializable {
 		this.password = password;
 	}
 
+    public void writeExternal(ObjectOutput out) throws IOException {
+        out.writeInt(id);
+        out.writeObject(firstName);
+        out.writeObject(middleName);
+        out.writeObject(lastName);
+        out.writeObject(emailAddress);
+        out.writeObject(username);
+        out.writeObject(password);
+    }
+
+    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
+        setId(in.readInt());
+        setFirstName((String)in.readObject());
+        setMiddleName((String)in.readObject());
+        setLastName((String)in.readObject());
+        setEmailAddress((String)in.readObject());
+        setPassword((String)in.readObject());
+    }
 }

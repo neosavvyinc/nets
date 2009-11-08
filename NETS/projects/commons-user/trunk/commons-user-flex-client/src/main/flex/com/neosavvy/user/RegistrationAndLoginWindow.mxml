@@ -12,6 +12,8 @@
         <![CDATA[
         import com.neosavvy.user.registration.event.RegistrationFailedEvent;
 
+        import mx.core.FlexGlobals;
+
         protected function init():void {
                 addEventListener("newUser", newUserEvent);
                 addEventListener("cancelClicked",cancelButtonEvent);
@@ -38,6 +40,8 @@
                 userReg.visible = false;
                 userConfirmed.visible = true;
                 userFailed.visible = false;
+
+                FlexGlobals.topLevelApplication.initializeService();
             }
 
             protected function userFailedEvent(event:RegistrationFailedEvent):void {

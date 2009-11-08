@@ -1,15 +1,24 @@
 package com.neosavvy.user.dao;
 
 import com.neosavvy.user.dto.UserDTO;
+import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.criterion.Criterion;
 import org.hibernate.Criteria;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import java.util.List;
 
-public class UserDAOImpl extends HibernateDaoSupport implements UserDAO {
+public class UserDAOImpl implements UserDAO {
+
+    private SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    public SessionFactory getSessionFactory() {
+        return this.sessionFactory;
+    }
 
 	public void deleteUser(UserDTO user) {
 		getCurrentSession().delete(user);

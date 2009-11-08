@@ -116,39 +116,7 @@ package ${jClass.as3Type.packageName} {
                 }
             }
         }
-    }
-
-    ///////////////////////////////////////////////////////////////////////////
-    // Write IExternalizable Implementation.%>
-
-        <%= (jClass.hasSuperclass() ? "override " : "") %>public function readExternal(input:IDataInput):void {<%
-
-    if (jClass.hasSuperclass()) {%>
-            super.readExternal(input);<%
-    }
-    for (jProperty in jClass.properties) {
-        if (jProperty.as3Type.isNumber()) {%>
-            _${jProperty.name} = function(o:*):Number { return (o is Number ? o as Number : Number.NaN) } (input.readObject());<%
-        }
-        else if (jProperty.isEnum()) {%>
-            _${jProperty.name} = Enum.readEnum(input) as ${jProperty.as3Type.name};<%
-        }
-        else {%>
-            _${jProperty.name} = input.readObject() as ${jProperty.as3Type.name};<%
-        }
     }%>
-        }
 
-        <%= (jClass.hasSuperclass() ? "override " : "") %>public function writeExternal(output:IDataOutput):void {<%
-
-    if (jClass.hasSuperclass()) {%>
-            super.writeExternal(output);<%
-    }
-    for (jProperty in jClass.properties) {
-        if (!jProperty.externalizedProperty) {%>
-            output.writeObject(_${jProperty.name});<%
-        }
-    }%>
-        }
     }
 }
