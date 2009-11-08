@@ -1,0 +1,65 @@
+<mockup version="1.0" skin="sketch">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="60" y="10" w="576" h="400" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Commons%20User%20Registration%20/%20Login</text>
+        <topheight>26</topheight>
+      </controlProperties>
+    </control>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::VRule" x="337" y="55" w="-1" h="308" zOrder="2" locked="false" isInGroup="-1"/>
+    <control controlID="20" controlTypeID="__group__" x="357" y="147" w="-1" h="-1" zOrder="4" locked="false" isInGroup="-1">
+      <groupChildrenDescriptors>
+        <control controlID="7" controlTypeID="__group__" x="0" y="0" w="264" h="150" zOrder="0" locked="false" isInGroup="20">
+          <groupChildrenDescriptors>
+            <control controlID="2" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="25" w="264" h="-1" zOrder="0" locked="false" isInGroup="7">
+              <controlProperties>
+                <text>Enter%20Username%20here</text>
+              </controlProperties>
+            </control>
+            <control controlID="3" controlTypeID="com.balsamiq.mockups::TextInput" x="0" y="85" w="264" h="-1" zOrder="1" locked="false" isInGroup="7">
+              <controlProperties>
+                <text>Enter%20password%20here</text>
+              </controlProperties>
+            </control>
+            <control controlID="4" controlTypeID="com.balsamiq.mockups::Label" x="0" y="0" w="71" h="25" zOrder="2" locked="false" isInGroup="7">
+              <controlProperties>
+                <text>Username%3A</text>
+              </controlProperties>
+            </control>
+            <control controlID="5" controlTypeID="com.balsamiq.mockups::Label" x="0" y="60" w="67" h="25" zOrder="3" locked="false" isInGroup="7">
+              <controlProperties>
+                <text>Password%3A</text>
+              </controlProperties>
+            </control>
+            <control controlID="6" controlTypeID="com.balsamiq.mockups::Button" x="209" y="122" w="55" h="-1" zOrder="4" locked="false" isInGroup="7">
+              <controlProperties>
+                <text>Login</text>
+              </controlProperties>
+            </control>
+          </groupChildrenDescriptors>
+        </control>
+        <control controlID="8" controlTypeID="com.balsamiq.mockups::Link" x="0" y="191" w="-1" h="-1" zOrder="1" locked="false" isInGroup="20">
+          <controlProperties>
+            <text>Forgot%20Username</text>
+          </controlProperties>
+        </control>
+        <control controlID="9" controlTypeID="com.balsamiq.mockups::Link" x="115" y="191" w="-1" h="-1" zOrder="2" locked="false" isInGroup="20">
+          <controlProperties>
+            <text>Forgot%20Password</text>
+          </controlProperties>
+        </control>
+      </groupChildrenDescriptors>
+    </control>
+    <control controlID="14" controlTypeID="com.balsamiq.mockups::IconLabel" x="131" y="139" w="135" h="-1" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>User%20XXXXXX%20was%20successfully%20created%21</text>
+        <icon>CheckMarkIcon%7Clarge</icon>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::TextArea" x="659" y="10" w="397" h="400" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>User%20Registration%20Success%21%0A%20%0A1%29%20A%20Success%20message%20with%20an%20icon%20should%20display%20to%20depict%20the%20completion%20of%20user%20registration%0A2%29%20The%20user%20should%20still%20be%20required%20to%20login%20after%20successful%20registration</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
