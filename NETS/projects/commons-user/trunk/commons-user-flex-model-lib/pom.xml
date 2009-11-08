@@ -20,23 +20,23 @@
 				<groupId>org.sonatype.flexmojos</groupId>
 				<artifactId>flexmojos-maven-plugin</artifactId>
 				<version>${flex.mojos.maven.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<includeJavaClasses>
-								<includeClass>com.neosavvy.user.dto.*</includeClass>
-                            </includeJavaClasses>
-							<beanTemplate>
-								<template>${basedir}/src/main/template/beanBase.gsp</template>
-								<template>${basedir}/src/main/template/bean.gsp
-								</template>
-							</beanTemplate>
-						</configuration>
-					</execution>
-				</executions>
+				<!--<executions>-->
+					<!--<execution>-->
+						<!--<goals>-->
+							<!--<goal>generate</goal>-->
+						<!--</goals>-->
+						<!--<configuration>-->
+							<!--<includeJavaClasses>-->
+								<!--<includeClass>com.neosavvy.user.dto.*</includeClass>-->
+                            <!--</includeJavaClasses>-->
+							<!--<beanTemplate>-->
+								<!--<template>${basedir}/src/main/template/beanBase.gsp</template>-->
+								<!--<template>${basedir}/src/main/template/bean.gsp-->
+								<!--</template>-->
+							<!--</beanTemplate>-->
+						<!--</configuration>-->
+					<!--</execution>-->
+				<!--</executions>-->
 				<configuration>
                     <configurationReport>true</configurationReport>
 					<debug>true</debug>
