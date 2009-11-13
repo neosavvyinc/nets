@@ -43,6 +43,7 @@
         private function faultHandler(faultEvent:FaultEvent):void {
             trace("faultEvent: " + faultEvent.message);
             trace("faultEvent: " + faultEvent.fault.toString());
+            showRegistrationLoginWindow();
         }
 
         private function resultHandler(resultEvent:ResultEvent):void {
@@ -62,17 +63,40 @@
             identifier.text = String(selectedItem.id);
         }
 
+        var regAndLoginWindow:IFlexDisplayObject = null;
         protected function showRegistrationLoginWindow():void {
-            var regAndLoginWindow:IFlexDisplayObject = PopUpManager.createPopUp(this as DisplayObject, RegistrationAndLoginWindow, true);
+            regAndLoginWindow = PopUpManager.createPopUp(this as DisplayObject, RegistrationAndLoginWindow, true);
             PopUpManager.centerPopUp(regAndLoginWindow);
         }
-			
+
+        public function hideRegistrationLoginWindow(security:Object):void {
+            PopUpManager.removePopUp(regAndLoginWindow);
+
+            if(security.hasOwnProperty("name")) {
+                usernameLbl.text = security.name;
+            }
+            initializeService();
+        }
+
+        public function logout() {
+            var userService:RemoteObject = new RemoteObject();
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:8080/commons-user-webapp/messagebroker/amf");
+            var channelSet:ChannelSet = new ChannelSet();
+            channelSet.addChannel(channel);
+            userService.channelSet = channelSet;
+            userService.destination = "userService";
+            channelSet.logout();
+            showRegistrationLoginWindow();
+            usernameLbl.text = "Not Logged In";
+        }
 		]]>
 	</mx:Script>
 
 
-    <mx:Button id="showRegistrationLoginWindowBtn" click="{showRegistrationLoginWindow()}"/>
-
+    <mx:HBox width="100%" horizontalAlign="right">
+        <mx:Label id="usernameLbl" text="Not Logged In"/>
+        <mx:Button label="Logout" id="showRegistrationLoginWindowBtn" click="{logout()}"/>
+    </mx:HBox>
     <mx:HBox width="100%" height="100%">
         <mx:VBox>
                 <flexlib:PromptingTextInput id="identifier" editable="false" prompt="NoId"/>

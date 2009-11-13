@@ -11,12 +11,26 @@
     <beans:bean id="preAuthenticatedEntryPoint"
         class="org.springframework.security.ui.preauth.PreAuthenticatedProcessingFilterEntryPoint" />
 
-    <authentication-provider>
-        <user-service>
-            <user name="jeremy" password="atlanta" authorities="ROLE_USER, ROLE_ADMIN" />
-            <user name="keith" password="melbourne" authorities="ROLE_USER" />
-        </user-service>
+    <authentication-provider user-service-ref="authenticationDao">
+        <!--<user-service>-->
+            <!--<user name="jeremy" password="atlanta" authorities="ROLE_USER, ROLE_ADMIN" />-->
+            <!--<user name="keith" password="melbourne" authorities="ROLE_USER" />-->
+        <!--</user-service>-->
     </authentication-provider>
+    
+    <beans:bean id="authenticationDao" class="org.springframework.security.userdetails.jdbc.JdbcDaoImpl">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="usersByUsernameQuery">
+            <beans:value>
+                SELECT USERNAME, PASSWORD, true as enabled FROM USER WHERE USERNAME=?
+            </beans:value>
+        </beans:property>
+        <beans:property name="authoritiesByUsernameQuery">
+            <beans:value>
+                SELECT USERNAME, 'ROLE_ADMIN' AS PRIVILEGE FROM USER WHERE USERNAME=?
+            </beans:value>
+        </beans:property>
+    </beans:bean>
 
     <global-method-security secured-annotations="enabled" jsr250-annotations="enabled"/>
 </beans:beans>

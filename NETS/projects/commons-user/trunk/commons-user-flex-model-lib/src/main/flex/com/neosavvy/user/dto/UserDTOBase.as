@@ -10,13 +10,17 @@ package com.neosavvy.user.dto {
     import flash.utils.IDataInput;
     import flash.utils.IDataOutput;
     import flash.utils.IExternalizable;
+    import org.granite.collections.IPersistentCollection;
+    import org.granite.meta;
+
+    use namespace meta;
 
     [Bindable]
-    public class UserDTOBase  {
+    public class UserDTOBase {// implements IExternalizable {
 
         private var _emailAddress:String;
         private var _firstName:String;
-        private var _id:Number;
+        private var _id:int;
         private var _lastName:String;
         private var _middleName:String;
         private var _password:String;
@@ -36,10 +40,10 @@ package com.neosavvy.user.dto {
             return _firstName;
         }
 
-        public function set id(value:Number):void {
+        public function set id(value:int):void {
             _id = value;
         }
-        public function get id():Number {
+        public function get id():int {
             return _id;
         }
 
@@ -70,6 +74,25 @@ package com.neosavvy.user.dto {
         public function get username():String {
             return _username;
         }
-
+//
+//        public function readExternal(input:IDataInput):void {
+//            _id = input.readObject() as int;
+//            _firstName = input.readObject() as String;
+//            _middleName = input.readObject() as String;
+//            _lastName = input.readObject() as String;
+//            _emailAddress = input.readObject() as String;
+//            _username = input.readObject() as String;
+//            _password = input.readObject() as String;
+//        }
+//
+//        public function writeExternal(output:IDataOutput):void {
+//            output.writeObject(_id);
+//            output.writeObject(_firstName);
+//            output.writeObject(_middleName);
+//            output.writeObject(_lastName);
+//            output.writeObject(_emailAddress);
+//            output.writeObject(_username);
+//            output.writeObject(_password);
+//        }
     }
 }

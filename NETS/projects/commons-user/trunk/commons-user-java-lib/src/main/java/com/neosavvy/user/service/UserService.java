@@ -7,15 +7,15 @@ import java.util.List;
 
 public interface UserService {
 
-    @Secured("ROLE_USER")
+    @Secured("ROLE_ADMIN")
 	public List<UserDTO> getUsers();
 
 	public void saveUser(UserDTO user);
 
-    @Secured("ROLE_USER")
+    @Secured("ROLE_ADMIN")
 	public UserDTO findUserById(int id);
 
-    @Secured("ROLE_USER")
+    @Secured("ROLE_ADMIN")
 	public List<UserDTO> findUsers(UserDTO user);
 
     @Secured("ROLE_ADMIN")

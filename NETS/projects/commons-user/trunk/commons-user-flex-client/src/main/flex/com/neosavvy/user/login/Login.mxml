@@ -3,12 +3,58 @@
     xmlns:mx="http://www.adobe.com/2006/mxml"
     xmlns:flexlib="http://code.google.com/p/flexlib/">
 
-    <flexlib:PromptingTextInput prompt="Username"/>
-    <flexlib:PromptingTextInput prompt="Password"/>
+    <mx:Script><![CDATA[
+        import mx.core.FlexGlobals;
+        import mx.events.CloseEvent;
+        import mx.messaging.ChannelSet;
+        import mx.messaging.channels.AMFChannel;
+        import mx.rpc.AsyncResponder;
+        import mx.rpc.AsyncToken;
+        import mx.rpc.events.FaultEvent;
+        import mx.rpc.events.ResultEvent;
+        import mx.rpc.remoting.mxml.RemoteObject;
 
-    <mx:Button id="loginButton" label="Login"/>
+
+        protected function login():void {
+            errorLbl.text = null;
+            var userService:RemoteObject = new RemoteObject();
+
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:8080/commons-user-webapp/messagebroker/amf");
+            var channelSet:ChannelSet = new ChannelSet();
+            channelSet.addChannel(channel);
+            userService.channelSet = channelSet;
+            userService.destination = "userService";
+            channelSet.login(username.text, password.text);
+            channelSet.addEventListener(ResultEvent.RESULT, resultHandler);
+            channelSet.addEventListener(FaultEvent.FAULT, faultHandler);
+        }
+
+        protected function resultHandler( result:ResultEvent ):void {
+            if (result.result.authorities.indexOf("ROLE_ADMIN") >= 0) {
+                trace("User logged in as admin");
+            } else {
+                trace("User logged in as user");
+            }
+            FlexGlobals.topLevelApplication.hideRegistrationLoginWindow(result.result);
+        }
+
+        protected function faultHandler( fault:FaultEvent ):void {
+            trace("Login Failed: " + fault.fault.faultString);
+            errorLbl.text = "login invalid";
+        }
+
+]]></mx:Script>
+
+
+
+    <flexlib:PromptingTextInput prompt="Username" id="username"/>
+    <flexlib:PromptingTextInput prompt="Password" id="password" displayAsPassword="true"/>
+
+    <mx:Button id="loginButton" label="Login" click="{login()}"/>
 
     <mx:LinkButton id="forgotUsername" label="Forgot Username"/>
     <mx:LinkButton id="forgotPassword" label="Forgot Password"/>
+
+    <mx:Label id="errorLbl"/>
 
 </mx:VBox>
