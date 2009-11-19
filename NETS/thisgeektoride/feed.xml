@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd" version="2.0">
+    <channel>
+        <title>You Must Be This Geek to Ride</title>
+        <link>http://thisgeektoride.com</link>
+        <language>en-us</language>
+        <itunes:subtitle>A Show for Geeks</itunes:subtitle>
+        <itunes:author>Fat Tony and Pope J-rod</itunes:author>
+        <itunes:summary>Join Fat Tony and Pope J-Rod for a wild ride through geek culture</itunes:summary>
+        <description>Join Fat Tony and Pope J-Rod for a wild ride through geek culture</description>
+        <itunes:owner>
+            <itunes:name>Nathan Kelly</itunes:name>
+            <itunes:email>nate.kelly@gmail.com</itunes:email>
+        </itunes:owner>
+        <itunes:image href="http://www.neosavvy.com/svn-analytics/images/neosavvy_logo_sm.png"/>
+        <itunes:category text="Games &amp; Hobbies">
+            <itunes:category text="Other Games"/>
+            <itunes:category text="Video Games"/>
+        </itunes:category>
+        <itunes:category text="Comedy"/>
+        <itunes:category text="TV &amp; Film"/>
+        <item>
+            <title>Where am I going and why am I in this handbasket.</title>
+            <itunes:author>Fat Tony and Pope J-rod</itunes:author>
+            <itunes:subtitle>A Show for Geeks</itunes:subtitle>
+            <itunes:summary>The boys explore the world of podcasting</itunes:summary>
+            <enclosure url="http://thisgeektoride.com/podcasts/ThisGeek2-2-2.mp3" length="61051008" type="audio/x-mp3"/>
+            <pubDate>Sun, 19 Nov 2009 19:00:00 GMT</pubDate>
+            <itunes:duration>2:07:11</itunes:duration>
+            <itunes:keywords>wow, geek, movie, film, movies, films, tv, television, video games, games, rpg
+            </itunes:keywords>
+        </item>
+    </channel>
+</rss>
