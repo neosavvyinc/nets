@@ -19,7 +19,8 @@
         </itunes:category>
         <itunes:category text="Comedy"/>
         <itunes:category text="TV &amp; Film"/>
-        <item ref="self">
+        <item>
+            <link>self</link>
             <title>Where am I going and why am I in this handbasket.</title>
             <itunes:author>Fat Tony and Pope J-rod</itunes:author>
             <itunes:subtitle>A Show for Geeks</itunes:subtitle>
@@ -28,7 +29,7 @@
             <pubDate>Thu, 19 Nov 2009 19:00:00 GMT</pubDate>
             <itunes:duration>2:07:11</itunes:duration>
             <itunes:keywords>wow, geek, movie, film, movies, films, tv, television, video games, games, rpg</itunes:keywords>
-            <itunes:explicit>true</itunes:explicit>
+            <itunes:explicit>yes</itunes:explicit>
         </item>
     </channel>
 </rss>
