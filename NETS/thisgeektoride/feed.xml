@@ -19,6 +19,7 @@
         </itunes:category>
         <itunes:category text="Comedy"/>
         <itunes:category text="TV &amp; Film"/>
+        <itunes:explicit>yes</itunes:explicit>
         <item>
             <title>Where am I going and why am I in this handbasket.</title>
             <itunes:author>Fat Tony and Pope J-rod</itunes:author>
@@ -27,7 +28,6 @@
             <enclosure url="http://www.thisgeektoride.com/podcasts/ThisGeek2-2-2.mp3" length="61051008" type="audio/x-mp3"/>
             <pubDate>Thu, 19 Nov 2009 19:00:00 GMT</pubDate>
             <itunes:duration>2:07:11</itunes:duration>
-            <itunes:explicit>yes</itunes:explicit>
             <itunes:keywords>wow, geek, movie, film, movies, films, tv, television, video games, games, rpg</itunes:keywords>
         </item>
     </channel>
