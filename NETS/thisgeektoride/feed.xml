@@ -20,7 +20,6 @@
         <itunes:category text="Comedy"/>
         <itunes:category text="TV &amp; Film"/>
         <item>
-            <link>self</link>
             <title>Where am I going and why am I in this handbasket.</title>
             <itunes:author>Fat Tony and Pope J-rod</itunes:author>
             <itunes:subtitle>A Show for Geeks</itunes:subtitle>
