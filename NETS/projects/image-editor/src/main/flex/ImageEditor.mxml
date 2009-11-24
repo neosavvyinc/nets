@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	layout="horizontal" 
+	xmlns:imagecropper="com.flexblocks.imagecropper.*" 
+	xmlns:local="*">
+	
+	<mx:Script>
+		<![CDATA[
+
+        // Index of last image selected using the selectImage ComboBox
+
+        private var lastSelectedImage:uint = 0;
+
+        // Current values for the cropping rectangle, handle size, and aspect ratio constraint settings
+
+        private var currentCropbox:Rectangle;
+        private var currentHandleSize:uint = 10;
+        private var currentCropConstraint:Boolean = false
+
+        // Image 1 ("Image Larger then Component"): Last values for the cropping rectangle, handle size, and aspect ratio constraint settings
+
+        private var img1Cropbox:Rectangle;
+        private var img1HandleSize:uint = 10;
+        private var img1CropConstraint:Boolean = false;
+
+        // Image 2 ("Image Smaller than Component"): Last values for the cropping rectangle, handle size, and aspect ratio constraint settings
+
+        private var img2Cropbox:Rectangle;
+        private var img2HandleSize:uint = 10;
+        private var img2CropConstraint:Boolean = false;
+
+        // --------------------------------------------------------------------------------------------------
+        // doImageSelect - Called when an image is selected using the selectImage ComboBox
+        // --------------------------------------------------------------------------------------------------
+
+        private function doImageSelect():void {
+
+            // Remove the previously cropped image
+
+            croppedImage.source = null;
+            croppedImage.width = 0;
+            croppedImage.height = 0;
+
+            // Save the cropping rectangle, handle size and constraint option for the previous image so that these settings
+            // may be restored when the image is re-selected
+
+            if (lastSelectedImage == 0) {
+                img1Cropbox = imageCropper.getCropRect(true);
+                img1HandleSize = imageCropper.handleSize;
+            }
+            else {
+                img2Cropbox = imageCropper.getCropRect(true);
+                img2HandleSize = imageCropper.handleSize;
+            }
+
+
+            // Restore the cropping rectangle, handle size and constraint option for the image just selected
+
+            currentCropbox = lastSelectedImage == 0 ? img1Cropbox : img2Cropbox;
+            currentHandleSize = lastSelectedImage == 0 ? img1HandleSize : img2HandleSize;
+            currentCropConstraint = lastSelectedImage == 0 ? img1CropConstraint : img2CropConstraint;
+
+
+            // Disable all controls while the image is loading. This is done after the sourceImage is assigned
+            // to the ImageCropper because when the ImageCropper is disabled a sourceImage cannot be assigned.
+
+            enableControls(false, true);
+        }
+
+        // --------------------------------------------------------------------------------------------------
+        // imageReady - Called when the ImageCropper component has loaded and initialized an image
+        // --------------------------------------------------------------------------------------------------
+
+        private function imageReady():void {
+
+            // Enable the controls (including the imageCropper). Note that the imageCropper must be enabled before changing property values or calling setCropRect().
+
+            enableControls(true, true);
+
+            // Restore the handle size that was previously saved for this image
+
+            imageCropper.handleSize = currentHandleSize;
+            //handleSize.value = currentHandleSize;
+
+            // Restore "Constrain Crop Rectangle to Aspect Ratio" to the setting that was previously saved for the image
+
+            imageCropper.constrainToAspectRatio = currentCropConstraint;
+
+            // If this image was not previously selected then set the cropping rectangle to include the entire image. Otherwise,
+            // restore the cropping rectangle to its previous value. Note that the cropping rectangle is relative to the component
+            // and not to the image because the componentRelative parameter in the call the to setCropRect is set to true.
+
+            if (!currentCropbox) imageCropper.setCropRect();
+            else imageCropper.setCropRect(currentCropbox.width, currentCropbox.height, currentCropbox.x, currentCropbox.y, true);
+
+            // Get the cropped image
+
+            doCrop();
+        }
+
+        // --------------------------------------------------------------------------------------------------
+        // doCrop - Get the cropped image from the ImageCropper component
+        // --------------------------------------------------------------------------------------------------
+
+        private function doCrop():void {
+
+            // Get the cropped BitmapData
+
+            var newImage:BitmapData = imageCropper.croppedBitmapData;
+
+            // Set the width and height of the croppedImage Image based on the dimensions of the cropped image
+
+            croppedImage.width = newImage.width;
+            croppedImage.height = newImage.height;
+
+            // Create a new Bitmap from the BitmapData and assign it to the croppedImage Image
+
+            croppedImage.source = new Bitmap(newImage);
+        }
+
+        private function enableControls(enable:Boolean, includeEnabled:Boolean = false):void {
+
+            // Set the enabled state for all other controls
+
+            imageCropper.enabled = enable;
+        }
+
+        private function setImageHandler(event:MouseEvent):void {
+            if(!event) return;
+
+            Security.allowInsecureDomain("*");
+
+            var imageUrlString:String = imageUrl.text;
+            imageCropper.sourceImage = imageUrlString;
+            panZoom.imageViewer.imageURL = imageUrlString;
+        }
+
+        private function handleModeChange():void {
+            croppedImage.visible = false;
+            imageCropper.visible = false;
+            panZoom.visible = false;
+
+            switch (modeSelector.selectedIndex) {
+                case 0:
+                    croppedImage.visible = true;
+                    break;
+                case 1:
+                    imageCropper.visible = true;
+                    break;
+                case 2:
+                    panZoom.visible = true;
+                    break;
+            }
+        }
+		]]>
+	</mx:Script>
+    <mx:VBox>
+        <mx:TextInput id="imageUrl" text="http://lh4.ggpht.com/_RY8ZmqmMhXA/Sku1e-Cl9LI/AAAAAAAABEw/6Q_lPepYZ-I/s512/Glastonbury%20Pictures0036.jpg" /><mx:Button label="setImage" click="{setImageHandler(event)}"/>
+        <mx:ToggleButtonBar id="modeSelector" itemClick="{handleModeChange()}">
+            <mx:dataProvider>
+                <mx:String>View</mx:String>
+                <mx:String>Crop</mx:String>
+                <mx:String>Pan-Zoom</mx:String>
+            </mx:dataProvider>
+        </mx:ToggleButtonBar>
+    </mx:VBox>
+    <mx:Canvas>
+        <mx:Image id="croppedImage" width="280" height="280" scaleContent="false" visible="true" />
+        <imagecropper:ImageCropper
+            id="imageCropper"
+            width="280"
+            height="280"
+            enabled="true"
+            handleColor="#FF00FF"
+            maskColor="#660066"
+            maskAlpha="0.6"
+            sourceImageReady="{imageReady()}"
+            sourceImageLoadError="trace('Error while loading image')"
+            cropRectChanged="{doCrop()}"
+            cropConstraintDisabled="false"
+            cropConstraintChanged="{trace('Crop constraint changed'); doCrop()}"
+            cropDimensionsChanged="{trace('Crop dimensions changed'); doCrop()}"
+            cropPositionChanged="{trace('Crop position changed'); doCrop()}"
+            visible="false"/>
+        <local:PanZoom id="panZoom" width="290" height="290" visible="false"/>
+
+    </mx:Canvas>
+	
+</mx:Application>
