@@ -109,28 +109,10 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring</artifactId>
 		</dependency>
-        <!--
-         Right now Spring-flex pulls in 2.5.6 of Spring
-         which causes problems when trying to use 3.0.0.RC1
-         versions of spring. So I must forcibly exlude the
-         transitive dependencies
-        -->
         <dependency>
             <groupId>org.springframework.flex</groupId>
             <artifactId>spring-flex</artifactId>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-webmvc</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-tx</artifactId>-->
-        <!--</dependency>-->
-        <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-orm</artifactId>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -203,74 +185,10 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-core</artifactId>
-            <version>2.2.2</version>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-spring</artifactId>
+            <version>1.2.GA</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-simple</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxrs</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-databinding-aegis</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-local</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http-jetty</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-jms</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-management</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-common-utilities</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.codehaus.jettison</groupId>
-            <artifactId>jettison</artifactId>
-            <version>1.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-fileupload</groupId>
-            <artifactId>commons-fileupload</artifactId>
-            <version>1.2.1</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-io</groupId>
-            <artifactId>commons-io</artifactId>
-            <version>1.4</version>
-        </dependency>
+
 	</dependencies>
 </project>

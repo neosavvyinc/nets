@@ -1,6 +1,8 @@
 package com.neosavvy.user.dto;
 
 import javax.persistence.*;
+import javax.ws.rs.FormParam;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
 
 @Entity
@@ -11,6 +13,7 @@ import java.io.*;
             ,@UniqueConstraint(columnNames = {"USERNAME"})
     }
 )
+@XmlRootElement
 public class UserDTO {// implements Externalizable {
 
 	@Id
@@ -39,36 +42,43 @@ public class UserDTO {// implements Externalizable {
 	public int getId() {
 		return id;
 	}
+
+    @FormParam("id")
 	public void setId(int id) {
 		this.id = id;
 	}
 	public String getFirstName() {
 		return firstName;
 	}
+    @FormParam("firstName")
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
 	public String getMiddleName() {
 		return middleName;
 	}
+    @FormParam("middleName")
 	public void setMiddleName(String middleName) {
 		this.middleName = middleName;
 	}
 	public String getLastName() {
 		return lastName;
 	}
+    @FormParam("lastName")
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
 	public String getEmailAddress() {
 		return emailAddress;
 	}
+    @FormParam("emailAddress")
 	public void setEmailAddress(String emailAddress) {
 		this.emailAddress = emailAddress;
 	}
     public String getUsername() {
         return username;
     }
+    @FormParam("userName")
     public void setUsername(String username) {
         this.username = username;
     }
@@ -79,22 +89,4 @@ public class UserDTO {// implements Externalizable {
 		this.password = password;
 	}
 
-//    public void writeExternal(ObjectOutput out) throws IOException {
-//        out.writeInt(id);
-//        out.writeObject(firstName);
-//        out.writeObject(middleName);
-//        out.writeObject(lastName);
-//        out.writeObject(emailAddress);
-//        out.writeObject(username);
-//        out.writeObject(password);
-//    }
-//
-//    public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-//        setId(in.readInt());
-//        setFirstName((String)in.readObject());
-//        setMiddleName((String)in.readObject());
-//        setLastName((String)in.readObject());
-//        setEmailAddress((String)in.readObject());
-//        setPassword((String)in.readObject());
-//    }
 }

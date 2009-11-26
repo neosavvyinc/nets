@@ -39,16 +39,4 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(UserDTO user) {
         userDao.deleteUser(user);
     }
-
-    public Boolean login(UserDTO user) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public Boolean logout(UserDTO user) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
-    }
-
-    public String test() {
-        return "hello";  //To change body of implemented methods use File | Settings | File Templates.
-    }
 }
