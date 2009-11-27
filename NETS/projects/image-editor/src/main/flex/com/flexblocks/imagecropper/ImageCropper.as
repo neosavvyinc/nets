@@ -178,11 +178,11 @@ import mx.core.UIComponent;
 		private var cropX:Number;
 		private var cropY:Number;
 		private var cropWidth:Number;
-		private var cropHeight:Number;		
-		private var newCroppingRect:Boolean = false;
+		private var cropHeight:Number;
+        private var newCroppingRect:Boolean = false;
 		private var cropRatioActive:Boolean = false;
 		private var cropRatio:Number = 0;
-		private var cropRect:Rectangle;	
+		private var cropRect:Rectangle;
 		private var croppingRectBitmapData:BitmapData;
 		private var anchorX:Number;
 		private var anchorY:Number;
@@ -2120,14 +2120,14 @@ import mx.core.UIComponent;
 				if (imageBitmapData != null) {	
 					
 					// If the image has not been rendered yet, create a scaled version of the image that will fit within the component
-					
-					if (newImageLoaded) createScaledImage();
 									
+					if (newImageLoaded) createScaledImage();
+
 					if (newCroppingRect) initializeCroppingRect();
-					
+
 					// Clear the current content
-					
-					componentBitmapData.fillRect(componentBitmapData.rect, bkgndColor);
+
+                    componentBitmapData.fillRect(componentBitmapData.rect, bkgndColor);
 					
 					// Draw the scaled image in the component's display
 					
