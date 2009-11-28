@@ -20,70 +20,6 @@ import com.neosavvy.user.dto.UserDTO;
  * To change this template use File | Settings | File Templates.
  */
 public class TestCompanyDAO extends BaseSpringAwareTestCase{
-    @Autowired
-	protected CompanyDAO companyDAO;
-    @Autowired
-    protected UserDAO userDAO;
-
-
-    private UserDTO createTestUser(){
-        UserDTO user = new UserDTO();
-        user.setFirstName("William");
-        user.setMiddleName("Adam");
-        user.setLastName("Parrish");
-        user.setUsername("aparrish");
-        user.setPassword("testPassword");
-        user.setEmailAddress("aparrish@neosavvy.com");
-        return user;
-    }
-
-    private UserDTO createAltTestUser(){
-        UserDTO user = new UserDTO();
-        user.setFirstName("Lance");
-        user.setMiddleName("B");
-        user.setLastName("Gleason");
-        user.setUsername("lgleason");
-        user.setPassword("testPassword");
-        user.setEmailAddress("lg@neosavvy.com");
-        return user;
-    }
-
-    private CompanyDTO createTestCompany() {
-        CompanyDTO company = new CompanyDTO();
-        company.setCompanyName("BFD Enterprises");
-        company.setAddressOne("address one");
-        company.setAddressTwo("address two");
-        company.setCity("Atlanta");
-        company.setState("GA");
-        company.setPostalCode("30312");
-        company.setCountry("USA");
-        return company;
-    }
-
-    private CompanyDTO createAltTestCompany() {
-        CompanyDTO company = new CompanyDTO();
-        company.setCompanyName("Zymol Enterprises");
-        company.setAddressOne("address one one");
-        company.setAddressTwo("address two two");
-        company.setCity("Wellsville");
-        company.setState("NY");
-        company.setPostalCode("14895");
-        company.setCountry("USA");
-        return company;
-    }
-
-    private CompanyDTO createTestCompanyWithUser(UserDTO user) {
-        CompanyDTO company = new CompanyDTO();
-        company.setCompanyName("Big Enterprises");
-        company.setAddressOne("address one one");
-        company.setAddressTwo("address two two");
-        company.setCity("Toronto");
-        company.setState("CA");
-        company.setPostalCode("14895");
-        company.setCountry("Canada");
-        company.addUser(user);
-        return company;
-    }
     
     @Test
     public void testFindCompanyById() {
@@ -114,11 +50,6 @@ public class TestCompanyDAO extends BaseSpringAwareTestCase{
 
         int numRows = countRowsInTable("COMPANY");
         Assert.assertEquals("Num of rows is not equal to 2", 2, numRows);
-    }
-
-    private void assertSearchCriteriaResults(List<CompanyDTO> companiesFound,int numRows) {
-        Assert.assertNotNull("Search results were null", companiesFound);
-        Assert.assertEquals("Size of returned results should have been " + numRows, numRows,companiesFound.size());
     }
 
     @Test
@@ -182,6 +113,19 @@ public class TestCompanyDAO extends BaseSpringAwareTestCase{
         assertSearchCriteriaResults(companiesFound,0);
     }
 
+    protected CompanyDTO createTestCompanyWithUser(UserDTO user) {
+        CompanyDTO company = new CompanyDTO();
+        company.setCompanyName("Big Enterprises");
+        company.setAddressOne("address one one");
+        company.setAddressTwo("address two two");
+        company.setCity("Toronto");
+        company.setState("CA");
+        company.setPostalCode("14895");
+        company.setCountry("Canada");
+        company.addUser(user);
+        return company;
+    }    
+
     @Test
     public void testFindCompanyWithUser() {
         deleteFromTables("USER_COMPANY");
@@ -226,25 +170,7 @@ public class TestCompanyDAO extends BaseSpringAwareTestCase{
 
         Assert.assertNotNull("Company object was not found by id " + company.getId(), companyFound);
 
-        Assert.assertEquals("Company has one user", 2, companyFound.getUsers().size());
+        Assert.assertEquals("Company has two users", 2, companyFound.getUsers().size());
     }
-
-//
-//    @Test
-//    public void testSaveTwoUsersSameUserName() {
-//        deleteFromTables("USER");
-//        companyDAO.saveUser(createTestUser());
-//        try {
-//            Assert.assertEquals("Should be a row in the table for the user",countRowsInTable("USER"),1);
-//            companyDAO.saveUser(createTestUser());
-//        } catch (ConstraintViolationException e) {
-//            return;
-//        }
-//        Assert.fail("No data access exception was thrown when saving a user by the same id");
-//    }
-//
-
-//
-//
 
 }

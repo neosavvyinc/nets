@@ -103,4 +103,9 @@ public class UserDTO {// implements Externalizable {
 	public void setCompanies(Set<CompanyDTO> companies) {
 		this.companies = companies;
 	}
+
+    public void addCompany(CompanyDTO company) {
+        if (this.companies != null)
+            this.companies.add(company);
+    }
 }

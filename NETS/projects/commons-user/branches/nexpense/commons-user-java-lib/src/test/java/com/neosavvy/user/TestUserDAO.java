@@ -2,6 +2,7 @@ package com.neosavvy.user;
 
 import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dto.CompanyDTO;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -11,9 +12,6 @@ import org.springframework.dao.DataAccessException;
 import java.util.List;
 
 public class TestUserDAO extends BaseSpringAwareTestCase {
-
-	@Autowired
-	protected UserDAO userDAO;
 	
 	@Test
 	public void testSaveUser() {
@@ -25,28 +23,6 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 		userDAO.saveUser(user);
 		Assert.assertTrue((int)user.getId() > 0);
 	}
-
-    private UserDTO createTestUser() {
-        UserDTO user = new UserDTO();
-        user.setFirstName("William");
-        user.setMiddleName("Adam");
-        user.setLastName("Parrish");
-        user.setUsername("aparrish");
-        user.setPassword("testPassword");
-        user.setEmailAddress("aparrish@neosavvy.com");
-        return user;
-    }
-
-    private UserDTO createAltTestUser() {
-        UserDTO user = new UserDTO();
-        user.setFirstName("Dana");
-        user.setMiddleName("Leigh");
-        user.setLastName("Hamlett");
-        user.setUsername("dhamlett");
-        user.setPassword("testPassword");
-        user.setEmailAddress("dhamlett@neosavvy.com");
-        return user;
-    }
 
     @Test
     public void testDeleteUser() {
@@ -177,9 +153,64 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
         Assert.assertEquals("Num of rows is not equal to 2", 2, numRows);
     }
 
-
-    private void assertSearchCriteriaResults(List<UserDTO> usersFound,int numRows) {
-        Assert.assertNotNull("Search results were null", usersFound);
-        Assert.assertEquals("Size of returned results should have been " + numRows, numRows,usersFound.size());
+    protected UserDTO createTestUserWithCompany(CompanyDTO company) {
+        UserDTO user = new UserDTO();
+        user.setFirstName("William");
+        user.setMiddleName("Adam");
+        user.setLastName("Parrish");
+        user.setUsername("aparrish");
+        user.setPassword("testPassword");
+        user.setEmailAddress("aparrish@neosavvy.com");
+        user.addCompany(company);
+        return user;
     }
+
+    @Test
+    public void testFindUserWithCompany() {
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
+        deleteFromTables("USER");
+        CompanyDTO company = createTestCompany();
+        companyDAO.saveCompany(company);
+        UserDTO user = createTestUserWithCompany(company);
+        userDAO.saveUser(user);
+
+
+        int numRows = countRowsInTable("USER");
+
+        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
+
+        UserDTO userFound = userDAO.findUserById(user.getId());
+
+        Assert.assertNotNull("User object was not found by id " + user.getId(), userFound);
+
+        Assert.assertEquals("User has one company", 1, userFound.getCompanies().size());
+    }
+
+    @Test
+    public void testFindUserWithMultipleCompanies() {
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
+        deleteFromTables("USER");
+        CompanyDTO company = createTestCompany();
+        companyDAO.saveCompany(company);
+        CompanyDTO altCompany = createAltTestCompany();
+        companyDAO.saveCompany(altCompany);
+        UserDTO user = createTestUserWithCompany(company);
+        user.addCompany(altCompany);
+        userDAO.saveUser(user);
+
+
+        int numRows = countRowsInTable("USER");
+
+        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
+
+        UserDTO userFound = userDAO.findUserById(user.getId());
+
+        Assert.assertNotNull("User object was not found by id " + user.getId(), userFound);
+
+        Assert.assertEquals("User has 2 companies", 2, userFound.getCompanies().size());
+    }
+
+
 }

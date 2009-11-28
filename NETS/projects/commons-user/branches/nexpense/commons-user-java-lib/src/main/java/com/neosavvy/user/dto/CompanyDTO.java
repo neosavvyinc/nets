@@ -24,8 +24,6 @@ import java.util.Set;
 )
 @XmlRootElement
 public class CompanyDTO {
-//    @OneToMany (mappedBy="USER")
-//    private Set users = new HashSet();
 
     @Id
     @GeneratedValue
