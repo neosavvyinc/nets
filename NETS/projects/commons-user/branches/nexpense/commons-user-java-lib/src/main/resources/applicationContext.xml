@@ -27,6 +27,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="annotatedClasses">
             <list>
                 <value>com.neosavvy.user.dto.UserDTO</value>
+                <value>com.neosavvy.user.dto.CompanyDTO</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -47,6 +48,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     </bean>
 
     <bean id="userDAO" class="com.neosavvy.user.dao.UserDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="companyDAO" class="com.neosavvy.user.dao.CompanyDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

@@ -4,6 +4,8 @@ import javax.persistence.*;
 import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.*;
+import java.util.Set;
+import java.util.LinkedHashSet;
 
 @Entity
 @Table(
@@ -38,6 +40,11 @@ public class UserDTO {// implements Externalizable {
 
 	@Column(name="PASSWORD")
 	private String password;
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "USER_COMPANY", joinColumns = { @JoinColumn(name = "COMPANY_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
+    private Set<CompanyDTO> companies = new LinkedHashSet<CompanyDTO>();
 	
 	public int getId() {
 		return id;
@@ -89,4 +96,11 @@ public class UserDTO {// implements Externalizable {
 		this.password = password;
 	}
 
+	public Set<CompanyDTO> getCompanies() {
+		return companies;
+	}
+
+	public void setCompanies(Set<CompanyDTO> companies) {
+		this.companies = companies;
+	}
 }
