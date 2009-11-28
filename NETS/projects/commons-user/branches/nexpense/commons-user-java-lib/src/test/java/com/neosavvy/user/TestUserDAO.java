@@ -17,12 +17,13 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 	
 	@Test
 	public void testSaveUser() {
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
         deleteFromTables("USER");
         UserDTO user = createTestUser();
 		
 		userDAO.saveUser(user);
-		
-		Assert.assertEquals((int)user.getId(),(int)1);
+		Assert.assertTrue((int)user.getId() > 0);
 	}
 
     private UserDTO createTestUser() {
@@ -49,6 +50,8 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 
     @Test
     public void testDeleteUser() {
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
         deleteFromTables("USER");
         int numRows = countRowsInTable("USER");
         Assert.assertEquals(numRows, 0);
@@ -67,6 +70,8 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 
     @Test
     public void testFindUserById() {
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
         deleteFromTables("USER");
 
         UserDTO user = createTestUser();
@@ -144,6 +149,8 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 
     @Test
     public void testSaveTwoUsersSameUserName() {
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
         deleteFromTables("USER");
         userDAO.saveUser(createTestUser());
         try {
@@ -156,6 +163,8 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
     }
 
     private void setupCriteriaBasedSearchTest() {
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
         deleteFromTables("USER");
 
         UserDTO user = createTestUser();

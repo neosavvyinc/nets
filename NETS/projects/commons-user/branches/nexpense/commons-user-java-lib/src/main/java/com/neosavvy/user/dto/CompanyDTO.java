@@ -148,4 +148,9 @@ public class CompanyDTO {
 	public void setUsers(Set<UserDTO> users) {
 		this.users = users;
 	}
+
+    public void addUser(UserDTO user){
+        if (this.users != null)
+            this.users.add(user);   
+    }
 }
