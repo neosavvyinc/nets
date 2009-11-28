@@ -3,6 +3,7 @@ package com.neosavvy.user;
 import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dto.CompanyDTO;
+import com.neosavvy.user.dto.RoleDTO;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -165,6 +166,18 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
         return user;
     }
 
+    protected UserDTO createTestUserWithRole(RoleDTO role) {
+        UserDTO user = new UserDTO();
+        user.setFirstName("William");
+        user.setMiddleName("Adam");
+        user.setLastName("Parrish");
+        user.setUsername("aparrish");
+        user.setPassword("testPassword");
+        user.setEmailAddress("aparrish@neosavvy.com");
+        user.addRole(role);
+        return user;
+    }
+
     @Test
     public void testFindUserWithCompany() {
         deleteFromTables("USER_COMPANY");
@@ -212,5 +225,54 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
         Assert.assertEquals("User has 2 companies", 2, userFound.getCompanies().size());
     }
 
+    @Test
+    public void testFindUserWithRole() {
+        deleteFromTables("USER_ROLE");
+        deleteFromTables("ROLE");
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
+        deleteFromTables("USER");
+        RoleDTO role = createTestRole();
+        roleDAO.saveRole(role);
+        UserDTO user = createTestUserWithRole(role);
+        userDAO.saveUser(user);
 
+
+        int numRows = countRowsInTable("USER");
+
+        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
+
+        UserDTO userFound = userDAO.findUserById(user.getId());
+
+        Assert.assertNotNull("User object was not found by id " + user.getId(), userFound);
+
+        Assert.assertEquals("User has one company", 1, userFound.getRoles().size());
+    }
+
+    @Test
+    public void testFindUserWithMultipleRoles() {
+        deleteFromTables("USER_ROLE");
+        deleteFromTables("ROLE");
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
+        deleteFromTables("USER");
+        RoleDTO role = createTestRole();
+        roleDAO.saveRole(role);
+        RoleDTO altRole = createAltTestRole();
+        roleDAO.saveRole(altRole);
+        UserDTO user = createTestUserWithRole(role);
+        user.addRole(altRole);
+        userDAO.saveUser(user);
+
+
+        int numRows = countRowsInTable("USER");
+
+        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
+
+        UserDTO userFound = userDAO.findUserById(user.getId());
+
+        Assert.assertNotNull("User object was not found by id " + user.getId(), userFound);
+
+        Assert.assertEquals("User has one company", 2, userFound.getRoles().size());
+    }
 }

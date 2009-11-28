@@ -45,6 +45,11 @@ public class UserDTO {// implements Externalizable {
     @JoinTable(name = "USER_COMPANY", joinColumns = { @JoinColumn(name = "COMPANY_ID") },
             inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
     private Set<CompanyDTO> companies = new LinkedHashSet<CompanyDTO>();
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "ROLE_ID") },
+            inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
+    private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>();
 	
 	public int getId() {
 		return id;
@@ -105,7 +110,18 @@ public class UserDTO {// implements Externalizable {
 	}
 
     public void addCompany(CompanyDTO company) {
-        if (this.companies != null)
             this.companies.add(company);
+    }
+
+    public Set<RoleDTO> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<RoleDTO> roles) {
+        this.roles = roles;
+    }
+
+    public void addRole(RoleDTO role){
+            this.roles.add(role);
     }
 }

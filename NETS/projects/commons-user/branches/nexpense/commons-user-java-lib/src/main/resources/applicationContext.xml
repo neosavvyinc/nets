@@ -28,6 +28,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
             <list>
                 <value>com.neosavvy.user.dto.UserDTO</value>
                 <value>com.neosavvy.user.dto.CompanyDTO</value>
+                <value>com.neosavvy.user.dto.RoleDTO</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -52,6 +53,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     </bean>
 
     <bean id="companyDAO" class="com.neosavvy.user.dao.CompanyDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="roleDAO" class="com.neosavvy.user.dao.RoleDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 

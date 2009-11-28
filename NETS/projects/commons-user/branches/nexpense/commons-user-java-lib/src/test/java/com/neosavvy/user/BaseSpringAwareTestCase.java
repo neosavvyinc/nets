@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.Assert;
 import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dto.CompanyDTO;
+import com.neosavvy.user.dto.RoleDTO;
 import com.neosavvy.user.dao.CompanyDAO;
 import com.neosavvy.user.dao.UserDAO;
+import com.neosavvy.user.dao.RoleDAO;
 
 import java.util.List;
 
@@ -19,7 +21,9 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
     @Autowired
 	protected CompanyDAO companyDAO;
     @Autowired
-    protected UserDAO userDAO;    
+    protected UserDAO userDAO;
+    @Autowired
+    protected RoleDAO roleDAO;       
 
     protected UserDTO createTestUser(){
         UserDTO user = new UserDTO();
@@ -67,6 +71,19 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
         return company;
     }
 
+    protected RoleDTO createTestRole() {
+        RoleDTO role = new RoleDTO();
+        role.setShortName("ADMIN");
+        role.setLongName("Administrator");
+        return role;
+    }
+
+    protected RoleDTO createAltTestRole() {
+        RoleDTO role = new RoleDTO();
+        role.setShortName("USER");
+        role.setLongName("User Role");
+        return role;
+    }
 
     protected void assertSearchCriteriaResults(List itemsFound,int numRows) {
         Assert.assertNotNull("Search results were null", itemsFound);
