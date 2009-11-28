@@ -10,12 +10,19 @@
     paddingTop="0"
     horizontalScrollPolicy="off"
     verticalScrollPolicy="off"
+    verticalAlign="middle"
+    horizontalAlign="center"
+    backgroundColor="0x000000"
     creationComplete="{creationCompleteHandler()}">
 	
 	<mx:Script>
 		<![CDATA[
 
         import com.flexblocks.imagecropper.ImageCropper;
+
+        import mx.logging.Log;
+        import mx.logging.LogEventLevel;
+        import mx.logging.targets.TraceTarget;
 
         // Index of last image selected using the selectImage ComboBox
 
@@ -81,16 +88,64 @@
 
             croppedImage.source = new Bitmap(newImage);
 
+            var totalCroppedWidth:Number = croppedImage.width;
+            var totalCroppedHeight:Number = croppedImage.height;
+
+            var totalAvailableHeight:Number = imageCanvas.height;
+            var totalAvailableWidth:Number = imageCanvas.width;
+
+            var cropX:Number = (totalAvailableWidth / 2) - (totalCroppedWidth / 2);
+            var cropY:Number = (totalAvailableHeight / 2) - (totalCroppedHeight / 2);
+
+            croppedImage.x = cropX;
+            croppedImage.y = cropY;
+
         }
 
 
         var imageUrlString:String;
         private function creationCompleteHandler():void {
-           Security.allowInsecureDomain("*");
+            Security.allowInsecureDomain("*");
             imageUrlString = this.parameters.imageUrl;
-            if( imageUrlString ) {
+
+            var aMaxWidth:Number = this.parameters.width;
+            var aMaxHeight:Number = this.parameters.height;
+            
+            if (imageUrlString) {
                 croppedImage.source = imageUrlString;
             }
+
+            if( aMaxWidth )
+            {
+                imageCanvas.width = aMaxWidth;
+            }
+
+            if( aMaxHeight )
+            {
+                imageCanvas.height = aMaxHeight;
+            }
+
+        }
+
+
+        private function enableLogging():void {
+            var logTarget:TraceTarget = new TraceTarget();
+
+           // Log only messages for the classes in the mx.rpc.* and
+           // mx.messaging packages.
+           logTarget.filters=["*"];
+
+           // Log all log levels.
+           logTarget.level = LogEventLevel.ALL;
+
+           // Add date, time, category, and log level to the output.
+           logTarget.includeDate = true;
+           logTarget.includeTime = true;
+           logTarget.includeCategory = true;
+           logTarget.includeLevel = true;
+
+           // Begin logging.
+           Log.addTarget(logTarget);
 
         }
 
@@ -99,7 +154,7 @@
         private function handleModeChange():void {
             croppedImage.visible = false;
             var imageCropper:ImageCropper = imageCanvas.getChildByName("imageCropper") as ImageCropper;
-            if(imageCropper)
+            if (imageCropper)
                 imageCropper.visible = false;
 
             switch (modeSelector.selectedIndex) {
@@ -107,7 +162,7 @@
                     croppedImage.visible = true;
                     break;
                 case 1:
-                    if( !cropperInitialized ) {
+                    if (!cropperInitialized) {
                         var imageCropper:ImageCropper = new ImageCropper();
                         imageCropper.id = "imageCropper";
                         imageCropper.name = "imageCropper";
@@ -123,7 +178,7 @@
                         imageCropper.addEventListener(imageCropper.CROP_DIMENSIONS_CHANGED, doCrop);
                         imageCropper.addEventListener(imageCropper.CROP_POSITION_CHANGED, doCrop);
                         imageCropper.visible = false;
-                        imageCanvas.addChildAt(imageCropper,1);
+                        imageCanvas.addChildAt(imageCropper, 1);
                         cropperInitialized = true;
                         imageCropper.sourceImage = imageUrlString;
                     }
@@ -133,8 +188,8 @@
         }
 		]]>
 	</mx:Script>
-    <mx:Canvas id="imageCanvas">
-        <mx:Image id="croppedImage" scaleContent="false" visible="true" />
+    <mx:Canvas id="imageCanvas" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+        <mx:Image id="croppedImage" scaleContent="true" visible="true" width="100%" height="100%" />
         <mx:ToggleButtonBar x="10" y="10" id="modeSelector" itemClick="{handleModeChange()}">
             <mx:dataProvider>
                 <mx:String>View</mx:String>

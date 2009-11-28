@@ -40,6 +40,8 @@ package com.flexblocks.imagecropper {
 
 import flash.system.LoaderContext;
 
+import flash.system.Security;
+
 import mx.core.UIComponent;
 	import mx.managers.CursorManager;
 	
@@ -893,7 +895,8 @@ import mx.core.UIComponent;
 					if (value is String) {
 												
 						// Create a loader for the requested image
-						var loaderCxt:LoaderContext = new LoaderContext(true);
+						var loaderCxt:LoaderContext = new LoaderContext();
+                        loaderCxt.checkPolicyFile = true;
 						currentSource = new Loader();
 
 						
