@@ -40,44 +40,6 @@
         private var img2CropConstraint:Boolean = false;
 
         // --------------------------------------------------------------------------------------------------
-        // doImageSelect - Called when an image is selected using the selectImage ComboBox
-        // --------------------------------------------------------------------------------------------------
-
-//        private function doImageSelect():void {
-//
-//            // Remove the previously cropped image
-//
-//            croppedImage.source = null;
-//            croppedImage.width = 0;
-//            croppedImage.height = 0;
-//
-//            // Save the cropping rectangle, handle size and constraint option for the previous image so that these settings
-//            // may be restored when the image is re-selected
-//
-//            if (lastSelectedImage == 0) {
-//                img1Cropbox = imageCropper.getCropRect(true);
-//                img1HandleSize = imageCropper.handleSize;
-//            }
-//            else {
-//                img2Cropbox = imageCropper.getCropRect(true);
-//                img2HandleSize = imageCropper.handleSize;
-//            }
-//
-//
-//            // Restore the cropping rectangle, handle size and constraint option for the image just selected
-//
-//            currentCropbox = lastSelectedImage == 0 ? img1Cropbox : img2Cropbox;
-//            currentHandleSize = lastSelectedImage == 0 ? img1HandleSize : img2HandleSize;
-//            currentCropConstraint = lastSelectedImage == 0 ? img1CropConstraint : img2CropConstraint;
-//
-//
-//            // Disable all controls while the image is loading. This is done after the sourceImage is assigned
-//            // to the ImageCropper because when the ImageCropper is disabled a sourceImage cannot be assigned.
-//
-//            enableControls(false, true);
-//        }
-
-        // --------------------------------------------------------------------------------------------------
         // imageReady - Called when the ImageCropper component has loaded and initialized an image
         // --------------------------------------------------------------------------------------------------
 
@@ -124,7 +86,7 @@
 
         var imageUrlString:String;
         private function creationCompleteHandler():void {
-            Security.allowInsecureDomain("*");
+           Security.allowInsecureDomain("*");
             imageUrlString = this.parameters.imageUrl;
             if( imageUrlString ) {
                 croppedImage.source = imageUrlString;
