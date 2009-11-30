@@ -47,12 +47,12 @@ public class UserDTO {// implements Externalizable {
     @Column(name="CONFIRMED_REGISTRATION")
     private Boolean confirmedRegistration;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "USER_COMPANY", joinColumns = { @JoinColumn(name = "COMPANY_ID") },
             inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
     private Set<CompanyDTO> companies = new LinkedHashSet<CompanyDTO>();
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
     @JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "ROLE_ID") },
             inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
     private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>();
