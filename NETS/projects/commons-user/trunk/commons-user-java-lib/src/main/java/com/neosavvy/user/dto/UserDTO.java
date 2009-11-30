@@ -38,6 +38,12 @@ public class UserDTO {// implements Externalizable {
 
 	@Column(name="PASSWORD")
 	private String password;
+
+    @Column(name="REG_TOKEN")
+    private String registrationToken;
+
+    @Column(name="CONFIRMED_REGISTRATION")
+    private Boolean confirmedRegistration;
 	
 	public int getId() {
 		return id;
@@ -88,5 +94,21 @@ public class UserDTO {// implements Externalizable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+    public String getRegistrationToken() {
+        return registrationToken;
+    }
+
+    public void setRegistrationToken(String registrationToken) {
+        this.registrationToken = registrationToken;
+    }
+
+    public void setConfirmedRegistration( Boolean confirmedRegistration ) {
+        this.confirmedRegistration = confirmedRegistration;
+    }
+
+    public Boolean isConfirmedRegistration() {
+        return this.confirmedRegistration;
+    }
 
 }

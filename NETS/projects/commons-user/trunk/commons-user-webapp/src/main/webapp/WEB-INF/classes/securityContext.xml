@@ -22,7 +22,7 @@
         <beans:property name="dataSource" ref="dataSource"/>
         <beans:property name="usersByUsernameQuery">
             <beans:value>
-                SELECT USERNAME, PASSWORD, true as enabled FROM USER WHERE USERNAME=?
+                SELECT USERNAME, PASSWORD, CONFIRMED_REGISTRATION AS ENABLED FROM USER WHERE USERNAME=?
             </beans:value>
         </beans:property>
         <beans:property name="authoritiesByUsernameQuery">

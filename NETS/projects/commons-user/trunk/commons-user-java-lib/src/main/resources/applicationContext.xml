@@ -52,7 +52,19 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
+        <property name="templateMessage" ref="templateMessage"/>
+        <property name="mailSender" ref="mailSender"/>
     </bean>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="localhost"/>
+    </bean>
+
+    <bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+      <property name="from" value="customerservice@mycompany.com"/>
+      <property name="subject" value="Thanks for registering a user with commons-user"/>
+    </bean>
+
 
     <!--<bean id="userRestResource" class="com.neosavvy.user.rest.UserResource">-->
         <!--<property name="userService" ref="userService"/>-->

@@ -21,6 +21,5 @@ public interface UserService {
     @Secured("ROLE_ADMIN")
 	public void deleteUser(UserDTO user);
 
-
-    
+    public boolean confirmUser(String userName, String hashCode);
 }

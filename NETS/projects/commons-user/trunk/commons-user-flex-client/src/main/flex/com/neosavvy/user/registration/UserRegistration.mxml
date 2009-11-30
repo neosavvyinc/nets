@@ -52,6 +52,7 @@
             lastName.text = null;
             username.text = null;
             password.text = null;
+            emailAddress.text = null;
             confirmPassword.text = null;
             errorBox.text = null;
         }
@@ -63,6 +64,7 @@
             userFromTextInputs.lastName = lastName.text;
             userFromTextInputs.username = username.text;
             userFromTextInputs.password = password.text;
+            userFromTextInputs.emailAddress = emailAddress.text;
             return userFromTextInputs;
         }
 
@@ -109,6 +111,10 @@
     <flexlib:PromptingTextInput
         id="lastName"
         prompt="Last Name"
+        />
+    <flexlib:PromptingTextInput
+        id="emailAddress"
+        prompt="Email Address"
         />
     <flexlib:PromptingTextInput
         id="password"
