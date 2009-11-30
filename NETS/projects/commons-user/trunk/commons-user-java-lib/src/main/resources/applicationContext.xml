@@ -75,6 +75,13 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
       <property name="subject" value="Thanks for registering a user with commons-user"/>
     </bean>
 
+    <bean id="viewResolver"
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
 
     <!--<bean id="userRestResource" class="com.neosavvy.user.rest.UserResource">-->
         <!--<property name="userService" ref="userService"/>-->

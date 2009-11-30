@@ -4,6 +4,7 @@ import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -39,7 +40,7 @@ public class UserResource {
     @GET
     @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
     @Path("data/{userName}/{hashCode}")
-    public String confirmUser(@PathParam("userName") String userName, @PathParam("hashCode") String hashCode) {
+    public ModelAndView confirmUser(@PathParam("userName") String userName, @PathParam("hashCode") String hashCode) {
         boolean confirmed = userService.confirmUser(userName, hashCode);
         String returnValue;
         if(confirmed) {
@@ -47,7 +48,7 @@ public class UserResource {
         } else {
             returnValue = "There was a problem confirming your membership please request a new registration token";
         }
-        return returnValue;
+        return new ModelAndView("registrationConfirmation","confirmationMessage", returnValue);
     }
 
 }
