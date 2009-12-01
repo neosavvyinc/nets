@@ -20,8 +20,9 @@ public class TestRoleDAO extends BaseSpringAwareTestCase{
 
     private void cleanDatabase() {
         deleteFromTables("USER_ROLE");
-        deleteFromTables("ROLE");
+        deleteFromTables("USER_COMPANY");
         deleteFromTables("USER");
+        deleteFromTables("ROLE");        
     }
 
     @Test
