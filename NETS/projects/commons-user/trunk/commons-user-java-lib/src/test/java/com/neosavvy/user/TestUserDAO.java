@@ -16,6 +16,7 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 	
 	@Test
 	public void testSaveUser() {
+        deleteFromTables("USER_ROLE");
         deleteFromTables("USER_COMPANY");
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
@@ -27,6 +28,7 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 
     @Test
     public void testDeleteUser() {
+        deleteFromTables("USER_ROLE");
         deleteFromTables("USER_COMPANY");
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
@@ -47,6 +49,7 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 
     @Test
     public void testFindUserById() {
+        deleteFromTables("USER_ROLE");
         deleteFromTables("USER_COMPANY");
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
@@ -126,6 +129,7 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 
     @Test
     public void testSaveTwoUsersSameUserName() {
+        deleteFromTables("USER_ROLE");
         deleteFromTables("USER_COMPANY");
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
@@ -140,6 +144,7 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
     }
 
     private void setupCriteriaBasedSearchTest() {
+        deleteFromTables("USER_ROLE");
         deleteFromTables("USER_COMPANY");
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
@@ -180,6 +185,7 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 
     @Test
     public void testFindUserWithCompany() {
+        deleteFromTables("USER_ROLE");
         deleteFromTables("USER_COMPANY");
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
@@ -202,6 +208,7 @@ public class TestUserDAO extends BaseSpringAwareTestCase {
 
     @Test
     public void testFindUserWithMultipleCompanies() {
+        deleteFromTables("USER_ROLE");
         deleteFromTables("USER_COMPANY");
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
