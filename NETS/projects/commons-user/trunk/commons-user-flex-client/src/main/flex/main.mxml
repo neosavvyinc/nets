@@ -8,8 +8,9 @@
 	
 	<mx:Script>
 		<![CDATA[
-        import com.neosavvy.user.RegistrationAndLoginWindow;
         import com.neosavvy.user.dto.UserDTO;
+
+        import com.neosavvy.user.view.RegistrationAndLoginWindow;
 
         import mx.collections.ArrayCollection;
         import mx.core.IFlexDisplayObject;
