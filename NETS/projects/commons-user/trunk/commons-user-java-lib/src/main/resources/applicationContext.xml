@@ -15,7 +15,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
         <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
-        <property name="url" value="jdbc:hsqldb:mem:test"/>
+        <property name="url" value="jdbc:hsqldb:file:/tmp/test"/>
         <property name="username" value="sa"/>
         <property name="password" value=""/>
         <property name="initialSize" value="5"/>
@@ -64,6 +64,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="userDao" ref="userDAO"/>
         <property name="templateMessage" ref="templateMessage"/>
         <property name="mailSender" ref="mailSender"/>
+        <property name="hostName" value="www.neosavvy.com:8080"/>
     </bean>
 
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

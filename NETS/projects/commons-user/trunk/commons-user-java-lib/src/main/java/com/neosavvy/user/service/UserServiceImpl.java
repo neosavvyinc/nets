@@ -25,6 +25,15 @@ public class UserServiceImpl implements UserService {
     private UserDAO userDao;
     private MailSender mailSender;
     private SimpleMailMessage templateMessage;
+    private String hostName;
+
+    public String getHostName() {
+        return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
 
     public void setUserDao(UserDAO userDao) {
         this.userDao = userDao;
@@ -66,7 +75,7 @@ public class UserServiceImpl implements UserService {
 
         SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
         msg.setTo(user.getEmailAddress());
-        msg.setText("Please click here to activate your account: http://localhost:8080/commons-user-webapp/users/data/" + user.getUsername() + "/" + user.getRegistrationToken());
+        msg.setText("Please click here to activate your account: http://" + hostName + "/commons-user-webapp/users/data/" + user.getUsername() + "/" + user.getRegistrationToken());
         try{
             mailSender.send(msg);
         }

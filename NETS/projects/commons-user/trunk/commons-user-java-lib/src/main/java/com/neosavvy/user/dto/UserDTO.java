@@ -17,7 +17,7 @@ import java.util.LinkedHashSet;
 )
 @XmlRootElement
 public class UserDTO {// implements Externalizable {
-
+    
 	@Id
     @GeneratedValue
 	@Column(name="USER_ID")
