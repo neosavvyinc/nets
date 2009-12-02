@@ -2,7 +2,7 @@
 <mx:TitleWindow
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:login="com.neosavvy.user.view.login.*"
-        xmlns:registration="com.neosavvy.user.registration.*"
+        xmlns:registration="com.neosavvy.user.view.registration.*"
         layout="horizontal"
         title="Commons User Registration / Login"
         initialize="{init()}"
@@ -10,7 +10,7 @@
 
     <mx:Script>
         <![CDATA[
-        import com.neosavvy.user.registration.event.RegistrationFailedEvent;
+        import com.neosavvy.user.view.registration.event.RegistrationFailedEvent;
 
         import mx.events.CloseEvent;
         import mx.managers.PopUpManager;

@@ -7,7 +7,7 @@
     <mx:Script><![CDATA[
         import com.neosavvy.user.dto.UserDTO;
 
-        import com.neosavvy.user.registration.event.RegistrationFailedEvent;
+        import com.neosavvy.user.view.registration.event.RegistrationFailedEvent;
 
         import mx.messaging.ChannelSet;
         import mx.messaging.channels.AMFChannel;
@@ -22,12 +22,12 @@
                 return;
             }
             addUser()
-            dispatchEvent(new Event("createClicked",true));
+            dispatchEvent(new Event("createClicked", true));
         }
 
         protected function handleCancel():void {
             clearFields();
-            dispatchEvent(new Event("cancelClicked",true));
+            dispatchEvent(new Event("cancelClicked", true));
         }
 
         /**
@@ -87,11 +87,11 @@
             trace("faultEvent: " + faultEvent.message);
             trace("faultEvent: " + faultEvent.fault.toString());
             var event:RegistrationFailedEvent = new RegistrationFailedEvent(faultEvent.message.toString(), faultEvent.fault.toString());
-            dispatchEvent( event );
+            dispatchEvent(event);
         }
 
         private function saveresultHandler(resultEvent:ResultEvent):void {
-            dispatchEvent( new Event("userConfirmed",true));
+            dispatchEvent(new Event("userConfirmed", true));
         }
 
         ]]></mx:Script>

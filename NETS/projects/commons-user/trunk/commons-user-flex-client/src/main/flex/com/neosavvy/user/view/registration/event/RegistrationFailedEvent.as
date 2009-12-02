@@ -1,4 +1,4 @@
-package com.neosavvy.user.registration.event {
+package com.neosavvy.user.view.registration.event {
 import flash.events.Event;
 
 public class RegistrationFailedEvent extends Event {
