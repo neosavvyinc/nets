@@ -1,7 +1,9 @@
 package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dao.UserDAO;
 import org.springframework.security.annotation.Secured;
+import org.springframework.mail.MailSender;
 
 import java.util.List;
 
@@ -22,4 +24,8 @@ public interface UserService {
 	public void deleteUser(UserDTO user);
 
     public boolean confirmUser(String userName, String hashCode);
+
+    public void setUserDao(UserDAO userDao);
+
+    public void setMailSender(MailSender mailSender);
 }
