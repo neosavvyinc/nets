@@ -17,12 +17,6 @@ import com.neosavvy.user.dto.UserDTO;
  * To change this template use File | Settings | File Templates.
  */
 public class TestUserService extends BaseSpringAwareServiceTestCase {
-    private void cleanDatabase() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("USER");
-        deleteFromTables("ROLE");
-    }
 
     @Test
     public void testGetUsers() throws Exception{

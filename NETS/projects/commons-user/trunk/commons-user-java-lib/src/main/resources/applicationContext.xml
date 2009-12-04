@@ -67,6 +67,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="hostName" value="www.neosavvy.com:8080"/>
     </bean>
 
+    <bean id="companyService" class="com.neosavvy.user.service.CompanyServiceImpl">
+        <property name="companyDao" ref="companyDAO"/>
+    </bean>
+
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="localhost"/>
     </bean>
