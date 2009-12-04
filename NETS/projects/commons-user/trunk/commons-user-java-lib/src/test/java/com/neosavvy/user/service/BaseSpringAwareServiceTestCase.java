@@ -3,7 +3,6 @@ package com.neosavvy.user.service;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.jmock.Mockery;
 import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.dto.UserDTO;
 
@@ -23,7 +22,7 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
     @Autowired
     protected UserDAO userDAO;
 
-    Mockery mock_context = new Mockery();
+    //Mockery mock_context = new Mockery();
 
     //todo:  refactor this to something common for dao and Service tests
     protected UserDTO createTestUser() {

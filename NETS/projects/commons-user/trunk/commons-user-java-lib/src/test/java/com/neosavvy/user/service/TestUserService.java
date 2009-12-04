@@ -3,8 +3,9 @@ package com.neosavvy.user.service;
 import org.junit.Test;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.jmock.Expectations;
+import org.easymock.EasyMock;
 import junit.framework.Assert;
+import com.neosavvy.user.dto.UserDTO;
 
 /**
  * Created by IntelliJ IDEA.
@@ -29,16 +30,44 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
         Assert.assertFalse(userService.getUsers().isEmpty());
     }
 
+    //todo:  convert this to easymock
     @Test
     public void testSaveUser() throws Exception{
         cleanDatabase();
-        final MailSender mailSender = mock_context.mock(MailSender.class);
+        MailSender mailSender = EasyMock.createMock(MailSender.class);
         userService.setMailSender(mailSender);
 
-        mock_context.checking(new Expectations() {{
-            oneOf (mailSender).send(with(any(SimpleMailMessage.class)));
-        }});
+        mailSender.send((SimpleMailMessage) EasyMock.anyObject());
+        EasyMock.replay(mailSender);
+
         userService.saveUser(createTestUser());
         Assert.assertFalse(userService.getUsers().isEmpty());
+    }
+
+    @Test
+    public void testConfirmUser() throws Exception{
+        cleanDatabase();
+        MailSender mailSender = EasyMock.createMock(MailSender.class);
+        userService.setMailSender(mailSender);
+
+        mailSender.send((SimpleMailMessage) EasyMock.anyObject());
+        EasyMock.replay(mailSender);
+
+
+        UserDTO  testUser = createTestUser();
+        userService.saveUser(testUser);
+        Assert.assertFalse(userService.getUsers().isEmpty());
+
+        Assert.assertTrue(userService.confirmUser(testUser.getUsername(), testUser.getRegistrationToken()));
+    }
+
+    @Test
+    public void testFindUserById() throws Exception{
+        cleanDatabase();
+        UserDTO  testUser = createTestUser();
+        userDAO.saveUser(testUser);
+        Assert.assertFalse(userService.getUsers().isEmpty());
+        Assert.assertNotNull("findUserById should return the user that we just added when we search by the id for it",
+                userService.findUserById(testUser.getId()));
     }
 }
