@@ -3,6 +3,8 @@ package com.neosavvy.user.service;
 import org.junit.Test;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.context.SecurityContextHolder;
+import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
 import org.easymock.EasyMock;
 import junit.framework.Assert;
 import com.neosavvy.user.dto.UserDTO;
@@ -67,7 +69,9 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
         UserDTO  testUser = createTestUser();
         userDAO.saveUser(testUser);
         Assert.assertFalse(userService.getUsers().isEmpty());
+        SecurityContextHolder.getContext().setAuthentication(null);
         Assert.assertNotNull("findUserById should return the user that we just added when we search by the id for it",
                 userService.findUserById(testUser.getId()));
     }
+
 }

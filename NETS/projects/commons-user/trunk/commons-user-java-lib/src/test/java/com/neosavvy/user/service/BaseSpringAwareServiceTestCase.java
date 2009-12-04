@@ -3,6 +3,11 @@ package com.neosavvy.user.service;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.BeanFactoryUtils;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.context.SecurityContextHolder;
+import org.junit.Before;
 import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.dto.UserDTO;
 
@@ -14,7 +19,8 @@ import com.neosavvy.user.dto.UserDTO;
  * To change this template use File | Settings | File Templates.
  */
 @ContextConfiguration(locations = {
-		"classpath:applicationContext.xml"
+		"classpath:applicationContext.xml",
+        "classpath:testSecurityContext.xml"
         })
 public abstract class BaseSpringAwareServiceTestCase extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
@@ -22,7 +28,6 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
     @Autowired
     protected UserDAO userDAO;
 
-    //Mockery mock_context = new Mockery();
 
     //todo:  refactor this to something common for dao and Service tests
     protected UserDTO createTestUser() {
@@ -35,4 +40,6 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         user.setEmailAddress("aparrish@neosavvy.com");
         return user;
     }
+
+
 }
