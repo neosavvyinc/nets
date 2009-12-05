@@ -29,6 +29,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
                 <value>com.neosavvy.user.dto.UserDTO</value>
                 <value>com.neosavvy.user.dto.CompanyDTO</value>
                 <value>com.neosavvy.user.dto.RoleDTO</value>
+                <value>com.neosavvy.user.dto.NumEmployeesRangeDTO</value>
             </list>
         </property>
         <property name="hibernateProperties">
@@ -58,6 +59,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <bean id="roleDAO" class="com.neosavvy.user.dao.RoleDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="numEmployeesRangeDAO" class="com.neosavvy.user.dao.NumEmployeesRangeDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">

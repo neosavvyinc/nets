@@ -23,7 +23,10 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
     @Autowired
     protected UserDAO userDAO;
     @Autowired
-    protected RoleDAO roleDAO;       
+    protected RoleDAO roleDAO;
+    @Autowired
+    protected NumEmployeesRangeDAO numEmployeesRangeDAO;
+
 
     protected UserDTO createTestUser(){
         UserDTO user = new UserDTO();
