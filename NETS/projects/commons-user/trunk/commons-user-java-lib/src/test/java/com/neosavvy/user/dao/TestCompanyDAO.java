@@ -7,6 +7,7 @@ import java.util.List;
 
 import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dto.NumEmployeesRangeDTO;
 
 /**
  * Created by IntelliJ IDEA.
@@ -167,6 +168,25 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
         Assert.assertNotNull("Company object was not found by id " + company.getId(), companyFound);
 
         Assert.assertEquals("Company has two users", 2, companyFound.getUsers().size());
+    }
+
+    @Test
+    public void testAddNumEmployeesRangeToCompany() {
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
+        deleteFromTables("USER");
+        deleteFromTables("NUM_EMPLOYEES_RANGE");
+        NumEmployeesRangeDTO testNumEmployeesRange = createTestRange();
+        numEmployeesRangeDAO.saveRange(testNumEmployeesRange);
+        CompanyDTO company = createTestCompany();
+        company.setNumEmployeesRange(testNumEmployeesRange);
+        companyDAO.saveCompany(company);
+
+        CompanyDTO foundCompany = companyDAO.findCompanyById(company.getId());
+
+        Assert.assertEquals("Found company has the num employees range we just set",
+                company.getNumEmployeesRange().getRangeDescription(),
+                foundCompany.getNumEmployeesRange().getRangeDescription());
     }
 
 }

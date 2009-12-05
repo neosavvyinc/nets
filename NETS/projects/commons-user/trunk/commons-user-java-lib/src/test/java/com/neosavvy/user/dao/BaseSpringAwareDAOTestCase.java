@@ -8,6 +8,7 @@ import org.junit.Assert;
 import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dto.RoleDTO;
+import com.neosavvy.user.dto.NumEmployeesRangeDTO;
 import com.neosavvy.user.dao.CompanyDAO;
 import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.dao.RoleDAO;
@@ -73,6 +74,15 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
         company.setCountry("USA");
         return company;
     }
+
+    protected NumEmployeesRangeDTO createTestRange(){
+        NumEmployeesRangeDTO test_range = new NumEmployeesRangeDTO();
+        test_range.setRangeDescription("1-10");
+        test_range.setRangeFrom(1);
+        test_range.setRangeTo(10);
+        return test_range;
+    }
+
 
     protected RoleDTO createTestRole() {
         RoleDTO role = new RoleDTO();

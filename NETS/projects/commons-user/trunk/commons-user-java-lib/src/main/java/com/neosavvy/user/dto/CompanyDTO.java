@@ -58,14 +58,9 @@ public class CompanyDTO {
     private Set<UserDTO> users = new LinkedHashSet<UserDTO>();
 
 
-//    public Set getUsers() {
-//        return users;
-//    }
-//
-//    @FormParam("users")
-//    public void setUsers(Set users) {
-//        this.users = users;
-//    }
+    @ManyToOne
+    @JoinColumn(name="NUM_EMPLOYEES_RANGE_FK")
+    private NumEmployeesRangeDTO numEmployeesRange;
 
     public int getId() {
         return id;
@@ -150,5 +145,13 @@ public class CompanyDTO {
     public void addUser(UserDTO user){
         if (this.users != null)
             this.users.add(user);   
+    }
+
+    public NumEmployeesRangeDTO getNumEmployeesRange() {
+        return numEmployeesRange;
+    }
+
+    public void setNumEmployeesRange(NumEmployeesRangeDTO numEmployeesRange) {
+        this.numEmployeesRange = numEmployeesRange;
     }
 }

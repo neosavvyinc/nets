@@ -20,14 +20,6 @@ public class TestNumEmployeesRangeDAO extends BaseSpringAwareDAOTestCase{
         deleteFromTables("NUM_EMPLOYEES_RANGE");
     }
 
-    private NumEmployeesRangeDTO createTestRange(){
-        NumEmployeesRangeDTO test_range = new NumEmployeesRangeDTO();
-        test_range.setRangeDescription("1-10");
-        test_range.setRangeFrom(1);
-        test_range.setRangeTo(10);
-        return test_range;
-    }
-
     private NumEmployeesRangeDTO createAltTestRange(){
         NumEmployeesRangeDTO test_range = new NumEmployeesRangeDTO();
         test_range.setRangeDescription("11-50");
