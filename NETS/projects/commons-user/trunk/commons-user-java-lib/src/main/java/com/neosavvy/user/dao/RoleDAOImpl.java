@@ -1,6 +1,7 @@
 package com.neosavvy.user.dao;
 
 import com.neosavvy.user.dto.RoleDTO;
+import com.neosavvy.user.dto.CompanyDTO;
 
 import java.util.List;
 
@@ -16,7 +17,7 @@ import org.hibernate.Criteria;
  */
 public class RoleDAOImpl extends BaseDAO implements RoleDAO{
     public List<RoleDTO> getRoles() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return getCurrentSession().createCriteria(RoleDTO.class).list();
     }
 
     public void saveRole(RoleDTO role) {

@@ -10,8 +10,10 @@ import org.springframework.security.context.SecurityContextHolder;
 import org.junit.Before;
 import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.dao.CompanyDAO;
+import com.neosavvy.user.dao.RoleDAO;
 import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dto.CompanyDTO;
+import com.neosavvy.user.dto.RoleDTO;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,6 +35,10 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
     protected CompanyService companyService;
     @Autowired
     protected CompanyDAO companyDAO;
+    @Autowired
+    protected RoleService roleService;
+    @Autowired
+    protected RoleDAO roleDAO;
 
 
     //todo:  refactor this to something common for dao and Service tests
@@ -57,6 +63,13 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         company.setPostalCode("30312");
         company.setCountry("USA");
         return company;
+    }
+
+    protected RoleDTO createTestRole() {
+        RoleDTO role = new RoleDTO();
+        role.setShortName("ADMIN");
+        role.setLongName("Administrator");
+        return role;
     }
 
     protected void cleanDatabase() {

@@ -71,6 +71,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="companyDao" ref="companyDAO"/>
     </bean>
 
+    <bean id="roleService" class="com.neosavvy.user.service.RoleServiceImpl">
+        <property name="roleDao" ref="roleDAO"/>
+    </bean>
+
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="localhost"/>
     </bean>

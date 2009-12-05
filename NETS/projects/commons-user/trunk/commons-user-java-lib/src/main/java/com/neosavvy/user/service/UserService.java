@@ -25,7 +25,5 @@ public interface UserService {
 
     public boolean confirmUser(String userName, String hashCode);
 
-    public void setUserDao(UserDAO userDao);
-
     public void setMailSender(MailSender mailSender);
 }

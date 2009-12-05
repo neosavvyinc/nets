@@ -26,5 +26,4 @@ public interface CompanyService {
     @Secured("ROLE_ADMIN")
 	public List<CompanyDTO> findCompanies(CompanyDTO company);
     
-    public void setCompanyDao(CompanyDAO companyDao);
 }
