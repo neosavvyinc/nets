@@ -17,6 +17,7 @@ import java.util.List;
 public class TestNumEmployeesRangeDAO extends BaseSpringAwareDAOTestCase{
 
     private void cleanDatabase() {
+        deleteFromTables("COMPANY");
         deleteFromTables("NUM_EMPLOYEES_RANGE");
     }
 
