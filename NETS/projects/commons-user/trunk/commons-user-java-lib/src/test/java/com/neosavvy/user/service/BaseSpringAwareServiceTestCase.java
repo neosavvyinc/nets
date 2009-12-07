@@ -1,5 +1,6 @@
 package com.neosavvy.user.service;
 
+import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,7 @@ import com.neosavvy.user.dto.RoleDTO;
         "classpath:testSecurityContext.xml"
         })
 public abstract class BaseSpringAwareServiceTestCase extends AbstractTransactionalJUnit4SpringContextTests {
+
     @Autowired
     protected UserService userService;
     @Autowired
@@ -40,6 +42,10 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
     @Autowired
     protected RoleDAO roleDAO;
 
+    @Before
+    public void loginTestUser() {
+       SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("admin", "admin"));
+    }
 
     //todo:  refactor this to something common for dao and Service tests
     protected UserDTO createTestUser() {
