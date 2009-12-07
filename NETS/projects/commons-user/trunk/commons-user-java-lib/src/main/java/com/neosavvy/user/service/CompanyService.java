@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dao.CompanyDAO;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,6 +15,7 @@ import com.neosavvy.user.dao.CompanyDAO;
  * Time: 4:15:26 PM
  * To change this template use File | Settings | File Templates.
  */
+@Transactional
 public interface CompanyService {
     @Secured("ROLE_ADMIN")
 	public List<CompanyDTO> getCompanies();

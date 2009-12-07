@@ -1,5 +1,6 @@
 package com.neosavvy.user.dao;
 
+import org.junit.Before;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
@@ -103,4 +104,12 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
         Assert.assertEquals("Size of returned results should have been " + numRows, numRows,itemsFound.size());
     }
 
+    protected void cleanupTables() {
+        deleteFromTables("USER_ROLE");
+        deleteFromTables("ROLE");
+        deleteFromTables("USER_COMPANY");
+        deleteFromTables("COMPANY");
+        deleteFromTables("USER");
+        deleteFromTables("NUM_EMPLOYEES_RANGE");
+    }
 }

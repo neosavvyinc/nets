@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.neosavvy.user.dto.RoleDTO;
 import com.neosavvy.user.dao.RoleDAO;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,6 +15,7 @@ import com.neosavvy.user.dao.RoleDAO;
  * Time: 5:28:05 PM
  * To change this template use File | Settings | File Templates.
  */
+@Transactional
 public interface RoleService {
 
     @Secured("ROLE_ADMIN")
@@ -31,5 +33,4 @@ public interface RoleService {
     @Secured("ROLE_ADMIN")
 	public void deleteRole(RoleDTO role);
 
-//    public void setRoleDao(RoleDAO roleDao);
 }

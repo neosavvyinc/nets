@@ -8,18 +8,10 @@ import com.neosavvy.user.dto.NumEmployeesRangeDTO;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Dec 5, 2009
- * Time: 1:26:25 PM
- * To change this template use File | Settings | File Templates.
+ * @author lgleason
  */
 public class TestNumEmployeesRangeDAO extends BaseSpringAwareDAOTestCase{
 
-    private void cleanDatabase() {
-        deleteFromTables("COMPANY");
-        deleteFromTables("NUM_EMPLOYEES_RANGE");
-    }
 
     private NumEmployeesRangeDTO createAltTestRange(){
         NumEmployeesRangeDTO test_range = new NumEmployeesRangeDTO();
@@ -32,7 +24,7 @@ public class TestNumEmployeesRangeDAO extends BaseSpringAwareDAOTestCase{
 
     @Test
     public void testSaveRange() {
-        cleanDatabase();
+        cleanupTables();
         NumEmployeesRangeDTO range = createTestRange();
         numEmployeesRangeDAO.saveRange(range);
         Assert.assertTrue((int)range.getId() > 0);
@@ -40,7 +32,7 @@ public class TestNumEmployeesRangeDAO extends BaseSpringAwareDAOTestCase{
 
     @Test
     public void testDeleteRange() {
-        cleanDatabase();
+        cleanupTables();
         int numRows = countRowsInTable("NUM_EMPLOYEES_RANGE");
         Assert.assertEquals(numRows, 0);
 
@@ -58,7 +50,7 @@ public class TestNumEmployeesRangeDAO extends BaseSpringAwareDAOTestCase{
 
     @Test
     public void testFindRangeById() {
-        cleanDatabase();
+        cleanupTables();
         NumEmployeesRangeDTO range = createTestRange();
         numEmployeesRangeDAO.saveRange(range);
 
@@ -73,7 +65,7 @@ public class TestNumEmployeesRangeDAO extends BaseSpringAwareDAOTestCase{
 
     @Test
     public void testFindRanges() {
-        cleanDatabase();
+        cleanupTables();
         NumEmployeesRangeDTO range = createTestRange();
         numEmployeesRangeDAO.saveRange(range);
 
@@ -87,7 +79,7 @@ public class TestNumEmployeesRangeDAO extends BaseSpringAwareDAOTestCase{
     }
 
     private void setupCriteriaBasedSearchTest() {
-        cleanDatabase();
+        cleanupTables();
         NumEmployeesRangeDTO range = createTestRange();
         NumEmployeesRangeDTO range2 = createAltTestRange();
 
@@ -137,7 +129,7 @@ public class TestNumEmployeesRangeDAO extends BaseSpringAwareDAOTestCase{
 
     @Test
     public void testSaveTwoRangesSameDescription() {
-        cleanDatabase();
+        cleanupTables();
         numEmployeesRangeDAO.saveRange(createTestRange());
         try {
             Assert.assertEquals("Should be a row in the table for the range",countRowsInTable("NUM_EMPLOYEES_RANGE"),1);

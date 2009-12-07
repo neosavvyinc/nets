@@ -11,11 +11,7 @@ import junit.framework.Assert;
 import com.neosavvy.user.dto.UserDTO;
 
 /**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Nov 29, 2009
- * Time: 9:10:37 PM
- * To change this template use File | Settings | File Templates.
+ * @author lgleason
  */
 public class TestUserService extends BaseSpringAwareServiceTestCase {
 

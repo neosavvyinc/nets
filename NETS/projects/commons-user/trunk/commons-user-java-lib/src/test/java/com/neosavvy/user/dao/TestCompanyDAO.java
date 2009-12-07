@@ -10,19 +10,13 @@ import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dto.NumEmployeesRangeDTO;
 
 /**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Nov 27, 2009
- * Time: 3:23:00 PM
- * To change this template use File | Settings | File Templates.
+ * @author lgleason
  */
 public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
     
     @Test
     public void testFindCompanyById() {
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
-
+        cleanupTables();
         CompanyDTO company = createTestCompany();
         companyDAO.saveCompany(company);
 
@@ -36,8 +30,7 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
     }
 
     private void setupCriteriaBasedSearchTest() {
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
 
         CompanyDTO company = createTestCompany();
         CompanyDTO company2 = createAltTestCompany();
@@ -125,9 +118,7 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindCompanyWithUser() {
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
         UserDTO user = createTestUser();
         userDAO.saveUser(user);
         CompanyDTO company = createTestCompanyWithUser(user);
@@ -147,9 +138,7 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindCompanyWithMultipleUsers() {
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
         UserDTO user = createTestUser();
         userDAO.saveUser(user);
         UserDTO altUser = createAltTestUser();
@@ -172,10 +161,7 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testAddNumEmployeesRangeToCompany() {
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
-        deleteFromTables("NUM_EMPLOYEES_RANGE");
+        cleanupTables();
         NumEmployeesRangeDTO testNumEmployeesRange = createTestRange();
         numEmployeesRangeDAO.saveRange(testNumEmployeesRange);
         CompanyDTO company = createTestCompany();

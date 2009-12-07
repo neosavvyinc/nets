@@ -10,13 +10,12 @@ import org.junit.Test;
 import java.util.List;
 
 public class TestUserDAO extends BaseSpringAwareDAOTestCase {
-	
+
+
+
 	@Test
 	public void testSaveUser() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
         UserDTO user = createTestUser();
 		
 		userDAO.saveUser(user);
@@ -25,10 +24,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testDeleteUser() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
         int numRows = countRowsInTable("USER");
         Assert.assertEquals(numRows, 0);
 
@@ -46,10 +42,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindUserById() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
 
         UserDTO user = createTestUser();
         userDAO.saveUser(user);
@@ -126,10 +119,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testSaveTwoUsersSameUserName() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
         userDAO.saveUser(createTestUser());
         try {
             Assert.assertEquals("Should be a row in the table for the user",countRowsInTable("USER"),1);
@@ -141,10 +131,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
     }
 
     private void setupCriteriaBasedSearchTest() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
 
         UserDTO user = createTestUser();
         UserDTO user2 = createAltTestUser();
@@ -182,10 +169,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindUserWithCompany() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
         CompanyDTO company = createTestCompany();
         companyDAO.saveCompany(company);
         UserDTO user = createTestUserWithCompany(company);
@@ -205,10 +189,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindUserWithMultipleCompanies() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
         CompanyDTO company = createTestCompany();
         companyDAO.saveCompany(company);
         CompanyDTO altCompany = createAltTestCompany();
@@ -231,11 +212,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindUserWithRole() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
         RoleDTO role = createTestRole();
         roleDAO.saveRole(role);
         UserDTO user = createTestUserWithRole(role);
@@ -255,11 +232,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindUserWithMultipleRoles() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("COMPANY");
-        deleteFromTables("USER");
+        cleanupTables();
         RoleDTO role = createTestRole();
         roleDAO.saveRole(role);
         RoleDTO altRole = createAltTestRole();

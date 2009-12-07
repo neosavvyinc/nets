@@ -10,24 +10,13 @@ import com.neosavvy.user.dto.RoleDTO;
 import com.neosavvy.user.dto.UserDTO;
 
 /**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Nov 28, 2009
- * Time: 4:08:02 AM
- * To change this template use File | Settings | File Templates.
+ * @author lgleason
  */
 public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
 
-    private void cleanDatabase() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("USER_COMPANY");
-        deleteFromTables("USER");
-        deleteFromTables("ROLE");        
-    }
-
     @Test
     public void testSaveRole() {
-        cleanDatabase();
+        cleanupTables();
         RoleDTO role = createTestRole();
 
         roleDAO.saveRole(role);
@@ -36,7 +25,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testDeleteRole() {
-        cleanDatabase();
+        cleanupTables();
         int numRows = countRowsInTable("ROLE");
         Assert.assertEquals(numRows, 0);
 
@@ -54,7 +43,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindRoleById() {
-        cleanDatabase();
+        cleanupTables();
         RoleDTO role = createTestRole();
         roleDAO.saveRole(role);
 
@@ -68,7 +57,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
     }
 
     private void setupCriteriaBasedSearchTest() {
-        cleanDatabase();
+        cleanupTables();
         RoleDTO role = createTestRole();
         RoleDTO role2 = createAltTestRole();
 
@@ -102,12 +91,12 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
         List<RoleDTO> rolesFounds = roleDAO.findRoles(searchCriteria);
 
         assertSearchCriteriaResults(rolesFounds,1);
-        cleanDatabase();
+        cleanupTables();
     }
 
     @Test
     public void testSaveTwoUsersSameUserName() {
-        cleanDatabase();
+        cleanupTables();
         roleDAO.saveRole(createTestRole());
         try {
             Assert.assertEquals("Should be a row in the table for the user",countRowsInTable("ROLE"),1);
@@ -127,7 +116,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindRoleWithUser() {
-        cleanDatabase();
+        cleanupTables();
         UserDTO user = createTestUser();
         userDAO.saveUser(user);
         RoleDTO role = createTestRoleWithUser(user);
@@ -147,7 +136,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindRoleWithMultipleUsers() {
-        cleanDatabase();
+        cleanupTables();
         UserDTO user = createTestUser();
         userDAO.saveUser(user);
         UserDTO altUser = createAltTestUser();

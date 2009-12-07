@@ -17,11 +17,7 @@ import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dto.RoleDTO;
 
 /**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Nov 29, 2009
- * Time: 9:22:33 PM
- * To change this template use File | Settings | File Templates.
+ * @author lgleason
  */
 @ContextConfiguration(locations = {
 		"classpath:applicationContext.xml",

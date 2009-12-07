@@ -1,4 +1,5 @@
-package com.neosavvy.user.service.exception; /*************************************************************************
+package com.neosavvy.user.service.exception;
+/*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
  * __________________

@@ -4,6 +4,7 @@ import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dao.UserDAO;
 import org.springframework.security.annotation.Secured;
 import org.springframework.mail.MailSender;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 

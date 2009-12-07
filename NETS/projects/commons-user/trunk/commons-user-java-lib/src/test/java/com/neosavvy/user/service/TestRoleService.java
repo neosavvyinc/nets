@@ -5,11 +5,7 @@ import junit.framework.Assert;
 import com.neosavvy.user.dto.RoleDTO;
 
 /**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Dec 4, 2009
- * Time: 5:39:46 PM
- * To change this template use File | Settings | File Templates.
+ * @author lgleason
  */
 public class TestRoleService extends BaseSpringAwareServiceTestCase{
     @Test
