@@ -34,10 +34,13 @@ public class RoleDTO {
 	@Column(name="LONG_NAME")
 	private String longName;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
-    private Set<UserDTO> users = new LinkedHashSet<UserDTO>();
+//    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+//    @JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") },
+//            inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
+//    private Set<UserDTO> users = new LinkedHashSet<UserDTO>();
+
+    @OneToMany(mappedBy="role")
+    private Set<UserCompanyRoleDTO> userCompanyRoles;
 
     public int getId() {
         return id;
@@ -63,16 +66,11 @@ public class RoleDTO {
         this.longName = longName;
     }
 
-    public Set<UserDTO> getUsers() {
-        return users;
+    public Set<UserCompanyRoleDTO> getUserCompanyRoles() {
+        return userCompanyRoles;
     }
 
-    public void setUsers(Set<UserDTO> users) {
-        this.users = users;
-    }
-
-    public void addUser(UserDTO user){
-        if (this.users != null)
-            this.users.add(user);
+    public void setUserCompanyRoles(Set<UserCompanyRoleDTO> userCompanyRoles) {
+        this.userCompanyRoles = userCompanyRoles;
     }
 }

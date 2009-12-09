@@ -8,17 +8,7 @@ import org.hibernate.Criteria;
 
 import java.util.List;
 
-public class UserDAOImpl implements UserDAO {
-
-    private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public SessionFactory getSessionFactory() {
-        return this.sessionFactory;
-    }
+public class UserDAOImpl extends BaseDAO implements UserDAO {
 
 	public void deleteUser(UserDTO user) {
 		getCurrentSession().delete(user);
@@ -63,9 +53,5 @@ public class UserDAOImpl implements UserDAO {
 		getCurrentSession().saveOrUpdate(user);
         getCurrentSession().flush();
 	}
-
-    protected Session getCurrentSession() {
-        return getSessionFactory().getCurrentSession();
-    }
 
 }

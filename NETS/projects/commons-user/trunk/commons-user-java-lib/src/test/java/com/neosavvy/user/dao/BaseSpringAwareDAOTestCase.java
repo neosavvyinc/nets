@@ -28,6 +28,8 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
     protected RoleDAO roleDAO;
     @Autowired
     protected NumEmployeesRangeDAO numEmployeesRangeDAO;
+    @Autowired
+    protected UserCompanyRoleDAO userCompanyRoleDAO;
 
 
     protected UserDTO createTestUser(){
@@ -111,5 +113,6 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
         deleteFromTables("NUM_EMPLOYEES_RANGE");
+        deleteFromTables("USER_COMPANY_ROLE");
     }
 }

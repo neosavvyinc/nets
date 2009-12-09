@@ -52,11 +52,13 @@ public class CompanyDTO {
     @Column(name="COUNTRY")
     private String country;
 
-    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(name = "USER_COMPANY", joinColumns = { @JoinColumn(name = "USER_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "COMPANY_ID") })
-    private Set<UserDTO> users = new LinkedHashSet<UserDTO>();
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+//    @JoinTable(name = "USER_COMPANY", joinColumns = { @JoinColumn(name = "USER_ID") },
+//            inverseJoinColumns = { @JoinColumn(name = "COMPANY_ID") })
+//    private Set<UserDTO> users = new LinkedHashSet<UserDTO>();
 
+    @OneToMany(mappedBy="company")
+    private Set<UserCompanyRoleDTO> userCompanyRoles;
 
     @ManyToOne
     @JoinColumn(name="NUM_EMPLOYEES_RANGE_FK")
@@ -134,18 +136,18 @@ public class CompanyDTO {
         this.country = country;
     }
 
-	public Set<UserDTO> getUsers() {
-		return users;
-	}
-
-	public void setUsers(Set<UserDTO> users) {
-		this.users = users;
-	}
-
-    public void addUser(UserDTO user){
-        if (this.users != null)
-            this.users.add(user);   
-    }
+//	public Set<UserDTO> getUsers() {
+//		return users;
+//	}
+//
+//	public void setUsers(Set<UserDTO> users) {
+//		this.users = users;
+//	}
+//
+//    public void addUser(UserDTO user){
+//        if (this.users != null)
+//            this.users.add(user);
+//    }
 
     public NumEmployeesRangeDTO getNumEmployeesRange() {
         return numEmployeesRange;
@@ -153,5 +155,13 @@ public class CompanyDTO {
 
     public void setNumEmployeesRange(NumEmployeesRangeDTO numEmployeesRange) {
         this.numEmployeesRange = numEmployeesRange;
+    }
+
+    public Set<UserCompanyRoleDTO> getUserCompanyRoles() {
+        return userCompanyRoles;
+    }
+
+    public void setUserCompanyRoles(Set<UserCompanyRoleDTO> userCompanyRoles) {
+        this.userCompanyRoles = userCompanyRoles;
     }
 }

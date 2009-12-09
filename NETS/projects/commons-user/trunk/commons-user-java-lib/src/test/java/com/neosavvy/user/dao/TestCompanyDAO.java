@@ -103,62 +103,6 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
         assertSearchCriteriaResults(companiesFound,0);
     }
 
-    protected CompanyDTO createTestCompanyWithUser(UserDTO user) {
-        CompanyDTO company = new CompanyDTO();
-        company.setCompanyName("Big Enterprises");
-        company.setAddressOne("address one one");
-        company.setAddressTwo("address two two");
-        company.setCity("Toronto");
-        company.setState("CA");
-        company.setPostalCode("14895");
-        company.setCountry("Canada");
-        company.addUser(user);
-        return company;
-    }    
-
-    @Test
-    public void testFindCompanyWithUser() {
-        cleanupTables();
-        UserDTO user = createTestUser();
-        userDAO.saveUser(user);
-        CompanyDTO company = createTestCompanyWithUser(user);
-        companyDAO.saveCompany(company);
-
-
-        int numRows = countRowsInTable("COMPANY");
-
-        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
-
-        CompanyDTO companyFound = companyDAO.findCompanyById(company.getId());
-
-        Assert.assertNotNull("Company object was not found by id " + company.getId(), companyFound);
-
-        Assert.assertEquals("Company has one user", 1, companyFound.getUsers().size());
-    }
-
-    @Test
-    public void testFindCompanyWithMultipleUsers() {
-        cleanupTables();
-        UserDTO user = createTestUser();
-        userDAO.saveUser(user);
-        UserDTO altUser = createAltTestUser();
-        userDAO.saveUser(altUser);
-        CompanyDTO company = createTestCompanyWithUser(user);
-        company.addUser(altUser);
-        companyDAO.saveCompany(company);
-
-
-        int numRows = countRowsInTable("COMPANY");
-
-        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
-
-        CompanyDTO companyFound = companyDAO.findCompanyById(company.getId());
-
-        Assert.assertNotNull("Company object was not found by id " + company.getId(), companyFound);
-
-        Assert.assertEquals("Company has two users", 2, companyFound.getUsers().size());
-    }
-
     @Test
     public void testAddNumEmployeesRangeToCompany() {
         cleanupTables();

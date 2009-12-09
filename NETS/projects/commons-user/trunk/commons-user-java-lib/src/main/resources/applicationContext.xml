@@ -30,13 +30,14 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
                 <value>com.neosavvy.user.dto.CompanyDTO</value>
                 <value>com.neosavvy.user.dto.RoleDTO</value>
                 <value>com.neosavvy.user.dto.NumEmployeesRangeDTO</value>
+                <value>com.neosavvy.user.dto.UserCompanyRoleDTO</value>
             </list>
         </property>
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="show_sql">true</prop>
-                <!--<prop key="hibernate.hbm2ddl.auto">create</prop>-->
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
             </props>
         </property>
     </bean>
@@ -47,6 +48,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
         <property name="userTransaction" ref="jotm"/>
+    </bean>
+
+    <bean id="userCompanyRoleDAO" class="com.neosavvy.user.dao.UserCompanyRoleDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
     <bean id="userDAO" class="com.neosavvy.user.dao.UserDAOImpl">

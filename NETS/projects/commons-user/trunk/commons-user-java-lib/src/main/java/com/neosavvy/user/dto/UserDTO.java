@@ -45,18 +45,21 @@ public class UserDTO {// implements Externalizable {
     private String registrationToken;
 
     @Column(name="CONFIRMED_REGISTRATION")
-    private Boolean confirmedRegistration;
+    private Boolean confirmedRegistration = true;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinTable(name = "USER_COMPANY", joinColumns = { @JoinColumn(name = "COMPANY_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
-    private Set<CompanyDTO> companies = new LinkedHashSet<CompanyDTO>();
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
+//    @JoinTable(name = "USER_COMPANY", joinColumns = { @JoinColumn(name = "COMPANY_ID") },
+//            inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
+//    private Set<CompanyDTO> companies = new LinkedHashSet<CompanyDTO>();
+//
+//    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+//    @JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "ROLE_ID") },
+//            inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
+//    private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>();
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-    @JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "ROLE_ID") },
-            inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
-    private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>();
-	
+    @OneToMany(mappedBy="user")
+    private Set<UserCompanyRoleDTO> userCompanyRoles;
+
 	public int getId() {
 		return id;
 	}
@@ -123,27 +126,35 @@ public class UserDTO {// implements Externalizable {
         return this.confirmedRegistration;
     }
 
-	public Set<CompanyDTO> getCompanies() {
-		return companies;
-	}
-
-	public void setCompanies(Set<CompanyDTO> companies) {
-		this.companies = companies;
-	}
-
-    public void addCompany(CompanyDTO company) {
-            this.companies.add(company);
+    public Set<UserCompanyRoleDTO> getUserCompanyRoles() {
+        return userCompanyRoles;
     }
 
-    public Set<RoleDTO> getRoles() {
-        return roles;
+    public void setUserCompanyRoles(Set<UserCompanyRoleDTO> userCompanyRoles) {
+        this.userCompanyRoles = userCompanyRoles;
     }
 
-    public void setRoles(Set<RoleDTO> roles) {
-        this.roles = roles;
-    }
-
-    public void addRole(RoleDTO role){
-            this.roles.add(role);
-    }
+    //	public Set<CompanyDTO> getCompanies() {
+//		return companies;
+//	}
+//
+//	public void setCompanies(Set<CompanyDTO> companies) {
+//		this.companies = companies;
+//	}
+//
+//    public void addCompany(CompanyDTO company) {
+//            this.companies.add(company);
+//    }
+//
+//    public Set<RoleDTO> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Set<RoleDTO> roles) {
+//        this.roles = roles;
+//    }
+//
+//    public void addRole(RoleDTO role){
+//            this.roles.add(role);
+//    }
 }

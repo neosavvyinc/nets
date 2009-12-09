@@ -16,20 +16,7 @@ import org.hibernate.classic.Session;
  * Time: 2:53:27 PM
  * To change this template use File | Settings | File Templates.
  */
-public class CompanyDAOImpl implements CompanyDAO{
-    private SessionFactory sessionFactory;
-
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
-
-    public SessionFactory getSessionFactory() {
-        return this.sessionFactory;
-    }
-
-    protected Session getCurrentSession() {
-        return getSessionFactory().getCurrentSession();
-    }
+public class CompanyDAOImpl extends BaseDAO implements CompanyDAO{
 
     public List<CompanyDTO> getCompanies() {
         return getCurrentSession().createCriteria(CompanyDTO.class).list();
