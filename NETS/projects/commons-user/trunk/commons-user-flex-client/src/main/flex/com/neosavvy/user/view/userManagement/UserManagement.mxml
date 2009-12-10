@@ -1,21 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
-<mx:Application
+<?xml version="1.0" ?>
+<mx:VBox
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:flexlib="http://code.google.com/p/flexlib/"
-        layout="vertical"
         creationComplete="{initializeService()}">
-	
-	
-	<mx:Script>
+    <mx:Script>
 		<![CDATA[
         import com.neosavvy.user.dto.UserDTO;
-
-        import com.neosavvy.user.view.RegistrationAndLoginWindow;
+        import com.neosavvy.user.view.login.RegistrationAndLoginWindow;
 
         import mx.collections.ArrayCollection;
         import mx.core.IFlexDisplayObject;
-        import mx.events.ItemClickEvent;
-        import mx.events.ListEvent;
         import mx.managers.PopUpManager;
         import mx.messaging.ChannelSet;
         import mx.messaging.channels.AMFChannel;
@@ -52,7 +46,6 @@
             grid.dataProvider = data;
         }
 
-        
 
         private function handleItemClick():void {
             var selectedItem:UserDTO = grid.selectedItem as UserDTO;
@@ -65,6 +58,7 @@
         }
 
         var regAndLoginWindow:IFlexDisplayObject = null;
+
         protected function showRegistrationLoginWindow():void {
             regAndLoginWindow = PopUpManager.createPopUp(this as DisplayObject, RegistrationAndLoginWindow, true);
             PopUpManager.centerPopUp(regAndLoginWindow);
@@ -73,7 +67,7 @@
         public function hideRegistrationLoginWindow(security:Object):void {
             PopUpManager.removePopUp(regAndLoginWindow);
 
-            if(security.hasOwnProperty("name")) {
+            if (security.hasOwnProperty("name")) {
                 usernameLbl.text = security.name;
             }
             initializeService();
@@ -93,21 +87,20 @@
 		]]>
 	</mx:Script>
 
-
     <mx:HBox width="100%" horizontalAlign="right">
         <mx:Label id="usernameLbl" text="Not Logged In"/>
         <mx:Button label="Logout" id="showRegistrationLoginWindowBtn" click="{logout()}"/>
     </mx:HBox>
     <mx:HBox width="100%" height="100%">
         <mx:VBox>
-                <flexlib:PromptingTextInput id="identifier" editable="false" prompt="NoId"/>
-                <flexlib:PromptingTextInput id="fName" prompt="First Name"/>
-                <flexlib:PromptingTextInput id="mName" prompt="Middle Name"/>
-                <flexlib:PromptingTextInput id="lName" prompt="Last Name"/>
-                <flexlib:PromptingTextInput id="username" prompt="Username"/>
-                <flexlib:PromptingTextInput id="password" prompt="Password" displayAsPassword="true"/>
+            <flexlib:PromptingTextInput id="identifier" editable="false" prompt="NoId"/>
+            <flexlib:PromptingTextInput id="fName" prompt="First Name"/>
+            <flexlib:PromptingTextInput id="mName" prompt="Middle Name"/>
+            <flexlib:PromptingTextInput id="lName" prompt="Last Name"/>
+            <flexlib:PromptingTextInput id="username" prompt="Username"/>
+            <flexlib:PromptingTextInput id="password" prompt="Password" displayAsPassword="true"/>
         </mx:VBox>
-	    <mx:AdvancedDataGrid
+        <mx:AdvancedDataGrid
                 id="grid"
                 width="100%"
                 height="25%"
@@ -137,9 +130,9 @@
                 <mx:AdvancedDataGridColumn
                         id="actions"
                         headerText="Actions"
-                        itemRenderer="com.neosavvy.user.Actions"
+                        itemRenderer="com.neosavvy.user.view.userManagement.Actions"
                         />
             </mx:columns>
         </mx:AdvancedDataGrid>
-	</mx:HBox>
-</mx:Application>
+    </mx:HBox>
+</mx:VBox>

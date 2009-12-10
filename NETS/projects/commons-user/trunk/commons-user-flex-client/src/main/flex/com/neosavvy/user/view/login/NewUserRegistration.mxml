@@ -5,9 +5,9 @@
         protected function newUserClick():void {
             dispatchEvent(new Event("newUser", true));
         }
-]]></mx:Script>
+        ]]></mx:Script>
 
     <mx:Button
-        label="Click here to register a user" click="{newUserClick()}"/>
+            label="Click here to register a user" click="{newUserClick()}"/>
 
 </mx:VBox>

@@ -3,9 +3,9 @@
 
     <mx:Script>
         <![CDATA[
+        import com.neosavvy.user.*;
         import com.neosavvy.user.dto.UserDTO;
 
-        import mx.core.Application;
         import mx.core.FlexGlobals;
         import mx.messaging.ChannelSet;
         import mx.messaging.channels.AMFChannel;
@@ -31,14 +31,14 @@
 
         }
 
-        protected function deletefaultHandler( faultEvent:FaultEvent ):void {
-				trace("faultEvent: " + faultEvent.message );
-				trace("faultEvent: " + faultEvent.fault.toString() );
-			}
+        protected function deletefaultHandler(faultEvent:FaultEvent):void {
+            trace("faultEvent: " + faultEvent.message);
+            trace("faultEvent: " + faultEvent.fault.toString());
+        }
 
-        protected function deleteresultHandler( resultEvent:ResultEvent ):void {
-				var data:Array = resultEvent.result as Array;
-				FlexGlobals.topLevelApplication.initializeService();
+        protected function deleteresultHandler(resultEvent:ResultEvent):void {
+            var data:Array = resultEvent.result as Array;
+            FlexGlobals.topLevelApplication.initializeService();
         }
         ]]>
     </mx:Script>

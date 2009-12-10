@@ -1,8 +1,7 @@
 <?xml version="1.0" ?>
 <mx:TitleWindow
         xmlns:mx="http://www.adobe.com/2006/mxml"
-        xmlns:login="com.neosavvy.user.login.*"
-        xmlns:registration="com.neosavvy.user.view.registration.*"
+        xmlns:login="com.neosavvy.user.view.login.*"
         layout="horizontal"
         title="Commons User Registration / Login"
         initialize="{init()}"
@@ -10,9 +9,8 @@
 
     <mx:Script>
         <![CDATA[
-        import com.neosavvy.user.view.registration.event.RegistrationFailedEvent;
+        import com.neosavvy.user.view.login.event.RegistrationFailedEvent;
 
-        import mx.core.FlexGlobals;
         import mx.events.CloseEvent;
         import mx.managers.PopUpManager;
 
@@ -61,10 +59,10 @@
     </mx:Script>
 
     <mx:Canvas>
-        <registration:UserRegistration visible="false" id="userReg" width="185"/>
-        <registration:NewUserRegistration id="newUserReg" width="185"/>
-        <registration:UserConfirmed visible="false" id="userConfirmed" width="185"/>
-        <registration:UserFailed visible="false" id="userFailed" width="185"/>
+        <login:UserRegistration visible="false" id="userReg" width="185"/>
+        <login:NewUserRegistration id="newUserReg" width="185"/>
+        <login:UserConfirmed visible="false" id="userConfirmed" width="185"/>
+        <login:UserFailed visible="false" id="userFailed" width="185"/>
     </mx:Canvas>
     <mx:VRule height="95%"/>
     <login:Login/>

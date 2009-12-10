@@ -6,8 +6,7 @@
 
     <mx:Script><![CDATA[
         import com.neosavvy.user.dto.UserDTO;
-
-        import com.neosavvy.user.view.registration.event.RegistrationFailedEvent;
+        import com.neosavvy.user.view.login.event.RegistrationFailedEvent;
 
         import mx.messaging.ChannelSet;
         import mx.messaging.channels.AMFChannel;
@@ -97,35 +96,35 @@
         ]]></mx:Script>
 
     <flexlib:PromptingTextInput
-        id="username"
-        prompt="Username"
-        />
+            id="username"
+            prompt="Username"
+            />
     <flexlib:PromptingTextInput
-        id="firstName"
-        prompt="First Name"
-        />
+            id="firstName"
+            prompt="First Name"
+            />
     <flexlib:PromptingTextInput
-        id="middleName"
-        prompt="Middle Name"
-        />
+            id="middleName"
+            prompt="Middle Name"
+            />
     <flexlib:PromptingTextInput
-        id="lastName"
-        prompt="Last Name"
-        />
+            id="lastName"
+            prompt="Last Name"
+            />
     <flexlib:PromptingTextInput
-        id="emailAddress"
-        prompt="Email Address"
-        />
+            id="emailAddress"
+            prompt="Email Address"
+            />
     <flexlib:PromptingTextInput
-        id="password"
-        prompt="Password"
-        displayAsPassword="true"
-        />
+            id="password"
+            prompt="Password"
+            displayAsPassword="true"
+            />
     <flexlib:PromptingTextInput
-        id="confirmPassword"
-        prompt="Confirm Password"
-        displayAsPassword="true"
-        />
+            id="confirmPassword"
+            prompt="Confirm Password"
+            displayAsPassword="true"
+            />
 
     <mx:Text id="errorBox" width="{confirmPassword.width}"/>
 

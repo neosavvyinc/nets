@@ -1,21 +1,17 @@
 <?xml version="1.0" ?>
 <mx:VBox
-    xmlns:mx="http://www.adobe.com/2006/mxml"
-    xmlns:flexlib="http://code.google.com/p/flexlib/">
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/">
 
     <mx:Script><![CDATA[
         import com.neosavvy.user.ProxyConstants;
 
         import mx.core.FlexGlobals;
-        import mx.events.CloseEvent;
         import mx.messaging.ChannelSet;
         import mx.messaging.channels.AMFChannel;
-        import mx.rpc.AsyncResponder;
-        import mx.rpc.AsyncToken;
         import mx.rpc.events.FaultEvent;
         import mx.rpc.events.ResultEvent;
         import mx.rpc.remoting.mxml.RemoteObject;
-
 
         protected function login():void {
             errorLbl.text = null;
@@ -31,7 +27,7 @@
             channelSet.addEventListener(FaultEvent.FAULT, faultHandler);
         }
 
-        protected function resultHandler( result:ResultEvent ):void {
+        protected function resultHandler(result:ResultEvent):void {
             if (result.result.authorities.indexOf("ROLE_ADMIN") >= 0) {
                 trace("User logged in as admin");
             } else {
@@ -40,13 +36,12 @@
             FlexGlobals.topLevelApplication.hideRegistrationLoginWindow(result.result);
         }
 
-        protected function faultHandler( fault:FaultEvent ):void {
+        protected function faultHandler(fault:FaultEvent):void {
             trace("Login Failed: " + fault.fault.faultString);
             errorLbl.text = "login invalid";
         }
 
-]]></mx:Script>
-
+        ]]></mx:Script>
 
 
     <flexlib:PromptingTextInput prompt="Username" id="username"/>
