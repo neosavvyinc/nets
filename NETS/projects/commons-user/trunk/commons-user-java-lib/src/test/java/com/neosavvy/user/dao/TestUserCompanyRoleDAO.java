@@ -17,24 +17,13 @@ import java.util.List;
  */
 public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase{
 
-    private UserCompanyRoleDTO createTestUserCompanyRole(RoleDTO role, CompanyDTO company){
-        UserCompanyRoleDTO testUserCompanyRole = new UserCompanyRoleDTO();
-        if(role != null)
-            testUserCompanyRole.setRole(role);
-        if(company != null)
-            testUserCompanyRole.setCompany(company);
-
-
-        return testUserCompanyRole;
-    }
-
     @Test
     public void testSaveUserCompanyRole() {
         cleanupTables();
         RoleDTO role = createTestRole();
         roleDAO.saveRole(role);
 
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
         Assert.assertTrue("record was added in the db", (int)userCompanyRole.getId() > 0);
@@ -48,7 +37,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase{
         CompanyDTO company = createTestCompany();
         companyDAO.saveCompany(company);
 
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
         Assert.assertTrue("Record was added in the db", (int)userCompanyRole.getId() > 0);
@@ -62,7 +51,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase{
         CompanyDTO company = createTestCompany();
         companyDAO.saveCompany(company);
 
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
         UserCompanyRoleDTO userCompanyRoleReturned = userCompanyRoleDAO.getUserCompanyRoles().get(0);
@@ -82,7 +71,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase{
         cleanupTables();
         RoleDTO role = createTestRole();
         roleDAO.saveRole(role);
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
         int numRows = countRowsInTable("USER_COMPANY_ROLE");
@@ -99,7 +88,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase{
         cleanupTables();
         RoleDTO role = createTestRole();
         roleDAO.saveRole(role);
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
         int numRows = countRowsInTable("USER_COMPANY_ROLE");

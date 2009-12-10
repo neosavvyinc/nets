@@ -4,10 +4,10 @@ import org.junit.Test;
 import org.junit.Assert;
 
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.UserDTO;
-import com.neosavvy.user.dto.NumEmployeesRangeDTO;
+import com.neosavvy.user.dto.*;
 
 /**
  * @author lgleason
@@ -119,4 +119,73 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
                 foundCompany.getNumEmployeesRange().getRangeDescription());
     }
 
+    @Test
+    public void testUserCompanyRoles(){
+        cleanupTables();
+
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(null, null, null);
+        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+
+        CompanyDTO company = createTestCompany();
+        HashSet<UserCompanyRoleDTO> userCompanySet = new HashSet();
+        userCompanySet.add(userCompanyRole);
+        company.setUserCompanyRoles(userCompanySet);
+        companyDAO.saveCompany(company);
+
+        CompanyDTO foundCompany = companyDAO.findCompanyById(company.getId());
+
+        Assert.assertEquals("the userCompanyRole in the company we got back is the same one we stored",
+                foundCompany.getUserCompanyRoles().iterator().next().getId(),
+                userCompanyRole.getId());
+    }
+
+    @Test
+    public void testUserCompanyRolesRole(){
+        cleanupTables();
+        RoleDTO role = createTestRole();
+        roleDAO.saveRole(role);
+
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
+        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+
+        CompanyDTO company = createTestCompany();
+        HashSet<UserCompanyRoleDTO> userCompanySet = new HashSet();
+        userCompanySet.add(userCompanyRole);
+        company.setUserCompanyRoles(userCompanySet);
+        companyDAO.saveCompany(company);
+
+        CompanyDTO foundCompany = companyDAO.findCompanyById(company.getId());
+
+        Assert.assertEquals("the userCompanyRole in the company we got back is the same one we stored",
+                foundCompany.getUserCompanyRoles().iterator().next().getId(),
+                userCompanyRole.getId());
+        Assert.assertEquals("the userCompanyRole role in the company we got back is the same one we stored",
+                foundCompany.getUserCompanyRoles().iterator().next().getRole().getId(),
+                role.getId());
+    }
+
+    @Test
+    public void testUserCompanyRolesUser(){
+        cleanupTables();
+        UserDTO user = createTestUser();
+        userDAO.saveUser(user);
+
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(null, null, user);
+        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+
+        CompanyDTO company = createTestCompany();
+        HashSet<UserCompanyRoleDTO> userCompanySet = new HashSet();
+        userCompanySet.add(userCompanyRole);
+        company.setUserCompanyRoles(userCompanySet);
+        companyDAO.saveCompany(company);
+
+        CompanyDTO foundCompany = companyDAO.findCompanyById(company.getId());
+
+        Assert.assertEquals("the userCompanyRole in the company we got back is the same one we stored",
+                foundCompany.getUserCompanyRoles().iterator().next().getId(),
+                userCompanyRole.getId());
+        Assert.assertEquals("the userCompanyRole role in the company we got back is the same one we stored",
+                foundCompany.getUserCompanyRoles().iterator().next().getUser().getId(),
+                user.getId());
+    }
 }

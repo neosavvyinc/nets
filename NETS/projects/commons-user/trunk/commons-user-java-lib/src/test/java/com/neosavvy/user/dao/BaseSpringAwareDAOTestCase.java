@@ -6,10 +6,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.Assert;
-import com.neosavvy.user.dto.UserDTO;
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.RoleDTO;
-import com.neosavvy.user.dto.NumEmployeesRangeDTO;
+import com.neosavvy.user.dto.*;
 import com.neosavvy.user.dao.CompanyDAO;
 import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.dao.RoleDAO;
@@ -99,6 +96,19 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
         role.setShortName("USER");
         role.setLongName("User Role");
         return role;
+    }
+
+    protected UserCompanyRoleDTO createTestUserCompanyRole(RoleDTO role, CompanyDTO company, UserDTO user){
+        UserCompanyRoleDTO testUserCompanyRole = new UserCompanyRoleDTO();
+        if(role != null)
+            testUserCompanyRole.setRole(role);
+        if(company != null)
+            testUserCompanyRole.setCompany(company);
+        if(user != null)
+            testUserCompanyRole.setUser(user);
+
+
+        return testUserCompanyRole;
     }
 
     protected void assertSearchCriteriaResults(List itemsFound,int numRows) {
