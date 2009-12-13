@@ -24,6 +24,9 @@ public interface UserService {
     @Secured("ROLE_ADMIN")
 	public void deleteUser(UserDTO user);
 
+    @Secured("ROLE_ADMIN")
+    public Boolean checkUserLoggedIn();
+
     public boolean confirmUser(String userName, String hashCode);
 
     public void setMailSender(MailSender mailSender);

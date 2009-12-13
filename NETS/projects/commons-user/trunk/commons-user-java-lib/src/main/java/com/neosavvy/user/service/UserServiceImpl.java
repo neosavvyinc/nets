@@ -113,4 +113,8 @@ public class UserServiceImpl implements UserService {
         }
         return false;
     }
+
+    public Boolean checkUserLoggedIn() {
+        return true;
+    }
 }

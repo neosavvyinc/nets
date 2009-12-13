@@ -6,8 +6,20 @@ package com.neosavvy.user {
     public class ApplicationFacade extends Facade
     {
 
-        // Notification constants
-        public static const STARTUP:String            = 'startup';
+        public static const STARTUP:String = 'startup';
+
+
+        /**
+         * Login / Security related notifications
+         */
+        public static const REQUEST_USER_LOGIN:String = "requestUserLogin";
+        public static const USER_LOGIN_SUCCESS:String = "userLoginSuccess";
+        public static const USER_LOGIN_FAILED:String = "userLoginFailed";
+        public static const REQUEST_FORGOT_USERNAME:String = "requestForgotUsername";
+        public static const REQUEST_FORGOT_PASSWORD:String = "requestForgotPassword";
+        public static const LOGOUT_USER:String = "requestLogout";
+        public static const USER_NOT_LOGGED_IN:String = "userNotLoggedIn";
+        public static const USER_LOGGED_IN:String = "userLoggedIn";
 
 
         public function ApplicationFacade(key:String)
@@ -43,6 +55,7 @@ package com.neosavvy.user {
         {
             sendNotification(STARTUP, app);
         }
+
 
 
     }

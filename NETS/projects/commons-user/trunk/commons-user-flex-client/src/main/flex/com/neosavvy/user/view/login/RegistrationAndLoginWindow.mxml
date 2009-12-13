@@ -65,6 +65,6 @@
         <login:UserFailed visible="false" id="userFailed" width="185"/>
     </mx:Canvas>
     <mx:VRule height="95%"/>
-    <login:Login/>
+    <login:Login id="login"/>
 
 </mx:TitleWindow>
