@@ -1,24 +1,16 @@
 package com.neosavvy.user.view.login {
     import com.neosavvy.user.ApplicationFacade;
-
     import com.neosavvy.user.dto.UserDTO;
 
-    import com.neosavvy.user.view.login.event.RegistrationFailedEvent;
-
-    import flash.events.Event;
     import flash.events.MouseEvent;
 
     import mx.controls.Label;
     import mx.events.CloseEvent;
-    import mx.logging.Log;
-
     import mx.managers.PopUpManager;
-
     import mx.messaging.ChannelSet;
     import mx.messaging.channels.AMFChannel;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
-
     import mx.rpc.remoting.mxml.RemoteObject;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
@@ -77,7 +69,7 @@ package com.neosavvy.user.view.login {
         }
 
         override public function handleNotification(notification:INotification):void {
-            switch ( notification.getName() ) {
+            switch (notification.getName()) {
                 case ApplicationFacade.USER_LOGIN_FAILED:
                     errorLabel.text = "User login failed";
                     break;
@@ -98,7 +90,6 @@ package com.neosavvy.user.view.login {
 
         protected function handleForgotUsername(event:MouseEvent):void {
             //TODO: Create handle forgotten username flow
-
             sendNotification(ApplicationFacade.REQUEST_FORGOT_USERNAME);
         }
 
@@ -222,13 +213,9 @@ package com.neosavvy.user.view.login {
             userConfirmed.visible = false;
             userFailed.visible = true;
         }
+
         /*********
          * NAVIGATION RELATED HANDLERS
          *********/
-
-
-
-
-
     }
 }
