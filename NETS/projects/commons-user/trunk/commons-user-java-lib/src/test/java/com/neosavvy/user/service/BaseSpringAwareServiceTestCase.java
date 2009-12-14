@@ -77,7 +77,7 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
 
     protected RoleDTO createTestRole() {
         RoleDTO role = new RoleDTO();
-        role.setShortName("ADMIN");
+        role.setShortName("ROLE_ADMIN");
         role.setLongName("Administrator");
         return role;
     }
@@ -93,6 +93,7 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
     protected void cleanDatabase() {
         deleteFromTables("USER_ROLE");
         deleteFromTables("USER_COMPANY");
+        deleteFromTables("USER_COMPANY_ROLE");
         deleteFromTables("USER");
         deleteFromTables("ROLE");
     }
