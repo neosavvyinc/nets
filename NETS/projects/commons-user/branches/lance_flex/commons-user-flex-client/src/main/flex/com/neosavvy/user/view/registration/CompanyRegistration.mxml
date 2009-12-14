@@ -1,0 +1,276 @@
+<?xml version="1.0" ?>
+<mx:Application
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/">
+<mx:Style
+        >
+    .solidBorder { border-style: solid; }
+
+    .solidBorderPadded
+    {
+        padding-top: 12;
+        padding-bottom: 12;
+        padding-left: 12;
+        padding-right: 12;
+        border-style: solid;
+    }
+
+    .rowHeight
+    {
+        height: 600;
+    }
+</mx:Style>        
+<mx:VBox>
+
+    <mx:Script><![CDATA[
+        import com.neosavvy.user.dto.UserDTO;
+        import com.neosavvy.user.dto.CompanyDTO;
+
+        import com.neosavvy.user.view.registration.event.RegistrationFailedEvent;
+
+        import mx.messaging.ChannelSet;
+        import mx.messaging.channels.AMFChannel;
+        import mx.rpc.events.FaultEvent;
+        import mx.rpc.events.ResultEvent;
+        import mx.rpc.remoting.mxml.RemoteObject;
+
+        protected function handleCreate():void {
+
+            if (!validatePasswordsMatch()) {
+                errorBox.text = "Passwords must match and be at least 6 characters";
+                return;
+            }
+            addUser()
+            dispatchEvent(new Event("createClicked", true));
+        }
+
+        protected function handleCancel():void {
+            clearFields();
+            dispatchEvent(new Event("cancelClicked", true));
+        }
+
+        /**
+         * Validate the two password fields
+         *
+         * @return isPasswordValid if the two passwords match, are not null, and exceed at least 6 characters
+         */
+        protected function validatePasswordsMatch():Boolean {
+            var isPasswordValid:Boolean = false;
+            if (password.text && password.text.length >= 6 &&
+                confirmPassword.text && confirmPassword.text.length >= 6 &&
+                password.text == confirmPassword.text
+                    ) {
+                isPasswordValid = true
+            }
+            return isPasswordValid;
+        }
+
+        protected function clearFields():void {
+            firstName.text = null;
+            middleName.text = null;
+            lastName.text = null;
+            username.text = null;
+            password.text = null;
+            emailAddress.text = null;
+            confirmPassword.text = null;
+            errorBox.text = null;
+        }
+
+        protected function getUserFromTextInput():UserDTO {
+            var userFromTextInputs:UserDTO = new UserDTO();
+            userFromTextInputs.firstName = firstName.text;
+            userFromTextInputs.middleName = middleName.text;
+            userFromTextInputs.lastName = lastName.text;
+            userFromTextInputs.username = username.text;
+            userFromTextInputs.password = password.text;
+            userFromTextInputs.emailAddress = emailAddress.text;
+            return userFromTextInputs;
+        }
+
+        protected function getCompanyFromTextInput():CompanyDTO{
+            var companyFromTextInputs:CompanyDTO = new CompanyDTO();
+            companyFromTextInputs.companyName = companyName.text;
+            companyFromTextInputs.addressOne = addressOne.text;
+            companyFromTextInputs.addressTwo = addressTwo.text;
+            companyFromTextInputs.city = city.text;
+            companyFromTextInputs.postalCode = postalCode.text;
+            companyFromTextInputs.state = state.text;
+            companyFromTextInputs.country = country.text;
+            return companyFromTextInputs;
+        }
+        
+        protected function addUser():void {
+            var userService:RemoteObject = new RemoteObject();
+            var companyService:RemoteObject = new RemoteObject();
+
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:8080/commons-user-webapp/messagebroker/amf");
+            var channelSet:ChannelSet = new ChannelSet();
+            channelSet.addChannel(channel);
+            userService.channelSet = channelSet;
+            companyService.channelSet = channelSet;
+
+
+            userService.destination = "userService";
+            userService.addEventListener(FaultEvent.FAULT, savefaultHandler);
+            userService.addEventListener(ResultEvent.RESULT, saveresultHandler);
+            userService.saveUser(getUserFromTextInput());
+
+            companyService.destination = "companyService";
+            companyService.addEventListener(FaultEvent.FAULT, savefaultHandler);
+            companyService.addEventListener(ResultEvent.RESULT, saveresultHandler);
+            companyService.saveCompany(getCompanyFromTextInput());
+        }
+
+        private function savefaultHandler(faultEvent:FaultEvent):void {
+            trace("faultEvent: " + faultEvent.message);
+            trace("faultEvent: " + faultEvent.fault.toString());
+            var event:RegistrationFailedEvent = new RegistrationFailedEvent(faultEvent.message.toString(), faultEvent.fault.toString());
+            dispatchEvent(event);
+        }
+
+        private function saveresultHandler(resultEvent:ResultEvent):void {
+            dispatchEvent(new Event("userConfirmed", true));
+        }
+
+        ]]></mx:Script>
+
+    <mx:Grid id="myGrid">
+    <mx:GridRow styleName="rowHeight" id="row1">
+    <mx:GridItem>
+    <mx:VBox
+        styleName="solidBorderPadded" >
+        <mx:Text>
+            <mx:text>
+                Start Here By Introducing Your company
+            </mx:text>
+        </mx:Text>
+    <flexlib:PromptingTextInput
+        id="companyName"
+        prompt="Company Name"
+        />
+    <flexlib:PromptingTextInput
+        id="addressOne"
+        prompt="Address Main"
+        />
+    <flexlib:PromptingTextInput
+        id="addressTwo"
+        prompt="Address Extended"
+        />
+    <flexlib:PromptingTextInput
+        id="city"
+        prompt="City"
+        />
+    <flexlib:PromptingTextInput
+        id="state"
+        prompt="State"
+        />
+   <flexlib:PromptingTextInput
+        id="postalCode"
+        prompt="Postal Code"
+        />
+    <flexlib:PromptingTextInput
+        id="country"
+        prompt="Country"
+        />
+    </mx:VBox>
+    </mx:GridItem>
+    <mx:GridItem>
+    <mx:RadioButtonGroup id="num_employees" />
+
+    <mx:Form>
+        <mx:FormItem>
+            <mx:Text id="employees_range"
+                    text="For how many employees do you want to track expenses?" />
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:RadioButton id="num_1_10"
+                    group="{num_employees}"
+                    label="1-10" />
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:RadioButton id="num_11_50"
+                    group="{num_employees}"
+                    label="11-50" />
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:RadioButton id="num_51_100"
+                    group="{num_employees}"
+                    label="51-100" />
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:RadioButton id="num_101_1000"
+                    group="{num_employees}"
+                    label="101-1000" />
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:RadioButton id="num_1001_10000"
+                    group="{num_employees}"
+                    label="1001-10000" />
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:RadioButton id="num_10001"
+                    group="{num_employees}"
+                    label="10000 +" />
+        </mx:FormItem>
+    </mx:Form>
+    </mx:GridItem>
+    </mx:GridRow>
+    <mx:GridRow>
+    <mx:GridItem>
+    <mx:VBox
+        styleName="solidBorderPadded" >
+        <mx:Text>
+            <mx:text>
+                We Need An Administrative User For Your Account
+            </mx:text>
+        </mx:Text>
+    <flexlib:PromptingTextInput
+        id="username"
+        prompt="Username"
+        />
+    <flexlib:PromptingTextInput
+        id="firstName"
+        prompt="First Name"
+        />
+    <flexlib:PromptingTextInput
+        id="middleName"
+        prompt="Middle Name"
+        />
+    <flexlib:PromptingTextInput
+        id="lastName"
+        prompt="Last Name"
+        />
+    <flexlib:PromptingTextInput
+        id="emailAddress"
+        prompt="Email Address"
+        />
+    <flexlib:PromptingTextInput
+        id="password"
+        prompt="Password"
+        displayAsPassword="true"
+        />
+    <flexlib:PromptingTextInput
+        id="confirmPassword"
+        prompt="Confirm Password"
+        displayAsPassword="true"
+        />
+		<mx:Text id="errorBox" width="{confirmPassword.width}"/>
+		
+		<mx:HBox>
+			<mx:Button id="createButton" label="Create" click="{handleCreate()}"/>
+			<mx:Button id="cancelButton" label="Cancel" click="{handleCancel()}"/>
+		</mx:HBox>		
+    </mx:VBox>
+    
+    </mx:GridItem>
+        <mx:GridItem>
+        <mx:Text>
+            <mx:text>
+                Hello
+            </mx:text>
+        </mx:Text>
+        </mx:GridItem>
+    </mx:GridRow>
+    </mx:Grid>
+</mx:VBox>
+</mx:Application>
