@@ -14,7 +14,7 @@ import com.neosavvy.user.dao.RoleDAO;
 import java.util.List;
 
 @ContextConfiguration(locations = {
-		"classpath:applicationContext.xml"
+		"classpath:testApplicationContext.xml"
         })
 public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired

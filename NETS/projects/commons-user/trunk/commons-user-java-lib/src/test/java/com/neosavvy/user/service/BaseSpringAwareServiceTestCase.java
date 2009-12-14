@@ -12,15 +12,18 @@ import org.junit.Before;
 import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.dao.CompanyDAO;
 import com.neosavvy.user.dao.RoleDAO;
+import com.neosavvy.user.dao.NumEmployeesRangeDAO;
 import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dto.RoleDTO;
+import com.neosavvy.user.dto.NumEmployeesRangeDTO;
 
 /**
  * @author lgleason
+ * todo: refactor this and the other base service out for common classes
  */
 @ContextConfiguration(locations = {
-		"classpath:applicationContext.xml",
+		"classpath:testApplicationContext.xml",
         "classpath:testSecurityContext.xml"
         })
 public abstract class BaseSpringAwareServiceTestCase extends AbstractTransactionalJUnit4SpringContextTests {
@@ -37,6 +40,11 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
     protected RoleService roleService;
     @Autowired
     protected RoleDAO roleDAO;
+    @Autowired
+    protected NumEmployeesRangeDAO numEmployeesRangeDAO;
+    @Autowired
+    protected NumEmployeesRangeService numEmployeesRangeService;
+
 
     @Before
     public void loginTestUser() {
@@ -72,6 +80,14 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         role.setShortName("ADMIN");
         role.setLongName("Administrator");
         return role;
+    }
+
+    protected NumEmployeesRangeDTO createTestRange(){
+        NumEmployeesRangeDTO test_range = new NumEmployeesRangeDTO();
+        test_range.setRangeDescription("1-10");
+        test_range.setRangeFrom(1);
+        test_range.setRangeTo(10);
+        return test_range;
     }
 
     protected void cleanDatabase() {
