@@ -4,97 +4,6 @@
         xmlns:flexlib="http://code.google.com/p/flexlib/"
         >
 
-    <mx:Script><![CDATA[
-        import com.neosavvy.user.dto.UserDTO;
-        import com.neosavvy.user.view.login.event.RegistrationFailedEvent;
-
-        import mx.messaging.ChannelSet;
-        import mx.messaging.channels.AMFChannel;
-        import mx.rpc.events.FaultEvent;
-        import mx.rpc.events.ResultEvent;
-        import mx.rpc.remoting.mxml.RemoteObject;
-
-        protected function handleCreate():void {
-
-            if (!validatePasswordsMatch()) {
-                errorBox.text = "Passwords must match and be at least 6 characters";
-                return;
-            }
-            addUser()
-            dispatchEvent(new Event("createClicked", true));
-        }
-
-        protected function handleCancel():void {
-            clearFields();
-            dispatchEvent(new Event("cancelClicked", true));
-        }
-
-        /**
-         * Validate the two password fields
-         *
-         * @return isPasswordValid if the two passwords match, are not null, and exceed at least 6 characters
-         */
-        protected function validatePasswordsMatch():Boolean {
-            var isPasswordValid:Boolean = false;
-            if (password.text && password.text.length >= 6 &&
-                confirmPassword.text && confirmPassword.text.length >= 6 &&
-                password.text == confirmPassword.text
-                    ) {
-                isPasswordValid = true
-            }
-            return isPasswordValid;
-        }
-
-        protected function clearFields():void {
-            firstName.text = null;
-            middleName.text = null;
-            lastName.text = null;
-            username.text = null;
-            password.text = null;
-            emailAddress.text = null;
-            confirmPassword.text = null;
-            errorBox.text = null;
-        }
-
-        protected function getUserFromTextInput():UserDTO {
-            var userFromTextInputs:UserDTO = new UserDTO();
-            userFromTextInputs.firstName = firstName.text;
-            userFromTextInputs.middleName = middleName.text;
-            userFromTextInputs.lastName = lastName.text;
-            userFromTextInputs.username = username.text;
-            userFromTextInputs.password = password.text;
-            userFromTextInputs.emailAddress = emailAddress.text;
-            return userFromTextInputs;
-        }
-
-        protected function addUser():void {
-            var userService:RemoteObject = new RemoteObject();
-
-            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:8080/commons-user-webapp/messagebroker/amf");
-            var channelSet:ChannelSet = new ChannelSet();
-            channelSet.addChannel(channel);
-            userService.channelSet = channelSet;
-
-
-            userService.destination = "userService";
-            userService.addEventListener(FaultEvent.FAULT, savefaultHandler);
-            userService.addEventListener(ResultEvent.RESULT, saveresultHandler);
-            userService.saveUser(getUserFromTextInput());
-        }
-
-        private function savefaultHandler(faultEvent:FaultEvent):void {
-            trace("faultEvent: " + faultEvent.message);
-            trace("faultEvent: " + faultEvent.fault.toString());
-            var event:RegistrationFailedEvent = new RegistrationFailedEvent(faultEvent.message.toString(), faultEvent.fault.toString());
-            dispatchEvent(event);
-        }
-
-        private function saveresultHandler(resultEvent:ResultEvent):void {
-            dispatchEvent(new Event("userConfirmed", true));
-        }
-
-        ]]></mx:Script>
-
     <flexlib:PromptingTextInput
             id="username"
             prompt="Username"
@@ -129,7 +38,7 @@
     <mx:Text id="errorBox" width="{confirmPassword.width}"/>
 
     <mx:HBox width="100%">
-        <mx:Button id="cancelButton" label="Cancel" click="{handleCancel()}"/>
-        <mx:Button id="createButton" label="Create" click="{handleCreate()}"/>
+        <mx:Button id="cancelButton" label="Cancel"/>
+        <mx:Button id="createButton" label="Create"/>
     </mx:HBox>
 </mx:VBox>
