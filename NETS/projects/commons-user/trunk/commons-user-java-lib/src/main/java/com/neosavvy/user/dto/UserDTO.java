@@ -3,9 +3,7 @@ package com.neosavvy.user.dto;
 import javax.persistence.*;
 import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.*;
 import java.util.Set;
-import java.util.LinkedHashSet;
 
 @Entity
 @Table(
@@ -57,7 +55,7 @@ public class UserDTO {// implements Externalizable {
 //            inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
 //    private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>();
 
-    @OneToMany(mappedBy="user")
+    @OneToMany(mappedBy="user", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
 
 	public int getId() {

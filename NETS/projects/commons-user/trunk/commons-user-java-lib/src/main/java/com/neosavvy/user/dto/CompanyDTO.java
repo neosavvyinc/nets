@@ -5,7 +5,6 @@ package com.neosavvy.user.dto;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.ws.rs.FormParam;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -57,7 +56,7 @@ public class CompanyDTO {
 //            inverseJoinColumns = { @JoinColumn(name = "COMPANY_ID") })
 //    private Set<UserDTO> users = new LinkedHashSet<UserDTO>();
 
-    @OneToMany(mappedBy="company")
+    @OneToMany(mappedBy="company", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
 
     @ManyToOne
