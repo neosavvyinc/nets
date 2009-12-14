@@ -9,6 +9,7 @@ package com.neosavvy.user.view.userManagement {
 
     import flash.events.MouseEvent;
 
+    import mx.controls.Label;
     import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -38,6 +39,10 @@ package com.neosavvy.user.view.userManagement {
             return viewComponent as UserManagement;
         }
 
+        public function get usernameLbl():Label {
+            return userManagement.usernameLbl;
+        }
+
 
         var regAndLoginWindow:IFlexDisplayObject = null;
 
@@ -47,12 +52,9 @@ package com.neosavvy.user.view.userManagement {
             facade.registerMediator( new RegistrationAndLoginWindowMediator( regAndLoginWindow ) );
         }
 
-        protected function hideRegistrationLoginWindow(security:Object):void {
+        protected function hideRegistrationLoginWindow(name:String):void {
             PopUpManager.removePopUp(regAndLoginWindow);
-
-            if (security.hasOwnProperty("name")) {
-                //usernameLbl.text = security.name;
-            }
+            usernameLbl.text = name;
         }
 
 
@@ -70,6 +72,9 @@ package com.neosavvy.user.view.userManagement {
 
                 case ApplicationFacade.USER_NOT_LOGGED_IN:
                     showRegistrationLoginWindow();
+                    break;
+                case ApplicationFacade.USER_LOGIN_SUCCESS:
+                    hideRegistrationLoginWindow(notification.getBody() as String);
                     break;
             
             }

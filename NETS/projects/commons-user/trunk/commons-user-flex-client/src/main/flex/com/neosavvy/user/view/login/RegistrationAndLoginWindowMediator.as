@@ -2,13 +2,14 @@ package com.neosavvy.user.view.login {
     import com.neosavvy.user.ApplicationFacade;
 
     import com.neosavvy.user.dto.UserDTO;
-    import com.neosavvy.user.model.security.LoginRequest;
 
     import flash.events.MouseEvent;
 
+    import mx.controls.Label;
     import mx.logging.Log;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
+    import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.mediator.Mediator;
 
     public class RegistrationAndLoginWindowMediator extends Mediator implements IMediator {
@@ -30,6 +31,25 @@ package com.neosavvy.user.view.login {
             return registrationAndLoginWindow.login;
         }
 
+        public function get errorLabel():Label {
+            return login.errorLbl;
+        }
+
+
+        override public function listNotificationInterests():Array {
+            return [
+                ApplicationFacade.USER_LOGIN_FAILED
+            ];
+        }
+
+        override public function handleNotification(notification:INotification):void {
+            switch ( notification.getName() ) {
+
+                case ApplicationFacade.USER_LOGIN_FAILED:
+                    errorLabel.text = "User login failed";
+                    break;
+            }
+        }
 
         /**
          * Event Handlers
@@ -39,6 +59,7 @@ package com.neosavvy.user.view.login {
             var user:UserDTO = new UserDTO();
             user.username = login.username.text;
             user.password = login.password.text;
+            errorLabel.text = "";
             sendNotification(ApplicationFacade.REQUEST_USER_LOGIN, user);
         }
 

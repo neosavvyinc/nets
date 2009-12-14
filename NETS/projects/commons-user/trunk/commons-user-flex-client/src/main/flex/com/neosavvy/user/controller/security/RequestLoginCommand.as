@@ -1,9 +1,8 @@
 
 package com.neosavvy.user.controller.security {
+    import com.neosavvy.user.dto.UserDTO;
     import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.model.SecurityProxy;
-
-    import com.neosavvy.user.model.security.LoginRequest;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.SimpleCommand;
@@ -12,9 +11,9 @@ package com.neosavvy.user.controller.security {
 
         override public function execute(notification:INotification):void {
 
-            var loginRequest:LoginRequest = notification.getBody() as LoginRequest;
+            var user:UserDTO = notification.getBody() as UserDTO;
             var securityProxy:SecurityProxy = facade.retrieveProxy( SecurityProxy.NAME ) as SecurityProxy;
-            securityProxy.login(loginRequest)
+            securityProxy.login(user)
 
         }
     }

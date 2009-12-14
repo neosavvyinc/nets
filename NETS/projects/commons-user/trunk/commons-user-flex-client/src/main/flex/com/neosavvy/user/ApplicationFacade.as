@@ -1,6 +1,8 @@
 package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
 
+    import com.neosavvy.user.controller.security.RequestLoginCommand;
+
     import org.puremvc.as3.multicore.patterns.facade.Facade;
 
     public class ApplicationFacade extends Facade
@@ -44,6 +46,7 @@ package com.neosavvy.user {
             super.initializeController();
 
             registerCommand(STARTUP, CommonsUserStartupCommand);
+            registerCommand(REQUEST_USER_LOGIN, RequestLoginCommand);
         }
 
         /**

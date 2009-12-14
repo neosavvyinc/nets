@@ -2,7 +2,7 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.ProxyConstants;
 
-    import com.neosavvy.user.model.security.LoginRequest;
+    import com.neosavvy.user.dto.UserDTO;
 
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -47,9 +47,9 @@ package com.neosavvy.user.model {
          *
          *******/
 
-        public function login(loginRequest:LoginRequest):void {
+        public function login(user:UserDTO):void {
             var channelSet:ChannelSet = getUserServiceChannelSet();
-            channelSet.login(loginRequest.userName, loginRequest.password);
+            channelSet.login(user.username, user.password);
             channelSet.addEventListener(ResultEvent.RESULT, login_resultHandler);
             channelSet.addEventListener(FaultEvent.FAULT, login_faultHandler);
         }
@@ -75,7 +75,7 @@ package com.neosavvy.user.model {
 
         protected function login_resultHandler(result:ResultEvent):void {
             setData(result.result);
-            sendNotification(ApplicationFacade.USER_LOGIN_SUCCESS);
+            sendNotification(ApplicationFacade.USER_LOGIN_SUCCESS, user);
         }
 
         protected function login_faultHandler(fault:FaultEvent):void {
