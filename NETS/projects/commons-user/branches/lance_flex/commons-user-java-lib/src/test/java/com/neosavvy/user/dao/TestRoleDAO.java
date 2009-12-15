@@ -74,7 +74,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
         setupCriteriaBasedSearchTest();
 
         RoleDTO searchCriteria = new RoleDTO();
-        searchCriteria.setShortName("ADMIN");
+        searchCriteria.setShortName("ROLE_ADMIN");
 
         List<RoleDTO> rolesFound = roleDAO.findRoles(searchCriteria);
 

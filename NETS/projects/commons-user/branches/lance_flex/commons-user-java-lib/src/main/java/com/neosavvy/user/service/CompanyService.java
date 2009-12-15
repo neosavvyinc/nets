@@ -5,6 +5,7 @@ import org.springframework.security.annotation.Secured;
 import java.util.List;
 
 import com.neosavvy.user.dto.CompanyDTO;
+import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dao.CompanyDAO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -21,6 +22,8 @@ public interface CompanyService {
 	public List<CompanyDTO> getCompanies();
 
 	public void saveCompany(CompanyDTO company);
+
+    public void addCompany(CompanyDTO company, UserDTO user);
 
     @Secured("ROLE_ADMIN")
 	public CompanyDTO findCompanyById(int id);

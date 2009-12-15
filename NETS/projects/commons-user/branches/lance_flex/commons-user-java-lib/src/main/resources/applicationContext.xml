@@ -78,10 +78,17 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <bean id="companyService" class="com.neosavvy.user.service.CompanyServiceImpl">
         <property name="companyDao" ref="companyDAO"/>
+        <property name="userDao" ref="userDAO"/>
+        <property name="roleDao" ref="roleDAO"/>
+        <property name="userCompanyRoleDao" ref="userCompanyRoleDAO"/>
     </bean>
 
     <bean id="roleService" class="com.neosavvy.user.service.RoleServiceImpl">
         <property name="roleDao" ref="roleDAO"/>
+    </bean>
+
+    <bean id="numEmployeesRangeService" class="com.neosavvy.user.service.NumEmployeesRangeServiceImpl">
+        <property name="numEmployeesRangeDao" ref="numEmployeesRangeDAO"/>
     </bean>
 
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

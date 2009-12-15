@@ -17,7 +17,7 @@ package com.neosavvy.user.dto {
     use namespace meta;
 
     [Bindable]
-    public class CompanyDTOBase {
+    public class CompanyDTOBase{
 
         private var __laziness:String = null;
 
@@ -30,7 +30,7 @@ package com.neosavvy.user.dto {
         private var _numEmployeesRange:NumEmployeesRangeDTO;
         private var _postalCode:String;
         private var _state:String;
-        private var _users:ListCollectionView;
+        private var _userCompanyRoles:ListCollectionView;
 
         meta function isInitialized(name:String = null):Boolean {
             if (!name)
@@ -106,11 +106,11 @@ package com.neosavvy.user.dto {
             return _state;
         }
 
-        public function set users(value:ListCollectionView):void {
-            _users = value;
+        public function set userCompanyRoles(value:ListCollectionView):void {
+            _userCompanyRoles = value;
         }
-        public function get users():ListCollectionView {
-            return _users;
+        public function get userCompanyRoles():ListCollectionView {
+            return _userCompanyRoles;
         }
 
 //        public function readExternal(input:IDataInput):void {
@@ -125,7 +125,7 @@ package com.neosavvy.user.dto {
 //                _numEmployeesRange = input.readObject() as NumEmployeesRangeDTO;
 //                _postalCode = input.readObject() as String;
 //                _state = input.readObject() as String;
-//                _users = input.readObject() as ListCollectionView;
+//                _userCompanyRoles = input.readObject() as ListCollectionView;
 //            }
 //            else {
 //                _id = input.readObject() as int;
@@ -144,7 +144,7 @@ package com.neosavvy.user.dto {
 //                output.writeObject(_numEmployeesRange);
 //                output.writeObject(_postalCode);
 //                output.writeObject(_state);
-//                output.writeObject(_users);
+//                output.writeObject(_userCompanyRoles);
 //            }
 //            else {
 //                output.writeObject(_id);

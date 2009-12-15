@@ -14,5 +14,5 @@ http://www.springframework.org/schema/flex http://www.springframework.org/schema
     <flex:remoting-destination ref="userService" />
     <flex:remoting-destination ref="companyService" />
     <flex:remoting-destination ref="roleService" />
-
+    <flex:remoting-destination ref="numEmployeesRangeService" />
 </beans>

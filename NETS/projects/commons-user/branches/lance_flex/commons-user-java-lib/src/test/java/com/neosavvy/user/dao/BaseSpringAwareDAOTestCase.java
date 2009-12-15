@@ -86,14 +86,14 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
 
     protected RoleDTO createTestRole() {
         RoleDTO role = new RoleDTO();
-        role.setShortName("ADMIN");
+        role.setShortName("ROLE_ADMIN");
         role.setLongName("Administrator");
         return role;
     }
 
     protected RoleDTO createAltTestRole() {
         RoleDTO role = new RoleDTO();
-        role.setShortName("USER");
+        role.setShortName("ROLE_USER");
         role.setLongName("User Role");
         return role;
     }
