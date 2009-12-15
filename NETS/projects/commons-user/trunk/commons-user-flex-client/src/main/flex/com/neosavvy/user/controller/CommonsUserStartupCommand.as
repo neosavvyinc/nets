@@ -1,7 +1,7 @@
 package com.neosavvy.user.controller {
     import com.neosavvy.user.ApplicationMediator;
 
-    import com.neosavvy.user.model.security.CheckLoggedIn;
+    import com.neosavvy.user.controller.security.CheckLoggedIn;
 
     import mx.logging.Log;
 

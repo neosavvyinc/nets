@@ -1,6 +1,7 @@
 package com.neosavvy.user.view.userManagement {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.UserDTO;
+    import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.view.login.RegistrationAndLoginWindow;
 
     import com.neosavvy.user.view.login.RegistrationAndLoginWindowMediator;
@@ -9,6 +10,7 @@ package com.neosavvy.user.view.userManagement {
 
     import flash.events.MouseEvent;
 
+    import mx.controls.AdvancedDataGrid;
     import mx.controls.Label;
     import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
@@ -27,12 +29,16 @@ package com.neosavvy.user.view.userManagement {
 
         public function UserManagementMediator(viewComponent:Object) {
             super(NAME, viewComponent);
-            userManagement.logoutButton.addEventListener(MouseEvent.CLICK, handleLogoutButtClicked)
+        }
+
+
+        override public function onRegister():void {
+            userManagement.logoutButton.addEventListener(MouseEvent.CLICK, handleLogoutButtClicked);
         }
 
         private function handleLogoutButtClicked(event:MouseEvent):void {
             showRegistrationLoginWindow();
-            sendNotification(ApplicationFacade.LOGOUT_USER);
+            sendNotification(ApplicationFacade.REQUEST_LOGOUT);
         }
 
         public function get userManagement():UserManagement {
@@ -43,6 +49,9 @@ package com.neosavvy.user.view.userManagement {
             return userManagement.usernameLbl;
         }
 
+        public function get grid():AdvancedDataGrid {
+            return userManagement.grid;
+        }
 
         var regAndLoginWindow:IFlexDisplayObject = null;
 
@@ -64,6 +73,7 @@ package com.neosavvy.user.view.userManagement {
                 ,ApplicationFacade.USER_LOGGED_IN
                 ,ApplicationFacade.USER_NOT_LOGGED_IN
                 ,ApplicationFacade.USER_LOGIN_SUCCESS
+                ,ApplicationFacade.GET_USERS_SUCCESS
             ];
         }
 
@@ -75,6 +85,11 @@ package com.neosavvy.user.view.userManagement {
                     break;
                 case ApplicationFacade.USER_LOGIN_SUCCESS:
                     hideRegistrationLoginWindow(notification.getBody() as String);
+                    sendNotification(ApplicationFacade.GET_USERS_REQUEST)
+                    break;
+                case ApplicationFacade.GET_USERS_SUCCESS:
+                    var userServiceProxy:UserServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
+                    grid.dataProvider = userServiceProxy.users;
                     break;
             
             }

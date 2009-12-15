@@ -1,7 +1,12 @@
 package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
 
-    import com.neosavvy.user.controller.security.RequestLoginCommand;
+    import com.neosavvy.user.controller.security.LoginCommand;
+
+    import com.neosavvy.user.controller.security.LogoutCommand;
+    import com.neosavvy.user.controller.user.GetUsersCommand;
+
+    import com.neosavvy.user.controller.user.SaveUserCommand;
 
     import org.puremvc.as3.multicore.patterns.facade.Facade;
 
@@ -19,9 +24,15 @@ package com.neosavvy.user {
         public static const USER_LOGIN_FAILED:String = "userLoginFailed";
         public static const REQUEST_FORGOT_USERNAME:String = "requestForgotUsername";
         public static const REQUEST_FORGOT_PASSWORD:String = "requestForgotPassword";
-        public static const LOGOUT_USER:String = "requestLogout";
+        public static const REQUEST_LOGOUT:String = "requestLogout";
         public static const USER_NOT_LOGGED_IN:String = "userNotLoggedIn";
         public static const USER_LOGGED_IN:String = "userLoggedIn";
+        public static const GET_USERS_REQUEST:String = "getUsersRequest";
+        public static const GET_USERS_SUCCESS:String = "getUsersSuccess";
+        public static const GET_USERS_FAILED:String = "getUsersFailed";
+        public static const SAVE_USER_REQUEST:String = "saveUserRequest";
+        public static const SAVE_USER_SUCCESS:String = "saveUserSuccess";
+        public static const SAVE_USER_FAILED:String = "saveUserFailed";
 
 
         public function ApplicationFacade(key:String)
@@ -46,7 +57,10 @@ package com.neosavvy.user {
             super.initializeController();
 
             registerCommand(STARTUP, CommonsUserStartupCommand);
-            registerCommand(REQUEST_USER_LOGIN, RequestLoginCommand);
+            registerCommand(REQUEST_USER_LOGIN, LoginCommand);
+            registerCommand(REQUEST_LOGOUT, LogoutCommand);
+            registerCommand(GET_USERS_REQUEST, GetUsersCommand);
+            registerCommand(SAVE_USER_REQUEST, SaveUserCommand);
         }
 
         /**
@@ -58,8 +72,5 @@ package com.neosavvy.user {
         {
             sendNotification(STARTUP, app);
         }
-
-
-
     }
 }

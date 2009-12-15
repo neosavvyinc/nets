@@ -1,16 +1,16 @@
-package com.neosavvy.user.controller {
-    import com.neosavvy.user.model.SecurityProxy;
-
+package com.neosavvy.user.controller.user {
     import com.neosavvy.user.model.UserServiceProxy;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.SimpleCommand;
 
-    public class ModelPrepCommand extends SimpleCommand {
+    public class GetUsersCommand extends SimpleCommand {
 
         override public function execute(notification:INotification):void {
-            facade.registerProxy( new SecurityProxy() );
-            facade.registerProxy( new UserServiceProxy() );
+
+            var userProxy:UserServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
+            userProxy.getUsers();
+
         }
     }
 }

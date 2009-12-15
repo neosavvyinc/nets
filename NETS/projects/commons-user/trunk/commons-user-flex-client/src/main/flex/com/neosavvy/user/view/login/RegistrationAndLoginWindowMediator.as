@@ -7,11 +7,8 @@ package com.neosavvy.user.view.login {
     import mx.controls.Label;
     import mx.events.CloseEvent;
     import mx.managers.PopUpManager;
-    import mx.messaging.ChannelSet;
-    import mx.messaging.channels.AMFChannel;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
-    import mx.rpc.remoting.mxml.RemoteObject;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -23,6 +20,9 @@ package com.neosavvy.user.view.login {
 
         public function RegistrationAndLoginWindowMediator(viewComponent:Object) {
             super(NAME, viewComponent);
+        }
+
+        override public function onRegister():void {
             login.loginButton.addEventListener(MouseEvent.CLICK, handleLogin);
             login.forgotPassword.addEventListener(MouseEvent.CLICK, handleForgotPassword);
             login.forgotUsername.addEventListener(MouseEvent.CLICK, handleForgotUsername);
@@ -31,6 +31,8 @@ package com.neosavvy.user.view.login {
 
             userReg.createButton.addEventListener(MouseEvent.CLICK, handleCreate);
             userReg.cancelButton.addEventListener(MouseEvent.CLICK, handleCancel);
+
+            userFailed.tryAgainButton.addEventListener(MouseEvent.CLICK, handleNewUser);
         }
 
         public function get registrationAndLoginWindow():RegistrationAndLoginWindow {
@@ -65,6 +67,8 @@ package com.neosavvy.user.view.login {
         override public function listNotificationInterests():Array {
             return [
                 ApplicationFacade.USER_LOGIN_FAILED
+                ,ApplicationFacade.SAVE_USER_SUCCESS
+                ,ApplicationFacade.SAVE_USER_FAILED
             ];
         }
 
@@ -72,6 +76,12 @@ package com.neosavvy.user.view.login {
             switch (notification.getName()) {
                 case ApplicationFacade.USER_LOGIN_FAILED:
                     errorLabel.text = "User login failed";
+                    break;
+                case ApplicationFacade.SAVE_USER_SUCCESS:
+                    userConfirmedNavigation();
+                    break;
+                case ApplicationFacade.SAVE_USER_FAILED:
+                    registrationFailedNavigation();
                     break;
             }
         }
@@ -158,18 +168,7 @@ package com.neosavvy.user.view.login {
         }
 
         protected function addUser():void {
-            var userService:RemoteObject = new RemoteObject();
-
-            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:8080/commons-user-webapp/messagebroker/amf");
-            var channelSet:ChannelSet = new ChannelSet();
-            channelSet.addChannel(channel);
-            userService.channelSet = channelSet;
-
-
-            userService.destination = "userService";
-            userService.addEventListener(FaultEvent.FAULT, savefaultHandler);
-            userService.addEventListener(ResultEvent.RESULT, saveresultHandler);
-            userService.saveUser(getUserFromTextInput());
+            sendNotification(ApplicationFacade.SAVE_USER_REQUEST, getUserFromTextInput());
         }
 
         private function savefaultHandler(faultEvent:FaultEvent):void {
@@ -215,7 +214,7 @@ package com.neosavvy.user.view.login {
         }
 
         /*********
-         * NAVIGATION RELATED HANDLERS
+         * END NAVIGATION RELATED HANDLERS
          *********/
     }
 }

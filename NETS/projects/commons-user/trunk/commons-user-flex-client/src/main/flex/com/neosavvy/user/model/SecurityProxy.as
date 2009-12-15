@@ -62,9 +62,9 @@ package com.neosavvy.user.model {
         }
 
         public function logout() {
-            var channelSet:ChannelSet = getUserServiceChannelSet()();
+            var channelSet:ChannelSet = getUserServiceChannelSet();
             channelSet.logout();
-            sendNotification(ApplicationFacade.LOGOUT_USER);
+            sendNotification(ApplicationFacade.USER_NOT_LOGGED_IN);
         }
 
         /********
