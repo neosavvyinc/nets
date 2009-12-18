@@ -21,7 +21,6 @@ package com.neosavvy.user.controller {
 
             addSubCommand( ModelPrepCommand );
 			addSubCommand( ViewPrepCommand );
-            addSubCommand( CheckLoggedIn );
         }
 
         private function initLogging():void {

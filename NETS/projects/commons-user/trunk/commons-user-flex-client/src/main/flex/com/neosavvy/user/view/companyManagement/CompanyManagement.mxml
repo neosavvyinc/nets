@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<mx:HBox
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        horizontalAlign="center">
+    <mx:Script>
+        <![CDATA[
+
+        import mx.collections.ArrayCollection;
+
+        private var unitedStates:Array = [
+            "Alabama"
+            ,"Alaska"
+            ,"American Samoa"
+            ,"Arizona"
+            ,"Arkansas"
+            ,"California"
+            ,"Colorado"
+            ,"Connecticut"
+            ,"Delaware"
+            ,"District of Columbia"
+            ,"Florida"
+            ,"Georgia"
+            ,"Guam"
+            ,"Hawaii"
+            ,"Idaho"
+            ,"Illinois"
+            ,"Indiana"
+            ,"Iowa"
+            ,"Kansas"
+            ,"Kentucky"
+            ,"Louisiana"
+            ,"Maine"
+            ,"Maryland"
+            ,"Massachusetts"
+            ,"Michigan"
+            ,"Minnesota"
+            ,"Mississippi"
+            ,"Missouri"
+            ,"Montana"
+            ,"Nebraska"
+            ,"Nevada"
+            ,"New Hampshire"
+            ,"New Jersey"
+            ,"New Mexico"
+            ,"New York"
+            ,"North Carolina"
+            ,"North Dakota"
+            ,"Northern Marianas Islands"
+            ,"Ohio"
+            ,"Oklahoma"
+            ,"Oregon"
+            ,"Pennsylvania"
+            ,"Puerto Rico"
+            ,"Rhode Island"
+            ,"South Carolina"
+            ,"South Dakota"
+            ,"Tennessee"
+            ,"Texas"
+            ,"Utah"
+            ,"Vermont"
+            ,"Virginia"
+            ,"Virgin Islands"
+            ,"Washington"
+            ,"West Virginia"
+            ,"Wisconsin"
+            ,"Wyoming"
+        ]
+        ]]>
+    </mx:Script>
+
+    <mx:VBox width="400">
+        <mx:Panel title="Basic Company Information" width="100%" styleName="paddedContainer">
+            <flexlib:PromptingTextInput id="companyName" prompt="Company Name" width="100%"/>
+            <flexlib:PromptingTextInput id="addressOne" prompt="Mailing Address" width="100%"/>
+            <flexlib:PromptingTextInput id="addressTwo" prompt="Additional Mailing Address " width="100%"/>
+            <flexlib:PromptingTextInput id="postalCode" prompt="Postal Code" width="100%"/>
+            <flexlib:PromptingTextInput id="city" prompt="City" width="100%"/>
+            <mx:HBox width="100%">
+                <mx:ComboBox id="state" dataProvider="{unitedStates}" text="Select..." width="100%"/>
+                <mx:ComboBox id="country" data="[USA]" selectedIndex="0" width="70"/>
+            </mx:HBox>
+        </mx:Panel>
+        <mx:Panel title="Administrative User" width="100%" styleName="paddedContainer">
+            <flexlib:PromptingTextInput id="administrativeUser" prompt="Admin User Name" width="100%"/>
+            <flexlib:PromptingTextInput id="administrativePassword" prompt="Admin Password" width="100%"/>
+            <flexlib:PromptingTextInput id="administrativeConfirmPassword" prompt="Confirm Admin Password" width="100%"/>
+            <flexlib:PromptingTextInput id="email" prompt="Admin Email Account" width="100%"/>
+        </mx:Panel>
+    </mx:VBox>
+    <mx:VBox width="400">
+        <mx:Panel title="Company Information" width="100%" styleName="paddedContainer">
+            <mx:Text text="Please give us just a bit more information about your company"/>
+            <mx:RadioButtonGroup id="numberOfEmployeesGroup"/>
+            <mx:RadioButton group="{numberOfEmployeesGroup}" id="oneToTen" label="1-10"/>
+            <mx:RadioButton group="{numberOfEmployeesGroup}" id="elevenToFifty" label="11-50"/>
+            <mx:RadioButton group="{numberOfEmployeesGroup}" id="fiftyOneToOneHundred" label="51-100"/>
+            <mx:RadioButton group="{numberOfEmployeesGroup}" id="oneHundredOneToOneThousand" label="101-1,000"/>
+            <mx:RadioButton group="{numberOfEmployeesGroup}" id="oneThousandOneToTenThousand" label="1,000-10,000"/>
+            <mx:RadioButton group="{numberOfEmployeesGroup}" id="moreThanTenThousand" label="&gt;10,001"/>
+        </mx:Panel>
+        <mx:Button label="Register Company"/>
+    </mx:VBox>
+
+</mx:HBox>
