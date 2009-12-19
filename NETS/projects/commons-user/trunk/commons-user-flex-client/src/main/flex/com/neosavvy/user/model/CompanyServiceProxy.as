@@ -45,7 +45,7 @@ package com.neosavvy.user.model {
         private function handleSaveCompanyResult(event:ResultEvent):void {
             LOGGER.debug("Company was returned");
             this.data = event.result as ArrayCollection;
-            sendNotification(ApplicationFacade.GET_USERS_SUCCESS);
+            sendNotification(ApplicationFacade.SAVE_COMPANY_SUCCESS);
         }
 
         /****

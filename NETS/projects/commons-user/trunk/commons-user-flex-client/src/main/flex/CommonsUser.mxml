@@ -3,6 +3,7 @@
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:userManagement="com.neosavvy.user.view.userManagement.*"
         xmlns:companyManagement="com.neosavvy.user.view.companyManagement.*"
+        xmlns:employeeInvitation="com.neosavvy.user.view.employeeInvitation.*"
         creationComplete="{facade.startup(this)}"
         layout="absolute"
         >
@@ -10,10 +11,11 @@
     <mx:Script>
         <![CDATA[
         import com.neosavvy.user.ApplicationFacade;
+
         public static var APPLICATION_NAME:String = "CommonsUser";
         private var facade:ApplicationFacade = ApplicationFacade.getInstance(APPLICATION_NAME);
         ]]>
-        </mx:Script>
+    </mx:Script>
 
     <mx:Style source="/commonsUser.css"/>
 
@@ -22,18 +24,19 @@
     </mx:ApplicationControlBar>
 
     <mx:ViewStack
-        id="navigationViewStack"
-        selectedIndex="0"
-        width="100%"
-        height="100%"
-        styleName="paddedContainer"
-        creationPolicy="all">
+            id="navigationViewStack"
+            selectedIndex="3"
+            width="100%"
+            height="100%"
+            styleName="paddedContainer"
+            creationPolicy="all">
         <mx:HBox horizontalAlign="center" verticalAlign="middle" width="100%" height="100%">
             <mx:Button label="New Company's Click Here" id="newCompanyButton"/>
             <mx:Button label="Existing Users Login Here" id="existingUsersButton"/>
         </mx:HBox>
         <companyManagement:CompanyManagement id="companyManagement" width="100%" height="100%"/>
         <userManagement:UserManagement id="userManagement" width="100%" height="100%"/>
+        <employeeInvitation:EmployeeManagement id="employeeManagement" width="100%" height="100%"/>
     </mx:ViewStack>
 
 </mx:Application>

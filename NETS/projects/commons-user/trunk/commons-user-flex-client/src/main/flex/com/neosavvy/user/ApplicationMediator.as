@@ -6,6 +6,7 @@ package com.neosavvy.user {
     import mx.controls.Button;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
+    import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.mediator.Mediator;
 
     /**
@@ -40,6 +41,21 @@ package com.neosavvy.user {
         {
             this.newCompanyButton.addEventListener(MouseEvent.CLICK, newCompanyButtonClicked);
             this.existingUserButton.addEventListener(MouseEvent.CLICK, existingUserButtonClicked);
+        }
+
+
+        override public function listNotificationInterests():Array {
+            return [
+                ApplicationFacade.SAVE_COMPANY_SUCCESS
+            ];
+        }
+
+        override public function handleNotification(notification:INotification):void {
+            switch ( notification.getName() ) {
+                case ApplicationFacade.SAVE_COMPANY_SUCCESS:
+                    this.navigationViewStack.selectedIndex = 3;
+                    break;
+            }
         }
 
         private function newCompanyButtonClicked(event:MouseEvent):void {
