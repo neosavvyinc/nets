@@ -78,7 +78,7 @@
             <flexlib:PromptingTextInput id="city" prompt="City" width="100%"/>
             <mx:HBox width="100%">
                 <mx:ComboBox id="state" dataProvider="{unitedStates}" text="Select..." width="100%"/>
-                <mx:ComboBox id="country" data="[USA]" selectedIndex="0" width="70"/>
+                <mx:ComboBox id="country" dataProvider="{['USA']}" selectedIndex="0" width="70"/>
             </mx:HBox>
         </mx:Panel>
         <mx:Panel title="Administrative User" width="100%" styleName="paddedContainer">
@@ -99,7 +99,7 @@
             <mx:RadioButton group="{numberOfEmployeesGroup}" id="oneThousandOneToTenThousand" label="1,000-10,000"/>
             <mx:RadioButton group="{numberOfEmployeesGroup}" id="moreThanTenThousand" label="&gt;10,001"/>
         </mx:Panel>
-        <mx:Button label="Register Company"/>
+        <mx:Button id="registerCompanyButton" label="Register Company"/>
     </mx:VBox>
 
 </mx:HBox>

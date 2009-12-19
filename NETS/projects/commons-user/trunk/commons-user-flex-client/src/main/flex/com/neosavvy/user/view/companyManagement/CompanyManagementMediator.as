@@ -1,0 +1,62 @@
+package com.neosavvy.user.view.companyManagement {
+    import com.neosavvy.user.ApplicationFacade;
+    import com.neosavvy.user.dto.CompanyDTO;
+
+    import com.neosavvy.user.dto.NumEmployeesRangeDTO;
+
+    import flash.events.MouseEvent;
+
+    import mx.controls.Button;
+    import mx.controls.RadioButtonGroup;
+    import mx.logging.ILogger;
+    import mx.logging.Log;
+
+    import org.puremvc.as3.multicore.interfaces.IMediator;
+    import org.puremvc.as3.multicore.patterns.mediator.Mediator;
+
+    public class CompanyManagementMediator extends Mediator implements IMediator {
+
+        private static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.view.companyManagement.CompanyManagementMediator")
+
+        public static const NAME:String = "CompanyManagementMediator";
+
+        public function CompanyManagementMediator(viewComponent:Object) {
+            super(NAME, viewComponent);
+        }
+
+        override public function onRegister():void {
+            registerButton.addEventListener(MouseEvent.CLICK, registerCompanyButtonClickHandler);
+        }
+
+        public function get companyManagement():CompanyManagement {
+            return this.viewComponent as CompanyManagement;
+        }
+
+        public function get registerButton():Button {
+            return companyManagement.registerCompanyButton;
+        }
+
+        private function registerCompanyButtonClickHandler(event:MouseEvent):void {
+            var company:CompanyDTO = new CompanyDTO();
+            company.addressOne = companyManagement.addressOne.text;
+            company.addressTwo = companyManagement.addressTwo.text;
+            company.city = companyManagement.city.text;
+            company.companyName = companyManagement.companyName.text;
+            company.country = companyManagement.country.selectedItem as String;
+            company.postalCode = companyManagement.postalCode.text;
+            company.numEmployeesRange = new NumEmployeesRangeDTO();
+//            var radioButtonGroup:RadioButtonGroup = companyManagement.numberOfEmployeesGroup;
+//            var selectedValue:Object = radioButtonGroup.selectedValue;
+//            var numEmployeesSelected:String = selectedValue as String;
+//            if (numEmployeesSelected.indexOf(">") == -1) {
+//                company.numEmployeesRange.rangeFrom = numEmployeesSelected.split("-")[0] as Number;
+//                company.numEmployeesRange.rangeTo = numEmployeesSelected.split("-")[1] as Number;
+//            } else {
+//                company.numEmployeesRange.rangeFrom = 10001;
+//                company.numEmployeesRange.rangeTo = Number.MAX_VALUE;
+//            }
+            sendNotification(ApplicationFacade.SAVE_COMPANY_REQUEST, company);
+        }
+
+    }
+}

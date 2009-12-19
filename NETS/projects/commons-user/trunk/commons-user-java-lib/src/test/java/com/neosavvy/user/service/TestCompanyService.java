@@ -15,7 +15,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase{
     @Test
     public void testGetCompanies() throws Exception{
         cleanDatabase();
-        companyDAO.saveCompany(createTestCompany());
+        companyService.saveCompany(createTestCompany());
         Assert.assertFalse(companyService.getCompanies().isEmpty());
     }
 
@@ -23,7 +23,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase{
     public void testFindCompanyById() throws Exception{
         cleanDatabase();
         CompanyDTO testCompany = createTestCompany();
-        companyDAO.saveCompany(testCompany);
+        companyService.saveCompany(testCompany);
         Assert.assertFalse(companyService.getCompanies().isEmpty());
 
         Assert.assertNotNull("findCompanyById should return the company that we just added when we search by the id for it",
@@ -34,7 +34,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase{
     public void testFindCompanies(){
         cleanDatabase();
         CompanyDTO testCompany = createTestCompany();
-        companyDAO.saveCompany(testCompany);
+        companyService.saveCompany(testCompany);
         Assert.assertFalse(companyService.getCompanies().isEmpty());
         Assert.assertTrue(companyService.findCompanies(testCompany).contains(testCompany));
     }

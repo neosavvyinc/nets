@@ -22,10 +22,10 @@ public class CompanyDAOImpl extends BaseDAO implements CompanyDAO{
         return getCurrentSession().createCriteria(CompanyDTO.class).list();
     }
 
-    public void saveCompany(CompanyDTO company) {
+    public CompanyDTO saveCompany(CompanyDTO company) {
 		getCurrentSession().saveOrUpdate(company);
         getCurrentSession().flush();
-        //To change body of implemented methods use File | Settings | File Templates.
+        return company;
     }
 
     public CompanyDTO findCompanyById(int id) {

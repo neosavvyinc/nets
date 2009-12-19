@@ -81,6 +81,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="userDao" ref="userDAO"/>
         <property name="roleDao" ref="roleDAO"/>
         <property name="userCompanyRoleDao" ref="userCompanyRoleDAO"/>
+        <property name="numEmployeesRangeDao" ref="numEmployeesRangeDAO"/>
     </bean>
 
     <bean id="roleService" class="com.neosavvy.user.service.RoleServiceImpl">

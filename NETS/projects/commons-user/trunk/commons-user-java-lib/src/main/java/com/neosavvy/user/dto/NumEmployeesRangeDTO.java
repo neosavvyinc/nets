@@ -16,8 +16,7 @@ import java.util.LinkedHashSet;
 @Table(
     name="NUM_EMPLOYEES_RANGE" ,
     uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"NUM_EMPLOYEES_RANGE_ID"}),
-            @UniqueConstraint(columnNames = {"RANGE_DESCRIPTION"})
+            @UniqueConstraint(columnNames = {"NUM_EMPLOYEES_RANGE_ID"})
     }
 )
 @XmlRootElement

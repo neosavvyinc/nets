@@ -22,11 +22,16 @@
     </mx:ApplicationControlBar>
 
     <mx:ViewStack
+        id="navigationViewStack"
         selectedIndex="0"
         width="100%"
         height="100%"
         styleName="paddedContainer"
         creationPolicy="all">
+        <mx:HBox horizontalAlign="center" verticalAlign="middle" width="100%" height="100%">
+            <mx:Button label="New Company's Click Here" id="newCompanyButton"/>
+            <mx:Button label="Existing Users Login Here" id="existingUsersButton"/>
+        </mx:HBox>
         <companyManagement:CompanyManagement id="companyManagement" width="100%" height="100%"/>
         <userManagement:UserManagement id="userManagement" width="100%" height="100%"/>
     </mx:ViewStack>

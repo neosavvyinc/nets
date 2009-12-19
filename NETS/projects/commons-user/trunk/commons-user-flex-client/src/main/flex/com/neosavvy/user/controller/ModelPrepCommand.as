@@ -1,4 +1,5 @@
 package com.neosavvy.user.controller {
+    import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.SecurityProxy;
 
     import com.neosavvy.user.model.UserServiceProxy;
@@ -11,6 +12,7 @@ package com.neosavvy.user.controller {
         override public function execute(notification:INotification):void {
             facade.registerProxy( new SecurityProxy() );
             facade.registerProxy( new UserServiceProxy() );
+            facade.registerProxy( new CompanyServiceProxy() );
         }
     }
 }

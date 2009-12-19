@@ -14,7 +14,7 @@ import java.util.List;
 public interface CompanyDAO {
 	public List<CompanyDTO> getCompanies();
 
-	public void saveCompany(CompanyDTO company);
+	public CompanyDTO saveCompany(CompanyDTO company);
 
 	public CompanyDTO findCompanyById(int id);
 

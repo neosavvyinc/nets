@@ -29,7 +29,8 @@ package com.neosavvy.user {
         /**
          * Destination names for services
          */
-        public static const userServiceDestination:String = "userService" ;
+        public static const userServiceDestination:String = "userService";
+        public static const companyServiceDestiation:String = "companyService";
 
     }
 }

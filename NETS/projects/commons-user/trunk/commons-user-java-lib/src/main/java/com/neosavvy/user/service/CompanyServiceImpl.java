@@ -1,13 +1,10 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.user.dao.*;
 import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dto.RoleDTO;
 import com.neosavvy.user.dto.UserCompanyRoleDTO;
-import com.neosavvy.user.dao.CompanyDAO;
-import com.neosavvy.user.dao.UserCompanyRoleDAO;
-import com.neosavvy.user.dao.RoleDAO;
-import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.service.exception.CompanyServiceException;
 
 import java.util.List;
@@ -25,13 +22,17 @@ public class CompanyServiceImpl implements CompanyService{
     private UserCompanyRoleDAO userCompanyRoleDao;
     private RoleDAO roleDao;
     private UserDAO userDao;
+    private NumEmployeesRangeDAO numEmployeesRangeDao;
 
     public List<CompanyDTO> getCompanies() {
         return companyDao.getCompanies();
     }
 
-    public void saveCompany(CompanyDTO company) {
-        companyDao.saveCompany(company);
+    public CompanyDTO saveCompany(CompanyDTO company) {
+        if( company.getNumEmployeesRange() != null )
+            numEmployeesRangeDao.saveRange(company.getNumEmployeesRange());
+
+        return companyDao.saveCompany(company);
     }
 
     public CompanyDTO findCompanyById(int id) {
@@ -44,7 +45,7 @@ public class CompanyServiceImpl implements CompanyService{
 
     public void addCompany(CompanyDTO company, UserDTO user) {
         userDao.saveUser(user);
-        companyDao.saveCompany(company);
+        saveCompany(company);
         // At some point we should look at getting rid of this hard coding.
         RoleDTO roleToFind = new RoleDTO();
         roleToFind.setShortName("ROLE_ADMIN");
@@ -93,5 +94,13 @@ public class CompanyServiceImpl implements CompanyService{
 
     public void setUserDao(UserDAO userDao) {
         this.userDao = userDao;
+    }
+
+    public NumEmployeesRangeDAO getNumEmployeesRangeDao() {
+        return numEmployeesRangeDao;
+    }
+
+    public void setNumEmployeesRangeDao(NumEmployeesRangeDAO numEmployeesRangeDao) {
+        this.numEmployeesRangeDao = numEmployeesRangeDao;
     }
 }

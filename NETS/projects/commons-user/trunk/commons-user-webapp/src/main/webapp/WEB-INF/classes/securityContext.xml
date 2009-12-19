@@ -11,12 +11,7 @@
     <beans:bean id="preAuthenticatedEntryPoint"
         class="org.springframework.security.ui.preauth.PreAuthenticatedProcessingFilterEntryPoint" />
 
-    <authentication-provider user-service-ref="authenticationDao">
-        <!--<user-service>-->
-            <!--<user name="jeremy" password="atlanta" authorities="ROLE_USER, ROLE_ADMIN" />-->
-            <!--<user name="keith" password="melbourne" authorities="ROLE_USER" />-->
-        <!--</user-service>-->
-    </authentication-provider>
+    <authentication-provider user-service-ref="authenticationDao"/>
     
     <beans:bean id="authenticationDao" class="org.springframework.security.userdetails.jdbc.JdbcDaoImpl">
         <beans:property name="dataSource" ref="dataSource"/>

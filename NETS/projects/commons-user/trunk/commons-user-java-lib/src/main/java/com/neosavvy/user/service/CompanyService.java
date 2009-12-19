@@ -21,7 +21,7 @@ public interface CompanyService {
     @Secured("ROLE_ADMIN")
 	public List<CompanyDTO> getCompanies();
 
-	public void saveCompany(CompanyDTO company);
+	public CompanyDTO saveCompany(CompanyDTO company);
 
     public void addCompany(CompanyDTO company, UserDTO user);
 
