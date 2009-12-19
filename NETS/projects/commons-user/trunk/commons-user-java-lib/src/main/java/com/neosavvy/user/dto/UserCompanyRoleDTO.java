@@ -14,14 +14,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(
     name="USER_COMPANY_ROLE" ,
     uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"COMPANY_ROLE_ID"})
+            @UniqueConstraint(columnNames = {"ID"})
     }
 )
 @XmlRootElement
 public class UserCompanyRoleDTO {
     @Id
     @GeneratedValue
-    @Column(name="COMPANY_ROLE_ID")
+    @Column(name="ID")
     private int id;
 
     @ManyToOne

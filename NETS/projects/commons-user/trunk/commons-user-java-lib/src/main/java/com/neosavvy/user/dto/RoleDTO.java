@@ -17,7 +17,7 @@ import java.util.LinkedHashSet;
 @Table(
     name="ROLE" ,
     uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"ROLE_ID"}),
+            @UniqueConstraint(columnNames = {"ID"}),
             @UniqueConstraint(columnNames = {"SHORT_NAME"})
     }
 )
@@ -25,7 +25,7 @@ import java.util.LinkedHashSet;
 public class RoleDTO {
     @Id
     @GeneratedValue
-	@Column(name="ROLE_ID")
+	@Column(name="ID")
 	private int id;
 
 	@Column(name="SHORT_NAME")

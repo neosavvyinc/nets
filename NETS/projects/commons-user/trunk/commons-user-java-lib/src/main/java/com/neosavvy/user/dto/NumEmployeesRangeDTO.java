@@ -16,14 +16,14 @@ import java.util.LinkedHashSet;
 @Table(
     name="NUM_EMPLOYEES_RANGE" ,
     uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"NUM_EMPLOYEES_RANGE_ID"})
+            @UniqueConstraint(columnNames = {"ID"})
     }
 )
 @XmlRootElement
 public class NumEmployeesRangeDTO {
     @Id
     @GeneratedValue
-    @Column(name="NUM_EMPLOYEES_RANGE_ID")
+    @Column(name="ID")
     private int id;
 
     @Column(name="RANGE_DESCRIPTION")

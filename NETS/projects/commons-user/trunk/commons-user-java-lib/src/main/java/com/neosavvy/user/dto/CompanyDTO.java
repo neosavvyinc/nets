@@ -18,7 +18,7 @@ import java.util.Set;
 @Table(
     name="COMPANY" ,
     uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"COMPANY_ID"})
+            @UniqueConstraint(columnNames = {"ID"})
     }
 )
 @XmlRootElement
@@ -26,7 +26,7 @@ public class CompanyDTO {
 
     @Id
     @GeneratedValue
-    @Column(name="COMPANY_ID")
+    @Column(name="ID")
     private int id;
 
     @Column(name="COMPANY_NAME")

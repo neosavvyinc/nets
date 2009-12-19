@@ -9,7 +9,7 @@ import java.util.Set;
 @Table(
     name="USER" ,
     uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"USER_ID"})
+            @UniqueConstraint(columnNames = {"ID"})
             ,@UniqueConstraint(columnNames = {"USERNAME"})
     }
 )
@@ -18,7 +18,7 @@ public class UserDTO {// implements Externalizable {
     
 	@Id
     @GeneratedValue
-	@Column(name="USER_ID")
+	@Column(name="ID")
 	private int id;
 	
 	@Column(name="FIRST_NAME")
