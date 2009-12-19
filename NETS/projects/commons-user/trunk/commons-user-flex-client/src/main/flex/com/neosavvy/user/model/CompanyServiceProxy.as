@@ -3,6 +3,8 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.ProxyConstants;
     import com.neosavvy.user.dto.CompanyDTO;
 
+    import com.neosavvy.user.dto.UserDTO;
+
     import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -27,12 +29,12 @@ package com.neosavvy.user.model {
             super(NAME, null);
         }
 
-        public function saveCompany(company:CompanyDTO):void
+        public function addCompany(company:CompanyDTO, user:UserDTO):void
         {
             var companyService:RemoteObject = getCompanyService();
             companyService.addEventListener(ResultEvent.RESULT, handleSaveCompanyResult);
             companyService.addEventListener(FaultEvent.FAULT, handleSaveCompanyFault);
-            companyService.saveCompany( company );
+            companyService.addCompany( company, user );
         }
 
         private function handleSaveCompanyFault(event:FaultEvent):void {

@@ -85,7 +85,7 @@
             <flexlib:PromptingTextInput id="administrativeUser" prompt="Admin User Name" width="100%"/>
             <flexlib:PromptingTextInput id="administrativePassword" prompt="Admin Password" width="100%"/>
             <flexlib:PromptingTextInput id="administrativeConfirmPassword" prompt="Confirm Admin Password" width="100%"/>
-            <flexlib:PromptingTextInput id="email" prompt="Admin Email Account" width="100%"/>
+            <flexlib:PromptingTextInput id="administrativeEmail" prompt="Admin Email Account" width="100%"/>
         </mx:Panel>
     </mx:VBox>
     <mx:VBox width="400">

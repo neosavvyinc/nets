@@ -11,7 +11,8 @@ package com.neosavvy.user.controller.company {
 
         override public function execute(notification:INotification):void {
             var companyServiceProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
-            companyServiceProxy.saveCompany(notification.getBody() as CompanyDTO );
+            var params:Array = notification.getBody() as Array;
+            companyServiceProxy.addCompany(params[0] as CompanyDTO, params[1] as UserDTO);
         }
     }
 }
