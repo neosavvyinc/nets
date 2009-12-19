@@ -2,20 +2,21 @@
 <mx:VBox
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:flexlib="http://code.google.com/p/flexlib/"
+        xmlns:controls="controls.*"
         >
 
 
-    <mx:Panel title="Queue Employees to be invited here" styleName="paddedContainer" width="100%">
+    <mx:Panel title="Queue Employees to be invited here" styleName="paddedContainer" width="100%" height="100%">
         <mx:HBox width="100%">
             <flexlib:PromptingTextInput id="empFName" prompt="First Name" width="100%"/>
-            <flexlib:PromptingTextInput id="empMName" prompt="Middle Name" width="100%"/>
             <flexlib:PromptingTextInput id="empLName" prompt="Last Name" width="100%"/>
-            <flexlib:PromptingTextInput id="username" prompt="Username" width="100%"/>
             <flexlib:PromptingTextInput id="empEmail" prompt="Email" width="100%"/>
+            <mx:Button id="queueEmployee" label="Queue User"/>
         </mx:HBox>
         <mx:AdvancedDataGrid
                 id="employeesQueuedToInvite"
                 width="100%"
+                height="100%"
                 >
             <mx:columns>
                 <mx:AdvancedDataGridColumn
@@ -24,19 +25,9 @@
                         headerText="First Name"
                         />
                 <mx:AdvancedDataGridColumn
-                        id="middleNameCol"
-                        dataField="middleName"
-                        headerText="Middle Name"
-                        />
-                <mx:AdvancedDataGridColumn
                         id="lastNameCol"
                         dataField="lastName"
                         headerText="Last Name"
-                        />
-                <mx:AdvancedDataGridColumn
-                        id="userNameCol"
-                        dataField="username"
-                        headerText="Username"
                         />
                 <mx:AdvancedDataGridColumn
                         id="emailCol"
@@ -45,67 +36,11 @@
                         />
             </mx:columns>
         </mx:AdvancedDataGrid>
-        <mx:Button id="requestQueueToBeProcessed" label="Process Invitations"/>
-    </mx:Panel>
-
-    <mx:Panel title="These employees have been invited but have yet to RSVP" styleName="paddedContainer" width="100%">
-        <mx:AdvancedDataGrid
-                id="employeesInvited"
-                width="100%"
-                >
-            <mx:columns>
-                <mx:AdvancedDataGridColumn
-                        dataField="firstName"
-                        headerText="First Name"
-                        />
-                <mx:AdvancedDataGridColumn
-                        dataField="middleName"
-                        headerText="Middle Name"
-                        />
-                <mx:AdvancedDataGridColumn
-                        dataField="lastName"
-                        headerText="Last Name"
-                        />
-                <mx:AdvancedDataGridColumn
-                        dataField="username"
-                        headerText="Username"
-                        />
-                <mx:AdvancedDataGridColumn
-                        dataField="email"
-                        headerText="Email"
-                        />
-            </mx:columns>
-        </mx:AdvancedDataGrid>
-    </mx:Panel>
-
-    <mx:Panel title="These are your active employees in the system" styleName="paddedContainer" width="100%">
-        <mx:AdvancedDataGrid
-                id="employeesActivated"
-                width="100%"
-                >
-            <mx:columns>
-                <mx:AdvancedDataGridColumn
-                        dataField="firstName"
-                        headerText="First Name"
-                        />
-                <mx:AdvancedDataGridColumn
-                        dataField="middleName"
-                        headerText="Middle Name"
-                        />
-                <mx:AdvancedDataGridColumn
-                        dataField="lastName"
-                        headerText="Last Name"
-                        />
-                <mx:AdvancedDataGridColumn
-                        dataField="username"
-                        headerText="Username"
-                        />
-                <mx:AdvancedDataGridColumn
-                        dataField="email"
-                        headerText="Email"
-                        />
-            </mx:columns>
-        </mx:AdvancedDataGrid>
+        <mx:HBox width="100%">
+            <mx:Button id="requestQueueToBeProcessed" label="Process Invitations"/>
+            <mx:Spacer width="100%"/>
+            <controls:Spinner id="queuingSpinner" tickColor="#66aaff" creationComplete="{queuingSpinner.play()}"/>
+        </mx:HBox>
     </mx:Panel>
 
 </mx:VBox>
