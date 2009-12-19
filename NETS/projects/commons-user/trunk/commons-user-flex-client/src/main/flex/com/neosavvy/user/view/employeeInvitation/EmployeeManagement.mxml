@@ -11,7 +11,7 @@
             <flexlib:PromptingTextInput id="empFName" prompt="First Name" width="100%"/>
             <flexlib:PromptingTextInput id="empLName" prompt="Last Name" width="100%"/>
             <flexlib:PromptingTextInput id="empEmail" prompt="Email" width="100%"/>
-            <mx:Button id="queueEmployee" label="Queue User"/>
+            <mx:Button id="addUser" label="Add User"/>
         </mx:HBox>
         <mx:AdvancedDataGrid
                 id="employeesQueuedToInvite"
@@ -34,12 +34,15 @@
                         dataField="email"
                         headerText="Email"
                         />
+                <mx:AdvancedDataGridColumn
+                        id="actionsCol"
+                        headerText="Actions"
+                        itemRenderer="com.neosavvy.user.view.userManagement.Actions"/>
             </mx:columns>
         </mx:AdvancedDataGrid>
         <mx:HBox width="100%">
-            <mx:Button id="requestQueueToBeProcessed" label="Process Invitations"/>
-            <mx:Spacer width="100%"/>
-            <controls:Spinner id="queuingSpinner" tickColor="#66aaff" creationComplete="{queuingSpinner.play()}"/>
+            <mx:Button id="doneBtn" label="Done"/>
+            <mx:Button id="cancelBtn" label="Cancel"/>
         </mx:HBox>
     </mx:Panel>
 
