@@ -3,6 +3,7 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
 
     import flash.events.MouseEvent;
 
+    import mx.controls.Button;
     import mx.controls.LinkButton;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -20,9 +21,14 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
         }
 
         override public function onRegister():void {
+            welcomeButton.addEventListener(MouseEvent.CLICK, handleWelcomeButtonClicked);
             inviteEmployeesButton.addEventListener(MouseEvent.CLICK, handleInviteEmployeesButtonClicked);
             viewActiveEmployeesButton.addEventListener(MouseEvent.CLICK, handleViewActiveEmployeesClicked);
             viewNonActiveEmployeesButton.addEventListener(MouseEvent.CLICK, handleViewNonActiveEmployeesClicked);
+        }
+
+        private function handleWelcomeButtonClicked(event:MouseEvent):void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_WELCOME,ApplicationFacade.NAVIGATE_TO_WELCOME);
         }
 
         private function handleViewNonActiveEmployeesClicked(event:MouseEvent):void {
@@ -39,6 +45,10 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
 
         public function get adminNavigation():AdminNavigation {
             return viewComponent as AdminNavigation;
+        }
+
+        public function get welcomeButton():LinkButton {
+            return adminNavigation.welcomeButton;
         }
 
         public function get inviteEmployeesButton():LinkButton {

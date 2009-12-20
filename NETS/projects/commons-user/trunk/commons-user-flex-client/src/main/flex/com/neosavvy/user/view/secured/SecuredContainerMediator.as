@@ -39,7 +39,8 @@ package com.neosavvy.user.view.secured {
 
         override public function listNotificationInterests():Array {
             return [
-                ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES
+                ApplicationFacade.NAVIGATE_TO_WELCOME
+                ,ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES
             ];
         }
 
