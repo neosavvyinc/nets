@@ -45,7 +45,7 @@
 	</modules>
 
 	<properties>
-		<flex.version>4.0.0.10485</flex.version>
+		<flex.version>3.2.0.3958</flex.version>
         <property.org.graniteds.version>1.2.0</property.org.graniteds.version>
         <carol.version>2.0.5</carol.version>
         <container-spec.version>1.0.1</container-spec.version>
@@ -87,7 +87,7 @@
 						</dependency>
 						<dependency>
 							<groupId>com.adobe.flex.license</groupId>
-							<artifactId>license-flashbuilder</artifactId>
+                            <artifactId>license-flexbuilder-pro-roundarch</artifactId>
 							<version>${flex.version}</version>
 						</dependency>
 					</dependencies>

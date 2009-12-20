@@ -26,6 +26,10 @@ package com.neosavvy.user.view.companyManagement {
 
         public static const REGISTRATION_INDEX:Number = 0;
         public static const CONFIRMATION_INDEX:Number = 1;
+        public static const CONFIRMATION_SUCCESS_INDEX:Number = 2;
+        public static const CONFIRMATION_FAILED_INDEX:Number = 3;
+
+        private var userName:String = null;
 
         public function CompanyManagementMediator(viewComponent:Object) {
             super(NAME, viewComponent);
@@ -33,7 +37,9 @@ package com.neosavvy.user.view.companyManagement {
 
         override public function onRegister():void {
             registerButton.addEventListener(MouseEvent.CLICK, registerCompanyButtonClickHandler);
+            confirmAccountButton.addEventListener(MouseEvent.CLICK, confirmAccountButtonClickHandler);
         }
+
 
         public function get companyManagement():CompanyManagement {
             return this.viewComponent as CompanyManagement;
@@ -41,6 +47,10 @@ package com.neosavvy.user.view.companyManagement {
 
         public function get registerButton():Button {
             return companyManagement.registerCompanyButton;
+        }
+
+        public function get confirmAccountButton():Button {
+            return companyManagement.confirmAccountButton;
         }
 
         public function get companyManavementViewStack():ViewStack {
@@ -51,6 +61,8 @@ package com.neosavvy.user.view.companyManagement {
             return [
                 ApplicationFacade.SAVE_COMPANY_FAILED
                 ,ApplicationFacade.SAVE_COMPANY_SUCCESS
+                ,ApplicationFacade.CONFIRM_ACCOUNT_FAILED
+                ,ApplicationFacade.CONFIRM_ACCOUNT_SUCCESS
             ];
         }
 
@@ -62,6 +74,14 @@ package com.neosavvy.user.view.companyManagement {
                     break;
                 case ApplicationFacade.SAVE_COMPANY_FAILED:
                     LOGGER.debug("Save company failed");
+                    break;
+                case ApplicationFacade.CONFIRM_ACCOUNT_FAILED:
+                    LOGGER.debug("Account confirmation failed");
+                    companyManavementViewStack.selectedIndex = CONFIRMATION_FAILED_INDEX;
+                    break;
+                case ApplicationFacade.CONFIRM_ACCOUNT_SUCCESS:
+                    LOGGER.debug("Account confirmation succeeded");
+                    companyManavementViewStack.selectedIndex = CONFIRMATION_SUCCESS_INDEX;
                     break;
             }
         }
@@ -88,13 +108,19 @@ package com.neosavvy.user.view.companyManagement {
             }
 
             var user:UserDTO = new UserDTO();
-            user.username = companyManagement.administrativeUser.text;
+            userName = user.username = companyManagement.administrativeUser.text;
             user.password = companyManagement.administrativePassword.text;
             user.emailAddress = companyManagement.administrativeEmail.text;
             user.firstName = companyManagement.administrativeFirstName.text;
             user.middleName = companyManagement.administrativeMiddleName.text;
             user.lastName = companyManagement.administrativeLastName.text;
             sendNotification(ApplicationFacade.SAVE_COMPANY_REQUEST, [company,user]);
+        }
+
+
+        private function confirmAccountButtonClickHandler(event:MouseEvent):void {
+            var hashCode:String = companyManagement.confirmationToken.text;
+            sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_REQUEST, [userName, hashCode]);
         }
 
     }

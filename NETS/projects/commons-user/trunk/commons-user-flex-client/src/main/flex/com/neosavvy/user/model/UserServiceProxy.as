@@ -47,6 +47,13 @@ package com.neosavvy.user.model {
             userService.saveUser( param );
         }
 
+        public function confirmUser(userName:String, hashCode:String):void {
+            var userService:RemoteObject = getUserService();
+            userService.addEventListener(ResultEvent.RESULT, handleConfirmUserSuccess);
+            userService.addEventListener(FaultEvent.FAULT, handleConfirmUserFault);
+            userService.confirmUser( userName, hashCode );
+        }
+
         private function handleSaveUserFault(event:FaultEvent):void {
             LOGGER.debug("User save failed");
             sendNotification(ApplicationFacade.SAVE_USER_FAILED);
@@ -67,6 +74,17 @@ package com.neosavvy.user.model {
             LOGGER.debug("Users were returned");
             this.data = event.result as ArrayCollection;
             sendNotification(ApplicationFacade.GET_USERS_SUCCESS);
+        }
+
+
+        private function handleConfirmUserSuccess(event:ResultEvent):void {
+            LOGGER.debug("Confirmation successful: ");
+            sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_SUCCESS);
+        }
+
+        private function handleConfirmUserFault(event:FaultEvent):void {
+            LOGGER.debug("Fault occurred while trying to confirm user: " + event.toString());
+            sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_FAILED);
         }
 
         /****

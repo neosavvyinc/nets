@@ -6,7 +6,6 @@
         import com.neosavvy.user.*;
         import com.neosavvy.user.dto.UserDTO;
 
-        import mx.core.FlexGlobals;
         import mx.messaging.ChannelSet;
         import mx.messaging.channels.AMFChannel;
         import mx.rpc.events.FaultEvent;
@@ -38,7 +37,7 @@
 
         protected function deleteresultHandler(resultEvent:ResultEvent):void {
             var data:Array = resultEvent.result as Array;
-            FlexGlobals.topLevelApplication.initializeService();
+            //FlexGlobals.topLevelApplication.initializeService();
         }
         ]]>
     </mx:Script>

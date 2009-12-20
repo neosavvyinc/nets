@@ -143,6 +143,17 @@
 
             </mx:Panel>
         </mx:VBox>
+        <mx:VBox horizontalAlign="center">
+            <mx:Panel title="Congratulations you are confirmed!!!" width="400" styleName="paddedContainer">
+                <mx:Text width="100%" text="Thanks for confirming your account please click below to login to the expense tracker"/>
+                <mx:Button id="loginButton" label="Login"/>
+            </mx:Panel>
+        </mx:VBox>
+        <mx:VBox horizontalAlign="center">
+            <mx:Panel title="Sorry, Something went wrong with the confirmation!!!" width="400" styleName="paddedContainer">
+                <mx:Text width="100%" text="Contact customer support at 919-741-9597"/>
+            </mx:Panel>
+        </mx:VBox>
 
     </mx:ViewStack>
 

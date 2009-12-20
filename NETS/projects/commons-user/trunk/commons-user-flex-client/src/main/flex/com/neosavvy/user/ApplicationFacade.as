@@ -11,6 +11,8 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.user.SaveEmployeeToCompanyCommand;
     import com.neosavvy.user.controller.user.SaveUserCommand;
 
+    import com.neosavvy.user.controller.user.ConfirmAccountCommand;
+
     import org.puremvc.as3.multicore.patterns.facade.Facade;
 
     public class ApplicationFacade extends Facade
@@ -49,7 +51,11 @@ package com.neosavvy.user {
 
         public static const SAVE_USER_TO_COMPANY_REQUEST:String = "saveEmployeeToCompanyRequest";
         public static const SAVE_USER_TO_COMPANY_SUCCESS:String = "saveEmployeeToCompanySuccess";
-        public static const SAVE_USER_TO_COMPANY_FAILED:String = "saveEmployeeToCompanyFailed"; 
+        public static const SAVE_USER_TO_COMPANY_FAILED:String = "saveEmployeeToCompanyFailed";
+
+        public static const CONFIRM_ACCOUNT_REQUEST:String = "confirmAccountRequest";
+        public static const CONFIRM_ACCOUNT_SUCCESS:String = "confirmAccountSuccess";
+        public static const CONFIRM_ACCOUNT_FAILED:String = "confirmAccountFailed";
 
 
         public function ApplicationFacade(key:String)
@@ -81,6 +87,7 @@ package com.neosavvy.user {
             registerCommand(SAVE_USER_REQUEST, SaveUserCommand);
             registerCommand(SAVE_COMPANY_REQUEST, SaveCompanyCommand);
             registerCommand(SAVE_USER_TO_COMPANY_REQUEST, SaveEmployeeToCompanyCommand)
+            registerCommand(CONFIRM_ACCOUNT_REQUEST, ConfirmAccountCommand);
         }
 
         /**
