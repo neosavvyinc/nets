@@ -1,4 +1,4 @@
-package com.neosavvy.user.view.userManagement {
+package com.neosavvy.user.view.secured.userManagement {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.UserDTO;
     import com.neosavvy.user.model.UserServiceProxy;
@@ -23,7 +23,7 @@ package com.neosavvy.user.view.userManagement {
 
     public class UserManagementMediator extends Mediator implements IMediator {
 
-        private static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.view.userManagement.UserManagementMediator")
+        private static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.view.secured.userManagement.UserManagementMediator")
 
         public static const NAME:String = "UserManagementMediator";
 

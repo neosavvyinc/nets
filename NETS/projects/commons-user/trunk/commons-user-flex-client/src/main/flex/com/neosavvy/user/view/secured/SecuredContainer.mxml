@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
          xmlns:leftNavigation="com.neosavvy.user.view.secured.leftNavigation.*"
-         xmlns:userManagement="com.neosavvy.user.view.userManagement.*">
+         xmlns:userManagement="com.neosavvy.user.view.secured.userManagement.*">
 
     <mx:HDividedBox width="100%" height="100%">
 

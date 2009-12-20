@@ -6,7 +6,7 @@ package com.neosavvy.user.controller {
     import com.neosavvy.user.view.login.RegistrationAndLoginWindowMediator;
 
     import com.neosavvy.user.view.security.LoginMediator;
-    import com.neosavvy.user.view.userManagement.UserManagementMediator;
+    import com.neosavvy.user.view.secured.userManagement.UserManagementMediator;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.SimpleCommand;

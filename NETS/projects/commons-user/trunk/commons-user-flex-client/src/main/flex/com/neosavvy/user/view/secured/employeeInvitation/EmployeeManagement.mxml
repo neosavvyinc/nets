@@ -37,7 +37,7 @@
                 <mx:AdvancedDataGridColumn
                         id="actionsCol"
                         headerText="Actions"
-                        itemRenderer="com.neosavvy.user.view.userManagement.Actions"/>
+                        itemRenderer="com.neosavvy.user.view.secured.userManagement.Actions"/>
             </mx:columns>
         </mx:AdvancedDataGrid>
         <mx:HBox width="100%">

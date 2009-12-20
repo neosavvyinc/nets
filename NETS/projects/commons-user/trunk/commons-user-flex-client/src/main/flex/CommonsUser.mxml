@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application
         xmlns:mx="http://www.adobe.com/2006/mxml"
-        xmlns:userManagement="com.neosavvy.user.view.userManagement.*"
+        xmlns:userManagement="com.neosavvy.user.view.secured.userManagement.*"
         xmlns:companyManagement="com.neosavvy.user.view.companyManagement.*"
         xmlns:employeeInvitation="com.neosavvy.user.view.secured.employeeInvitation.*"
         xmlns:security="com.neosavvy.user.view.security.*" xmlns:secured="com.neosavvy.user.view.secured.*"
