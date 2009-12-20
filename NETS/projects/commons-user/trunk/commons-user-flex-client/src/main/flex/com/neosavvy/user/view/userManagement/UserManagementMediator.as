@@ -71,9 +71,9 @@ package com.neosavvy.user.view.userManagement {
         override public function listNotificationInterests():Array {
             return [
                 ApplicationFacade.USER_LOGIN_FAILED
-                ,ApplicationFacade.USER_LOGGED_IN
+                //,ApplicationFacade.USER_LOGGED_IN
                 ,ApplicationFacade.USER_NOT_LOGGED_IN
-                ,ApplicationFacade.USER_LOGIN_SUCCESS
+                //,ApplicationFacade.USER_LOGIN_SUCCESS
                 ,ApplicationFacade.GET_USERS_SUCCESS
             ];
         }
@@ -82,10 +82,10 @@ package com.neosavvy.user.view.userManagement {
             switch (notification.getName()) {
 
                 case ApplicationFacade.USER_NOT_LOGGED_IN:
-                    showRegistrationLoginWindow();
+                    //showRegistrationLoginWindow();
                     break;
                 case ApplicationFacade.USER_LOGIN_SUCCESS:
-                    hideRegistrationLoginWindow(notification.getBody() as String);
+                    //hideRegistrationLoginWindow(notification.getBody() as String);
                     sendNotification(ApplicationFacade.GET_USERS_REQUEST)
                     break;
                 case ApplicationFacade.GET_USERS_SUCCESS:

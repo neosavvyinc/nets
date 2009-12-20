@@ -15,6 +15,13 @@ package com.neosavvy.user {
      * Time: 10:54:23 PM
      */
     public class ApplicationMediator extends Mediator implements IMediator {
+
+        public static var LANDING_NAVIGATION_INDEX:Number = 0;
+        public static var COMPANY_MANAGEMENT_NAVIGATION_INDEX:Number = 1;
+        public static var USER_MANAGEMENT_NAVIGATION_INDEX:Number = 2;
+        public static var EMPLOYEE_MANAGEMENT_NAVIGATION_INDEX:Number = 3;
+        public static var LOGIN_NAVIGATION_INDEX:Number = 4;
+
         public function ApplicationMediator(viewComponent:CommonsUser)
         {
             super(NAME, viewComponent);
@@ -46,25 +53,30 @@ package com.neosavvy.user {
 
         override public function listNotificationInterests():Array {
             return [
-                //ApplicationFacade.SAVE_COMPANY_SUCCESS
+                ApplicationFacade.USER_LOGGED_IN
+                ,ApplicationFacade.USER_NOT_LOGGED_IN
+                ,ApplicationFacade.USER_LOGIN_SUCCESS
             ];
         }
 
         override public function handleNotification(notification:INotification):void {
             switch ( notification.getName() ) {
-//                case ApplicationFacade.SAVE_COMPANY_SUCCESS:
-//                    this.navigationViewStack.selectedIndex = 3;
-//                    break;
+                case ApplicationFacade.USER_LOGIN_SUCCESS:
+                case ApplicationFacade.USER_LOGGED_IN:
+                    this.navigationViewStack.selectedIndex = USER_MANAGEMENT_NAVIGATION_INDEX;
+                    break;
+                case ApplicationFacade.USER_NOT_LOGGED_IN:
+                    this.navigationViewStack.selectedIndex = LOGIN_NAVIGATION_INDEX;
+                    break;
             }
         }
 
         private function newCompanyButtonClicked(event:MouseEvent):void {
-            this.navigationViewStack.selectedIndex = 1;
+            this.navigationViewStack.selectedIndex = COMPANY_MANAGEMENT_NAVIGATION_INDEX;
         }
 
         private function existingUserButtonClicked(event:MouseEvent):void {
             sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
-            this.navigationViewStack.selectedIndex = 2;
         }
     }
 
