@@ -8,6 +8,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.security.LogoutCommand;
     import com.neosavvy.user.controller.user.GetUsersCommand;
 
+    import com.neosavvy.user.controller.user.SaveEmployeeToCompanyCommand;
     import com.neosavvy.user.controller.user.SaveUserCommand;
 
     import org.puremvc.as3.multicore.patterns.facade.Facade;
@@ -46,6 +47,10 @@ package com.neosavvy.user {
         public static const SAVE_COMPANY_SUCCESS:String = "saveCompanySuccess";
         public static const SAVE_COMPANY_FAILED:String = "saveCompanyFailed";
 
+        public static const SAVE_USER_TO_COMPANY_REQUEST:String = "saveEmployeeToCompanyRequest";
+        public static const SAVE_USER_TO_COMPANY_SUCCESS:String = "saveEmployeeToCompanySuccess";
+        public static const SAVE_USER_TO_COMPANY_FAILED:String = "saveEmployeeToCompanyFailed"; 
+
 
         public function ApplicationFacade(key:String)
         {
@@ -75,6 +80,7 @@ package com.neosavvy.user {
             registerCommand(GET_USERS_REQUEST, GetUsersCommand);
             registerCommand(SAVE_USER_REQUEST, SaveUserCommand);
             registerCommand(SAVE_COMPANY_REQUEST, SaveCompanyCommand);
+            registerCommand(SAVE_USER_TO_COMPANY_REQUEST, SaveEmployeeToCompanyCommand)
         }
 
         /**
@@ -87,5 +93,6 @@ package com.neosavvy.user {
             sendNotification(STARTUP, app);
         }
 
-       }
+
+        }
 }

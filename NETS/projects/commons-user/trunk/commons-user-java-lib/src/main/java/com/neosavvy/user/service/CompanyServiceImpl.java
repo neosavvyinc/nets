@@ -51,12 +51,30 @@ public class CompanyServiceImpl implements CompanyService{
         roleToFind.setShortName("ROLE_ADMIN");
         List<RoleDTO> adminRoles = roleDao.findRoles(roleToFind);
         if((adminRoles.size() > 1) || (adminRoles.size() < 1)){
-          throw new CompanyServiceException("invalid number of ROLE_ADIMS found " + adminRoles.size(), null);    
+          throw new CompanyServiceException("invalid number of ROLE_ADMINS found " + adminRoles.size(), null);
         }
         UserCompanyRoleDTO userCompanyRole = new UserCompanyRoleDTO();
         userCompanyRole.setRole(adminRoles.get(0));
         userCompanyRole.setUser(user);
         userCompanyRole.setCompany(company);
+        userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
+        HashSet<UserCompanyRoleDTO> userCompanyRoles = new HashSet<UserCompanyRoleDTO>();
+        userCompanyRoles.add(userCompanyRole);
+        company.setUserCompanyRoles(userCompanyRoles);
+        companyDao.saveCompany(company);
+    }
+
+    public void addEmployeeToCompany(CompanyDTO company, UserDTO employee) {
+        userDao.saveUser(employee);
+        RoleDTO roleToFind = new RoleDTO();
+        roleToFind.setShortName("ROLE_EMPLOYEE");
+        List<RoleDTO> employeeRoles = roleDao.findRoles(roleToFind);
+        if((employeeRoles.size() > 1) || (employeeRoles.size() < 1)) {
+            throw new CompanyServiceException("invalid number of ROLE_EMPLOYEEs found " + employeeRoles.size(), null);
+        }
+        UserCompanyRoleDTO userCompanyRole = new UserCompanyRoleDTO();
+        userCompanyRole.setRole(employeeRoles.get(0));
+        userCompanyRole.setUser(employee);
         userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
         HashSet<UserCompanyRoleDTO> userCompanyRoles = new HashSet<UserCompanyRoleDTO>();
         userCompanyRoles.add(userCompanyRole);

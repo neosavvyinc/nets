@@ -1,26 +1,26 @@
 package com.neosavvy.user.service;
 
-import org.junit.Test;
-import junit.framework.Assert;
 import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dto.RoleDTO;
 import com.neosavvy.user.dto.UserCompanyRoleDTO;
+import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.service.exception.CompanyServiceException;
+import junit.framework.Assert;
+import org.junit.Test;
 
 /**
  * @author lgleason
  */
-public class TestCompanyService extends BaseSpringAwareServiceTestCase{
+public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     @Test
-    public void testGetCompanies() throws Exception{
+    public void testGetCompanies() throws Exception {
         cleanDatabase();
         companyService.saveCompany(createTestCompany());
         Assert.assertFalse(companyService.getCompanies().isEmpty());
     }
 
     @Test
-    public void testFindCompanyById() throws Exception{
+    public void testFindCompanyById() throws Exception {
         cleanDatabase();
         CompanyDTO testCompany = createTestCompany();
         companyService.saveCompany(testCompany);
@@ -31,7 +31,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase{
     }
 
     @Test
-    public void testFindCompanies(){
+    public void testFindCompanies() {
         cleanDatabase();
         CompanyDTO testCompany = createTestCompany();
         companyService.saveCompany(testCompany);
@@ -40,7 +40,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase{
     }
 
     @Test
-    public void testAddCompany(){
+    public void testAddCompany() {
         cleanDatabase();
         CompanyDTO testCompany = createTestCompany();
         UserDTO testUser = createTestUser();
@@ -64,8 +64,31 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase{
                 foundUserCompanyRole.getUser().getId());
     }
 
-    @Test(expected= CompanyServiceException.class)
-    public void testAddCompanyException(){
+    @Test
+    public void testAddEmployeeToCompany() {
+        cleanDatabase();
+        CompanyDTO testCompany = createTestCompany();
+        UserDTO testUserDTO = createTestUser();
+        roleDAO.saveRole(createEmployeeTestRole());
+        roleDAO.saveRole(createTestRole());
+
+        companyService.addCompany(testCompany, testUserDTO);
+
+        int numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
+        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
+                1,
+                numUserCompanyRoles);
+
+
+        companyService.addEmployeeToCompany(testCompany, testUserDTO);
+        numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
+        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
+                2,
+                numUserCompanyRoles);
+    }
+
+    @Test(expected = CompanyServiceException.class)
+    public void testAddCompanyException() {
         //this expects to throw an exception
         cleanDatabase();
         CompanyDTO testCompany = createTestCompany();

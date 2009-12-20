@@ -2,6 +2,7 @@ package com.neosavvy.user.controller {
     import com.neosavvy.user.ApplicationMediator;
 
     import com.neosavvy.user.view.companyManagement.CompanyManagementMediator;
+    import com.neosavvy.user.view.employeeInvitation.EmployeeManagementMediator;
     import com.neosavvy.user.view.login.RegistrationAndLoginWindowMediator;
 
     import com.neosavvy.user.view.userManagement.UserManagementMediator;
@@ -18,7 +19,7 @@ package com.neosavvy.user.controller {
             //facade.registerMediator( new RegistrationAndLoginWindowMediator() );
             facade.registerMediator( new UserManagementMediator( application.userManagement ) );
             facade.registerMediator( new CompanyManagementMediator( application.companyManagement ) );
-            
+            facade.registerMediator( new EmployeeManagementMediator( application.employeeManagement ) );
         }
     }
 }

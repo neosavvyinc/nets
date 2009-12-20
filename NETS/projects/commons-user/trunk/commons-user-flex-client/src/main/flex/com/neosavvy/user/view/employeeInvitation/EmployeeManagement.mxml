@@ -11,7 +11,7 @@
             <flexlib:PromptingTextInput id="empFName" prompt="First Name" width="100%"/>
             <flexlib:PromptingTextInput id="empLName" prompt="Last Name" width="100%"/>
             <flexlib:PromptingTextInput id="empEmail" prompt="Email" width="100%"/>
-            <mx:Button id="addUser" label="Add User"/>
+            <mx:Button id="addUserButton" label="Add User"/>
         </mx:HBox>
         <mx:AdvancedDataGrid
                 id="employeesQueuedToInvite"

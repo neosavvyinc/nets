@@ -89,6 +89,13 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         return role;
     }
 
+    protected RoleDTO createEmployeeTestRole() {
+        RoleDTO role = new RoleDTO();
+        role.setShortName("ROLE_EMPLOYEE");
+        role.setLongName("Employee");
+        return role;
+    }
+
     protected NumEmployeesRangeDTO createTestRange(){
         NumEmployeesRangeDTO test_range = new NumEmployeesRangeDTO();
         test_range.setRangeDescription("1-10");

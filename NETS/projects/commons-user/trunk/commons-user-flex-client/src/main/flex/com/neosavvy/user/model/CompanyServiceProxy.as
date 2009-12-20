@@ -29,6 +29,17 @@ package com.neosavvy.user.model {
             super(NAME, null);
         }
 
+        /***
+         * This variable should maintain the reference to the
+         * active and working company.
+         *
+         * When a user logs in this variable should be set based on
+         * what company they are associated with
+         */
+        public function get activeCompany():CompanyDTO{
+            return data as CompanyDTO;
+        }
+
         public function addCompany(company:CompanyDTO, user:UserDTO):void
         {
             var companyService:RemoteObject = getCompanyService();
@@ -46,6 +57,20 @@ package com.neosavvy.user.model {
             LOGGER.debug("Company was returned");
             this.data = event.result as ArrayCollection;
             sendNotification(ApplicationFacade.SAVE_COMPANY_SUCCESS);
+        }
+
+        public function addEmployeeToCompany(company:CompanyDTO, user:UserDTO):void
+        {
+            var companyService:RemoteObject = getCompanyService();
+            companyService.addEventListener(ResultEvent.RESULT, handleSaveEmployeeToCompanyResult);
+            companyService.addEventListener(FaultEvent.FAULT, handleSaveEmployeeToCompanyFault);
+            companyService.addEmployeeToCompany( company, user );
+        }
+
+        private function handleSaveEmployeeToCompanyFault(event:FaultEvent):void {
+        }
+
+        private function handleSaveEmployeeToCompanyResult(event:ResultEvent):void {
         }
 
         /****
