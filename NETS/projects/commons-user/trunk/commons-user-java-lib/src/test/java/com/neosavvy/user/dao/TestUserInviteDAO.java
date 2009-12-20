@@ -18,7 +18,7 @@ import com.neosavvy.user.dto.UserInviteDTO;
  */
 public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
     @Test
-	public void testSaveUser() {
+	public void testSaveUserInvite() {
         cleanupTables();
         UserInviteDTO userInvite = createTestUserInvite();
 
@@ -27,7 +27,7 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
 	}
 
     @Test
-    public void testDeleteUser() {
+    public void testDeleteUserInvite() {
         cleanupTables();
         int numRows = countRowsInTable("USER_INVITE");
         Assert.assertEquals("The table should be empty", 0, numRows);
@@ -45,7 +45,7 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
     }
 
     @Test
-    public void testFindUserById() {
+    public void testFindUserInviteById() {
         cleanupTables();
 
         UserInviteDTO userInvite = createTestUserInvite();
@@ -57,7 +57,23 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
 
         UserInviteDTO userInviteFound = userInviteDAO.findUserInviteById(userInvite.getId());
 
-        Assert.assertNotNull("User object was not found by id " + userInvite.getId(), userInviteFound);
+        Assert.assertNotNull("UserInvite object was found by id " + userInvite.getId(), userInviteFound);
+    }
+
+    @Test
+    public void testGetUserInvites() {
+        cleanupTables();
+
+        UserInviteDTO userInvite = createTestUserInvite();
+        userInviteDAO.saveUserInvite(userInvite);
+
+        int numRows = countRowsInTable("USER_INVITE");
+
+        Assert.assertEquals("Num of rows is not equal to 1", 1, numRows);
+
+        List<UserInviteDTO> userInvitesFound = userInviteDAO.getUserInvites();
+
+        Assert.assertTrue("UserInvite objects were found ", userInvitesFound.size() > 0);
     }
 
     @Test
@@ -96,7 +112,17 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
         assertSearchCriteriaResults(userInvitesFounds,1);
     }
 
+    @Test
+    public void testFindByEmail() {
+        setupCriteriaBasedSearchTest();
 
+        UserInviteDTO searchCriteria = new UserInviteDTO();
+        searchCriteria.setEmailAddress("aparrish@neosavvy.com");
+
+        List<UserInviteDTO> userInvitesFounds = userInviteDAO.findUserInvites(searchCriteria);
+
+        assertSearchCriteriaResults(userInvitesFounds,1);
+    }
 
     private void setupCriteriaBasedSearchTest() {
         cleanupTables();
@@ -111,69 +137,5 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
         Assert.assertEquals("Num of rows is not equal to 2", 2, numRows);
     }
 
-//    @Test
-//    public void testUserCompanyRoles(){
-//        cleanupTables();
-//
-//        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(null, null, null);
-//        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
-//
-//        UserDTO user = createTestUser();
-//        HashSet<UserCompanyRoleDTO> userCompanySet = new HashSet();
-//        userCompanySet.add(userCompanyRole);
-//        user.setUserCompanyRoles(userCompanySet);
-//        userDAO.saveUser(user);
-//
-//        UserDTO foundUser = userDAO.findUserById(user.getId());
-//
-//        Assert.assertEquals("the userCompanyRole in the user we got back is the same one we stored",
-//                foundUser.getUserCompanyRoles().iterator().next().getId(),
-//                userCompanyRole.getId());
-//    }
-//
-//    @Test
-//    public void testUserCompanyRolesRole(){
-//        cleanupTables();
-//        RoleDTO role = createTestRole();
-//        roleDAO.saveRole(role);
-//
-//        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
-//        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
-//
-//        UserDTO user = createTestUser();
-//        HashSet<UserCompanyRoleDTO> userCompanySet = new HashSet();
-//        userCompanySet.add(userCompanyRole);
-//        user.setUserCompanyRoles(userCompanySet);
-//        userDAO.saveUser(user);
-//
-//        UserDTO foundUser = userDAO.findUserById(user.getId());
-//
-//        Assert.assertEquals("the userCompanyRole role in the user we got back is the same one we stored",
-//                foundUser.getUserCompanyRoles().iterator().next().getRole().getId(),
-//                role.getId());
-//    }
-//
-//    @Test
-//    public void testUserCompanyRolesCompany(){
-//        cleanupTables();
-//        RoleDTO role = createTestRole();
-//        roleDAO.saveRole(role);
-//        CompanyDTO company = createTestCompany();
-//        companyDAO.saveCompany(company);
-//
-//        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(null, company, null);
-//        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
-//
-//        UserDTO user = createTestUser();
-//        HashSet<UserCompanyRoleDTO> userCompanySet = new HashSet();
-//        userCompanySet.add(userCompanyRole);
-//        user.setUserCompanyRoles(userCompanySet);
-//        userDAO.saveUser(user);
-//
-//        UserDTO foundUser = userDAO.findUserById(user.getId());
-//
-//        Assert.assertEquals("the userCompanyRole role in the user we got back is the same one we stored",
-//                foundUser.getUserCompanyRoles().iterator().next().getCompany().getId(),
-//                company.getId());
-//    }
+
 }

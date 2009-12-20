@@ -16,7 +16,7 @@ import org.hibernate.Criteria;
  */
 public class UserInviteDAOImpl extends BaseDAO implements UserInviteDAO{
     public List<UserInviteDTO> getUserInvites() {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return getCurrentSession().createCriteria(UserInviteDTO.class).list();
     }
 
     public void saveUserInvite(UserInviteDTO userInvite) {
@@ -43,7 +43,9 @@ public class UserInviteDAOImpl extends BaseDAO implements UserInviteDAO{
         if((userInvite.getLastName() != null) && (userInvite.getLastName().length() > 0)){
             criteria.add(Restrictions.eq("lastName", userInvite.getLastName()));
         }
-
+        if((userInvite.getEmailAddress() != null) && (userInvite.getEmailAddress().length() > 0)){
+            criteria.add(Restrictions.eq("emailAddress", userInvite.getEmailAddress()));
+        }
 
         return criteria.list();  
     }
