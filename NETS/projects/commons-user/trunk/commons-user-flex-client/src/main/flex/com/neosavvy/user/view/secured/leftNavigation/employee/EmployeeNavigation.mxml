@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Employee Navigation" styleName="paddedContainer">
 
-    <mx:LinkButton id="addExpenseReport" label="Add Expense"/>
-    <mx:LinkButton id="viewSubmittedExpenses" label="View Submitted Expenses"/>
+    <mx:LinkButton id="addExpenseReport" label="Add Expense" enabled="false"/>
+    <mx:LinkButton id="viewSubmittedExpenses" label="View Submitted Expenses" enabled="false"/>
 
 </mx:Panel>
