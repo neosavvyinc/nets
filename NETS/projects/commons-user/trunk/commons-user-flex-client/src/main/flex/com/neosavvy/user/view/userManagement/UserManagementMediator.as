@@ -33,7 +33,6 @@ package com.neosavvy.user.view.userManagement {
 
 
         override public function onRegister():void {
-            userManagement.logoutButton.addEventListener(MouseEvent.CLICK, handleLogoutButtClicked);
             grid.addEventListener(ListEvent.ITEM_CLICK, handleGridItemClicked);
         }
 
@@ -44,10 +43,6 @@ package com.neosavvy.user.view.userManagement {
 
         public function get userManagement():UserManagement {
             return viewComponent as UserManagement;
-        }
-
-        public function get usernameLbl():Label {
-            return userManagement.usernameLbl;
         }
 
         public function get grid():AdvancedDataGrid {
@@ -64,7 +59,6 @@ package com.neosavvy.user.view.userManagement {
 
         protected function hideRegistrationLoginWindow(name:String):void {
             PopUpManager.removePopUp(regAndLoginWindow);
-            usernameLbl.text = name;
         }
 
 

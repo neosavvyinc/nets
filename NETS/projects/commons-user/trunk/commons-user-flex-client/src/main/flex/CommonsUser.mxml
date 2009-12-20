@@ -4,7 +4,7 @@
         xmlns:userManagement="com.neosavvy.user.view.userManagement.*"
         xmlns:companyManagement="com.neosavvy.user.view.companyManagement.*"
         xmlns:employeeInvitation="com.neosavvy.user.view.employeeInvitation.*"
-        xmlns:security="com.neosavvy.user.view.security.*"
+        xmlns:security="com.neosavvy.user.view.security.*" xmlns:secured="com.neosavvy.user.view.secured.*"
         creationComplete="{facade.startup(this)}"
         layout="absolute"
         >
@@ -36,7 +36,7 @@
             <mx:Button label="Existing Users Login Here" id="existingUsersButton"/>
         </mx:HBox>
         <companyManagement:CompanyManagement id="companyManagement" width="100%" height="100%"/>
-        <userManagement:UserManagement id="userManagement" width="100%" height="100%"/>
+        <secured:SecuredContainer id="securedContainer" width="100%" height="100%"/>
         <employeeInvitation:EmployeeManagement id="employeeManagement" width="100%" height="100%"/>
         <security:Login id="login" width="100%" height="100%"/>
     </mx:ViewStack>

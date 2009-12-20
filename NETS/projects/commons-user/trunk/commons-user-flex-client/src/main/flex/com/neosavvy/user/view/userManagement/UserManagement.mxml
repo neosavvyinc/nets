@@ -1,12 +1,8 @@
 <?xml version="1.0" ?>
-<mx:VBox
+<mx:Panel
         xmlns:mx="http://www.adobe.com/2006/mxml"
-        xmlns:flexlib="http://code.google.com/p/flexlib/">
+        xmlns:flexlib="http://code.google.com/p/flexlib/" styleName="paddedContainer">
 
-    <mx:HBox width="100%" horizontalAlign="right">
-        <mx:Label id="usernameLbl" text="Not Logged In"/>
-        <mx:Button label="Logout" id="logoutButton"/>
-    </mx:HBox>
     <mx:HBox width="100%" height="100%">
         <mx:VBox>
             <flexlib:PromptingTextInput id="identifier" editable="false" prompt="NoId"/>
@@ -50,4 +46,4 @@
             </mx:columns>
         </mx:AdvancedDataGrid>
     </mx:HBox>
-</mx:VBox>
+</mx:Panel>
