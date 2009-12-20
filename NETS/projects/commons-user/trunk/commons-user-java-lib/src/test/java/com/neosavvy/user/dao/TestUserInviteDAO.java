@@ -72,30 +72,30 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
         assertSearchCriteriaResults(usersFound,1);
     }
 
-//    @Test
-//    public void testFindByMiddleName() {
-//        setupCriteriaBasedSearchTest();
-//
-//        UserDTO searchCriteria = new UserDTO();
-//        searchCriteria.setMiddleName("Adam");
-//
-//        List<UserDTO> usersFounds = userDAO.findUsers(searchCriteria);
-//
-//        assertSearchCriteriaResults(usersFounds,1);
-//    }
-//
-//    @Test
-//    public void testFindByLastName() {
-//        setupCriteriaBasedSearchTest();
-//
-//        UserDTO searchCriteria = new UserDTO();
-//        searchCriteria.setLastName("Parrish");
-//
-//        List<UserDTO> usersFounds = userDAO.findUsers(searchCriteria);
-//
-//        assertSearchCriteriaResults(usersFounds,1);
-//    }
-//
+    @Test
+    public void testFindByMiddleName() {
+        setupCriteriaBasedSearchTest();
+
+        UserInviteDTO searchCriteria = new UserInviteDTO();
+        searchCriteria.setMiddleName("Adam");
+
+        List<UserInviteDTO> userInvitesFounds = userInviteDAO.findUserInvites(searchCriteria);
+
+        assertSearchCriteriaResults(userInvitesFounds,1);
+    }
+
+    @Test
+    public void testFindByLastName() {
+        setupCriteriaBasedSearchTest();
+
+        UserInviteDTO searchCriteria = new UserInviteDTO();
+        searchCriteria.setLastName("Parrish");
+
+        List<UserInviteDTO> userInvitesFounds = userInviteDAO.findUserInvites(searchCriteria);
+
+        assertSearchCriteriaResults(userInvitesFounds,1);
+    }
+
 
 
     private void setupCriteriaBasedSearchTest() {

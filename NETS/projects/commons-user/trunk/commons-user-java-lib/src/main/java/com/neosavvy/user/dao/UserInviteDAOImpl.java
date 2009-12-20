@@ -37,6 +37,13 @@ public class UserInviteDAOImpl extends BaseDAO implements UserInviteDAO{
         if((userInvite.getFirstName() != null) && (userInvite.getFirstName().length() > 0)){
             criteria.add(Restrictions.eq("firstName", userInvite.getFirstName()));
         }
+        if((userInvite.getMiddleName() != null) && (userInvite.getMiddleName().length() > 0)){
+            criteria.add(Restrictions.eq("middleName", userInvite.getMiddleName()));
+        }
+        if((userInvite.getLastName() != null) && (userInvite.getLastName().length() > 0)){
+            criteria.add(Restrictions.eq("lastName", userInvite.getLastName()));
+        }
+
 
         return criteria.list();  
     }
