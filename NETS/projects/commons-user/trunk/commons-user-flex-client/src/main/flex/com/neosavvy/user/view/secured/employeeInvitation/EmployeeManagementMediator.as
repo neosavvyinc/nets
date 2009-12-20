@@ -1,4 +1,4 @@
-package com.neosavvy.user.view.employeeInvitation {
+package com.neosavvy.user.view.secured.employeeInvitation {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.CompanyDTO;
     import com.neosavvy.user.dto.UserDTO;
@@ -16,7 +16,7 @@ package com.neosavvy.user.view.employeeInvitation {
 
     public class EmployeeManagementMediator extends Mediator implements IMediator {
 
-        private static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.view.employeeInvitation.EmployeeManagementMediator")
+        private static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.view.secured.employeeInvitation.EmployeeManagementMediator")
 
         public static const NAME:String = "employeeManagementMediator";
 
