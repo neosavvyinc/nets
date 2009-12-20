@@ -87,7 +87,7 @@ public class CompanyServiceImpl implements CompanyService{
 
         SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
         msg.setTo(user.getEmailAddress());
-        msg.setText("Please click here to activate your account: http://" + hostName + "/commons-user-webapp/users/data/" + user.getUsername() + "/" + user.getRegistrationToken());
+        msg.setText("Use your registration token to confirm that you are actually whom you say you are. \n\nThis is your registration token: " + user.getRegistrationToken());
         try{
             mailSender.send(msg);
         }

@@ -128,9 +128,7 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
     }
 
     protected void cleanupTables() {
-        deleteFromTables("USER_ROLE");
         deleteFromTables("ROLE");
-        deleteFromTables("USER_COMPANY");
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
         deleteFromTables("USER_INVITE");

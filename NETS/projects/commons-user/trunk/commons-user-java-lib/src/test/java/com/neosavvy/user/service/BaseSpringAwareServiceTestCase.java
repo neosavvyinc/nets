@@ -59,7 +59,7 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         user.setLastName("Parrish");
         user.setUsername("aparrish");
         user.setPassword("testPassword");
-        user.setEmailAddress("aparrish@neosavvy.com");
+        user.setEmailAddress("aparrish1@neosavvy.com");
         return user;
     }
 
@@ -105,8 +105,6 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
     }
 
     protected void cleanDatabase() {
-        deleteFromTables("USER_ROLE");
-        deleteFromTables("USER_COMPANY");
         deleteFromTables("USER_COMPANY_ROLE");
         deleteFromTables("USER");
         deleteFromTables("ROLE");

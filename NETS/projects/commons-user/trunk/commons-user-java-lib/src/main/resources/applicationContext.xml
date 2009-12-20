@@ -38,6 +38,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
                 <prop key="show_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">create</prop>
             </props>
         </property>
     </bean>
@@ -76,7 +77,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
-        <property name="templateMessage" ref="templateMessage"/>
+        <property name="templateMessage" ref="newUserAddedToCompanyTemplateMessage"/>
         <property name="mailSender" ref="mailSender"/>
         <property name="hostName" value="localhost:8080"/>
     </bean>
@@ -87,7 +88,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="roleDao" ref="roleDAO"/>
         <property name="userCompanyRoleDao" ref="userCompanyRoleDAO"/>
         <property name="numEmployeesRangeDao" ref="numEmployeesRangeDAO"/>
-        <property name="templateMessage" ref="templateMessage"/>
+        <property name="templateMessage" ref="adminUserAddedToCompanyTemplateMessage"/>
         <property name="mailSender" ref="mailSender"/>
         <property name="hostName" value="localhost:8080"/>
     </bean>
@@ -104,9 +105,14 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
       <property name="host" value="localhost"/>
     </bean>
 
-    <bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+    <bean id="newUserAddedToCompanyTemplateMessage" class="org.springframework.mail.SimpleMailMessage">
       <property name="from" value="customerservice@mycompany.com"/>
-      <property name="subject" value="Thanks for registering a user with commons-user"/>
+      <property name="subject" value="You have been invited to join your company's expense tracking system!"/>
+    </bean>
+    
+    <bean id="adminUserAddedToCompanyTemplateMessage" class="org.springframework.mail.SimpleMailMessage">
+      <property name="from" value="customerservice@mycompany.com"/>
+      <property name="subject" value="Confirm that you have just been added as the admin user for your company's time tracking system"/>
     </bean>
 
     <bean id="viewResolver"
