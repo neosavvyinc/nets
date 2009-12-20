@@ -51,6 +51,10 @@ package com.neosavvy.user {
         public static const SAVE_COMPANY_SUCCESS:String = "saveCompanySuccess";
         public static const SAVE_COMPANY_FAILED:String = "saveCompanyFailed";
 
+        public static const INVITE_USER_TO_COMPANY_REQUEST:String = "inviteEmployeeToCompanyRequest";
+        public static const INVITE_USER_TO_COMPANY_SUCCESS:String = "inviteEmployeeToCompanySuccess";
+        public static const INVITE_USER_TO_COMPANY_FAILED:String = "inviteEmployeeToCompanyFailed";
+
         public static const SAVE_USER_TO_COMPANY_REQUEST:String = "saveEmployeeToCompanyRequest";
         public static const SAVE_USER_TO_COMPANY_SUCCESS:String = "saveEmployeeToCompanySuccess";
         public static const SAVE_USER_TO_COMPANY_FAILED:String = "saveEmployeeToCompanyFailed";

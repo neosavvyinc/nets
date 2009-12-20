@@ -3,6 +3,7 @@ package com.neosavvy.user.view.secured.employeeInvitation {
     import com.neosavvy.user.dto.CompanyDTO;
     import com.neosavvy.user.dto.UserDTO;
 
+    import com.neosavvy.user.dto.UserInviteDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
 
     import flash.events.MouseEvent;
@@ -38,14 +39,15 @@ package com.neosavvy.user.view.secured.employeeInvitation {
         }
 
         private function addUserButtonClickListener(event:MouseEvent):void {
-            var user:UserDTO = new UserDTO();
+            var user:UserInviteDTO = new UserInviteDTO();
             user.firstName = employeeManagement.empFName.text;
             user.lastName = employeeManagement.empLName.text;
             user.emailAddress = employeeManagement.empEmail.text;
 
             var company:CompanyDTO = (facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy).activeCompany;
 
-            sendNotification(ApplicationFacade.SAVE_USER_TO_COMPANY_REQUEST, [company,user]);
+            user.company = company;
+            sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_REQUEST, user);
         }
 
     }
