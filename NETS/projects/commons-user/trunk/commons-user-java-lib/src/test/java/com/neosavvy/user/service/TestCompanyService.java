@@ -183,6 +183,31 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
                 userInvites.iterator().next().getId(),
                 foundCompany.getUserInvites().iterator().next().getId());
     }
+    //todo: test persisting more than one user
+
+    @Test(expected = CompanyServiceException.class)
+    public void testGetUserInvitesNullCompany(){
+        companyService.getInvitedUsers(null);
+    }
+
+    @Test(expected = CompanyServiceException.class)
+    public void testGetUserInvitesUnpersistedCompany(){
+        companyService.getInvitedUsers(createTestCompany());
+    }
+
+    @Test
+    public void testGetUserInvites(){
+        cleanDatabase();
+        List<UserInviteDTO> userInvites = new ArrayList();
+        userInvites.add(createTestUserInvite());
+        CompanyDTO company = createTestCompany();
+        companyDAO.saveCompany(company);
+        companyService.inviteUsers(company, userInvites);
+        List<UserInviteDTO> foundUserInvites = companyService.getInvitedUsers(company);
+        Assert.assertEquals("Persisted User invite is the one we created",
+                userInvites.iterator().next().getId(),
+                foundUserInvites.iterator().next().getId());
+    }
 
     @Test(expected = CompanyServiceException.class)
     public void testAddCompanyException() {

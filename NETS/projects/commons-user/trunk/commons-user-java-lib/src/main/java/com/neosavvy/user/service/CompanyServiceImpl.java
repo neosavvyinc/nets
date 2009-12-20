@@ -14,6 +14,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.ArrayList;
 
 /**
  * User: lgleason
@@ -96,24 +97,15 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public void addUserToCompany(CompanyDTO company, UserDTO user) {
-        if(company == null){
-            throw new CompanyServiceException("null company not supported", null);
-        }
         if(user == null){
             throw new CompanyServiceException("null user not supported", null);    
         }
+        verifyValidCompany(company);
         //look for user
         UserDTO foundUser = userDao.findUserById(user.getId());
 
         if ((foundUser == null) || (!foundUser.getUsername().equals(user.getUsername()))){
             throw new CompanyServiceException("no User found that matches username " + user.getUsername(), null);
-        }
-
-        //look for company
-        CompanyDTO foundCompany = companyDao.findCompanyById(company.getId());
-
-        if ((foundCompany == null) || (!foundCompany.getCompanyName().equals(company.getCompanyName()))){
-            throw new CompanyServiceException("no Company found that matches Company " + company.getCompanyName(), null);
         }
         
         //look for a valid role
@@ -140,14 +132,8 @@ public class CompanyServiceImpl implements CompanyService{
         if(userInvites == null){
             throw new CompanyServiceException("null userInvites not supported", null);
         }
-        if(company == null){
-            throw new CompanyServiceException("null company not supported", null);
-        }
 
-        if(companyDao.findCompanyById(company.getId()) == null){
-            throw new CompanyServiceException("unpersisted company", null);
-        }
-
+        verifyValidCompany(company);
         for(UserInviteDTO invite: userInvites){
             try {
                 invite.setRegistrationToken(StringUtil.getHash64(invite.toString() + System.currentTimeMillis() + ""));
@@ -168,8 +154,21 @@ public class CompanyServiceImpl implements CompanyService{
         //this will e-mail out the invites once everything is hooked in.
     }
 
+    protected void verifyValidCompany(CompanyDTO company){
+        if(company == null){
+            throw new CompanyServiceException("null company not supported", null);
+        }
+
+        if(companyDao.findCompanyById(company.getId()) == null){
+            throw new CompanyServiceException("unpersisted company", null);
+        }
+    }
+
     public List<UserInviteDTO> getInvitedUsers(CompanyDTO company) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        // for now we are going to access this via company but later on this should probably be a direct
+        // query against the userInvites table.
+        verifyValidCompany(company);
+        return new ArrayList(company.getUserInvites());
     }
 
     public void setCompanyDao(CompanyDAO companyDao) {
