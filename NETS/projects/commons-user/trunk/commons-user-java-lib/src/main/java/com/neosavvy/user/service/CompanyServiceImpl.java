@@ -96,17 +96,40 @@ public class CompanyServiceImpl implements CompanyService{
         }
     }
 
-    public void addEmployeeToCompany(CompanyDTO company, UserDTO employee) {
-        userDao.saveUser(employee);
+    public void addUserToCompany(CompanyDTO company, UserDTO user) {
+        if(company == null){
+            throw new CompanyServiceException("null company not supported", null);
+        }
+        if(user == null){
+            throw new CompanyServiceException("null user not supported", null);    
+        }
+        //look for user
+        UserDTO foundUser = userDao.findUserById(user.getId());
+
+        if ((foundUser == null) || (!foundUser.getUsername().equals(user.getUsername()))){
+            throw new CompanyServiceException("no User found that matches username " + user.getUsername(), null);
+        }
+
+        //look for company
+        CompanyDTO foundCompany = companyDao.findCompanyById(company.getId());
+
+        if ((foundCompany == null) || (!foundCompany.getCompanyName().equals(company.getCompanyName()))){
+            throw new CompanyServiceException("no Company found that matches Company " + company.getCompanyName(), null);
+        }
+        
+       
         RoleDTO roleToFind = new RoleDTO();
         roleToFind.setShortName("ROLE_EMPLOYEE");
         List<RoleDTO> employeeRoles = roleDao.findRoles(roleToFind);
         if((employeeRoles.size() > 1) || (employeeRoles.size() < 1)) {
             throw new CompanyServiceException("invalid number of ROLE_EMPLOYEEs found " + employeeRoles.size(), null);
         }
+
+
+
         UserCompanyRoleDTO userCompanyRole = new UserCompanyRoleDTO();
         userCompanyRole.setRole(employeeRoles.get(0));
-        userCompanyRole.setUser(employee);
+        userCompanyRole.setUser(user);
         userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
         HashSet<UserCompanyRoleDTO> userCompanyRoles = new HashSet<UserCompanyRoleDTO>();
         userCompanyRoles.add(userCompanyRole);

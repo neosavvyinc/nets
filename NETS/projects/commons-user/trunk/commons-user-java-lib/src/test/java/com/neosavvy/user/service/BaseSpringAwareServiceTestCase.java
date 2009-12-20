@@ -73,12 +73,6 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         company.setPostalCode("30312");
         company.setCountry("USA");
 
-        NumEmployeesRangeDTO numEmployees = new NumEmployeesRangeDTO();
-        numEmployees.setRangeDescription("1-100");
-        numEmployees.setRangeFrom(1);
-        numEmployees.setRangeTo(100);
-        
-        company.setNumEmployeesRange(numEmployees);
         return company;
     }
 

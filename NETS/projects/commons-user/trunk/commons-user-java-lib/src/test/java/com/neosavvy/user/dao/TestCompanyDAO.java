@@ -188,4 +188,26 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
                 foundCompany.getUserCompanyRoles().iterator().next().getUser().getId(),
                 user.getId());
     }
+
+    @Test
+    public void testUserInvite(){
+        cleanupTables();
+        UserInviteDTO userInvite = createTestUserInvite();
+        userInviteDAO.saveUserInvite(userInvite);
+
+        CompanyDTO company = createTestCompany();
+        HashSet<UserInviteDTO> userInviteSet = new HashSet();
+        userInviteSet.add(userInvite);
+        company.setUserInvites(userInviteSet);
+        companyDAO.saveCompany(company);
+
+        CompanyDTO foundCompany = companyDAO.findCompanyById(company.getId());
+
+        Assert.assertEquals("We got the same userInvite id back that we just stored",
+                foundCompany.getUserInvites().iterator().next().getId(),
+                userInvite.getId());
+        Assert.assertEquals("We got the same userInvite email address back that we just stored",
+                foundCompany.getUserInvites().iterator().next().getEmailAddress(),
+                userInvite.getEmailAddress());
+    }
 }

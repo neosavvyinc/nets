@@ -29,5 +29,5 @@ public interface CompanyService {
     @Secured("ROLE_ADMIN")
 	public List<CompanyDTO> findCompanies(CompanyDTO company);
 
-    public void addEmployeeToCompany(CompanyDTO company, UserDTO employee);
+    public void addUserToCompany(CompanyDTO company, UserDTO employee);
 }
