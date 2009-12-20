@@ -14,24 +14,8 @@ import java.util.Set;
     }
 )
 @XmlRootElement
-public class UserDTO {// implements Externalizable {
-    
-	@Id
-    @GeneratedValue
-	@Column(name="ID")
-	private int id;
-	
-	@Column(name="FIRST_NAME")
-	private String firstName;
-	
-	@Column(name="MIDDLE_NAME")
-	private String middleName;
-	
-	@Column(name="LAST_NAME")
-	private String lastName;
-	
-	@Column(name="EMAIL_ADDRESS")
-	private String emailAddress;
+public class UserDTO extends BaseUserDTO{// implements Externalizable {
+
 
     @Column(name="USERNAME")
     private String username;
@@ -45,55 +29,9 @@ public class UserDTO {// implements Externalizable {
     @Column(name="CONFIRMED_REGISTRATION")
     private Boolean confirmedRegistration = true;
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE})
-//    @JoinTable(name = "USER_COMPANY", joinColumns = { @JoinColumn(name = "COMPANY_ID") },
-//            inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
-//    private Set<CompanyDTO> companies = new LinkedHashSet<CompanyDTO>();
-//
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-//    @JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "ROLE_ID") },
-//            inverseJoinColumns = { @JoinColumn(name = "USER_ID") })
-//    private Set<RoleDTO> roles = new LinkedHashSet<RoleDTO>();
-
     @OneToMany(mappedBy="user", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
 
-	public int getId() {
-		return id;
-	}
-
-    @FormParam("id")
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-    @FormParam("firstName")
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-	public String getMiddleName() {
-		return middleName;
-	}
-    @FormParam("middleName")
-	public void setMiddleName(String middleName) {
-		this.middleName = middleName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-    @FormParam("lastName")
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-	public String getEmailAddress() {
-		return emailAddress;
-	}
-    @FormParam("emailAddress")
-	public void setEmailAddress(String emailAddress) {
-		this.emailAddress = emailAddress;
-	}
     public String getUsername() {
         return username;
     }
@@ -132,27 +70,4 @@ public class UserDTO {// implements Externalizable {
         this.userCompanyRoles = userCompanyRoles;
     }
 
-    //	public Set<CompanyDTO> getCompanies() {
-//		return companies;
-//	}
-//
-//	public void setCompanies(Set<CompanyDTO> companies) {
-//		this.companies = companies;
-//	}
-//
-//    public void addCompany(CompanyDTO company) {
-//            this.companies.add(company);
-//    }
-//
-//    public Set<RoleDTO> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(Set<RoleDTO> roles) {
-//        this.roles = roles;
-//    }
-//
-//    public void addRole(RoleDTO role){
-//            this.roles.add(role);
-//    }
 }

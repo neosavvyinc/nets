@@ -1,8 +1,6 @@
 package com.neosavvy.user.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,13 +9,14 @@ import javax.persistence.UniqueConstraint;
  * Time: 11:57:55 PM
  * To change this template use File | Settings | File Templates.
  */
-//@Entity
-//@Table(
-//    name="USER_INVITE" ,
-//    uniqueConstraints = {
-//            @UniqueConstraint(columnNames = {"ID"})
-//            ,@UniqueConstraint(columnNames = {"USERNAME"})
-//    }
-//)
-public class UserInviteDTO {
+@Entity
+@Table(
+    name="USER_INVITE" ,
+    uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"ID"})
+            ,@UniqueConstraint(columnNames = {"EMAIL_ADDRESS"})
+    }
+)
+public class UserInviteDTO extends BaseUserDTO{
+
 }
