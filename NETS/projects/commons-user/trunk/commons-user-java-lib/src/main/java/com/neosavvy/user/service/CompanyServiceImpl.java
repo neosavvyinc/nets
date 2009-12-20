@@ -134,12 +134,12 @@ public class CompanyServiceImpl implements CompanyService{
         companyDao.saveCompany(company);
     }
 
-    public List<UserInviteDTO> inviteUsers(List<UserInviteDTO> userInvites) {
+    public List<UserInviteDTO> inviteUsers(CompanyDTO company, List<UserInviteDTO> userInvites) {
         //To change body of implemented methods use File | Settings | File Templates.
         return null;
     }
 
-    public List<UserInviteDTO> getInvitedUsers() {
+    public List<UserInviteDTO> getInvitedUsers(CompanyDTO company) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 

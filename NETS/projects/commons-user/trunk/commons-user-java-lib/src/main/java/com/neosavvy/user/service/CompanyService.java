@@ -32,7 +32,7 @@ public interface CompanyService {
 
     public void addUserToCompany(CompanyDTO company, UserDTO employee);
 
-    public List<UserInviteDTO> inviteUsers(List<UserInviteDTO> userInvites);
+    public List<UserInviteDTO> inviteUsers(CompanyDTO company, List<UserInviteDTO> userInvites);
 
-    public List<UserInviteDTO> getInvitedUsers();
+    public List<UserInviteDTO> getInvitedUsers(CompanyDTO company);
 }
