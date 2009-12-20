@@ -38,8 +38,8 @@ package com.neosavvy.user.view.companyManagement {
         override public function onRegister():void {
             registerButton.addEventListener(MouseEvent.CLICK, registerCompanyButtonClickHandler);
             confirmAccountButton.addEventListener(MouseEvent.CLICK, confirmAccountButtonClickHandler);
+            loginButton.addEventListener(MouseEvent.CLICK, loginButtonClickHandler);
         }
-
 
         public function get companyManagement():CompanyManagement {
             return this.viewComponent as CompanyManagement;
@@ -55,6 +55,10 @@ package com.neosavvy.user.view.companyManagement {
 
         public function get companyManavementViewStack():ViewStack {
             return companyManagement.companyRegistrationProcessViewStack;
+        }
+
+        public function get loginButton():Button {
+            return companyManagement.loginButton;
         }
 
         override public function listNotificationInterests():Array {
@@ -122,6 +126,12 @@ package com.neosavvy.user.view.companyManagement {
             var hashCode:String = companyManagement.confirmationToken.text;
             sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_REQUEST, [userName, hashCode]);
         }
+
+
+        private function loginButtonClickHandler(event:MouseEvent):void {
+            sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
+        }
+
 
     }
 }
