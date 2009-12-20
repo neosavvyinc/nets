@@ -1,10 +1,7 @@
 package com.neosavvy.user.service;
 
 import com.neosavvy.user.dao.*;
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.UserDTO;
-import com.neosavvy.user.dto.RoleDTO;
-import com.neosavvy.user.dto.UserCompanyRoleDTO;
+import com.neosavvy.user.dto.*;
 import com.neosavvy.user.service.exception.CompanyServiceException;
 import com.neosavvy.user.service.exception.UserServiceException;
 import com.neosavvy.util.StringUtil;
@@ -117,7 +114,7 @@ public class CompanyServiceImpl implements CompanyService{
             throw new CompanyServiceException("no Company found that matches Company " + company.getCompanyName(), null);
         }
         
-       
+        //look for a valid role
         RoleDTO roleToFind = new RoleDTO();
         roleToFind.setShortName("ROLE_EMPLOYEE");
         List<RoleDTO> employeeRoles = roleDao.findRoles(roleToFind);
@@ -135,6 +132,10 @@ public class CompanyServiceImpl implements CompanyService{
         userCompanyRoles.add(userCompanyRole);
         company.setUserCompanyRoles(userCompanyRoles);
         companyDao.saveCompany(company);
+    }
+
+    public void inviteUsers(List<UserInviteDTO> userInvites) {
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 
     public void setCompanyDao(CompanyDAO companyDao) {

@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dto.UserInviteDTO;
 import com.neosavvy.user.dao.CompanyDAO;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,4 +31,6 @@ public interface CompanyService {
 	public List<CompanyDTO> findCompanies(CompanyDTO company);
 
     public void addUserToCompany(CompanyDTO company, UserDTO employee);
+
+    public void inviteUsers(List<UserInviteDTO> userInvites);
 }

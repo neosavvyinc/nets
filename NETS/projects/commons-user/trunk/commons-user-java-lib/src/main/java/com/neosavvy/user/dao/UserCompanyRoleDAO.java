@@ -18,5 +18,7 @@ public interface UserCompanyRoleDAO {
 
 	public UserCompanyRoleDTO findUserCompanyRoleById(int id);
 
+    public List<UserCompanyRoleDTO> findUserCompanyRoles(UserCompanyRoleDTO userCompanyRole);
+
     public void deleteUserCompanyRole(UserCompanyRoleDTO userCompanyRole);
 }

@@ -5,6 +5,7 @@ import org.junit.Assert;
 import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dto.RoleDTO;
 import com.neosavvy.user.dto.UserCompanyRoleDTO;
+import com.neosavvy.user.dto.UserDTO;
 
 import java.util.List;
 
@@ -82,6 +83,46 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase{
 
         Assert.assertNotNull("User object was found by id " + role.getId(), userCompanyRoleFound);
     }
+
+    //todo: left off needing to get this working correctly.
+    @Test
+    public void testFindUserCompanyRoleByRoleId() {
+        cleanupTables();
+        RoleDTO role = createTestRole();
+        roleDAO.saveRole(role);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
+        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+
+        int numRows = countRowsInTable("USER_COMPANY_ROLE");
+
+        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
+
+        UserCompanyRoleDTO userCompanyRoleFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRole).get(0);
+
+        Assert.assertEquals("UserCompanyRole object was found by id ",
+                role.getId(),
+                userCompanyRoleFound.getRole().getId());
+    }
+
+    @Test
+    public void testFindUserCompanyRoleByUserId() {
+        cleanupTables();
+        UserDTO user = createTestUser();
+        userDAO.saveUser(user);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(null, null, user);
+        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+
+        int numRows = countRowsInTable("USER_COMPANY_ROLE");
+
+        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
+
+        UserCompanyRoleDTO userCompanyRoleFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRole).get(0);
+
+        Assert.assertEquals("UserCompanyRole object was found by id ",
+                user.getId(),
+                userCompanyRoleFound.getUser().getId());
+    }
+
 
     @Test
     public void testDeleteUserCompanyRole() {

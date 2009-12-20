@@ -5,6 +5,7 @@ import com.neosavvy.user.dto.UserCompanyRoleDTO;
 import java.util.List;
 
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.Criteria;
 
 /**
  * Created by IntelliJ IDEA.
@@ -33,5 +34,14 @@ public class UserCompanyRoleDAOImpl extends BaseDAO implements UserCompanyRoleDA
     public void deleteUserCompanyRole(UserCompanyRoleDTO userCompanyRole) {
         getCurrentSession().delete(userCompanyRole);
         getCurrentSession().flush();
+    }
+
+    public List<UserCompanyRoleDTO> findUserCompanyRoles(UserCompanyRoleDTO userCompanyRole) {
+        Criteria criteria = getCurrentSession().createCriteria(UserCompanyRoleDTO.class);
+
+        if((userCompanyRole.getRole() != null)){
+            criteria.add(Restrictions.eq("role", userCompanyRole.getRole()));
+        }
+        return criteria.list();
     }
 }
