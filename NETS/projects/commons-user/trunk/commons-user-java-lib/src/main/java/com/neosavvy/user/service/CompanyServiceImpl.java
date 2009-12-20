@@ -149,12 +149,23 @@ public class CompanyServiceImpl implements CompanyService{
         }
 
         for(UserInviteDTO invite: userInvites){
+            try {
+                invite.setRegistrationToken(StringUtil.getHash64(invite.toString() + System.currentTimeMillis() + ""));
+            } catch (UnsupportedEncodingException e) {
+                logger.error(e);
+                throw new UserServiceException("Unable to generate token for user: "+ invite.toString(),e);
+            }
             userInviteDao.saveUserInvite(invite);
         }
 
         company.setUserInvites(new HashSet(userInvites));
         companyDao.saveCompany(company);
+        sendInvites(userInvites);
         return null;
+    }
+
+    protected void sendInvites(List<UserInviteDTO> userInvites){
+        //this will e-mail out the invites once everything is hooked in.
     }
 
     public List<UserInviteDTO> getInvitedUsers(CompanyDTO company) {

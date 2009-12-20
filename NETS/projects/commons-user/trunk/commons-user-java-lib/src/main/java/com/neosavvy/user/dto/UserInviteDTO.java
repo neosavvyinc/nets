@@ -22,11 +22,21 @@ public class UserInviteDTO extends BaseUserDTO{
     @JoinColumn(name="COMPANY_FK")
     private CompanyDTO company;
 
+    private String registrationToken;
+
     public CompanyDTO getCompany() {
         return company;
     }
 
     public void setCompany(CompanyDTO company) {
         this.company = company;
+    }
+
+    public String getRegistrationToken() {
+        return registrationToken;
+    }
+
+    public void setRegistrationToken(String registrationToken) {
+        this.registrationToken = registrationToken;
     }
 }
