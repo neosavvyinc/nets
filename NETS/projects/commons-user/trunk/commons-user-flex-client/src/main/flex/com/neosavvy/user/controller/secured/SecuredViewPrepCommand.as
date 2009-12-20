@@ -15,6 +15,7 @@ package com.neosavvy.user.controller.secured {
             var securedContainer:SecuredContainer = notification.getBody() as SecuredContainer;
             facade.registerMediator(new SecuredContainerMediator(securedContainer));
             facade.registerMediator(new AdminNavigationMediator(securedContainer.leftNavigation.adminNavigation) );
+            facade.registerMediator( new EmployeeManagementMediator( securedContainer.employeeInvitationManagement ) );
         }
     }
 }

@@ -8,6 +8,10 @@ package com.neosavvy.user.view.secured.employeeInvitation {
 
     import flash.events.MouseEvent;
 
+    import flash.ui.Mouse;
+
+    import mx.collections.ArrayCollection;
+    import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -21,14 +25,17 @@ package com.neosavvy.user.view.secured.employeeInvitation {
 
         public static const NAME:String = "employeeManagementMediator";
 
+        private var _userInviteQueue:ArrayCollection = new ArrayCollection();
+
         public function EmployeeManagementMediator(viewComponent:Object) {
             super(NAME, viewComponent);
         }
 
         override public function onRegister():void {
             addUserButton.addEventListener(MouseEvent.CLICK, addUserButtonClickListener);
+            doneButton.addEventListener(MouseEvent.CLICK, doneButtonClickHandler);
+            cancelButton.addEventListener(MouseEvent.CLICK, cancelButtonClickHandler);
         }
-
 
         public function get employeeManagement():EmployeeManagement {
             return viewComponent as EmployeeManagement;
@@ -36,6 +43,18 @@ package com.neosavvy.user.view.secured.employeeInvitation {
 
         public function get addUserButton():Button {
             return employeeManagement.addUserButton;
+        }
+
+        public function get grid():AdvancedDataGrid {
+            return employeeManagement.employeesQueuedToInvite;
+        }
+
+        public function get doneButton():Button {
+            return employeeManagement.doneBtn;
+        }
+
+        public function get cancelButton():Button {
+            return employeeManagement.cancelBtn;
         }
 
         private function addUserButtonClickListener(event:MouseEvent):void {
@@ -47,8 +66,18 @@ package com.neosavvy.user.view.secured.employeeInvitation {
             var company:CompanyDTO = (facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy).activeCompany;
 
             user.company = company;
-            sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_REQUEST, user);
+
+            _userInviteQueue.addItem( user );
+            grid.dataProvider = _userInviteQueue;
         }
 
+        private function cancelButtonClickHandler(event:MouseEvent):void {
+            grid.dataProvider = _userInviteQueue = new ArrayCollection();
+        }
+
+        private function doneButtonClickHandler(event:MouseEvent):void {
+            var activeCompany:CompanyDTO = (facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy).activeCompany;
+            sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_REQUEST, [activeCompany, _userInviteQueue]);
+        }
     }
 }

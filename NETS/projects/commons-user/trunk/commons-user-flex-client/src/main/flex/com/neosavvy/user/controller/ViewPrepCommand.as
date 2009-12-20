@@ -20,7 +20,6 @@ package com.neosavvy.user.controller {
             //facade.registerMediator( new RegistrationAndLoginWindowMediator() );
 //            facade.registerMediator( new UserManagementMediator( application.userManagement ) );
             facade.registerMediator( new CompanyManagementMediator( application.companyManagement ) );
-            facade.registerMediator( new EmployeeManagementMediator( application.employeeManagement ) );
             facade.registerMediator( new LoginMediator( application.login ) );
         }
     }

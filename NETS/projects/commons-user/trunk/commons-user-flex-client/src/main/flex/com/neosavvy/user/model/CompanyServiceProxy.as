@@ -2,6 +2,7 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.ProxyConstants;
     import com.neosavvy.user.dto.CompanyDTO;
+    import com.neosavvy.user.dto.CompanyDTO;
 
     import com.neosavvy.user.dto.UserDTO;
 
@@ -71,6 +72,21 @@ package com.neosavvy.user.model {
         }
 
         private function handleSaveEmployeeToCompanyResult(event:ResultEvent):void {
+        }
+
+        public function inviteUsers(company:CompanyDTO, userInvites:ArrayCollection):void {
+            var companyService:RemoteObject = getCompanyService();
+            companyService.addEventListener(ResultEvent.RESULT, handleInviteUsersResult);
+            companyService.addEventListener(FaultEvent.FAULT, handleInviteUsersFault);
+            companyService.inviteUsers( company, userInvites );
+        }
+
+        private function handleInviteUsersFault(event:FaultEvent):void {
+            LOGGER.debug("User invites failed!");
+        }
+
+        private function handleInviteUsersResult(event:ResultEvent):void {
+            LOGGER.debug("User invites successful");
         }
 
         /****

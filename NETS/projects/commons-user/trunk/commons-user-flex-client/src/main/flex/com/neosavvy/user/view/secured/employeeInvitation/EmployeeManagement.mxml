@@ -28,7 +28,7 @@
                     />
             <mx:AdvancedDataGridColumn
                     id="emailCol"
-                    dataField="email"
+                    dataField="emailAddress"
                     headerText="Email"
                     />
             <mx:AdvancedDataGridColumn

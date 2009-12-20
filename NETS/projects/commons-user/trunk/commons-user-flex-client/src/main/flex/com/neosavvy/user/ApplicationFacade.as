@@ -1,6 +1,7 @@
 package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
 
+    import com.neosavvy.user.controller.company.InviteUsersToCompanyCommand;
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
     import com.neosavvy.user.controller.secured.SecuredViewPrepCommand;
     import com.neosavvy.user.controller.secured.SecuredViewTeardownCommand;
@@ -110,6 +111,8 @@ package com.neosavvy.user {
 
             registerCommand(INITIALIZE_SECURED_VIEW, SecuredViewPrepCommand);
             registerCommand(DEINITIALIZE_SECURED_VIEW, SecuredViewTeardownCommand);
+
+            registerCommand(INVITE_USER_TO_COMPANY_REQUEST, InviteUsersToCompanyCommand);
         }
 
         /**

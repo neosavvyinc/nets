@@ -12,6 +12,7 @@ package com.neosavvy.user.controller.secured {
     public class SecuredViewTeardownCommand extends SimpleCommand {
 
         override public function execute(notification:INotification):void {
+            facade.removeMediator( EmployeeManagementMediator.NAME );
             facade.removeMediator( AdminNavigationMediator.NAME );
             facade.removeMediator( SecuredContainerMediator.NAME );
         }
