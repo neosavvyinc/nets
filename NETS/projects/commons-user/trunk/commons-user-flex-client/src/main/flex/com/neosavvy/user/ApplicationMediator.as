@@ -2,6 +2,8 @@ package com.neosavvy.user {
 
     import com.neosavvy.user.dto.UserDTO;
 
+    import com.neosavvy.user.view.secured.SecuredContainer;
+
     import flash.events.MouseEvent;
 
     import mx.containers.ViewStack;
@@ -22,7 +24,7 @@ package com.neosavvy.user {
 
         public static var LANDING_NAVIGATION_INDEX:Number = 0;
         public static var COMPANY_MANAGEMENT_NAVIGATION_INDEX:Number = 1;
-        public static var USER_MANAGEMENT_NAVIGATION_INDEX:Number = 2;
+        public static var SECURED_CONTAINER_NAVIGATION_INDEX:Number = 2;
         public static var EMPLOYEE_MANAGEMENT_NAVIGATION_INDEX:Number = 3;
         public static var LOGIN_NAVIGATION_INDEX:Number = 4;
 
@@ -60,6 +62,10 @@ package com.neosavvy.user {
             return app.loggedInUserName;
         }
 
+        public function get securedContainer():SecuredContainer {
+            return app.securedContainer;
+        }
+
         override public function onRegister():void
         {
             this.newCompanyButton.addEventListener(MouseEvent.CLICK, newCompanyButtonClicked);
@@ -80,17 +86,19 @@ package com.neosavvy.user {
             switch ( notification.getName() ) {
                 case ApplicationFacade.USER_LOGIN_SUCCESS:
                 case ApplicationFacade.USER_LOGGED_IN:
-                    this.navigationViewStack.selectedIndex = USER_MANAGEMENT_NAVIGATION_INDEX;
+                    this.navigationViewStack.selectedIndex = SECURED_CONTAINER_NAVIGATION_INDEX;
                     loggedInUserName.text = "You are logged in as " +notification.getBody() as String;
 
                     loginButton.visible = false;
                     logoutButton.visible = true;
+                    sendNotification(ApplicationFacade.INITIALIZE_SECURED_VIEW, securedContainer);
                     break;
                 case ApplicationFacade.USER_NOT_LOGGED_IN:
                     this.navigationViewStack.selectedIndex = LOGIN_NAVIGATION_INDEX;
                     loginButton.visible = true;
                     logoutButton.visible = false;
                     loggedInUserName.text = "You are not logged in";
+                    sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
                     break;
             }
         }

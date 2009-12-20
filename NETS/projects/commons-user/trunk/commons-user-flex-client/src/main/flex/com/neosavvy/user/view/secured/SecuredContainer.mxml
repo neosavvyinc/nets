@@ -1,12 +1,20 @@
 <?xml version="1.0"?>
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
          xmlns:leftNavigation="com.neosavvy.user.view.secured.leftNavigation.*"
-         xmlns:userManagement="com.neosavvy.user.view.secured.userManagement.*">
+         xmlns:userManagement="com.neosavvy.user.view.secured.userManagement.*"
+         xmlns:Mx="http://www.adobe.com/2006/mxml"
+         xmlns:employeeInvitation="com.neosavvy.user.view.secured.employeeInvitation.*"
+         xmlns:welcome="com.neosavvy.user.view.secured.welcome.*">
 
     <mx:HDividedBox width="100%" height="100%">
 
-        <leftNavigation:LeftNavigation/>
-        <userManagement:UserManagement/>
+        <leftNavigation:LeftNavigation id="leftNavigation"/>
+
+        <mx:ViewStack id="navigationViewStack" width="100%" height="100%" selectedIndex="{SecuredContainerMediator.NAV_INDEX_WELCOME}">
+            <welcome:Welcome id="welcomeContainer"/>
+            <employeeInvitation:EmployeeManagement id="employeeInvitationManagement" width="100%" height="100%"/>
+            <userManagement:UserManagement id="userManagement" width="100%" height="100%"/>
+        </mx:ViewStack>
 
     </mx:HDividedBox>
 

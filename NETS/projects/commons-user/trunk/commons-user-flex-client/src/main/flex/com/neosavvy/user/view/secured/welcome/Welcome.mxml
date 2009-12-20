@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" styleName="paddedContainer">
+
+
+    <mx:Text text="Welcome to the expense tracking system. Something useful and informative should really go here."/>
+
+</mx:Panel>

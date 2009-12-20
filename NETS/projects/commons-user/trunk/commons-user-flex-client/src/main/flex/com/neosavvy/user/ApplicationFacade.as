@@ -2,6 +2,8 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
 
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
+    import com.neosavvy.user.controller.secured.SecuredViewPrepCommand;
+    import com.neosavvy.user.controller.secured.SecuredViewTeardownCommand;
     import com.neosavvy.user.controller.security.CheckLoggedIn;
     import com.neosavvy.user.controller.security.LoginCommand;
 
@@ -57,7 +59,20 @@ package com.neosavvy.user {
         public static const CONFIRM_ACCOUNT_SUCCESS:String = "confirmAccountSuccess";
         public static const CONFIRM_ACCOUNT_FAILED:String = "confirmAccountFailed";
 
+        public static const INITIALIZE_SECURED_VIEW:String = "initializeSecuredViewRequest";
+        public static const DEINITIALIZE_SECURED_VIEW:String = "deinitializeSecuredViewRequest";
 
+        public static var ACTIVE_EMPLOYEES_REQUEST:String="activeEmployeesRequest";
+        public static var ACTIVE_EMPLOYEES_SUCCESS:String="activeEmployeesSuccess";
+        public static var ACTIVE_EMPLOYEES_FAILED:String ="activeEmployeesFailed";
+
+        public static var NON_ACTIVE_EMPLOYEES_REQUEST:String="nonActiveEmployeesRequest";
+        public static var NON_ACTIVE_EMPLOYEES_SUCCESS:String="nonActiveEmployeesSuccess";
+        public static var NON_ACTIVE_EMPLOYEES_FAILED:String="nonActiveEmployeesFailed";
+
+        public static var NAVIGATE_TO_INVITE_EMPLOYEES:String="navigateToInviteEmployees";
+        public static var NAVIGATE_TO_WELCOME:String="navigateToWelcome";
+        
         public function ApplicationFacade(key:String)
         {
             super(key);
@@ -88,6 +103,9 @@ package com.neosavvy.user {
             registerCommand(SAVE_COMPANY_REQUEST, SaveCompanyCommand);
             registerCommand(SAVE_USER_TO_COMPANY_REQUEST, SaveEmployeeToCompanyCommand)
             registerCommand(CONFIRM_ACCOUNT_REQUEST, ConfirmAccountCommand);
+
+            registerCommand(INITIALIZE_SECURED_VIEW, SecuredViewPrepCommand);
+            registerCommand(DEINITIALIZE_SECURED_VIEW, SecuredViewTeardownCommand);
         }
 
         /**
@@ -101,5 +119,5 @@ package com.neosavvy.user {
         }
 
 
-        }
+       }
 }

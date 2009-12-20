@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Admin Navigation" styleName="paddedContainer">
 
-    <mx:LinkButton id="inviteEmployees" label="Invite Employees"/>
-    <mx:LinkButton id="viewActiveEmployees" label="View Active Employees"/>
-    <mx:LinkButton id="viewNonActiveEmployees" label="View In-Active Employees"/>
+    <mx:LinkButton id="inviteEmployeesButton" label="Invite Employees"/>
+    <mx:LinkButton id="viewActiveEmployeesButton" label="View Active Employees"/>
+    <mx:LinkButton id="viewNonActiveEmployeesButton" label="View In-Active Employees"/>
     
 </mx:Panel>
