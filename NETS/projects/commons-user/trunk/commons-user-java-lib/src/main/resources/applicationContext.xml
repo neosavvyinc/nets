@@ -27,6 +27,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="annotatedClasses">
             <list>
                 <value>com.neosavvy.user.dto.UserDTO</value>
+                <value>com.neosavvy.user.dto.UserInviteDTO</value>
                 <value>com.neosavvy.user.dto.CompanyDTO</value>
                 <value>com.neosavvy.user.dto.RoleDTO</value>
                 <value>com.neosavvy.user.dto.NumEmployeesRangeDTO</value>
@@ -57,6 +58,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
+    <bean id="userInviteDAO" class="com.neosavvy.user.dao.UserInviteDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    
     <bean id="companyDAO" class="com.neosavvy.user.dao.CompanyDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>

@@ -24,6 +24,8 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
     @Autowired
     protected RoleDAO roleDAO;
     @Autowired
+    protected UserInviteDAO userInviteDAO;
+    @Autowired
     protected NumEmployeesRangeDAO numEmployeesRangeDAO;
     @Autowired
     protected UserCompanyRoleDAO userCompanyRoleDAO;
@@ -98,6 +100,15 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
         return role;
     }
 
+    protected UserInviteDTO createTestUserInvite(){
+        UserInviteDTO userInvite = new UserInviteDTO();
+        userInvite.setFirstName("William");
+        userInvite.setMiddleName("Adam");
+        userInvite.setLastName("Parrish");
+        userInvite.setEmailAddress("aparrish@neosavvy.com");
+        return userInvite;
+    }
+
     protected UserCompanyRoleDTO createTestUserCompanyRole(RoleDTO role, CompanyDTO company, UserDTO user){
         UserCompanyRoleDTO testUserCompanyRole = new UserCompanyRoleDTO();
         if(role != null)
@@ -122,6 +133,7 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
         deleteFromTables("USER_COMPANY");
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
+        deleteFromTables("USER_INVITE");
         deleteFromTables("NUM_EMPLOYEES_RANGE");
         deleteFromTables("USER_COMPANY_ROLE");
     }

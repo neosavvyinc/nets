@@ -35,7 +35,7 @@ public class TestNumEmployeesRangeDAO extends BaseSpringAwareDAOTestCase{
     public void testDeleteRange() {
         cleanupTables();
         int numRows = countRowsInTable("NUM_EMPLOYEES_RANGE");
-        Assert.assertEquals(numRows, 0);
+        Assert.assertEquals(0, numRows);
 
         NumEmployeesRangeDTO range = createTestRange();
         numEmployeesRangeDAO.saveRange(range);

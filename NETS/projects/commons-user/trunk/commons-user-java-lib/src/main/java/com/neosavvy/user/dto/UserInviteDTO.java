@@ -14,9 +14,19 @@ import javax.persistence.*;
     name="USER_INVITE" ,
     uniqueConstraints = {
             @UniqueConstraint(columnNames = {"ID"})
-            ,@UniqueConstraint(columnNames = {"EMAIL_ADDRESS"})
     }
 )
 public class UserInviteDTO extends BaseUserDTO{
 
+    @ManyToOne
+    @JoinColumn(name="COMPANY_FK")
+    private CompanyDTO company;
+
+    public CompanyDTO getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyDTO company) {
+        this.company = company;
+    }
 }

@@ -51,13 +51,12 @@ public class CompanyDTO {
     @Column(name="COUNTRY")
     private String country;
 
-//    @ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-//    @JoinTable(name = "USER_COMPANY", joinColumns = { @JoinColumn(name = "USER_ID") },
-//            inverseJoinColumns = { @JoinColumn(name = "COMPANY_ID") })
-//    private Set<UserDTO> users = new LinkedHashSet<UserDTO>();
-
     @OneToMany(mappedBy="company", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
+
+    @OneToMany(mappedBy="company", fetch=FetchType.EAGER)
+    private Set<UserInviteDTO> userInvites;
+
 
     @ManyToOne
     @JoinColumn(name="NUM_EMPLOYEES_RANGE_FK")
@@ -135,19 +134,6 @@ public class CompanyDTO {
         this.country = country;
     }
 
-//	public Set<UserDTO> getUsers() {
-//		return users;
-//	}
-//
-//	public void setUsers(Set<UserDTO> users) {
-//		this.users = users;
-//	}
-//
-//    public void addUser(UserDTO user){
-//        if (this.users != null)
-//            this.users.add(user);
-//    }
-
     public NumEmployeesRangeDTO getNumEmployeesRange() {
         return numEmployeesRange;
     }
@@ -162,5 +148,13 @@ public class CompanyDTO {
 
     public void setUserCompanyRoles(Set<UserCompanyRoleDTO> userCompanyRoles) {
         this.userCompanyRoles = userCompanyRoles;
+    }
+
+    public Set<UserInviteDTO> getUserInvites() {
+        return userInvites;
+    }
+
+    public void setUserInvites(Set<UserInviteDTO> userInvites) {
+        this.userInvites = userInvites;
     }
 }

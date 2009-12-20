@@ -124,7 +124,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
         cleanupTables();
         userDAO.saveUser(createTestUser());
         try {
-            Assert.assertEquals("Should be a row in the table for the user",countRowsInTable("USER"),1);
+            Assert.assertEquals("Should be a row in the table for the user",  1,  countRowsInTable("USER"));
             userDAO.saveUser(createTestUser());
         } catch (ConstraintViolationException e) {
             return;
