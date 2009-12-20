@@ -13,10 +13,7 @@ import com.neosavvy.user.dao.UserDAO;
 import com.neosavvy.user.dao.CompanyDAO;
 import com.neosavvy.user.dao.RoleDAO;
 import com.neosavvy.user.dao.NumEmployeesRangeDAO;
-import com.neosavvy.user.dto.UserDTO;
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.RoleDTO;
-import com.neosavvy.user.dto.NumEmployeesRangeDTO;
+import com.neosavvy.user.dto.*;
 
 /**
  * @author lgleason
@@ -96,6 +93,15 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         test_range.setRangeFrom(1);
         test_range.setRangeTo(10);
         return test_range;
+    }
+
+    protected UserInviteDTO createTestUserInvite(){
+        UserInviteDTO userInvite = new UserInviteDTO();
+        userInvite.setFirstName("William");
+        userInvite.setMiddleName("Adam");
+        userInvite.setLastName("Parrish");
+        userInvite.setEmailAddress("aparrish@neosavvy.com");
+        return userInvite;
     }
 
     protected void cleanDatabase() {

@@ -87,6 +87,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="roleDao" ref="roleDAO"/>
         <property name="userCompanyRoleDao" ref="userCompanyRoleDAO"/>
         <property name="numEmployeesRangeDao" ref="numEmployeesRangeDAO"/>
+        <property name="userInviteDao" ref="userInviteDAO"/>
         <property name="templateMessage" ref="adminUserAddedToCompanyTemplateMessage"/>
         <property name="mailSender" ref="mailSender"/>
         <property name="hostName" value="localhost:8080"/>

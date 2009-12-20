@@ -13,6 +13,7 @@ import org.springframework.mail.SimpleMailMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * User: lgleason
@@ -28,6 +29,7 @@ public class CompanyServiceImpl implements CompanyService{
     private RoleDAO roleDao;
     private UserDAO userDao;
     private NumEmployeesRangeDAO numEmployeesRangeDao;
+    private UserInviteDAO userInviteDao;
     private MailSender mailSender;
     private SimpleMailMessage templateMessage;
     private String hostName;
@@ -135,7 +137,23 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public List<UserInviteDTO> inviteUsers(CompanyDTO company, List<UserInviteDTO> userInvites) {
-        //To change body of implemented methods use File | Settings | File Templates.
+        if(userInvites == null){
+            throw new CompanyServiceException("null userInvites not supported", null);
+        }
+        if(company == null){
+            throw new CompanyServiceException("null company not supported", null);
+        }
+
+        if(companyDao.findCompanyById(company.getId()) == null){
+            throw new CompanyServiceException("unpersisted company", null);
+        }
+
+        for(UserInviteDTO invite: userInvites){
+            userInviteDao.saveUserInvite(invite);
+        }
+
+        company.setUserInvites(new HashSet(userInvites));
+        companyDao.saveCompany(company);
         return null;
     }
 
@@ -210,5 +228,12 @@ public class CompanyServiceImpl implements CompanyService{
     public void setHostName(String hostName) {
         this.hostName = hostName;
     }
-    
+
+    public UserInviteDAO getUserInviteDao() {
+        return userInviteDao;
+    }
+
+    public void setUserInviteDao(UserInviteDAO userinviteDao) {
+        this.userInviteDao = userinviteDao;
+    }
 }

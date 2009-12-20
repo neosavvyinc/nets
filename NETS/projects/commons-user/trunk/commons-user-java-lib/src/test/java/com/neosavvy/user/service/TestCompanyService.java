@@ -1,12 +1,14 @@
 package com.neosavvy.user.service;
 
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.RoleDTO;
-import com.neosavvy.user.dto.UserCompanyRoleDTO;
-import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dto.*;
 import com.neosavvy.user.service.exception.CompanyServiceException;
 import junit.framework.Assert;
 import org.junit.Test;
+
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Set;
+import java.util.HashSet;
 
 /**
  * @author lgleason
@@ -146,6 +148,41 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 //        Assert.assertEquals("Number of Employees is the ");
 //    }
 
+    @Test(expected = CompanyServiceException.class)
+    public void testInviteUsersNoUsers(){
+        cleanDatabase();
+        companyService.inviteUsers(createTestCompany(), null);
+    }
+
+    @Test(expected = CompanyServiceException.class)
+    public void testInviteUsersNoCompany(){
+        cleanDatabase();
+        List<UserInviteDTO> userInvites = new ArrayList();
+        userInvites.add(createTestUserInvite());
+        companyService.inviteUsers(null, userInvites);
+    }
+
+    @Test(expected = CompanyServiceException.class)
+    public void testInviteUsersNoPersistedCompany(){
+        cleanDatabase();
+        List<UserInviteDTO> userInvites = new ArrayList();
+        userInvites.add(createTestUserInvite());
+        companyService.inviteUsers(createTestCompany(), userInvites);
+    }
+
+    @Test
+    public void testInviteUsersPersistsOneUser(){
+        cleanDatabase();
+        List<UserInviteDTO> userInvites = new ArrayList();
+        userInvites.add(createTestUserInvite());
+        CompanyDTO company = createTestCompany();
+        companyDAO.saveCompany(company);
+        companyService.inviteUsers(company, userInvites);
+        CompanyDTO foundCompany = companyService.findCompanyById(company.getId());
+        Assert.assertEquals("Persisted User invite is the one we created",
+                userInvites.iterator().next().getId(),
+                foundCompany.getUserInvites().iterator().next().getId());
+    }
 
     @Test(expected = CompanyServiceException.class)
     public void testAddCompanyException() {
