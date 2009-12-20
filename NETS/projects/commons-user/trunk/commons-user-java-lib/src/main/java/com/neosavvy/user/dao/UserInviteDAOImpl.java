@@ -4,6 +4,9 @@ import com.neosavvy.user.dto.UserInviteDTO;
 
 import java.util.List;
 
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.Criteria;
+
 /**
  * Created by IntelliJ IDEA.
  * User: lgleason
@@ -22,11 +25,20 @@ public class UserInviteDAOImpl extends BaseDAO implements UserInviteDAO{
     }
 
     public UserInviteDTO findUserInviteById(int id) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return (UserInviteDTO) getCurrentSession().
+                createCriteria(UserInviteDTO.class).
+                add(Restrictions.idEq(id)).
+                uniqueResult();
     }
 
     public List<UserInviteDTO> findUserInvites(UserInviteDTO userInvite) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Criteria criteria = getCurrentSession().createCriteria(UserInviteDTO.class);
+
+        if((userInvite.getFirstName() != null) && (userInvite.getFirstName().length() > 0)){
+            criteria.add(Restrictions.eq("firstName", userInvite.getFirstName()));
+        }
+
+        return criteria.list();  
     }
 
     public void deleteUserInvite(UserInviteDTO userInvite) {

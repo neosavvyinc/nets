@@ -44,35 +44,34 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
         Assert.assertEquals(0,numRows);
     }
 
-//    @Test
-//    public void testFindUserById() {
-//        cleanupTables();
-//
-//        UserDTO user = createTestUser();
-//        userDAO.saveUser(user);
-//
-//        int numRows = countRowsInTable("USER");
-//
-//        Assert.assertEquals("Num of rows is not equal to 1", 1, numRows);
-//
-//        UserDTO userFound = userDAO.findUserById(user.getId());
-//
-//        Assert.assertNotNull("User object was not found by id " + user.getId(), userFound);
-//    }
-//
-//    @Test
-//    public void testFindByFirstName() {
-//        setupCriteriaBasedSearchTest();
-//
-//        UserDTO searchCriteria = new UserDTO();
-//        searchCriteria.setFirstName("William");
-//
-//        List<UserDTO> usersFound = userDAO.findUsers(searchCriteria);
-//
-//        assertSearchCriteriaResults(usersFound,1);
-//
-//    }
-//
+    @Test
+    public void testFindUserById() {
+        cleanupTables();
+
+        UserInviteDTO userInvite = createTestUserInvite();
+        userInviteDAO.saveUserInvite(userInvite);
+
+        int numRows = countRowsInTable("USER_INVITE");
+
+        Assert.assertEquals("Num of rows is not equal to 1", 1, numRows);
+
+        UserInviteDTO userInviteFound = userInviteDAO.findUserInviteById(userInvite.getId());
+
+        Assert.assertNotNull("User object was not found by id " + userInvite.getId(), userInviteFound);
+    }
+
+    @Test
+    public void testFindByFirstName() {
+        setupCriteriaBasedSearchTest();
+
+        UserInviteDTO searchCriteria = new UserInviteDTO();
+        searchCriteria.setFirstName("William");
+
+        List<UserInviteDTO> usersFound = userInviteDAO.findUserInvites(searchCriteria);
+
+        assertSearchCriteriaResults(usersFound,1);
+    }
+
 //    @Test
 //    public void testFindByMiddleName() {
 //        setupCriteriaBasedSearchTest();
@@ -97,56 +96,21 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
 //        assertSearchCriteriaResults(usersFounds,1);
 //    }
 //
-//    @Test
-//    public void testFindByUserName() {
-//        setupCriteriaBasedSearchTest();
-//
-//        UserDTO searchCriteria = new UserDTO();
-//        searchCriteria.setUsername("aparrish");
-//
-//        List<UserDTO> usersFounds = userDAO.findUsers(searchCriteria);
-//
-//        assertSearchCriteriaResults(usersFounds,1);
-//    }
-//
-//    @Test
-//    public void testFindByPassword() {
-//        setupCriteriaBasedSearchTest();
-//
-//        UserDTO searchCriteria = new UserDTO();
-//        searchCriteria.setPassword("testPassword");
-//
-//        List<UserDTO> usersFounds = userDAO.findUsers(searchCriteria);
-//
-//        assertSearchCriteriaResults(usersFounds,2);
-//    }
-//
-//    @Test
-//    public void testSaveTwoUsersSameUserName() {
-//        cleanupTables();
-//        userDAO.saveUser(createTestUser());
-//        try {
-//            Assert.assertEquals("Should be a row in the table for the user",  1,  countRowsInTable("USER"));
-//            userDAO.saveUser(createTestUser());
-//        } catch (ConstraintViolationException e) {
-//            return;
-//        }
-//        Assert.fail("No data access exception was thrown when saving a user by the same id");
-//    }
-//
-//    private void setupCriteriaBasedSearchTest() {
-//        cleanupTables();
-//
-//        UserDTO user = createTestUser();
-//        UserDTO user2 = createAltTestUser();
-//
-//        userDAO.saveUser(user);
-//        userDAO.saveUser(user2);
-//
-//        int numRows = countRowsInTable("USER");
-//        Assert.assertEquals("Num of rows is not equal to 2", 2, numRows);
-//    }
-//
+
+
+    private void setupCriteriaBasedSearchTest() {
+        cleanupTables();
+
+        UserInviteDTO userInvite = createTestUserInvite();
+        UserInviteDTO userInvite2 = createAltTestUserInvite();
+
+        userInviteDAO.saveUserInvite(userInvite);
+        userInviteDAO.saveUserInvite(userInvite2);
+
+        int numRows = countRowsInTable("USER_INVITE");
+        Assert.assertEquals("Num of rows is not equal to 2", 2, numRows);
+    }
+
 //    @Test
 //    public void testUserCompanyRoles(){
 //        cleanupTables();

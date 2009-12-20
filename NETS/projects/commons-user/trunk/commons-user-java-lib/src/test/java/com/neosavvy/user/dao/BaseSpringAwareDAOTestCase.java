@@ -108,6 +108,15 @@ public abstract class BaseSpringAwareDAOTestCase extends AbstractTransactionalJU
         userInvite.setEmailAddress("aparrish@neosavvy.com");
         return userInvite;
     }
+    
+    protected UserInviteDTO createAltTestUserInvite(){
+        UserInviteDTO userInvite = new UserInviteDTO();
+        userInvite.setFirstName("Lance");
+        userInvite.setMiddleName("B");
+        userInvite.setLastName("Gleason");
+        userInvite.setEmailAddress("lg@neosavvy.com");
+        return userInvite;
+    }    
 
     protected UserCompanyRoleDTO createTestUserCompanyRole(RoleDTO role, CompanyDTO company, UserDTO user){
         UserCompanyRoleDTO testUserCompanyRole = new UserCompanyRoleDTO();
