@@ -6,23 +6,34 @@ import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dto.RoleDTO;
 import com.neosavvy.user.dto.UserCompanyRoleDTO;
 import com.neosavvy.user.service.exception.CompanyServiceException;
+import com.neosavvy.user.service.exception.UserServiceException;
+import com.neosavvy.util.StringUtil;
+import org.apache.log4j.Logger;
+import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.HashSet;
 
 /**
- * Created by IntelliJ IDEA.
  * User: lgleason
  * Date: Dec 4, 2009
  * Time: 4:18:34 PM
- * To change this template use File | Settings | File Templates.
  */
 public class CompanyServiceImpl implements CompanyService{
+
+    private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
+
     private CompanyDAO companyDao;
     private UserCompanyRoleDAO userCompanyRoleDao;
     private RoleDAO roleDao;
     private UserDAO userDao;
     private NumEmployeesRangeDAO numEmployeesRangeDao;
+    private MailSender mailSender;
+    private SimpleMailMessage templateMessage;
+    private String hostName;
 
     public List<CompanyDTO> getCompanies() {
         return companyDao.getCompanies();
@@ -44,7 +55,7 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public void addCompany(CompanyDTO company, UserDTO user) {
-        userDao.saveUser(user);
+        saveUserAndEmailConfirmation(user);
         saveCompany(company);
         // At some point we should look at getting rid of this hard coding.
         RoleDTO roleToFind = new RoleDTO();
@@ -62,6 +73,27 @@ public class CompanyServiceImpl implements CompanyService{
         userCompanyRoles.add(userCompanyRole);
         company.setUserCompanyRoles(userCompanyRoles);
         companyDao.saveCompany(company);
+    }
+
+    protected void saveUserAndEmailConfirmation(UserDTO user) {
+        try {
+            user.setRegistrationToken(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e);
+            throw new UserServiceException("Unable to generate token for user: "+ user.toString(),e);
+        }
+
+        userDao.saveUser(user);
+
+        SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
+        msg.setTo(user.getEmailAddress());
+        msg.setText("Please click here to activate your account: http://" + hostName + "/commons-user-webapp/users/data/" + user.getUsername() + "/" + user.getRegistrationToken());
+        try{
+            mailSender.send(msg);
+        }
+        catch(MailException ex) {
+            logger.error(ex.getMessage());
+        }
     }
 
     public void addEmployeeToCompany(CompanyDTO company, UserDTO employee) {
@@ -121,4 +153,33 @@ public class CompanyServiceImpl implements CompanyService{
     public void setNumEmployeesRangeDao(NumEmployeesRangeDAO numEmployeesRangeDao) {
         this.numEmployeesRangeDao = numEmployeesRangeDao;
     }
+
+    public void setMailSender(MailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
+    public MailSender getMailSender() {
+        return this.mailSender;
+    }
+
+    public void setTemplateMessage(SimpleMailMessage templateMessage) {
+        this.templateMessage = templateMessage;
+    }
+
+    public SimpleMailMessage getTemplateMessage() {
+        return this.templateMessage;
+    }
+
+    public List<UserDTO> getUsers() {
+        return userDao.getUsers();
+    }
+    
+    public String getHostName() {
+        return hostName;
+    }
+
+    public void setHostName(String hostName) {
+        this.hostName = hostName;
+    }
+    
 }

@@ -10,11 +10,9 @@ import com.neosavvy.user.dao.CompanyDAO;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by IntelliJ IDEA.
  * User: lgleason
  * Date: Dec 4, 2009
  * Time: 4:15:26 PM
- * To change this template use File | Settings | File Templates.
  */
 @Transactional
 public interface CompanyService {

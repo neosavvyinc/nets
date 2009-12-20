@@ -7,11 +7,9 @@ import com.neosavvy.user.dao.NumEmployeesRangeDAO;
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA.
  * User: lgleason
  * Date: Dec 13, 2009
  * Time: 11:53:28 PM
- * To change this template use File | Settings | File Templates.
  */
 public class NumEmployeesRangeServiceImpl implements NumEmployeesRangeService{
     private NumEmployeesRangeDAO numEmployeesRangeDao;

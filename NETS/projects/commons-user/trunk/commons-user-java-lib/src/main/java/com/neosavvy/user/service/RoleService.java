@@ -9,11 +9,9 @@ import com.neosavvy.user.dao.RoleDAO;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- * Created by IntelliJ IDEA.
  * User: lgleason
  * Date: Dec 4, 2009
  * Time: 5:28:05 PM
- * To change this template use File | Settings | File Templates.
  */
 @Transactional
 public interface RoleService {

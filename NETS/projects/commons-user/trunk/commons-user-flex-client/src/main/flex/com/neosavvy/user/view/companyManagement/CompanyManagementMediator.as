@@ -8,12 +8,14 @@ package com.neosavvy.user.view.companyManagement {
 
     import flash.events.MouseEvent;
 
+    import mx.containers.ViewStack;
     import mx.controls.Button;
     import mx.controls.RadioButtonGroup;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
+    import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.mediator.Mediator;
 
     public class CompanyManagementMediator extends Mediator implements IMediator {
@@ -21,6 +23,9 @@ package com.neosavvy.user.view.companyManagement {
         private static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.view.companyManagement.CompanyManagementMediator")
 
         public static const NAME:String = "CompanyManagementMediator";
+
+        public static const REGISTRATION_INDEX:Number = 0;
+        public static const CONFIRMATION_INDEX:Number = 1;
 
         public function CompanyManagementMediator(viewComponent:Object) {
             super(NAME, viewComponent);
@@ -36,6 +41,29 @@ package com.neosavvy.user.view.companyManagement {
 
         public function get registerButton():Button {
             return companyManagement.registerCompanyButton;
+        }
+
+        public function get companyManavementViewStack():ViewStack {
+            return companyManagement.companyRegistrationProcessViewStack;
+        }
+
+        override public function listNotificationInterests():Array {
+            return [
+                ApplicationFacade.SAVE_COMPANY_FAILED
+                ,ApplicationFacade.SAVE_COMPANY_SUCCESS
+            ];
+        }
+
+        override public function handleNotification(notification:INotification):void {
+            switch (notification.getName()) {
+                case ApplicationFacade.SAVE_COMPANY_SUCCESS:
+                    LOGGER.debug("Save company succeeded");
+                    companyManavementViewStack.selectedIndex = CONFIRMATION_INDEX;
+                    break;
+                case ApplicationFacade.SAVE_COMPANY_FAILED:
+                    LOGGER.debug("Save company failed");
+                    break;
+            }
         }
 
         private function registerCompanyButtonClickHandler(event:MouseEvent):void {
@@ -63,7 +91,9 @@ package com.neosavvy.user.view.companyManagement {
             user.username = companyManagement.administrativeUser.text;
             user.password = companyManagement.administrativePassword.text;
             user.emailAddress = companyManagement.administrativeEmail.text;
-
+            user.firstName = companyManagement.administrativeFirstName.text;
+            user.middleName = companyManagement.administrativeMiddleName.text;
+            user.lastName = companyManagement.administrativeLastName.text;
             sendNotification(ApplicationFacade.SAVE_COMPANY_REQUEST, [company,user]);
         }
 

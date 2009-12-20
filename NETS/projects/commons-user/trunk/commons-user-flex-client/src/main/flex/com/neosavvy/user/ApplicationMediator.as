@@ -46,15 +46,15 @@ package com.neosavvy.user {
 
         override public function listNotificationInterests():Array {
             return [
-                ApplicationFacade.SAVE_COMPANY_SUCCESS
+                //ApplicationFacade.SAVE_COMPANY_SUCCESS
             ];
         }
 
         override public function handleNotification(notification:INotification):void {
             switch ( notification.getName() ) {
-                case ApplicationFacade.SAVE_COMPANY_SUCCESS:
-                    this.navigationViewStack.selectedIndex = 3;
-                    break;
+//                case ApplicationFacade.SAVE_COMPANY_SUCCESS:
+//                    this.navigationViewStack.selectedIndex = 3;
+//                    break;
             }
         }
 

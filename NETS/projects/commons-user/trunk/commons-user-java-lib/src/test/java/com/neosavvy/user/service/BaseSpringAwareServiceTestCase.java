@@ -23,7 +23,7 @@ import com.neosavvy.user.dto.NumEmployeesRangeDTO;
  * todo: refactor this and the other base service out for common classes
  */
 @ContextConfiguration(locations = {
-		"classpath:testApplicationContext.xml",
+		"classpath:applicationContext.xml",
         "classpath:testSecurityContext.xml"
         })
 public abstract class BaseSpringAwareServiceTestCase extends AbstractTransactionalJUnit4SpringContextTests {
