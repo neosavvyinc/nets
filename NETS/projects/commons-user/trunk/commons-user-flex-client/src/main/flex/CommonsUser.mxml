@@ -21,7 +21,11 @@
     <mx:Style source="/commonsUser.css"/>
 
     <mx:ApplicationControlBar dock="true" horizontalAlign="right" width="100%" id="appControlBar">
-        <mx:Button id="Login" label="Login"/>
+        <mx:Label id="loggedInUserName"/>
+        <mx:Canvas>
+            <mx:Button id="loginButton" label="Login"/>
+            <mx:Button id="logoutButton" label="Logout" visible="false"/>
+        </mx:Canvas>
     </mx:ApplicationControlBar>
 
     <mx:ViewStack

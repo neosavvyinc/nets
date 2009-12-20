@@ -1,9 +1,13 @@
 package com.neosavvy.user {
 
+    import com.neosavvy.user.dto.UserDTO;
+
     import flash.events.MouseEvent;
 
     import mx.containers.ViewStack;
     import mx.controls.Button;
+
+    import mx.controls.Label;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -44,12 +48,25 @@ package com.neosavvy.user {
             return app.navigationViewStack;
         }
 
+        public function get loginButton():Button {
+            return app.loginButton;
+        }
+
+        public function get logoutButton():Button {
+            return app.logoutButton;
+        }
+
+        public function get loggedInUserName():Label {
+            return app.loggedInUserName;
+        }
+
         override public function onRegister():void
         {
             this.newCompanyButton.addEventListener(MouseEvent.CLICK, newCompanyButtonClicked);
             this.existingUserButton.addEventListener(MouseEvent.CLICK, existingUserButtonClicked);
+            this.loginButton.addEventListener(MouseEvent.CLICK, loginButtonClickedHandler);
+            this.logoutButton.addEventListener(MouseEvent.CLICK, logoutButtonClickHandler);
         }
-
 
         override public function listNotificationInterests():Array {
             return [
@@ -64,9 +81,16 @@ package com.neosavvy.user {
                 case ApplicationFacade.USER_LOGIN_SUCCESS:
                 case ApplicationFacade.USER_LOGGED_IN:
                     this.navigationViewStack.selectedIndex = USER_MANAGEMENT_NAVIGATION_INDEX;
+                    loggedInUserName.text = "You are logged in as " +notification.getBody() as String;
+
+                    loginButton.visible = false;
+                    logoutButton.visible = true;
                     break;
                 case ApplicationFacade.USER_NOT_LOGGED_IN:
                     this.navigationViewStack.selectedIndex = LOGIN_NAVIGATION_INDEX;
+                    loginButton.visible = true;
+                    logoutButton.visible = false;
+                    loggedInUserName.text = "You are not logged in";
                     break;
             }
         }
@@ -76,6 +100,14 @@ package com.neosavvy.user {
         }
 
         private function existingUserButtonClicked(event:MouseEvent):void {
+            sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
+        }
+
+        private function logoutButtonClickHandler(event:MouseEvent):void {
+            sendNotification(ApplicationFacade.REQUEST_LOGOUT);
+        }
+
+        private function loginButtonClickedHandler(event:MouseEvent):void {
             sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
         }
     }
