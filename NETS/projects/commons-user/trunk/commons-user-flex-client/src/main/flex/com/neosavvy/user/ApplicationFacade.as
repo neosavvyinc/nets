@@ -5,6 +5,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
     import com.neosavvy.user.controller.secured.SecuredViewPrepCommand;
     import com.neosavvy.user.controller.secured.SecuredViewTeardownCommand;
+    import com.neosavvy.user.controller.secured.UserLoggedInStartupCommand;
     import com.neosavvy.user.controller.security.CheckLoggedIn;
     import com.neosavvy.user.controller.security.LoginCommand;
 
@@ -109,7 +110,7 @@ package com.neosavvy.user {
             registerCommand(SAVE_USER_TO_COMPANY_REQUEST, SaveEmployeeToCompanyCommand)
             registerCommand(CONFIRM_ACCOUNT_REQUEST, ConfirmAccountCommand);
 
-            registerCommand(INITIALIZE_SECURED_VIEW, SecuredViewPrepCommand);
+            registerCommand(INITIALIZE_SECURED_VIEW, UserLoggedInStartupCommand);
             registerCommand(DEINITIALIZE_SECURED_VIEW, SecuredViewTeardownCommand);
 
             registerCommand(INVITE_USER_TO_COMPANY_REQUEST, InviteUsersToCompanyCommand);

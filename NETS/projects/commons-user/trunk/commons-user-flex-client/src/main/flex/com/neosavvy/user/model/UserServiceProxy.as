@@ -24,6 +24,8 @@ package com.neosavvy.user.model {
 
 		private var remote:Boolean = ProxyConstants.isRemoteEnabled;
 
+        private var _activeUser:UserDTO;
+
 		public function UserServiceProxy()
 		{
 			super(NAME, null);
@@ -31,6 +33,10 @@ package com.neosavvy.user.model {
 
         public function get users():ArrayCollection {
             return data as ArrayCollection;
+        }
+
+        public function get activeUser():UserDTO {
+            return _activeUser;
         }
 
         public function getUsers():void {
@@ -52,6 +58,26 @@ package com.neosavvy.user.model {
             userService.addEventListener(ResultEvent.RESULT, handleConfirmUserSuccess);
             userService.addEventListener(FaultEvent.FAULT, handleConfirmUserFault);
             userService.confirmUser( userName, hashCode );
+        }
+
+        public function getActiveUser():void {
+            var userService:RemoteObject = getUserService();
+            userService.addEventListener(ResultEvent.RESULT, handleGetActiveUserSuccess);
+            userService.addEventListener(FaultEvent.FAULT, handleGetActiveUserFault);
+            var securityProxy:SecurityProxy = facade.retrieveProxy( SecurityProxy.NAME ) as SecurityProxy;
+            var user:UserDTO = new UserDTO();
+            user.username = securityProxy.user;
+            userService.findUsers( user );
+        }
+
+        private function handleGetActiveUserFault(event:FaultEvent):void {
+            LOGGER.debug("User retrieval for active user failed");
+        }
+
+        private function handleGetActiveUserSuccess(event:ResultEvent):void {
+            LOGGER.debug("User retrieval for active user succeeded");
+            var users:ArrayCollection = event.result as ArrayCollection;
+            _activeUser = users.getItemAt(0) as UserDTO;
         }
 
         private function handleSaveUserFault(event:FaultEvent):void {

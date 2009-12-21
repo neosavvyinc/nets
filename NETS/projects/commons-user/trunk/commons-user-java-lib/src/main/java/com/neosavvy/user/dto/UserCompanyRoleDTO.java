@@ -24,15 +24,15 @@ public class UserCompanyRoleDTO {
     @Column(name="ID")
     private int id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="COMPANY_FK")
     private CompanyDTO company;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="ROLE_FK")
     private RoleDTO role;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="USER_FK")
     private UserDTO user;
 

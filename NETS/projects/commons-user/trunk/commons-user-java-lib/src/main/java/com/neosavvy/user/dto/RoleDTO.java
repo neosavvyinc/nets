@@ -39,7 +39,7 @@ public class RoleDTO {
 //            inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
 //    private Set<UserDTO> users = new LinkedHashSet<UserDTO>();
 
-    @OneToMany(mappedBy="role")
+    @OneToMany(mappedBy="role", fetch = FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
 
     public int getId() {

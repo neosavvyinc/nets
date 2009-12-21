@@ -4,9 +4,14 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.dto.CompanyDTO;
     import com.neosavvy.user.dto.CompanyDTO;
 
+    import com.neosavvy.user.dto.UserCompanyRoleDTO;
+    import com.neosavvy.user.dto.UserDTO;
     import com.neosavvy.user.dto.UserDTO;
 
+    import com.neosavvy.user.model.UserServiceProxy;
+
     import mx.collections.ArrayCollection;
+    import mx.collections.ListCollectionView;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -38,6 +43,21 @@ package com.neosavvy.user.model {
          * what company they are associated with
          */
         public function get activeCompany():CompanyDTO{
+            if( !data ) {
+                //check the UserServiceProxy just in case it has an activeCompany
+                var userService:UserServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy
+                var activeUser:UserDTO = userService.activeUser;
+                if( activeUser ) {
+                    var userCompanyRoles:ListCollectionView = activeUser.userCompanyRoles;
+                    if( userCompanyRoles && userCompanyRoles.length > 0 ) {
+                        var userCompanyRole:UserCompanyRoleDTO = userCompanyRoles.getItemAt(0) as UserCompanyRoleDTO;
+                        var company:CompanyDTO = userCompanyRole.company;
+                        data = company;
+                    }
+                }
+            }
+
+
             return data as CompanyDTO;
         }
 
@@ -83,6 +103,7 @@ package com.neosavvy.user.model {
 
         private function handleInviteUsersFault(event:FaultEvent):void {
             LOGGER.debug("User invites failed!");
+            LOGGER.error(event.toString());
         }
 
         private function handleInviteUsersResult(event:ResultEvent):void {

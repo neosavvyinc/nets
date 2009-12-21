@@ -23,6 +23,7 @@ public class CompanyDAOImpl extends BaseDAO implements CompanyDAO{
     }
 
     public CompanyDTO saveCompany(CompanyDTO company) {
+        getCurrentSession().clear();
 		getCurrentSession().saveOrUpdate(company);
         getCurrentSession().flush();
         return company;
