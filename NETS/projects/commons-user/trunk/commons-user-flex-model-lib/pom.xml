@@ -27,7 +27,7 @@
 						<!--</goals>-->
 						<!--<configuration>-->
 							<!--<includeJavaClasses>-->
-								<!--<includeClass>com.neosavvy.user.dto.*</includeClass>-->
+								<!--<includeClass>com.neosavvy.user.dto.SecurityWrapperDTO</includeClass>-->
                             <!--</includeJavaClasses>-->
 							<!--<beanTemplate>-->
 								<!--<template>${basedir}/src/main/template/beanBase.gsp</template>-->

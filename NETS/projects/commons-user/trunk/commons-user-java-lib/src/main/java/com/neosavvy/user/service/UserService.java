@@ -1,7 +1,7 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.user.dto.SecurityWrapperDTO;
 import com.neosavvy.user.dto.UserDTO;
-import com.neosavvy.user.dao.UserDAO;
 import org.springframework.security.annotation.Secured;
 import org.springframework.mail.MailSender;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +26,7 @@ public interface UserService {
 	public void deleteUser(UserDTO user);
 
     @Secured("ROLE_ADMIN")
-    public Boolean checkUserLoggedIn();
+    public SecurityWrapperDTO checkUserLoggedIn();
 
     public boolean confirmUser(String userName, String hashCode);
 

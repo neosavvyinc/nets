@@ -1,11 +1,11 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.user.dto.SecurityWrapperDTO;
 import com.neosavvy.user.dto.UserDTO;
 import com.neosavvy.user.dao.UserDAO;
 
 import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.neosavvy.user.service.exception.UserServiceException;
@@ -14,6 +14,9 @@ import org.apache.log4j.Logger;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.GrantedAuthority;
+import org.springframework.security.context.SecurityContextHolder;
+import org.springframework.security.userdetails.User;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
@@ -114,7 +117,17 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
-    public Boolean checkUserLoggedIn() {
-        return true;
+    public SecurityWrapperDTO checkUserLoggedIn() {
+        User principal = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName = principal.getUsername();
+        GrantedAuthority[] authorities = SecurityContextHolder.getContext().getAuthentication().getAuthorities();
+        List<String> authortiesAsStrings = new ArrayList<String>();
+        for (GrantedAuthority authority : authorities) {
+            authortiesAsStrings.add(authority.toString()); 
+        }
+
+        SecurityWrapperDTO security = new SecurityWrapperDTO(userName, authortiesAsStrings.toArray(new String[]{}));
+
+        return security;
     }
 }

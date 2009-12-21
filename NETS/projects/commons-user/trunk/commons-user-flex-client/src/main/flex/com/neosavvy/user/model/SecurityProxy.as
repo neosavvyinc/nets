@@ -2,6 +2,7 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.ProxyConstants;
 
+    import com.neosavvy.user.dto.SecurityWrapperDTO;
     import com.neosavvy.user.dto.UserDTO;
 
     import mx.logging.ILogger;
@@ -87,10 +88,11 @@ package com.neosavvy.user.model {
             LOGGER.debug("User is not yet logged in");
             sendNotification(ApplicationFacade.USER_NOT_LOGGED_IN);
         }
-
         protected function user_loggedAlreadyLoggedInHandler(event:ResultEvent):void {
             LOGGER.debug("User is already logged in");
-            sendNotification(ApplicationFacade.USER_LOGGED_IN);
+            var security:SecurityWrapperDTO = event.result as SecurityWrapperDTO;
+            setData(security);
+            sendNotification(ApplicationFacade.USER_LOGGED_IN, user);
         }
 
         /****
