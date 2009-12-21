@@ -16,6 +16,8 @@ public interface CompanyDAO {
 
 	public CompanyDTO saveCompany(CompanyDTO company);
 
+    public CompanyDTO updateCompany(CompanyDTO company);
+
 	public CompanyDTO findCompanyById(int id);
 
 	public List<CompanyDTO> findCompanies(CompanyDTO company);

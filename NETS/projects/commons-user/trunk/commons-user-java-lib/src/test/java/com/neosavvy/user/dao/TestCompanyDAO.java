@@ -29,6 +29,20 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
         Assert.assertNotNull("Company object was not found by id " + company.getId(), companyFound);
     }
 
+    @Test
+    public void testUpdateCompanies() {
+        cleanupTables();
+        CompanyDTO company = createTestCompany();
+        companyDAO.saveCompany(company);
+
+        company.setAddressOne("666 Satin blvd");
+        companyDAO.updateCompany(company);
+
+        int numRows = countRowsInTable("COMPANY");
+
+        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
+    }    
+
     private void setupCriteriaBasedSearchTest() {
         cleanupTables();
 

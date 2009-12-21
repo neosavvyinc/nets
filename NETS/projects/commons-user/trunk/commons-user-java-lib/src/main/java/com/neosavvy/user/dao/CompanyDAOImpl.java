@@ -29,6 +29,12 @@ public class CompanyDAOImpl extends BaseDAO implements CompanyDAO{
         return company;
     }
 
+    public CompanyDTO updateCompany(CompanyDTO company) {
+        getCurrentSession().update(company);
+        getCurrentSession().flush();
+        return company;
+    }
+
     public CompanyDTO findCompanyById(int id) {
         return (CompanyDTO) getCurrentSession()
             .createCriteria(CompanyDTO.class)

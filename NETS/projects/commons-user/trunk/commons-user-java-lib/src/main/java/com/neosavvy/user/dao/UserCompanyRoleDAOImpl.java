@@ -42,6 +42,17 @@ public class UserCompanyRoleDAOImpl extends BaseDAO implements UserCompanyRoleDA
         if((userCompanyRole.getRole() != null)){
             criteria.add(Restrictions.eq("role", userCompanyRole.getRole()));
         }
+
+        if((userCompanyRole.getUser() != null)){
+            criteria.add(Restrictions.eq("user", userCompanyRole.getUser()));
+        }
+
+
+        if((userCompanyRole.getCompany() != null)){
+            criteria.add(Restrictions.eq("company", userCompanyRole.getCompany()));
+        }
+
+
         return criteria.list();
     }
 }

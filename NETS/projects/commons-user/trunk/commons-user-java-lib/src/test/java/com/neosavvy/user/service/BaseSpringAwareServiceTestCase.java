@@ -60,6 +60,17 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         return user;
     }
 
+    protected UserDTO createAltTestUser(){
+        UserDTO user = new UserDTO();
+        user.setFirstName("Lance");
+        user.setMiddleName("B");
+        user.setLastName("Gleason");
+        user.setUsername("lgleason");
+        user.setPassword("testPassword");
+        user.setEmailAddress("lg@neosavvy.com");
+        return user;
+    }    
+
     protected CompanyDTO createTestCompany() {
         CompanyDTO company = new CompanyDTO();
         company.setCompanyName("BFD Enterprises");

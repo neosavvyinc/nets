@@ -84,7 +84,6 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase{
         Assert.assertNotNull("User object was found by id " + role.getId(), userCompanyRoleFound);
     }
 
-    //todo: left off needing to get this working correctly.
     @Test
     public void testFindUserCompanyRoleByRoleId() {
         cleanupTables();
@@ -109,20 +108,80 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase{
         cleanupTables();
         UserDTO user = createTestUser();
         userDAO.saveUser(user);
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(null, null, user);
+        RoleDTO role = createTestRole();
+        roleDAO.saveRole(role);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, user);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+        UserCompanyRoleDTO altUserCompanyRole = createTestUserCompanyRole(role, null, null);
+        userCompanyRoleDAO.saveUserCompanyRole(altUserCompanyRole);
 
         int numRows = countRowsInTable("USER_COMPANY_ROLE");
 
-        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
+        Assert.assertEquals("Num of rows is equal to 1", 2, numRows);
 
-        UserCompanyRoleDTO userCompanyRoleFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRole).get(0);
+        List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRole);
 
         Assert.assertEquals("UserCompanyRole object was found by id ",
                 user.getId(),
-                userCompanyRoleFound.getUser().getId());
+                userCompanyRolesFound.get(0).getUser().getId());
+        Assert.assertEquals("found only the one usercompany role that we saved and searched for ",
+                1,
+                userCompanyRolesFound.size());
     }
 
+    @Test
+    public void testFindUserCompanyRoleByCompanyId() {
+        cleanupTables();
+        CompanyDTO company = createTestCompany();
+        companyDAO.saveCompany(company);
+        RoleDTO role = createTestRole();
+        roleDAO.saveRole(role);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
+        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+        UserCompanyRoleDTO altUserCompanyRole = createTestUserCompanyRole(role, null, null);
+        userCompanyRoleDAO.saveUserCompanyRole(altUserCompanyRole);
+
+        int numRows = countRowsInTable("USER_COMPANY_ROLE");
+
+        Assert.assertEquals("Num of rows is equal to 1", 2, numRows);
+
+        List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRole);
+
+        Assert.assertEquals("UserCompanyRole object was found by id ",
+                company.getId(),
+                userCompanyRolesFound.get(0).getCompany().getId());
+        Assert.assertEquals("found only the one usercompany role that we saved and searched for ",
+                1,
+                userCompanyRolesFound.size());
+    }
+
+    @Test
+    public void testFindUserCompanyRoleByAllThree() {
+        cleanupTables();
+        CompanyDTO company = createTestCompany();
+        companyDAO.saveCompany(company);
+        RoleDTO role = createTestRole();
+        roleDAO.saveRole(role);
+        UserDTO user = createTestUser();
+        userDAO.saveUser(user);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, user);
+        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+        UserCompanyRoleDTO altUserCompanyRole = createTestUserCompanyRole(role, null, null);
+        userCompanyRoleDAO.saveUserCompanyRole(altUserCompanyRole);
+
+        int numRows = countRowsInTable("USER_COMPANY_ROLE");
+
+        Assert.assertEquals("Num of rows is equal to 1", 2, numRows);
+
+        List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRole);
+
+        Assert.assertEquals("UserCompanyRole object was found by id ",
+                company.getId(),
+                userCompanyRolesFound.get(0).getCompany().getId());
+        Assert.assertEquals("found only the one usercompany role that we saved and searched for ",
+                1,
+                userCompanyRolesFound.size());
+    }
 
     @Test
     public void testDeleteUserCompanyRole() {

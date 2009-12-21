@@ -132,6 +132,19 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     }
 
 //    @Test(expected = CompanyServiceException.class)
+//    public void testAddEmployeeToDifferentCompanies() {
+//        cleanDatabase();
+//        CompanyDTO testCompany = createTestCompany();
+//        companyDAO.saveCompany(testCompany);
+//        UserDTO testUser = createTestUser();
+//        userDAO.saveUser(testUser);
+//
+//        companyService.addCompany(testCompany, testUser);
+//    }
+
+    
+
+//    @Test(expected = CompanyServiceException.class)
 //    public void testAddEmployeeToCompanyTwice() {
 //        cleanDatabase();
 //        CompanyDTO testCompany = createTestCompany();
@@ -155,8 +168,11 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 //        cleanDatabase();
 //        CompanyDTO testCompany = createTestCompany();
 //        UserDTO testUserDTO = createTestUser();
+//        UserDTO altTestUserDTO = createAltTestUser();
 //        roleDAO.saveRole(createEmployeeTestRole());
 //        roleDAO.saveRole(createTestRole());
+//        userDAO.saveUser(testUserDTO);
+//        userDAO.saveUser(altTestUserDTO);
 //
 //        companyService.addCompany(testCompany, testUserDTO);
 //
@@ -166,14 +182,36 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 //                numUserCompanyRoles);
 //
 //
-//        companyService.addEmployeeToCompany(testCompany, testUserDTO);
+//        companyService.addUserToCompany(testCompany, altTestUserDTO);
 //        numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
 //        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
 //                2,
 //                numUserCompanyRoles);
 //
 //        CompanyDTO foundCompany = companyService.findCompanyById(testCompany.getId());
-//        Assert.assertEquals("Number of Employees is the ");
+//        Assert.assertEquals("Number of Employees is 2", 2,
+//            foundCompany.getUserCompanyRoles().size());
+//    }
+//
+//    @Test(expected = CompanyServiceException.class)
+//    public void testReAddEmployeeToCompany() {
+//        cleanDatabase();
+//        CompanyDTO testCompany = createTestCompany();
+//        UserDTO testUserDTO = createTestUser();
+//        roleDAO.saveRole(createEmployeeTestRole());
+//        roleDAO.saveRole(createTestRole());
+//        userDAO.saveUser(testUserDTO);
+//        companyDAO.saveCompany(testCompany);
+//
+//        companyService.addCompany(testCompany, testUserDTO);
+//
+//        int numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
+//        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
+//                1,
+//                numUserCompanyRoles);
+//
+//
+//        companyService.addUserToCompany(testCompany, testUserDTO);
 //    }
 
     @Test(expected = CompanyServiceException.class)

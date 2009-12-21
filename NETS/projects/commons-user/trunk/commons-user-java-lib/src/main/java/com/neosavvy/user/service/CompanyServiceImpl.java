@@ -97,6 +97,7 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public void addUserToCompany(CompanyDTO company, UserDTO user) {
+        System.out.println("num companies before " + companyDao.getCompanies().size());
         if(user == null){
             throw new CompanyServiceException("null user not supported", null);    
         }
@@ -116,16 +117,25 @@ public class CompanyServiceImpl implements CompanyService{
             throw new CompanyServiceException("invalid number of ROLE_EMPLOYEEs found " + employeeRoles.size(), null);
         }
 
-
-
         UserCompanyRoleDTO userCompanyRole = new UserCompanyRoleDTO();
         userCompanyRole.setRole(employeeRoles.get(0));
         userCompanyRole.setUser(user);
+        userCompanyRole.setCompany(company);
+
+        if(userCompanyRoleDao.findUserCompanyRoles(userCompanyRole).size() > 0){
+            throw new CompanyServiceException("employee/role/company conbination already added " 
+                    , null);
+        }
+
         userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
-        HashSet<UserCompanyRoleDTO> userCompanyRoles = new HashSet<UserCompanyRoleDTO>();
-        userCompanyRoles.add(userCompanyRole);
-        company.setUserCompanyRoles(userCompanyRoles);
-        companyDao.saveCompany(company);
+//        CompanyDTO foundCompany = companyDao.findCompanyById(company.getId());
+//        Set<UserCompanyRoleDTO> userCompanyRoles = foundCompany.getUserCompanyRoles();
+//        userCompanyRoles.add(userCompanyRole);
+//
+//        foundCompany.setUserCompanyRoles(userCompanyRoles);
+//        companyDao.updateCompany(foundCompany);
+
+        System.out.println("num companies after " + companyDao.getCompanies().size());
     }
 
     public List<UserInviteDTO> inviteUsers(CompanyDTO company, List<UserInviteDTO> userInvites) {
