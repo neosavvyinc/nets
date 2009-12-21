@@ -14,6 +14,34 @@ import java.util.HashSet;
  * @author lgleason
  */
 public class TestCompanyService extends BaseSpringAwareServiceTestCase {
+
+    protected UserInviteDTO createTestUserInvite(){
+        UserInviteDTO userInvite = new UserInviteDTO();
+        userInvite.setFirstName("William");
+        userInvite.setMiddleName("Adam");
+        userInvite.setLastName("Parrish");
+        userInvite.setEmailAddress("aparrish@neosavvy.com");
+        return userInvite;
+    }
+
+    protected UserInviteDTO createAltTestUserInvite(){
+        UserInviteDTO userInvite = new UserInviteDTO();
+        userInvite.setFirstName("Lance");
+        userInvite.setMiddleName("B");
+        userInvite.setLastName("Gleason");
+        userInvite.setEmailAddress("lg@neosavvy.com");
+        return userInvite;
+    }
+
+    protected UserInviteDTO createAnotherTestUserInvite(){
+        UserInviteDTO userInvite = new UserInviteDTO();
+        userInvite.setFirstName("Ted");
+        userInvite.setMiddleName("B");
+        userInvite.setLastName("Bundy");
+        userInvite.setEmailAddress("tb@neosavvy.com");
+        return userInvite;
+    }
+
     @Test
     public void testGetCompanies() throws Exception {
         cleanDatabase();
@@ -183,7 +211,43 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
                 userInvites.iterator().next().getId(),
                 foundCompany.getUserInvites().iterator().next().getId());
     }
-    //todo: test persisting more than one user
+
+    @Test
+    public void testInviteUsersPersistsTwoUsers(){
+        cleanDatabase();
+        List<UserInviteDTO> userInvites = new ArrayList();
+        UserInviteDTO testUserInvite = createTestUserInvite();
+        UserInviteDTO altTestUserInvite = createAltTestUserInvite();
+        userInvites.add(testUserInvite);
+        userInvites.add(altTestUserInvite);
+        CompanyDTO company = createTestCompany();
+        companyDAO.saveCompany(company);
+        companyService.inviteUsers(company, userInvites);
+        CompanyDTO foundCompany = companyService.findCompanyById(company.getId());
+        Assert.assertTrue("Persisted User invite contains the ones we created",
+                userInvites.contains(altTestUserInvite));
+    }
+
+    @Test
+    public void testInviteUsersPersistsLastSaved(){
+        cleanDatabase();
+        List<UserInviteDTO> userInvites = new ArrayList();
+        userInvites.add(createTestUserInvite());
+        CompanyDTO company = createTestCompany();
+        companyDAO.saveCompany(company);
+        companyService.inviteUsers(company, userInvites);
+        CompanyDTO foundCompany = companyService.findCompanyById(company.getId());
+        Assert.assertEquals("Persisted User invite is the one we created",
+                userInvites.iterator().next().getId(),
+                foundCompany.getUserInvites().iterator().next().getId());
+        userInvites = new ArrayList();
+        userInvites.add(createAltTestUserInvite());
+        companyService.inviteUsers(company, userInvites);
+        foundCompany = companyService.findCompanyById(company.getId());
+        Assert.assertEquals("Persisted User invite is the one we created",
+                userInvites.iterator().next().getId(),
+                foundCompany.getUserInvites().iterator().next().getId());
+    }
 
     @Test(expected = CompanyServiceException.class)
     public void testGetUserInvitesNullCompany(){

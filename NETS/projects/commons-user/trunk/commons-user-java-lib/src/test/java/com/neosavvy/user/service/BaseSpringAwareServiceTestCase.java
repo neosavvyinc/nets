@@ -95,15 +95,6 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         return test_range;
     }
 
-    protected UserInviteDTO createTestUserInvite(){
-        UserInviteDTO userInvite = new UserInviteDTO();
-        userInvite.setFirstName("William");
-        userInvite.setMiddleName("Adam");
-        userInvite.setLastName("Parrish");
-        userInvite.setEmailAddress("aparrish@neosavvy.com");
-        return userInvite;
-    }
-
     protected void cleanDatabase() {
         deleteFromTables("USER_COMPANY_ROLE");
         deleteFromTables("USER");
