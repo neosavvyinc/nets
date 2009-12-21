@@ -20,7 +20,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         userInvite.setFirstName("William");
         userInvite.setMiddleName("Adam");
         userInvite.setLastName("Parrish");
-        userInvite.setEmailAddress("aparrish@neosavvy.com");
+        userInvite.setEmailAddress("aparrish1@neosavvy.com");
         return userInvite;
     }
 
@@ -247,6 +247,22 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         Assert.assertEquals("Persisted User invite is the one we created",
                 userInvites.iterator().next().getId(),
                 foundCompany.getUserInvites().iterator().next().getId());
+    }
+
+    @Test
+    public void testInviteUsersPersistPersistedUser(){
+        cleanDatabase();
+        List<UserInviteDTO> userInvites = new ArrayList();
+        userInvites.add(createTestUserInvite());
+        CompanyDTO company = createTestCompany();
+        roleDAO.saveRole(createTestRole());
+        companyService.addCompany(company, createTestUser());
+        List<UserInviteDTO> problemInvites = companyService.inviteUsers(company, userInvites);
+        Assert.assertEquals("Item is returned as a problem invite because a registered user with same e-mail exists",
+                userInvites.iterator().next().getEmailAddress(),
+                problemInvites.get(0).getEmailAddress());
+        CompanyDTO foundCompany = companyService.findCompanyById(company.getId());
+        Assert.assertFalse(foundCompany.getUserInvites().contains(problemInvites.get(0)));
     }
 
     @Test(expected = CompanyServiceException.class)

@@ -133,7 +133,19 @@ public class CompanyServiceImpl implements CompanyService{
             throw new CompanyServiceException("null userInvites not supported", null);
         }
 
-        verifyValidCompany(company);
+        Set<UserCompanyRoleDTO> userCompanyRoles = verifyValidCompany(company).getUserCompanyRoles();
+
+        List<UserInviteDTO> usersAlreadyRegistered = new ArrayList();
+        List<UserInviteDTO> finalUserInviteList = new ArrayList();
+
+        List<String> registeredUserEmails = new ArrayList();
+
+        if(userCompanyRoles != null){
+            for(UserCompanyRoleDTO userCompanyRole: userCompanyRoles){
+                registeredUserEmails.add(userCompanyRole.getUser().getEmailAddress());
+            }
+        }
+
         for(UserInviteDTO invite: userInvites){
             try {
                 invite.setRegistrationToken(StringUtil.getHash64(invite.toString() + System.currentTimeMillis() + ""));
@@ -141,27 +153,36 @@ public class CompanyServiceImpl implements CompanyService{
                 logger.error(e);
                 throw new UserServiceException("Unable to generate token for user: "+ invite.toString(),e);
             }
-            userInviteDao.saveUserInvite(invite);
+
+            if(registeredUserEmails.contains(invite.getEmailAddress())){
+                usersAlreadyRegistered.add(invite);
+            }else{
+                userInviteDao.saveUserInvite(invite);
+                finalUserInviteList.add(invite);
+            }
         }
 
-        company.setUserInvites(new HashSet(userInvites));
+        company.setUserInvites(new HashSet(finalUserInviteList));
         companyDao.saveCompany(company);
-        sendInvites(userInvites);
-        return null;
+        sendInvites(finalUserInviteList);
+        return usersAlreadyRegistered;
     }
 
     protected void sendInvites(List<UserInviteDTO> userInvites){
         //this will e-mail out the invites once everything is hooked in.
     }
 
-    protected void verifyValidCompany(CompanyDTO company){
+    protected CompanyDTO verifyValidCompany(CompanyDTO company){
         if(company == null){
             throw new CompanyServiceException("null company not supported", null);
         }
 
-        if(companyDao.findCompanyById(company.getId()) == null){
+        CompanyDTO verifiedCompany = companyDao.findCompanyById(company.getId());
+
+        if(verifiedCompany == null){
             throw new CompanyServiceException("unpersisted company", null);
         }
+        return verifiedCompany;
     }
 
     public List<UserInviteDTO> getInvitedUsers(CompanyDTO company) {
