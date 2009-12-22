@@ -36,4 +36,6 @@ public interface CompanyService {
     public List<UserInviteDTO> inviteUsers(CompanyDTO company, List<UserInviteDTO> userInvites);
 
     public List<UserInviteDTO> getInvitedUsers(CompanyDTO company);
+
+    public void deleteInvitedUser(CompanyDTO company, UserInviteDTO userInvite);
 }

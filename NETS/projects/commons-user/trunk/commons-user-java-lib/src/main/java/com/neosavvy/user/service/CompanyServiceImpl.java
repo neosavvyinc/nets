@@ -178,6 +178,10 @@ public class CompanyServiceImpl implements CompanyService{
         return usersAlreadyRegistered;
     }
 
+    public void deleteInvitedUser(CompanyDTO company, UserInviteDTO userInvite) {
+        userInviteDao.deleteUserInvite(userInvite);
+    }
+
     protected void sendInvites(List<UserInviteDTO> userInvites){
         //this will e-mail out the invites once everything is hooked in.
     }

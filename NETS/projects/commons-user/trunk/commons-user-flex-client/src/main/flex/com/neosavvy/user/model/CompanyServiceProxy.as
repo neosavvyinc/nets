@@ -8,6 +8,7 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.dto.UserDTO;
     import com.neosavvy.user.dto.UserDTO;
 
+    import com.neosavvy.user.dto.UserInviteDTO;
     import com.neosavvy.user.model.UserServiceProxy;
 
     import mx.collections.ArrayCollection;
@@ -15,6 +16,7 @@ package com.neosavvy.user.model {
     import mx.logging.ILogger;
     import mx.logging.Log;
 
+    import mx.messaging.AbstractProducer;
     import mx.messaging.ChannelSet;
     import mx.messaging.channels.AMFChannel;
     import mx.rpc.events.FaultEvent;
@@ -61,6 +63,17 @@ package com.neosavvy.user.model {
             return data as CompanyDTO;
         }
 
+        private var _invitedUsersForActiveCompany:ArrayCollection = new ArrayCollection();
+
+
+        public function get invitedUsersForActiveCompany():ArrayCollection {
+            return _invitedUsersForActiveCompany;
+        }
+
+        public function set invitedUsersForActiveCompany(value:ArrayCollection):void {
+            _invitedUsersForActiveCompany = value;
+        }
+
         public function addCompany(company:CompanyDTO, user:UserDTO):void
         {
             var companyService:RemoteObject = getCompanyService();
@@ -94,11 +107,11 @@ package com.neosavvy.user.model {
         private function handleSaveEmployeeToCompanyResult(event:ResultEvent):void {
         }
 
-        public function inviteUsers(company:CompanyDTO, userInvites:ArrayCollection):void {
+        public function inviteUsers( userInvites:ArrayCollection ):void {
             var companyService:RemoteObject = getCompanyService();
             companyService.addEventListener(ResultEvent.RESULT, handleInviteUsersResult);
             companyService.addEventListener(FaultEvent.FAULT, handleInviteUsersFault);
-            companyService.inviteUsers( company, userInvites );
+            companyService.inviteUsers( activeCompany, userInvites );
         }
 
         private function handleInviteUsersFault(event:FaultEvent):void {
@@ -108,6 +121,47 @@ package com.neosavvy.user.model {
 
         private function handleInviteUsersResult(event:ResultEvent):void {
             LOGGER.debug("User invites successful");
+        }
+
+        public function getInvitedUsers():void {
+            var companyService:RemoteObject = getCompanyService();
+            companyService.addEventListener(ResultEvent.RESULT, handleGetInvitedUsersResult);
+            companyService.addEventListener(FaultEvent.FAULT, handleGetInvitedUsersFault);
+            companyService.getInvitedUsers( activeCompany );
+        }
+
+        private function handleGetInvitedUsersFault(event:FaultEvent):void {
+            LOGGER.debug("Get Invited Users Failed");
+
+            sendNotification(ApplicationFacade.GET_INVITED_USERS_FAILED);
+        }
+
+        private function handleGetInvitedUsersResult(event:ResultEvent):void {
+            LOGGER.debug("Get Invited Users Success");
+
+            if(event.result != null)
+                _invitedUsersForActiveCompany = event.result as ArrayCollection;
+            else
+                _invitedUsersForActiveCompany = new ArrayCollection();
+
+            sendNotification(ApplicationFacade.GET_INVITED_USERS_SUCCESS);
+        }
+
+        public function deleteUserCompanyInvite(userInvite:UserInviteDTO):void {
+            var companyService:RemoteObject = getCompanyService();
+            companyService.addEventListener(ResultEvent.RESULT, handleDeleteInvitedUserResult);
+            companyService.addEventListener(FaultEvent.FAULT, handleDeleteInvitedUserFault);
+            companyService.deleteInvitedUser( activeCompany, userInvite );
+        }
+
+        private function handleDeleteInvitedUserFault(event:FaultEvent):void {
+            LOGGER.debug("User Invite Delete Failed for: " + event.toString());
+            sendNotification(ApplicationFacade.DELETE_USER_COMPANY_INVITE_FAILED);
+        }
+
+        private function handleDeleteInvitedUserResult(event:ResultEvent):void {
+            LOGGER.debug("User Invite Delete Succeeded");
+            sendNotification(ApplicationFacade.DELETE_USER_COMPANY_INVITE_SUCCESS);
         }
 
         /****
@@ -130,5 +184,5 @@ package com.neosavvy.user.model {
         }
 
 
-    }
+        }
 }

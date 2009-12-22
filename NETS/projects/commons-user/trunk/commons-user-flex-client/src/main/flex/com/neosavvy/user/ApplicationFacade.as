@@ -1,6 +1,8 @@
 package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
 
+    import com.neosavvy.user.controller.company.DeleteUserCompanyInviteCommand;
+    import com.neosavvy.user.controller.company.GetInvitedUsersForCompanyCommand;
     import com.neosavvy.user.controller.company.InviteUsersToCompanyCommand;
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
     import com.neosavvy.user.controller.secured.SecuredViewPrepCommand;
@@ -77,6 +79,15 @@ package com.neosavvy.user {
         public static var NON_ACTIVE_EMPLOYEES_FAILED:String="nonActiveEmployeesFailed";
 
         public static var NAVIGATE_TO_INVITE_EMPLOYEES:String="navigateToInviteEmployees";
+
+        public static var GET_INVITED_USERS_REQUEST:String = "getInvitedUsersRequest";
+        public static var GET_INVITED_USERS_FAILED:String = "getInvitedUsersFailed";
+        public static var GET_INVITED_USERS_SUCCESS:String = "getInvitedUsersSuccess";
+
+        public static var DELETE_USER_COMPANY_INVITE:String = "deleteUserCompanyInvite";
+        public static var DELETE_USER_COMPANY_INVITE_FAILED:String = "deleteUserCompanyInviteFailed";
+        public static var DELETE_USER_COMPANY_INVITE_SUCCESS:String = "deleteUserCompanyInviteSuccess";
+
         public static var NAVIGATE_TO_WELCOME:String="navigateToWelcome";
         
         public function ApplicationFacade(key:String)
@@ -114,6 +125,8 @@ package com.neosavvy.user {
             registerCommand(DEINITIALIZE_SECURED_VIEW, SecuredViewTeardownCommand);
 
             registerCommand(INVITE_USER_TO_COMPANY_REQUEST, InviteUsersToCompanyCommand);
+            registerCommand(GET_INVITED_USERS_REQUEST, GetInvitedUsersForCompanyCommand);
+            registerCommand(DELETE_USER_COMPANY_INVITE, DeleteUserCompanyInviteCommand);
         }
 
         /**
@@ -127,5 +140,5 @@ package com.neosavvy.user {
         }
 
 
-       }
+        }
 }

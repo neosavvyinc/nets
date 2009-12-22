@@ -1,7 +1,4 @@
 package com.neosavvy.user.controller.company {
-    import com.neosavvy.user.dto.CompanyDTO;
-    import com.neosavvy.user.dto.UserDTO;
-
     import com.neosavvy.user.model.CompanyServiceProxy;
 
     import mx.collections.ArrayCollection;
@@ -9,13 +6,10 @@ package com.neosavvy.user.controller.company {
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.SimpleCommand;
 
-    public class InviteUsersToCompanyCommand extends SimpleCommand {
+    public class GetInvitedUsersForCompanyCommand extends SimpleCommand {
         override public function execute(notification:INotification):void {
-            
             var companyServiceProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
-            var params:ArrayCollection = notification.getBody() as ArrayCollection;
-            companyServiceProxy.inviteUsers( params );
-            
+            companyServiceProxy.getInvitedUsers();
         }
     }
 }

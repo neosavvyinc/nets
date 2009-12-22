@@ -1,6 +1,6 @@
 <TopNode>
   <TestSuite name="Test Company Registration" description="">
-    <TestCase name="Register Company" description="">
+    <TestCase name="RegisterCompany" description="">
       <Test name="Fill out Company form" description="" defaultThinkTime="500">
         <UIEvent command="Click" value="New Company's Click Here" prop="automationName">
           <arg value="0"/>
@@ -144,6 +144,67 @@
           <arg value="0"/>
         </UIEvent>
         <UIEvent command="Click" value="Register Company" prop="automationName">
+          <arg value="0"/>
+        </UIEvent>
+      </Test>
+    </TestCase>
+    <TestCase name="LoginandInviteUser" description="null">
+      <Test name="InviteUser" description="null" defaultThinkTime="500">
+        <UIEvent command="SelectText" value="username" prop="automationName" containerValue="Panel">
+          <arg value="0"/>
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="Input" value="username" prop="automationName">
+          <arg value="neosavvy"/>
+        </UIEvent>
+        <UIEvent command="ChangeFocus" value="username" prop="automationName">
+          <arg value="false"/>
+          <arg value="TAB"/>
+        </UIEvent>
+        <UIEvent command="Input" value="password" prop="automationName">
+          <arg value="test"/>
+        </UIEvent>
+        <UIEvent command="Click" value="Login" prop="automationName">
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="Click" value="Invite Employees" prop="automationName">
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="SelectText" value="empFName" prop="automationName">
+          <arg value="0"/>
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="Input" value="empFName" prop="automationName">
+          <arg value="Adam"/>
+        </UIEvent>
+        <UIEvent command="ChangeFocus" value="empFName" prop="automationName">
+          <arg value="false"/>
+          <arg value="TAB"/>
+        </UIEvent>
+        <UIEvent command="Input" value="empLName" prop="automationName">
+          <arg value="Parrish"/>
+        </UIEvent>
+        <UIEvent command="ChangeFocus" value="empLName" prop="automationName">
+          <arg value="false"/>
+          <arg value="TAB"/>
+        </UIEvent>
+        <UIEvent command="Input" value="empEmail" prop="automationName">
+          <arg value="aparrish@e"/>
+        </UIEvent>
+        <UIEvent command="Type" value="empEmail" prop="automationName">
+          <arg value="BACKSPACE"/>
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="Input" value="empEmail" prop="automationName">
+          <arg value="neosavvy"/>
+        </UIEvent>
+        <UIEvent command="Click" value="Add User" prop="automationName">
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="Click" value="Done" prop="automationName">
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="Click" value="Logout" prop="automationName">
           <arg value="0"/>
         </UIEvent>
       </Test>

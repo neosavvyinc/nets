@@ -4,6 +4,8 @@ package com.neosavvy.user.view.secured {
 
     import flash.events.MouseEvent;
 
+    import flash.net.registerClassAlias;
+
     import mx.containers.ViewStack;
     import mx.controls.LinkButton;
     import mx.logging.ILogger;
