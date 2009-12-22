@@ -8,11 +8,14 @@
         <flexlib:PromptingTextInput prompt="Username" automationName="username" id="username" width="100%"/>
         <flexlib:PromptingTextInput prompt="Password" automationName="password" id="password" width="100%" displayAsPassword="true"/>
 
-        <mx:Button id="loginButton" label="Login"/>
-
+        <mx:HBox>
+            <mx:Button id="loginButton" label="Login"/>
+            <mx:Button id="newCompanyButtonFromExistingLogin" label="Oops - I am a new company"/>
+        </mx:HBox>
         <mx:LinkButton id="forgotUsername" label="Forgot Username"/>
         <mx:LinkButton id="forgotPassword" label="Forgot Password"/>
 
         <mx:Label id="errorLbl"/>
+
     </mx:Panel>
 </mx:VBox>

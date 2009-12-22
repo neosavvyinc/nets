@@ -79,6 +79,7 @@ package com.neosavvy.user {
         public static var NON_ACTIVE_EMPLOYEES_FAILED:String="nonActiveEmployeesFailed";
 
         public static var NAVIGATE_TO_INVITE_EMPLOYEES:String="navigateToInviteEmployees";
+        public static var NAVIGATE_TO_COMPANY_REGISTRATION:String="navigateToCompanyRegistration";
 
         public static var GET_INVITED_USERS_REQUEST:String = "getInvitedUsersRequest";
         public static var GET_INVITED_USERS_FAILED:String = "getInvitedUsersFailed";
@@ -140,5 +141,5 @@ package com.neosavvy.user {
         }
 
 
-        }
+    }
 }

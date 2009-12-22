@@ -79,6 +79,7 @@ package com.neosavvy.user {
                 ApplicationFacade.USER_LOGGED_IN
                 ,ApplicationFacade.USER_NOT_LOGGED_IN
                 ,ApplicationFacade.USER_LOGIN_SUCCESS
+                ,ApplicationFacade.NAVIGATE_TO_COMPANY_REGISTRATION
             ];
         }
 
@@ -100,6 +101,9 @@ package com.neosavvy.user {
                     loggedInUserName.text = "You are not logged in";
                     sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
                     break;
+                case ApplicationFacade.NAVIGATE_TO_COMPANY_REGISTRATION:
+                    this.navigationViewStack.selectedIndex = COMPANY_MANAGEMENT_NAVIGATION_INDEX;
+                    break;
             }
         }
 
@@ -118,7 +122,8 @@ package com.neosavvy.user {
         private function loginButtonClickedHandler(event:MouseEvent):void {
             sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
         }
-    }
+
+        }
 
 
 }
