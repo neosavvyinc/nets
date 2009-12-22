@@ -97,7 +97,6 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public void addUserToCompany(CompanyDTO company, UserDTO user) {
-        System.out.println("num companies before " + companyDao.getCompanies().size());
         if(user == null){
             throw new CompanyServiceException("null user not supported", null);    
         }
@@ -128,14 +127,6 @@ public class CompanyServiceImpl implements CompanyService{
         }
 
         userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
-//        CompanyDTO foundCompany = companyDao.findCompanyById(company.getId());
-//        Set<UserCompanyRoleDTO> userCompanyRoles = foundCompany.getUserCompanyRoles();
-//        userCompanyRoles.add(userCompanyRole);
-//
-//        foundCompany.setUserCompanyRoles(userCompanyRoles);
-//        companyDao.updateCompany(foundCompany);
-
-        System.out.println("num companies after " + companyDao.getCompanies().size());
     }
 
     public List<UserInviteDTO> inviteUsers(CompanyDTO company, List<UserInviteDTO> userInvites) {

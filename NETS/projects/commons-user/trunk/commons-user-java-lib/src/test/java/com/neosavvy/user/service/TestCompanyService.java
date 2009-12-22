@@ -163,56 +163,60 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 //        companyService.addEmployeeToCompany(testCompany, testUserDTO);
 //    }
 
-//    @Test
-//    public void testAddMoreEmployeeToCompany() {
-//        cleanDatabase();
-//        CompanyDTO testCompany = createTestCompany();
-//        UserDTO testUserDTO = createTestUser();
-//        UserDTO altTestUserDTO = createAltTestUser();
-//        roleDAO.saveRole(createEmployeeTestRole());
-//        roleDAO.saveRole(createTestRole());
-//        userDAO.saveUser(testUserDTO);
-//        userDAO.saveUser(altTestUserDTO);
-//
-//        companyService.addCompany(testCompany, testUserDTO);
-//
-//        int numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
-//        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
-//                1,
-//                numUserCompanyRoles);
-//
-//
-//        companyService.addUserToCompany(testCompany, altTestUserDTO);
-//        numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
-//        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
-//                2,
-//                numUserCompanyRoles);
-//
-//        CompanyDTO foundCompany = companyService.findCompanyById(testCompany.getId());
-//        Assert.assertEquals("Number of Employees is 2", 2,
-//            foundCompany.getUserCompanyRoles().size());
-//    }
-//
-//    @Test(expected = CompanyServiceException.class)
-//    public void testReAddEmployeeToCompany() {
-//        cleanDatabase();
-//        CompanyDTO testCompany = createTestCompany();
-//        UserDTO testUserDTO = createTestUser();
-//        roleDAO.saveRole(createEmployeeTestRole());
-//        roleDAO.saveRole(createTestRole());
-//        userDAO.saveUser(testUserDTO);
-//        companyDAO.saveCompany(testCompany);
-//
-//        companyService.addCompany(testCompany, testUserDTO);
-//
-//        int numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
-//        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
-//                1,
-//                numUserCompanyRoles);
-//
-//
-//        companyService.addUserToCompany(testCompany, testUserDTO);
-//    }
+    @Test
+    public void testAddMoreEmployeeToCompany() {
+        cleanDatabase();
+        CompanyDTO testCompany = createTestCompany();
+        UserDTO testUserDTO = createTestUser();
+        UserDTO altTestUserDTO = createAltTestUser();
+        roleDAO.saveRole(createEmployeeTestRole());
+        roleDAO.saveRole(createTestRole());
+        userDAO.saveUser(testUserDTO);
+        userDAO.saveUser(altTestUserDTO);
+
+        companyService.addCompany(testCompany, testUserDTO);
+
+        int numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
+        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
+                1,
+                numUserCompanyRoles);
+
+
+        companyService.addUserToCompany(testCompany, altTestUserDTO);
+        numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
+        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
+                2,
+                numUserCompanyRoles);
+
+        UserCompanyRoleDTO userCompanyRoleToFind = new UserCompanyRoleDTO();
+        userCompanyRoleToFind.setCompany(testCompany);
+        
+        List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDao.findUserCompanyRoles(userCompanyRoleToFind);
+        CompanyDTO foundCompany = companyService.findCompanyById(testCompany.getId());
+        Assert.assertEquals("Number of Employees is 2", 2,
+            userCompanyRolesFound.size());
+    }
+
+    @Test(expected = CompanyServiceException.class)
+    public void testReAddEmployeeToCompany() {
+        cleanDatabase();
+        CompanyDTO testCompany = createTestCompany();
+        UserDTO testUserDTO = createTestUser();
+        roleDAO.saveRole(createEmployeeTestRole());
+        roleDAO.saveRole(createTestRole());
+        userDAO.saveUser(testUserDTO);
+        companyDAO.saveCompany(testCompany);
+
+        companyService.addCompany(testCompany, testUserDTO);
+
+        int numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
+        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
+                1,
+                numUserCompanyRoles);
+
+        companyService.addUserToCompany(testCompany, testUserDTO);
+        companyService.addUserToCompany(testCompany, testUserDTO);
+    }
 
     @Test(expected = CompanyServiceException.class)
     public void testInviteUsersNoUsers(){

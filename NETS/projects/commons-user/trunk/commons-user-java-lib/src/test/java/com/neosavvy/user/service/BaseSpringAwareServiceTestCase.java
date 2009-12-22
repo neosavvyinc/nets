@@ -9,10 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.context.SecurityContextHolder;
 import org.junit.Before;
-import com.neosavvy.user.dao.UserDAO;
-import com.neosavvy.user.dao.CompanyDAO;
-import com.neosavvy.user.dao.RoleDAO;
-import com.neosavvy.user.dao.NumEmployeesRangeDAO;
+import com.neosavvy.user.dao.*;
 import com.neosavvy.user.dto.*;
 
 /**
@@ -41,6 +38,8 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
     protected NumEmployeesRangeDAO numEmployeesRangeDAO;
     @Autowired
     protected NumEmployeesRangeService numEmployeesRangeService;
+    @Autowired
+    protected UserCompanyRoleDAO userCompanyRoleDao;
 
 
     @Before
