@@ -148,6 +148,7 @@ public class CompanyServiceImpl implements CompanyService{
         }
 
         for(UserInviteDTO invite: userInvites){
+            invite.setCompany(company);
             try {
                 invite.setRegistrationToken(StringUtil.getHash64(invite.toString() + System.currentTimeMillis() + ""));
             } catch (UnsupportedEncodingException e) {
