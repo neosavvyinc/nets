@@ -37,8 +37,4 @@
                     itemRenderer="com.neosavvy.user.view.secured.employeeInvitation.Actions"/>
         </mx:columns>
     </mx:AdvancedDataGrid>
-    <mx:HBox width="100%">
-        <mx:Button id="doneBtn" label="Done"/>
-        <mx:Button id="cancelBtn" label="Cancel"/>
-    </mx:HBox>
 </mx:Panel>

@@ -2,6 +2,7 @@ package com.neosavvy.user.controller.company {
     import com.neosavvy.user.dto.CompanyDTO;
     import com.neosavvy.user.dto.UserDTO;
 
+    import com.neosavvy.user.dto.UserInviteDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
 
     import mx.collections.ArrayCollection;
@@ -13,7 +14,8 @@ package com.neosavvy.user.controller.company {
         override public function execute(notification:INotification):void {
             
             var companyServiceProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
-            companyServiceProxy.inviteUsers( );
+            var userInvite:UserInviteDTO = notification.getBody() as UserInviteDTO;
+            companyServiceProxy.inviteUsers( userInvite );
             
         }
     }

@@ -37,12 +37,14 @@ package com.neosavvy.user.view.secured.employeeInvitation {
 
         override public function onRegister():void {
             addUserButton.addEventListener(MouseEvent.CLICK, addUserButtonClickListener);
-            doneButton.addEventListener(MouseEvent.CLICK, doneButtonClickHandler);
-            cancelButton.addEventListener(MouseEvent.CLICK, cancelButtonClickHandler);
-
             grid.addEventListener(UserCompanyInviteEvent.TYPE, userCompanyInviteEventHandler);
-
             _companyProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
+        }
+
+        override public function onRemove():void {
+            addUserButton.removeEventListener(MouseEvent.CLICK, addUserButtonClickListener);
+            grid.removeEventListener(UserCompanyInviteEvent.TYPE, userCompanyInviteEventHandler);
+            _companyProxy = null;
         }
 
         override public function listNotificationInterests():Array {
@@ -60,7 +62,11 @@ package com.neosavvy.user.view.secured.employeeInvitation {
                     grid.dataProvider = _companyProxy.invitedUsersForActiveCompany;
                     break;
                 case ApplicationFacade.DELETE_USER_COMPANY_INVITE_SUCCESS:
+                    sendNotification(ApplicationFacade.GET_INVITED_USERS_REQUEST);
+                    break;
                 case ApplicationFacade.INVITE_USER_TO_COMPANY_SUCCESS:
+                    sendNotification(ApplicationFacade.GET_INVITED_USERS_REQUEST);
+                    break;
                 case ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES:
                     sendNotification(ApplicationFacade.GET_INVITED_USERS_REQUEST);
                     break;
@@ -79,31 +85,16 @@ package com.neosavvy.user.view.secured.employeeInvitation {
             return employeeManagement.employeesQueuedToInvite;
         }
 
-        public function get doneButton():Button {
-            return employeeManagement.doneBtn;
-        }
-
-        public function get cancelButton():Button {
-            return employeeManagement.cancelBtn;
-        }
-
         private function addUserButtonClickListener(event:MouseEvent):void {
+            LOGGER.debug(">>>>>>>>Adding user");
+
             var user:UserInviteDTO = new UserInviteDTO();
             user.firstName = employeeManagement.empFName.text;
             user.lastName = employeeManagement.empLName.text;
             user.emailAddress = employeeManagement.empEmail.text;
-            _companyProxy.invitedUsersForActiveCompany.addItem(user);
-            grid.dataProvider = _companyProxy.invitedUsersForActiveCompany;
+            sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_REQUEST,user);
         }
-
-        private function cancelButtonClickHandler(event:MouseEvent):void {
-            grid.dataProvider = _companyProxy.invitedUsersForActiveCompany = new ArrayCollection();
-        }
-
-        private function doneButtonClickHandler(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_REQUEST);
-        }
-
+        
         private function userCompanyInviteEventHandler(event:UserCompanyInviteEvent):void {
             switch ( event.action ) {
                 case UserCompanyInviteEvent.ACTION_DELETE:

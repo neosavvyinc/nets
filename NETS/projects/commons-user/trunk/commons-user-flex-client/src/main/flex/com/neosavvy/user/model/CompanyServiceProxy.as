@@ -74,10 +74,6 @@ package com.neosavvy.user.model {
             _invitedUsersForActiveCompany = value;
         }
 
-        public function queueUserForInvite(userInvite:UserInviteDTO):void {
-            _invitedUsersForActiveCompany.addItem(userInvite);
-        }
-
         public function addCompany(company:CompanyDTO, user:UserDTO):void
         {
             var companyService:RemoteObject = getCompanyService();
@@ -111,20 +107,22 @@ package com.neosavvy.user.model {
         private function handleSaveEmployeeToCompanyResult(event:ResultEvent):void {
         }
 
-        public function inviteUsers():void {
+        public function inviteUsers( userInvite:UserInviteDTO ):void {
             var companyService:RemoteObject = getCompanyService();
             companyService.addEventListener(ResultEvent.RESULT, handleInviteUsersResult);
             companyService.addEventListener(FaultEvent.FAULT, handleInviteUsersFault);
-            companyService.inviteUsers( activeCompany, _invitedUsersForActiveCompany );
+            companyService.inviteUsers( activeCompany, userInvite );
         }
 
         private function handleInviteUsersFault(event:FaultEvent):void {
             LOGGER.debug("User invites failed!");
             LOGGER.error(event.toString());
+            sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_FAILED);
         }
 
         private function handleInviteUsersResult(event:ResultEvent):void {
             LOGGER.debug("User invites successful");
+            sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_SUCCESS);
         }
 
         public function getInvitedUsers():void {

@@ -29,10 +29,10 @@ package com.neosavvy.user.controller {
 
             // Log only messages for the classes in the mx.rpc.* and
             // mx.messaging packages.
-            logTarget.filters=["*"];
+            logTarget.filters=["com.neosavvy.*"];
 
             // Log all log levels.
-            logTarget.level = LogEventLevel.ALL;
+            logTarget.level = LogEventLevel.DEBUG;
 
             // Add date, time, category, and log level to the output.
             logTarget.includeDate = true;
