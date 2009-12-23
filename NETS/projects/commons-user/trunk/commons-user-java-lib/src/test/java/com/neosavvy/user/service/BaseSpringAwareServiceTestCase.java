@@ -40,7 +40,8 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
     protected NumEmployeesRangeService numEmployeesRangeService;
     @Autowired
     protected UserCompanyRoleDAO userCompanyRoleDao;
-
+    @Autowired
+    protected UserInviteDAO userInviteDao;
 
     @Before
     public void loginTestUser() {
@@ -109,5 +110,6 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         deleteFromTables("USER_COMPANY_ROLE");
         deleteFromTables("USER");
         deleteFromTables("ROLE");
+        deleteFromTables("USER_INVITE");
     }
 }

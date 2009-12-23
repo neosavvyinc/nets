@@ -129,8 +129,8 @@ public class CompanyServiceImpl implements CompanyService{
         userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
     }
 
-    public List<UserInviteDTO> inviteUsers(CompanyDTO company, List<UserInviteDTO> userInvites) {
-        if(userInvites == null){
+    public List<UserInviteDTO> inviteUsers(CompanyDTO company, UserInviteDTO userInvite) {
+        if(userInvite == null){
             throw new CompanyServiceException("null userInvites not supported", null);
         }
 
@@ -147,24 +147,23 @@ public class CompanyServiceImpl implements CompanyService{
             }
         }
 
-        for(UserInviteDTO invite: userInvites){
-            invite.setCompany(company);
-            try {
-                invite.setRegistrationToken(StringUtil.getHash64(invite.toString() + System.currentTimeMillis() + ""));
-            } catch (UnsupportedEncodingException e) {
-                logger.error(e);
-                throw new UserServiceException("Unable to generate token for user: "+ invite.toString(),e);
-            }
-
-            if(registeredUserEmails.contains(invite.getEmailAddress())){
-                usersAlreadyRegistered.add(invite);
-            }else{
-                userInviteDao.saveUserInvite(invite);
-                finalUserInviteList.add(invite);
-            }
+        userInvite.setCompany(company);
+        try {
+            userInvite.setRegistrationToken(StringUtil.getHash64(userInvite.toString() + System.currentTimeMillis() + ""));
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e);
+            throw new UserServiceException("Unable to generate token for user: " + userInvite.toString(), e);
         }
 
-        company.setUserInvites(new HashSet(finalUserInviteList));
+        if (registeredUserEmails.contains(userInvite.getEmailAddress())) {
+            //todo: write a test for this.
+            //throw new UserServiceException("User is already Invited", null);
+        } else {
+            userInviteDao.saveUserInvite(userInvite);
+            finalUserInviteList.add(userInvite);
+        }
+
+        //company.setUserInvites(new HashSet(finalUserInviteList));
         companyDao.saveCompany(company);
         sendInvites(finalUserInviteList);
         return usersAlreadyRegistered;
