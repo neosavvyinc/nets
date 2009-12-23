@@ -74,6 +74,10 @@ package com.neosavvy.user.model {
             _invitedUsersForActiveCompany = value;
         }
 
+        public function queueUserForInvite(userInvite:UserInviteDTO):void {
+            _invitedUsersForActiveCompany.addItem(userInvite);
+        }
+
         public function addCompany(company:CompanyDTO, user:UserDTO):void
         {
             var companyService:RemoteObject = getCompanyService();
@@ -107,11 +111,11 @@ package com.neosavvy.user.model {
         private function handleSaveEmployeeToCompanyResult(event:ResultEvent):void {
         }
 
-        public function inviteUsers( userInvites:ArrayCollection ):void {
+        public function inviteUsers():void {
             var companyService:RemoteObject = getCompanyService();
             companyService.addEventListener(ResultEvent.RESULT, handleInviteUsersResult);
             companyService.addEventListener(FaultEvent.FAULT, handleInviteUsersFault);
-            companyService.inviteUsers( activeCompany, userInvites );
+            companyService.inviteUsers( activeCompany, _invitedUsersForActiveCompany );
         }
 
         private function handleInviteUsersFault(event:FaultEvent):void {

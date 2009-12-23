@@ -29,7 +29,7 @@ package com.neosavvy.user.view.secured.employeeInvitation {
 
         public static const NAME:String = "employeeManagementMediator";
 
-        private var _userInviteQueue:ArrayCollection = new ArrayCollection();
+        private var _companyProxy:CompanyServiceProxy;
 
         public function EmployeeManagementMediator(viewComponent:Object) {
             super(NAME, viewComponent);
@@ -41,6 +41,8 @@ package com.neosavvy.user.view.secured.employeeInvitation {
             cancelButton.addEventListener(MouseEvent.CLICK, cancelButtonClickHandler);
 
             grid.addEventListener(UserCompanyInviteEvent.TYPE, userCompanyInviteEventHandler);
+
+            _companyProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
         }
 
         override public function listNotificationInterests():Array {
@@ -55,8 +57,7 @@ package com.neosavvy.user.view.secured.employeeInvitation {
         override public function handleNotification(notification:INotification):void {
             switch ( notification.getName() ) {
                 case ApplicationFacade.GET_INVITED_USERS_SUCCESS:
-                    var companyProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
-                    grid.dataProvider = companyProxy.invitedUsersForActiveCompany;
+                    grid.dataProvider = _companyProxy.invitedUsersForActiveCompany;
                     break;
                 case ApplicationFacade.DELETE_USER_COMPANY_INVITE_SUCCESS:
                 case ApplicationFacade.INVITE_USER_TO_COMPANY_SUCCESS:
@@ -91,16 +92,16 @@ package com.neosavvy.user.view.secured.employeeInvitation {
             user.firstName = employeeManagement.empFName.text;
             user.lastName = employeeManagement.empLName.text;
             user.emailAddress = employeeManagement.empEmail.text;
-            _userInviteQueue.addItem( user );
-            grid.dataProvider = _userInviteQueue;
+            _companyProxy.invitedUsersForActiveCompany.addItem(user);
+            grid.dataProvider = _companyProxy.invitedUsersForActiveCompany;
         }
 
         private function cancelButtonClickHandler(event:MouseEvent):void {
-            grid.dataProvider = _userInviteQueue = new ArrayCollection();
+            grid.dataProvider = _companyProxy.invitedUsersForActiveCompany = new ArrayCollection();
         }
 
         private function doneButtonClickHandler(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_REQUEST, _userInviteQueue);
+            sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_REQUEST);
         }
 
         private function userCompanyInviteEventHandler(event:UserCompanyInviteEvent):void {

@@ -13,8 +13,7 @@ package com.neosavvy.user.controller.company {
         override public function execute(notification:INotification):void {
             
             var companyServiceProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
-            var params:ArrayCollection = notification.getBody() as ArrayCollection;
-            companyServiceProxy.inviteUsers( params );
+            companyServiceProxy.inviteUsers( );
             
         }
     }

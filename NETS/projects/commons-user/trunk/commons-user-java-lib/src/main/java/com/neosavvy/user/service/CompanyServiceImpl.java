@@ -100,7 +100,7 @@ public class CompanyServiceImpl implements CompanyService{
         if(user == null){
             throw new CompanyServiceException("null user not supported", null);    
         }
-        verifyValidCompany(company);
+        verifyAndAttachCompany(company);
         //look for user
         UserDTO foundUser = userDao.findUserById(user.getId());
 
@@ -134,7 +134,7 @@ public class CompanyServiceImpl implements CompanyService{
             throw new CompanyServiceException("null userInvites not supported", null);
         }
 
-        Set<UserCompanyRoleDTO> userCompanyRoles = verifyValidCompany(company).getUserCompanyRoles();
+        Set<UserCompanyRoleDTO> userCompanyRoles = verifyAndAttachCompany(company).getUserCompanyRoles();
 
         List<UserInviteDTO> usersAlreadyRegistered = new ArrayList();
         List<UserInviteDTO> finalUserInviteList = new ArrayList();
@@ -178,7 +178,7 @@ public class CompanyServiceImpl implements CompanyService{
         //this will e-mail out the invites once everything is hooked in.
     }
 
-    protected CompanyDTO verifyValidCompany(CompanyDTO company){
+    protected CompanyDTO verifyAndAttachCompany(CompanyDTO company){
         if(company == null){
             throw new CompanyServiceException("null company not supported", null);
         }
@@ -194,7 +194,7 @@ public class CompanyServiceImpl implements CompanyService{
     public List<UserInviteDTO> getInvitedUsers(CompanyDTO company) {
         // for now we are going to access this via company but later on this should probably be a direct
         // query against the userInvites table.
-        verifyValidCompany(company);
+        company = verifyAndAttachCompany(company);
         return new ArrayList(company.getUserInvites());
     }
 
