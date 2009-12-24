@@ -64,6 +64,7 @@ package com.neosavvy.user.view.login {
                 var user:UserDTO = new UserDTO();
 
                 user.registrationToken = confirmUserRegistration.confirmationKey.text;
+                user.username = confirmUserRegistration.username.text;
                 user.firstName = confirmUserRegistration.firstName.text;
                 user.middleName = confirmUserRegistration.middleName.text;
                 user.lastName = confirmUserRegistration.lastName.text;
@@ -77,6 +78,7 @@ package com.neosavvy.user.view.login {
         private function isUserConfirmationFormValid():Boolean {
             var validators:Array = new Array();
             validators.push(confirmUserRegistration.confirmationKeyValidator);
+            validators.push(confirmUserRegistration.userNameValidator)
             validators.push(confirmUserRegistration.firstNameValidator);
             validators.push(confirmUserRegistration.middleNameValidator);
             validators.push(confirmUserRegistration.lastNameValidator);

@@ -218,7 +218,20 @@ public class CompanyServiceImpl implements CompanyService{
         userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
 
         // email them to tell them how grateful you are for joining
-
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom("customerservice@company.com");
+        message.setTo(user.getEmailAddress());
+        message.setSubject("Welcome to " + company.getCompanyName()+ "'s expense tracking system");
+        message.setText(
+            "username: " + user.getUsername() + "\n"
+            + "password: "+ user.getPassword() + "\n"
+            + "\n\n\nThanks, Expense Tracking Team!");
+        try{
+            mailSender.send(message);
+        }
+        catch(MailException ex) {
+            logger.error(ex.getMessage());
+        }
     }
 
     private RoleDTO getEmployeeRoleFromDatabase() {

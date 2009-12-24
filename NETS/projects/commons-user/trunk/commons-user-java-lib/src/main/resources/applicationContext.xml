@@ -116,7 +116,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     
     <bean id="adminUserAddedToCompanyTemplateMessage" class="org.springframework.mail.SimpleMailMessage">
       <property name="from" value="customerservice@mycompany.com"/>
-      <property name="subject" value="Confirm that you have just been added as the admin user for your company's time tracking system"/>
+      <property name="subject" value="Confirm that you have just been added as the admin user for your company's expense tracking system"/>
     </bean>
 
     <bean id="viewResolver"

@@ -263,9 +263,6 @@
         <UIEvent command="Click" value="Add User" prop="automationName">
           <arg value="0"/>
         </UIEvent>
-        <UIEvent command="Click" value="Done" prop="automationName">
-          <arg value="0"/>
-        </UIEvent>
         <UIEvent command="Click" value="Logout" prop="automationName">
           <arg value="0"/>
         </UIEvent>
