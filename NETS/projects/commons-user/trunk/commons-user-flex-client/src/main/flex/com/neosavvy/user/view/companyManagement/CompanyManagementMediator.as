@@ -8,11 +8,14 @@ package com.neosavvy.user.view.companyManagement {
 
     import flash.events.MouseEvent;
 
+    import mx.containers.Form;
     import mx.containers.ViewStack;
     import mx.controls.Button;
     import mx.controls.RadioButtonGroup;
     import mx.logging.ILogger;
     import mx.logging.Log;
+
+    import mx.validators.Validator;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -61,6 +64,14 @@ package com.neosavvy.user.view.companyManagement {
             return companyManagement.loginButton;
         }
 
+        public function get companyForm():Form {
+            return companyManagement.companyForm;
+        }
+
+        public function get adminUserForm():Form {
+            return companyManagement.userForm;
+        }
+
         override public function listNotificationInterests():Array {
             return [
                 ApplicationFacade.SAVE_COMPANY_FAILED
@@ -91,34 +102,62 @@ package com.neosavvy.user.view.companyManagement {
         }
 
         private function registerCompanyButtonClickHandler(event:MouseEvent):void {
-            var company:CompanyDTO = new CompanyDTO();
-            company.addressOne = companyManagement.addressOne.text;
-            company.addressTwo = companyManagement.addressTwo.text;
-            company.city = companyManagement.city.text;
-            company.companyName = companyManagement.companyName.text;
-            company.country = companyManagement.country.selectedItem as String;
-            company.postalCode = companyManagement.postalCode.text;
-            company.numEmployeesRange = new NumEmployeesRangeDTO();
+            if(isEmployeeFormValid()) {
+                var company:CompanyDTO = new CompanyDTO();
+                company.addressOne = companyManagement.addressOne.text;
+                company.addressTwo = companyManagement.addressTwo.text;
+                company.city = companyManagement.city.text;
+                company.companyName = companyManagement.companyName.text;
+                company.country = companyManagement.country.selectedItem as String;
+                company.postalCode = companyManagement.postalCode.text;
+                company.numEmployeesRange = new NumEmployeesRangeDTO();
+    
+                var radioButtonGroup:RadioButtonGroup = companyManagement.numberOfEmployeesGroup;
+                var selectedValue:Object = radioButtonGroup.selectedValue;
+                var numEmployeesSelected:String = selectedValue as String;
+                if (numEmployeesSelected.indexOf(">") == -1) {
+                    company.numEmployeesRange.rangeFrom = numEmployeesSelected.split("-")[0] as Number;
+                    company.numEmployeesRange.rangeTo = numEmployeesSelected.split("-")[1] as Number;
+                } else {
+                    company.numEmployeesRange.rangeFrom = 10001;
+                    company.numEmployeesRange.rangeTo = Number.MAX_VALUE;
+                }
+    
+                var user:UserDTO = new UserDTO();
+                userName = user.username = companyManagement.administrativeUser.text;
+                user.password = companyManagement.administrativePassword.text;
+                user.emailAddress = companyManagement.administrativeEmail.text;
+                user.firstName = companyManagement.administrativeFirstName.text;
+                user.middleName = companyManagement.administrativeMiddleName.text;
+                user.lastName = companyManagement.administrativeLastName.text;
+                sendNotification(ApplicationFacade.SAVE_COMPANY_REQUEST, [company,user]);
+            }
+        }
 
-            var radioButtonGroup:RadioButtonGroup = companyManagement.numberOfEmployeesGroup;
-            var selectedValue:Object = radioButtonGroup.selectedValue;
-            var numEmployeesSelected:String = selectedValue as String;
-            if (numEmployeesSelected.indexOf(">") == -1) {
-                company.numEmployeesRange.rangeFrom = numEmployeesSelected.split("-")[0] as Number;
-                company.numEmployeesRange.rangeTo = numEmployeesSelected.split("-")[1] as Number;
-            } else {
-                company.numEmployeesRange.rangeFrom = 10001;
-                company.numEmployeesRange.rangeTo = Number.MAX_VALUE;
+        private function isEmployeeFormValid():Boolean {
+            var validators:Array = new Array();
+            validators.push(companyManagement.companyNameValidator);
+            validators.push(companyManagement.addressOneValidator);
+            validators.push(companyManagement.addressTwoValidator);
+            validators.push(companyManagement.cityValidator);
+            validators.push(companyManagement.stateValidator);
+            validators.push(companyManagement.zipValidator);
+            validators.push(companyManagement.adminUserValidator);
+            validators.push(companyManagement.adminFirstNameValidator);
+            validators.push(companyManagement.adminMiddleNameValidator);
+            validators.push(companyManagement.adminLastNameValidator);
+            validators.push(companyManagement.adminEmailValidator);
+            var validationResults:Array = Validator.validateAll(validators);
+
+            for each ( var result:Object in validationResults ) {
+                LOGGER.debug(result.message);
             }
 
-            var user:UserDTO = new UserDTO();
-            userName = user.username = companyManagement.administrativeUser.text;
-            user.password = companyManagement.administrativePassword.text;
-            user.emailAddress = companyManagement.administrativeEmail.text;
-            user.firstName = companyManagement.administrativeFirstName.text;
-            user.middleName = companyManagement.administrativeMiddleName.text;
-            user.lastName = companyManagement.administrativeLastName.text;
-            sendNotification(ApplicationFacade.SAVE_COMPANY_REQUEST, [company,user]);
+            return validationResults.length == 0 ? true : false ;
+        }
+
+        private function resetForm():void {
+            
         }
 
 

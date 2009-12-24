@@ -7,6 +7,8 @@ package com.neosavvy.user.view.secured.employeeInvitation {
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.CompanyServiceProxy;
 
+    import com.neosavvy.user.util.FormUtils;
+    import com.neosavvy.user.util.StringUtils;
     import com.neosavvy.user.view.secured.employeeInvitation.event.UserCompanyInviteEvent;
 
     import flash.events.MouseEvent;
@@ -14,8 +16,10 @@ package com.neosavvy.user.view.secured.employeeInvitation {
     import flash.ui.Mouse;
 
     import mx.collections.ArrayCollection;
+    import mx.containers.VBox;
     import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
+    import mx.controls.Label;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -85,14 +89,57 @@ package com.neosavvy.user.view.secured.employeeInvitation {
             return employeeManagement.employeesQueuedToInvite;
         }
 
+        public function get errorContainer():VBox {
+            return employeeManagement.errorContainer;
+        }
+
         private function addUserButtonClickListener(event:MouseEvent):void {
             LOGGER.debug(">>>>>>>>Adding user");
+            resetForm();
+            if(isInvitationValid()) {
+                var user:UserInviteDTO = new UserInviteDTO();
+                user.firstName = employeeManagement.empFName.text;
+                user.lastName = employeeManagement.empLName.text;
+                user.emailAddress = employeeManagement.empEmail.text;
+                sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_REQUEST,user);
+            } else {
+                var errorLabel:Label = new Label();
+                errorLabel.text = "There are errors in your invitation, please correct them at try again";
+                errorContainer.addChild(errorLabel);
+            }
+        }
 
-            var user:UserInviteDTO = new UserInviteDTO();
-            user.firstName = employeeManagement.empFName.text;
-            user.lastName = employeeManagement.empLName.text;
-            user.emailAddress = employeeManagement.empEmail.text;
-            sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_REQUEST,user);
+        private function resetForm():void {
+            errorContainer.removeAllChildren();
+            employeeManagement.empFName.setStyle("borderColor",0xAAB3B3);
+            employeeManagement.empLName.setStyle("borderColor",0xAAB3B3);
+            employeeManagement.empEmail.setStyle("borderColor",0xAAB3B3);
+        }
+
+        private function isInvitationValid():Boolean {
+            var invitationValid:Boolean = true;
+
+            if(!FormUtils.isInputSet( employeeManagement.empFName )) {
+                employeeManagement.empFName.setStyle("borderColor","red");
+                employeeManagement.empFName.setStyle("borderStyle","solid");
+                invitationValid = false;
+            }
+
+            if(!FormUtils.isInputSet( employeeManagement.empLName )) {
+                employeeManagement.empLName.setStyle("borderColor","red");
+                employeeManagement.empLName.setStyle("borderStyle","solid");
+                invitationValid = false;
+            }
+
+            if(!FormUtils.isInputSet( employeeManagement.empEmail ) ||
+               !StringUtils.isValidEmail( employeeManagement.empEmail.text )) {
+                employeeManagement.empEmail.setStyle("borderColor","red");
+                employeeManagement.empEmail.setStyle("borderStyle","solid");
+                invitationValid = false;
+            }
+
+            return invitationValid;
+
         }
         
         private function userCompanyInviteEventHandler(event:UserCompanyInviteEvent):void {

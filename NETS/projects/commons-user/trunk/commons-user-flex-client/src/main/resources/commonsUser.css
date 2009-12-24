@@ -5,3 +5,10 @@
     paddingRight:   10;
     paddingTop:     10;
 }
+
+.textInputError {
+    borderColor:        red;
+    borderThickness:    1;
+    borderStyle:        solid;
+}
+
