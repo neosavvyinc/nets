@@ -8,6 +8,7 @@ package com.neosavvy.user.view.secured.employeeInvitation.event {
         public static const TYPE:String = "userCompanyInviteEvent";
 
         public static const ACTION_DELETE:String = "delete";
+        public static const ACTION_INVITE:String = "invite";
 
         private var _userInvite:UserInviteDTO;
         private var _action:String;
@@ -26,5 +27,6 @@ package com.neosavvy.user.view.secured.employeeInvitation.event {
         public function get action():String {
             return _action;
         }
+
     }
 }

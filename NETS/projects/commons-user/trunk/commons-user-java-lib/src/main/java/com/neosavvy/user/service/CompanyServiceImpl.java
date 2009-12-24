@@ -13,7 +13,6 @@ import org.springframework.mail.SimpleMailMessage;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.HashSet;
-import java.util.Set;
 import java.util.ArrayList;
 
 /**
@@ -129,24 +128,16 @@ public class CompanyServiceImpl implements CompanyService{
         userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
     }
 
-    public List<UserInviteDTO> inviteUsers(CompanyDTO company, UserInviteDTO userInvite) {
+    public void inviteUsers(CompanyDTO company, UserInviteDTO userInvite) {
         if(userInvite == null){
-            throw new CompanyServiceException("null userInvites not supported", null);
+            throw new CompanyServiceException("null userInvites not supported");
         }
 
-        Set<UserCompanyRoleDTO> userCompanyRoles = verifyAndAttachCompany(company).getUserCompanyRoles();
-
-        List<UserInviteDTO> usersAlreadyRegistered = new ArrayList();
-        List<UserInviteDTO> finalUserInviteList = new ArrayList();
-
-        List<String> registeredUserEmails = new ArrayList();
-
-        if(userCompanyRoles != null){
-            for(UserCompanyRoleDTO userCompanyRole: userCompanyRoles){
-                registeredUserEmails.add(userCompanyRole.getUser().getEmailAddress());
-            }
+        if(userInvite.getEmailAddress() == null || userInvite.getEmailAddress().length() == 0) {
+            throw new CompanyServiceException("Empty email addresses won't allow us to invite your users - please provide an email address");
         }
 
+        verifyAndAttachCompany(company);
         userInvite.setCompany(company);
         try {
             userInvite.setRegistrationToken(StringUtil.getHash64(userInvite.toString() + System.currentTimeMillis() + ""));
@@ -154,27 +145,25 @@ public class CompanyServiceImpl implements CompanyService{
             logger.error(e);
             throw new UserServiceException("Unable to generate token for user: " + userInvite.toString(), e);
         }
-
-        if (registeredUserEmails.contains(userInvite.getEmailAddress())) {
-            //todo: write a test for this.
-            //throw new UserServiceException("User is already Invited", null);
-        } else {
-            userInviteDao.saveUserInvite(userInvite);
-            finalUserInviteList.add(userInvite);
-        }
-
-        //company.setUserInvites(new HashSet(finalUserInviteList));
+        userInviteDao.saveUserInvite(userInvite);
         companyDao.saveCompany(company);
-        sendInvites(finalUserInviteList);
-        return usersAlreadyRegistered;
+        sendInvite(userInvite);
     }
 
     public void deleteInvitedUser(CompanyDTO company, UserInviteDTO userInvite) {
         userInviteDao.deleteUserInvite(userInvite);
     }
 
-    protected void sendInvites(List<UserInviteDTO> userInvites){
-        //this will e-mail out the invites once everything is hooked in.
+    public void sendInvite(UserInviteDTO userInvite){
+        SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
+        msg.setTo(userInvite.getEmailAddress());
+        msg.setText("This is an invite to join your company's expense tracking tool!!!");
+        try{
+            mailSender.send(msg);
+        }
+        catch(MailException ex) {
+            logger.error(ex.getMessage());
+        }
     }
 
     protected CompanyDTO verifyAndAttachCompany(CompanyDTO company){

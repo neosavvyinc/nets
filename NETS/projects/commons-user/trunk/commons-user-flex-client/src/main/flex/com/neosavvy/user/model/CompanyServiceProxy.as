@@ -166,6 +166,23 @@ package com.neosavvy.user.model {
             sendNotification(ApplicationFacade.DELETE_USER_COMPANY_INVITE_SUCCESS);
         }
 
+        public function sendInvite( userInvite:UserInviteDTO ):void {
+            var companyService:RemoteObject = getCompanyService();
+            companyService.addEventListener(ResultEvent.RESULT, handleSendInviteResult);
+            companyService.addEventListener(FaultEvent.FAULT, handleSendInviteFault);
+            companyService.sendInvite( userInvite );
+        }
+
+        private function handleSendInviteFault(event:FaultEvent):void {
+            LOGGER.debug("User invite failed" + event.toString());
+            sendNotification(ApplicationFacade.SEND_USER_INVITE_FAILED);
+        }
+
+        private function handleSendInviteResult(event:ResultEvent):void {
+            LOGGER.debug("User invite success");
+            sendNotification(ApplicationFacade.SEND_USER_INVITE_SUCCESS);
+        }
+
         /****
          *
          * Helper functions

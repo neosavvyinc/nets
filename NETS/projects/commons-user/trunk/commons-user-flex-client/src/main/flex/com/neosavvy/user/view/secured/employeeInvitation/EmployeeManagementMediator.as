@@ -153,6 +153,9 @@ package com.neosavvy.user.view.secured.employeeInvitation {
                 case UserCompanyInviteEvent.ACTION_DELETE:
                     sendNotification(ApplicationFacade.DELETE_USER_COMPANY_INVITE, event.userInvite);
                     break;
+                case UserCompanyInviteEvent.ACTION_INVITE:
+                    sendNotification(ApplicationFacade.SEND_USER_INVITE_REQUEST, event.userInvite);
+                    break;
             }
 
         }

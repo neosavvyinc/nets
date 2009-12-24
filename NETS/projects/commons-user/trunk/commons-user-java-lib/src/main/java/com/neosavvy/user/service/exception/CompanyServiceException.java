@@ -8,6 +8,11 @@ package com.neosavvy.user.service.exception;
  * To change this template use File | Settings | File Templates.
  */
 public class CompanyServiceException extends RuntimeException{
+
+    public CompanyServiceException(String message) {
+        super(message);
+    }
+
     public CompanyServiceException(String message, Exception cause) {
         super(message, cause);
     }    

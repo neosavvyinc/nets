@@ -14,7 +14,14 @@
             var userInvite:UserInviteDTO = data as UserInviteDTO;
             dispatchEvent(new UserCompanyInviteEvent(UserCompanyInviteEvent.ACTION_DELETE, userInvite));
         }
+
+        protected function resendInviteHandler():void {
+            var userInvite:UserInviteDTO = data as UserInviteDTO;
+            dispatchEvent(new UserCompanyInviteEvent(UserCompanyInviteEvent.ACTION_INVITE, userInvite));
+        }
+
         ]]>
     </mx:Script>
     <mx:Button id="deleteBtn" label="Delete" click="{deleteHandler()}"/>
+    <mx:Button id="inviteBtn" label="Resend Invite" click="{resendInviteHandler()}"/>
 </mx:HBox>

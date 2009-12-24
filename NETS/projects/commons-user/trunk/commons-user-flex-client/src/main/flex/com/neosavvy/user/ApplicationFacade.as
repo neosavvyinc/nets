@@ -5,6 +5,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.company.GetInvitedUsersForCompanyCommand;
     import com.neosavvy.user.controller.company.InviteUsersToCompanyCommand;
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
+    import com.neosavvy.user.controller.company.SendUserInviteCommand;
     import com.neosavvy.user.controller.secured.SecuredViewPrepCommand;
     import com.neosavvy.user.controller.secured.SecuredViewTeardownCommand;
     import com.neosavvy.user.controller.secured.UserLoggedInStartupCommand;
@@ -90,6 +91,10 @@ package com.neosavvy.user {
         public static var DELETE_USER_COMPANY_INVITE_SUCCESS:String = "deleteUserCompanyInviteSuccess";
 
         public static var NAVIGATE_TO_WELCOME:String="navigateToWelcome";
+
+        public static var SEND_USER_INVITE_REQUEST:String = "sendUserInviteRequest";
+        public static var SEND_USER_INVITE_FAILED:String = "sendUserInviteFailed";
+        public static var SEND_USER_INVITE_SUCCESS:String = "sendUserInviteSuccess";
         
         public function ApplicationFacade(key:String)
         {
@@ -128,6 +133,7 @@ package com.neosavvy.user {
             registerCommand(INVITE_USER_TO_COMPANY_REQUEST, InviteUsersToCompanyCommand);
             registerCommand(GET_INVITED_USERS_REQUEST, GetInvitedUsersForCompanyCommand);
             registerCommand(DELETE_USER_COMPANY_INVITE, DeleteUserCompanyInviteCommand);
+            registerCommand(SEND_USER_INVITE_REQUEST, SendUserInviteCommand);
         }
 
         /**
@@ -141,5 +147,5 @@ package com.neosavvy.user {
         }
 
 
-    }
+        }
 }
