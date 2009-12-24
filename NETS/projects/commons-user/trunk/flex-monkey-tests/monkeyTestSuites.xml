@@ -148,23 +148,29 @@
         </UIEvent>
       </Test>
     </TestCase>
+    <TestCase name="ConfirmInvitation" description="null">
+      <Test name="NewTest" description="null" defaultThinkTime="500"/>
+    </TestCase>
     <TestCase name="LoginandInviteUser" description="null">
       <Test name="InviteUser" description="null" defaultThinkTime="500">
-        <UIEvent command="SelectText" value="username" prop="automationName" containerValue="Panel">
+        <UIEvent command="Click" value="Login" prop="automationName">
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="SelectText" value="username" prop="automationName" containerValue="Login" containerProp="title">
           <arg value="0"/>
           <arg value="0"/>
         </UIEvent>
-        <UIEvent command="Input" value="username" prop="automationName">
+        <UIEvent command="Input" value="username" prop="automationName" containerValue="Login" containerProp="title">
           <arg value="neosavvy"/>
         </UIEvent>
-        <UIEvent command="ChangeFocus" value="username" prop="automationName">
+        <UIEvent command="ChangeFocus" value="username" prop="automationName" containerValue="Login" containerProp="title">
           <arg value="false"/>
           <arg value="TAB"/>
         </UIEvent>
-        <UIEvent command="Input" value="password" prop="automationName">
+        <UIEvent command="Input" value="password" prop="automationName" containerValue="Login" containerProp="title">
           <arg value="test"/>
         </UIEvent>
-        <UIEvent command="Click" value="Login" prop="automationName">
+        <UIEvent command="Click" value="Login" prop="automationName" containerValue="Login" containerProp="title">
           <arg value="0"/>
         </UIEvent>
         <UIEvent command="Click" value="Invite Employees" prop="automationName">
@@ -196,7 +202,7 @@
           <arg value="0"/>
         </UIEvent>
         <UIEvent command="Input" value="empEmail" prop="automationName">
-          <arg value="neosavvy"/>
+          <arg value="neosavvy.com"/>
         </UIEvent>
         <UIEvent command="Click" value="Add User" prop="automationName">
           <arg value="0"/>

@@ -3,7 +3,7 @@ package com.neosavvy.user.view.secured.userManagement {
     import com.neosavvy.user.dto.UserDTO;
     import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.view.login.RegistrationAndLoginWindow;
-    import com.neosavvy.user.view.login.RegistrationAndLoginWindowMediator;
+    import com.neosavvy.user.view.login.ConfirmUserRegistrationMediator;
 
     import flash.display.DisplayObject;
     import flash.events.Event;
@@ -54,7 +54,7 @@ package com.neosavvy.user.view.secured.userManagement {
         protected function showRegistrationLoginWindow():void {
             regAndLoginWindow = PopUpManager.createPopUp(userManagement as DisplayObject, RegistrationAndLoginWindow, true);
             PopUpManager.centerPopUp(regAndLoginWindow);
-            facade.registerMediator(new RegistrationAndLoginWindowMediator(regAndLoginWindow));
+            facade.registerMediator(new ConfirmUserRegistrationMediator(regAndLoginWindow));
         }
 
         protected function hideRegistrationLoginWindow(name:String):void {

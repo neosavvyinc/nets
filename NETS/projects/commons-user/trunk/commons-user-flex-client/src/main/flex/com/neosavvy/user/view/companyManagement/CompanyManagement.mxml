@@ -85,7 +85,7 @@
         <mx:HBox width="100%" height="100%" horizontalAlign="center" verticalAlign="top">
 
                 <mx:VBox width="450" horizontalScrollPolicy="off" verticalScrollPolicy="off">
-                    <mx:Panel title="Basic Company Information" width="100%">
+                    <mx:Panel title="Basic Company Information" width="100%" styleName="paddedContainer">
                         <mx:Form id="companyForm" width="100%" height="100%" paddingLeft="0" defaultButton="{registerCompanyButton}">
                             <mx:FormItem width="100%"><flexlib:PromptingTextInput id="companyName" prompt="Company Name" width="100%"/></mx:FormItem>
                             <mx:FormItem width="100%"><flexlib:PromptingTextInput id="addressOne" prompt="Mailing Address" width="100%"/></mx:FormItem>
@@ -100,7 +100,7 @@
                             </mx:HBox>
                         </mx:Form>
                     </mx:Panel>
-                    <mx:Panel title="Administrative User" width="100%">
+                    <mx:Panel title="Administrative User" width="100%" styleName="paddedContainer">
                         <mx:Form id="userForm" width="100%" height="100%" paddingLeft="0" defaultButton="{registerCompanyButton}">
                             <mx:FormItem width="100%"><flexlib:PromptingTextInput
                                     id="administrativeUser"

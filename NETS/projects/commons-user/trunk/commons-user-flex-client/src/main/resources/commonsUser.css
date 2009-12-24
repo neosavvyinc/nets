@@ -12,3 +12,10 @@
     borderStyle:        solid;
 }
 
+Form {
+    paddingBottom:  0;
+    paddingLeft:    0;
+    paddingRight:   0;
+    paddingTop:     0;
+}
+

@@ -27,6 +27,7 @@ package com.neosavvy.user {
         public static var SECURED_CONTAINER_NAVIGATION_INDEX:Number = 2;
         public static var EMPLOYEE_MANAGEMENT_NAVIGATION_INDEX:Number = 3;
         public static var LOGIN_NAVIGATION_INDEX:Number = 4;
+        public static var NEW_USER_CONFIRMATION_INDEX:Number = 5;
 
         public function ApplicationMediator(viewComponent:CommonsUser)
         {
@@ -44,6 +45,10 @@ package com.neosavvy.user {
 
         public function get existingUserButton():Button {
             return app.existingUsersButton;
+        }
+
+        public function get invitationButton():Button {
+            return app.invitationButton;
         }
 
         public function get navigationViewStack():ViewStack {
@@ -72,7 +77,10 @@ package com.neosavvy.user {
             this.existingUserButton.addEventListener(MouseEvent.CLICK, existingUserButtonClicked);
             this.loginButton.addEventListener(MouseEvent.CLICK, loginButtonClickedHandler);
             this.logoutButton.addEventListener(MouseEvent.CLICK, logoutButtonClickHandler);
+            this.invitationButton.addEventListener(MouseEvent.CLICK, invitationButtonClickHandler);
         }
+
+
 
         override public function listNotificationInterests():Array {
             return [
@@ -123,7 +131,10 @@ package com.neosavvy.user {
             sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
         }
 
+        private function invitationButtonClickHandler(event:MouseEvent):void {
+            this.navigationViewStack.selectedIndex = NEW_USER_CONFIRMATION_INDEX;
         }
 
+    }
 
 }

@@ -40,4 +40,14 @@ public interface CompanyService {
     public void deleteInvitedUser(CompanyDTO company, UserInviteDTO userInvite);
 
     public void sendInvite(UserInviteDTO userInvite);
+
+    /**
+     * This method attempts to look up a user's invite via the registration token.
+     * Then it will retrieve the company they were invited to off of the invite.
+     * It will then persist the new user and send a confirmation email to thank
+     * them for joining the company.
+     * 
+     * @param user
+     */
+    public void addEmployeeToCompany(UserDTO user);
 }

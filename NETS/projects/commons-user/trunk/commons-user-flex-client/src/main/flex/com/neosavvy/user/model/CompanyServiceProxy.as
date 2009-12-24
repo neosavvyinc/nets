@@ -3,6 +3,7 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.ProxyConstants;
     import com.neosavvy.user.dto.CompanyDTO;
     import com.neosavvy.user.dto.CompanyDTO;
+    import com.neosavvy.user.dto.CompanyDTO;
 
     import com.neosavvy.user.dto.UserCompanyRoleDTO;
     import com.neosavvy.user.dto.UserDTO;
@@ -93,12 +94,12 @@ package com.neosavvy.user.model {
             sendNotification(ApplicationFacade.SAVE_COMPANY_SUCCESS);
         }
 
-        public function addEmployeeToCompany(company:CompanyDTO, user:UserDTO):void
+        public function addEmployeeToCompany( user:UserDTO ):void
         {
             var companyService:RemoteObject = getCompanyService();
             companyService.addEventListener(ResultEvent.RESULT, handleSaveEmployeeToCompanyResult);
             companyService.addEventListener(FaultEvent.FAULT, handleSaveEmployeeToCompanyFault);
-            companyService.addEmployeeToCompany( company, user );
+            companyService.addEmployeeToCompany( user );
         }
 
         private function handleSaveEmployeeToCompanyFault(event:FaultEvent):void {

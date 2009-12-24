@@ -157,7 +157,7 @@ public class CompanyServiceImpl implements CompanyService{
     public void sendInvite(UserInviteDTO userInvite){
         SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
         msg.setTo(userInvite.getEmailAddress());
-        msg.setText("This is an invite to join your company's expense tracking tool!!!");
+        msg.setText("This is an invite to join your company's expense tracking tool!!!\n\nUse this key as your confirmation: " + userInvite.getRegistrationToken());
         try{
             mailSender.send(msg);
         }
@@ -184,6 +184,10 @@ public class CompanyServiceImpl implements CompanyService{
         // query against the userInvites table.
         company = verifyAndAttachCompany(company);
         return new ArrayList(company.getUserInvites());
+    }
+
+    public void addEmployeeToCompany(UserDTO user) {
+        logger.debug("LOOKS LIKE I AM IN THE ADD EMPLOYEE TO COMPANY METHOD!!!!");
     }
 
     public void setCompanyDao(CompanyDAO companyDao) {

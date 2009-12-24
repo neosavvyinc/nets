@@ -1,6 +1,0 @@
-<?xml version="1.0" ?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml">
-    <mx:Text id="failedLabel" text="Oops there was a problem registering your user!" width="{this.width}"/>
-    <mx:Text id="errorText" width="{this.width}"/>
-    <mx:Button label="Try Again?" id="tryAgainButton"/>
-</mx:VBox>

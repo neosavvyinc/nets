@@ -5,6 +5,7 @@
         xmlns:companyManagement="com.neosavvy.user.view.companyManagement.*"
         xmlns:employeeInvitation="com.neosavvy.user.view.secured.employeeInvitation.*"
         xmlns:security="com.neosavvy.user.view.security.*" xmlns:secured="com.neosavvy.user.view.secured.*"
+        xmlns:login="com.neosavvy.user.view.login.*"
         creationComplete="{facade.startup(this)}"
         layout="absolute"
         >
@@ -38,11 +39,13 @@
         <mx:HBox horizontalAlign="center" verticalAlign="middle" width="100%" height="100%">
             <mx:Button label="New Company's Click Here" id="newCompanyButton"/>
             <mx:Button label="Existing Users Login Here" id="existingUsersButton"/>
+            <mx:Button label="Been Invited? Click Here" id="invitationButton"/>
         </mx:HBox>
         <companyManagement:CompanyManagement id="companyManagement" width="100%" height="100%"/>
         <secured:SecuredContainer id="securedContainer" width="100%" height="100%"/>
         <employeeInvitation:EmployeeManagement id="employeeManagement" width="100%" height="100%"/>
         <security:Login id="login" width="100%" height="100%"/>
+        <login:ConfirmUserRegistration id="confirmUser" width="100%" height="100%"/>
     </mx:ViewStack>
 
 </mx:Application>
