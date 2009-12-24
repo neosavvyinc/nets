@@ -10,10 +10,12 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
+import javax.management.relation.Role;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.Set;
 
 /**
  * User: lgleason
@@ -187,7 +189,46 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public void addEmployeeToCompany(UserDTO user) {
-        logger.debug("LOOKS LIKE I AM IN THE ADD EMPLOYEE TO COMPANY METHOD!!!!");
+        // find a user invite via registration token
+        UserInviteDTO searchByRegistration = new UserInviteDTO();
+        searchByRegistration.setRegistrationToken(user.getRegistrationToken());
+        List <UserInviteDTO> invitesFromToken = userInviteDao.findUserInvites(searchByRegistration);
+        if( invitesFromToken == null || invitesFromToken.size() != 1) {
+            throw new CompanyServiceException("Unfortunately the system could not find an invite for your confirmation number you provided. Please have your company administrator resend an invite.");
+        }
+
+        // get the invite from the persistent invites
+        UserInviteDTO userInvite = invitesFromToken.get(0);
+        user.setEmailAddress(userInvite.getEmailAddress());
+
+        // get the company from the UserInvite
+        CompanyDTO company = userInvite.getCompany();
+
+
+
+        // save the new user to the company
+        Set<UserCompanyRoleDTO> membersOfCompany = company.getUserCompanyRoles();
+        UserCompanyRoleDTO userCompanyRole = new UserCompanyRoleDTO();
+        userCompanyRole.setCompany(company);
+        userCompanyRole.setRole(getEmployeeRoleFromDatabase());
+        userCompanyRole.setUser(user);
+        membersOfCompany.add(userCompanyRole);
+        company.setUserCompanyRoles(membersOfCompany);
+        userDao.saveUser(user);
+        userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
+
+        // email them to tell them how grateful you are for joining
+
+    }
+
+    private RoleDTO getEmployeeRoleFromDatabase() {
+        RoleDTO role = new RoleDTO();
+        role.setShortName("ROLE_EMPLOYEE");
+        List<RoleDTO> roles = roleDao.findRoles(role);
+        if( roles ==  null || roles.size() != 1) {
+            throw new CompanyServiceException("No Employee role could be found - please contact the customer support at customersupport@neosavvy.com");
+        }
+        return roles.get(0);
     }
 
     public void setCompanyDao(CompanyDAO companyDao) {

@@ -40,7 +40,7 @@ public class RoleDAOImpl extends BaseDAO implements RoleDAO{
         if(role.getLongName() != null && role.getLongName().length() > 0) {
             criteria.add(Restrictions.eq("longName", role.getLongName()));
         }
-        return criteria.list();  //To change body of implemented methods use File | Settings | File Templates.
+        return criteria.list(); 
     }
 
     public void deleteRole(RoleDTO role) {

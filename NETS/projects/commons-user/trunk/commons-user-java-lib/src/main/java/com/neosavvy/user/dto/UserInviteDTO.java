@@ -22,6 +22,7 @@ public class UserInviteDTO extends BaseUserDTO{
     @JoinColumn(name="COMPANY_FK")
     private CompanyDTO company;
 
+    @Column(name="REGISTRATION_TOKEN")
     private String registrationToken;
 
     public CompanyDTO getCompany() {

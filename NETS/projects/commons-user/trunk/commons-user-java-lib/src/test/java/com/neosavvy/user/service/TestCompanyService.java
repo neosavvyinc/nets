@@ -5,11 +5,11 @@ import com.neosavvy.user.service.exception.CompanyServiceException;
 import com.neosavvy.user.dao.UserInviteDAO;
 import junit.framework.Assert;
 import org.junit.Test;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
 
 /**
  * @author lgleason
@@ -323,5 +323,50 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         UserDTO testUser = createTestUser();
 
         companyService.addCompany(testCompany, testUser);
+    }
+
+
+    @Test
+    public void testAddEmployeeToCompany() {
+        cleanDatabase();
+
+        // Register a new company
+        CompanyDTO testCompany = createTestCompany();
+        UserDTO testUser = createAltTestUser();
+        RoleDTO testRole = createTestRole();
+        RoleDTO testEmployeeRole = createEmployeeTestRole();
+
+        roleDAO.saveRole(testRole);
+        roleDAO.saveRole(testEmployeeRole);
+
+        companyService.addCompany(testCompany, testUser);
+
+        // Invite a user to that company
+        UserInviteDTO userToInvite = createTestInvite();
+        companyService.inviteUsers(testCompany,userToInvite);
+
+        // Look up that users confirmation - this would occur by the user and would be emailed to them
+        // since there is only one user - can just query for all and use the first one
+        UserInviteDTO userInvitesFromDatabase =  simpleJdbcTemplate.queryForObject("SELECT * FROM USER_INVITE", new ParameterizedRowMapper<UserInviteDTO>(){
+            public UserInviteDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+                UserInviteDTO userInvite = new UserInviteDTO();
+
+                userInvite.setRegistrationToken( rs.getString("REGISTRATION_TOKEN"));
+
+                return userInvite;
+            }
+        });
+
+        // Populate a user with the confirmation token and call addEmployeToCompany
+        UserDTO user = createTestUser();
+        user.setRegistrationToken(userInvitesFromDatabase.getRegistrationToken());
+
+        companyService.addEmployeeToCompany(user);
+
+
+        // Assert that when looking up the list of employee's that the new employee is there
+        int numberEmployeesInCompany = countRowsInTable("USER_COMPANY_ROLE");
+        Assert.assertEquals("Number of employees was expected to be 2 but was not", 2,numberEmployeesInCompany);
+
     }
 }

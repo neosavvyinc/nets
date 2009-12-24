@@ -84,6 +84,16 @@ public abstract class BaseSpringAwareServiceTestCase extends AbstractTransaction
         return company;
     }
 
+    protected UserInviteDTO createTestInvite() {
+        UserInviteDTO invite = new UserInviteDTO();
+
+        invite.setFirstName("Adam");
+        invite.setLastName("Parrish");
+        invite.setEmailAddress("aparrish@neosavvy.com");
+
+        return invite;
+    }
+
     protected RoleDTO createTestRole() {
         RoleDTO role = new RoleDTO();
         role.setShortName("ROLE_ADMIN");

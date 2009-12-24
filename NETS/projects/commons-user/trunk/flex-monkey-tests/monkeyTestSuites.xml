@@ -149,7 +149,63 @@
       </Test>
     </TestCase>
     <TestCase name="ConfirmInvitation" description="null">
-      <Test name="NewTest" description="null" defaultThinkTime="500"/>
+      <Test name="Confirm" description="null" defaultThinkTime="500">
+        <UIEvent command="Click" value="Been Invited? Click Here" prop="automationName">
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="SelectText" value="confirmationKey" prop="automationName">
+          <arg value="0"/>
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="Input" value="confirmationKey" prop="automationName">
+          <arg value="E31EEF042AB87663"/>
+        </UIEvent>
+        <UIEvent command="SelectText" value="username" prop="automationName">
+          <arg value="0"/>
+          <arg value="0"/>
+        </UIEvent>
+        <UIEvent command="Input" value="username" prop="automationName">
+          <arg value="adamparrish"/>
+        </UIEvent>
+        <UIEvent command="ChangeFocus" value="username" prop="automationName">
+          <arg value="false"/>
+          <arg value="TAB"/>
+        </UIEvent>
+        <UIEvent command="Input" value="firstName" prop="automationName">
+          <arg value="W"/>
+        </UIEvent>
+        <UIEvent command="ChangeFocus" value="firstName" prop="automationName">
+          <arg value="false"/>
+          <arg value="TAB"/>
+        </UIEvent>
+        <UIEvent command="Input" value="middleName" prop="automationName">
+          <arg value="A"/>
+        </UIEvent>
+        <UIEvent command="ChangeFocus" value="middleName" prop="automationName">
+          <arg value="false"/>
+          <arg value="TAB"/>
+        </UIEvent>
+        <UIEvent command="Input" value="lastName" prop="automationName">
+          <arg value="P"/>
+        </UIEvent>
+        <UIEvent command="ChangeFocus" value="lastName" prop="automationName">
+          <arg value="false"/>
+          <arg value="TAB"/>
+        </UIEvent>
+        <UIEvent command="Input" value="password" prop="automationName">
+          <arg value="testconfirm"/>
+        </UIEvent>
+        <UIEvent command="ChangeFocus" value="password" prop="automationName">
+          <arg value="false"/>
+          <arg value="TAB"/>
+        </UIEvent>
+        <UIEvent command="Input" value="confirmPassword" prop="automationName">
+          <arg value="testconfirm"/>
+        </UIEvent>
+        <UIEvent command="Click" value="Confirm Your Account" prop="automationName">
+          <arg value="0"/>
+        </UIEvent>
+      </Test>
     </TestCase>
     <TestCase name="LoginandInviteUser" description="null">
       <Test name="InviteUser" description="null" defaultThinkTime="500">
