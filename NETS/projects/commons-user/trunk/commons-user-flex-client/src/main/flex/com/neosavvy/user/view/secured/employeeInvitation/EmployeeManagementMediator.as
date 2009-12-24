@@ -94,14 +94,14 @@ package com.neosavvy.user.view.secured.employeeInvitation {
         }
 
         private function addUserButtonClickListener(event:MouseEvent):void {
-            LOGGER.debug(">>>>>>>>Adding user");
-            resetForm();
+            resetFormStylesAndErrors();
             if(isInvitationValid()) {
                 var user:UserInviteDTO = new UserInviteDTO();
                 user.firstName = employeeManagement.empFName.text;
                 user.lastName = employeeManagement.empLName.text;
                 user.emailAddress = employeeManagement.empEmail.text;
                 sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_REQUEST,user);
+                resetFormEntry();
             } else {
                 var errorLabel:Label = new Label();
                 errorLabel.text = "There are errors in your invitation, please correct them at try again";
@@ -109,11 +109,17 @@ package com.neosavvy.user.view.secured.employeeInvitation {
             }
         }
 
-        private function resetForm():void {
+        private function resetFormStylesAndErrors():void {
             errorContainer.removeAllChildren();
             employeeManagement.empFName.setStyle("borderColor",0xAAB3B3);
             employeeManagement.empLName.setStyle("borderColor",0xAAB3B3);
             employeeManagement.empEmail.setStyle("borderColor",0xAAB3B3);
+        }
+
+        private function resetFormEntry():void {
+            employeeManagement.empFName.text = null;
+            employeeManagement.empLName.text = null;
+            employeeManagement.empEmail.text = null;
         }
 
         private function isInvitationValid():Boolean {
