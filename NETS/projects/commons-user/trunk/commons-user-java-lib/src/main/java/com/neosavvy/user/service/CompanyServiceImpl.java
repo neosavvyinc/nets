@@ -140,6 +140,19 @@ public class CompanyServiceImpl implements CompanyService{
         }
 
         verifyAndAttachCompany(company);
+
+        UserInviteDTO userInvitesToFind = new UserInviteDTO();
+        userInvitesToFind.setCompany(company);
+        List<UserInviteDTO> currentInvites = userInviteDao.findUserInvites(userInvitesToFind);
+
+        if (currentInvites != null) {
+            for (UserInviteDTO currentInvite : currentInvites) {
+                if (currentInvite.getEmailAddress().equals(userInvite.getEmailAddress())) {
+                    throw new CompanyServiceException("user already invited", null);
+                }
+            }
+        }
+
         userInvite.setCompany(company);
         try {
             userInvite.setRegistrationToken(StringUtil.getHash64(userInvite.toString() + System.currentTimeMillis() + ""));

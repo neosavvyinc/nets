@@ -274,6 +274,17 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
                 userInviteEmails.contains(altTestUserInvite.getEmailAddress()));
     }
 
+    @Test(expected = CompanyServiceException.class)
+    public void testInviteSameUserWithSameCompany(){
+        cleanDatabase();
+        UserInviteDTO testUserInvite = createTestUserInvite();
+
+        CompanyDTO company = createTestCompany();
+        companyDAO.saveCompany(company);
+        companyService.inviteUsers(company, testUserInvite);
+        companyService.inviteUsers(company, testUserInvite);
+    }
+
 
 //    @Test
 //    public void testInviteUsersPersistPersistedUser(){
