@@ -87,47 +87,47 @@
                 <mx:VBox width="450" horizontalScrollPolicy="off" verticalScrollPolicy="off">
                     <mx:Panel title="Basic Company Information" width="100%" styleName="paddedContainer">
                         <mx:Form id="companyForm" width="100%" height="100%" paddingLeft="0" defaultButton="{registerCompanyButton}">
-                            <mx:FormItem width="100%"><flexlib:PromptingTextInput id="companyName" prompt="Company Name" width="100%"/></mx:FormItem>
-                            <mx:FormItem width="100%"><flexlib:PromptingTextInput id="addressOne" prompt="Mailing Address" width="100%"/></mx:FormItem>
+                            <mx:FormItem width="100%" required="true"><flexlib:PromptingTextInput id="companyName" prompt="Company Name" width="100%"/></mx:FormItem>
+                            <mx:FormItem width="100%" required="true"><flexlib:PromptingTextInput id="addressOne" prompt="Mailing Address" width="100%"/></mx:FormItem>
                             <mx:FormItem width="100%"><flexlib:PromptingTextInput id="addressTwo" prompt="Additional Mailing Address " width="100%"/></mx:FormItem>
                             <mx:HBox width="100%" horizontalGap="5">
-                                <mx:FormItem width="60%"><flexlib:PromptingTextInput id="city" prompt="City" width="100%"/></mx:FormItem>
-                                <mx:FormItem width="40%"><mx:ComboBox id="state" dataProvider="{unitedStates}" text="Select..." width="100%"/></mx:FormItem>
+                                <mx:FormItem width="60%" required="true"><flexlib:PromptingTextInput id="city" prompt="City" width="100%"/></mx:FormItem>
+                                <mx:FormItem width="40%" required="true"><mx:ComboBox id="state" dataProvider="{unitedStates}" text="Select..." width="100%"/></mx:FormItem>
                             </mx:HBox>
                             <mx:HBox width="100%" horizontalGap="5">
-                                <mx:FormItem width="70%"><flexlib:PromptingTextInput id="postalCode" prompt="Postal Code" width="100%"/></mx:FormItem>
-                                <mx:FormItem width="30%"><mx:ComboBox id="country" dataProvider="{['USA']}" selectedIndex="0" width="100%"/></mx:FormItem>
+                                <mx:FormItem width="70%" required="true"><flexlib:PromptingTextInput id="postalCode" prompt="Postal Code" width="100%"/></mx:FormItem>
+                                <mx:FormItem width="30%" required="true"><mx:ComboBox id="country" dataProvider="{['USA']}" selectedIndex="0" width="100%"/></mx:FormItem>
                             </mx:HBox>
                         </mx:Form>
                     </mx:Panel>
                     <mx:Panel title="Administrative User" width="100%" styleName="paddedContainer">
                         <mx:Form id="userForm" width="100%" height="100%" paddingLeft="0" defaultButton="{registerCompanyButton}">
-                            <mx:FormItem width="100%"><flexlib:PromptingTextInput
+                            <mx:FormItem width="100%" required="true"><flexlib:PromptingTextInput
                                     id="administrativeUser"
                                     prompt="Admin User Name"
                                     width="100%"/></mx:FormItem>
-                            <mx:FormItem width="100%"><flexlib:PromptingTextInput
+                            <mx:FormItem width="100%" required="true"><flexlib:PromptingTextInput
                                     id="administrativeFirstName"
                                     prompt="First Name"
                                     width="100%"/></mx:FormItem>
-                            <mx:FormItem width="100%"><flexlib:PromptingTextInput
+                            <mx:FormItem width="100%" required="true"><flexlib:PromptingTextInput
                                     id="administrativeMiddleName"
                                     prompt="Middle Name"
                                     width="100%"/></mx:FormItem>
-                            <mx:FormItem width="100%"><flexlib:PromptingTextInput
+                            <mx:FormItem width="100%" required="true"><flexlib:PromptingTextInput
                                     id="administrativeLastName"
                                     prompt="Last Name"
                                     width="100%"/></mx:FormItem>
-                            <mx:FormItem width="100%"><flexlib:PromptingTextInput
+                            <mx:FormItem width="100%" required="true"><flexlib:PromptingTextInput
                                     id="administrativeEmail"
                                     prompt="Email Address"
                                     width="100%"/></mx:FormItem>
-                            <mx:FormItem width="100%"><flexlib:PromptingTextInput
+                            <mx:FormItem width="100%" required="true"><flexlib:PromptingTextInput
                                     id="administrativePassword"
                                     prompt="Password"
                                     displayAsPassword="true"
                                     width="100%"/></mx:FormItem>
-                            <mx:FormItem width="100%"><flexlib:PromptingTextInput
+                            <mx:FormItem width="100%" required="true"><flexlib:PromptingTextInput
                                     id="administrativeConfirmPassword"
                                     prompt="Confirm Password"
                                     displayAsPassword="true"
