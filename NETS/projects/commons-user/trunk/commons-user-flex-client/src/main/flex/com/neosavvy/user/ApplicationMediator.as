@@ -63,6 +63,10 @@ package com.neosavvy.user {
             return app.logoutButton;
         }
 
+        public function get newCompanyConfirmationButton():Button {
+            return app.newCompanyConfirmationButton;
+        }
+
         public function get loggedInUserName():Label {
             return app.loggedInUserName;
         }
@@ -78,8 +82,8 @@ package com.neosavvy.user {
             this.loginButton.addEventListener(MouseEvent.CLICK, loginButtonClickedHandler);
             this.logoutButton.addEventListener(MouseEvent.CLICK, logoutButtonClickHandler);
             this.invitationButton.addEventListener(MouseEvent.CLICK, invitationButtonClickHandler);
+            this.newCompanyConfirmationButton.addEventListener(MouseEvent.CLICK, newCompanyConfirmationButtonClickHandler);
         }
-
 
 
         override public function listNotificationInterests():Array {
@@ -133,6 +137,11 @@ package com.neosavvy.user {
 
         private function invitationButtonClickHandler(event:MouseEvent):void {
             this.navigationViewStack.selectedIndex = NEW_USER_CONFIRMATION_INDEX;
+        }
+
+        private function newCompanyConfirmationButtonClickHandler(event:MouseEvent):void {
+            this.navigationViewStack.selectedIndex = COMPANY_MANAGEMENT_NAVIGATION_INDEX;
+            sendNotification(ApplicationFacade.SAVE_COMPANY_SUCCESS);
         }
 
     }

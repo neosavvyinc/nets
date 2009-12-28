@@ -27,7 +27,7 @@ public class UserDTO extends BaseUserDTO{// implements Externalizable {
     private String registrationToken;
 
     @Column(name="CONFIRMED_REGISTRATION")
-    private Boolean confirmedRegistration = true;
+    private Boolean confirmedRegistration = false;
 
     @OneToMany(mappedBy="user", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;

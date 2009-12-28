@@ -86,6 +86,10 @@ package com.neosavvy.user.view.companyManagement {
                 case ApplicationFacade.SAVE_COMPANY_SUCCESS:
                     LOGGER.debug("Save company succeeded");
                     companyManavementViewStack.selectedIndex = CONFIRMATION_INDEX;
+                    companyManagement.usernameConfirmation.text = userName;
+                    if( userName != null && userName.length > 0 ) {
+                        companyManagement.usernameConfirmation.editable = companyManagement.usernameConfirmation.enabled = false;
+                    }
                     break;
                 case ApplicationFacade.SAVE_COMPANY_FAILED:
                     LOGGER.debug("Save company failed");
@@ -138,7 +142,6 @@ package com.neosavvy.user.view.companyManagement {
             var validators:Array = new Array();
             validators.push(companyManagement.companyNameValidator);
             validators.push(companyManagement.addressOneValidator);
-            validators.push(companyManagement.addressTwoValidator);
             validators.push(companyManagement.cityValidator);
             validators.push(companyManagement.stateValidator);
             validators.push(companyManagement.zipValidator);
@@ -163,6 +166,7 @@ package com.neosavvy.user.view.companyManagement {
 
         private function confirmAccountButtonClickHandler(event:MouseEvent):void {
             var hashCode:String = companyManagement.confirmationToken.text;
+            userName = this.companyManagement.usernameConfirmation.text;
             sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_REQUEST, [userName, hashCode]);
         }
 

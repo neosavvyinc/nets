@@ -7,13 +7,6 @@
 
 package com.neosavvy.user.dto {
 
-    import flash.utils.IDataInput;
-    import flash.utils.IDataOutput;
-    import flash.utils.IExternalizable;
-    import org.granite.collections.IPersistentCollection;
-    import org.granite.meta;
-
-    use namespace meta;
 
     [Bindable]
     public class BaseUserDTOBase {

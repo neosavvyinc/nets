@@ -38,8 +38,9 @@
             creationPolicy="all">
         <mx:HBox horizontalAlign="center" verticalAlign="middle" width="100%" height="100%">
             <mx:Button label="New Company's Click Here" id="newCompanyButton"/>
+            <mx:Button label="Confirm Your New Company Here" id="newCompanyConfirmationButton"/>
             <mx:Button label="Existing Users Login Here" id="existingUsersButton"/>
-            <mx:Button label="Been Invited? Click Here" id="invitationButton"/>
+            <mx:Button label="Been Invited To Be a User? Click Here" id="invitationButton"/>
         </mx:HBox>
         <companyManagement:CompanyManagement id="companyManagement" width="100%" height="100%"/>
         <secured:SecuredContainer id="securedContainer" width="100%" height="100%"/>
