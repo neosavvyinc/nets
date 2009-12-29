@@ -192,7 +192,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         UserCompanyRoleDTO userCompanyRoleToFind = new UserCompanyRoleDTO();
         userCompanyRoleToFind.setCompany(testCompany);
         
-        List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDao.findUserCompanyRoles(userCompanyRoleToFind);
+        List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRoleToFind);
         Assert.assertEquals("Number of Employees is 2", 2,
             userCompanyRolesFound.size());
     }
@@ -245,7 +245,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         companyService.inviteUsers(company, testUserInvite);
         UserInviteDTO userInviteToFind = new UserInviteDTO();
         userInviteToFind.setCompany(company);
-        List<UserInviteDTO> userInvitesFound = userInviteDao.findUserInvites(userInviteToFind);
+        List<UserInviteDTO> userInvitesFound = userInviteDAO.findUserInvites(userInviteToFind);
         Assert.assertEquals("Persisted User invite is the one we created",
                 testUserInvite.getId(),
                 userInvitesFound.get(0).getId());
@@ -264,7 +264,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         UserInviteDTO userInviteToFind = new UserInviteDTO();
         userInviteToFind.setCompany(company);
 
-        List<UserInviteDTO> userInvitesFound = userInviteDao.findUserInvites(userInviteToFind);
+        List<UserInviteDTO> userInvitesFound = userInviteDAO.findUserInvites(userInviteToFind);
         List<String> userInviteEmails = new ArrayList();
 
         for(UserInviteDTO invite: userInvitesFound){
@@ -285,6 +285,30 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         companyService.inviteUsers(company, testUserInvite);
     }
 
+//    @Test
+//    public void testInviteExistingCompanyUser(){
+//        cleanDatabase();
+//        UserInviteDTO testUserInvite = createTestUserInvite();
+//
+//        CompanyDTO company = createTestCompany();
+//        companyDAO.saveCompany(company);
+//        UserDTO user = createTestUser();
+//        userDAO.saveUser(user);
+//        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole();
+//        userCompanyRoleDao.saveUserCompanyRole();
+//        companyService.inviteUsers(company, testUserInvite);
+//        UserInviteDTO userInviteToFind = new UserInviteDTO();
+//        userInviteToFind.setCompany(company);
+//
+//        List<UserInviteDTO> userInvitesFound = userInviteDao.findUserInvites(userInviteToFind);
+//        List<String> userInviteEmails = new ArrayList();
+//
+////        for(UserInviteDTO invite: userInvitesFound){
+////            userInviteEmails.add(invite.getEmailAddress());
+////        }
+////        Assert.assertTrue("Persisted User invite contains the ones we created",
+////                userInviteEmails.contains(altTestUserInvite.getEmailAddress()));
+//    }
 
 //    @Test
 //    public void testInviteUsersPersistPersistedUser(){
