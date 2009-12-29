@@ -27,16 +27,19 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="annotatedClasses">
-            <list>
-                <value>com.neosavvy.user.dto.UserDTO</value>
-                <value>com.neosavvy.user.dto.UserInviteDTO</value>
-                <value>com.neosavvy.user.dto.CompanyDTO</value>
-                <value>com.neosavvy.user.dto.RoleDTO</value>
-                <value>com.neosavvy.user.dto.NumEmployeesRangeDTO</value>
-                <value>com.neosavvy.user.dto.UserCompanyRoleDTO</value>
-            </list>
+        <property name="configLocation">
+            <value>classpath:hibernate.cfg.xml</value>
         </property>
+        <!--<property name="annotatedClasses">-->
+            <!--<list>-->
+                <!--<value>com.neosavvy.user.dto.UserDTO</value>-->
+                <!--<value>com.neosavvy.user.dto.UserInviteDTO</value>-->
+                <!--<value>com.neosavvy.user.dto.CompanyDTO</value>-->
+                <!--<value>com.neosavvy.user.dto.RoleDTO</value>-->
+                <!--<value>com.neosavvy.user.dto.NumEmployeesRangeDTO</value>-->
+                <!--<value>com.neosavvy.user.dto.UserCompanyRoleDTO</value>-->
+            <!--</list>-->
+        <!--</property>-->
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
