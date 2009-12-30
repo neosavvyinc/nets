@@ -201,6 +201,20 @@ public class CompanyServiceImpl implements CompanyService{
         return new ArrayList(company.getUserInvites());
     }
 
+    public List<UserDTO> findUsersForCompany(CompanyDTO company) {
+        return userDao.findUsersForCompany(company);   
+    }
+
+    public List<UserDTO> findActiveUsersForCompany(CompanyDTO comany) {
+
+        return null;
+    }
+
+    public List<UserDTO> findInactiveUsersForCompany(CompanyDTO company) {
+
+        return null;
+    }
+
     public void addEmployeeToCompany(UserDTO user) {
         // find a user invite via registration token
         UserInviteDTO searchByRegistration = new UserInviteDTO();

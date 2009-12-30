@@ -58,4 +58,5 @@ public class CompanyDAOImpl extends BaseDAO implements CompanyDAO{
         }
 		return criteria.list();
     }
+    
 }

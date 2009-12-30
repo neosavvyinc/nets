@@ -1,5 +1,6 @@
 package com.neosavvy.user.dao;
 
+import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dto.UserDTO;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
@@ -53,5 +54,11 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
 		getCurrentSession().saveOrUpdate(user);
         getCurrentSession().flush();
 	}
+
+    public List<UserDTO> findUsersForCompany(CompanyDTO company) {
+        return getCurrentSession().createQuery(
+                "from UserDTO user inner join UserCompanyRoles ucl where user.id = ucl.user_fk")
+                .list();
+    }
 
 }

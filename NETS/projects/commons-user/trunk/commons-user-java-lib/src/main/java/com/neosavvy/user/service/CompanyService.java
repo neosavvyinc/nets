@@ -50,4 +50,14 @@ public interface CompanyService {
      * @param user
      */
     public void addEmployeeToCompany(UserDTO user);
+
+
+    /****
+     * Interface for helper search methods
+     ****/   
+    public List<UserDTO> findUsersForCompany(CompanyDTO company);
+
+    public List<UserDTO> findActiveUsersForCompany(CompanyDTO comany);
+
+    public List<UserDTO> findInactiveUsersForCompany(CompanyDTO company);
 }

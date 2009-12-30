@@ -60,6 +60,7 @@ public abstract class BaseSpringAwareServiceTestCase extends BaseSpringAwareTest
         deleteFromTables("USER_COMPANY_ROLE");
         deleteFromTables("USER");
         deleteFromTables("ROLE");
+        deleteFromTables("COMPANY");
         deleteFromTables("USER_INVITE");
     }
 }

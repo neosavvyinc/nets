@@ -2,10 +2,10 @@ package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.*;
 import com.neosavvy.user.service.exception.CompanyServiceException;
-import com.neosavvy.user.dao.UserInviteDAO;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+import org.springframework.test.annotation.Rollback;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -366,15 +366,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         cleanDatabase();
 
         // Register a new company
-        CompanyDTO testCompany = createTestCompany();
-        UserDTO testUser = createAltTestUser();
-        RoleDTO testRole = createTestRole();
-        RoleDTO testEmployeeRole = createEmployeeTestRole();
-
-        roleDAO.saveRole(testRole);
-        roleDAO.saveRole(testEmployeeRole);
-
-        companyService.addCompany(testCompany, testUser);
+        CompanyDTO testCompany = setupCompany();
 
         // Invite a user to that company
         UserInviteDTO userToInvite = createTestInvite();
@@ -404,4 +396,90 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         Assert.assertEquals("Number of employees was expected to be 2 but was not", 2,numberEmployeesInCompany);
 
     }
+
+    private CompanyDTO setupCompany() {
+        CompanyDTO testCompany = createTestCompany();
+        UserDTO testUser = createAltTestUser();
+        RoleDTO testRole = createTestRole();
+        RoleDTO testEmployeeRole = createEmployeeTestRole();
+
+        roleDAO.saveRole(testRole);
+        roleDAO.saveRole(testEmployeeRole);
+
+        companyService.addCompany(testCompany, testUser);
+        return testCompany;
+    }
+
+
+    @Test
+    public void testGetAllEmployeesFromCompany() {
+        cleanDatabase();
+
+        CompanyDTO testCompany = setupCompany();
+        int numCompanies = countRowsInTable("COMPANY");
+        Assert.assertEquals("Should only be one company right now",numCompanies, 1);
+
+        setupCompanyTestUsers(testCompany);
+
+        List<UserDTO> allUsers = companyService.findUsersForCompany(testCompany);
+        List<UserDTO> activeUsers = companyService.findActiveUsersForCompany(testCompany);
+        List<UserDTO> inactiveUsers = companyService.findInactiveUsersForCompany(testCompany);
+
+        Assert.assertNotNull(allUsers);
+        Assert.assertNotNull(activeUsers);
+        Assert.assertNotNull(inactiveUsers);
+
+        Assert.assertEquals("Should be 4 users for the company", 4,allUsers.size());
+        Assert.assertEquals("Should be 3 active users for the company", 3,activeUsers.size());
+        Assert.assertEquals("Should be 1 inactive user for the company", 1,inactiveUsers.size());
+
+    }
+
+    private void setupCompanyTestUsers(CompanyDTO company) {
+        insertTestUser("test1@email.com", "testFName","testMName","testLName",true,"test","test","test1");
+        insertTestUser("test2@email.com", "testFName","testMName","testLName",false,"test","test","test2");
+        insertTestUser("test3@email.com", "testFName","testMName","testLName",true,"test","test","test3");
+        int numUsers = countRowsInTable("USER");
+        Assert.assertEquals("There should be three users in the users table",4,numUsers);
+
+        int user1 = getUserId("test1");
+        int user2 = getUserId("test2");
+        int user3 = getUserId("test3");
+
+        int companyId = getCompanyId(company.getCompanyName());
+        int roleId = getRoleId("ROLE_EMPLOYEE");
+
+        insertTestUserToCompanyRole(companyId, roleId, user1);
+        insertTestUserToCompanyRole(companyId, roleId, user2);
+        insertTestUserToCompanyRole(companyId, roleId, user3);
+
+        int numUsersMappedToCompany1 = countRowsInTable("USER_COMPANY_ROLE");
+        Assert.assertEquals("There should be three users associated with the company",4, numUsersMappedToCompany1);
+
+    }
+
+    private void insertTestUser(String email, String firstName, String middleName, String lastName, Boolean active, String password, String registrationToken, String username) {
+        simpleJdbcTemplate.update(
+                "INSERT INTO USER(EMAIL_ADDRESS,FIRST_NAME,MIDDLE_NAME,LAST_NAME,CONFIRMED_REGISTRATION,PASSWORD,REG_TOKEN,USERNAME) " +
+                "VALUES (?,?,?,?,?,?,?,?)", new Object[]{email,firstName,middleName,lastName,active,password,registrationToken,username});
+    }
+
+    private void insertTestUserToCompanyRole(int companyId, int roleId, int userId) {
+        simpleJdbcTemplate.update("INSERT INTO USER_COMPANY_ROLE (COMPANY_FK,ROLE_FK,USER_FK) VALUES (?,?,?)", new Object[]{companyId,roleId,userId});
+    }
+
+    private int getUserId(String username) {
+        return simpleJdbcTemplate.queryForInt("SELECT ID FROM USER WHERE USERNAME = ?",new Object[]{username});
+    }
+
+    private int getRoleId(String shortName) {
+        return simpleJdbcTemplate.queryForInt("SELECT ID FROM ROLE WHERE SHORT_NAME = ?", new Object[]{shortName});
+    }
+
+    private int getCompanyId(String companyName) {
+        return simpleJdbcTemplate.queryForInt("SELECT ID FROM COMPANY WHERE COMPANY_NAME = ?", new Object[]{companyName});
+    }
+
+
+
 }

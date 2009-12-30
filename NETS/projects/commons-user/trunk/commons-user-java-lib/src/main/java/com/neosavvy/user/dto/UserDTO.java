@@ -1,5 +1,8 @@
 package com.neosavvy.user.dto;
 
+import org.hibernate.FetchMode;
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.*;
 import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlRootElement;
