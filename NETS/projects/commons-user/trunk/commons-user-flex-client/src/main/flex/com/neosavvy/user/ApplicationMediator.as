@@ -29,6 +29,8 @@ package com.neosavvy.user {
         public static var LOGIN_NAVIGATION_INDEX:Number = 4;
         public static var NEW_USER_CONFIRMATION_INDEX:Number = 5;
 
+        private var _lastNavigationIndex:Number = 0;
+
         public function ApplicationMediator(viewComponent:CommonsUser)
         {
             super(NAME, viewComponent);
@@ -63,6 +65,10 @@ package com.neosavvy.user {
             return app.logoutButton;
         }
 
+        public function get backButton():Button {
+            return app.backButton;
+        }
+
         public function get newCompanyConfirmationButton():Button {
             return app.newCompanyConfirmationButton;
         }
@@ -83,6 +89,7 @@ package com.neosavvy.user {
             this.logoutButton.addEventListener(MouseEvent.CLICK, logoutButtonClickHandler);
             this.invitationButton.addEventListener(MouseEvent.CLICK, invitationButtonClickHandler);
             this.newCompanyConfirmationButton.addEventListener(MouseEvent.CLICK, newCompanyConfirmationButtonClickHandler);
+            this.backButton.addEventListener(MouseEvent.CLICK, backButtonClickHandler);
         }
 
 
@@ -120,28 +127,38 @@ package com.neosavvy.user {
         }
 
         private function newCompanyButtonClicked(event:MouseEvent):void {
+            _lastNavigationIndex = this.navigationViewStack.selectedIndex;
             this.navigationViewStack.selectedIndex = COMPANY_MANAGEMENT_NAVIGATION_INDEX;
         }
 
         private function existingUserButtonClicked(event:MouseEvent):void {
+            _lastNavigationIndex = this.navigationViewStack.selectedIndex;
             sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
         }
 
         private function logoutButtonClickHandler(event:MouseEvent):void {
+            _lastNavigationIndex = this.navigationViewStack.selectedIndex;
             sendNotification(ApplicationFacade.REQUEST_LOGOUT);
         }
 
         private function loginButtonClickedHandler(event:MouseEvent):void {
+            _lastNavigationIndex = this.navigationViewStack.selectedIndex;
             sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
         }
 
         private function invitationButtonClickHandler(event:MouseEvent):void {
+            _lastNavigationIndex = this.navigationViewStack.selectedIndex;
             this.navigationViewStack.selectedIndex = NEW_USER_CONFIRMATION_INDEX;
         }
 
         private function newCompanyConfirmationButtonClickHandler(event:MouseEvent):void {
+            _lastNavigationIndex = this.navigationViewStack.selectedIndex;
             this.navigationViewStack.selectedIndex = COMPANY_MANAGEMENT_NAVIGATION_INDEX;
             sendNotification(ApplicationFacade.SAVE_COMPANY_SUCCESS);
+        }
+
+        private function backButtonClickHandler(event:MouseEvent):void {
+            this.navigationViewStack.selectedIndex = _lastNavigationIndex;
         }
 
     }
