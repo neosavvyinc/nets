@@ -285,7 +285,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         companyService.inviteUsers(company, testUserInvite);
     }
 
-//    @Test
+//    @Test(expected = CompanyServiceException.class)
 //    public void testInviteExistingCompanyUser(){
 //        cleanDatabase();
 //        UserInviteDTO testUserInvite = createTestUserInvite();
@@ -294,20 +294,9 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 //        companyDAO.saveCompany(company);
 //        UserDTO user = createTestUser();
 //        userDAO.saveUser(user);
-//        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole();
-//        userCompanyRoleDao.saveUserCompanyRole();
+//        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(null, company, user);
+//        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 //        companyService.inviteUsers(company, testUserInvite);
-//        UserInviteDTO userInviteToFind = new UserInviteDTO();
-//        userInviteToFind.setCompany(company);
-//
-//        List<UserInviteDTO> userInvitesFound = userInviteDao.findUserInvites(userInviteToFind);
-//        List<String> userInviteEmails = new ArrayList();
-//
-////        for(UserInviteDTO invite: userInvitesFound){
-////            userInviteEmails.add(invite.getEmailAddress());
-////        }
-////        Assert.assertTrue("Persisted User invite contains the ones we created",
-////                userInviteEmails.contains(altTestUserInvite.getEmailAddress()));
 //    }
 
 //    @Test

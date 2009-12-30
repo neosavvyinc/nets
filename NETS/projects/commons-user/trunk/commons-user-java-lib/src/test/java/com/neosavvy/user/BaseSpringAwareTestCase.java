@@ -1,10 +1,7 @@
 package com.neosavvy.user;
 
 import com.neosavvy.user.dao.*;
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.NumEmployeesRangeDTO;
-import com.neosavvy.user.dto.RoleDTO;
-import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
@@ -77,5 +74,18 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
         role.setShortName("ROLE_ADMIN");
         role.setLongName("Administrator");
         return role;
-    }    
+    }
+
+    protected UserCompanyRoleDTO createTestUserCompanyRole(RoleDTO role, CompanyDTO company, UserDTO user){
+        UserCompanyRoleDTO testUserCompanyRole = new UserCompanyRoleDTO();
+        if(role != null)
+            testUserCompanyRole.setRole(role);
+        if(company != null)
+            testUserCompanyRole.setCompany(company);
+        if(user != null)
+            testUserCompanyRole.setUser(user);
+
+
+        return testUserCompanyRole;
+    }
 }

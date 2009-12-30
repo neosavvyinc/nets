@@ -54,19 +54,6 @@ public abstract class BaseSpringAwareDAOTestCase extends BaseSpringAwareTestCase
         userInvite.setLastName("Gleason");
         userInvite.setEmailAddress("lg@neosavvy.com");
         return userInvite;
-    }    
-
-    protected UserCompanyRoleDTO createTestUserCompanyRole(RoleDTO role, CompanyDTO company, UserDTO user){
-        UserCompanyRoleDTO testUserCompanyRole = new UserCompanyRoleDTO();
-        if(role != null)
-            testUserCompanyRole.setRole(role);
-        if(company != null)
-            testUserCompanyRole.setCompany(company);
-        if(user != null)
-            testUserCompanyRole.setUser(user);
-
-
-        return testUserCompanyRole;
     }
 
     protected void assertSearchCriteriaResults(List itemsFound,int numRows) {
@@ -75,11 +62,12 @@ public abstract class BaseSpringAwareDAOTestCase extends BaseSpringAwareTestCase
     }
 
     protected void cleanupTables() {
+        deleteFromTables("USER_COMPANY_ROLE");
         deleteFromTables("ROLE");
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
         deleteFromTables("USER_INVITE");
         deleteFromTables("NUM_EMPLOYEES_RANGE");
-        deleteFromTables("USER_COMPANY_ROLE");
+
     }
 }
