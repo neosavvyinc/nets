@@ -12,8 +12,8 @@
             <mx:Button id="loginButton" label="Login"/>
             <mx:Button id="newCompanyButtonFromExistingLogin" label="Oops - I am a new company"/>
         </mx:HBox>
-        <mx:LinkButton id="forgotUsername" label="Forgot Username"/>
-        <mx:LinkButton id="forgotPassword" label="Forgot Password"/>
+        <!--<mx:LinkButton id="forgotUsername" label="Forgot Username"/>-->
+        <!--<mx:LinkButton id="forgotPassword" label="Forgot Password"/>-->
 
         <mx:Label id="errorLbl"/>
 

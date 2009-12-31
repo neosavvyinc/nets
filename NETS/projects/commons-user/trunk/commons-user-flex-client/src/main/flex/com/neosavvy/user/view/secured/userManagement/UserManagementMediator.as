@@ -1,21 +1,14 @@
 package com.neosavvy.user.view.secured.userManagement {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.UserDTO;
-    import com.neosavvy.user.model.UserServiceProxy;
-    import com.neosavvy.user.view.login.RegistrationAndLoginWindow;
-    import com.neosavvy.user.view.login.ConfirmUserRegistrationMediator;
+    import com.neosavvy.user.model.CompanyServiceProxy;
 
-    import flash.display.DisplayObject;
     import flash.events.Event;
-    import flash.events.MouseEvent;
 
     import mx.controls.AdvancedDataGrid;
-    import mx.controls.Label;
-    import mx.core.IFlexDisplayObject;
     import mx.events.ListEvent;
     import mx.logging.ILogger;
     import mx.logging.Log;
-    import mx.managers.PopUpManager;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -36,10 +29,6 @@ package com.neosavvy.user.view.secured.userManagement {
             grid.addEventListener(ListEvent.ITEM_CLICK, handleGridItemClicked);
         }
 
-        private function handleLogoutButtClicked(event:MouseEvent):void {
-            showRegistrationLoginWindow();
-            sendNotification(ApplicationFacade.REQUEST_LOGOUT);
-        }
 
         public function get userManagement():UserManagement {
             return viewComponent as UserManagement;
@@ -49,42 +38,31 @@ package com.neosavvy.user.view.secured.userManagement {
             return userManagement.grid;
         }
 
-        var regAndLoginWindow:IFlexDisplayObject = null;
-
-        protected function showRegistrationLoginWindow():void {
-            regAndLoginWindow = PopUpManager.createPopUp(userManagement as DisplayObject, RegistrationAndLoginWindow, true);
-            PopUpManager.centerPopUp(regAndLoginWindow);
-            facade.registerMediator(new ConfirmUserRegistrationMediator(regAndLoginWindow));
-        }
-
-        protected function hideRegistrationLoginWindow(name:String):void {
-            PopUpManager.removePopUp(regAndLoginWindow);
-        }
-
-
         override public function listNotificationInterests():Array {
             return [
-                ApplicationFacade.USER_LOGIN_FAILED
-                //,ApplicationFacade.USER_LOGGED_IN
-                ,ApplicationFacade.USER_NOT_LOGGED_IN
-                //,ApplicationFacade.USER_LOGIN_SUCCESS
-                ,ApplicationFacade.GET_USERS_SUCCESS
+                ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS
+                ,ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST
+                ,ApplicationFacade.ALL_EMPLOYEES_SUCCESS
             ];
+        }
+
+        private function getCompanyProxy():CompanyServiceProxy {
+            return facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
         }
 
         override public function handleNotification(notification:INotification):void {
             switch (notification.getName()) {
-
-                case ApplicationFacade.USER_NOT_LOGGED_IN:
-                    //showRegistrationLoginWindow();
+                case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:
+                    grid.dataProvider = getCompanyProxy().activeUsersForCompany;
+                    userManagement.title = "Viewing All Active Employees (" + getCompanyProxy().activeCompany.companyName + ")";
                     break;
-                case ApplicationFacade.USER_LOGIN_SUCCESS:
-                    //hideRegistrationLoginWindow(notification.getBody() as String);
-                    sendNotification(ApplicationFacade.GET_USERS_REQUEST)
+                case ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST:
+                    grid.dataProvider = getCompanyProxy().inactiveUsersForCompany;
+                    userManagement.title = "Viewing All Inactive Employees (" + getCompanyProxy().activeCompany.companyName + ")";
                     break;
-                case ApplicationFacade.GET_USERS_SUCCESS:
-                    var userServiceProxy:UserServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
-                    grid.dataProvider = userServiceProxy.users;
+                case ApplicationFacade.ALL_EMPLOYEES_SUCCESS:
+                    grid.dataProvider = getCompanyProxy().allUsersForCompany;
+                    userManagement.title = "Viewing All Employees (" + getCompanyProxy().activeCompany.companyName + ")";
                     break;
 
             }

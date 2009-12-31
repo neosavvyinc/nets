@@ -2,6 +2,9 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
 
     import com.neosavvy.user.controller.company.DeleteUserCompanyInviteCommand;
+    import com.neosavvy.user.controller.company.GetActiveUsersForCompany;
+    import com.neosavvy.user.controller.company.GetAllUsersForCompany;
+    import com.neosavvy.user.controller.company.GetInActiveUsersForCompany;
     import com.neosavvy.user.controller.company.GetInvitedUsersForCompanyCommand;
     import com.neosavvy.user.controller.company.InviteUsersToCompanyCommand;
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
@@ -79,6 +82,10 @@ package com.neosavvy.user {
         public static var NON_ACTIVE_EMPLOYEES_SUCCESS:String="nonActiveEmployeesSuccess";
         public static var NON_ACTIVE_EMPLOYEES_FAILED:String="nonActiveEmployeesFailed";
 
+        public static const ALL_EMPLOYEES_REQUEST:String = "allEmployeesRequest";
+        public static const ALL_EMPLOYEES_SUCCESS:String = "allEmployeesSuccess";
+        public static const ALL_EMPLOYEES_FAILED:String = "allEmployeesFailed";
+
         public static var NAVIGATE_TO_INVITE_EMPLOYEES:String="navigateToInviteEmployees";
         public static var NAVIGATE_TO_COMPANY_REGISTRATION:String="navigateToCompanyRegistration";
 
@@ -134,6 +141,10 @@ package com.neosavvy.user {
             registerCommand(GET_INVITED_USERS_REQUEST, GetInvitedUsersForCompanyCommand);
             registerCommand(DELETE_USER_COMPANY_INVITE, DeleteUserCompanyInviteCommand);
             registerCommand(SEND_USER_INVITE_REQUEST, SendUserInviteCommand);
+
+            registerCommand(ACTIVE_EMPLOYEES_REQUEST, GetActiveUsersForCompany);
+            registerCommand(NON_ACTIVE_EMPLOYEES_REQUEST, GetInActiveUsersForCompany);
+            registerCommand(ALL_EMPLOYEES_REQUEST, GetAllUsersForCompany);
         }
 
         /**
@@ -147,5 +158,5 @@ package com.neosavvy.user {
         }
 
 
-        }
+    }
 }

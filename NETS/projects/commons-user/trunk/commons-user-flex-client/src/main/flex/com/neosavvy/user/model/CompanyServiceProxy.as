@@ -66,13 +66,26 @@ package com.neosavvy.user.model {
 
         private var _invitedUsersForActiveCompany:ArrayCollection = new ArrayCollection();
 
+        private var _allUsersForCompany:ArrayCollection = new ArrayCollection();
+
+        private var _activeUsersForCompany:ArrayCollection = new ArrayCollection();
+
+        private var _inactiveUsersForCompany:ArrayCollection = new ArrayCollection();
 
         public function get invitedUsersForActiveCompany():ArrayCollection {
             return _invitedUsersForActiveCompany;
         }
 
-        public function set invitedUsersForActiveCompany(value:ArrayCollection):void {
-            _invitedUsersForActiveCompany = value;
+        public function get allUsersForCompany():ArrayCollection {
+            return _allUsersForCompany;
+        }
+
+        public function get activeUsersForCompany():ArrayCollection {
+            return _activeUsersForCompany;
+        }
+
+        public function get inactiveUsersForCompany():ArrayCollection {
+            return _inactiveUsersForCompany;
         }
 
         public function addCompany(company:CompanyDTO, user:UserDTO):void
@@ -184,6 +197,74 @@ package com.neosavvy.user.model {
             sendNotification(ApplicationFacade.SEND_USER_INVITE_SUCCESS);
         }
 
+        public function findUsersForCompany(company:CompanyDTO):void {
+            var companyService:RemoteObject = getCompanyService();
+            companyService.addEventListener(ResultEvent.RESULT, handleFindUsersResult);
+            companyService.addEventListener(FaultEvent.FAULT, handleFindUsersFault);
+            companyService.findUsersForCompany( activeCompany );
+        }
+
+        private function handleFindUsersFault(event:FaultEvent):void {
+            LOGGER.debug("Unable to find all users: " + event.toString());
+            sendNotification(ApplicationFacade.ALL_EMPLOYEES_FAILED);
+        }
+
+        private function handleFindUsersResult(event:ResultEvent):void {
+
+            if( event.result )
+                _allUsersForCompany = event.result as ArrayCollection;
+            else
+                _allUsersForCompany = new ArrayCollection();
+
+
+            sendNotification(ApplicationFacade.ALL_EMPLOYEES_SUCCESS);
+        }
+
+        public function findActiveUsersForCompany():void {
+            var companyService:RemoteObject = getCompanyService();
+            companyService.addEventListener(ResultEvent.RESULT, handleFindActiveUsersResult);
+            companyService.addEventListener(FaultEvent.FAULT, handleFindActiveUsersFault);
+            companyService.findActiveUsersForCompany( activeCompany );
+        }
+
+        private function handleFindActiveUsersFault(event:FaultEvent):void {
+            LOGGER.debug("Unable to find active users: " + event.toString());
+            sendNotification(ApplicationFacade.ACTIVE_EMPLOYEES_FAILED);
+        }
+
+        private function handleFindActiveUsersResult(event:ResultEvent):void {
+
+            if( event.result )
+                _activeUsersForCompany = event.result as ArrayCollection;
+            else
+                _activeUsersForCompany = new ArrayCollection();
+
+
+            sendNotification(ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS);
+        }
+
+        public function findInactiveUsersForCompany(company:CompanyDTO ):void {
+            var companyService:RemoteObject = getCompanyService();
+            companyService.addEventListener(ResultEvent.RESULT, handleFindInactiveUsersResult);
+            companyService.addEventListener(FaultEvent.FAULT, handleFindInactiveUsersFault);
+            companyService.findInactiveUsersForCompany( activeCompany );
+        }
+
+        private function handleFindInactiveUsersFault(event:FaultEvent):void {
+            LOGGER.debug("Unable to find inactive users: " + event.toString());
+            sendNotification(ApplicationFacade.NON_ACTIVE_EMPLOYEES_FAILED);
+        }
+
+        private function handleFindInactiveUsersResult(event:ResultEvent):void {
+
+            if( event.result )
+                _inactiveUsersForCompany = event.result as ArrayCollection;
+            else
+                _inactiveUsersForCompany = new ArrayCollection();
+
+            sendNotification(ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS);
+        }
+
         /****
          *
          * Helper functions
@@ -203,6 +284,5 @@ package com.neosavvy.user.model {
             return userService;
         }
 
-
-        }
+    }
 }

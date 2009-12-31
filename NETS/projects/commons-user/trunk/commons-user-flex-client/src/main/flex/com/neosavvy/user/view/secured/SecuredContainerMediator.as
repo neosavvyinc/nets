@@ -25,8 +25,7 @@ package com.neosavvy.user.view.secured {
 
         public static const NAV_INDEX_WELCOME:Number = 0;
         public static const NAV_INDEX_INVITE_EMPLOYEES:Number = 1;
-        public static const NAV_INDEX_VIEW_ACTIVE_EMPLOYEES:Number = 2;
-        public static const NAV_INDEX_VIEW_INACTIVE_EMPLOYEES:Number = 3;
+        public static const NAV_INDEX_USER_MANAGEMENT:Number = 2;
 
         override public function onRegister():void {
         }
@@ -43,17 +42,27 @@ package com.neosavvy.user.view.secured {
             return [
                 ApplicationFacade.NAVIGATE_TO_WELCOME
                 ,ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES
+                ,ApplicationFacade.ALL_EMPLOYEES_FAILED
+                ,ApplicationFacade.ALL_EMPLOYEES_SUCCESS
+                ,ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS
+                ,ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS
             ];
         }
 
         override public function handleNotification(notification:INotification):void {
-            switch ( notification.getBody() ) {
+            switch ( notification.getName() ) {
                 case ApplicationFacade.NAVIGATE_TO_WELCOME:
                     navigationViewStack.selectedIndex = NAV_INDEX_WELCOME;
                     break;
                 case ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES:
                     navigationViewStack.selectedIndex = NAV_INDEX_INVITE_EMPLOYEES;
                     break;
+                case ApplicationFacade.ALL_EMPLOYEES_SUCCESS:
+                case ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS:
+                case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:                        
+                    navigationViewStack.selectedIndex = NAV_INDEX_USER_MANAGEMENT;
+                    break;
+
             }
         }
 

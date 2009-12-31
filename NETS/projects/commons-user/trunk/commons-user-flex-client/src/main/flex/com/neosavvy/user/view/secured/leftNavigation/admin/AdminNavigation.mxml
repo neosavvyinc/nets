@@ -3,7 +3,8 @@
 
     <mx:LinkButton id="welcomeButton" label="Welcome"/>    
     <mx:LinkButton id="inviteEmployeesButton" label="Invite Employees"/>
-    <mx:LinkButton id="viewActiveEmployeesButton" label="View Active Employees" enabled="false"/>
-    <mx:LinkButton id="viewNonActiveEmployeesButton" label="View In-Active Employees" enabled="false"/>
+    <mx:LinkButton id="viewAllEmployeesButton" label="View Employees"/>
+    <mx:LinkButton id="viewActiveEmployeesButton" label="View Active Employees"/>
+    <mx:LinkButton id="viewNonActiveEmployeesButton" label="View Inactive Employees"/>
     
 </mx:Panel>
