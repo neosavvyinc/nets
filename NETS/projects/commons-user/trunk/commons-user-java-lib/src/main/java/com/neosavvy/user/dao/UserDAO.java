@@ -17,6 +17,6 @@ public interface UserDAO {
 
 	public void deleteUser(UserDTO user);
 
-    public List<UserDTO> findUsersForCompany(CompanyDTO company);
+    public List<UserDTO> findUsersForCompany(CompanyDTO company, UserDTO user);
 
 }

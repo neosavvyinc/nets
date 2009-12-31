@@ -57,7 +57,7 @@ public interface CompanyService {
      ****/   
     public List<UserDTO> findUsersForCompany(CompanyDTO company);
 
-    public List<UserDTO> findActiveUsersForCompany(CompanyDTO comany);
+    public List<UserDTO> findActiveUsersForCompany(CompanyDTO company);
 
     public List<UserDTO> findInactiveUsersForCompany(CompanyDTO company);
 }

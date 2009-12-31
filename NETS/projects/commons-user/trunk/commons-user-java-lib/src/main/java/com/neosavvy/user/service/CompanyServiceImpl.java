@@ -202,17 +202,19 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public List<UserDTO> findUsersForCompany(CompanyDTO company) {
-        return userDao.findUsersForCompany(company);   
+        return userDao.findUsersForCompany(company, null);
     }
 
-    public List<UserDTO> findActiveUsersForCompany(CompanyDTO comany) {
-
-        return null;
+    public List<UserDTO> findActiveUsersForCompany(CompanyDTO company) {
+        UserDTO user = new UserDTO();
+        user.setConfirmedRegistration(true);
+        return userDao.findUsersForCompany(company, user);
     }
 
     public List<UserDTO> findInactiveUsersForCompany(CompanyDTO company) {
-
-        return null;
+        UserDTO user = new UserDTO();
+        user.setConfirmedRegistration(false);
+        return userDao.findUsersForCompany(company, user);
     }
 
     public void addEmployeeToCompany(UserDTO user) {
