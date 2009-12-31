@@ -3,8 +3,6 @@ package com.neosavvy.user.dao;
 import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dto.UserDTO;
 import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.Criteria;
 
@@ -62,14 +60,14 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
                 "where user.id = ucl.user and ucl.company = company.id " +
                 "and company.id = :companyId");
         if( user != null ) {
-            queryString.append(" and user.confirmedRegistration = :userActive");
+            queryString.append(" and user.active = :userActive");
         }
 
         Query userQuery = getCurrentSession().createQuery(queryString.toString());
         userQuery.setInteger("companyId",company.getId());
 
         if( user != null) {
-            userQuery.setBoolean("userActive", user.isConfirmedRegistration());
+            userQuery.setBoolean("userActive", user.isActive());
         }
 
         return userQuery.list();

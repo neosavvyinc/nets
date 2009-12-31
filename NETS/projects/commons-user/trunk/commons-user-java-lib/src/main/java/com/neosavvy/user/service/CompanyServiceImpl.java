@@ -10,7 +10,6 @@ import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 
-import javax.management.relation.Role;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.HashSet;
@@ -207,13 +206,13 @@ public class CompanyServiceImpl implements CompanyService{
 
     public List<UserDTO> findActiveUsersForCompany(CompanyDTO company) {
         UserDTO user = new UserDTO();
-        user.setConfirmedRegistration(true);
+        user.setActive(true);
         return userDao.findUsersForCompany(company, user);
     }
 
     public List<UserDTO> findInactiveUsersForCompany(CompanyDTO company) {
         UserDTO user = new UserDTO();
-        user.setConfirmedRegistration(false);
+        user.setActive(false);
         return userDao.findUsersForCompany(company, user);
     }
 

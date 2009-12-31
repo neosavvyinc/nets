@@ -66,25 +66,10 @@ public class UserServiceImpl implements UserService {
         return userDao.getUsers();
     }
 
+
+
     public void saveUser(UserDTO user) {
-        try {
-            user.setRegistrationToken(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));
-        } catch (UnsupportedEncodingException e) {
-            logger.error(e);
-            throw new UserServiceException("Unable to generate token for user: "+ user.toString(),e);
-        }
-
         userDao.saveUser(user);
-
-        SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
-        msg.setTo(user.getEmailAddress());
-        msg.setText("Please click here to activate your account: http://" + hostName + "/commons-user-webapp/users/data/" + user.getUsername() + "/" + user.getRegistrationToken());
-        try{
-            mailSender.send(msg);
-        }
-        catch(MailException ex) {
-            logger.error(ex.getMessage());
-        }
     }
     
     public UserDTO findUserById(int id) {
@@ -109,7 +94,8 @@ public class UserServiceImpl implements UserService {
         if( matchingUsers != null && matchingUsers.size() == 1) {
             UserDTO matchingUser = matchingUsers.get(0);
             if( hashCode.equals(matchingUser.getRegistrationToken()) ){
-                matchingUser.setConfirmedRegistration(true);
+                matchingUser.setActive(true);
+                matchingUser.setConfirmed_registration(true);
                 userDao.saveUser(matchingUser);
                 return true;
             }
@@ -130,4 +116,26 @@ public class UserServiceImpl implements UserService {
 
         return security;
     }
+
+    public void createAdminUser(UserDTO user) {
+        try {
+            user.setRegistrationToken(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e);
+            throw new UserServiceException("Unable to generate token for user: "+ user.toString(),e);
+        }
+
+        userDao.saveUser(user);
+
+        SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
+        msg.setTo(user.getEmailAddress());
+        msg.setText("Please click here to activate your account: http://" + hostName + "/commons-user-webapp/users/data/" + user.getUsername() + "/" + user.getRegistrationToken());
+        try{
+            mailSender.send(msg);
+        }
+        catch(MailException ex) {
+            logger.error(ex.getMessage());
+        }
+    }
+
 }

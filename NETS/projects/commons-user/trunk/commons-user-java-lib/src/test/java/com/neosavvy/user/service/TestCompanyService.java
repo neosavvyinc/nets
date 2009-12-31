@@ -449,7 +449,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 
     private void insertTestUser(String email, String firstName, String middleName, String lastName, Boolean active, String password, String registrationToken, String username) {
         simpleJdbcTemplate.update(
-                "INSERT INTO USER(EMAIL_ADDRESS,FIRST_NAME,MIDDLE_NAME,LAST_NAME,CONFIRMED_REGISTRATION,PASSWORD,REG_TOKEN,USERNAME) " +
+                "INSERT INTO USER(EMAIL_ADDRESS,FIRST_NAME,MIDDLE_NAME,LAST_NAME,ACTIVE,PASSWORD,REG_TOKEN,USERNAME) " +
                 "VALUES (?,?,?,?,?,?,?,?)", new Object[]{email,firstName,middleName,lastName,active,password,registrationToken,username});
     }
 

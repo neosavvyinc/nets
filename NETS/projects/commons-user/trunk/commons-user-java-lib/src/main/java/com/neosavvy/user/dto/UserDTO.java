@@ -1,8 +1,5 @@
 package com.neosavvy.user.dto;
 
-import org.hibernate.FetchMode;
-import org.hibernate.annotations.Fetch;
-
 import javax.persistence.*;
 import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -29,8 +26,11 @@ public class UserDTO extends BaseUserDTO{// implements Externalizable {
     @Column(name="REG_TOKEN")
     private String registrationToken;
 
+    @Column(name="ACTIVE")
+    private Boolean active = true;
+
     @Column(name="CONFIRMED_REGISTRATION")
-    private Boolean confirmedRegistration = true;
+    private Boolean confirmed_registration = true;
 
     @OneToMany(mappedBy="user", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
@@ -57,12 +57,12 @@ public class UserDTO extends BaseUserDTO{// implements Externalizable {
         this.registrationToken = registrationToken;
     }
 
-    public void setConfirmedRegistration( Boolean confirmedRegistration ) {
-        this.confirmedRegistration = confirmedRegistration;
+    public void setActive( Boolean active) {
+        this.active = active;
     }
 
-    public Boolean isConfirmedRegistration() {
-        return this.confirmedRegistration;
+    public Boolean isActive() {
+        return this.active;
     }
 
     public Set<UserCompanyRoleDTO> getUserCompanyRoles() {
@@ -73,4 +73,11 @@ public class UserDTO extends BaseUserDTO{// implements Externalizable {
         this.userCompanyRoles = userCompanyRoles;
     }
 
+    public Boolean isConfirmed_registration() {
+        return confirmed_registration;
+    }
+
+    public void setConfirmed_registration(Boolean confirmed_registration) {
+        this.confirmed_registration = confirmed_registration;
+    }
 }

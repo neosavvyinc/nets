@@ -31,4 +31,6 @@ public interface UserService {
     public boolean confirmUser(String userName, String hashCode);
 
     public void setMailSender(MailSender mailSender);
+
+    public void createAdminUser(UserDTO user);
 }
