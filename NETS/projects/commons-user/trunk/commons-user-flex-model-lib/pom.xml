@@ -43,7 +43,6 @@
 					<locales>
 						<param>en_US</param>
 					</locales>
-                    <targetPlayer>10.0.0</targetPlayer>
 				</configuration>
 			</plugin>
 		</plugins>

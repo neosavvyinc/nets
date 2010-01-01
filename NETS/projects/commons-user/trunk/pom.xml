@@ -45,12 +45,12 @@
 	</modules>
 
 	<properties>
-		<flex.version>3.2.0.3958</flex.version>
+		<flex.version>3.5.0.12683</flex.version>
         <property.org.graniteds.version>1.2.0</property.org.graniteds.version>
         <carol.version>2.0.5</carol.version>
         <container-spec.version>1.0.1</container-spec.version>
         <jotm.version>2.0.10</jotm.version>
-        <flex.mojos.maven.version>3.4-SNAPSHOT</flex.mojos.maven.version>
+        <flex.mojos.maven.version>3.5.0</flex.mojos.maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>2.5.6</spring.version>
         <spring.security.version>2.0.4</spring.security.version>
@@ -76,7 +76,6 @@
 						<locales>
 							<param>en_US</param>
 						</locales>
-                        <targetPlayer>10.0.0</targetPlayer>
 					</configuration>
 					<dependencies>
 						<dependency>
@@ -88,7 +87,7 @@
 						<dependency>
 							<groupId>com.adobe.flex.license</groupId>
                             <artifactId>license-flexbuilder-pro-roundarch</artifactId>
-							<version>${flex.version}</version>
+							<version>3.2.0.3958</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -143,13 +142,13 @@
 			<dependency>
 				<groupId>com.adobe.flex.sdk</groupId>
 				<artifactId>datavisualization</artifactId>
-				<version>${flex.version}</version>
+				<version>3.2.0.3958</version>
 				<type>swc</type>
 			</dependency>
 			<dependency>
 				<groupId>com.adobe.flex.sdk</groupId>
 				<artifactId>datavisualization</artifactId>
-				<version>${flex.version}</version>
+				<version>3.2.0.3958</version>
 				<classifier>en_US</classifier>
 				<type>swc</type>
 			</dependency>
@@ -281,7 +280,7 @@
                 <version>${flex.version}</version>
                 <classifier>10</classifier>
                 <type>swc</type>
-            </dependency> 
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>

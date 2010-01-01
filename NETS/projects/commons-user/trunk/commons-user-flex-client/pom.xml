@@ -42,7 +42,6 @@
                         -->
                     <contextRoot>commons-user-webapp</contextRoot>
                     <sourceFile>./CommonsUser.mxml</sourceFile>
-                    <targetPlayer>10.0.0</targetPlayer>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -54,7 +53,7 @@
                     <dependency>
                         <groupId>com.adobe.flex.license</groupId>
                         <artifactId>license-flexbuilder-pro-roundarch</artifactId>
-                        <version>${flex.version}</version>
+                        <version>3.2.0.3958</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -121,7 +120,7 @@
         <dependency>
             <groupId>com.adobe.flex.license</groupId>
             <artifactId>license-flexbuilder-pro-roundarch</artifactId>
-            <version>${flex.version}</version>
+            <version>3.2.0.3958</version>
         </dependency>
         <dependency>
             <groupId>com.adobe.blazeds</groupId>
