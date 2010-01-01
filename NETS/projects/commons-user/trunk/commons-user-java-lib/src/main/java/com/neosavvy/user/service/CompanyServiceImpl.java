@@ -201,16 +201,29 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public List<UserDTO> findUsersForCompany(CompanyDTO company) {
+        if( company == null ) {
+            throw new CompanyServiceException("To find users for a company, you must supply a company parameter");
+        }
+
+
         return userDao.findUsersForCompany(company, null);
     }
 
     public List<UserDTO> findActiveUsersForCompany(CompanyDTO company) {
+        if( company == null ) {
+            throw new CompanyServiceException("To find active users for a company, you must supply a company parameter");
+        }
+
         UserDTO user = new UserDTO();
         user.setActive(true);
         return userDao.findUsersForCompany(company, user);
     }
 
     public List<UserDTO> findInactiveUsersForCompany(CompanyDTO company) {
+        if( company == null ) {
+            throw new CompanyServiceException("To find inactive users for a company, you must supply a company parameter");
+        }
+
         UserDTO user = new UserDTO();
         user.setActive(false);
         return userDao.findUsersForCompany(company, user);

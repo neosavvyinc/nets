@@ -67,7 +67,7 @@ public class UserDAOImpl extends BaseDAO implements UserDAO {
         userQuery.setInteger("companyId",company.getId());
 
         if( user != null) {
-            userQuery.setBoolean("userActive", user.isActive());
+            userQuery.setBoolean("userActive", user.getActive());
         }
 
         return userQuery.list();

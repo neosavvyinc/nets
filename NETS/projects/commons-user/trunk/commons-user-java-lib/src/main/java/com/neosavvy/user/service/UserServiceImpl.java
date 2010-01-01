@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
             UserDTO matchingUser = matchingUsers.get(0);
             if( hashCode.equals(matchingUser.getRegistrationToken()) ){
                 matchingUser.setActive(true);
-                matchingUser.setConfirmed_registration(true);
+                matchingUser.setConfirmedRegistration(true);
                 userDao.saveUser(matchingUser);
                 return true;
             }

@@ -30,7 +30,7 @@ public class UserDTO extends BaseUserDTO{// implements Externalizable {
     private Boolean active = true;
 
     @Column(name="CONFIRMED_REGISTRATION")
-    private Boolean confirmed_registration = true;
+    private Boolean confirmedRegistration = true;
 
     @OneToMany(mappedBy="user", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
@@ -61,7 +61,7 @@ public class UserDTO extends BaseUserDTO{// implements Externalizable {
         this.active = active;
     }
 
-    public Boolean isActive() {
+    public Boolean getActive() {
         return this.active;
     }
 
@@ -73,11 +73,11 @@ public class UserDTO extends BaseUserDTO{// implements Externalizable {
         this.userCompanyRoles = userCompanyRoles;
     }
 
-    public Boolean isConfirmed_registration() {
-        return confirmed_registration;
+    public Boolean getConfirmedRegistration() {
+        return confirmedRegistration;
     }
 
-    public void setConfirmed_registration(Boolean confirmed_registration) {
-        this.confirmed_registration = confirmed_registration;
+    public void setConfirmedRegistration(Boolean confirmedRegistration) {
+        this.confirmedRegistration = confirmedRegistration;
     }
 }

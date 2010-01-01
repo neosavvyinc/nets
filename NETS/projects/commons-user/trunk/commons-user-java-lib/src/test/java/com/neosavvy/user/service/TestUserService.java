@@ -60,7 +60,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
 
 
         UserDTO  testUser = createTestUser();
-        testUser.setConfirmed_registration(false);
+        testUser.setConfirmedRegistration(false);
         testUser.setActive(false);
         userService.createAdminUser(testUser);
         Assert.assertFalse(userService.getUsers().isEmpty());
@@ -68,8 +68,8 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
         Assert.assertTrue(userService.confirmUser(testUser.getUsername(), testUser.getRegistrationToken()));
 
         UserDTO foundUser = userDAO.findUserById(testUser.getId());
-        Assert.assertTrue(foundUser.isActive());
-        Assert.assertTrue(foundUser.isConfirmed_registration());
+        Assert.assertTrue(foundUser.getActive());
+        Assert.assertTrue(foundUser.getConfirmedRegistration());
     }
 
     @Test(expected = ConstraintViolationException.class)
