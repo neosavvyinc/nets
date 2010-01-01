@@ -8,6 +8,7 @@ package com.neosavvy.user.view.secured.userManagement.event {
 
         public static const ACTION_ACTIVATE:String = "Activate";
         public static const ACTION_DEACTIVATE:String = "Deactivate";
+        public static const ACTION_RESET_PASSWORD:String = "resetPassword";
 
         private var _user:UserDTO;
         private var _action:String;

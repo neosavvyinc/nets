@@ -8,6 +8,7 @@
         import com.neosavvy.user.dto.UserDTO;
         import com.neosavvy.user.view.secured.userManagement.event.UserManagementEvent;
 
+
         override public function set data(value:Object):void {
             if (value is UserDTO) {
                 var user:UserDTO = value as UserDTO;
@@ -25,10 +26,15 @@
             dispatchEvent( new UserManagementEvent(activationButton.label, data as UserDTO) );
         }
 
+
+        protected function handleResetPasswordClicked():void {
+            dispatchEvent( new UserManagementEvent(UserManagementEvent.ACTION_RESET_PASSWORD, data as UserDTO) );
+        }
+
         ]]></mx:Script>
 
     <mx:Button id="activationButton" click="{handleToggleActivationClicked()}"/>
-    <mx:Button id="resetPassword" label="Reset Password"/>
+    <mx:Button id="resetPassword" label="Reset Password" click="{handleResetPasswordClicked()}"/>
 
 
 </mx:HBox>

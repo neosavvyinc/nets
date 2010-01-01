@@ -117,6 +117,29 @@ public class UserServiceImpl implements UserService {
         return security;
     }
 
+    public void resetPassword(UserDTO user) {
+        try {
+            user.setPassword(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e);
+            throw new UserServiceException("Unable to generate new password for user: "+ user.toString(),e);
+        }
+
+        userDao.saveUser(user);
+
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setTo(user.getEmailAddress());
+        msg.setText("Your new password is: " + user.getPassword());
+        try {
+            mailSender.send(msg);
+        }
+        catch (MailException ex) {
+            logger.error(ex.getMessage());
+            throw new UserServiceException("Unable to mail the password to user: " + user.toString(), ex);
+        }
+
+    }
+
     public void createAdminUser(UserDTO user) {
         try {
             user.setRegistrationToken(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));
@@ -135,6 +158,7 @@ public class UserServiceImpl implements UserService {
         }
         catch(MailException ex) {
             logger.error(ex.getMessage());
+            throw new UserServiceException("Unable to mail message to user: " + user.toString(), ex);
         }
     }
 

@@ -106,6 +106,10 @@ package com.neosavvy.user.view.secured.userManagement {
                     userToUpdate.active = !userToUpdate.active;
                     sendNotification(ApplicationFacade.SAVE_USER_REQUEST, userToUpdate );
                     break;
+                case UserManagementEvent.ACTION_RESET_PASSWORD:
+                    var userToReset:UserDTO = event.user;
+                    sendNotification(ApplicationFacade.RESET_USER_PASSWORD_REQUEST, userToReset );
+                    break;
             }
         }
     }

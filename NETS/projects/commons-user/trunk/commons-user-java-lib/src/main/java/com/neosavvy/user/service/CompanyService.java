@@ -21,43 +21,53 @@ public interface CompanyService {
     @Secured("ROLE_ADMIN")
 	public List<CompanyDTO> getCompanies();
 
-	public CompanyDTO saveCompany(CompanyDTO company);
-
-    public void addCompany(CompanyDTO company, UserDTO user);
-
     @Secured("ROLE_ADMIN")
 	public CompanyDTO findCompanyById(int id);
 
     @Secured("ROLE_ADMIN")
 	public List<CompanyDTO> findCompanies(CompanyDTO company);
 
+    @Secured("ROLE_ADMIN")
     public void addUserToCompany(CompanyDTO company, UserDTO employee);
 
+    @Secured("ROLE_ADMIN")
     public void inviteUsers(CompanyDTO company, UserInviteDTO userInvites);
 
+    @Secured("ROLE_ADMIN")
     public List<UserInviteDTO> getInvitedUsers(CompanyDTO company);
 
+    @Secured("ROLE_ADMIN")
     public void deleteInvitedUser(CompanyDTO company, UserInviteDTO userInvite);
 
+    @Secured("ROLE_ADMIN")
     public void sendInvite(UserInviteDTO userInvite);
 
+    /****
+     * Interface for helper search methods
+     ****/
+    @Secured("ROLE_ADMIN")
+    public List<UserDTO> findUsersForCompany(CompanyDTO company);
+
+    @Secured("ROLE_ADMIN")
+    public List<UserDTO> findActiveUsersForCompany(CompanyDTO company);
+
+    @Secured("ROLE_ADMIN")
+    public List<UserDTO> findInactiveUsersForCompany(CompanyDTO company);
+
+    /*****************************************************************
+     *  All Non Secured Methods should go below this line
+     *****************************************************************/
     /**
      * This method attempts to look up a user's invite via the registration token.
      * Then it will retrieve the company they were invited to off of the invite.
      * It will then persist the new user and send a confirmation email to thank
      * them for joining the company.
-     * 
+     *
      * @param user
      */
     public void addEmployeeToCompany(UserDTO user);
 
+    public CompanyDTO saveCompany(CompanyDTO company);
 
-    /****
-     * Interface for helper search methods
-     ****/   
-    public List<UserDTO> findUsersForCompany(CompanyDTO company);
-
-    public List<UserDTO> findActiveUsersForCompany(CompanyDTO company);
-
-    public List<UserDTO> findInactiveUsersForCompany(CompanyDTO company);
+    public void addCompany(CompanyDTO company, UserDTO user);
 }

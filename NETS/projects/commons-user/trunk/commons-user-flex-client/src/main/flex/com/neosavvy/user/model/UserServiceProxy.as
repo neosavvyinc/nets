@@ -5,6 +5,8 @@ package com.neosavvy.user.model {
 
     import com.neosavvy.user.dto.UserDTO;
 
+    import com.neosavvy.user.util.RemoteObjectUtils;
+
     import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -46,6 +48,18 @@ package com.neosavvy.user.model {
             userService.getUsers();
         }
 
+        private function handleGetUsersFault(event:FaultEvent):void {
+            LOGGER.debug("User retrieval failed: " + event.toString());
+            RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
+            sendNotification(ApplicationFacade.GET_USERS_FAILED);
+        }
+
+        private function handleGetUsersResult(event:ResultEvent):void {
+            LOGGER.debug("Users were returned");
+            this.data = event.result as ArrayCollection;
+            sendNotification(ApplicationFacade.GET_USERS_SUCCESS);
+        }
+
         public function saveUser(param:UserDTO):void {
             var userService:RemoteObject = getUserService();
             userService.addEventListener(ResultEvent.RESULT, handleSaveUserResult);
@@ -53,11 +67,33 @@ package com.neosavvy.user.model {
             userService.saveUser( param );
         }
 
+        private function handleSaveUserFault(event:FaultEvent):void {
+            LOGGER.debug("User save failed");
+            RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
+            sendNotification(ApplicationFacade.SAVE_USER_FAILED);
+        }
+
+        private function handleSaveUserResult(event:ResultEvent):void {
+            LOGGER.debug("User save success");
+            sendNotification(ApplicationFacade.SAVE_USER_SUCCESS);
+        }
+
         public function confirmUser(userName:String, hashCode:String):void {
             var userService:RemoteObject = getUserService();
             userService.addEventListener(ResultEvent.RESULT, handleConfirmUserSuccess);
             userService.addEventListener(FaultEvent.FAULT, handleConfirmUserFault);
             userService.confirmUser( userName, hashCode );
+        }
+
+        private function handleConfirmUserSuccess(event:ResultEvent):void {
+            LOGGER.debug("Confirmation successful: ");
+            sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_SUCCESS);
+        }
+
+        private function handleConfirmUserFault(event:FaultEvent):void {
+            LOGGER.debug("Fault occurred while trying to confirm user: " + event.toString());
+            RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
+            sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_FAILED);
         }
 
         public function getActiveUser():void {
@@ -72,6 +108,7 @@ package com.neosavvy.user.model {
 
         private function handleGetActiveUserFault(event:FaultEvent):void {
             LOGGER.debug("User retrieval for active user failed");
+            RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
         }
 
         private function handleGetActiveUserSuccess(event:ResultEvent):void {
@@ -80,37 +117,22 @@ package com.neosavvy.user.model {
             _activeUser = users.getItemAt(0) as UserDTO;
         }
 
-        private function handleSaveUserFault(event:FaultEvent):void {
-            LOGGER.debug("User save failed");
-            sendNotification(ApplicationFacade.SAVE_USER_FAILED);
+        public function resetPassword(user:UserDTO):void {
+            var userService:RemoteObject = getUserService();
+            userService.addEventListener(ResultEvent.RESULT, handleResetPasswordSuccess);
+            userService.addEventListener(FaultEvent.FAULT, handleResetPasswordFault);
+            userService.resetPassword( user );
         }
 
-        private function handleSaveUserResult(event:ResultEvent):void {
-            LOGGER.debug("User save success");
-            sendNotification(ApplicationFacade.SAVE_USER_SUCCESS);
+        private function handleResetPasswordFault(event:FaultEvent):void {
+            LOGGER.debug("Resetting the password for user failed");
+            RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
+            sendNotification(ApplicationFacade.RESET_USER_PASSWORD_FAULT);
         }
 
-
-        private function handleGetUsersFault(event:FaultEvent):void {
-            LOGGER.debug("User retrieval failed: " + event.toString());
-            sendNotification(ApplicationFacade.GET_USERS_FAILED);
-        }
-
-        private function handleGetUsersResult(event:ResultEvent):void {
-            LOGGER.debug("Users were returned");
-            this.data = event.result as ArrayCollection;
-            sendNotification(ApplicationFacade.GET_USERS_SUCCESS);
-        }
-
-
-        private function handleConfirmUserSuccess(event:ResultEvent):void {
-            LOGGER.debug("Confirmation successful: ");
-            sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_SUCCESS);
-        }
-
-        private function handleConfirmUserFault(event:FaultEvent):void {
-            LOGGER.debug("Fault occurred while trying to confirm user: " + event.toString());
-            sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_FAILED);
+        private function handleResetPasswordSuccess(event:ResultEvent):void {
+            LOGGER.debug("User retrieval for active user succeeded");
+            sendNotification(ApplicationFacade.RESET_USER_PASSWORD_SUCCESS);
         }
 
         /****

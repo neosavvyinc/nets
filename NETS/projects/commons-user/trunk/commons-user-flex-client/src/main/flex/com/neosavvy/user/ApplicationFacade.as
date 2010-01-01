@@ -18,6 +18,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.security.LogoutCommand;
     import com.neosavvy.user.controller.user.GetUsersCommand;
 
+    import com.neosavvy.user.controller.user.ResetUserPasswordCommand;
     import com.neosavvy.user.controller.user.SaveEmployeeToCompanyCommand;
     import com.neosavvy.user.controller.user.SaveUserCommand;
 
@@ -102,6 +103,10 @@ package com.neosavvy.user {
         public static var SEND_USER_INVITE_REQUEST:String = "sendUserInviteRequest";
         public static var SEND_USER_INVITE_FAILED:String = "sendUserInviteFailed";
         public static var SEND_USER_INVITE_SUCCESS:String = "sendUserInviteSuccess";
+
+        public static const RESET_USER_PASSWORD_REQUEST:String = "resetUserPasswordRequest";
+        public static const RESET_USER_PASSWORD_SUCCESS:String = "resetUserPasswordSuccess";
+        public static const RESET_USER_PASSWORD_FAULT:String = "resetUserPasswordFault";
         
         public function ApplicationFacade(key:String)
         {
@@ -141,6 +146,7 @@ package com.neosavvy.user {
             registerCommand(GET_INVITED_USERS_REQUEST, GetInvitedUsersForCompanyCommand);
             registerCommand(DELETE_USER_COMPANY_INVITE, DeleteUserCompanyInviteCommand);
             registerCommand(SEND_USER_INVITE_REQUEST, SendUserInviteCommand);
+            registerCommand(RESET_USER_PASSWORD_REQUEST, ResetUserPasswordCommand);
 
             registerCommand(ACTIVE_EMPLOYEES_REQUEST, GetActiveUsersForCompany);
             registerCommand(NON_ACTIVE_EMPLOYEES_REQUEST, GetInActiveUsersForCompany);
@@ -158,5 +164,5 @@ package com.neosavvy.user {
         }
 
 
-    }
+        }
 }

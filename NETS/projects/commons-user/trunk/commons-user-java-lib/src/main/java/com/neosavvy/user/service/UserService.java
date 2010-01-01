@@ -28,6 +28,9 @@ public interface UserService {
     @Secured("ROLE_ADMIN")
     public SecurityWrapperDTO checkUserLoggedIn();
 
+    @Secured("ROLE_ADMIN")
+    public void resetPassword(UserDTO user);
+
     public boolean confirmUser(String userName, String hashCode);
 
     public void setMailSender(MailSender mailSender);
