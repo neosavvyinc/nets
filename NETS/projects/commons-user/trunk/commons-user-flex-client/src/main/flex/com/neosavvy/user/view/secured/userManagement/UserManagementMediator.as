@@ -88,7 +88,7 @@ package com.neosavvy.user.view.secured.userManagement {
                 case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:
                     sendNotification(ApplicationFacade.ACTIVE_EMPLOYEES_REQUEST);
                     break;
-                case ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST:
+                case ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS:
                     sendNotification(ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST);
                     break;
                 case ApplicationFacade.ALL_EMPLOYEES_SUCCESS:
