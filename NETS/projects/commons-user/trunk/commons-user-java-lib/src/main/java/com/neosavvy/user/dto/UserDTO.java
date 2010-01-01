@@ -1,5 +1,9 @@
 package com.neosavvy.user.dto;
 
+import flex.messaging.annotations.FlexClass;
+import flex.messaging.annotations.FlexField;
+import flex.messaging.annotations.IAnnotatedProxy;
+
 import javax.persistence.*;
 import javax.ws.rs.FormParam;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,7 +18,8 @@ import java.util.Set;
     }
 )
 @XmlRootElement
-public class UserDTO extends BaseUserDTO{// implements Externalizable {
+@FlexClass(classType= FlexClass.FlexClassType.RemoteObject)
+public class UserDTO extends BaseUserDTO implements IAnnotatedProxy {// implements Externalizable {
 
 
     @Column(name="USERNAME")

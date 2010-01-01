@@ -96,7 +96,7 @@ package ${jClass.as3Type.packageName} {
     // Write Constructor
     %>
         public function ${jClass.as3Type.name}Base() {}
-    <%
+    <%    
     ///////////////////////////////////////////////////////////////////////////
     // Write Public Getter/Setter.
 
@@ -159,6 +159,7 @@ package ${jClass.as3Type.packageName} {
         public function set ${jProperty.name}(objValue:${jProperty.as3Type.name}):void {
         }<%
                     }
+
                 }
                 if (jProperty.readable) {
                     if (jProperty.as3Type.isNumber() && !jProperty.type.isPrimitive()) { %>

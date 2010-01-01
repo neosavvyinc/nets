@@ -57,7 +57,7 @@ package ${jClass.as3Type.packageName} {<%
     ///////////////////////////////////////////////////////////////////////////
     // (Re)Write Public Getters/Setters for Implemented Interfaces.
 
-    if (jClass.hasInterfaces()) {
+    if (jClass.hasInterfacesProperties()) {
         for (jProperty in jClass.interfacesProperties) {
             if (jProperty.readable || jProperty.writable) {%>
 <%
