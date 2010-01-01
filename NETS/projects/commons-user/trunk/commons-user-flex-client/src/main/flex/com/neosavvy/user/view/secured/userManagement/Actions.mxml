@@ -1,45 +1,34 @@
 <?xml version="1.0" ?>
 <mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
 
+
     <mx:Script>
-        <![CDATA[
-        import com.neosavvy.user.*;
+            <![CDATA[
+
         import com.neosavvy.user.dto.UserDTO;
+        import com.neosavvy.user.view.secured.userManagement.event.UserManagementEvent;
 
-        import mx.messaging.ChannelSet;
-        import mx.messaging.channels.AMFChannel;
-        import mx.rpc.events.FaultEvent;
-        import mx.rpc.events.ResultEvent;
-        import mx.rpc.remoting.RemoteObject;
+        override public function set data(value:Object):void {
+            if (value is UserDTO) {
+                var user:UserDTO = value as UserDTO;
+                if (user.active) {
+                    activationButton.label = UserManagementEvent.ACTION_DEACTIVATE
+                } else {
+                    activationButton.label = UserManagementEvent.ACTION_ACTIVATE
+                }
+            }
 
-        protected var userService:RemoteObject;
-
-        protected function deleteHandler():void {
-            userService = new RemoteObject();
-
-            var channel:AMFChannel = new AMFChannel("user-amf", ProxyConstants.url);
-            var channelSet:ChannelSet = new ChannelSet();
-            channelSet.addChannel(channel);
-            userService.channelSet = channelSet;
-
-
-            userService.destination = "userService";
-            userService.addEventListener(FaultEvent.FAULT, deletefaultHandler);
-            userService.addEventListener(ResultEvent.RESULT, deleteresultHandler);
-            userService.deleteUser(data as UserDTO);
-
+            super.data = value;
         }
 
-        protected function deletefaultHandler(faultEvent:FaultEvent):void {
-            trace("faultEvent: " + faultEvent.message);
-            trace("faultEvent: " + faultEvent.fault.toString());
+        protected function handleToggleActivationClicked():void {
+            dispatchEvent( new UserManagementEvent(activationButton.label, data as UserDTO) );
         }
 
-        protected function deleteresultHandler(resultEvent:ResultEvent):void {
-            var data:Array = resultEvent.result as Array;
-            //FlexGlobals.topLevelApplication.initializeService();
-        }
-        ]]>
-    </mx:Script>
-    <mx:Button id="deleteBtn" label="Delete" click="{deleteHandler()}"/>
+        ]]></mx:Script>
+
+    <mx:Button id="activationButton" click="{handleToggleActivationClicked()}"/>
+    <mx:Button id="resetPassword" label="Reset Password"/>
+
+
 </mx:HBox>

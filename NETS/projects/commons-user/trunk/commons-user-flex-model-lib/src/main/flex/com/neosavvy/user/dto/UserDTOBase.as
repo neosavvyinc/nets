@@ -16,6 +16,7 @@ package com.neosavvy.user.dto {
     public class UserDTOBase extends BaseUserDTO {
 
         private var _confirmedRegistration:Boolean;
+        private var _active:Boolean;
         private var _password:String;
         private var _registrationToken:String;
         private var _userCompanyRoles:ListCollectionView;
@@ -23,6 +24,10 @@ package com.neosavvy.user.dto {
 
         public function set confirmedRegistration(value:Boolean):void {
             _confirmedRegistration = value;
+        }
+
+        public function get confirmedRegistration():Boolean {
+            return _confirmedRegistration;
         }
 
         public function set password(value:String):void {
@@ -52,6 +57,12 @@ package com.neosavvy.user.dto {
         public function get username():String {
             return _username;
         }
+        public function get active():Boolean {
+            return _active;
+        }
 
+        public function set active(value:Boolean):void {
+            _active = value;
+        }
     }
 }

@@ -33,11 +33,11 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
         }
 
         private function handleViewNonActiveEmployeesClicked(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.ACTIVE_EMPLOYEES_REQUEST);
+            sendNotification(ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST);
         }
 
         private function handleViewActiveEmployeesClicked(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST);
+            sendNotification(ApplicationFacade.ACTIVE_EMPLOYEES_REQUEST);
         }
 
         private function handleInviteEmployeesButtonClicked(event:MouseEvent):void {

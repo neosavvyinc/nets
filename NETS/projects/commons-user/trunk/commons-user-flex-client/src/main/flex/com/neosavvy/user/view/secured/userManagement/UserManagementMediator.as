@@ -3,6 +3,8 @@ package com.neosavvy.user.view.secured.userManagement {
     import com.neosavvy.user.dto.UserDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
 
+    import com.neosavvy.user.view.secured.userManagement.event.UserManagementEvent;
+
     import flash.events.Event;
 
     import mx.controls.AdvancedDataGrid;
@@ -24,9 +26,18 @@ package com.neosavvy.user.view.secured.userManagement {
             super(NAME, viewComponent);
         }
 
+        private var _companyProxy:CompanyServiceProxy;
+
+        private var _userManagementMode:String;
 
         override public function onRegister():void {
-            grid.addEventListener(ListEvent.ITEM_CLICK, handleGridItemClicked);
+            grid.addEventListener(UserManagementEvent.TYPE, userManagementEventHandler);
+            _companyProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
+        }
+
+        override public function onRemove():void {
+            grid.removeEventListener(UserManagementEvent.TYPE, userManagementEventHandler);
+            _companyProxy = null;
         }
 
 
@@ -41,43 +52,61 @@ package com.neosavvy.user.view.secured.userManagement {
         override public function listNotificationInterests():Array {
             return [
                 ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS
-                ,ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST
+                ,ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS
                 ,ApplicationFacade.ALL_EMPLOYEES_SUCCESS
+                ,ApplicationFacade.SAVE_USER_SUCCESS
             ];
         }
 
-        private function getCompanyProxy():CompanyServiceProxy {
-            return facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
-        }
 
         override public function handleNotification(notification:INotification):void {
             switch (notification.getName()) {
                 case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:
-                    grid.dataProvider = getCompanyProxy().activeUsersForCompany;
-                    userManagement.title = "Viewing All Active Employees (" + getCompanyProxy().activeCompany.companyName + ")";
+                    _userManagementMode = ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS;
+                    grid.dataProvider = _companyProxy.activeUsersForCompany;
+                    userManagement.title = "Viewing All Active Employees (" + _companyProxy.activeCompany.companyName + ")";
                     break;
-                case ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST:
-                    grid.dataProvider = getCompanyProxy().inactiveUsersForCompany;
-                    userManagement.title = "Viewing All Inactive Employees (" + getCompanyProxy().activeCompany.companyName + ")";
+                case ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS:
+                    _userManagementMode = ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS;
+                    grid.dataProvider = _companyProxy.inactiveUsersForCompany;
+                    userManagement.title = "Viewing All Inactive Employees (" + _companyProxy.activeCompany.companyName + ")";
                     break;
                 case ApplicationFacade.ALL_EMPLOYEES_SUCCESS:
-                    grid.dataProvider = getCompanyProxy().allUsersForCompany;
-                    userManagement.title = "Viewing All Employees (" + getCompanyProxy().activeCompany.companyName + ")";
+                    _userManagementMode = ApplicationFacade.ALL_EMPLOYEES_SUCCESS;
+                    grid.dataProvider = _companyProxy.allUsersForCompany;
+                    userManagement.title = "Viewing All Employees (" + _companyProxy.activeCompany.companyName + ")";
+                    break;
+                case ApplicationFacade.SAVE_USER_SUCCESS:
+                    refreshLastUserNotifcation();
                     break;
 
             }
         }
 
-        protected function handleGridItemClicked(event:Event):void {
-            var selectedItem:UserDTO = grid.selectedItem as UserDTO;
-            userManagement.fName.text = selectedItem.firstName;
-            userManagement.mName.text = selectedItem.middleName;
-            userManagement.lName.text = selectedItem.lastName;
-            userManagement.username.text = selectedItem.username;
-            userManagement.password.text = selectedItem.password;
-            userManagement.identifier.text = String(selectedItem.id);
+        private function refreshLastUserNotifcation():void {
+            switch(_userManagementMode) {
+                case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:
+                    sendNotification(ApplicationFacade.ACTIVE_EMPLOYEES_REQUEST);
+                    break;
+                case ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST:
+                    sendNotification(ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST);
+                    break;
+                case ApplicationFacade.ALL_EMPLOYEES_SUCCESS:
+                    sendNotification(ApplicationFacade.ALL_EMPLOYEES_REQUEST);
+                    break;
+            }
         }
 
 
+        private function userManagementEventHandler(event:UserManagementEvent):void {
+             switch ( event.action ) {
+                case UserManagementEvent.ACTION_ACTIVATE:
+                case UserManagementEvent.ACTION_DEACTIVATE:
+                    var userToUpdate:UserDTO = event.user;
+                    userToUpdate.active = !userToUpdate.active;
+                    sendNotification(ApplicationFacade.SAVE_USER_REQUEST, userToUpdate );
+                    break;
+            }
+        }
     }
 }
