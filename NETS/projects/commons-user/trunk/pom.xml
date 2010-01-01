@@ -86,8 +86,8 @@
 						</dependency>
 						<dependency>
 							<groupId>com.adobe.flex.license</groupId>
-                            <artifactId>license-flexbuilder-pro-roundarch</artifactId>
-							<version>3.2.0.3958</version>
+                            <artifactId>license-flexbuilder-pro</artifactId>
+							<version>${flex.version}</version>
 						</dependency>
 					</dependencies>
 				</plugin>
@@ -142,13 +142,13 @@
 			<dependency>
 				<groupId>com.adobe.flex.sdk</groupId>
 				<artifactId>datavisualization</artifactId>
-				<version>3.2.0.3958</version>
+				<version>${flex.version}</version>
 				<type>swc</type>
 			</dependency>
 			<dependency>
 				<groupId>com.adobe.flex.sdk</groupId>
 				<artifactId>datavisualization</artifactId>
-				<version>3.2.0.3958</version>
+				<version>${flex.version}</version>
 				<classifier>en_US</classifier>
 				<type>swc</type>
 			</dependency>
