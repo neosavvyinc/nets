@@ -4,13 +4,13 @@
 	<groupId>com.neosavvy.commons.flex</groupId>
 	<artifactId>commons-flex-toplevel</artifactId>
 	<packaging>pom</packaging>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
 	<name>commons-flex-parent</name>
 
     <scm>
-        <connection>scm:svn:http://www.neosavvy.com/svn/neosavvy/projects/commons-flex/trunk/</connection>
-        <developerConnection>scm:svn:http://www.neosavvy.com/svn/neosavvy/projects/commons-flex/trunk/</developerConnection>
-        <url>http://www.neosavvy.com/svn/neosavvy/projects/commons-flex/trunk/</url>
+        <connection>scm:svn:http://www.neosavvy.com/svn/neosavvy/projects/commons-flex/tags/commons-flex-toplevel-1.0</connection>
+        <developerConnection>scm:svn:http://www.neosavvy.com/svn/neosavvy/projects/commons-flex/tags/commons-flex-toplevel-1.0</developerConnection>
+        <url>http://www.neosavvy.com/svn/neosavvy/projects/commons-flex/tags/commons-flex-toplevel-1.0</url>
     </scm>
 
     <distributionManagement>
