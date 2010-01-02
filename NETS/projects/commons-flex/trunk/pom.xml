@@ -8,9 +8,9 @@
 	<name>commons-flex-parent</name>
 
     <scm>
-        <connection>scm:svn:http://www.neosavvy.com/svn/neosavvy/projects/commons-flex/trunk/</connection>
-        <developerConnection>scm:svn:http://www.neosavvy.com/svn/neosavvy/projects/commons-flex/trunk/</developerConnection>
-        <url>http://www.neosavvy.com/svn/neosavvy/projects/commons-flex/trunk/</url>
+        <connection>scm:svn:http://www.neosavvy.com/svn/internal/projects/commons-flex/trunk/</connection>
+        <developerConnection>scm:svn:http://www.neosavvy.com/svn/internal/projects/commons-flex/trunk/</developerConnection>
+        <url>http://www.neosavvy.com/svn/internal/projects/commons-flex/trunk/</url>
     </scm>
 
     <distributionManagement>
