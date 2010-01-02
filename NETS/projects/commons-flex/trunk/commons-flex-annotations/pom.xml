@@ -4,13 +4,13 @@
 	<parent>
 		<groupId>com.neosavvy.commons.flex</groupId>
 		<artifactId>commons-flex-toplevel</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>1.0</version>
 	</parent>
 
 	<groupId>com.neosavvy.commons.flex</groupId>
 	<artifactId>commons-flex-annotations</artifactId>
 	<packaging>jar</packaging>
-        <version>1.0-SNAPSHOT</version>
+        <version>1.0</version>
 	<name>commons-flex-annotations</name>
 
     <dependencies>
