@@ -130,6 +130,6 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <!--<bean id="flexInitializerBean" class="com.neosavvy.user.util.FlexInitializer">-->
-    <!--</bean>-->
+    <bean id="flexInitializerBean" class="com.neosavvy.user.util.FlexInitializer">
+    </bean>
 </beans>
