@@ -7,7 +7,7 @@
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 
-	<groupId>com.neosavvy.commons</groupId>
+	<groupId>com.neosavvy.commons.user</groupId>
 	<artifactId>commons-flex-annotations</artifactId>
 	<packaging>jar</packaging>
 	<name>commons-flex-annotations</name>
