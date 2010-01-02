@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.neosavvy.commons.flex</groupId>
+	<artifactId>commons-flex-toplevel</artifactId>
+	<packaging>pom</packaging>
+        <version>1.0</version>
+	<name>commons-flex-parent</name>
+
+    <scm>
+        <connection>scm:svn:http://www.neosavvy.com/svn/internal/projects/commons-flex/tags/commons-flex-toplevel-1.0</connection>
+        <developerConnection>scm:svn:http://www.neosavvy.com/svn/internal/projects/commons-flex/tags/commons-flex-toplevel-1.0</developerConnection>
+        <url>http://www.neosavvy.com/svn/internal/projects/commons-flex/tags/commons-flex-toplevel-1.0</url>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Nexus Releases Repository</name>
+            <url>http://maven.neosavvy.com/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Nexus Snapshots Repository</name>
+            <url>http://maven.neosavvy.com/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>www.neosavvy.com</id>
+            <url>scp://www.neosavvy.com/var/www/commons-flex/</url>
+        </site>
+    </distributionManagement>
+
+        <modules>
+	        <module>commons-flex-annotations</module>
+	</modules>
+
+	<build>
+		<plugins>
+                                <plugin>
+                                        <groupId>org.apache.maven.plugins</groupId>
+                                        <artifactId>maven-compiler-plugin</artifactId>
+                                        <version>2.0.2</version>
+                                        <configuration>
+                                                <source>1.5</source>
+                                                <target>1.5</target>
+                                                <!--                                                Use value below for target Java 1.4 builds (backward compatibility)
+                                                <target>jsr14</target>
+                                                -->
+                                        </configuration>
+                                </plugin>
+		</plugins>
+	</build>
+</project>
