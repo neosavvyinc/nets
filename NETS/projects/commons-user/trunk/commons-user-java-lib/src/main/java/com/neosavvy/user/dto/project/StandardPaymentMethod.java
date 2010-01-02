@@ -21,10 +21,7 @@ package com.neosavvy.user.dto.project;
 /**
  * User: adamparrish
  * Date: Jan 2, 2010
- * Time: 11:37:09 AM
+ * Time: 1:49:07 PM
  */
-public abstract class PaymentMethod {
-
-    private String type;
-    
+public class StandardPaymentMethod extends PaymentMethod {
 }

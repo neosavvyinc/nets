@@ -21,10 +21,17 @@ package com.neosavvy.user.dto.project;
 /**
  * User: adamparrish
  * Date: Jan 2, 2010
- * Time: 11:37:09 AM
+ * Time: 1:49:27 PM
  */
-public abstract class PaymentMethod {
+public class ProjectPaymentMethod extends PaymentMethod {
 
-    private String type;
-    
+    private Project project;
+
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
 }

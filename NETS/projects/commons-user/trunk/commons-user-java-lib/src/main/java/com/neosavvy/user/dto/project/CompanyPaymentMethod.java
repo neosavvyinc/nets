@@ -1,4 +1,6 @@
 package com.neosavvy.user.dto.project;
+
+import com.neosavvy.user.dto.CompanyDTO;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -21,10 +23,17 @@ package com.neosavvy.user.dto.project;
 /**
  * User: adamparrish
  * Date: Jan 2, 2010
- * Time: 11:37:09 AM
+ * Time: 1:50:54 PM
  */
-public abstract class PaymentMethod {
+public class CompanyPaymentMethod extends PaymentMethod {
 
-    private String type;
-    
+    private CompanyDTO company;
+
+    public CompanyDTO getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyDTO company) {
+        this.company = company;
+    }
 }
