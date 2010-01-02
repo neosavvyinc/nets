@@ -37,8 +37,8 @@
     </distributionManagement>
 
 	<modules>
+        <module>commons-flex-annotations</module>
 		<module>commons-user-config</module>
-        	<module>commons-flex-annotations</module>
 		<module>commons-user-flex-client</module>
 		<module>commons-user-flex-model-lib</module>
 		<module>commons-user-java-lib</module>
@@ -95,7 +95,7 @@
                           <version>3.5.0.patch01</version>
                         </dependency>
                         <dependency>
-                          <groupId>com.neosavvy.commons</groupId>
+                          <groupId>com.neosavvy.commons.user</groupId>
                           <artifactId>commons-flex-annotations</artifactId>
                           <version>${pom.version}</version>
                         </dependency>
