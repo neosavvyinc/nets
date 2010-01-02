@@ -97,7 +97,7 @@
                         <dependency>
                           <groupId>com.neosavvy.commons.flex</groupId>
                           <artifactId>commons-flex-annotations</artifactId>
-                          <version>${commons.flex.version}</version>
+                          <version>1.0</version>
                         </dependency>
 					</dependencies>
 				</plugin>
@@ -291,11 +291,11 @@
                 <classifier>10</classifier>
                 <type>swc</type>
             </dependency>
-                        <dependency>
-                          <groupId>com.neosavvy.commons.flex</groupId>
-                          <artifactId>commons-flex-annotations</artifactId>
-                          <version>${commons.flex.version}</version>
-                        </dependency>
+            <dependency>
+                <groupId>com.neosavvy.commons.flex</groupId>
+                <artifactId>commons-flex-annotations</artifactId>
+                <version>1.0</version>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>
