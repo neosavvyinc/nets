@@ -246,9 +246,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.neosavvy.commons.user</groupId>
+            <groupId>com.neosavvy.commons.flex</groupId>
             <artifactId>commons-flex-annotations</artifactId>
-            <version>${project.parent.version}</version>
         </dependency>
 
     </dependencies>

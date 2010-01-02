@@ -37,7 +37,6 @@
     </distributionManagement>
 
 	<modules>
-        <module>commons-flex-annotations</module>
 		<module>commons-user-config</module>
 		<module>commons-user-flex-client</module>
 		<module>commons-user-flex-model-lib</module>
@@ -54,6 +53,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>2.5.6</spring.version>
         <spring.security.version>2.0.4</spring.security.version>
+	<commons.flex.version>1.0-SNAPSHOT</commons.flex.version>
 
         <cargo.container.id>tomcat6x</cargo.container.id>
         <cargo.download.url>http://www.ibiblio.org/pub/mirrors/apache/tomcat/tomcat-6/v6.0.20/bin/apache-tomcat-6.0.20.zip</cargo.download.url>
@@ -95,9 +95,9 @@
                           <version>3.5.0.patch01</version>
                         </dependency>
                         <dependency>
-                          <groupId>com.neosavvy.commons.user</groupId>
+                          <groupId>com.neosavvy.commons.flex</groupId>
                           <artifactId>commons-flex-annotations</artifactId>
-                          <version>${pom.version}</version>
+                          <version>${commons.flex.version}</version>
                         </dependency>
 					</dependencies>
 				</plugin>
@@ -291,6 +291,11 @@
                 <classifier>10</classifier>
                 <type>swc</type>
             </dependency>
+                        <dependency>
+                          <groupId>com.neosavvy.commons.flex</groupId>
+                          <artifactId>commons-flex-annotations</artifactId>
+                          <version>${commons.flex.version}</version>
+                        </dependency>
 		</dependencies>
 	</dependencyManagement>
 </project>
