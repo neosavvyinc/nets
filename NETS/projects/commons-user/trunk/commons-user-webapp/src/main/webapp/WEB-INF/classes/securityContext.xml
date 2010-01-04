@@ -22,7 +22,7 @@
         </beans:property>
         <beans:property name="authoritiesByUsernameQuery">
             <beans:value>
-                SELECT USERNAME, 'ROLE_ADMIN' AS PRIVILEGE FROM USER WHERE USERNAME=?
+                SELECT USERNAME, SHORT_NAME AS PRIVILEGE FROM USER U, USER_COMPANY_ROLE UCR, ROLE R WHERE U.ID = UCR.USER_FK AND UCR.ROLE_FK = R.ID AND USERNAME=?
             </beans:value>
         </beans:property>
     </beans:bean>

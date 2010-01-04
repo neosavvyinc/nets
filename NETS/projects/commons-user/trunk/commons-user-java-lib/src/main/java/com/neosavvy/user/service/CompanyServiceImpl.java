@@ -242,6 +242,10 @@ public class CompanyServiceImpl implements CompanyService{
         UserInviteDTO userInvite = invitesFromToken.get(0);
         user.setEmailAddress(userInvite.getEmailAddress());
 
+        //Ensure that the user is active and enabled
+        user.setConfirmedRegistration(true);
+        user.setActive(true);
+
         // get the company from the UserInvite
         CompanyDTO company = userInvite.getCompany();
 

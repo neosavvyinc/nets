@@ -24,54 +24,88 @@
                     <excludes/>
                 </configuration>
             </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>maven-hsqldb-plugin</artifactId>-->
+                <!--<version>1.0-SNAPSHOT</version>-->
+                <!--<configuration>-->
+                    <!--<dbName>test</dbName>-->
+                    <!--<mode>server</mode>-->
+                    <!--<silent>true</silent>-->
+                    <!--<trace>false</trace>-->
+                    <!--<isTransient>false</isTransient>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>test</phase>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>hibernate3-maven-plugin</artifactId>-->
+                <!--<version>2.1</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>process-classes</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>hbm2ddl</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+                <!--<configuration>-->
+                    <!--<components>-->
+                        <!--<component>-->
+                            <!--<name>hbm2ddl</name>-->
+                            <!--<implementation>annotationconfiguration</implementation>-->
+                        <!--</component>-->
+                        <!--<component>-->
+                            <!--<name>hbmdoc</name>-->
+                        <!--</component>-->
+                    <!--</components>-->
+                    <!--<componentProperties>-->
+                        <!--<configurationfile>/target/classes/hibernate.cfg.xml</configurationfile>-->
+                        <!--<outputfilename>schema.ddl</outputfilename>-->
+                        <!--<drop>false</drop>-->
+                        <!--<create>true</create>-->
+                        <!--<export>false</export>-->
+                        <!--<format>true</format>-->
+                    <!--</componentProperties>-->
+                <!--</configuration>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
-                <artifactId>maven-hsqldb-plugin</artifactId>
-                <version>1.0-SNAPSHOT</version>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.2</version>
+                <dependencies>
+                    <!-- specify the dependent jdbc driver here -->
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.6</version>
+                    </dependency>
+                </dependencies>
                 <configuration>
-                    <dbName>test</dbName>
-                    <mode>server</mode>
-                    <silent>true</silent>
-                    <trace>false</trace>
-                    <isTransient>false</isTransient>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <url>jdbc:mysql://127.0.0.1:3306/commonsuser</url>
+                    <username>commonsuser</username>
+                    <password>commonsuser</password>
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>test</phase>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>hibernate3-maven-plugin</artifactId>
-                <version>2.1</version>
-                <executions>
-                    <execution>
-                        <phase>process-classes</phase>
+                        <id>create-data</id>
+                        <phase>post-integration-test</phase>
                         <goals>
-                            <goal>hbm2ddl</goal>
+                            <goal>execute</goal>
                         </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/test/sql/commonsuser.sql</srcFile>
+                            </srcFiles>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <components>
-                        <component>
-                            <name>hbm2ddl</name>
-                            <implementation>annotationconfiguration</implementation>
-                        </component>
-                        <component>
-                            <name>hbmdoc</name>
-                        </component>
-                    </components>
-                    <componentProperties>
-                        <configurationfile>/target/classes/hibernate.cfg.xml</configurationfile>
-                        <outputfilename>schema.ddl</outputfilename>
-                        <drop>false</drop>
-                        <create>true</create>
-                        <export>false</export>
-                        <format>true</format>
-                    </componentProperties>
-                </configuration>
             </plugin>
         </plugins>
     </build>
