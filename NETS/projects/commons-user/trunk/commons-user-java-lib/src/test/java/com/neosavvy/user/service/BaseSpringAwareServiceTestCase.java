@@ -27,16 +27,12 @@ public abstract class BaseSpringAwareServiceTestCase extends BaseSpringAwareTest
     protected UserService userService;
     @Autowired
     protected CompanyService companyService;
-    @Autowired
-    protected RoleService roleService;
 
     @Before
     public void loginTestUser() {
        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("admin", "admin"));
     }
-
-    //todo:  refactor this to something common for dao and Service tests
-
+    
     protected UserInviteDTO createTestInvite() {
         UserInviteDTO invite = new UserInviteDTO();
 
