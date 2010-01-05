@@ -1,8 +1,7 @@
 package com.neosavvy.user.service;
 
-import org.springframework.transaction.annotation.Transactional;
 import com.neosavvy.user.dto.NumEmployeesRangeDTO;
-import com.neosavvy.user.dao.NumEmployeesRangeDAO;
+import com.neosavvy.user.dao.companyManagement.NumEmployeesRangeDAO;
 
 import java.util.List;
 

@@ -5,7 +5,6 @@ import org.springframework.security.annotation.Secured;
 import java.util.List;
 
 import com.neosavvy.user.dto.RoleDTO;
-import com.neosavvy.user.dao.RoleDAO;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

@@ -1,5 +1,6 @@
-package com.neosavvy.user.dao;
+package com.neosavvy.user.dao.companyManagement;
 
+import com.neosavvy.user.dao.base.BaseDAO;
 import com.neosavvy.user.dto.CompanyDTO;
 import com.neosavvy.user.dto.UserDTO;
 import org.hibernate.Query;

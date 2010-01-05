@@ -1,4 +1,4 @@
-package com.neosavvy.user.dao;
+package com.neosavvy.user.dao.companyManagement;
 
 import com.neosavvy.user.dto.NumEmployeesRangeDTO;
 

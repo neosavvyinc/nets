@@ -1,4 +1,4 @@
-package com.neosavvy.user.dao;
+package com.neosavvy.user.dao.base;
 
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;

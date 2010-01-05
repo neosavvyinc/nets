@@ -1,8 +1,8 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.user.dao.companyManagement.UserDAO;
 import com.neosavvy.user.dto.SecurityWrapperDTO;
 import com.neosavvy.user.dto.UserDTO;
-import com.neosavvy.user.dao.UserDAO;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

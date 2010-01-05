@@ -1,16 +1,9 @@
 package com.neosavvy.user.dao;
 
 import com.neosavvy.user.BaseSpringAwareTestCase;
-import org.junit.Before;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.junit.Assert;
 import com.neosavvy.user.dto.*;
-import com.neosavvy.user.dao.CompanyDAO;
-import com.neosavvy.user.dao.UserDAO;
-import com.neosavvy.user.dao.RoleDAO;
 
 import java.util.List;
 

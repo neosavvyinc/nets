@@ -24,6 +24,8 @@ package com.neosavvy.user {
 
     import com.neosavvy.user.controller.user.ConfirmAccountCommand;
 
+    import com.neosavvy.user.model.SecurityProxy;
+
     import org.puremvc.as3.multicore.patterns.facade.Facade;
 
     public class ApplicationFacade extends Facade
@@ -165,6 +167,8 @@ package com.neosavvy.user {
             sendNotification(STARTUP, app);
         }
 
-
+        public static function getSecurityProxy(key:String):SecurityProxy {
+            return ApplicationFacade.getInstance(key).retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
         }
+    }
 }

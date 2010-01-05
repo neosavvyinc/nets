@@ -17,7 +17,6 @@ import java.util.Set;
             ,@UniqueConstraint(columnNames = {"USERNAME"})
     }
 )
-@XmlRootElement
 @FlexClass(classType= FlexClass.FlexClassType.RemoteObject)
 public class UserDTO extends BaseUserDTO implements IAnnotatedProxy {// implements Externalizable {
 
@@ -43,7 +42,6 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy {// implemen
     public String getUsername() {
         return username;
     }
-    @FormParam("userName")
     public void setUsername(String username) {
         this.username = username;
     }

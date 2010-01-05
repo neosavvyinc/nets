@@ -3,12 +3,10 @@
 
     <mx:Script>
         <![CDATA[
+        import com.neosavvy.user.ApplicationFacade;
         import com.neosavvy.user.dto.UserInviteDTO;
+        import com.neosavvy.user.model.SecurityProxy;
         import com.neosavvy.user.view.secured.employeeInvitation.event.UserCompanyInviteEvent;
-
-        import mx.rpc.remoting.RemoteObject;
-
-        protected var userService:RemoteObject;
 
         protected function deleteHandler():void {
             var userInvite:UserInviteDTO = data as UserInviteDTO;
@@ -19,6 +17,8 @@
             var userInvite:UserInviteDTO = data as UserInviteDTO;
             dispatchEvent(new UserCompanyInviteEvent(UserCompanyInviteEvent.ACTION_INVITE, userInvite));
         }
+
+
 
         ]]>
     </mx:Script>

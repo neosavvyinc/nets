@@ -1,13 +1,12 @@
-package com.neosavvy.user.dao;
+package com.neosavvy.user.dao.companyManagement;
 
+import com.neosavvy.user.dao.base.BaseDAO;
 import com.neosavvy.user.dto.CompanyDTO;
 
 import java.util.List;
 
-import org.hibernate.SessionFactory;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
-import org.hibernate.classic.Session;
 
 /**
  * Created by IntelliJ IDEA.

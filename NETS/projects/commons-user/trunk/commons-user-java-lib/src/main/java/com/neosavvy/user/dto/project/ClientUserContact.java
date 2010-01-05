@@ -1,11 +1,8 @@
 package com.neosavvy.user.dto.project;
 
-import com.neosavvy.user.dto.AbstractCompany;
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dto.BaseUserDTO;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 /*************************************************************************
@@ -29,20 +26,15 @@ import javax.persistence.UniqueConstraint;
 
 /**
  * User: adamparrish
- * Date: Jan 2, 2010
- * Time: 11:17:59 AM
+ * Date: Jan 5, 2010
+ * Time: 9:38:51 AM
  */
-
 @Entity
 @Table(
-    name="CLIENT_COMPANY" ,
+    name="CLIENT_USER_CONTACT" ,
     uniqueConstraints = {
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-public class ClientCompany extends AbstractCompany {
-
-    @OneToOne
-    private ClientUserContact clientContact;
-
+public class ClientUserContact extends BaseUserDTO {
 }

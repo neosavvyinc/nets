@@ -1,9 +1,8 @@
 package com.neosavvy.user;
 
-import com.neosavvy.user.dao.*;
+import com.neosavvy.user.dao.companyManagement.*;
 import com.neosavvy.user.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 
 /**

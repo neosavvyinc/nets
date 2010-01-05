@@ -48,27 +48,27 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="userTransaction" ref="jotm"/>
     </bean>
 
-    <bean id="userCompanyRoleDAO" class="com.neosavvy.user.dao.UserCompanyRoleDAOImpl">
+    <bean id="userCompanyRoleDAO" class="com.neosavvy.user.dao.companyManagement.UserCompanyRoleDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="userDAO" class="com.neosavvy.user.dao.UserDAOImpl">
+    <bean id="userDAO" class="com.neosavvy.user.dao.companyManagement.UserDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="userInviteDAO" class="com.neosavvy.user.dao.UserInviteDAOImpl">
+    <bean id="userInviteDAO" class="com.neosavvy.user.dao.companyManagement.UserInviteDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     
-    <bean id="companyDAO" class="com.neosavvy.user.dao.CompanyDAOImpl">
+    <bean id="companyDAO" class="com.neosavvy.user.dao.companyManagement.CompanyDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="roleDAO" class="com.neosavvy.user.dao.RoleDAOImpl">
+    <bean id="roleDAO" class="com.neosavvy.user.dao.companyManagement.RoleDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="numEmployeesRangeDAO" class="com.neosavvy.user.dao.NumEmployeesRangeDAOImpl">
+    <bean id="numEmployeesRangeDAO" class="com.neosavvy.user.dao.companyManagement.NumEmployeesRangeDAOImpl">
         <property name="sessionFactory" ref="sessionFactory" />
     </bean>
 

@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass;
  * To change this template use File | Settings | File Templates.
  */
 @MappedSuperclass
-public class BaseUserDTO {
+public abstract class BaseUserDTO {
     @Id
     @GeneratedValue
     @Column(name="ID")
@@ -30,6 +30,9 @@ public class BaseUserDTO {
 
     @Column(name="EMAIL_ADDRESS")
     private String emailAddress;
+
+    @Column(name="CONTACT_PHONE_NUMBER")
+    private String contactPhoneNumber;
 
     public int getId() {
         return id;
@@ -69,5 +72,13 @@ public class BaseUserDTO {
 
     public void setEmailAddress(String emailAddress) {
         this.emailAddress = emailAddress;
+    }
+
+    public String getContactPhoneNumber() {
+        return contactPhoneNumber;
+    }
+
+    public void setContactPhoneNumber(String contactPhoneNumber) {
+        this.contactPhoneNumber = contactPhoneNumber;
     }
 }
