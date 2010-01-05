@@ -1,10 +1,8 @@
-package com.neosavvy.user.dao.companyManagement;
+package com.neosavvy.user.dao.project;
 
-import com.neosavvy.user.dao.base.BaseUserDAO;
-import com.neosavvy.user.dto.companyManagement.CompanyDTO;
-import com.neosavvy.user.dto.companyManagement.UserDTO;
-
-import java.util.List;
+import com.neosavvy.user.BaseSpringAwareTestCase;
+import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
+import org.springframework.beans.factory.annotation.Autowired;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -27,10 +25,25 @@ import java.util.List;
 /**
  * User: adamparrish
  * Date: Jan 5, 2010
- * Time: 3:21:25 PM
+ * Time: 4:33:48 PM
  */
-public interface UserDAO extends BaseUserDAO<UserDTO> {
+public abstract class BaseProjectManagementDAOTest extends BaseSpringAwareDAOTestCase {
 
-     public List<UserDTO> findUsersForCompany(CompanyDTO company, UserDTO user);
-    
+    @Autowired
+    protected ClientUserContactDAO clientUserContactDAO;
+
+    public ClientUserContactDAO getClientUserContactDAO() {
+        return clientUserContactDAO;
+    }
+
+    public void setClientUserContactDAO(ClientUserContactDAO clientUserContactDAO) {
+        this.clientUserContactDAO = clientUserContactDAO;
+    }
+
+    @Override
+    protected void cleanupTables() {
+        super.cleanupTables();
+        deleteFromTables("CLIENT_COMPANY");
+        deleteFromTables("CLIENT_USER_CONTACT");
+    }
 }

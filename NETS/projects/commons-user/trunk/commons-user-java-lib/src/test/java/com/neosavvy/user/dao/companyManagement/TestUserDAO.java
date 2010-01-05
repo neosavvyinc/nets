@@ -1,5 +1,6 @@
-package com.neosavvy.user.dao;
+package com.neosavvy.user.dao.companyManagement;
 
+import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.RoleDTO;

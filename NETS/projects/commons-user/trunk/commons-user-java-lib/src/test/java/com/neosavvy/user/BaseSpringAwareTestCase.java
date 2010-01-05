@@ -13,7 +13,6 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
  * User: lgleason
  * Date: Dec 29, 2009
  * Time: 4:45:35 PM
- * To change this template use File | Settings | File Templates.
  */
 public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired

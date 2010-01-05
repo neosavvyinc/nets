@@ -1,10 +1,7 @@
-package com.neosavvy.user.dao.companyManagement;
+package com.neosavvy.user.dao.project;
 
 import com.neosavvy.user.dao.base.BaseUserDAO;
-import com.neosavvy.user.dto.companyManagement.CompanyDTO;
-import com.neosavvy.user.dto.companyManagement.UserDTO;
-
-import java.util.List;
+import com.neosavvy.user.dao.companyManagement.UserDAO;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -27,10 +24,7 @@ import java.util.List;
 /**
  * User: adamparrish
  * Date: Jan 5, 2010
- * Time: 3:21:25 PM
+ * Time: 4:24:21 PM
  */
-public interface UserDAO extends BaseUserDAO<UserDTO> {
-
-     public List<UserDTO> findUsersForCompany(CompanyDTO company, UserDTO user);
-    
+public interface ClientUserContactDAO extends BaseUserDAO {
 }

@@ -1,5 +1,6 @@
 package com.neosavvy.user.dao.base;
 
+import com.neosavvy.user.dto.base.BaseUserDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
@@ -29,9 +30,9 @@ import java.util.List;
  * Date: Jan 5, 2010
  * Time: 3:22:55 PM
  */
-public abstract class BaseUserDAOImpl extends BaseDAO implements BaseUserDAO {
+public abstract class BaseUserDAOImpl<T extends BaseUserDTO> extends BaseDAO implements BaseUserDAO<T> {
 
-    public void deleteUser(UserDTO user) {
+    public void deleteUser(T user) {
 		getCurrentSession().delete(user);
         getCurrentSession().flush();
 	}
@@ -43,7 +44,12 @@ public abstract class BaseUserDAOImpl extends BaseDAO implements BaseUserDAO {
                 .uniqueResult();
     }
 
-	public List<UserDTO> findUsers(UserDTO user) {
+    public List<T> findUsers(T user) {
+        Criteria c = generateCommonCriteriaFromBaseClass(user);
+        return c.list();
+    }
+
+    protected Criteria generateCommonCriteriaFromBaseClass(T user) {
         Criteria criteria = getCurrentSession().createCriteria(UserDTO.class);
         if(user.getFirstName() != null && user.getFirstName().length() > 0) {
             criteria.add(Restrictions.eq("firstName", user.getFirstName()));
@@ -57,20 +63,14 @@ public abstract class BaseUserDAOImpl extends BaseDAO implements BaseUserDAO {
         if(user.getEmailAddress() != null && user.getEmailAddress().length() > 0) {
             criteria.add(Restrictions.eq("emailAddress", user.getEmailAddress()));
         }
-        if(user.getUsername() != null && user.getUsername().length() > 0) {
-            criteria.add(Restrictions.eq("username", user.getUsername()));
-        }
-        if(user.getPassword() != null && user.getPassword().length() > 0) {
-            criteria.add(Restrictions.eq("password", user.getPassword()));
-        }
-		return criteria.list();
-	}
+        return criteria;
+    }
 
-	public List<UserDTO> getUsers() {
+    public List<T> getUsers() {
 		return getCurrentSession().createCriteria(UserDTO.class).list();
 	}
 
-	public void saveUser(UserDTO user) {
+	public void saveUser(T user) {
 		getCurrentSession().saveOrUpdate(user);
         getCurrentSession().flush();
 	}

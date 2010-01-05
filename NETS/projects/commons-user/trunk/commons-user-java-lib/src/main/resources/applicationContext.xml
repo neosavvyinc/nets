@@ -66,6 +66,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean id="roleDAO" class="com.neosavvy.user.dao.companyManagement.RoleDAOImpl">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
+    
+    <bean id="clientUserContactDAO" class="com.neosavvy.user.dao.project.ClientUserContactDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean> 
 
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>

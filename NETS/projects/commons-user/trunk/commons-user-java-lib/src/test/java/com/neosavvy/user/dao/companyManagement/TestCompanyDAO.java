@@ -1,5 +1,6 @@
-package com.neosavvy.user.dao;
+package com.neosavvy.user.dao.companyManagement;
 
+import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
 import com.neosavvy.user.dto.companyManagement.*;
 import org.junit.Test;
 import org.junit.Assert;

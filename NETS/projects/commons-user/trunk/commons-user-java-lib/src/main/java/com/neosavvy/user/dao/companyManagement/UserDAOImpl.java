@@ -1,13 +1,16 @@
 package com.neosavvy.user.dao.companyManagement;
 
 import com.neosavvy.user.dao.base.BaseUserDAOImpl;
+import com.neosavvy.user.dto.base.BaseUserDTO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
+import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
 
-public class UserDAOImpl extends BaseUserDAOImpl implements UserDAO {
+public class UserDAOImpl extends BaseUserDAOImpl<UserDTO> implements UserDAO {
 
     public List<UserDTO> findUsersForCompany(CompanyDTO company, UserDTO user) {
         StringBuffer queryString = new StringBuffer("select user from UserDTO user, UserCompanyRoleDTO ucl, CompanyDTO company " +
@@ -27,4 +30,16 @@ public class UserDAOImpl extends BaseUserDAOImpl implements UserDAO {
         return userQuery.list();
     }
 
+    @Override
+    public List<UserDTO> findUsers(UserDTO user) {
+        Criteria criteria = generateCommonCriteriaFromBaseClass(user);
+        if(user.getUsername() != null && user.getUsername().length() > 0) {
+            criteria.add(Restrictions.eq("username", user.getUsername()));
+        }
+        if(user.getPassword() != null && user.getPassword().length() > 0) {
+            criteria.add(Restrictions.eq("password", user.getPassword()));
+        }
+
+		return criteria.list();
+    }
 }

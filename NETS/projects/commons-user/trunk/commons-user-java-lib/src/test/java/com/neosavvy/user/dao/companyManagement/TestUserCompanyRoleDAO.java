@@ -1,5 +1,6 @@
-package com.neosavvy.user.dao;
+package com.neosavvy.user.dao.companyManagement;
 
+import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
 import org.junit.Test;
 import org.junit.Assert;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
@@ -16,7 +17,7 @@ import java.util.List;
  * Time: 12:58:01 PM
  * To change this template use File | Settings | File Templates.
  */
-public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase{
+public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testSaveUserCompanyRole() {

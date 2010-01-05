@@ -1,5 +1,6 @@
-package com.neosavvy.user.dao;
+package com.neosavvy.user.dao.companyManagement;
 
+import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 import org.junit.Test;
 import org.junit.Assert;
@@ -13,7 +14,7 @@ import java.util.List;
  * Time: 11:41:13 PM
  * To change this template use File | Settings | File Templates.
  */
-public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
+public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase {
     @Test
 	public void testSaveUserInvite() {
         cleanupTables();

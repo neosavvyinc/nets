@@ -1,18 +1,19 @@
 package com.neosavvy.user.dao.base;
 
+import com.neosavvy.user.dto.base.BaseUserDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 
 import java.util.List;
 
-public interface BaseUserDAO {
+public interface BaseUserDAO<T extends BaseUserDTO> {
 
-	public List<UserDTO> getUsers();
+	public List<T> getUsers();
 
-	public void saveUser(UserDTO user);
+	public void saveUser(T user);
 
 	public UserDTO findUserById(int id);
 
-	public List<UserDTO> findUsers(UserDTO user);
+	public List<T> findUsers(T user);
 
-	public void deleteUser(UserDTO user);
+	public void deleteUser(T user);
 }
