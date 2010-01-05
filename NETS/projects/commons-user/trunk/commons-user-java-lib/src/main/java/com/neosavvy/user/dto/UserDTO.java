@@ -1,12 +1,10 @@
 package com.neosavvy.user.dto;
 
+import com.neosavvy.user.dto.base.BaseUserDTO;
 import flex.messaging.annotations.FlexClass;
-import flex.messaging.annotations.FlexField;
 import flex.messaging.annotations.IAnnotatedProxy;
 
 import javax.persistence.*;
-import javax.ws.rs.FormParam;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
 @Entity

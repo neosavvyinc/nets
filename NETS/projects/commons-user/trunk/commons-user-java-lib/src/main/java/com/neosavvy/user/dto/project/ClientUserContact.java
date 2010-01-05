@@ -1,6 +1,6 @@
 package com.neosavvy.user.dto.project;
 
-import com.neosavvy.user.dto.BaseUserDTO;
+import com.neosavvy.user.dto.base.BaseUserDTO;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;

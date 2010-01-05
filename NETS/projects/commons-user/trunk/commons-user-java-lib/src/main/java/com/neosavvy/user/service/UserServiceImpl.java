@@ -1,5 +1,6 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.user.dao.base.BaseUserDAO;
 import com.neosavvy.user.dao.companyManagement.UserDAO;
 import com.neosavvy.user.dto.SecurityWrapperDTO;
 import com.neosavvy.user.dto.UserDTO;

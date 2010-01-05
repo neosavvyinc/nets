@@ -1,5 +1,7 @@
 package com.neosavvy.user.dto;
 
+import com.neosavvy.user.dto.base.BaseUserDTO;
+
 import javax.persistence.*;
 
 /**
@@ -16,7 +18,7 @@ import javax.persistence.*;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-public class UserInviteDTO extends BaseUserDTO{
+public class UserInviteDTO extends BaseUserDTO {
 
     @ManyToOne
     @JoinColumn(name="COMPANY_FK")

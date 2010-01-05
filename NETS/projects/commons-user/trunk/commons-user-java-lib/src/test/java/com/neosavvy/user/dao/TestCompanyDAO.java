@@ -118,22 +118,6 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
     }
 
     @Test
-    public void testAddNumEmployeesRangeToCompany() {
-        cleanupTables();
-        NumEmployeesRangeDTO testNumEmployeesRange = createTestRange();
-        numEmployeesRangeDAO.saveRange(testNumEmployeesRange);
-        CompanyDTO company = createTestCompany();
-        company.setNumEmployeesRange(testNumEmployeesRange);
-        companyDAO.saveCompany(company);
-
-        CompanyDTO foundCompany = companyDAO.findCompanyById(company.getId());
-
-        Assert.assertEquals("Found company has the num employees range we just set",
-                company.getNumEmployeesRange().getRangeDescription(),
-                foundCompany.getNumEmployeesRange().getRangeDescription());
-    }
-
-    @Test
     public void testUserCompanyRoles(){
         cleanupTables();
 

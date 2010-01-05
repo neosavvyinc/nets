@@ -1,5 +1,6 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.user.dao.base.BaseUserDAO;
 import com.neosavvy.user.dao.companyManagement.*;
 import com.neosavvy.user.dto.*;
 import com.neosavvy.user.service.exception.CompanyServiceException;
@@ -29,7 +30,6 @@ public class CompanyServiceImpl implements CompanyService{
     private UserCompanyRoleDAO userCompanyRoleDao;
     private RoleDAO roleDao;
     private UserDAO userDao;
-    private NumEmployeesRangeDAO numEmployeesRangeDao;
     private UserInviteDAO userInviteDao;
     private MailSender mailSender;
     private SimpleMailMessage templateMessage;
@@ -40,9 +40,6 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public CompanyDTO saveCompany(CompanyDTO company) {
-        if( company.getNumEmployeesRange() != null )
-            numEmployeesRangeDao.saveRange(company.getNumEmployeesRange());
-
         return companyDao.saveCompany(company);
     }
 
@@ -319,14 +316,6 @@ public class CompanyServiceImpl implements CompanyService{
 
     public void setUserDao(UserDAO userDao) {
         this.userDao = userDao;
-    }
-
-    public NumEmployeesRangeDAO getNumEmployeesRangeDao() {
-        return numEmployeesRangeDao;
-    }
-
-    public void setNumEmployeesRangeDao(NumEmployeesRangeDAO numEmployeesRangeDao) {
-        this.numEmployeesRangeDao = numEmployeesRangeDao;
     }
 
     public void setMailSender(MailSender mailSender) {

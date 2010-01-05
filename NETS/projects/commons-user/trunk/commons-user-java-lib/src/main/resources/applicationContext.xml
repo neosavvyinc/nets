@@ -9,7 +9,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.neosavvy.user.rest"/>
     <context:annotation-config/>
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
@@ -68,10 +67,6 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <bean id="numEmployeesRangeDAO" class="com.neosavvy.user.dao.companyManagement.NumEmployeesRangeDAOImpl">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
         <property name="templateMessage" ref="newUserAddedToCompanyTemplateMessage"/>
@@ -84,7 +79,6 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="userDao" ref="userDAO"/>
         <property name="roleDao" ref="roleDAO"/>
         <property name="userCompanyRoleDao" ref="userCompanyRoleDAO"/>
-        <property name="numEmployeesRangeDao" ref="numEmployeesRangeDAO"/>
         <property name="userInviteDao" ref="userInviteDAO"/>
         <property name="templateMessage" ref="adminUserAddedToCompanyTemplateMessage"/>
         <property name="mailSender" ref="mailSender"/>
@@ -95,9 +89,6 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="roleDao" ref="roleDAO"/>
     </bean>
 
-    <bean id="numEmployeesRangeService" class="com.neosavvy.user.service.NumEmployeesRangeServiceImpl">
-        <property name="numEmployeesRangeDao" ref="numEmployeesRangeDAO"/>
-    </bean>
 
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="localhost"/>

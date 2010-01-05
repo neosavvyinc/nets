@@ -29,8 +29,6 @@ public abstract class BaseSpringAwareServiceTestCase extends BaseSpringAwareTest
     protected CompanyService companyService;
     @Autowired
     protected RoleService roleService;
-    @Autowired
-    protected NumEmployeesRangeService numEmployeesRangeService;
 
     @Before
     public void loginTestUser() {

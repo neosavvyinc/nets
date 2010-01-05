@@ -13,7 +13,6 @@
         <mapping class="com.neosavvy.user.dto.UserInviteDTO"/>
         <mapping class="com.neosavvy.user.dto.CompanyDTO"/>
         <mapping class="com.neosavvy.user.dto.RoleDTO"/>
-        <mapping class="com.neosavvy.user.dto.NumEmployeesRangeDTO"/>
         <mapping class="com.neosavvy.user.dto.UserCompanyRoleDTO"/>
     </session-factory>
 </hibernate-configuration>

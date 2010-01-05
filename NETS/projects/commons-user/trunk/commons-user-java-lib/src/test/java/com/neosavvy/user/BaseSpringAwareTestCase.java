@@ -1,5 +1,6 @@
 package com.neosavvy.user;
 
+import com.neosavvy.user.dao.base.BaseUserDAO;
 import com.neosavvy.user.dao.companyManagement.*;
 import com.neosavvy.user.dto.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +22,6 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
     protected RoleDAO roleDAO;
     @Autowired
     protected UserInviteDAO userInviteDAO;
-    @Autowired
-    protected NumEmployeesRangeDAO numEmployeesRangeDAO;
     @Autowired
     protected UserCompanyRoleDAO userCompanyRoleDAO;
 
@@ -58,14 +57,6 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
         company.setPostalCode("30312");
         company.setCountry("USA");
         return company;
-    }
-
-    protected NumEmployeesRangeDTO createTestRange(){
-        NumEmployeesRangeDTO test_range = new NumEmployeesRangeDTO();
-        test_range.setRangeDescription("1-10");
-        test_range.setRangeFrom(1);
-        test_range.setRangeTo(10);
-        return test_range;
     }
 
     protected RoleDTO createTestRole() {

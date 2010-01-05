@@ -1,4 +1,4 @@
-package com.neosavvy.user.dto;
+package com.neosavvy.user.dto.base;
 
 import javax.persistence.Id;
 import javax.persistence.GeneratedValue;

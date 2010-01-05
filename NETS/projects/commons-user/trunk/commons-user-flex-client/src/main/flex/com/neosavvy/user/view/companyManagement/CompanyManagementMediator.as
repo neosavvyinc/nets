@@ -2,8 +2,6 @@ package com.neosavvy.user.view.companyManagement {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.CompanyDTO;
 
-    import com.neosavvy.user.dto.NumEmployeesRangeDTO;
-
     import com.neosavvy.user.dto.UserDTO;
 
     import flash.events.MouseEvent;
@@ -114,19 +112,7 @@ package com.neosavvy.user.view.companyManagement {
                 company.companyName = companyManagement.companyName.text;
                 company.country = companyManagement.country.selectedItem as String;
                 company.postalCode = companyManagement.postalCode.text;
-                company.numEmployeesRange = new NumEmployeesRangeDTO();
-    
-                var radioButtonGroup:RadioButtonGroup = companyManagement.numberOfEmployeesGroup;
-                var selectedValue:Object = radioButtonGroup.selectedValue;
-                var numEmployeesSelected:String = selectedValue as String;
-                if (numEmployeesSelected.indexOf(">") == -1) {
-                    company.numEmployeesRange.rangeFrom = numEmployeesSelected.split("-")[0] as Number;
-                    company.numEmployeesRange.rangeTo = numEmployeesSelected.split("-")[1] as Number;
-                } else {
-                    company.numEmployeesRange.rangeFrom = 10001;
-                    company.numEmployeesRange.rangeTo = Number.MAX_VALUE;
-                }
-    
+                
                 var user:UserDTO = new UserDTO();
                 userName = user.username = companyManagement.administrativeUser.text;
                 user.password = companyManagement.administrativePassword.text;

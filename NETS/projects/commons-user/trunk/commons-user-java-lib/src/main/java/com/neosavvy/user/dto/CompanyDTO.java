@@ -30,19 +30,6 @@ public class CompanyDTO extends AbstractCompany {
     @OneToMany(mappedBy="company", fetch=FetchType.EAGER)
     private Set<UserInviteDTO> userInvites;
 
-    @ManyToOne
-    @JoinColumn(name="NUM_EMPLOYEES_RANGE_FK")
-    private NumEmployeesRangeDTO numEmployeesRange;
-
-
-    public NumEmployeesRangeDTO getNumEmployeesRange() {
-        return numEmployeesRange;
-    }
-
-    public void setNumEmployeesRange(NumEmployeesRangeDTO numEmployeesRange) {
-        this.numEmployeesRange = numEmployeesRange;
-    }
-
     public Set<UserCompanyRoleDTO> getUserCompanyRoles() {
         return userCompanyRoles;
     }
