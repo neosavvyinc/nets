@@ -42,6 +42,24 @@ package com.neosavvy.user.model {
                 return new Array();
         }
 
+        public function isActiveUserEmployee():Boolean {
+            for each ( var authority:String in authorities ) {
+                if( authority == "ROLE_EMPLOYEE") {
+                    return true
+                }
+            }
+            return false;
+        }
+
+        public function isActiveUserAdmin():Boolean {
+            for each ( var authority:String in authorities ) {
+                if( authority == "ROLE_ADMIN") {
+                    return true
+                }
+            }
+            return false;
+        }
+
         /*******
          *
          * Service Proxied Functions

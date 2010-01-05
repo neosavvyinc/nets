@@ -48,7 +48,7 @@ package com.neosavvy.commons.user.flexmonkey.tests.Test Company Registration.tes
                 new UIEventMonkeyCommand('ChangeFocus', 'administrativeMiddleName', 'automationName', ['false', 'TAB']),
                 new UIEventMonkeyCommand('Input', 'administrativeLastName', 'automationName', ['Parrish']),
                 new UIEventMonkeyCommand('ChangeFocus', 'administrativeLastName', 'automationName', ['false', 'TAB']),
-                new UIEventMonkeyCommand('Input', 'administrativeEmail', 'automationName', ['aparrish@neosavvy.com']),
+                new UIEventMonkeyCommand('Input', 'administrativeEmail', 'automationName', ['aparrish1@neosavvy.com']),
                 new UIEventMonkeyCommand('ChangeFocus', 'administrativeEmail', 'automationName', ['false', 'TAB']),
                 new UIEventMonkeyCommand('Input', 'administrativePassword', 'automationName', ['test']),
                 new UIEventMonkeyCommand('ChangeFocus', 'administrativePassword', 'automationName', ['false', 'TAB']),

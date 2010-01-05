@@ -6,5 +6,8 @@
     <mx:LinkButton id="viewAllEmployeesButton" label="View Employees"/>
     <mx:LinkButton id="viewActiveEmployeesButton" label="View Active Employees"/>
     <mx:LinkButton id="viewNonActiveEmployeesButton" label="View Inactive Employees"/>
+
+    <mx:LinkButton id="manageProjects" label="Manage Projects"/>
+    <mx:LinkButton id="manageClients" label="Manage Clients"/>
     
 </mx:Panel>

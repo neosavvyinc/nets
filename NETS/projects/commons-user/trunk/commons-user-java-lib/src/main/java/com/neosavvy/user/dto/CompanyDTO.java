@@ -22,34 +22,7 @@ import java.util.Set;
     }
 )
 @XmlRootElement
-public class CompanyDTO {
-
-    @Id
-    @GeneratedValue
-    @Column(name="ID")
-    private int id;
-
-    @Column(name="COMPANY_NAME")
-
-    private String companyName;
-
-    @Column(name="ADDRESS_ONE")
-    private String addressOne;
-
-    @Column(name="ADDRESS_TWO")
-    private String addressTwo;
-
-    @Column(name="CITY")
-    private String city;
-
-    @Column(name="POSTAL_CODE")
-    private String postalCode;
-
-    @Column(name="STATE")
-    private String state;
-
-    @Column(name="COUNTRY")
-    private String country;
+public class CompanyDTO extends AbstractCompany {
 
     @OneToMany(mappedBy="company", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
@@ -57,82 +30,10 @@ public class CompanyDTO {
     @OneToMany(mappedBy="company", fetch=FetchType.EAGER)
     private Set<UserInviteDTO> userInvites;
 
-
     @ManyToOne
     @JoinColumn(name="NUM_EMPLOYEES_RANGE_FK")
     private NumEmployeesRangeDTO numEmployeesRange;
 
-    public int getId() {
-        return id;
-    }
-
-    @FormParam("id")
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    @FormParam("companyName")
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getAddressOne() {
-        return addressOne;
-    }
-
-    @FormParam("addressOne")
-    public void setAddressOne(String addressOne) {
-        this.addressOne = addressOne;
-    }
-
-    public String getAddressTwo() {
-        return addressTwo;
-    }
-
-    @FormParam("addressTwo")
-    public void setAddressTwo(String addressTwo) {
-        this.addressTwo = addressTwo;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    @FormParam("city")
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getPostalCode() {
-        return postalCode;
-    }
-
-    @FormParam("postalCode")
-    public void setPostalCode(String postalCode) {
-        this.postalCode = postalCode;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    @FormParam("state")
-    public void setState(String state) {
-        this.state = state;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    @FormParam("country")
-    public void setCountry(String country) {
-        this.country = country;
-    }
 
     public NumEmployeesRangeDTO getNumEmployeesRange() {
         return numEmployeesRange;

@@ -117,7 +117,7 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase{
         setupCriteriaBasedSearchTest();
 
         UserInviteDTO searchCriteria = new UserInviteDTO();
-        searchCriteria.setEmailAddress("aparrish@neosavvy.com");
+        searchCriteria.setEmailAddress("aparrish1@neosavvy.com");
 
         List<UserInviteDTO> userInvitesFounds = userInviteDAO.findUserInvites(searchCriteria);
 

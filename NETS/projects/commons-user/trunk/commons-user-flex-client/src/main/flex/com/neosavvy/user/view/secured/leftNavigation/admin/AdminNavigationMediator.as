@@ -1,6 +1,8 @@
 package com.neosavvy.user.view.secured.leftNavigation.admin {
     import com.neosavvy.user.ApplicationFacade;
 
+    import com.neosavvy.user.model.SecurityProxy;
+
     import flash.events.MouseEvent;
 
     import mx.controls.Button;
@@ -77,7 +79,7 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
         }
 
         override public function handleNotification(notification:INotification):void {
-            super.handleNotification(notification);
+            
         }
 
     }

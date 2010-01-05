@@ -2,6 +2,7 @@ package com.neosavvy.user {
 
     import com.neosavvy.user.dto.UserDTO;
 
+    import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.view.secured.SecuredContainer;
 
     import flash.events.MouseEvent;
@@ -108,7 +109,10 @@ package com.neosavvy.user {
                 case ApplicationFacade.USER_LOGGED_IN:
                     saveLastNavigationIndex();
                     this.navigationViewStack.selectedIndex = SECURED_CONTAINER_NAVIGATION_INDEX;
-                    loggedInUserName.text = "You are logged in as " + notification.getBody() as String;
+                    var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
+                    var roles:String = securityProxy.authorities.join(",");
+                    var activeUser:String = notification.getBody() as String;
+                    loggedInUserName.text = "You are logged in as " + activeUser + " with role(s): " + roles;
                     backButton.visible = false;
                     loginButton.visible = false;
                     logoutButton.visible = true;

@@ -43,7 +43,7 @@ public abstract class BaseSpringAwareDAOTestCase extends BaseSpringAwareTestCase
         userInvite.setFirstName("William");
         userInvite.setMiddleName("Adam");
         userInvite.setLastName("Parrish");
-        userInvite.setEmailAddress("aparrish@neosavvy.com");
+        userInvite.setEmailAddress("aparrish1@neosavvy.com");
         return userInvite;
     }
     

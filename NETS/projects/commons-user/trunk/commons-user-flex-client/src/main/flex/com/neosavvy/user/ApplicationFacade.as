@@ -107,7 +107,9 @@ package com.neosavvy.user {
         public static const RESET_USER_PASSWORD_REQUEST:String = "resetUserPasswordRequest";
         public static const RESET_USER_PASSWORD_SUCCESS:String = "resetUserPasswordSuccess";
         public static const RESET_USER_PASSWORD_FAULT:String = "resetUserPasswordFault";
-        
+
+        public static const POST_SECURE_VIEW_PREP:String = "secureViewInitializationComplete";
+
         public function ApplicationFacade(key:String)
         {
             super(key);

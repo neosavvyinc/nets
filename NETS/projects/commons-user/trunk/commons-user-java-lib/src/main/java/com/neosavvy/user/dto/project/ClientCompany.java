@@ -1,4 +1,6 @@
 package com.neosavvy.user.dto.project;
+
+import com.neosavvy.user.dto.CompanyDTO;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -23,5 +25,8 @@ package com.neosavvy.user.dto.project;
  * Date: Jan 2, 2010
  * Time: 11:17:59 AM
  */
-public class ClientCompany {
+public class ClientCompany extends CompanyDTO {
+
+
+
 }

@@ -44,7 +44,7 @@ public abstract class BaseSpringAwareServiceTestCase extends BaseSpringAwareTest
 
         invite.setFirstName("Adam");
         invite.setLastName("Parrish");
-        invite.setEmailAddress("aparrish@neosavvy.com");
+        invite.setEmailAddress("aparrish1@neosavvy.com");
 
         return invite;
     }
