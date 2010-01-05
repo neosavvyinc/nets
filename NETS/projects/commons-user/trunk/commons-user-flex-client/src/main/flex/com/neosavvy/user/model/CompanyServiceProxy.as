@@ -1,15 +1,15 @@
 package com.neosavvy.user.model {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.ProxyConstants;
-    import com.neosavvy.user.dto.CompanyDTO;
-    import com.neosavvy.user.dto.CompanyDTO;
-    import com.neosavvy.user.dto.CompanyDTO;
+    import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+    import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+    import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 
-    import com.neosavvy.user.dto.UserCompanyRoleDTO;
-    import com.neosavvy.user.dto.UserDTO;
-    import com.neosavvy.user.dto.UserDTO;
+    import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
 
-    import com.neosavvy.user.dto.UserInviteDTO;
+    import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
     import com.neosavvy.user.model.UserServiceProxy;
 
     import mx.collections.ArrayCollection;

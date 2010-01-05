@@ -1,9 +1,9 @@
 package com.neosavvy.user.view.secured.employeeInvitation {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.dto.CompanyDTO;
-    import com.neosavvy.user.dto.UserDTO;
+    import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
 
-    import com.neosavvy.user.dto.UserInviteDTO;
+    import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.CompanyServiceProxy;
 

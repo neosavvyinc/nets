@@ -1,6 +1,6 @@
 package com.neosavvy.user {
 
-    import com.neosavvy.user.dto.UserDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
 
     import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.view.secured.SecuredContainer;

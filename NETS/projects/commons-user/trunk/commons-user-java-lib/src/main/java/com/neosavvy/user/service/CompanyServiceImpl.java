@@ -1,8 +1,7 @@
 package com.neosavvy.user.service;
 
-import com.neosavvy.user.dao.base.BaseUserDAO;
 import com.neosavvy.user.dao.companyManagement.*;
-import com.neosavvy.user.dto.*;
+import com.neosavvy.user.dto.companyManagement.*;
 import com.neosavvy.user.service.exception.CompanyServiceException;
 import com.neosavvy.user.service.exception.UserServiceException;
 import com.neosavvy.util.StringUtil;

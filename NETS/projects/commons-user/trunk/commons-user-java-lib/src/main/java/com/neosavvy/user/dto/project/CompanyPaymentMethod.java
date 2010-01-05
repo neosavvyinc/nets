@@ -1,6 +1,6 @@
 package com.neosavvy.user.dto.project;
 
-import com.neosavvy.user.dto.CompanyDTO;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL

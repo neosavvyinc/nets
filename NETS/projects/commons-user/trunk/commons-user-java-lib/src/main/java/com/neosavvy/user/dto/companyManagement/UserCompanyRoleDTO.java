@@ -1,4 +1,4 @@
-package com.neosavvy.user.dto;
+package com.neosavvy.user.dto.companyManagement;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlRootElement;
  * User: lgleason
  * Date: Dec 8, 2009
  * Time: 10:50:05 PM
- * To change this template use File | Settings | File Templates.
  */
 @Entity
 @Table(

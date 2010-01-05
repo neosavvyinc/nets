@@ -2,10 +2,10 @@ package com.neosavvy.user.dao;
 
 import org.junit.Test;
 import org.junit.Assert;
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.RoleDTO;
-import com.neosavvy.user.dto.UserCompanyRoleDTO;
-import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import com.neosavvy.user.dto.companyManagement.RoleDTO;
+import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
 
 import java.util.List;
 

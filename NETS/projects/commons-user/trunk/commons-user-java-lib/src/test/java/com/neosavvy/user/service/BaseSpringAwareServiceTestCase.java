@@ -1,17 +1,13 @@
 package com.neosavvy.user.service;
 
 import com.neosavvy.user.BaseSpringAwareTestCase;
+import com.neosavvy.user.dto.companyManagement.RoleDTO;
+import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.BeanFactoryUtils;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.security.context.SecurityContextHolder;
 import org.junit.Before;
-import com.neosavvy.user.dao.*;
-import com.neosavvy.user.dto.*;
 
 /**
  * @author lgleason

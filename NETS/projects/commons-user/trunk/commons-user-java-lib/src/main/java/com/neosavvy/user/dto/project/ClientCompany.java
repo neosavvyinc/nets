@@ -1,8 +1,6 @@
 package com.neosavvy.user.dto.project;
 
-import com.neosavvy.user.dto.AbstractCompany;
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dto.companyManagement.AbstractCompany;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;

@@ -1,6 +1,6 @@
 package com.neosavvy.user.dao.base;
 
-import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
 import org.hibernate.Criteria;
 import org.hibernate.criterion.Restrictions;
 

@@ -1,4 +1,4 @@
-package com.neosavvy.user.dto;
+package com.neosavvy.user.dto.companyManagement;
 
 import com.neosavvy.user.dto.base.BaseUserDTO;
 import flex.messaging.annotations.FlexClass;

@@ -1,5 +1,5 @@
 package com.neosavvy.user.controller.company {
-    import com.neosavvy.user.dto.UserInviteDTO;
+    import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
 
     import com.neosavvy.user.view.secured.employeeInvitation.event.UserCompanyInviteEvent;

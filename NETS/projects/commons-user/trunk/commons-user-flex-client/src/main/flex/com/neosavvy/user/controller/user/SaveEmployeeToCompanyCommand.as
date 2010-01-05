@@ -1,6 +1,6 @@
 package com.neosavvy.user.controller.user {
-    import com.neosavvy.user.dto.CompanyDTO;
-    import com.neosavvy.user.dto.UserDTO;
+    import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
 
     import com.neosavvy.user.model.CompanyServiceProxy;
 

@@ -1,4 +1,4 @@
-package com.neosavvy.user.dto;
+package com.neosavvy.user.dto.companyManagement;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;

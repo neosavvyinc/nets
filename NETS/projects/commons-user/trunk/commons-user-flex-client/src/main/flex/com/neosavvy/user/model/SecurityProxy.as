@@ -2,8 +2,8 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.ProxyConstants;
 
-    import com.neosavvy.user.dto.SecurityWrapperDTO;
-    import com.neosavvy.user.dto.UserDTO;
+    import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
 
     import mx.logging.ILogger;
     import mx.logging.Log;

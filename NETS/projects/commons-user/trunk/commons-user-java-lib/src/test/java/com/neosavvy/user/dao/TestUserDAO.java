@@ -1,9 +1,9 @@
 package com.neosavvy.user.dao;
 
-import com.neosavvy.user.dto.UserDTO;
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.RoleDTO;
-import com.neosavvy.user.dto.UserCompanyRoleDTO;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import com.neosavvy.user.dto.companyManagement.RoleDTO;
+import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;

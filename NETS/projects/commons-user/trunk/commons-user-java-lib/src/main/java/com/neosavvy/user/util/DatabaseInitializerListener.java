@@ -41,7 +41,6 @@ public class DatabaseInitializerListener implements InitializingBean {
 
         try {
             template.execute("TRUNCATE TABLE COMPANY");
-            template.execute("TRUNCATE TABLE NUM_EMPLOYEES_RANGE");
             template.execute("TRUNCATE TABLE ROLE");
             template.execute("TRUNCATE TABLE USER");
             template.execute("TRUNCATE TABLE USER_COMPANY_ROLE");

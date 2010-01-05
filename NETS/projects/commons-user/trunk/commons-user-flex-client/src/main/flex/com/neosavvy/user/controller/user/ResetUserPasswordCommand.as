@@ -1,5 +1,5 @@
 package com.neosavvy.user.controller.user {
-    import com.neosavvy.user.dto.UserDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.UserServiceProxy;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

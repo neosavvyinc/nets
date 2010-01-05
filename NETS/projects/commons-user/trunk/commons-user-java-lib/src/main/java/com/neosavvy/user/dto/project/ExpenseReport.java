@@ -1,8 +1,5 @@
 package com.neosavvy.user.dto.project;
 
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.UserDTO;
-
 import java.util.Date;
 import java.util.List;
 /*************************************************************************

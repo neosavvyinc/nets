@@ -1,11 +1,10 @@
 package com.neosavvy.user.service;
 
-import com.neosavvy.user.dto.*;
+import com.neosavvy.user.dto.companyManagement.*;
 import com.neosavvy.user.service.exception.CompanyServiceException;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
-import org.springframework.test.annotation.Rollback;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

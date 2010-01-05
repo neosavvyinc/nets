@@ -1,4 +1,4 @@
-package com.neosavvy.user.dto;
+package com.neosavvy.user.dto.companyManagement;
 
 import com.neosavvy.user.dto.base.BaseUserDTO;
 
@@ -9,7 +9,6 @@ import javax.persistence.*;
  * User: lgleason
  * Date: Dec 18, 2009
  * Time: 11:57:55 PM
- * To change this template use File | Settings | File Templates.
  */
 @Entity
 @Table(

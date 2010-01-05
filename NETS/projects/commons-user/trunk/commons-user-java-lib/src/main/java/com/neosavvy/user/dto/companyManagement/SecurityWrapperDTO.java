@@ -1,6 +1,5 @@
-package com.neosavvy.user.dto;
+package com.neosavvy.user.dto.companyManagement;
 
-import java.util.List;
 
 /**
  * User: adamparrish

@@ -1,9 +1,11 @@
 package com.neosavvy.user.dao;
 
 import com.neosavvy.user.BaseSpringAwareTestCase;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import com.neosavvy.user.dto.companyManagement.RoleDTO;
+import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 import org.springframework.test.context.ContextConfiguration;
 import org.junit.Assert;
-import com.neosavvy.user.dto.*;
 
 import java.util.List;
 
@@ -60,7 +62,6 @@ public abstract class BaseSpringAwareDAOTestCase extends BaseSpringAwareTestCase
         deleteFromTables("COMPANY");
         deleteFromTables("USER");
         deleteFromTables("USER_INVITE");
-        deleteFromTables("NUM_EMPLOYEES_RANGE");
 
     }
 }

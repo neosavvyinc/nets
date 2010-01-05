@@ -1,7 +1,7 @@
 package com.neosavvy.user.controller.company {
-    import com.neosavvy.user.dto.CompanyDTO;
-    import com.neosavvy.user.dto.UserDTO;
-    import com.neosavvy.user.dto.UserInviteDTO;
+    import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
+    import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

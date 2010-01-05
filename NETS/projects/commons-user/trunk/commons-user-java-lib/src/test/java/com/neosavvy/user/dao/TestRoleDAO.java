@@ -1,13 +1,11 @@
 package com.neosavvy.user.dao;
 
+import com.neosavvy.user.dto.companyManagement.RoleDTO;
 import org.junit.Test;
 import org.junit.Assert;
 import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
-
-import com.neosavvy.user.dto.RoleDTO;
-import com.neosavvy.user.dto.UserDTO;
 
 /**
  * @author lgleason

@@ -1,5 +1,5 @@
 package com.neosavvy.user.view.secured.employeeInvitation.event {
-    import com.neosavvy.user.dto.UserInviteDTO;
+    import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 
     import flash.events.Event;
 

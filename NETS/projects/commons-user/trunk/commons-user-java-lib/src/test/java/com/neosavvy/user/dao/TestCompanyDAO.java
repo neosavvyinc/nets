@@ -1,13 +1,11 @@
 package com.neosavvy.user.dao;
 
+import com.neosavvy.user.dto.companyManagement.*;
 import org.junit.Test;
 import org.junit.Assert;
 
 import java.util.List;
 import java.util.HashSet;
-import java.util.Set;
-
-import com.neosavvy.user.dto.*;
 
 /**
  * @author lgleason

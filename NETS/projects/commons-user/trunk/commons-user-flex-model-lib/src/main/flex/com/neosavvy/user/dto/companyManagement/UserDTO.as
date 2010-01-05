@@ -5,10 +5,10 @@
  * your custom code here.
  */
 
-package com.neosavvy.user.dto {
+package com.neosavvy.user.dto.companyManagement {
 
     [Bindable]
-    [RemoteClass(alias="com.neosavvy.user.dto.UserDTO")]
+    [RemoteClass(alias="com.neosavvy.user.dto.companyManagement.UserDTO")]
     public class UserDTO extends UserDTOBase {
     }
 }

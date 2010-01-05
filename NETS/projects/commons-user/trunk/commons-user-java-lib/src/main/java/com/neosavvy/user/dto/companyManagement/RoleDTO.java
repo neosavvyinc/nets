@@ -1,16 +1,14 @@
-package com.neosavvy.user.dto;
+package com.neosavvy.user.dto.companyManagement;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
-import java.util.LinkedHashSet;
 
 /**
  * Created by IntelliJ IDEA.
  * User: lgleason
  * Date: Nov 28, 2009
  * Time: 3:54:52 AM
- * To change this template use File | Settings | File Templates.
  */
 
 @Entity
@@ -33,11 +31,6 @@ public class RoleDTO {
 
 	@Column(name="LONG_NAME")
 	private String longName;
-
-//    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-//    @JoinTable(name = "USER_ROLE", joinColumns = { @JoinColumn(name = "USER_ID") },
-//            inverseJoinColumns = { @JoinColumn(name = "ROLE_ID") })
-//    private Set<UserDTO> users = new LinkedHashSet<UserDTO>();
 
     @OneToMany(mappedBy="role", fetch = FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;

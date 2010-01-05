@@ -1,6 +1,6 @@
 package com.neosavvy.user.view.secured.userManagement {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.dto.UserDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
 
     import com.neosavvy.user.view.secured.userManagement.event.UserManagementEvent;

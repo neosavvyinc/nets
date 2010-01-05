@@ -5,10 +5,10 @@
  * your custom code here.
  */
 
-package com.neosavvy.user.dto {
+package com.neosavvy.user.dto.companyManagement {
 
     [Bindable]
-    [RemoteClass(alias="com.neosavvy.user.dto.AbstractCompany")]
+    [RemoteClass(alias="com.neosavvy.user.dto.companyManagement.AbstractCompany")]
     public dynamic class AbstractCompany extends AbstractCompanyBase {
         public function AbstractCompany() {
             super();

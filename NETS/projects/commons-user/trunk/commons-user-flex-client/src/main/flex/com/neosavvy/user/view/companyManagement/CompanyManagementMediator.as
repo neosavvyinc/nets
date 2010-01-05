@@ -1,15 +1,14 @@
 package com.neosavvy.user.view.companyManagement {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.dto.CompanyDTO;
+    import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 
-    import com.neosavvy.user.dto.UserDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
 
     import flash.events.MouseEvent;
 
     import mx.containers.Form;
     import mx.containers.ViewStack;
     import mx.controls.Button;
-    import mx.controls.RadioButtonGroup;
     import mx.logging.ILogger;
     import mx.logging.Log;
 

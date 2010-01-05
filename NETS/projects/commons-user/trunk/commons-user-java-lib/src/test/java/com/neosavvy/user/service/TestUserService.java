@@ -1,17 +1,12 @@
 package com.neosavvy.user.service;
 
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-import com.neosavvy.user.service.exception.UserServiceException;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
 import org.hibernate.exception.ConstraintViolationException;
-import org.junit.Before;
 import org.junit.Test;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.context.SecurityContextHolder;
-import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
 import org.easymock.EasyMock;
 import junit.framework.Assert;
-import com.neosavvy.user.dto.UserDTO;
 
 /**
  * @author lgleason

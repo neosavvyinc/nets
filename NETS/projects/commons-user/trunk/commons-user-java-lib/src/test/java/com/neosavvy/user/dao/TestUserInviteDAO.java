@@ -1,13 +1,10 @@
 package com.neosavvy.user.dao;
 
+import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 import org.junit.Test;
 import org.junit.Assert;
-import org.hibernate.exception.ConstraintViolationException;
 
 import java.util.List;
-import java.util.HashSet;
-
-import com.neosavvy.user.dto.UserInviteDTO;
 
 /**
  * Created by IntelliJ IDEA.

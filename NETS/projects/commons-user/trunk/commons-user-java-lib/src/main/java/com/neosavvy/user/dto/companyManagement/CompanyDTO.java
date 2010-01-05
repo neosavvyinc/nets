@@ -1,10 +1,9 @@
-package com.neosavvy.user.dto;
+package com.neosavvy.user.dto.companyManagement;
 
 
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.ws.rs.FormParam;
 import java.util.Set;
 
 /**
@@ -12,7 +11,6 @@ import java.util.Set;
  * User: lgleason
  * Date: Nov 27, 2009
  * Time: 2:03:57 PM
- * To change this template use File | Settings | File Templates.
  */
 @Entity
 @Table(

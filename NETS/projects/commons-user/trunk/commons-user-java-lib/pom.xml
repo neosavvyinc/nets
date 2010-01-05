@@ -101,7 +101,7 @@
                         <configuration>
                             <autocommit>true</autocommit>
                             <srcFiles>
-                                <srcFile>src/test/sql/commonsuser.sql</srcFile>
+                                <!--<srcFile>src/test/sql/commonsuser.sql</srcFile>-->
                             </srcFiles>
                         </configuration>
                     </execution>

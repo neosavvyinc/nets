@@ -1,7 +1,6 @@
 package com.neosavvy.user.dao.base;
 
-import com.neosavvy.user.dto.CompanyDTO;
-import com.neosavvy.user.dto.UserDTO;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
 
 import java.util.List;
 
