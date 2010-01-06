@@ -2,6 +2,7 @@ package com.neosavvy.user.dao.companyManagement;
 
 import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
 import com.neosavvy.user.dto.companyManagement.RoleDTO;
+import com.neosavvy.user.util.ProjectTestUtil;
 import org.junit.Test;
 import org.junit.Assert;
 import org.hibernate.exception.ConstraintViolationException;
@@ -16,7 +17,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testSaveRole() {
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
 
         roleDAO.saveRole(role);
         Assert.assertTrue((int)role.getId() > 0);
@@ -28,7 +29,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
         int numRows = countRowsInTable("ROLE");
         Assert.assertEquals(numRows, 0);
 
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
 
         numRows = countRowsInTable("ROLE");
@@ -43,7 +44,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testFindRoleById() {
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
 
         int numRows = countRowsInTable("ROLE");
@@ -57,7 +58,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
 
     private void setupCriteriaBasedSearchTest() {
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         RoleDTO role2 = createAltTestRole();
 
         roleDAO.saveRole(role);
@@ -96,10 +97,10 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testSaveTwoUsersSameUserName() {
         cleanupTables();
-        roleDAO.saveRole(createTestRole());
+        roleDAO.saveRole(ProjectTestUtil.createTestRole());
         try {
             Assert.assertEquals("Should be a row in the table for the user",countRowsInTable("ROLE"),1);
-            roleDAO.saveRole(createTestRole());
+            roleDAO.saveRole(ProjectTestUtil.createTestRole());
         } catch (ConstraintViolationException e) {
             return;
         }

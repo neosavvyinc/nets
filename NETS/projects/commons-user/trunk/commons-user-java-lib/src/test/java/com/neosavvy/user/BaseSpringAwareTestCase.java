@@ -26,47 +26,6 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
     @Autowired
     protected UserCompanyRoleDAO userCompanyRoleDAO;
 
-    protected UserDTO createTestUser() {
-        UserDTO user = new UserDTO();
-        user.setFirstName("William");
-        user.setMiddleName("Adam");
-        user.setLastName("Parrish");
-        user.setUsername("aparrish");
-        user.setPassword("testPassword");
-        user.setEmailAddress("aparrish1@neosavvy.com");
-        return user;
-    }
-
-    protected UserDTO createAltTestUser() {
-        UserDTO user = new UserDTO();
-        user.setFirstName("Lance");
-        user.setMiddleName("B");
-        user.setLastName("Gleason");
-        user.setUsername("lgleason");
-        user.setPassword("testPassword");
-        user.setEmailAddress("lg@neosavvy.com");
-        return user;
-    }
-
-    protected CompanyDTO createTestCompany() {
-        CompanyDTO company = new CompanyDTO();
-        company.setCompanyName("BFD Enterprises");
-        company.setAddressOne("address one");
-        company.setAddressTwo("address two");
-        company.setCity("Atlanta");
-        company.setState("GA");
-        company.setPostalCode("30312");
-        company.setCountry("USA");
-        return company;
-    }
-
-    protected RoleDTO createTestRole() {
-        RoleDTO role = new RoleDTO();
-        role.setShortName("ROLE_ADMIN");
-        role.setLongName("Administrator");
-        return role;
-    }
-
     protected UserCompanyRoleDTO createTestUserCompanyRole(RoleDTO role, CompanyDTO company, UserDTO user){
         UserCompanyRoleDTO testUserCompanyRole = new UserCompanyRoleDTO();
         if(role != null)

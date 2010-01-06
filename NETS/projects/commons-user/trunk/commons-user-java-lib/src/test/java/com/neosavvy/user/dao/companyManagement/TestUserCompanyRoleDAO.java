@@ -1,6 +1,7 @@
 package com.neosavvy.user.dao.companyManagement;
 
 import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
+import com.neosavvy.user.util.ProjectTestUtil;
 import org.junit.Test;
 import org.junit.Assert;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
@@ -22,7 +23,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testSaveUserCompanyRole() {
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
 
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
@@ -34,9 +35,9 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testAltSaveUserCompanyRole() {
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
-        CompanyDTO company = createTestCompany();
+        CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
 
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
@@ -48,9 +49,9 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testGetUserCompanyRoleData() {
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
-        CompanyDTO company = createTestCompany();
+        CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
 
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
@@ -71,7 +72,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testFindUserCompanyRoleById() {
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
@@ -88,7 +89,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testFindUserCompanyRoleByRoleId() {
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
@@ -107,9 +108,9 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testFindUserCompanyRoleByUserId() {
         cleanupTables();
-        UserDTO user = createTestUser();
+        UserDTO user = ProjectTestUtil.createTestUser();
         userDAO.saveUser(user);
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, user);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
@@ -133,9 +134,9 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testFindUserCompanyRoleByCompanyId() {
         cleanupTables();
-        CompanyDTO company = createTestCompany();
+        CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
@@ -159,11 +160,11 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testFindUserCompanyRoleByAllThree() {
         cleanupTables();
-        CompanyDTO company = createTestCompany();
+        CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
-        UserDTO user = createTestUser();
+        UserDTO user = ProjectTestUtil.createTestUser();
         userDAO.saveUser(user);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, user);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
@@ -187,7 +188,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testDeleteUserCompanyRole() {
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);

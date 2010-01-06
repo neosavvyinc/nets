@@ -1,11 +1,9 @@
 package com.neosavvy.user.dto.project;
 
 import com.neosavvy.user.dto.companyManagement.AbstractCompany;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -41,6 +39,26 @@ import javax.persistence.UniqueConstraint;
 public class ClientCompany extends AbstractCompany {
 
     @OneToOne
+    @JoinColumn(name="CLIENT_USER_CONTACT_FK")
     private ClientUserContact clientContact;
 
+    @OneToOne
+    @JoinColumn(name="PARENT_COMPANY_FK")
+    private CompanyDTO parentCompany;
+
+    public ClientUserContact getClientContact() {
+        return clientContact;
+    }
+
+    public void setClientContact(ClientUserContact clientContact) {
+        this.clientContact = clientContact;
+    }
+
+    public CompanyDTO getParentCompany() {
+        return parentCompany;
+    }
+
+    public void setParentCompany(CompanyDTO parentCompany) {
+        this.parentCompany = parentCompany;
+    }
 }

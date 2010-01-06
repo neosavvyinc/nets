@@ -57,7 +57,12 @@ public abstract class BaseCompanyDAOImpl<T extends AbstractCompany> extends Base
     }
 
     public List<T> findCompanies(T company) {
-        Criteria criteria = getCurrentSession().createCriteria(CompanyDTO.class);
+        Criteria criteria = generateCriteriaForFind(company);
+		return criteria.list();
+    }
+
+    protected Criteria generateCriteriaForFind(T company) {
+        Criteria criteria = getCurrentSession().createCriteria(company.getClass());
         if(company.getCompanyName() != null && company.getCompanyName().length() > 0) {
             criteria.add(Restrictions.eq("companyName", company.getCompanyName()));
         }
@@ -70,7 +75,7 @@ public abstract class BaseCompanyDAOImpl<T extends AbstractCompany> extends Base
         if(company.getPostalCode() != null && company.getPostalCode().length() > 0) {
             criteria.add(Restrictions.eq("postalCode", company.getPostalCode()));
         }
-		return criteria.list();
+        return criteria;
     }
 
     public void delete(T company) {

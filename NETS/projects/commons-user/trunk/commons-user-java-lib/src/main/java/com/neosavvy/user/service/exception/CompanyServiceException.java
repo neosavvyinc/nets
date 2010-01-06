@@ -5,7 +5,6 @@ package com.neosavvy.user.service.exception;
  * User: lgleason
  * Date: Dec 14, 2009
  * Time: 2:44:26 PM
- * To change this template use File | Settings | File Templates.
  */
 public class CompanyServiceException extends RuntimeException{
 

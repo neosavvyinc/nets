@@ -1,14 +1,4 @@
-package com.neosavvy.user.dao.project;
-
-import com.neosavvy.user.dao.base.BaseCompanyDAOImpl;
-import com.neosavvy.user.dto.companyManagement.CompanyDTO;
-import com.neosavvy.user.dto.project.ClientCompany;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
-
-import java.util.List;
-
+package com.neosavvy.user.service.exception;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -31,18 +21,16 @@ import java.util.List;
 /**
  * User: adamparrish
  * Date: Jan 6, 2010
- * Time: 3:54:29 AM
+ * Time: 1:11:00 PM
  */
-public class ClientCompanyDAOImpl extends BaseCompanyDAOImpl<ClientCompany> implements ClientCompanyDAO {
+public class ClientServiceException extends RuntimeException {
 
-    @Override
-    public List<ClientCompany> findCompanies(ClientCompany company) {
-        Criteria criteria = super.generateCriteriaForFind(company);
-
-        if(company.getParentCompany() != null) {
-            criteria.add(Restrictions.eq("parentCompany", company.getParentCompany()));
-        }
-
-        return criteria.list();
+    public ClientServiceException(String message) {
+        super(message, null);
     }
+
+    public ClientServiceException(String message, Exception cause) {
+        super(message, cause);
+    }
+
 }

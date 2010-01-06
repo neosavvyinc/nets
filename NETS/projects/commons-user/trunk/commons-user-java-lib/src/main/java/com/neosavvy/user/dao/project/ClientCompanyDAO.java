@@ -1,7 +1,10 @@
 package com.neosavvy.user.dao.project;
 
 import com.neosavvy.user.dao.base.BaseCompanyDAO;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
+
+import java.util.List;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL

@@ -5,6 +5,7 @@ import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.RoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
+import com.neosavvy.user.util.ProjectTestUtil;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
 	@Test
 	public void testSaveUser() {
         cleanupTables();
-        UserDTO user = createTestUser();
+        UserDTO user = ProjectTestUtil.createTestUser();
 		
 		userDAO.saveUser(user);
 		Assert.assertTrue((int)user.getId() > 0);
@@ -31,7 +32,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
         int numRows = countRowsInTable("USER");
         Assert.assertEquals(numRows, 0);
 
-        UserDTO user = createTestUser();
+        UserDTO user = ProjectTestUtil.createTestUser();
         userDAO.saveUser(user);
 
         numRows = countRowsInTable("USER");
@@ -47,7 +48,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
     public void testFindUserById() {
         cleanupTables();
 
-        UserDTO user = createTestUser();
+        UserDTO user = ProjectTestUtil.createTestUser();
         userDAO.saveUser(user);
 
         int numRows = countRowsInTable("USER");
@@ -123,10 +124,10 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testSaveTwoUsersSameUserName() {
         cleanupTables();
-        userDAO.saveUser(createTestUser());
+        userDAO.saveUser(ProjectTestUtil.createTestUser());
         try {
             Assert.assertEquals("Should be a row in the table for the user",  1,  countRowsInTable("USER"));
-            userDAO.saveUser(createTestUser());
+            userDAO.saveUser(ProjectTestUtil.createTestUser());
         } catch (ConstraintViolationException e) {
             return;
         }
@@ -136,8 +137,8 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
     private void setupCriteriaBasedSearchTest() {
         cleanupTables();
 
-        UserDTO user = createTestUser();
-        UserDTO user2 = createAltTestUser();
+        UserDTO user = ProjectTestUtil.createTestUser();
+        UserDTO user2 = ProjectTestUtil.createAltTestUser();
 
         userDAO.saveUser(user);
         userDAO.saveUser(user2);
@@ -153,7 +154,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(null, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
-        UserDTO user = createTestUser();
+        UserDTO user = ProjectTestUtil.createTestUser();
         HashSet<UserCompanyRoleDTO> userCompanySet = new HashSet();
         userCompanySet.add(userCompanyRole);
         user.setUserCompanyRoles(userCompanySet);
@@ -169,13 +170,13 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testUserCompanyRolesRole(){
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
 
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
-        UserDTO user = createTestUser();
+        UserDTO user = ProjectTestUtil.createTestUser();
         HashSet<UserCompanyRoleDTO> userCompanySet = new HashSet();
         userCompanySet.add(userCompanyRole);
         user.setUserCompanyRoles(userCompanySet);
@@ -191,15 +192,15 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testUserCompanyRolesCompany(){
         cleanupTables();
-        RoleDTO role = createTestRole();
+        RoleDTO role = ProjectTestUtil.createTestRole();
         roleDAO.saveRole(role);
-        CompanyDTO company = createTestCompany();
+        CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
 
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(null, company, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
-        UserDTO user = createTestUser();
+        UserDTO user = ProjectTestUtil.createTestUser();
         HashSet<UserCompanyRoleDTO> userCompanySet = new HashSet();
         userCompanySet.add(userCompanyRole);
         user.setUserCompanyRoles(userCompanySet);

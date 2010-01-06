@@ -1,6 +1,7 @@
 package com.neosavvy.user.dao.project;
 
 import com.neosavvy.user.dto.project.ClientCompany;
+import com.neosavvy.user.util.ProjectTestUtil;
 import org.junit.Assert;
 import org.junit.Test;
 /*************************************************************************
@@ -36,7 +37,7 @@ public class TestClientCompanyDAO extends BaseProjectManagementDAOTest {
     }
 
     private ClientCompany saveAndAssertTestCompany() {
-        ClientCompany company = createTestClientCompany();
+        ClientCompany company = ProjectTestUtil.createTestClientCompany();
         clientCompanyDAO.saveCompany(company);
         int rows = countRowsInTable("CLIENT_COMPANY");
         Assert.assertEquals(rows,1);

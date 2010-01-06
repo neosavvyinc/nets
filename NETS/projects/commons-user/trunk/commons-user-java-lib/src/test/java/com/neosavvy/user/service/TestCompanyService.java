@@ -2,6 +2,7 @@ package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.*;
 import com.neosavvy.user.service.exception.CompanyServiceException;
+import com.neosavvy.user.util.ProjectTestUtil;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
@@ -15,44 +16,17 @@ import java.util.*;
  */
 public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 
-    protected UserInviteDTO createTestUserInvite(){
-        UserInviteDTO userInvite = new UserInviteDTO();
-        userInvite.setFirstName("William");
-        userInvite.setMiddleName("Adam");
-        userInvite.setLastName("Parrish");
-        userInvite.setEmailAddress("aparrish1@neosavvy.com");
-        return userInvite;
-    }
-
-    protected UserInviteDTO createAltTestUserInvite(){
-        UserInviteDTO userInvite = new UserInviteDTO();
-        userInvite.setFirstName("Lance");
-        userInvite.setMiddleName("B");
-        userInvite.setLastName("Gleason");
-        userInvite.setEmailAddress("lg@neosavvy.com");
-        return userInvite;
-    }
-
-    protected UserInviteDTO createAnotherTestUserInvite(){
-        UserInviteDTO userInvite = new UserInviteDTO();
-        userInvite.setFirstName("Ted");
-        userInvite.setMiddleName("B");
-        userInvite.setLastName("Bundy");
-        userInvite.setEmailAddress("tb@neosavvy.com");
-        return userInvite;
-    }
-
     @Test
     public void testGetCompanies() throws Exception {
         cleanDatabase();
-        companyService.saveCompany(createTestCompany());
+        companyService.saveCompany(ProjectTestUtil.createTestCompany());
         Assert.assertFalse(companyService.getCompanies().isEmpty());
     }
 
     @Test
     public void testFindCompanyById() throws Exception {
         cleanDatabase();
-        CompanyDTO testCompany = createTestCompany();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
         companyService.saveCompany(testCompany);
         Assert.assertFalse(companyService.getCompanies().isEmpty());
 
@@ -63,7 +37,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     @Test
     public void testFindCompanies() {
         cleanDatabase();
-        CompanyDTO testCompany = createTestCompany();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
         companyService.saveCompany(testCompany);
         Assert.assertFalse(companyService.getCompanies().isEmpty());
         Assert.assertTrue(companyService.findCompanies(testCompany).contains(testCompany));
@@ -72,9 +46,9 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     @Test
     public void testAddCompany() {
         cleanDatabase();
-        CompanyDTO testCompany = createTestCompany();
-        UserDTO testUser = createTestUser();
-        RoleDTO testRole = createTestRole();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
+        UserDTO testUser = ProjectTestUtil.createTestUser();
+        RoleDTO testRole = ProjectTestUtil.createTestRole();
 
         roleDAO.saveRole(testRole);
 
@@ -96,81 +70,49 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 
     @Test(expected = CompanyServiceException.class)
     public void testAddUserToCompanyWithNullUser(){
-        companyService.addUserToCompany(createTestCompany(), null);
+        companyService.addUserToCompany(ProjectTestUtil.createTestCompany(), null);
     }
 
     @Test(expected = CompanyServiceException.class)
     public void testAddUserToCompanyWithNullCompany(){
-        companyService.addUserToCompany(null, createTestUser());
+        companyService.addUserToCompany(null, ProjectTestUtil.createTestUser());
     }
 
     @Test(expected = CompanyServiceException.class)
     public void testAddUserToCompanyThatDoesNotExistInDatabase() {
         cleanDatabase();
-        CompanyDTO testCompany = createTestCompany();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
         companyService.saveCompany(testCompany);
-        companyService.addUserToCompany(testCompany, createTestUser());
+        companyService.addUserToCompany(testCompany, ProjectTestUtil.createTestUser());
     }
 
     @Test(expected = CompanyServiceException.class)
     public void testAddUserToCompanyWithCompanyThatDoesNotExistInDatabase() {
         cleanDatabase();
-        UserDTO testUser = createTestUser();
+        UserDTO testUser = ProjectTestUtil.createTestUser();
         userDAO.saveUser(testUser);
-        companyService.addUserToCompany(createTestCompany(), testUser);
+        companyService.addUserToCompany(ProjectTestUtil.createTestCompany(), testUser);
     }
 
     @Test(expected = CompanyServiceException.class)
     public void testAddEmployeeToCompanyTwice() {
         cleanDatabase();
-        CompanyDTO testCompany = createTestCompany();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(testCompany);
-        UserDTO testUser = createTestUser();
+        UserDTO testUser = ProjectTestUtil.createTestUser();
         userDAO.saveUser(testUser);
 
         companyService.addCompany(testCompany, testUser);
     }
 
-//    @Test(expected = CompanyServiceException.class)
-//    public void testAddEmployeeToDifferentCompanies() {
-//        cleanDatabase();
-//        CompanyDTO testCompany = createTestCompany();
-//        companyDAO.saveCompany(testCompany);
-//        UserDTO testUser = createTestUser();
-//        userDAO.saveUser(testUser);
-//
-//        companyService.addCompany(testCompany, testUser);
-//    }
-
-    
-
-//    @Test(expected = CompanyServiceException.class)
-//    public void testAddEmployeeToCompanyTwice() {
-//        cleanDatabase();
-//        CompanyDTO testCompany = createTestCompany();
-//        UserDTO testUserDTO = createTestUser();
-//        roleDAO.saveRole(createEmployeeTestRole());
-//        roleDAO.saveRole(createTestRole());
-//
-//        companyService.addCompany(testCompany, testUserDTO);
-//
-//        int numUserCompanyRoles = countRowsInTable("USER_COMPANY_ROLE");
-//        Assert.assertEquals("a row was added to the USER_COMPANY_ROLE table",
-//                1,
-//                numUserCompanyRoles);
-//
-//
-//        companyService.addEmployeeToCompany(testCompany, testUserDTO);
-//    }
-
     @Test
     public void testAddMoreEmployeeToCompany() {
         cleanDatabase();
-        CompanyDTO testCompany = createTestCompany();
-        UserDTO testUserDTO = createTestUser();
-        UserDTO altTestUserDTO = createAltTestUser();
-        roleDAO.saveRole(createEmployeeTestRole());
-        roleDAO.saveRole(createTestRole());
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
+        UserDTO testUserDTO = ProjectTestUtil.createTestUser();
+        UserDTO altTestUserDTO = ProjectTestUtil.createAltTestUser();
+        roleDAO.saveRole(ProjectTestUtil.createEmployeeTestRole());
+        roleDAO.saveRole(ProjectTestUtil.createTestRole());
         userDAO.saveUser(testUserDTO);
         userDAO.saveUser(altTestUserDTO);
 
@@ -199,10 +141,10 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     @Test(expected = CompanyServiceException.class)
     public void testReAddEmployeeToCompany() {
         cleanDatabase();
-        CompanyDTO testCompany = createTestCompany();
-        UserDTO testUserDTO = createTestUser();
-        roleDAO.saveRole(createEmployeeTestRole());
-        roleDAO.saveRole(createTestRole());
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
+        UserDTO testUserDTO = ProjectTestUtil.createTestUser();
+        roleDAO.saveRole(ProjectTestUtil.createEmployeeTestRole());
+        roleDAO.saveRole(ProjectTestUtil.createTestRole());
         userDAO.saveUser(testUserDTO);
         companyDAO.saveCompany(testCompany);
 
@@ -220,26 +162,26 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     @Test(expected = CompanyServiceException.class)
     public void testInviteUsersNoUsers(){
         cleanDatabase();
-        companyService.inviteUsers(createTestCompany(), null);
+        companyService.inviteUsers(ProjectTestUtil.createTestCompany(), null);
     }
 
     @Test(expected = CompanyServiceException.class)
     public void testInviteUsersNoCompany(){
         cleanDatabase();
-        companyService.inviteUsers(null, createTestUserInvite());
+        companyService.inviteUsers(null, ProjectTestUtil.createTestUserInvite());
     }
 
     @Test(expected = CompanyServiceException.class)
     public void testInviteUsersNoPersistedCompany(){
         cleanDatabase();
-        companyService.inviteUsers(createTestCompany(), createTestUserInvite());
+        companyService.inviteUsers(ProjectTestUtil.createTestCompany(), ProjectTestUtil.createTestUserInvite());
     }
 
     @Test
     public void testInviteUsersPersistsOneUser(){
         cleanDatabase();
-        UserInviteDTO testUserInvite = createTestUserInvite();
-        CompanyDTO company = createTestCompany();
+        UserInviteDTO testUserInvite = ProjectTestUtil.createTestUserInvite();
+        CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
         companyService.inviteUsers(company, testUserInvite);
         UserInviteDTO userInviteToFind = new UserInviteDTO();
@@ -253,10 +195,10 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     @Test
     public void testInviteUsersPersistsTwoUsers(){
         cleanDatabase();
-        UserInviteDTO testUserInvite = createTestUserInvite();
-        UserInviteDTO altTestUserInvite = createAltTestUserInvite();
+        UserInviteDTO testUserInvite = ProjectTestUtil.createTestUserInvite();
+        UserInviteDTO altTestUserInvite = ProjectTestUtil.createAltTestUserInvite();
 
-        CompanyDTO company = createTestCompany();
+        CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
         companyService.inviteUsers(company, testUserInvite);
         companyService.inviteUsers(company, altTestUserInvite);
@@ -276,43 +218,14 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     @Test(expected = CompanyServiceException.class)
     public void testInviteSameUserWithSameCompany(){
         cleanDatabase();
-        UserInviteDTO testUserInvite = createTestUserInvite();
+        UserInviteDTO testUserInvite = ProjectTestUtil.createTestUserInvite();
 
-        CompanyDTO company = createTestCompany();
+        CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
         companyService.inviteUsers(company, testUserInvite);
         companyService.inviteUsers(company, testUserInvite);
     }
 
-//    @Test(expected = CompanyServiceException.class)
-//    public void testInviteExistingCompanyUser(){
-//        cleanDatabase();
-//        UserInviteDTO testUserInvite = createTestUserInvite();
-//
-//        CompanyDTO company = createTestCompany();
-//        companyDAO.saveCompany(company);
-//        UserDTO user = createTestUser();
-//        userDAO.saveUser(user);
-//        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(null, company, user);
-//        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
-//        companyService.inviteUsers(company, testUserInvite);
-//    }
-
-//    @Test
-//    public void testInviteUsersPersistPersistedUser(){
-//        cleanDatabase();
-//        List<UserInviteDTO> userInvites = new ArrayList();
-//        userInvites.add(createTestUserInvite());
-//        CompanyDTO company = createTestCompany();
-//        roleDAO.saveRole(createTestRole());
-//        companyService.addCompany(company, createTestUser());
-//        List<UserInviteDTO> problemInvites = companyService.inviteUsers(company, userInvites);
-//        Assert.assertEquals("Item is returned as a problem invite because a registered user with same e-mail exists",
-//                userInvites.iterator().next().getEmailAddress(),
-//                problemInvites.get(0).getEmailAddress());
-//        CompanyDTO foundCompany = companyService.findCompanyById(company.getId());
-//        Assert.assertFalse(foundCompany.getUserInvites().contains(problemInvites.get(0)));
-//    }
 
     @Test(expected = CompanyServiceException.class)
     public void testGetUserInvitesNullCompany(){
@@ -321,29 +234,15 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 
     @Test(expected = CompanyServiceException.class)
     public void testGetUserInvitesUnpersistedCompany(){
-        companyService.getInvitedUsers(createTestCompany());
+        companyService.getInvitedUsers(ProjectTestUtil.createTestCompany());
     }
-
-//    @Test
-//    public void testGetUserInvites(){
-//        cleanDatabase();
-//        List<UserInviteDTO> userInvites = new ArrayList();
-//        userInvites.add(createTestUserInvite());
-//        CompanyDTO company = createTestCompany();
-//        companyDAO.saveCompany(company);
-//        companyService.inviteUsers(company, userInvites);
-//        List<UserInviteDTO> foundUserInvites = companyService.getInvitedUsers(company);
-//        Assert.assertEquals("Persisted User invite is the one we created",
-//                userInvites.iterator().next().getId(),
-//                foundUserInvites.iterator().next().getId());
-//    }
 
     @Test(expected = CompanyServiceException.class)
     public void testAddCompanyException() {
         //this expects to throw an exception
         cleanDatabase();
-        CompanyDTO testCompany = createTestCompany();
-        UserDTO testUser = createTestUser();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
+        UserDTO testUser = ProjectTestUtil.createTestUser();
 
         companyService.addCompany(testCompany, testUser);
     }
@@ -357,7 +256,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         CompanyDTO testCompany = setupCompany();
 
         // Invite a user to that company
-        UserInviteDTO userToInvite = createTestInvite();
+        UserInviteDTO userToInvite = ProjectTestUtil.createTestInvite();
         companyService.inviteUsers(testCompany,userToInvite);
 
         // Look up that users confirmation - this would occur by the user and would be emailed to them
@@ -373,7 +272,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         });
 
         // Populate a user with the confirmation token and call addEmployeToCompany
-        UserDTO user = createTestUser();
+        UserDTO user = ProjectTestUtil.createTestUser();
         user.setRegistrationToken(userInvitesFromDatabase.getRegistrationToken());
 
         companyService.addEmployeeToCompany(user);
@@ -386,10 +285,10 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     }
 
     private CompanyDTO setupCompany() {
-        CompanyDTO testCompany = createTestCompany();
-        UserDTO testUser = createAltTestUser();
-        RoleDTO testRole = createTestRole();
-        RoleDTO testEmployeeRole = createEmployeeTestRole();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
+        UserDTO testUser = ProjectTestUtil.createAltTestUser();
+        RoleDTO testRole = ProjectTestUtil.createTestRole();
+        RoleDTO testEmployeeRole = ProjectTestUtil.createEmployeeTestRole();
 
         roleDAO.saveRole(testRole);
         roleDAO.saveRole(testEmployeeRole);

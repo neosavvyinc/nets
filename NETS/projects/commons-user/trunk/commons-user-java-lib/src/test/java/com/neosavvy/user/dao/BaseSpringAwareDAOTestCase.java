@@ -57,11 +57,12 @@ public abstract class BaseSpringAwareDAOTestCase extends BaseSpringAwareTestCase
     }
 
     protected void cleanupTables() {
+        deleteFromTables("CLIENT_COMPANY");
+        deleteFromTables("CLIENT_USER_CONTACT");
         deleteFromTables("USER_COMPANY_ROLE");
-        deleteFromTables("ROLE");
         deleteFromTables("COMPANY");
+        deleteFromTables("ROLE");
         deleteFromTables("USER");
         deleteFromTables("USER_INVITE");
-
     }
 }

@@ -2,6 +2,7 @@ package com.neosavvy.user.dao.project;
 
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.ClientUserContact;
+import com.neosavvy.user.util.ProjectTestUtil;
 import junit.framework.Assert;
 import org.junit.Test;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,7 +37,7 @@ public class TestClientUserContactDAO extends BaseProjectManagementDAOTest {
     @Test
     public void testSave() {
         cleanupTables();
-        ClientUserContact contact = createTestClientContact();
+        ClientUserContact contact = ProjectTestUtil.createTestClientContact();
         clientUserContactDAO.saveUser(contact);
 		Assert.assertTrue((int)contact.getId() > 0);
     }
@@ -48,7 +49,7 @@ public class TestClientUserContactDAO extends BaseProjectManagementDAOTest {
         int numRows = countRowsInTable("CLIENT_USER_CONTACT");
         Assert.assertEquals(numRows, 0);
 
-        ClientUserContact clientContact = createTestClientContact();
+        ClientUserContact clientContact = ProjectTestUtil.createTestClientContact();
         clientUserContactDAO.saveUser(clientContact);
 
         numRows = countRowsInTable("CLIENT_USER_CONTACT");
@@ -65,7 +66,7 @@ public class TestClientUserContactDAO extends BaseProjectManagementDAOTest {
     public void testUpdate() {
 
         cleanupTables();
-        ClientUserContact contact = createTestClientContact();
+        ClientUserContact contact = ProjectTestUtil.createTestClientContact();
         clientUserContactDAO.saveUser(contact);
 		Assert.assertTrue((int)contact.getId() > 0);
         int numRows = countRowsInTable("CLIENT_USER_CONTACT");

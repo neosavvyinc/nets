@@ -1,6 +1,7 @@
 package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.UserDTO;
+import com.neosavvy.user.util.ProjectTestUtil;
 import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Test;
 import org.springframework.mail.MailSender;
@@ -17,7 +18,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
     public void testGetUsers() throws Exception{
         cleanDatabase();
         Assert.assertTrue(userService.getUsers().isEmpty());
-        userDAO.saveUser(createTestUser());
+        userDAO.saveUser(ProjectTestUtil.createTestUser());
         Assert.assertFalse(userService.getUsers().isEmpty());
     }
 
@@ -31,7 +32,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
         mailSender.send((SimpleMailMessage) EasyMock.anyObject());
         EasyMock.replay(mailSender);
 
-        userService.createAdminUser(createTestUser());
+        userService.createAdminUser(ProjectTestUtil.createTestUser());
         Assert.assertFalse(userService.getUsers().isEmpty());
     }
 
@@ -40,7 +41,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
         cleanDatabase();
         Assert.assertTrue(userService.getUsers().isEmpty());
 
-        userService.saveUser(createTestUser());
+        userService.saveUser(ProjectTestUtil.createTestUser());
         Assert.assertFalse(userService.getUsers().isEmpty());
     }
 
@@ -54,7 +55,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
         EasyMock.replay(mailSender);
 
 
-        UserDTO  testUser = createTestUser();
+        UserDTO  testUser = ProjectTestUtil.createTestUser();
         testUser.setConfirmedRegistration(false);
         testUser.setActive(false);
         userService.createAdminUser(testUser);
@@ -76,15 +77,15 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
         mailSender.send((SimpleMailMessage) EasyMock.anyObject());
         EasyMock.replay(mailSender);
 
-        userDAO.saveUser(createTestUser());
-        userService.createAdminUser(createTestUser());
+        userDAO.saveUser(ProjectTestUtil.createTestUser());
+        userService.createAdminUser(ProjectTestUtil.createTestUser());
 
     }
 
     @Test
     public void testFindUserById() throws Exception{
         cleanDatabase();
-        UserDTO  testUser = createTestUser();
+        UserDTO  testUser = ProjectTestUtil.createTestUser();
         userDAO.saveUser(testUser);
         Assert.assertFalse(userService.getUsers().isEmpty());
         Assert.assertNotNull("findUserById should return the user that we just added when we search by the id for it",

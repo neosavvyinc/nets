@@ -1,9 +1,13 @@
-package com.neosavvy.user.dao.project;
+package com.neosavvy.user.service.project;
 
-import com.neosavvy.user.BaseSpringAwareTestCase;
 import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
+import com.neosavvy.user.dao.project.ClientCompanyDAO;
+import com.neosavvy.user.dao.project.ClientUserContactDAO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.ClientUserContact;
+import com.neosavvy.user.service.BaseSpringAwareServiceTestCase;
+import com.neosavvy.user.service.ClientService;
+import com.neosavvy.user.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 /*************************************************************************
  *
@@ -29,26 +33,20 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Date: Jan 5, 2010
  * Time: 4:33:48 PM
  */
-public abstract class BaseProjectManagementDAOTest extends BaseSpringAwareDAOTestCase {
+public abstract class BaseProjectManagementServiceTest extends BaseSpringAwareServiceTestCase {
+
 
     @Autowired
-    protected ClientUserContactDAO clientUserContactDAO;
+    protected ClientService clientService;
 
     @Autowired
-    protected ClientCompanyDAO clientCompanyDAO;
+    protected CompanyService companyService;
 
-    public ClientUserContactDAO getClientUserContactDAO() {
-        return clientUserContactDAO;
+    public ClientService getClientService() {
+        return clientService;
     }
 
-    public void setClientUserContactDAO(ClientUserContactDAO clientUserContactDAO) {
-        this.clientUserContactDAO = clientUserContactDAO;
-    }
-
-    @Override
-    protected void cleanupTables() {
-        super.cleanupTables();
-
-    }
-
+    public void setClientService(ClientService clientService) {
+        this.clientService = clientService;
+    }    
 }

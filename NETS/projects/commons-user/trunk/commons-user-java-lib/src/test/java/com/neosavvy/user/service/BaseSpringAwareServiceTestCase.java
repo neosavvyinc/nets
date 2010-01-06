@@ -28,30 +28,14 @@ public abstract class BaseSpringAwareServiceTestCase extends BaseSpringAwareTest
     public void loginTestUser() {
        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("admin", "admin"));
     }
-    
-    protected UserInviteDTO createTestInvite() {
-        UserInviteDTO invite = new UserInviteDTO();
-
-        invite.setFirstName("Adam");
-        invite.setLastName("Parrish");
-        invite.setEmailAddress("aparrish1@neosavvy.com");
-
-        return invite;
-    }
-
-    protected RoleDTO createEmployeeTestRole() {
-        RoleDTO role = new RoleDTO();
-        role.setShortName("ROLE_EMPLOYEE");
-        role.setLongName("Employee");
-        return role;
-    }
 
     protected void cleanDatabase() {
+        deleteFromTables("CLIENT_COMPANY");
+        deleteFromTables("CLIENT_USER_CONTACT");
         deleteFromTables("USER_COMPANY_ROLE");
         deleteFromTables("USER");
         deleteFromTables("ROLE");
         deleteFromTables("USER_INVITE");
         deleteFromTables("COMPANY");
-        
     }
 }
