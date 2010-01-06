@@ -2,6 +2,8 @@ package com.neosavvy.user.dao.project;
 
 import com.neosavvy.user.BaseSpringAwareTestCase;
 import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
+import com.neosavvy.user.dto.project.ClientCompany;
+import com.neosavvy.user.dto.project.ClientUserContact;
 import org.springframework.beans.factory.annotation.Autowired;
 /*************************************************************************
  *
@@ -32,6 +34,9 @@ public abstract class BaseProjectManagementDAOTest extends BaseSpringAwareDAOTes
     @Autowired
     protected ClientUserContactDAO clientUserContactDAO;
 
+    @Autowired
+    protected ClientCompanyDAO clientCompanyDAO;
+
     public ClientUserContactDAO getClientUserContactDAO() {
         return clientUserContactDAO;
     }
@@ -45,5 +50,27 @@ public abstract class BaseProjectManagementDAOTest extends BaseSpringAwareDAOTes
         super.cleanupTables();
         deleteFromTables("CLIENT_COMPANY");
         deleteFromTables("CLIENT_USER_CONTACT");
+    }
+
+    protected ClientCompany createTestClientCompany() {
+        ClientCompany company = new ClientCompany();
+        company.setAddressOne("4500 Manor Village Way");
+        company.setAddressTwo("Apt 127");
+        company.setCity("Raleigh");
+        company.setCompanyName("Neosavvy, Inc.");
+        company.setCountry("USA");
+        company.setPostalCode("27612");
+        company.setState("NC");
+        return company;
+    }
+
+    protected ClientUserContact createTestClientContact() {
+        ClientUserContact contact = new ClientUserContact();
+        contact.setContactPhoneNumber("9197419597");
+        contact.setEmailAddress("aparrish1@neosavvy.com");
+        contact.setFirstName("William");
+        contact.setMiddleName("Adam");
+        contact.setLastName("Parrish");
+        return contact;
     }
 }

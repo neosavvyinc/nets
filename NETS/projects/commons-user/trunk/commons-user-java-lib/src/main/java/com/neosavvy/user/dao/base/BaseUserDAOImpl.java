@@ -67,7 +67,7 @@ public abstract class BaseUserDAOImpl<T extends BaseUserDTO> extends BaseDAO imp
     }
 
     public List<T> getUsers() {
-		return getCurrentSession().createCriteria(UserDTO.class).list();
+		return getCurrentSession().createCriteria(BaseUserDTO.class).list();
 	}
 
 	public void saveUser(T user) {

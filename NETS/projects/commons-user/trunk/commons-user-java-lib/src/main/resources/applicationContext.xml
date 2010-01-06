@@ -46,30 +46,17 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
         <property name="userTransaction" ref="jotm"/>
     </bean>
-
-    <bean id="userCompanyRoleDAO" class="com.neosavvy.user.dao.companyManagement.UserCompanyRoleDAOImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-
-    <bean id="userDAO" class="com.neosavvy.user.dao.companyManagement.UserDAOImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-
-    <bean id="userInviteDAO" class="com.neosavvy.user.dao.companyManagement.UserInviteDAOImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
     
-    <bean id="companyDAO" class="com.neosavvy.user.dao.companyManagement.CompanyDAOImpl">
+    <bean id="abstractDao" class="com.neosavvy.user.dao.base.BaseDAO" abstract="true">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-
-    <bean id="roleDAO" class="com.neosavvy.user.dao.companyManagement.RoleDAOImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean>
-    
-    <bean id="clientUserContactDAO" class="com.neosavvy.user.dao.project.ClientUserContactDAOImpl">
-        <property name="sessionFactory" ref="sessionFactory"/>
-    </bean> 
+    <bean id="userCompanyRoleDAO" class="com.neosavvy.user.dao.companyManagement.UserCompanyRoleDAOImpl" parent="abstractDao"/>
+    <bean id="userDAO" class="com.neosavvy.user.dao.companyManagement.UserDAOImpl" parent="abstractDao"/>
+    <bean id="userInviteDAO" class="com.neosavvy.user.dao.companyManagement.UserInviteDAOImpl" parent="abstractDao"/>
+    <bean id="companyDAO" class="com.neosavvy.user.dao.companyManagement.CompanyDAOImpl" parent="abstractDao"/>
+    <bean id="roleDAO" class="com.neosavvy.user.dao.companyManagement.RoleDAOImpl" parent="abstractDao"/>
+    <bean id="clientUserContactDAO" class="com.neosavvy.user.dao.project.ClientUserContactDAOImpl" parent="abstractDao"/>
+    <bean id="clientCompanyDAO" class="com.neosavvy.user.dao.project.ClientCompanyDAOImpl" parent="abstractDao"/>
 
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
@@ -111,6 +98,5 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="suffix" value=".jsp" />
     </bean>
 
-    <bean id="flexInitializerBean" class="com.neosavvy.user.util.FlexInitializer">
-    </bean>
+    <bean id="flexInitializerBean" class="com.neosavvy.user.util.FlexInitializer"/>
 </beans>

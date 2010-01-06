@@ -41,16 +41,6 @@ public class TestClientUserContactDAO extends BaseProjectManagementDAOTest {
 		Assert.assertTrue((int)contact.getId() > 0);
     }
 
-    private ClientUserContact createTestClientContact() {
-        ClientUserContact contact = new ClientUserContact();
-        contact.setContactPhoneNumber("9197419597");
-        contact.setEmailAddress("aparrish1@neosavvy.com");
-        contact.setFirstName("William");
-        contact.setMiddleName("Adam");
-        contact.setLastName("Parrish");
-        return contact;
-    }
-
     @Test
     public void testDelete() {
 
