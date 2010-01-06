@@ -4,16 +4,21 @@
          xmlns:userManagement="com.neosavvy.user.view.secured.userManagement.*"
          xmlns:Mx="http://www.adobe.com/2006/mxml"
          xmlns:employeeInvitation="com.neosavvy.user.view.secured.employeeInvitation.*"
-         xmlns:welcome="com.neosavvy.user.view.secured.welcome.*">
+         xmlns:welcome="com.neosavvy.user.view.secured.welcome.*"
+         xmlns:clientManagement="com.neosavvy.user.view.secured.clientManagement.*"
+         xmlns:projectManagement="com.neosavvy.user.view.secured.projectManagement.*">
 
     <mx:HDividedBox width="100%" height="100%">
 
         <leftNavigation:LeftNavigation id="leftNavigation"/>
 
-        <mx:ViewStack id="navigationViewStack" width="100%" height="100%" selectedIndex="{SecuredContainerMediator.NAV_INDEX_WELCOME}">
+        <mx:ViewStack id="navigationViewStack" width="100%" height="100%"
+                      selectedIndex="{SecuredContainerMediator.NAV_INDEX_WELCOME}">
             <welcome:Welcome id="welcomeContainer"/>
             <employeeInvitation:EmployeeManagement id="employeeInvitationManagement" width="100%" height="100%"/>
             <userManagement:UserManagement id="userManagement" width="100%" height="100%"/>
+            <clientManagement:ClientManagement id="clientManagement" width="100%" height="100%"/>
+            <projectManagement:ProjectManagement id="projectManagement" width="100%" height="100%"/>
         </mx:ViewStack>
 
     </mx:HDividedBox>

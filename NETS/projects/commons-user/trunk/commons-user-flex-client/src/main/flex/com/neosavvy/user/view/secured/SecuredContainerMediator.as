@@ -1,4 +1,5 @@
 package com.neosavvy.user.view.secured {
+    import com.neosavvy.user.ApplicationMediator;
     import com.neosavvy.user.view.secured.leftNavigation.admin.*;
     import com.neosavvy.user.ApplicationFacade;
 
@@ -23,9 +24,11 @@ package com.neosavvy.user.view.secured {
             super(NAME, viewComponent);
         }
 
-        public static const NAV_INDEX_WELCOME:Number = 0;
-        public static const NAV_INDEX_INVITE_EMPLOYEES:Number = 1;
-        public static const NAV_INDEX_USER_MANAGEMENT:Number = 2;
+        public static const NAV_INDEX_WELCOME:Number                = 0;
+        public static const NAV_INDEX_INVITE_EMPLOYEES:Number       = 1;
+        public static const NAV_INDEX_USER_MANAGEMENT:Number        = 2;
+        public static const NAV_INDEX_CLIENT_MANAGEMENT:Number      = 3;
+        public static const NAV_INDEX_PROJECT_MANAGEMENT:Number     = 4;
 
         override public function onRegister():void {
         }
@@ -42,6 +45,9 @@ package com.neosavvy.user.view.secured {
             return [
                 ApplicationFacade.NAVIGATE_TO_WELCOME
                 ,ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES
+                ,ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT
+                ,ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT
+                    
                 ,ApplicationFacade.ALL_EMPLOYEES_FAILED
                 ,ApplicationFacade.ALL_EMPLOYEES_SUCCESS
                 ,ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS
@@ -57,11 +63,18 @@ package com.neosavvy.user.view.secured {
                 case ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES:
                     navigationViewStack.selectedIndex = NAV_INDEX_INVITE_EMPLOYEES;
                     break;
+                case ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT:
+                    navigationViewStack.selectedIndex = NAV_INDEX_CLIENT_MANAGEMENT;
+                    break;
+                case ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT:
+                    navigationViewStack.selectedIndex = NAV_INDEX_PROJECT_MANAGEMENT;
+                    break;
                 case ApplicationFacade.ALL_EMPLOYEES_SUCCESS:
                 case ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS:
                 case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:                        
                     navigationViewStack.selectedIndex = NAV_INDEX_USER_MANAGEMENT;
                     break;
+
 
             }
         }

@@ -77,34 +77,36 @@ package com.neosavvy.user {
         public static const INITIALIZE_SECURED_VIEW:String = "initializeSecuredViewRequest";
         public static const DEINITIALIZE_SECURED_VIEW:String = "deinitializeSecuredViewRequest";
 
-        public static var ACTIVE_EMPLOYEES_REQUEST:String="activeEmployeesRequest";
-        public static var ACTIVE_EMPLOYEES_SUCCESS:String="activeEmployeesSuccess";
-        public static var ACTIVE_EMPLOYEES_FAILED:String ="activeEmployeesFailed";
+        public static const ACTIVE_EMPLOYEES_REQUEST:String="activeEmployeesRequest";
+        public static const ACTIVE_EMPLOYEES_SUCCESS:String="activeEmployeesSuccess";
+        public static const ACTIVE_EMPLOYEES_FAILED:String ="activeEmployeesFailed";
 
-        public static var NON_ACTIVE_EMPLOYEES_REQUEST:String="nonActiveEmployeesRequest";
-        public static var NON_ACTIVE_EMPLOYEES_SUCCESS:String="nonActiveEmployeesSuccess";
-        public static var NON_ACTIVE_EMPLOYEES_FAILED:String="nonActiveEmployeesFailed";
+        public static const NON_ACTIVE_EMPLOYEES_REQUEST:String="nonActiveEmployeesRequest";
+        public static const NON_ACTIVE_EMPLOYEES_SUCCESS:String="nonActiveEmployeesSuccess";
+        public static const NON_ACTIVE_EMPLOYEES_FAILED:String="nonActiveEmployeesFailed";
 
         public static const ALL_EMPLOYEES_REQUEST:String = "allEmployeesRequest";
         public static const ALL_EMPLOYEES_SUCCESS:String = "allEmployeesSuccess";
         public static const ALL_EMPLOYEES_FAILED:String = "allEmployeesFailed";
 
-        public static var NAVIGATE_TO_INVITE_EMPLOYEES:String="navigateToInviteEmployees";
-        public static var NAVIGATE_TO_COMPANY_REGISTRATION:String="navigateToCompanyRegistration";
+        public static const NAVIGATE_TO_INVITE_EMPLOYEES:String="navigateToInviteEmployees";
+        public static const NAVIGATE_TO_COMPANY_REGISTRATION:String="navigateToCompanyRegistration";
+        public static const NAVIGATE_TO_PROJECT_MANAGEMENT:String = "navigateToProjectManagement";
+        public static const NAVIGATE_TO_CLIENT_MANAGEMENT:String = "navigateToClientManagement";
 
-        public static var GET_INVITED_USERS_REQUEST:String = "getInvitedUsersRequest";
-        public static var GET_INVITED_USERS_FAILED:String = "getInvitedUsersFailed";
-        public static var GET_INVITED_USERS_SUCCESS:String = "getInvitedUsersSuccess";
+        public static const GET_INVITED_USERS_REQUEST:String = "getInvitedUsersRequest";
+        public static const GET_INVITED_USERS_FAILED:String = "getInvitedUsersFailed";
+        public static const GET_INVITED_USERS_SUCCESS:String = "getInvitedUsersSuccess";
 
-        public static var DELETE_USER_COMPANY_INVITE:String = "deleteUserCompanyInvite";
-        public static var DELETE_USER_COMPANY_INVITE_FAILED:String = "deleteUserCompanyInviteFailed";
-        public static var DELETE_USER_COMPANY_INVITE_SUCCESS:String = "deleteUserCompanyInviteSuccess";
+        public static const DELETE_USER_COMPANY_INVITE:String = "deleteUserCompanyInvite";
+        public static const DELETE_USER_COMPANY_INVITE_FAILED:String = "deleteUserCompanyInviteFailed";
+        public static const DELETE_USER_COMPANY_INVITE_SUCCESS:String = "deleteUserCompanyInviteSuccess";
 
-        public static var NAVIGATE_TO_WELCOME:String="navigateToWelcome";
+        public static const NAVIGATE_TO_WELCOME:String="navigateToWelcome";
 
-        public static var SEND_USER_INVITE_REQUEST:String = "sendUserInviteRequest";
-        public static var SEND_USER_INVITE_FAILED:String = "sendUserInviteFailed";
-        public static var SEND_USER_INVITE_SUCCESS:String = "sendUserInviteSuccess";
+        public static const SEND_USER_INVITE_REQUEST:String = "sendUserInviteRequest";
+        public static const SEND_USER_INVITE_FAILED:String = "sendUserInviteFailed";
+        public static const SEND_USER_INVITE_SUCCESS:String = "sendUserInviteSuccess";
 
         public static const RESET_USER_PASSWORD_REQUEST:String = "resetUserPasswordRequest";
         public static const RESET_USER_PASSWORD_SUCCESS:String = "resetUserPasswordSuccess";
@@ -170,5 +172,6 @@ package com.neosavvy.user {
         public static function getSecurityProxy(key:String):SecurityProxy {
             return ApplicationFacade.getInstance(key).retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
         }
-    }
+
+        }
 }

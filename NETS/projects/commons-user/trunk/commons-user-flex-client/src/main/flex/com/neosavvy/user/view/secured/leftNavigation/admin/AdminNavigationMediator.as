@@ -28,6 +28,17 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
             viewActiveEmployeesButton.addEventListener(MouseEvent.CLICK, handleViewActiveEmployeesClicked);
             viewNonActiveEmployeesButton.addEventListener(MouseEvent.CLICK, handleViewNonActiveEmployeesClicked);
             viewAllEmployeesButton.addEventListener(MouseEvent.CLICK, handleViewAllEmployeesClicked);
+
+            manageClientsButton.addEventListener(MouseEvent.CLICK, handleManageClientsButtonClicked);
+            manageProjectsButton.addEventListener(MouseEvent.CLICK, handleManageProjectsButtonClicked);
+        }
+
+        private function handleManageProjectsButtonClicked(event:MouseEvent):void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT);
+        }
+
+        private function handleManageClientsButtonClicked(event:MouseEvent):void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT);
         }
 
         private function handleWelcomeButtonClicked(event:MouseEvent):void {
@@ -72,6 +83,14 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
 
         public function get viewAllEmployeesButton():LinkButton {
             return adminNavigation.viewAllEmployeesButton;
+        }
+
+        public function get manageProjectsButton():LinkButton {
+            return adminNavigation.manageProjectsButton;
+        }
+
+        public function get manageClientsButton():LinkButton {
+            return adminNavigation.manageClientsButton;
         }
 
         override public function listNotificationInterests():Array {
