@@ -1,6 +1,8 @@
 package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
 
+    import com.neosavvy.user.controller.client.GetClientsForCompany;
+    import com.neosavvy.user.controller.client.SaveClientCompany;
     import com.neosavvy.user.controller.company.DeleteUserCompanyInviteCommand;
     import com.neosavvy.user.controller.company.GetActiveUsersForCompany;
     import com.neosavvy.user.controller.company.GetAllUsersForCompany;
@@ -114,6 +116,14 @@ package com.neosavvy.user {
 
         public static const POST_SECURE_VIEW_PREP:String = "secureViewInitializationComplete";
 
+        public static const FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST:String = "findClientsForParentCompanyRequest";
+        public static const FIND_CLIENTS_FOR_PARENT_COMPANY_FAILED:String = "findClientsForParentCompanyFailed";
+        public static const FIND_CLIENTS_FOR_PARENT_COMPANY_SUCCESS:String = "findClientsForParentCompanySuccess";
+
+        public static var SAVE_CLIENT_COMPANY_REQUEST:String = "saveClientCompanyRequest";
+        public static var SAVE_CLIENT_COMPANY_SUCCESS:String = "saveClientCompanySuccess";
+        public static var SAVE_CLIENT_COMPANY_FAILED:String = "saveClientCompanyFailed";
+
         public function ApplicationFacade(key:String)
         {
             super(key);
@@ -157,6 +167,9 @@ package com.neosavvy.user {
             registerCommand(ACTIVE_EMPLOYEES_REQUEST, GetActiveUsersForCompany);
             registerCommand(NON_ACTIVE_EMPLOYEES_REQUEST, GetInActiveUsersForCompany);
             registerCommand(ALL_EMPLOYEES_REQUEST, GetAllUsersForCompany);
+
+            registerCommand(FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST, GetClientsForCompany);
+            registerCommand(SAVE_CLIENT_COMPANY_REQUEST, SaveClientCompany);
         }
 
         /**

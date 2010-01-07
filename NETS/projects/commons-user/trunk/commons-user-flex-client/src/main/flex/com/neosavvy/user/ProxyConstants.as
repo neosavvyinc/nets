@@ -31,6 +31,8 @@ package com.neosavvy.user {
          */
         public static const userServiceDestination:String = "userService";
         public static const companyServiceDestiation:String = "companyService";
+        public static const clientServiceDestiation:String = "clientService";
+        public static const projectServiceDestiation:String = "projectService";
 
     }
 }

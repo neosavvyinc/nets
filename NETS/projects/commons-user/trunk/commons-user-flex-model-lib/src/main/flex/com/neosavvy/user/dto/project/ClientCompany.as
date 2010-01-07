@@ -14,5 +14,18 @@ package com.neosavvy.user.dto.project {
             super();
         }
 
+        public function get clientPointOfContact():String {
+            return this.clientContact.lastName + "," + this.clientContact.firstName; 
+        }
+
+        public function get clientPhone():String {
+            return this.clientContact.contactPhoneNumber;
+        }
+
+        public function get clientEmail():String {
+            return this.clientContact.emailAddress;
+        }
+
+        
     }
 }

@@ -4,11 +4,13 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.SecuredContainer;
 
     import com.neosavvy.user.view.secured.SecuredContainerMediator;
+    import com.neosavvy.user.view.secured.clientManagement.ClientManagementMediator;
     import com.neosavvy.user.view.secured.employeeInvitation.EmployeeManagementMediator;
 
     import com.neosavvy.user.view.secured.leftNavigation.LeftNavigationMediator;
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigationMediator;
 
+    import com.neosavvy.user.view.secured.projectManagement.ProjectManagementMediator;
     import com.neosavvy.user.view.secured.userManagement.UserManagementMediator;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -18,21 +20,35 @@ package com.neosavvy.user.controller.secured {
 
         override public function execute(notification:INotification):void {
             var securedContainer:SecuredContainer = notification.getBody() as SecuredContainer;
-            facade.registerMediator(new SecuredContainerMediator(securedContainer));
+
+            if( !facade.hasMediator(SecuredContainerMediator.NAME))
+                facade.registerMediator(new SecuredContainerMediator(securedContainer));
 
             var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
 
             if( securityProxy.isActiveUserAdmin() ) {
                 // Admin related registrations - these should later be secured and not registered if a user doesn't have necessary roles
-                facade.registerMediator(new AdminNavigationMediator(securedContainer.leftNavigation.adminNavigation) );
-                facade.registerMediator( new EmployeeManagementMediator( securedContainer.employeeInvitationManagement ) );
-                facade.registerMediator( new UserManagementMediator( securedContainer.userManagement ) );
+                if( !facade.hasMediator(AdminNavigationMediator.NAME))
+                    facade.registerMediator(new AdminNavigationMediator(securedContainer.leftNavigation.adminNavigation) );
+
+                if( !facade.hasMediator(EmployeeManagementMediator.NAME))
+                    facade.registerMediator( new EmployeeManagementMediator( securedContainer.employeeInvitationManagement ) );
+
+                if( !facade.hasMediator(UserManagementMediator.NAME))
+                    facade.registerMediator( new UserManagementMediator( securedContainer.userManagement ) );
+
+                if( !facade.hasMediator(ClientManagementMediator.NAME))
+                    facade.registerMediator( new ClientManagementMediator( securedContainer.clientManagement ) );
+
+                if( !facade.hasMediator(ProjectManagementMediator.NAME))
+                    facade.registerMediator( new ProjectManagementMediator( securedContainer.projectManagement ) );
             }
 
 
             if( securityProxy.isActiveUserEmployee() || securityProxy.isActiveUserAdmin() ) {
                 //User or Admin related registrations -- these are registered regardless of role
-                facade.registerMediator( new LeftNavigationMediator( securedContainer.leftNavigation ) );
+                if( !facade.hasMediator(LeftNavigationMediator.NAME))
+                    facade.registerMediator( new LeftNavigationMediator( securedContainer.leftNavigation ) );
             }
 
 
