@@ -40,6 +40,12 @@ public class DatabaseInitializerListener implements InitializingBean {
     public void afterPropertiesSet () {
 
         try {
+            template.execute("TRUNCATE TABLE EXPENSE_REPORT_ITEM");       
+            template.execute("TRUNCATE TABLE EXPENSE_REPORT");
+            template.execute("TRUNCATE TABLE PROJECT_PAYMENT_METHOD");
+            template.execute("TRUNCATE TABLE STANDARD_PAYMENT_METHOD");
+            template.execute("TRUNCATE TABLE PROJECT_TYPE");
+            template.execute("TRUNCATE TABLE PROJECT");
             template.execute("TRUNCATE TABLE CLIENT_COMPANY");
             template.execute("TRUNCATE TABLE CLIENT_USER_CONTACT");
             template.execute("TRUNCATE TABLE COMPANY");

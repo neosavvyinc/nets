@@ -56,13 +56,4 @@ public abstract class BaseSpringAwareDAOTestCase extends BaseSpringAwareTestCase
         Assert.assertEquals("Size of returned results should have been " + numRows, numRows,itemsFound.size());
     }
 
-    protected void cleanupTables() {
-        deleteFromTables("CLIENT_COMPANY");
-        deleteFromTables("CLIENT_USER_CONTACT");
-        deleteFromTables("USER_COMPANY_ROLE");
-        deleteFromTables("COMPANY");
-        deleteFromTables("ROLE");
-        deleteFromTables("USER");
-        deleteFromTables("USER_INVITE");
-    }
 }

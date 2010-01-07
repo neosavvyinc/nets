@@ -1,5 +1,6 @@
 package com.neosavvy.user.dto.project;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 /*************************************************************************
@@ -26,33 +27,41 @@ import java.util.List;
  * Date: Jan 2, 2010
  * Time: 11:15:56 AM
  */
+@Entity
+@Table(
+    name="EXPENSE_REPORT" ,
+    uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"ID"})
+    }
+)
 public class ExpenseReport {
 
+    @Id
+    @GeneratedValue
+	@Column(name = "ID")
+	private int id; 
+
+    @OneToOne
+    @JoinColumn(name = "PROJECT_FK")
     private Project project;
 
+    @Column(name = "STATE_DATE")
+    @Temporal(TemporalType.DATE)
     private Date startDate;
+
+    @Column(name = "END_DATE")
+    @Temporal(TemporalType.DATE)
     private Date endDate;
 
+    @Column(name = "PURPOSE")
     private String purpose;
+
+    @Column(name = "LOCATION")
     private String location;
 
+    @OneToMany
+    @JoinColumn(name = "EXPENSE_ITEM_FK")
     private List<ExpenseItem> expenseItems;
-
-    public Project getProject() {
-        return project;
-    }
-
-    public void setProject(Project project) {
-        this.project = project;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
 
     public Date getEndDate() {
         return endDate;
@@ -62,12 +71,20 @@ public class ExpenseReport {
         this.endDate = endDate;
     }
 
-    public String getPurpose() {
-        return purpose;
+    public List<ExpenseItem> getExpenseItems() {
+        return expenseItems;
     }
 
-    public void setPurpose(String purpose) {
-        this.purpose = purpose;
+    public void setExpenseItems(List<ExpenseItem> expenseItems) {
+        this.expenseItems = expenseItems;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getLocation() {
@@ -78,11 +95,27 @@ public class ExpenseReport {
         this.location = location;
     }
 
-    public List<ExpenseItem> getExpenseItems() {
-        return expenseItems;
+    public Project getProject() {
+        return project;
     }
 
-    public void setExpenseItems(List<ExpenseItem> expenseItems) {
-        this.expenseItems = expenseItems;
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 }

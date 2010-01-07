@@ -1,4 +1,6 @@
 package com.neosavvy.user.dto.project;
+
+import javax.persistence.*;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -23,8 +25,17 @@ package com.neosavvy.user.dto.project;
  * Date: Jan 2, 2010
  * Time: 1:49:27 PM
  */
+@Entity
+@Table(
+    name="PROJECT_PAYMENT_METHOD" ,
+    uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"ID"})
+    }
+)
 public class ProjectPaymentMethod extends PaymentMethod {
 
+    @OneToOne
+    @JoinColumn(name = "PROJECT_FK")
     private Project project;
 
     public Project getProject() {

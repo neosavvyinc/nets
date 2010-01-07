@@ -1,10 +1,4 @@
-package com.neosavvy.user.dto.project;
-
-import com.neosavvy.user.dto.companyManagement.CompanyDTO;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+package com.neosavvy.user.service.exception;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -26,23 +20,17 @@ import javax.persistence.Id;
 
 /**
  * User: adamparrish
- * Date: Jan 2, 2010
- * Time: 1:50:54 PM
+ * Date: Jan 7, 2010
+ * Time: 4:16:36 PM
  */
-public class CompanyPaymentMethod extends PaymentMethod {
+public class ProjectServiceException extends RuntimeException {
 
-    @Id
-    @GeneratedValue
-	@Column(name="ID")
-	private int id;
-    
-    private CompanyDTO company;
-
-    public CompanyDTO getCompany() {
-        return company;
+    public ProjectServiceException(String message) {
+        super(message);
     }
 
-    public void setCompany(CompanyDTO company) {
-        this.company = company;
+    public ProjectServiceException(String message, Exception cause) {
+        super(message, cause);
     }
+
 }

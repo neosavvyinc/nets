@@ -1,7 +1,18 @@
 <?xml version="1.0"?>
 <mx:Panel
         xmlns:mx="http://www.adobe.com/2006/mxml"
-    xmlns:flexlib="http://code.google.com/p/flexlib/"
-    xmlns:controls="controls.*"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        xmlns:controls="controls.*" xmlns:projects="com.neosavvy.user.view.secured.projectManagement.projects.*"
+        xmlns:assignments="com.neosavvy.user.view.secured.projectManagement.assignments.*"
         title="Project Management" styleName="paddedContainer" width="100%" height="100%">
+
+    <mx:TabNavigator
+            id="projectManagementTabNavigator"
+            width="100%" height="100%"
+            creationPolicy="all"
+            >
+        <projects:ManageProjects id="manageProjectsTab" label="Manage Projects"/>
+        <assignments:ManageAssignments id="manageAssignments" label="Manage Assignments"/>
+    </mx:TabNavigator>
+
 </mx:Panel>

@@ -38,4 +38,20 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
 
         return testUserCompanyRole;
     }
+
+    protected void cleanupTables() {
+        deleteFromTables("EXPENSE_REPORT_ITEM");
+        deleteFromTables("EXPENSE_REPORT");
+        deleteFromTables("PROJECT_PAYMENT_METHOD");
+        deleteFromTables("STANDARD_PAYMENT_METHOD");
+        deleteFromTables("PROJECT_TYPE");
+        deleteFromTables("PROJECT");
+        deleteFromTables("CLIENT_COMPANY");
+        deleteFromTables("CLIENT_USER_CONTACT");
+        deleteFromTables("USER_COMPANY_ROLE");
+        deleteFromTables("USER");
+        deleteFromTables("ROLE");
+        deleteFromTables("USER_INVITE");
+        deleteFromTables("COMPANY");
+    }
 }

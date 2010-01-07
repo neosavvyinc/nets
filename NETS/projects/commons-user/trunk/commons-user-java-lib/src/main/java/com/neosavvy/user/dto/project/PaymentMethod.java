@@ -1,4 +1,9 @@
 package com.neosavvy.user.dto.project;
+
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.MappedSuperclass;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -23,8 +28,16 @@ package com.neosavvy.user.dto.project;
  * Date: Jan 2, 2010
  * Time: 11:37:09 AM
  */
+@MappedSuperclass
 public abstract class PaymentMethod {
 
+    @Id
+    @GeneratedValue
+	@Column(name="ID")
+	private int id;
+
+
+    @Column(name="TYPE")
     private String type;
     
 }

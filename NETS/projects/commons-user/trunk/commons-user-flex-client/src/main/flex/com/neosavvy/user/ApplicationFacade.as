@@ -120,9 +120,16 @@ package com.neosavvy.user {
         public static const FIND_CLIENTS_FOR_PARENT_COMPANY_FAILED:String = "findClientsForParentCompanyFailed";
         public static const FIND_CLIENTS_FOR_PARENT_COMPANY_SUCCESS:String = "findClientsForParentCompanySuccess";
 
-        public static var SAVE_CLIENT_COMPANY_REQUEST:String = "saveClientCompanyRequest";
-        public static var SAVE_CLIENT_COMPANY_SUCCESS:String = "saveClientCompanySuccess";
-        public static var SAVE_CLIENT_COMPANY_FAILED:String = "saveClientCompanyFailed";
+        public static const SAVE_CLIENT_COMPANY_REQUEST:String = "saveClientCompanyRequest";
+        public static const SAVE_CLIENT_COMPANY_SUCCESS:String = "saveClientCompanySuccess";
+        public static const SAVE_CLIENT_COMPANY_FAILED:String = "saveClientCompanyFailed";
+
+        public static const SAVE_PROJECT_REQUEST:String = "saveProjectRequest";
+        public static const SAVE_PROJECT_SUCCESS:String = "saveProjectSuccess";
+        public static const SAVE_PROJECT_FAILED:String = "saveProjectFailed";
+
+        public static const INITIALIZE_MANAGE_PROJECTS_VIEW:String = "initializeManageProjectsView";
+        public static const INITIALIZE_MANAGE_PROJECTS_VIEW_COMPLETE:String = "initializeManageProjectsViewComplete";
 
         public function ApplicationFacade(key:String)
         {
@@ -186,5 +193,6 @@ package com.neosavvy.user {
             return ApplicationFacade.getInstance(key).retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
         }
 
-        }
+
+    }
 }

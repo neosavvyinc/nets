@@ -1,5 +1,6 @@
 package com.neosavvy.user.dto.project;
 
+import javax.persistence.*;
 import java.util.Date;
 
 /*************************************************************************
@@ -26,16 +27,77 @@ import java.util.Date;
  * Date: Jan 2, 2010
  * Time: 11:16:12 AM
  */
-public abstract class ExpenseItem {
+@Entity
+@Table(
+    name="EXPENSE_REPORT_ITEM" ,
+    uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"ID"})
+    }
+)
+public class ExpenseItem {
 
+    @Id
+    @GeneratedValue
+	@Column(name="ID")
+	private int id;
     /**
      * Depending on the type of expense there will be
      * different fields that should be saved
      * these are the common ones.
      */
+
+    @Column(name = "EXPENSE_DATE")
+    @Temporal(TemporalType.DATE)
     private Date expenseDate;
+
+    @Column(name = "AMOUNT")
     private Double amount;
-    private PaymentMethod paymentMethod;
+
+//    @OneToOne
+//    @JoinColumn(name = "PAYMENT_METHOD_FK")
+//    private PaymentMethod paymentMethod;
+
+    @OneToOne
+    @JoinColumn(name = "PROJECT_TYPE_FK")
     private ProjectType projectType;
 
+    public Double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Double amount) {
+        this.amount = amount;
+    }
+
+    public Date getExpenseDate() {
+        return expenseDate;
+    }
+
+    public void setExpenseDate(Date expenseDate) {
+        this.expenseDate = expenseDate;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+//    public PaymentMethod getPaymentMethod() {
+//        return paymentMethod;
+//    }
+//
+//    public void setPaymentMethod(PaymentMethod paymentMethod) {
+//        this.paymentMethod = paymentMethod;
+//    }
+
+    public ProjectType getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(ProjectType projectType) {
+        this.projectType = projectType;
+    }
 }

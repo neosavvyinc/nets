@@ -3,6 +3,7 @@ package com.neosavvy.user.dto.project;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 /*************************************************************************
@@ -29,52 +30,87 @@ import java.util.List;
  * Date: Jan 2, 2010
  * Time: 11:15:16 AM
  */
+@Entity
+@Table(
+    name="PROJECT" ,
+    uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"ID"})
+    }
+)
 public class Project {
 
+    @Id
+    @GeneratedValue
+	@Column(name="ID")
+	private int id;
     /**
      * This is the owning company of the project - for whom the project should be billed from
      */
+    @OneToOne
+    @JoinColumn(name="PARENT_COMPANY_FK")
     private CompanyDTO company;
 
     /**
      * This is the client who will receive invoices for these expenses
      */
+    @OneToOne
+    @JoinColumn(name="CLIENT_COMPANY_FK")
     private ClientCompany client;
 
     /**
      * These are the people who enter expenses
      */
+    @OneToMany
+    @JoinColumn(name="PARTICIPANTS_FK")
     private List<UserDTO> participants;
 
     /**
      * These are the users who can approve expenses - this may need to change to be hierarchical
      */
+    @OneToMany
+    @JoinColumn(name="APPROVERS_FK")
     private List<UserDTO> approvers;
 
     /**
      * Simple name of the project
      */
+    @Column(name="PROJECT_NAME")
     private String name;
 
     /**
      * Simple short 3 letter code for the project
      */
+    @Column(name="CODE")
     private String code;
 
     /**
      * Start date when expense can be billed
      */
+    @Column(name="START_DATE")
+    @Temporal(TemporalType.DATE)
     private Date startDate;
 
     /**
      * End date when no more expense can be billed
      */
+    @Column(name="END_DATE")
+    @Temporal(TemporalType.DATE)
     private Date endDate;
 
     /**
      * A collection of all the expense reports
      */
+    @OneToMany
+    @JoinColumn(name="EXPENSE_REPORTS_FK")
     private List<ExpenseReport> expenseReports;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public CompanyDTO getCompany() {
         return company;
@@ -138,5 +174,13 @@ public class Project {
 
     public void setExpenseReports(List<ExpenseReport> expenseReports) {
         this.expenseReports = expenseReports;
+    }
+
+    public ClientCompany getClient() {
+        return client;
+    }
+
+    public void setClient(ClientCompany client) {
+        this.client = client;
     }
 }

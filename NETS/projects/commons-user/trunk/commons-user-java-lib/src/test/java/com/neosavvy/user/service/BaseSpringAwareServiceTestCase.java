@@ -29,13 +29,4 @@ public abstract class BaseSpringAwareServiceTestCase extends BaseSpringAwareTest
        SecurityContextHolder.getContext().setAuthentication(new UsernamePasswordAuthenticationToken("admin", "admin"));
     }
 
-    protected void cleanDatabase() {
-        deleteFromTables("CLIENT_COMPANY");
-        deleteFromTables("CLIENT_USER_CONTACT");
-        deleteFromTables("USER_COMPANY_ROLE");
-        deleteFromTables("USER");
-        deleteFromTables("ROLE");
-        deleteFromTables("USER_INVITE");
-        deleteFromTables("COMPANY");
-    }
 }

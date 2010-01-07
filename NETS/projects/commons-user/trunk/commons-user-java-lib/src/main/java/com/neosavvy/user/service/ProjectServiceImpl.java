@@ -1,10 +1,10 @@
-package com.neosavvy.user.dao.project;
+package com.neosavvy.user.service;
 
-import com.neosavvy.user.BaseSpringAwareTestCase;
-import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
+import com.neosavvy.user.dao.project.ProjectDAO;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
-import com.neosavvy.user.dto.project.ClientUserContact;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.neosavvy.user.dto.project.Project;
+import com.neosavvy.user.service.exception.ProjectServiceException;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -26,26 +26,27 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * User: adamparrish
- * Date: Jan 5, 2010
- * Time: 4:33:48 PM
+ * Date: Jan 7, 2010
+ * Time: 4:14:44 PM
  */
-public abstract class BaseProjectManagementDAOTest extends BaseSpringAwareDAOTestCase {
+public class ProjectServiceImpl implements ProjectService {
 
-    @Autowired
-    protected ClientUserContactDAO clientUserContactDAO;
+    private ProjectDAO projectDAO;
 
-    @Autowired
-    protected ClientCompanyDAO clientCompanyDAO;
+    public void addProject(Project project, CompanyDTO company, ClientCompany clientCompany) {
+        if( project == null ) {
+            throw new ProjectServiceException("Cannot create a null project");
+        }
+        if( company == null ) {
+            throw new ProjectServiceException("Cannot create a project without a company to own it");
+        }
+        if( clientCompany == null ) {
+            throw new ProjectServiceException("Cannot create a project without a client to send invoices to");
+        }
 
-    @Autowired
-    protected ProjectDAO projectDAO;
-
-    public ClientCompanyDAO getClientCompanyDAO() {
-        return clientCompanyDAO;
-    }
-
-    public void setClientCompanyDAO(ClientCompanyDAO clientCompanyDAO) {
-        this.clientCompanyDAO = clientCompanyDAO;
+        project.setCompany(company);
+        project.setClient(clientCompany);
+        projectDAO.save(project);
     }
 
     public ProjectDAO getProjectDAO() {
@@ -55,13 +56,4 @@ public abstract class BaseProjectManagementDAOTest extends BaseSpringAwareDAOTes
     public void setProjectDAO(ProjectDAO projectDAO) {
         this.projectDAO = projectDAO;
     }
-
-    public ClientUserContactDAO getClientUserContactDAO() {
-        return clientUserContactDAO;
-    }
-
-    public void setClientUserContactDAO(ClientUserContactDAO clientUserContactDAO) {
-        this.clientUserContactDAO = clientUserContactDAO;
-    }
-
 }

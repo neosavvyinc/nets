@@ -57,6 +57,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean id="roleDAO" class="com.neosavvy.user.dao.companyManagement.RoleDAOImpl" parent="abstractDao"/>
     <bean id="clientUserContactDAO" class="com.neosavvy.user.dao.project.ClientUserContactDAOImpl" parent="abstractDao"/>
     <bean id="clientCompanyDAO" class="com.neosavvy.user.dao.project.ClientCompanyDAOImpl" parent="abstractDao"/>
+    <bean id="projectDAO" class="com.neosavvy.user.dao.project.ProjectDAOImpl" parent="abstractDao"/>
 
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>

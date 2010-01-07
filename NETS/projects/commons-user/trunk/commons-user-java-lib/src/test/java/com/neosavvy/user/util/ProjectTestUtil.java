@@ -6,7 +6,10 @@ import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.ClientUserContact;
+import com.neosavvy.user.dto.project.Project;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
+
+import java.util.Date;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -173,6 +176,26 @@ public class ProjectTestUtil {
         userInvite.setEmailAddress("tb@neosavvy.com");
         return userInvite;
     }
-    
+
+    public static Project createTestProject1(CompanyDTO parent, ClientCompany client) {
+        Project project = new Project();
+        project.setCode("BLX");
+        project.setCompany(parent);
+        project.setClient(client);
+        project.setEndDate(new Date());
+        project.setStartDate(new Date());
+        project.setName("BuildLinks1");
+        return project;
+    }
+    public static Project createTestProject2(CompanyDTO parent, ClientCompany client) {
+        Project project = new Project();
+        project.setCode("BLX");
+        project.setCompany(parent);
+        project.setClient(client);
+        project.setEndDate(new Date());
+        project.setStartDate(new Date());
+        project.setName("BuildLinks1");
+        return project;
+    }
 
 }

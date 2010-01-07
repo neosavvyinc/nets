@@ -70,7 +70,7 @@ public class TestClientService extends BaseProjectManagementServiceTest {
 
     @Test
     public void testSaveClientForCompany() {
-        cleanDatabase();
+        cleanupTables();
 
         // Admin role required to add a company
         roleDAO.saveRole(ProjectTestUtil.createTestRole());
@@ -90,7 +90,7 @@ public class TestClientService extends BaseProjectManagementServiceTest {
     @Test
     public void testSaveTwoClientsAndTestFindForCompany() {
 
-        cleanDatabase();
+        cleanupTables();
 
         // Admin role required to add a company
         roleDAO.saveRole(ProjectTestUtil.createTestRole());

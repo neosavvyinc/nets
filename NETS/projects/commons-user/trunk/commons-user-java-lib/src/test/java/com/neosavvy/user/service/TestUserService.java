@@ -16,7 +16,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
 
     @Test
     public void testGetUsers() throws Exception{
-        cleanDatabase();
+        cleanupTables();
         Assert.assertTrue(userService.getUsers().isEmpty());
         userDAO.saveUser(ProjectTestUtil.createTestUser());
         Assert.assertFalse(userService.getUsers().isEmpty());
@@ -24,7 +24,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
 
     @Test
     public void testCreateAdminUser() throws Exception{
-        cleanDatabase();
+        cleanupTables();
         Assert.assertTrue(userService.getUsers().isEmpty());
         MailSender mailSender = EasyMock.createMock(MailSender.class);
         userService.setMailSender(mailSender);
@@ -38,7 +38,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
 
     @Test
     public void testSaveUser() throws Exception{
-        cleanDatabase();
+        cleanupTables();
         Assert.assertTrue(userService.getUsers().isEmpty());
 
         userService.saveUser(ProjectTestUtil.createTestUser());
@@ -47,7 +47,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
 
     @Test
     public void testConfirmUser() throws Exception{
-        cleanDatabase();
+        cleanupTables();
         MailSender mailSender = EasyMock.createMock(MailSender.class);
         userService.setMailSender(mailSender);
 
@@ -70,7 +70,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
 
     @Test(expected = ConstraintViolationException.class)
     public void testCreateDuplicateAdminUser() throws Exception{
-        cleanDatabase();
+        cleanupTables();
         MailSender mailSender = EasyMock.createMock(MailSender.class);
         userService.setMailSender(mailSender);
 
@@ -84,7 +84,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
 
     @Test
     public void testFindUserById() throws Exception{
-        cleanDatabase();
+        cleanupTables();
         UserDTO  testUser = ProjectTestUtil.createTestUser();
         userDAO.saveUser(testUser);
         Assert.assertFalse(userService.getUsers().isEmpty());

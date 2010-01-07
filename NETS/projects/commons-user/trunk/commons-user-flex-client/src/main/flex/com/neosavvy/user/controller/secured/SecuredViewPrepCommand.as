@@ -11,6 +11,8 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigationMediator;
 
     import com.neosavvy.user.view.secured.projectManagement.ProjectManagementMediator;
+    import com.neosavvy.user.view.secured.projectManagement.assignments.ManageAssignmentsMediator;
+    import com.neosavvy.user.view.secured.projectManagement.projects.ManageProjectsMediator;
     import com.neosavvy.user.view.secured.userManagement.UserManagementMediator;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -42,6 +44,13 @@ package com.neosavvy.user.controller.secured {
 
                 if( !facade.hasMediator(ProjectManagementMediator.NAME))
                     facade.registerMediator( new ProjectManagementMediator( securedContainer.projectManagement ) );
+
+                if( !facade.hasMediator(ManageProjectsMediator.NAME))
+                    facade.registerMediator( new ManageProjectsMediator( securedContainer.projectManagement.manageProjectsTab ) );
+
+                if( !facade.hasMediator(ManageAssignmentsMediator.NAME))
+                    facade.registerMediator( new ManageAssignmentsMediator( securedContainer.projectManagement.manageAssignments ) );
+
             }
 
 

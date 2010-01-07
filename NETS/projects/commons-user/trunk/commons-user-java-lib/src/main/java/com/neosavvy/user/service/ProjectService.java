@@ -1,10 +1,8 @@
-package com.neosavvy.user.dto.project;
+package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
-
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import com.neosavvy.user.dto.project.ClientCompany;
+import com.neosavvy.user.dto.project.Project;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -26,23 +24,11 @@ import javax.persistence.Id;
 
 /**
  * User: adamparrish
- * Date: Jan 2, 2010
- * Time: 1:50:54 PM
+ * Date: Jan 7, 2010
+ * Time: 4:13:36 PM
  */
-public class CompanyPaymentMethod extends PaymentMethod {
+public interface ProjectService {
 
-    @Id
-    @GeneratedValue
-	@Column(name="ID")
-	private int id;
-    
-    private CompanyDTO company;
+    public void addProject(Project project, CompanyDTO company, ClientCompany clientCompany);
 
-    public CompanyDTO getCompany() {
-        return company;
-    }
-
-    public void setCompany(CompanyDTO company) {
-        this.company = company;
-    }
 }

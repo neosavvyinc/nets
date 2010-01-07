@@ -2,8 +2,13 @@
 <mx:Panel
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:flexlib="http://code.google.com/p/flexlib/"
-        xmlns:controls="controls.*" xmlns:validators="com.visualempathy.validators.*"
-        title="Client Management" styleName="paddedContainer" width="100%" height="100%" layout="vertical"
+        xmlns:controls="controls.*"
+        xmlns:validators="com.visualempathy.validators.*"
+        title="Client Management"
+        styleName="paddedContainer"
+        width="100%"
+        height="100%"
+        layout="vertical"
         horizontalAlign="right">
 
     <mx:Script><![CDATA[

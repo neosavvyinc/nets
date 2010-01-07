@@ -1,4 +1,8 @@
 package com.neosavvy.user.dto.project;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -23,5 +27,12 @@ package com.neosavvy.user.dto.project;
  * Date: Jan 2, 2010
  * Time: 1:49:07 PM
  */
+@Entity
+@Table(
+    name="STANDARD_PAYMENT_METHOD" ,
+    uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"ID"})
+    }
+)
 public class StandardPaymentMethod extends PaymentMethod {
 }

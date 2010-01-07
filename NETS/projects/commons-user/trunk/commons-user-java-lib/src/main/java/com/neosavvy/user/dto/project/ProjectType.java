@@ -1,4 +1,6 @@
 package com.neosavvy.user.dto.project;
+
+import javax.persistence.*;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -23,8 +25,21 @@ package com.neosavvy.user.dto.project;
  * Date: Jan 2, 2010
  * Time: 11:39:24 AM
  */
+@Entity
+@Table(
+    name="PROJECT_TYPE" ,
+    uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"ID"})
+    }
+)
 public class ProjectType {
 
+    @Id
+    @GeneratedValue
+	@Column(name="ID")
+	private int id;
+
+    @Column(name="TYPE")
     private String type;
     
 }

@@ -9,6 +9,9 @@ package com.neosavvy.user.controller.secured {
 
     import com.neosavvy.user.view.secured.projectManagement.ProjectManagementMediator;
 
+    import com.neosavvy.user.view.secured.projectManagement.assignments.ManageAssignmentsMediator;
+    import com.neosavvy.user.view.secured.projectManagement.projects.ManageProjectsMediator;
+
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.SimpleCommand;
 
@@ -29,6 +32,12 @@ package com.neosavvy.user.controller.secured {
 
             if(facade.hasMediator(ProjectManagementMediator.NAME))
                 facade.removeMediator( ProjectManagementMediator.NAME );
+
+            if(facade.hasMediator(ManageProjectsMediator.NAME))
+                facade.removeMediator( ManageProjectsMediator.NAME );
+
+            if(facade.hasMediator(ManageAssignmentsMediator.NAME))
+                facade.removeMediator( ManageAssignmentsMediator.NAME );
         }
     }
 }

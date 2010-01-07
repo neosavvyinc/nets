@@ -115,6 +115,8 @@ package com.neosavvy.user.model {
             LOGGER.debug("User retrieval for active user succeeded");
             var users:ArrayCollection = event.result as ArrayCollection;
             _activeUser = users.getItemAt(0) as UserDTO;
+
+            trace("ADAM LOOK HERE I HAVE AN ACTIVE USER!!!!!!!!!!!");
         }
 
         public function resetPassword(user:UserDTO):void {

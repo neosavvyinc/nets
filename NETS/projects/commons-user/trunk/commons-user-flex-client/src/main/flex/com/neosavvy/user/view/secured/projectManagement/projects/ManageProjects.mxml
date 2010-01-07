@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        xmlns:controls="controls.*"
+        xmlns:validators="com.visualempathy.validators.*"
+        styleName="paddedContainer" width="100%" height="100%">
+
+
+    <mx:Array id="projectFormValidators">
+        <mx:StringValidator id="projectNameValidator" source="{this.projectName}" property="text" required="true"/>
+        <mx:StringValidator id="projectCodeValidator" source="{this.projectCode}" property="text" required="true"/>
+    </mx:Array>
+    <validators:FormValidator id="projectFormValidator" validators="{this.projectFormValidators}"/>
+
+    <mx:HBox width="100%">
+        <mx:Form id="projectEntryForm" width="50%">
+            <mx:FormItem label="Project Name:" width="100%" required="true">
+                <flexlib:PromptingTextInput id="projectName" prompt="Project Name" change="this.projectFormValidator.validateForm(event);"/>
+            </mx:FormItem>
+            <mx:FormItem label="Project Code:" width="100%" required="true">
+                <flexlib:PromptingTextInput id="projectCode" prompt="Three Letter Code" change="this.projectFormValidator.validateForm(event);"/>
+            </mx:FormItem>
+            <mx:FormItem label="State Date:" width="100%" required="true">
+                <mx:DateField id="startDate"/>
+            </mx:FormItem>
+            <mx:FormItem label="End Date:" width="100%" required="false">
+                <mx:DateField id="endDate"/>
+            </mx:FormItem>
+            <mx:FormItem>
+                <mx:CheckBox id="ongoingProject" label="No End Date (This Project is on-going)"/>
+            </mx:FormItem>
+        </mx:Form>
+        <mx:VBox width="50%" height="{projectEntryForm.height}">
+            <mx:ComboBox id="clientSelectorDropdown" labelField="companyName" width="60%" prompt="Select Client Company..."/>
+
+            <mx:HBox horizontalAlign="right" verticalAlign="bottom" height="100%" width="100%">
+                <mx:Button id="saveProject" label="Save Project"/>
+            </mx:HBox>
+        </mx:VBox>
+    </mx:HBox>
+    <mx:AdvancedDataGrid
+        id="projectManagementGrid"
+        width="100%"
+        height="100%"
+        >
+        <mx:columns>
+            <mx:AdvancedDataGridColumn
+                    id="projectNameColumn"
+                    dataField="projectName"
+                    headerText="Project Name"
+                    />
+            <mx:AdvancedDataGridColumn
+                    id="projectCodeColumn"
+                    dataField="projectCode"
+                    headerText="Project Code"
+                    />
+            <mx:AdvancedDataGridColumn
+                    id="startDateColumn"
+                    dataField="startDate"
+                    headerText="Start Date"
+                    />
+            <mx:AdvancedDataGridColumn
+                    id="endDateColumn"
+                    dataField="endDate"
+                    headerText="End Date"
+                    />
+            <mx:AdvancedDataGridColumn
+                    id="clientCompanyColumn"
+                    dataField="clientCompanyName"
+                    headerText="Client Company"
+                    />
+        </mx:columns>
+    </mx:AdvancedDataGrid>
+
+
+</mx:VBox>
