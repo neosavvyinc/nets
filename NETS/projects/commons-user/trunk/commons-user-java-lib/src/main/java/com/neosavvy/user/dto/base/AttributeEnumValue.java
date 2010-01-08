@@ -1,4 +1,4 @@
-package com.neosavvy.user.dto.project;
+package com.neosavvy.user.dto.base;
 
 import javax.persistence.*;
 /*************************************************************************
@@ -22,29 +22,62 @@ import javax.persistence.*;
 
 /**
  * User: adamparrish
- * Date: Jan 2, 2010
- * Time: 11:37:09 AM
+ * Date: Jan 7, 2010
+ * Time: 10:25:48 PM
  */
 @Entity
 @Table(
-    name="PAYMENT_METHOD" ,
+    name="ATTRIBUTE_ENUM_VALUE" ,
     uniqueConstraints = {
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn( name = "TYPE" )
-public abstract class PaymentMethod {
+public class AttributeEnumValue {
 
     @Id
     @GeneratedValue
-	@Column(name="ID")
-	private Long id;  
+    @Column(name="ID")
+    private Long id;
 
-    @Column(name="NAME")
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "DESCRIPTOR_ID")
+    private AttributeDescriptor descriptor;
 
-    @Column(name="DESCRIPTION")
-    private String description;
-    
+    @Column(name = "VALUE")
+    private String value;
+
+    @Column(name = "SORT_ORDER")
+    private int sortOrder;
+
+    public AttributeDescriptor getDescriptor() {
+        return descriptor;
+    }
+
+    public void setDescriptor(AttributeDescriptor descriptor) {
+        this.descriptor = descriptor;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(int sortOrder) {
+        this.sortOrder = sortOrder;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }

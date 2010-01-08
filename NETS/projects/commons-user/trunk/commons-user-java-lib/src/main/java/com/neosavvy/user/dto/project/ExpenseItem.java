@@ -1,7 +1,10 @@
 package com.neosavvy.user.dto.project;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /*************************************************************************
  *
@@ -39,34 +42,52 @@ public class ExpenseItem {
     @Id
     @GeneratedValue
 	@Column(name="ID")
-	private int id;
+	private Long id;
+
     /**
      * Depending on the type of expense there will be
      * different fields that should be saved
      * these are the common ones.
      */
-
     @Column(name = "EXPENSE_DATE")
     @Temporal(TemporalType.DATE)
     private Date expenseDate;
 
     @Column(name = "AMOUNT")
-    private Double amount;
+    private BigDecimal amount;
 
-//    @OneToOne
-//    @JoinColumn(name = "PAYMENT_METHOD_FK")
-//    private PaymentMethod paymentMethod;
+    @ManyToOne
+    @JoinColumn(name = "PAYMENT_METHOD_FK")
+    private PaymentMethod paymentMethod;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "PROJECT_TYPE_FK")
     private ProjectType projectType;
 
-    public Double getAmount() {
+    @ManyToOne
+    @JoinColumn(name = "EXPENSE_ITEM_TYPE_FK")
+    private ExpenseItemType expenseItemType;
+
+    @OneToMany(mappedBy="expenseItem")
+    private Set<ExpenseItemValue> expenseItemValues;
+
+    @Column(name = "COMMENT")
+    private String comment;
+
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     public Date getExpenseDate() {
@@ -77,21 +98,37 @@ public class ExpenseItem {
         this.expenseDate = expenseDate;
     }
 
-    public int getId() {
+    public ExpenseItemType getExpenseItemType() {
+        return expenseItemType;
+    }
+
+    public void setExpenseItemType(ExpenseItemType expenseItemType) {
+        this.expenseItemType = expenseItemType;
+    }
+
+    public Set<ExpenseItemValue> getExpenseItemValues() {
+        return expenseItemValues;
+    }
+
+    public void setExpenseItemValues(Set<ExpenseItemValue> expenseItemValues) {
+        this.expenseItemValues = expenseItemValues;
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-//    public PaymentMethod getPaymentMethod() {
-//        return paymentMethod;
-//    }
-//
-//    public void setPaymentMethod(PaymentMethod paymentMethod) {
-//        this.paymentMethod = paymentMethod;
-//    }
+    public PaymentMethod getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(PaymentMethod paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
 
     public ProjectType getProjectType() {
         return projectType;

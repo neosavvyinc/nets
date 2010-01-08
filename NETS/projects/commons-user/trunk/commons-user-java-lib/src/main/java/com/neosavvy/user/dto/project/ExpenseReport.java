@@ -39,7 +39,7 @@ public class ExpenseReport {
     @Id
     @GeneratedValue
 	@Column(name = "ID")
-	private int id; 
+	private Long id; 
 
     @OneToOne
     @JoinColumn(name = "PROJECT_FK")
@@ -79,11 +79,11 @@ public class ExpenseReport {
         this.expenseItems = expenseItems;
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

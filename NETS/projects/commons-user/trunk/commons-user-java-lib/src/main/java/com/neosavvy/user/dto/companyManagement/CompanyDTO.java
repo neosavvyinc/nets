@@ -19,7 +19,6 @@ import java.util.Set;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-@XmlRootElement
 public class CompanyDTO extends AbstractCompany {
 
     @OneToMany(mappedBy="company", fetch=FetchType.EAGER)

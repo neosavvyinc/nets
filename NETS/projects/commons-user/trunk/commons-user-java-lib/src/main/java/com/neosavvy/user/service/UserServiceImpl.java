@@ -72,7 +72,7 @@ public class UserServiceImpl implements UserService {
         userDao.saveUser(user);
     }
     
-    public UserDTO findUserById(int id) {
+    public UserDTO findUserById(long id) {
         return userDao.findUserById(id);
     }
 

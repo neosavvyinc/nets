@@ -1,6 +1,10 @@
 package com.neosavvy.user.dto.project;
 
+import com.neosavvy.user.dto.base.Attribute;
+
 import javax.persistence.*;
+import java.util.Date;
+
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -22,29 +26,22 @@ import javax.persistence.*;
 
 /**
  * User: adamparrish
- * Date: Jan 2, 2010
- * Time: 11:37:09 AM
+ * Date: Jan 7, 2010
+ * Time: 10:50:45 PM
  */
 @Entity
 @Table(
-    name="PAYMENT_METHOD" ,
+    name="EXPENSE_ITEM_VALUE" ,
     uniqueConstraints = {
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn( name = "TYPE" )
-public abstract class PaymentMethod {
+public class ExpenseItemValue extends Attribute {
 
-    @Id
-    @GeneratedValue
-	@Column(name="ID")
-	private Long id;  
+    @ManyToOne
+    private ExpenseItem expenseItem;
 
-    @Column(name="NAME")
-    private String name;
+    @Column( name = "PARTITION_DATE")
+    private Date partitionDate;
 
-    @Column(name="DESCRIPTION")
-    private String description;
-    
 }

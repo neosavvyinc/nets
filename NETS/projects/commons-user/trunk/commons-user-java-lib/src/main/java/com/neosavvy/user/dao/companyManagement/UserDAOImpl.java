@@ -21,7 +21,7 @@ public class UserDAOImpl extends BaseUserDAOImpl<UserDTO> implements UserDAO {
         }
 
         Query userQuery = getCurrentSession().createQuery(queryString.toString());
-        userQuery.setInteger("companyId",company.getId());
+        userQuery.setLong("companyId",company.getId());
 
         if( user != null) {
             userQuery.setBoolean("userActive", user.getActive());

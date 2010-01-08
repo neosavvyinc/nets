@@ -82,6 +82,11 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="clientUserContactDAO" ref="clientUserContactDAO"/>
     </bean>
 
+    <bean id="projectService" class="com.neosavvy.user.service.ProjectServiceImpl">
+        <property name="projectDAO" ref="projectDAO"/>
+    </bean>
+
+
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
       <property name="host" value="localhost"/>
     </bean>

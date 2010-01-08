@@ -17,7 +17,7 @@ public abstract class BaseUserDTO {
     @Id
     @GeneratedValue
     @Column(name="ID")
-    private int id;
+    private Long id;
 
     @Column(name="FIRST_NAME")
     private String firstName;
@@ -34,11 +34,11 @@ public abstract class BaseUserDTO {
     @Column(name="CONTACT_PHONE_NUMBER")
     private String contactPhoneNumber;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

@@ -49,7 +49,7 @@ public abstract class BaseCompanyDAOImpl<T extends AbstractCompany> extends Base
         return company;
     }
 
-    public T findCompanyById(int id) {
+    public T findCompanyById(long id) {
         return (T) getCurrentSession()
             .createCriteria(AbstractCompany.class)
             .add( Restrictions.idEq(id) )

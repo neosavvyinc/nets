@@ -42,7 +42,7 @@ public class Project {
     @Id
     @GeneratedValue
 	@Column(name="ID")
-	private int id;
+	private Long id;
     /**
      * This is the owning company of the project - for whom the project should be billed from
      */
@@ -93,7 +93,7 @@ public class Project {
     /**
      * End date when no more expense can be billed
      */
-    @Column(name="END_DATE")
+    @Column(name="END_DATE" , nullable = true)
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
@@ -104,11 +104,11 @@ public class Project {
     @JoinColumn(name="EXPENSE_REPORTS_FK")
     private List<ExpenseReport> expenseReports;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

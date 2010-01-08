@@ -2,7 +2,10 @@ package com.neosavvy.user.dao.project;
 
 import com.neosavvy.user.dao.base.BaseDAO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
+import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
+import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 
 import java.util.List;
@@ -33,7 +36,14 @@ import java.util.List;
 public class ProjectDAOImpl extends BaseDAO implements ProjectDAO {
 
     public List<Project> findProject(Project project) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        Criteria criteria = getCurrentSession().createCriteria(Project.class);
+        if(project.getCode() != null && project.getCode().length() > 0 ) {
+            criteria.add(Restrictions.eq("code", project.getCode()));
+        }
+        if(project.getName() != null && project.getName().length() > 0 ) {
+            criteria.add(Restrictions.eq("name", project.getName()));
+        }       
+        return criteria.list();
     }
 
     public void delete(Project project) {
@@ -51,7 +61,14 @@ public class ProjectDAOImpl extends BaseDAO implements ProjectDAO {
     public void save(Project project) {
         getCurrentSession().saveOrUpdate(project);
         getCurrentSession().flush();
-        getCurrentSession().close();
     }
 
+    public List<ClientCompany> findProjectsForParentCompany(Project exampleProject) {
+        Query projectSearchQuery = getCurrentSession().createQuery("select project from Project project, CompanyDTO company" +
+                " where project.client_company_fk = company.id and company.id = :companyId");
+        projectSearchQuery.setLong("companyId",exampleProject.getCompany().getId());
+        return projectSearchQuery.list();
+
+
+    }
 }

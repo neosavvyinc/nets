@@ -5,6 +5,9 @@ import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
 import com.neosavvy.user.service.exception.ProjectServiceException;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -29,6 +32,7 @@ import com.neosavvy.user.service.exception.ProjectServiceException;
  * Date: Jan 7, 2010
  * Time: 4:14:44 PM
  */
+@Transactional
 public class ProjectServiceImpl implements ProjectService {
 
     private ProjectDAO projectDAO;
@@ -47,6 +51,15 @@ public class ProjectServiceImpl implements ProjectService {
         project.setCompany(company);
         project.setClient(clientCompany);
         projectDAO.save(project);
+    }
+
+    public List<ClientCompany> findProjectsForParentCompany(CompanyDTO company) {
+        if( company == null ) {
+            throw new ProjectServiceException("Cannot find projects without a parent company");
+        }
+        Project exampleProject = new Project();
+        exampleProject.setCompany(company);
+        return projectDAO.findProjectsForParentCompany(exampleProject);
     }
 
     public ProjectDAO getProjectDAO() {

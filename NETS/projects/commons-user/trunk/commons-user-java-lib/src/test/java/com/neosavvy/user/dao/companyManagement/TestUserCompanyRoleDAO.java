@@ -29,7 +29,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
-        Assert.assertTrue("record was added in the db", (int)userCompanyRole.getId() > 0);
+        Assert.assertTrue("record was added in the db", userCompanyRole.getId() > 0);
     }
 
     @Test
@@ -43,7 +43,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
-        Assert.assertTrue("Record was added in the db", (int)userCompanyRole.getId() > 0);
+        Assert.assertTrue("Record was added in the db", userCompanyRole.getId() > 0);
     }
 
     @Test

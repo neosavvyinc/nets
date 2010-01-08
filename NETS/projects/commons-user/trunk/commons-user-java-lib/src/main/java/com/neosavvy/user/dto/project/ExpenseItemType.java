@@ -1,5 +1,7 @@
 package com.neosavvy.user.dto.project;
 
+import com.neosavvy.user.dto.base.AttributeDescriptor;
+
 import javax.persistence.*;
 /*************************************************************************
  *
@@ -22,29 +24,16 @@ import javax.persistence.*;
 
 /**
  * User: adamparrish
- * Date: Jan 2, 2010
- * Time: 11:37:09 AM
+ * Date: Jan 7, 2010
+ * Time: 10:16:34 PM
  */
 @Entity
 @Table(
-    name="PAYMENT_METHOD" ,
+    name="EXPENSE_ITEM_TYPE" ,
     uniqueConstraints = {
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn( name = "TYPE" )
-public abstract class PaymentMethod {
-
-    @Id
-    @GeneratedValue
-	@Column(name="ID")
-	private Long id;  
-
-    @Column(name="NAME")
-    private String name;
-
-    @Column(name="DESCRIPTION")
-    private String description;
-    
+@DiscriminatorValue("EXPENSE_ITEM_TYPE")
+public abstract class ExpenseItemType extends AttributeDescriptor {
 }

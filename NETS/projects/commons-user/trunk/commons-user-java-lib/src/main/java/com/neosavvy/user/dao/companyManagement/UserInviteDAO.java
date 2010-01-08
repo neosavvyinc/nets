@@ -17,7 +17,7 @@ public interface UserInviteDAO {
 
 	public void saveUserInvite(UserInviteDTO userInvite);
 
-	public UserInviteDTO findUserInviteById(int id);
+	public UserInviteDTO findUserInviteById(long id);
 
 	public List<UserInviteDTO> findUserInvites(UserInviteDTO userInvite);
 

@@ -41,7 +41,7 @@ public interface UserService {
 	public void saveUser(UserDTO user);
 
     @Secured("ROLE_ADMIN")
-	public UserDTO findUserById(int id);
+	public UserDTO findUserById(long id);
 
     @Secured("ROLE_ADMIN")
 	public List<UserDTO> findUsers(UserDTO user);

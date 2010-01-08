@@ -23,7 +23,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
         UserDTO user = ProjectTestUtil.createTestUser();
 		
 		userDAO.saveUser(user);
-		Assert.assertTrue((int)user.getId() > 0);
+		Assert.assertTrue(user.getId() > 0);
 	}
 
     @Test

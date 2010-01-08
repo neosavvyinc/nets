@@ -8,7 +8,7 @@
         <property name="hibernate.format_sql">true</property>
         <property name="use_sql_comments">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</property>
-        <!--<property name="hibernate.hbm2ddl.auto">create</property>-->
+        <property name="hibernate.hbm2ddl.auto">create</property>
         <mapping class="com.neosavvy.user.dto.companyManagement.UserDTO"/>
         <mapping class="com.neosavvy.user.dto.companyManagement.UserInviteDTO"/>
         <mapping class="com.neosavvy.user.dto.companyManagement.CompanyDTO"/>
@@ -24,5 +24,13 @@
         <mapping class="com.neosavvy.user.dto.project.ProjectPaymentMethod"/>
         <mapping class="com.neosavvy.user.dto.project.ProjectType"/>
         <mapping class="com.neosavvy.user.dto.project.StandardPaymentMethod"/>
+        <mapping class="com.neosavvy.user.dto.project.CompanyExpenseItemType"/>
+        <mapping class="com.neosavvy.user.dto.project.ExpenseItemType"/>
+        <mapping class="com.neosavvy.user.dto.project.ExpenseItemValue"/>
+        <mapping class="com.neosavvy.user.dto.project.StandardExpenseItemType"/>  
+        <mapping class="com.neosavvy.user.dto.base.Attribute"/>
+        <mapping class="com.neosavvy.user.dto.base.AttributeDescriptor"/>
+        <mapping class="com.neosavvy.user.dto.base.AttributeType"/>
+        <mapping class="com.neosavvy.user.dto.base.AttributeEnumValue"/>
     </session-factory>
 </hibernate-configuration>

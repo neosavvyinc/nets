@@ -20,7 +20,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
         RoleDTO role = ProjectTestUtil.createTestRole();
 
         roleDAO.saveRole(role);
-        Assert.assertTrue((int)role.getId() > 0);
+        Assert.assertTrue(role.getId() > 0);
     }
 
     @Test

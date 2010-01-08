@@ -34,7 +34,7 @@ public interface BaseCompanyDAO<T extends AbstractCompany> {
 
     public T updateCompany(T company);
 
-	public T findCompanyById(int id);
+	public T findCompanyById(long id);
 
 	public List<T> findCompanies(T company);
 

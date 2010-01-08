@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
 import java.util.List;
@@ -21,6 +22,7 @@ import java.util.Set;
  * Date: Dec 4, 2009
  * Time: 4:18:34 PM
  */
+@Transactional
 public class CompanyServiceImpl implements CompanyService{
 
     private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
@@ -42,7 +44,7 @@ public class CompanyServiceImpl implements CompanyService{
         return companyDao.saveCompany(company);
     }
 
-    public CompanyDTO findCompanyById(int id) {
+    public CompanyDTO findCompanyById(long id) {
         return companyDao.findCompanyById(id);
     }
 
@@ -93,8 +95,8 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public void addUserToCompany(CompanyDTO company, UserDTO user) {
-        if(user == null){
-            throw new CompanyServiceException("null user not supported", null);    
+        if(user == null || user.getId() == null){
+            throw new CompanyServiceException("Must supply an existing user to add a user to the company", null);    
         }
         verifyAndAttachCompany(company);
         //look for user
@@ -177,8 +179,8 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     protected CompanyDTO verifyAndAttachCompany(CompanyDTO company){
-        if(company == null){
-            throw new CompanyServiceException("null company not supported", null);
+        if(company == null || company.getId() == null){
+            throw new CompanyServiceException("Can not save a user to a company that isn't in the database", null);
         }
 
         CompanyDTO verifiedCompany = companyDao.findCompanyById(company.getId());

@@ -1,6 +1,9 @@
 package com.neosavvy.user.dto.project;
 
-import javax.persistence.*;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -22,29 +25,16 @@ import javax.persistence.*;
 
 /**
  * User: adamparrish
- * Date: Jan 2, 2010
- * Time: 11:37:09 AM
+ * Date: Jan 7, 2010
+ * Time: 10:17:32 PM
  */
 @Entity
 @Table(
-    name="PAYMENT_METHOD" ,
+    name="STANDARD_EXPENSE_TYPE" ,
     uniqueConstraints = {
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn( name = "TYPE" )
-public abstract class PaymentMethod {
-
-    @Id
-    @GeneratedValue
-	@Column(name="ID")
-	private Long id;  
-
-    @Column(name="NAME")
-    private String name;
-
-    @Column(name="DESCRIPTION")
-    private String description;
-    
+@DiscriminatorValue("STANDARD_EXPENSE_ITEM_TYPE")
+public class StandardExpenseItemType extends ExpenseItemType {
 }

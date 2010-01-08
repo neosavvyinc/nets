@@ -1,5 +1,7 @@
 package com.neosavvy.user.dto.project;
 
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+
 import javax.persistence.*;
 /*************************************************************************
  *
@@ -22,29 +24,28 @@ import javax.persistence.*;
 
 /**
  * User: adamparrish
- * Date: Jan 2, 2010
- * Time: 11:37:09 AM
+ * Date: Jan 7, 2010
+ * Time: 10:17:04 PM
  */
 @Entity
 @Table(
-    name="PAYMENT_METHOD" ,
+    name="COMPANY_EXPENSE_TYPE" ,
     uniqueConstraints = {
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn( name = "TYPE" )
-public abstract class PaymentMethod {
+@DiscriminatorValue("COMPANY_EXPENSE_ITEM_TYPE")
+public class CompanyExpenseItemType extends ExpenseItemType {
 
-    @Id
-    @GeneratedValue
-	@Column(name="ID")
-	private Long id;  
+    @ManyToOne
+    @JoinColumn(name = "COMPANY_ID")
+    private CompanyDTO company;
 
-    @Column(name="NAME")
-    private String name;
+    public CompanyDTO getCompany() {
+        return company;
+    }
 
-    @Column(name="DESCRIPTION")
-    private String description;
-    
+    public void setCompany(CompanyDTO company) {
+        this.company = company;
+    }
 }

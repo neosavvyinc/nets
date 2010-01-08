@@ -25,7 +25,7 @@ public class UserCompanyRoleDAOImpl extends BaseDAO implements UserCompanyRoleDA
         getCurrentSession().flush();
     }
 
-    public UserCompanyRoleDTO findUserCompanyRoleById(int id) {
+    public UserCompanyRoleDTO findUserCompanyRoleById(long id) {
         return (UserCompanyRoleDTO) getCurrentSession()
                 .createCriteria(UserCompanyRoleDTO.class)
                 .add(Restrictions.idEq(id))

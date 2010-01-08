@@ -16,7 +16,7 @@ public interface RoleDAO {
 
 	public void saveRole(RoleDTO user);
 
-	public RoleDTO findRoleById(int id);
+	public RoleDTO findRoleById(long id);
 
 	public List<RoleDTO> findRoles(RoleDTO role);
     

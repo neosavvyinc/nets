@@ -2,9 +2,7 @@ package com.neosavvy.user.dto.project;
 
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -29,13 +27,18 @@ import javax.persistence.Id;
  * Date: Jan 2, 2010
  * Time: 1:50:54 PM
  */
+@Entity
+@Table(
+    name="COMPANY_PAYMENT_METHOD" ,
+    uniqueConstraints = {
+            @UniqueConstraint(columnNames = {"ID"})
+    }
+)
+@DiscriminatorValue(value = "COMPANY")
 public class CompanyPaymentMethod extends PaymentMethod {
 
-    @Id
-    @GeneratedValue
-	@Column(name="ID")
-	private int id;
-    
+    @OneToOne
+    @JoinColumn(name = "COMPANY_ID")
     private CompanyDTO company;
 
     public CompanyDTO getCompany() {

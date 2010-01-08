@@ -39,7 +39,7 @@ public class TestClientUserContactDAO extends BaseProjectManagementDAOTest {
         cleanupTables();
         ClientUserContact contact = ProjectTestUtil.createTestClientContact();
         clientUserContactDAO.saveUser(contact);
-		Assert.assertTrue((int)contact.getId() > 0);
+		Assert.assertTrue(contact.getId() > 0);
     }
 
     @Test
@@ -68,7 +68,7 @@ public class TestClientUserContactDAO extends BaseProjectManagementDAOTest {
         cleanupTables();
         ClientUserContact contact = ProjectTestUtil.createTestClientContact();
         clientUserContactDAO.saveUser(contact);
-		Assert.assertTrue((int)contact.getId() > 0);
+		Assert.assertTrue(contact.getId() > 0);
         int numRows = countRowsInTable("CLIENT_USER_CONTACT");
         Assert.assertEquals(numRows, 1);
         contact.setFirstName("CHANGEDNAME");

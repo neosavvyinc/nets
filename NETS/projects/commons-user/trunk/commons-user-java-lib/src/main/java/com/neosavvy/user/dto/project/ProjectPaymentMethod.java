@@ -32,6 +32,7 @@ import javax.persistence.*;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
+@DiscriminatorValue(value = "PROJECT")
 public class ProjectPaymentMethod extends PaymentMethod {
 
     @OneToOne

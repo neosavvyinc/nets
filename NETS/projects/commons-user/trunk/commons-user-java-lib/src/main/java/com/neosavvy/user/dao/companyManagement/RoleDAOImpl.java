@@ -25,7 +25,7 @@ public class RoleDAOImpl extends BaseDAO implements RoleDAO{
         getCurrentSession().flush();
     }
 
-    public RoleDTO findRoleById(int id) {
+    public RoleDTO findRoleById(long id) {
         return (RoleDTO) getCurrentSession()
                 .createCriteria(RoleDTO.class)
                 .add( Restrictions.idEq(id) )

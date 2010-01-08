@@ -61,12 +61,12 @@ public class TestClientCompanyDAO extends BaseProjectManagementDAOTest {
         ClientCompany company = saveAndAssertTestCompany();
 
         company.setCompanyName("Neosavvy LLC");
-        int id = company.getId();
+        long id = company.getId();
 
 
         clientCompanyDAO.saveCompany(company);
 
-        Assert.assertEquals("Ids should be the same before and after the update",id, company.getId());
+        Assert.assertEquals("Ids should be the same before and after the update", id, (long) company.getId());
         Assert.assertEquals("Name should now be Neosavvy LLC","Neosavvy LLC", company.getCompanyName());
     }
 

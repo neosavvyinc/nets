@@ -37,7 +37,7 @@ public class ProjectType {
     @Id
     @GeneratedValue
 	@Column(name="ID")
-	private int id;
+	private Long id;
 
     @Column(name="TYPE")
     private String type;

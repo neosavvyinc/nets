@@ -11,7 +11,7 @@ public interface BaseUserDAO<T extends BaseUserDTO> {
 
 	public void saveUser(T user);
 
-	public UserDTO findUserById(int id);
+	public UserDTO findUserById(long id);
 
 	public List<T> findUsers(T user);
 

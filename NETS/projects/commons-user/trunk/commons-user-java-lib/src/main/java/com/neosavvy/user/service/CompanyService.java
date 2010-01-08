@@ -20,7 +20,7 @@ public interface CompanyService {
 	public List<CompanyDTO> getCompanies();
 
     @Secured("ROLE_ADMIN")
-	public CompanyDTO findCompanyById(int id);
+	public CompanyDTO findCompanyById(long id);
 
     @Secured("ROLE_ADMIN")
 	public List<CompanyDTO> findCompanies(CompanyDTO company);

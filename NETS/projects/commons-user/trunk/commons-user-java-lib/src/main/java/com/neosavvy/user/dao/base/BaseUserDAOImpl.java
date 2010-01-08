@@ -37,7 +37,7 @@ public abstract class BaseUserDAOImpl<T extends BaseUserDTO> extends BaseDAO imp
         getCurrentSession().flush();
 	}
 
-	public UserDTO findUserById(int id) {
+	public UserDTO findUserById(long id) {
         return (UserDTO) getCurrentSession()
                 .createCriteria(UserDTO.class)
                 .add( Restrictions.idEq(id) )

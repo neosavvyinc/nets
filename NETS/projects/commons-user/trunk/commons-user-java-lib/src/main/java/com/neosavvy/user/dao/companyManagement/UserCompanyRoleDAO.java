@@ -16,7 +16,7 @@ public interface UserCompanyRoleDAO {
 
 	public void saveUserCompanyRole(UserCompanyRoleDTO userCompanyRole);
 
-	public UserCompanyRoleDTO findUserCompanyRoleById(int id);
+	public UserCompanyRoleDTO findUserCompanyRoleById(long id);
 
     public List<UserCompanyRoleDTO> findUserCompanyRoles(UserCompanyRoleDTO userCompanyRole);
 

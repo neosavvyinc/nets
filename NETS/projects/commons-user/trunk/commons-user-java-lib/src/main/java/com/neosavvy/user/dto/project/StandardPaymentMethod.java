@@ -1,5 +1,6 @@
 package com.neosavvy.user.dto.project;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -34,5 +35,6 @@ import javax.persistence.UniqueConstraint;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
+@DiscriminatorValue(value = "STANDARD")
 public class StandardPaymentMethod extends PaymentMethod {
 }

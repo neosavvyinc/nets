@@ -1,5 +1,6 @@
 package com.neosavvy.user.dao.project;
 
+import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
 
 import java.util.List;
@@ -37,4 +38,5 @@ public interface ProjectDAO {
 
     public void delete(Project project);
 
+    List<ClientCompany> findProjectsForParentCompany(Project exampleProject);
 }

@@ -35,7 +35,7 @@ public abstract class AbstractCompany {
     @Id
     @GeneratedValue
     @Column(name="ID")
-    private int id;
+    private Long id;
 
     @Column(name="COMPANY_NAME")
 
@@ -59,20 +59,11 @@ public abstract class AbstractCompany {
     @Column(name="COUNTRY")
     private String country;
 
-    public int getId() {
-        return id;
-    }
-
-    @FormParam("id")
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getCompanyName() {
         return companyName;
     }
 
-    @FormParam("companyName")
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
@@ -81,7 +72,6 @@ public abstract class AbstractCompany {
         return addressOne;
     }
 
-    @FormParam("addressOne")
     public void setAddressOne(String addressOne) {
         this.addressOne = addressOne;
     }
@@ -90,7 +80,6 @@ public abstract class AbstractCompany {
         return addressTwo;
     }
 
-    @FormParam("addressTwo")
     public void setAddressTwo(String addressTwo) {
         this.addressTwo = addressTwo;
     }
@@ -99,7 +88,6 @@ public abstract class AbstractCompany {
         return city;
     }
 
-    @FormParam("city")
     public void setCity(String city) {
         this.city = city;
     }
@@ -108,7 +96,6 @@ public abstract class AbstractCompany {
         return postalCode;
     }
 
-    @FormParam("postalCode")
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
     }
@@ -117,7 +104,6 @@ public abstract class AbstractCompany {
         return state;
     }
 
-    @FormParam("state")
     public void setState(String state) {
         this.state = state;
     }
@@ -126,9 +112,15 @@ public abstract class AbstractCompany {
         return country;
     }
 
-    @FormParam("country")
     public void setCountry(String country) {
         this.country = country;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

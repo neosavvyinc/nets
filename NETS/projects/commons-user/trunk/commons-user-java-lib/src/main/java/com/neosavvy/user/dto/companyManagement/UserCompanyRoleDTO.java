@@ -21,7 +21,7 @@ public class UserCompanyRoleDTO {
     @Id
     @GeneratedValue
     @Column(name="ID")
-    private int id;
+    private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="COMPANY_FK")
@@ -35,11 +35,11 @@ public class UserCompanyRoleDTO {
     @JoinColumn(name="USER_FK")
     private UserDTO user;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

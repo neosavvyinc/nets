@@ -25,7 +25,7 @@ public class UserInviteDAOImpl extends BaseDAO implements UserInviteDAO{
         getCurrentSession().flush();
     }
 
-    public UserInviteDTO findUserInviteById(int id) {
+    public UserInviteDTO findUserInviteById(long id) {
         return (UserInviteDTO) getCurrentSession().
                 createCriteria(UserInviteDTO.class).
                 add(Restrictions.idEq(id)).
