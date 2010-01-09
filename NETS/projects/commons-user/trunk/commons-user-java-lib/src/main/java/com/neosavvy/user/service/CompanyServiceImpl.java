@@ -233,7 +233,7 @@ public class CompanyServiceImpl implements CompanyService{
         searchByRegistration.setRegistrationToken(user.getRegistrationToken());
         List <UserInviteDTO> invitesFromToken = userInviteDao.findUserInvites(searchByRegistration);
         if( invitesFromToken == null || invitesFromToken.size() != 1) {
-            throw new CompanyServiceException("Unfortunately the system could not find an invite for your confirmation number you provided. Please have your company administrator resend an invite.");
+            throw new CompanyServiceException("Unfortunately the system could not find a single invite for your confirmation number you provided. Please have your company administrator resend an invite.");
         }
 
         // get the invite from the persistent invites

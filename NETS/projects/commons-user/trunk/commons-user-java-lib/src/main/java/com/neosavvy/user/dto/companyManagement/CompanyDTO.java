@@ -2,6 +2,10 @@ package com.neosavvy.user.dto.companyManagement;
 
 
 
+import flex.messaging.annotations.FlexClass;
+import flex.messaging.annotations.FlexField;
+import flex.messaging.annotations.IAnnotatedProxy;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
@@ -19,14 +23,16 @@ import java.util.Set;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-public class CompanyDTO extends AbstractCompany {
+@FlexClass(classType= FlexClass.FlexClassType.RemoteObject)
+public class CompanyDTO extends AbstractCompany implements IAnnotatedProxy {
 
-    @OneToMany(mappedBy="company", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="company", fetch=FetchType.LAZY)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
 
-    @OneToMany(mappedBy="company", fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="company", fetch=FetchType.LAZY)
     private Set<UserInviteDTO> userInvites;
 
+    @FlexField(fieldType = FlexField.FlexFieldType.Excluded)
     public Set<UserCompanyRoleDTO> getUserCompanyRoles() {
         return userCompanyRoles;
     }
@@ -35,6 +41,7 @@ public class CompanyDTO extends AbstractCompany {
         this.userCompanyRoles = userCompanyRoles;
     }
 
+    @FlexField(fieldType = FlexField.FlexFieldType.Excluded)
     public Set<UserInviteDTO> getUserInvites() {
         return userInvites;
     }

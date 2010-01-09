@@ -3,6 +3,7 @@ package com.neosavvy.user {
 
     import com.neosavvy.user.controller.client.GetClientsForCompany;
     import com.neosavvy.user.controller.client.SaveClientCompany;
+    import com.neosavvy.user.controller.clientManagement.InitializeManageProjects;
     import com.neosavvy.user.controller.company.DeleteUserCompanyInviteCommand;
     import com.neosavvy.user.controller.company.GetActiveUsersForCompany;
     import com.neosavvy.user.controller.company.GetAllUsersForCompany;
@@ -11,6 +12,8 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.company.InviteUsersToCompanyCommand;
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
     import com.neosavvy.user.controller.company.SendUserInviteCommand;
+    import com.neosavvy.user.controller.project.GetProjectsForCompany;
+    import com.neosavvy.user.controller.project.SaveProject;
     import com.neosavvy.user.controller.secured.SecuredViewPrepCommand;
     import com.neosavvy.user.controller.secured.SecuredViewTeardownCommand;
     import com.neosavvy.user.controller.secured.UserLoggedInStartupCommand;
@@ -131,6 +134,10 @@ package com.neosavvy.user {
         public static const INITIALIZE_MANAGE_PROJECTS_VIEW:String = "initializeManageProjectsView";
         public static const INITIALIZE_MANAGE_PROJECTS_VIEW_COMPLETE:String = "initializeManageProjectsViewComplete";
 
+        public static const GET_PROJECTS_FOR_COMPANY_REQUEST:String = "getProjectsForCompanyRequest";
+        public static const GET_PROJECTS_FOR_COMPANY_SUCCESS:String = "getProjectsForCompanySuccess";
+        public static const GET_PROJECTS_FOR_COMPANY_FAILED:String = "getProjectsForCompanyFailed";
+
         public function ApplicationFacade(key:String)
         {
             super(key);
@@ -177,6 +184,9 @@ package com.neosavvy.user {
 
             registerCommand(FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST, GetClientsForCompany);
             registerCommand(SAVE_CLIENT_COMPANY_REQUEST, SaveClientCompany);
+            registerCommand(INITIALIZE_MANAGE_PROJECTS_VIEW, InitializeManageProjects );
+            registerCommand(SAVE_PROJECT_REQUEST, SaveProject);
+            registerCommand(GET_PROJECTS_FOR_COMPANY_REQUEST, GetProjectsForCompany);
         }
 
         /**
@@ -193,6 +203,5 @@ package com.neosavvy.user {
             return ApplicationFacade.getInstance(key).retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
         }
 
-
-    }
+        }
 }

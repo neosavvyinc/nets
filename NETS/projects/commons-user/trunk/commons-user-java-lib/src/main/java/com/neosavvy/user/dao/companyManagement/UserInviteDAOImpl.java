@@ -47,8 +47,11 @@ public class UserInviteDAOImpl extends BaseDAO implements UserInviteDAO{
         if((userInvite.getEmailAddress() != null) && (userInvite.getEmailAddress().length() > 0)){
             criteria.add(Restrictions.eq("emailAddress", userInvite.getEmailAddress()));
         }
-
-        return criteria.list();  
+        if((userInvite.getRegistrationToken() != null) && (userInvite.getRegistrationToken().length() > 0)){
+            criteria.add(Restrictions.eq("registrationToken", userInvite.getRegistrationToken()));
+        }
+        
+        return criteria.list();
     }
 
     public void deleteUserInvite(UserInviteDTO userInvite) {

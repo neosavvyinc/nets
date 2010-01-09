@@ -11,12 +11,6 @@
         layout="vertical"
         horizontalAlign="right">
 
-    <mx:Script><![CDATA[
-        private function isFormValid():Boolean {
-            return this.companyFormValidators.formIsValid && this.clientFormValidators.formIsValid;
-        }
-]]></mx:Script>
-    
     <mx:Array id="companyFormValidators">
         <mx:StringValidator id="companyNameValidator" source="{this.companyName}" property="text" required="true"/>
         <mx:StringValidator id="billingAddress1Validator" source="{this.billingAddressOne}" property="text" required="true"/>
