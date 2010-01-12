@@ -1,21 +1,17 @@
 package com.neosavvy.user.model {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.ProxyConstants;
-
     import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
 
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.messaging.ChannelSet;
-    import mx.messaging.channels.AMFChannel;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.mxml.RemoteObject;
 
-    import org.puremvc.as3.multicore.patterns.proxy.Proxy;
-
-    public class SecurityProxy extends Proxy
+    public class SecurityProxy extends AbstractRemoteObjectProxy
     {
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.model.SecurityProxy");
 
@@ -66,22 +62,22 @@ package com.neosavvy.user.model {
          *
          *******/
 
-        public function login(user:UserDTO):void {
-            var channelSet:ChannelSet = getUserServiceChannelSet();
+        public function login(user:UserDTO, completionCallback:Function ):void {
+            var channelSet:ChannelSet =  getServiceChannelSet();
             channelSet.login(user.username, user.password);
             channelSet.addEventListener(ResultEvent.RESULT, login_resultHandler);
             channelSet.addEventListener(FaultEvent.FAULT, login_faultHandler);
         }
 
-        public function checkUserLoggedIn():void {
-            var userService:RemoteObject = getUserService();
+        public function checkUserLoggedIn(completionCallback:Function ):void {
+            var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             userService.addEventListener(ResultEvent.RESULT, user_loggedAlreadyLoggedInHandler);
             userService.addEventListener(FaultEvent.FAULT, user_notLoggedInHandler);
             userService.checkUserLoggedIn();
         }
 
-        public function logout() {
-            var channelSet:ChannelSet = getUserServiceChannelSet();
+        public function logout(completionCallback:Function ) {
+            var channelSet:ChannelSet = getServiceChannelSet();
             channelSet.logout();
             sendNotification(ApplicationFacade.USER_NOT_LOGGED_IN);
         }
@@ -111,26 +107,6 @@ package com.neosavvy.user.model {
             var security:SecurityWrapperDTO = event.result as SecurityWrapperDTO;
             setData(security);
             sendNotification(ApplicationFacade.USER_LOGGED_IN, user);
-        }
-
-        /****
-         *
-         * Helper functions
-         *
-         ****/
-
-        private function getUserServiceChannelSet():ChannelSet {
-            var channel:AMFChannel = new AMFChannel(ProxyConstants.channelName, ProxyConstants.url);
-            var channelSet:ChannelSet = new ChannelSet();
-            channelSet.addChannel(channel);
-            return channelSet;
-        }
-
-        private function getUserService():RemoteObject {
-            var userService:RemoteObject = new RemoteObject();
-            userService.channelSet = getUserServiceChannelSet();
-            userService.destination = ProxyConstants.userServiceDestination;
-            return userService;
         }
     }
 }

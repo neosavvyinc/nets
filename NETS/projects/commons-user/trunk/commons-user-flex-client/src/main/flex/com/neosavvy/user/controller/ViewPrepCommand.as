@@ -5,6 +5,7 @@ package com.neosavvy.user.controller {
     import com.neosavvy.user.view.secured.employeeInvitation.EmployeeManagementMediator;
     import com.neosavvy.user.view.login.ConfirmUserRegistrationMediator;
 
+    import com.neosavvy.user.view.secured.progress.ProgressBarMediator;
     import com.neosavvy.user.view.security.LoginMediator;
     import com.neosavvy.user.view.secured.userManagement.UserManagementMediator;
 
@@ -16,6 +17,7 @@ package com.neosavvy.user.controller {
         override public function execute(notification:INotification):void {
             var application:CommonsUser = notification.getBody() as CommonsUser;
             facade.registerMediator( new ApplicationMediator(application) );
+            facade.registerMediator( new ProgressBarMediator(null) );
             facade.registerMediator( new CompanyManagementMediator( application.companyManagement ) );
             facade.registerMediator( new LoginMediator( application.login ) );
             facade.registerMediator( new ConfirmUserRegistrationMediator( application.confirmUser ) );

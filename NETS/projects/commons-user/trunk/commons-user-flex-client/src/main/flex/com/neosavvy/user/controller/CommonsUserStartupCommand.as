@@ -18,7 +18,6 @@ package com.neosavvy.user.controller {
 
         override protected function initializeMacroCommand():void {
             initLogging();
-
             addSubCommand( ModelPrepCommand );
 			addSubCommand( ViewPrepCommand );
         }
@@ -29,7 +28,7 @@ package com.neosavvy.user.controller {
 
             // Log only messages for the classes in the mx.rpc.* and
             // mx.messaging packages.
-            logTarget.filters=["com.neosavvy.*"];
+            logTarget.filters=["*"];
 
             // Log all log levels.
             logTarget.level = LogEventLevel.DEBUG;

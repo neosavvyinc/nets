@@ -138,6 +138,10 @@ package com.neosavvy.user {
         public static const GET_PROJECTS_FOR_COMPANY_SUCCESS:String = "getProjectsForCompanySuccess";
         public static const GET_PROJECTS_FOR_COMPANY_FAILED:String = "getProjectsForCompanyFailed";
 
+        public static const SHOW_PROGRESS_INDICATOR:String = "showProgressIndicator";
+        public static const UPDATE_PROGRESS_INDICATOR:String = "updateProgressIndicator";
+        public static const HIDE_PROGRESS_INDICATOR:String = "hideProgressIndicator";
+
         public function ApplicationFacade(key:String)
         {
             super(key);
@@ -202,6 +206,5 @@ package com.neosavvy.user {
         public static function getSecurityProxy(key:String):SecurityProxy {
             return ApplicationFacade.getInstance(key).retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
         }
-
-        }
+    }
 }

@@ -3,6 +3,8 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
+
+import java.util.List;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -31,4 +33,6 @@ public interface ProjectService {
 
     public void addProject(Project project, CompanyDTO company, ClientCompany clientCompany);
 
+    public List<ClientCompany> findProjectsForParentCompany(CompanyDTO company);
+    
 }

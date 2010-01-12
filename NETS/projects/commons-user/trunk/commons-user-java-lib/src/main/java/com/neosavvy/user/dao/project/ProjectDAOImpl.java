@@ -65,7 +65,7 @@ public class ProjectDAOImpl extends BaseDAO implements ProjectDAO {
 
     public List<ClientCompany> findProjectsForParentCompany(Project exampleProject) {
         Query projectSearchQuery = getCurrentSession().createQuery("select project from Project project, CompanyDTO company" +
-                " where project.client_company_fk = company.id and company.id = :companyId");
+                " where project.client.id = company.id and company.id = :companyId");
         projectSearchQuery.setLong("companyId",exampleProject.getCompany().getId());
         return projectSearchQuery.list();
 

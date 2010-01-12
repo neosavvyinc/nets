@@ -1,25 +1,19 @@
 package com.neosavvy.user.model {
+    import com.neosavvy.flex.CustomRemoteObject;
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.ProxyConstants;
-
-
     import com.neosavvy.user.dto.companyManagement.UserDTO;
-
     import com.neosavvy.user.util.RemoteObjectUtils;
 
     import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
-
-    import mx.messaging.ChannelSet;
-    import mx.messaging.channels.AMFChannel;
+    import mx.rpc.IResponder;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.mxml.RemoteObject;
 
-    import org.puremvc.as3.multicore.patterns.proxy.Proxy;
-
-    public class UserServiceProxy extends Proxy {
+    public class UserServiceProxy extends AbstractRemoteObjectProxy {
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.model.UserServiceProxy");
 
         public static var NAME:String = "userProxy";
@@ -41,8 +35,13 @@ package com.neosavvy.user.model {
             return _activeUser;
         }
 
-        public function getUsers():void {
-            var userService:RemoteObject = getUserService();
+        public function set activeUser(activeUser:UserDTO):void {
+            _activeUser = activeUser;
+        }
+
+        public function getUsers(completionCallback:Function ):void {
+            var userService:RemoteObject =  getService(ProxyConstants.userServiceDestination);
+            //addCallbackHandler(userService, completionCallback);
             userService.addEventListener(ResultEvent.RESULT, handleGetUsersResult);
             userService.addEventListener(FaultEvent.FAULT, handleGetUsersFault);
             userService.getUsers();
@@ -60,8 +59,9 @@ package com.neosavvy.user.model {
             sendNotification(ApplicationFacade.GET_USERS_SUCCESS);
         }
 
-        public function saveUser(param:UserDTO):void {
-            var userService:RemoteObject = getUserService();
+        public function saveUser(param:UserDTO, completionCallback:Function ):void {
+            var userService:RemoteObject =  getService(ProxyConstants.userServiceDestination);
+            //addCallbackHandler(userService, completionCallback);
             userService.addEventListener(ResultEvent.RESULT, handleSaveUserResult);
             userService.addEventListener(FaultEvent.FAULT, handleSaveUserFault);
             userService.saveUser( param );
@@ -78,8 +78,9 @@ package com.neosavvy.user.model {
             sendNotification(ApplicationFacade.SAVE_USER_SUCCESS);
         }
 
-        public function confirmUser(userName:String, hashCode:String):void {
-            var userService:RemoteObject = getUserService();
+        public function confirmUser(userName:String, hashCode:String, completionCallback:Function ):void {
+            var userService:RemoteObject =  getService(ProxyConstants.userServiceDestination);
+            //addCallbackHandler(userService, completionCallback);
             userService.addEventListener(ResultEvent.RESULT, handleConfirmUserSuccess);
             userService.addEventListener(FaultEvent.FAULT, handleConfirmUserFault);
             userService.confirmUser( userName, hashCode );
@@ -96,29 +97,18 @@ package com.neosavvy.user.model {
             sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_FAILED);
         }
 
-        public function getActiveUser():void {
-            var userService:RemoteObject = getUserService();
-            userService.addEventListener(ResultEvent.RESULT, handleGetActiveUserSuccess);
-            userService.addEventListener(FaultEvent.FAULT, handleGetActiveUserFault);
+        public function getActiveUser(responder:IResponder):void {
+            var userService:RemoteObject =  getService(ProxyConstants.userServiceDestination);
+            addCallbackHandler(userService, responder);
             var securityProxy:SecurityProxy = facade.retrieveProxy( SecurityProxy.NAME ) as SecurityProxy;
             var user:UserDTO = new UserDTO();
             user.username = securityProxy.user;
             userService.findUsers( user );
         }
 
-        private function handleGetActiveUserFault(event:FaultEvent):void {
-            LOGGER.debug("User retrieval for active user failed");
-            RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
-        }
-
-        private function handleGetActiveUserSuccess(event:ResultEvent):void {
-            LOGGER.debug("User retrieval for active user succeeded");
-            var users:ArrayCollection = event.result as ArrayCollection;
-            _activeUser = users.getItemAt(0) as UserDTO;
-        }
-
-        public function resetPassword(user:UserDTO):void {
-            var userService:RemoteObject = getUserService();
+        public function resetPassword(user:UserDTO, completionCallback:Function ):void {
+            var userService:RemoteObject =  getService(ProxyConstants.userServiceDestination);
+            //addCallbackHandler(userService, completionCallback);
             userService.addEventListener(ResultEvent.RESULT, handleResetPasswordSuccess);
             userService.addEventListener(FaultEvent.FAULT, handleResetPasswordFault);
             userService.resetPassword( user );
@@ -134,26 +124,6 @@ package com.neosavvy.user.model {
             LOGGER.debug("User retrieval for active user succeeded");
             sendNotification(ApplicationFacade.RESET_USER_PASSWORD_SUCCESS);
         }
-
-        /****
-         *
-         * Helper functions
-         *
-         ****/
-        private function getUserServiceChannelSet():ChannelSet {
-            var channel:AMFChannel = new AMFChannel(ProxyConstants.channelName, ProxyConstants.url);
-            var channelSet:ChannelSet = new ChannelSet();
-            channelSet.addChannel(channel);
-            return channelSet;
-        }
-
-        private function getUserService():RemoteObject {
-            var userService:RemoteObject = new RemoteObject();
-            userService.channelSet = getUserServiceChannelSet();
-            userService.destination = ProxyConstants.userServiceDestination;
-            return userService;
-        }
-
 
     }
 }
