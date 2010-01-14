@@ -3,43 +3,52 @@ package com.neosavvy.user.dao.companyManagement;
 import com.neosavvy.user.dao.base.BaseUserDAOImpl;
 import com.neosavvy.user.dto.base.BaseUserDTO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAOImpl extends BaseUserDAOImpl<UserDTO> implements UserDAO {
 
     public List<UserDTO> findUsersForCompany(CompanyDTO company, UserDTO user) {
-        StringBuffer queryString = new StringBuffer("select user from UserDTO user, UserCompanyRoleDTO ucl, CompanyDTO company " +
-                "where user.id = ucl.user and ucl.company = company.id " +
+
+        StringBuilder queryString = new StringBuilder("select user from UserDTO user, UserCompanyRoleDTO ucl, CompanyDTO company " +
+                "where user = ucl.user and ucl.company = company " +
                 "and company.id = :companyId");
         if( user != null ) {
             queryString.append(" and user.active = :userActive");
         }
 
-        Query userQuery = getCurrentSession().createQuery(queryString.toString());
-        userQuery.setLong("companyId",company.getId());
+        Query userQuery = getEntityManager().createQuery(queryString.toString());
+        userQuery.setParameter("companyId",company.getId());
 
         if( user != null) {
-            userQuery.setBoolean("userActive", user.getActive());
+            userQuery.setParameter("userActive", user.getActive());
         }
 
-        return userQuery.list();
+        return userQuery.getResultList();
     }
 
     @Override
-    public List<UserDTO> findUsers(UserDTO user) {
-        Criteria criteria = generateCommonCriteriaFromBaseClass(user);
+    protected void addSearchPredicates(UserDTO user, CriteriaBuilder builder, Root<UserDTO> root, List<Predicate> searchPredicates) {
+        super.addSearchPredicates(user, builder, root, searchPredicates);
+        
         if(user.getUsername() != null && user.getUsername().length() > 0) {
-            criteria.add(Restrictions.eq("username", user.getUsername()));
+            searchPredicates.add(builder.equal(root.get("username"), user.getUsername()));
         }
         if(user.getPassword() != null && user.getPassword().length() > 0) {
-            criteria.add(Restrictions.eq("password", user.getPassword()));
+            searchPredicates.add(builder.equal(root.get("password"), user.getPassword()));
         }
+    }
 
-		return criteria.list();
+    @Override
+    protected Class<UserDTO> getTypeClass() {
+        return UserDTO.class;
     }
 }

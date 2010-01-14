@@ -40,7 +40,8 @@ import java.util.Set;
 public class ExpenseItem {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_item_id_seq")
+    @SequenceGenerator(name = "expense_item_id_seq", sequenceName = "expense_item_id_seq", allocationSize=1)
 	@Column(name="ID")
 	private Long id;
 

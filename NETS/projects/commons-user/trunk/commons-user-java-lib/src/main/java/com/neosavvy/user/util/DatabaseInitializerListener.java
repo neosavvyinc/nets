@@ -50,11 +50,11 @@ public class DatabaseInitializerListener implements InitializingBean {
             template.execute("TRUNCATE TABLE CLIENT_USER_CONTACT");
             template.execute("TRUNCATE TABLE COMPANY");
             template.execute("TRUNCATE TABLE ROLE");
-            template.execute("TRUNCATE TABLE USER");
+            template.execute("TRUNCATE TABLE USERS");
             template.execute("TRUNCATE TABLE USER_COMPANY_ROLE");
             template.execute("TRUNCATE TABLE USER_INVITE");
-            template.update("INSERT INTO ROLE(LONG_NAME,SHORT_NAME) VALUES (?, ?)",new Object[]{"Administrator","ROLE_ADMIN"});
-            template.update("INSERT INTO ROLE(LONG_NAME,SHORT_NAME) VALUES (?, ?)",new Object[]{"Employee","ROLE_EMPLOYEE"});
+            template.update("INSERT INTO ROLE(ID,LONG_NAME,SHORT_NAME) VALUES (nextval('role_id_seq'),?, ?)",new Object[]{"Administrator","ROLE_ADMIN"});
+            template.update("INSERT INTO ROLE(ID,LONG_NAME,SHORT_NAME) VALUES (nextval('role_id_seq'),?, ?)",new Object[]{"Employee","ROLE_EMPLOYEE"});
         } catch (DataAccessException e) {
             logger.error(e);
         }

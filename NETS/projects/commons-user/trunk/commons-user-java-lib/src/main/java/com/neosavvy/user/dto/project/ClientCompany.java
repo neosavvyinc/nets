@@ -37,6 +37,11 @@ import javax.persistence.*;
     }
 )
 public class ClientCompany extends AbstractCompany {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_company_id_seq")
+    @SequenceGenerator(name = "client_company_id_seq", sequenceName = "client_company_id_seq", allocationSize=1)
+    @Column(name="ID")
+    private Long id;
 
     @OneToOne
     @JoinColumn(name="CLIENT_USER_CONTACT_FK")
@@ -60,5 +65,14 @@ public class ClientCompany extends AbstractCompany {
 
     public void setParentCompany(CompanyDTO parentCompany) {
         this.parentCompany = parentCompany;
+    }
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

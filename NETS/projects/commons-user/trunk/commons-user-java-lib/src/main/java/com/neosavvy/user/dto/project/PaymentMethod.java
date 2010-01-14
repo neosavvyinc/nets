@@ -37,7 +37,8 @@ import javax.persistence.*;
 public abstract class PaymentMethod {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_method_id_seq")
+    @SequenceGenerator(name = "payment_method_id_seq", sequenceName = "payment_method_id_seq", allocationSize=1)
 	@Column(name="ID")
 	private Long id;  
 

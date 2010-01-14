@@ -37,7 +37,8 @@ import java.util.List;
 public class ExpenseReport {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_report_id_seq")
+    @SequenceGenerator(name = "expense_report_id_seq", sequenceName = "expense_report_id_seq", allocationSize=1)
 	@Column(name = "ID")
 	private Long id; 
 

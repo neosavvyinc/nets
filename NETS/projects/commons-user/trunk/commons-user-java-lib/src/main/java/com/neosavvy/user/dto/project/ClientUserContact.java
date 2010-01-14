@@ -2,9 +2,7 @@ package com.neosavvy.user.dto.project;
 
 import com.neosavvy.user.dto.base.BaseUserDTO;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -37,4 +35,17 @@ import javax.persistence.UniqueConstraint;
     }
 )
 public class ClientUserContact extends BaseUserDTO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_user_contact_id_seq")
+    @SequenceGenerator(name = "client_user_contact_id_seq", sequenceName = "client_user_contact_id_seq", allocationSize=1)
+    @Column(name="ID")
+    private Long id;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

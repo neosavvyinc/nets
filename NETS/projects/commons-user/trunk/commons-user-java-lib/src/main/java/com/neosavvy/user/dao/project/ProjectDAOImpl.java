@@ -1,13 +1,17 @@
 package com.neosavvy.user.dao.project;
 
 import com.neosavvy.user.dao.base.BaseDAO;
+import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 
+import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 /*************************************************************************
  *
@@ -36,38 +40,47 @@ import java.util.List;
 public class ProjectDAOImpl extends BaseDAO implements ProjectDAO {
 
     public List<Project> findProject(Project project) {
-        Criteria criteria = getCurrentSession().createCriteria(Project.class);
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<Project> criteria = builder.createQuery(Project.class);
+        Root<Project> root = criteria.from(Project.class);
+        List<Predicate> searchPredicates = new ArrayList<Predicate>();
+
         if(project.getCode() != null && project.getCode().length() > 0 ) {
-            criteria.add(Restrictions.eq("code", project.getCode()));
+            searchPredicates.add(builder.equal(root.get("code"), project.getCode()));
         }
         if(project.getName() != null && project.getName().length() > 0 ) {
-            criteria.add(Restrictions.eq("name", project.getName()));
+            searchPredicates.add(builder.equal(root.get("name"), project.getName()));
         }       
-        return criteria.list();
+
+        return getEntityManager().createQuery(criteria.where(searchPredicates.toArray(new Predicate[0]))).getResultList();
     }
 
     public void delete(Project project) {
-        getCurrentSession().delete(project);
-        getCurrentSession().flush();
+        getEntityManager().remove(project);
+        getEntityManager().flush();
     }
 
-    public Project findProjectById(int id) {
-        return (Project) getCurrentSession()
-                .createCriteria(Project.class)
-                .add( Restrictions.idEq(id) )
-                .uniqueResult();
+    public Project findProjectById(long id) {
+        return getEntityManager().find(Project.class, id);
     }
 
-    public void save(Project project) {
-        getCurrentSession().saveOrUpdate(project);
-        getCurrentSession().flush();
+    public Project save(Project project) {
+        if (project.getId() == null) {
+            getEntityManager().persist(project);
+        }
+        else {
+            project = getEntityManager().merge(project);
+        }
+
+        getEntityManager().flush();
+        return project;
     }
 
-    public List<ClientCompany> findProjectsForParentCompany(Project exampleProject) {
-        Query projectSearchQuery = getCurrentSession().createQuery("select project from Project project, CompanyDTO company" +
+    public List<Project> findProjectsForParentCompany(long parentCompanyId) {
+        Query projectSearchQuery = getEntityManager().createQuery("select project from Project project, CompanyDTO company" +
                 " where project.client.id = company.id and company.id = :companyId");
-        projectSearchQuery.setLong("companyId",exampleProject.getCompany().getId());
-        return projectSearchQuery.list();
+        projectSearchQuery.setParameter("companyId", parentCompanyId);
+        return projectSearchQuery.getResultList();
 
 
     }

@@ -37,11 +37,40 @@ import java.util.Date;
     }
 )
 public class ExpenseItemValue extends Attribute {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_item_value_id_seq")
+    @SequenceGenerator(name = "expense_item_value_id_seq", sequenceName = "expense_item_value_id_seq", allocationSize=1)
+	@Column(name="ID")
+	private Long id;
 
     @ManyToOne
     private ExpenseItem expenseItem;
 
     @Column( name = "PARTITION_DATE")
+    @Temporal(TemporalType.DATE)
     private Date partitionDate;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public ExpenseItem getExpenseItem() {
+        return expenseItem;
+    }
+
+    public void setExpenseItem(ExpenseItem expenseItem) {
+        this.expenseItem = expenseItem;
+    }
+
+    public Date getPartitionDate() {
+        return partitionDate;
+    }
+
+    public void setPartitionDate(Date partitionDate) {
+        this.partitionDate = partitionDate;
+    }
 }

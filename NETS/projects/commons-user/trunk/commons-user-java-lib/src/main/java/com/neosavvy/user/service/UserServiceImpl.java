@@ -62,11 +62,6 @@ public class UserServiceImpl implements UserService {
         return this.templateMessage;
     }
 
-    public List<UserDTO> getUsers() {
-        return userDao.getUsers();
-    }
-
-
 
     public void saveUser(UserDTO user) {
         userDao.saveUser(user);

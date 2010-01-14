@@ -36,7 +36,7 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
         companyDAO.saveCompany(company);
 
         company.setAddressOne("666 Satin blvd");
-        companyDAO.updateCompany(company);
+        companyDAO.saveCompany(company);
 
         int numRows = countRowsInTable("COMPANY");
 

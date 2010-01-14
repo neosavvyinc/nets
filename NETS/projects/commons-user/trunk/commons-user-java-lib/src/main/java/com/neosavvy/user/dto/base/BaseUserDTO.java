@@ -1,9 +1,8 @@
 package com.neosavvy.user.dto.base;
 
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import org.eclipse.persistence.internal.descriptors.PersistenceObject;
+
+import javax.persistence.*;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,11 +13,6 @@ import javax.persistence.MappedSuperclass;
  */
 @MappedSuperclass
 public abstract class BaseUserDTO {
-    @Id
-    @GeneratedValue
-    @Column(name="ID")
-    private Long id;
-
     @Column(name="FIRST_NAME")
     private String firstName;
 
@@ -34,14 +28,12 @@ public abstract class BaseUserDTO {
     @Column(name="CONTACT_PHONE_NUMBER")
     private String contactPhoneNumber;
 
-    public Long getId() {
-        return id;
+    protected BaseUserDTO() {
+
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
+    public abstract Long getId();
+    
     public String getFirstName() {
         return firstName;
     }

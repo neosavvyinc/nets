@@ -9,7 +9,7 @@ import java.util.Set;
 
 @Entity
 @Table(
-    name="USER" ,
+    name="USERS" ,
     uniqueConstraints = {
             @UniqueConstraint(columnNames = {"ID"})
             ,@UniqueConstraint(columnNames = {"USERNAME"})
@@ -18,6 +18,11 @@ import java.util.Set;
 @FlexClass(classType= FlexClass.FlexClassType.RemoteObject)
 public class UserDTO extends BaseUserDTO implements IAnnotatedProxy {// implements Externalizable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")
+    @SequenceGenerator(name = "users_id_seq", sequenceName = "users_id_seq", allocationSize=1)
+    @Column(name="ID")
+    private Long id;
 
     @Column(name="USERNAME")
     private String username;
@@ -37,6 +42,13 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy {// implemen
     @OneToMany(mappedBy="user", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     public String getUsername() {
         return username;
     }

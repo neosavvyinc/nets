@@ -12,9 +12,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface UserCompanyRoleDAO {
-    public List<UserCompanyRoleDTO> getUserCompanyRoles();
-
-	public void saveUserCompanyRole(UserCompanyRoleDTO userCompanyRole);
+	public UserCompanyRoleDTO saveUserCompanyRole(UserCompanyRoleDTO userCompanyRole);
 
 	public UserCompanyRoleDTO findUserCompanyRoleById(long id);
 

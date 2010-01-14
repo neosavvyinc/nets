@@ -9,9 +9,6 @@ import org.junit.Assert;
 
 import java.util.List;
 
-@ContextConfiguration(locations = {
-		"classpath:applicationContext.xml"
-        })
 public abstract class BaseSpringAwareDAOTestCase extends BaseSpringAwareTestCase {
 
     protected CompanyDTO createAltTestCompany() {

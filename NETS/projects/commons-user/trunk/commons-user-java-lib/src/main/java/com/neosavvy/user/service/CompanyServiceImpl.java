@@ -36,10 +36,6 @@ public class CompanyServiceImpl implements CompanyService{
     private SimpleMailMessage templateMessage;
     private String hostName;
 
-    public List<CompanyDTO> getCompanies() {
-        return companyDao.getCompanies();
-    }
-
     public CompanyDTO saveCompany(CompanyDTO company) {
         return companyDao.saveCompany(company);
     }
@@ -52,6 +48,7 @@ public class CompanyServiceImpl implements CompanyService{
         return companyDao.findCompanies(company);
     }
 
+    @Transactional(rollbackFor={CompanyServiceException.class})
     public void addCompany(CompanyDTO company, UserDTO user) {
         saveUserAndEmailConfirmation(user);
         saveCompany(company);
@@ -243,10 +240,10 @@ public class CompanyServiceImpl implements CompanyService{
         //Ensure that the user is active and enabled
         user.setConfirmedRegistration(true);
         user.setActive(true);
+        userDao.saveUser(user);
 
         // get the company from the UserInvite
         CompanyDTO company = userInvite.getCompany();
-
 
 
         // save the new user to the company
@@ -257,7 +254,6 @@ public class CompanyServiceImpl implements CompanyService{
         userCompanyRole.setUser(user);
         membersOfCompany.add(userCompanyRole);
         company.setUserCompanyRoles(membersOfCompany);
-        userDao.saveUser(user);
         userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
 
         // email them to tell them how grateful you are for joining
@@ -335,10 +331,6 @@ public class CompanyServiceImpl implements CompanyService{
         return this.templateMessage;
     }
 
-    public List<UserDTO> getUsers() {
-        return userDao.getUsers();
-    }
-    
     public String getHostName() {
         return hostName;
     }

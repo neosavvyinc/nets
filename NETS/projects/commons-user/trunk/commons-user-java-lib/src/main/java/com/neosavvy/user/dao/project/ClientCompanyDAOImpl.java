@@ -3,10 +3,10 @@ package com.neosavvy.user.dao.project;
 import com.neosavvy.user.dao.base.BaseCompanyDAOImpl;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
-import org.hibernate.Criteria;
-import org.hibernate.Query;
-import org.hibernate.criterion.Restrictions;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 /*************************************************************************
@@ -36,13 +36,16 @@ import java.util.List;
 public class ClientCompanyDAOImpl extends BaseCompanyDAOImpl<ClientCompany> implements ClientCompanyDAO {
 
     @Override
-    public List<ClientCompany> findCompanies(ClientCompany company) {
-        Criteria criteria = super.generateCriteriaForFind(company);
+    protected Class<ClientCompany> getTypeClass() {
+        return ClientCompany.class;
+    }
+
+    @Override
+    protected void addSearchPredicates(ClientCompany company, CriteriaBuilder builder, Root<ClientCompany> root, List<Predicate> searchPredicates) {
+        super.addSearchPredicates(company, builder, root, searchPredicates);
 
         if(company.getParentCompany() != null) {
-            criteria.add(Restrictions.eq("parentCompany", company.getParentCompany()));
+            searchPredicates.add(builder.equal(root.get("parentCompany"), company.getParentCompany()));
         }
-
-        return criteria.list();
     }
 }

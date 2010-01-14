@@ -1,12 +1,16 @@
 package com.neosavvy.user.dao.companyManagement;
 
 import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.RoleDTO;
 import com.neosavvy.user.util.ProjectTestUtil;
 import org.junit.Test;
 import org.junit.Assert;
-import org.hibernate.exception.ConstraintViolationException;
+import org.postgresql.util.PSQLException;
 
+import javax.persistence.PersistenceException;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 /**
@@ -94,17 +98,12 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
         cleanupTables();
     }
 
-    @Test
+    @Test(expected = PersistenceException.class)
     public void testSaveTwoUsersSameUserName() {
         cleanupTables();
         roleDAO.saveRole(ProjectTestUtil.createTestRole());
-        try {
-            Assert.assertEquals("Should be a row in the table for the user",countRowsInTable("ROLE"),1);
-            roleDAO.saveRole(ProjectTestUtil.createTestRole());
-        } catch (ConstraintViolationException e) {
-            return;
-        }
+        Assert.assertEquals("Should be a row in the table for the user",countRowsInTable("ROLE"),1);
+        roleDAO.saveRole(ProjectTestUtil.createTestRole());
         Assert.fail("No data access exception was thrown when saving a role by the same id");
     }
-
 }

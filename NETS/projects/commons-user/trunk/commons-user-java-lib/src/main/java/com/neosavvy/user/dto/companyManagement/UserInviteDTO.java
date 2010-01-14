@@ -18,6 +18,11 @@ import javax.persistence.*;
     }
 )
 public class UserInviteDTO extends BaseUserDTO {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_invite_id_seq")
+    @SequenceGenerator(name = "user_invite_id_seq", sequenceName = "user_invite_id_seq", allocationSize=1)
+    @Column(name="ID")
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name="COMPANY_FK")
@@ -25,6 +30,14 @@ public class UserInviteDTO extends BaseUserDTO {
 
     @Column(name="REGISTRATION_TOKEN")
     private String registrationToken;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public CompanyDTO getCompany() {
         return company;

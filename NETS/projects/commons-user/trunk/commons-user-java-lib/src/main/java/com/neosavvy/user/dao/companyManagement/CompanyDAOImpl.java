@@ -7,8 +7,6 @@ import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 
 import java.util.List;
 
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
 
 /**
  * Created by IntelliJ IDEA.
@@ -18,6 +16,8 @@ import org.hibernate.criterion.Restrictions;
  */
 public class CompanyDAOImpl extends BaseCompanyDAOImpl<CompanyDTO> implements CompanyDAO {
 
-
-    
+    @Override
+    protected Class<CompanyDTO> getTypeClass() {
+        return CompanyDTO.class;
+    }
 }

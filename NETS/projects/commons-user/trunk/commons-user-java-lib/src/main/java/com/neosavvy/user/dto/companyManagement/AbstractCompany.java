@@ -1,5 +1,7 @@
 package com.neosavvy.user.dto.companyManagement;
 
+import org.eclipse.persistence.internal.descriptors.PersistenceObject;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -32,13 +34,7 @@ import javax.ws.rs.FormParam;
 @MappedSuperclass
 public abstract class AbstractCompany {
 
-    @Id
-    @GeneratedValue
-    @Column(name="ID")
-    private Long id;
-
     @Column(name="COMPANY_NAME")
-
     private String companyName;
 
     @Column(name="ADDRESS_ONE")
@@ -59,6 +55,11 @@ public abstract class AbstractCompany {
     @Column(name="COUNTRY")
     private String country;
 
+    protected AbstractCompany() {
+        
+    }
+
+    public abstract Long getId();
 
     public String getCompanyName() {
         return companyName;
@@ -116,11 +117,4 @@ public abstract class AbstractCompany {
         this.country = country;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 }

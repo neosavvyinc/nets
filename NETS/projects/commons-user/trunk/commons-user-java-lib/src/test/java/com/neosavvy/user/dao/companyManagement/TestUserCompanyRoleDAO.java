@@ -9,6 +9,8 @@ import com.neosavvy.user.dto.companyManagement.RoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 /**
@@ -57,7 +59,9 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
 
-        UserCompanyRoleDTO userCompanyRoleReturned = userCompanyRoleDAO.getUserCompanyRoles().get(0);
+        List<UserCompanyRoleDTO> roles = findUserCompanyRoles();
+        Assert.assertFalse(roles.isEmpty());
+        UserCompanyRoleDTO userCompanyRoleReturned = roles.get(0);
         Assert.assertEquals("ojbect stored is the one returned",
                 userCompanyRole.getId(),
                 userCompanyRoleReturned.getId());
@@ -203,4 +207,10 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
         Assert.assertEquals(0,numRows);
     }
 
+    private List<UserCompanyRoleDTO> findUserCompanyRoles() {
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery query = builder.createQuery(UserCompanyRoleDTO.class);
+        query.from(UserCompanyRoleDTO.class);
+        return getEntityManager().createQuery(query).getResultList();
+    }
 }

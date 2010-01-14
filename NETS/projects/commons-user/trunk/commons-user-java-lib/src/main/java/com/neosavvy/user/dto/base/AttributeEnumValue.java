@@ -35,7 +35,8 @@ import javax.persistence.*;
 public class AttributeEnumValue {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attribute_enum_value_id_seq")
+    @SequenceGenerator(name = "attribute_enum_value_id_seq", sequenceName = "attribute_enum_value_id_seq", allocationSize=1)
     @Column(name="ID")
     private Long id;
 

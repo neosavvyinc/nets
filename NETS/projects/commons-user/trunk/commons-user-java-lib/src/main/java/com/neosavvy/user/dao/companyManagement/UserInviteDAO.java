@@ -12,10 +12,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface UserInviteDAO {
-    
-    public List<UserInviteDTO> getUserInvites();
-
-	public void saveUserInvite(UserInviteDTO userInvite);
+	public UserInviteDTO saveUserInvite(UserInviteDTO userInvite);
 
 	public UserInviteDTO findUserInviteById(long id);
 

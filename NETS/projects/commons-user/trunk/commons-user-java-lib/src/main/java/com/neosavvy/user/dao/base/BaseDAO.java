@@ -1,7 +1,7 @@
 package com.neosavvy.user.dao.base;
 
-import org.hibernate.SessionFactory;
-import org.hibernate.classic.Session;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  * Created by IntelliJ IDEA.
@@ -11,17 +11,15 @@ import org.hibernate.classic.Session;
  * To change this template use File | Settings | File Templates.
  */
 public class BaseDAO {
-    private SessionFactory sessionFactory;
+    @PersistenceContext
+    private EntityManager entityManager;
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
+    public EntityManager getEntityManager() {
+        return entityManager;
     }
 
-    public SessionFactory getSessionFactory() {
-        return this.sessionFactory;
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
     }
 
-    protected Session getCurrentSession() {
-        return getSessionFactory().getCurrentSession();
-    }    
 }

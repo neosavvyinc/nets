@@ -8,6 +8,58 @@
              http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-2.5.xsd
              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.1.xsd">
 
+    <import resource="classpath*:commonsContext.xml" />
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/commonstest"/>
+        <property name="username" value="commonstest"/>
+        <property name="password" value="commonstest"/>
+        <property name="initialSize" value="5"/>
+        <property name="maxActive" value="10"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="validationQuery" value="SELECT 1"/>
+
+    </bean>
+
+
+    <!--bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+        <property name="url" value="jdbc:derby:memory:commonsuser;create=true"/>
+        <property name="username" value=""/>
+        <property name="password" value=""/>
+        <property name="initialSize" value="5"/>
+        <property name="maxActive" value="10"/>
+        <property name="testOnBorrow" value="true"/>
+        <property name="validationQuery" value="SELECT 1 FROM SYSIBM.SYSDUMMY1"/>
+
+    </bean-->
+
+    <bean id="entityManagerFactory"
+          class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.EclipseLinkJpaVendorAdapter">
+                <property name="showSql" value="true"/>
+                <property name="generateDdl" value="true"/>
+                <property name="databasePlatform" value="org.eclipse.persistence.platform.database.PostgreSQLPlatform"/>
+            </bean>
+        </property>
+        <property name="jpaPropertyMap">
+            <map>
+                <entry key="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+                <entry key="eclipselink.ddl-generation.output-mode" value="both"/>
+                <entry key="eclipselink.logging.level" value="FINEST"/>
+                <entry key="eclipselink.create-ddl-jdbc-file-name" value="ddl.txt" />
+                <entry key="eclipselink.application-location" value="/tmp" />
+            </map>
+        </property>
+    </bean>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+
     <security:authentication-provider>
         <security:password-encoder hash="plaintext"/>
         <security:user-service>

@@ -53,13 +53,11 @@ public class ProjectServiceImpl implements ProjectService {
         projectDAO.save(project);
     }
 
-    public List<ClientCompany> findProjectsForParentCompany(CompanyDTO company) {
+    public List<Project> findProjectsForParentCompany(CompanyDTO company) {
         if( company == null ) {
             throw new ProjectServiceException("Cannot find projects without a parent company");
         }
-        Project exampleProject = new Project();
-        exampleProject.setCompany(company);
-        return projectDAO.findProjectsForParentCompany(exampleProject);
+        return projectDAO.findProjectsForParentCompany(company.getId());
     }
 
     public ProjectDAO getProjectDAO() {

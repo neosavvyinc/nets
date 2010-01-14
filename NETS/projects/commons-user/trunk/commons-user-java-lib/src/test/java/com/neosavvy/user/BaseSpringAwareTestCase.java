@@ -6,7 +6,16 @@ import com.neosavvy.user.dto.companyManagement.RoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.transaction.TransactionConfiguration;
+
+import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
+import javax.sql.DataSource;
 
 /**
  * Created by IntelliJ IDEA.
@@ -14,6 +23,9 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
  * Date: Dec 29, 2009
  * Time: 4:45:35 PM
  */
+@ContextConfiguration(locations = {
+        "classpath:testSecurityContext.xml"
+        })
 public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit4SpringContextTests {
     @Autowired
     protected CompanyDAO companyDAO;
@@ -25,6 +37,9 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
     protected UserInviteDAO userInviteDAO;
     @Autowired
     protected UserCompanyRoleDAO userCompanyRoleDAO;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     protected UserCompanyRoleDTO createTestUserCompanyRole(RoleDTO role, CompanyDTO company, UserDTO user){
         UserCompanyRoleDTO testUserCompanyRole = new UserCompanyRoleDTO();
@@ -49,9 +64,14 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
         deleteFromTables("CLIENT_COMPANY");
         deleteFromTables("CLIENT_USER_CONTACT");
         deleteFromTables("USER_COMPANY_ROLE");
-        deleteFromTables("USER");
+        deleteFromTables("USERS");
         deleteFromTables("ROLE");
         deleteFromTables("USER_INVITE");
         deleteFromTables("COMPANY");
     }
+
+    protected EntityManager getEntityManager() {
+        return entityManager;
+    }
+
 }

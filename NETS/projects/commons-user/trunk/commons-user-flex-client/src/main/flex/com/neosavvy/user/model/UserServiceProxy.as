@@ -1,5 +1,4 @@
 package com.neosavvy.user.model {
-    import com.neosavvy.flex.CustomRemoteObject;
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.ProxyConstants;
     import com.neosavvy.user.dto.companyManagement.UserDTO;

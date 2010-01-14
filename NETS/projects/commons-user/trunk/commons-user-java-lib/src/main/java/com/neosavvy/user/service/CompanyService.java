@@ -17,9 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface CompanyService {
     @Secured("ROLE_ADMIN")
-	public List<CompanyDTO> getCompanies();
-
-    @Secured("ROLE_ADMIN")
 	public CompanyDTO findCompanyById(long id);
 
     @Secured("ROLE_ADMIN")

@@ -19,7 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class UserCompanyRoleDTO {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_company_role_id_seq")
+    @SequenceGenerator(name = "user_company_role_id_seq", sequenceName = "user_company_role_id_seq", allocationSize=1)
     @Column(name="ID")
     private Long id;
 

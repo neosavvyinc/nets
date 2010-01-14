@@ -25,6 +25,11 @@ import java.util.Set;
 )
 @FlexClass(classType= FlexClass.FlexClassType.RemoteObject)
 public class CompanyDTO extends AbstractCompany implements IAnnotatedProxy {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_id_seq")
+    @SequenceGenerator(name = "company_id_seq", sequenceName = "company_id_seq", allocationSize=1)
+    @Column(name="ID")
+    private Long id;
 
     @OneToMany(mappedBy="company", fetch=FetchType.LAZY)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
@@ -48,5 +53,13 @@ public class CompanyDTO extends AbstractCompany implements IAnnotatedProxy {
 
     public void setUserInvites(Set<UserInviteDTO> userInvites) {
         this.userInvites = userInvites;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

@@ -35,9 +35,6 @@ import java.util.List;
 @Transactional
 public interface UserService {
 
-    @Secured("ROLE_ADMIN")
-	public List<UserDTO> getUsers();
-
 	public void saveUser(UserDTO user);
 
     @Secured("ROLE_ADMIN")
@@ -55,9 +52,10 @@ public interface UserService {
     @Secured("ROLE_ADMIN")
     public void resetPassword(UserDTO user);
 
+    @Secured("ROLE_ADMIN")
+    public void createAdminUser(UserDTO user);
+    
     public boolean confirmUser(String userName, String hashCode);
 
     public void setMailSender(MailSender mailSender);
-
-    public void createAdminUser(UserDTO user);
 }

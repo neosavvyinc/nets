@@ -2,9 +2,12 @@ package com.neosavvy.user.dao.base;
 
 import com.neosavvy.user.dto.companyManagement.AbstractCompany;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 /*************************************************************************
  *
@@ -32,54 +35,56 @@ import java.util.List;
  */
 public abstract class BaseCompanyDAOImpl<T extends AbstractCompany> extends BaseDAO implements BaseCompanyDAO<T> {
 
-    public List<T> getCompanies() {
-        return getCurrentSession().createCriteria(AbstractCompany.class).list();
-    }
-
     public T saveCompany(T company) {
-        getCurrentSession().clear();
-		getCurrentSession().saveOrUpdate(company);
-        getCurrentSession().flush();
-        return company;
-    }
-
-    public T updateCompany(T company) {
-        getCurrentSession().update(company);
-        getCurrentSession().flush();
+        if (company.getId() == null) {
+            getEntityManager().persist(company);
+        }
+		else {
+            company = getEntityManager().merge(company);
+        }
+        getEntityManager().flush();
         return company;
     }
 
     public T findCompanyById(long id) {
-        return (T) getCurrentSession()
-            .createCriteria(AbstractCompany.class)
-            .add( Restrictions.idEq(id) )
-            .uniqueResult();
+        return getEntityManager().find(getTypeClass(), id);
     }
 
     public List<T> findCompanies(T company) {
-        Criteria criteria = generateCriteriaForFind(company);
-		return criteria.list();
+        CriteriaQuery<T> criteria = generateCriteriaForFind(company);
+		return getEntityManager().createQuery(criteria).getResultList();
     }
 
-    protected Criteria generateCriteriaForFind(T company) {
-        Criteria criteria = getCurrentSession().createCriteria(company.getClass());
+    protected CriteriaQuery<T> generateCriteriaForFind(T company) {
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<T> criteria = builder.createQuery(getTypeClass());
+        Root<T> root = criteria.from(getTypeClass());
+        List<Predicate> searchPredicates = new ArrayList<Predicate>();
+
+        addSearchPredicates(company, builder, root, searchPredicates);
+        return criteria.where(searchPredicates.toArray(new Predicate[0]));
+    }
+
+    protected void addSearchPredicates(T company, CriteriaBuilder builder, Root<T> root, List<Predicate> searchPredicates) {
         if(company.getCompanyName() != null && company.getCompanyName().length() > 0) {
-            criteria.add(Restrictions.eq("companyName", company.getCompanyName()));
+            searchPredicates.add(builder.equal(root.get("companyName"), company.getCompanyName()));
         }
         if(company.getCity() != null && company.getCity().length() > 0) {
-            criteria.add(Restrictions.eq("city", company.getCity()));
+            searchPredicates.add(builder.equal(root.get("city"), company.getCity()));
         }
         if(company.getState() != null && company.getState().length() > 0) {
-            criteria.add(Restrictions.eq("state", company.getState()));
+            searchPredicates.add(builder.equal(root.get("state"), company.getState()));
         }
         if(company.getPostalCode() != null && company.getPostalCode().length() > 0) {
-            criteria.add(Restrictions.eq("postalCode", company.getPostalCode()));
+            searchPredicates.add(builder.equal(root.get("postalCode"), company.getPostalCode()));
         }
-        return criteria;
     }
 
     public void delete(T company) {
-		getCurrentSession().delete(company);
-        getCurrentSession().flush();
+		getEntityManager().remove(company);
+        getEntityManager().flush();
 	}
+
+    protected abstract Class<T> getTypeClass();
+
 }

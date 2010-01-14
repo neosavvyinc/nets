@@ -33,6 +33,6 @@ public interface ProjectService {
 
     public void addProject(Project project, CompanyDTO company, ClientCompany clientCompany);
 
-    public List<ClientCompany> findProjectsForParentCompany(CompanyDTO company);
+    public List<Project> findProjectsForParentCompany(CompanyDTO company);
     
 }

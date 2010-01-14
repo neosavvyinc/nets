@@ -13,10 +13,6 @@ import org.junit.Before;
  * @author lgleason
  * todo: refactor this and the other base service out for common classes
  */
-@ContextConfiguration(locations = {
-		"classpath:applicationContext.xml",
-        "classpath:testSecurityContext.xml"
-        })
 public abstract class BaseSpringAwareServiceTestCase extends BaseSpringAwareTestCase {
 
     @Autowired

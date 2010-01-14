@@ -30,13 +30,13 @@ import java.util.List;
  */
 public interface ProjectDAO {
 
-    public void save(Project project);
+    public Project save(Project project);
 
-	public Project findProjectById(int id);
+	public Project findProjectById(long id);
 
 	public List<Project> findProject(Project project);
 
     public void delete(Project project);
 
-    List<ClientCompany> findProjectsForParentCompany(Project exampleProject);
+    List<Project> findProjectsForParentCompany(long parentCompanyId);
 }

@@ -22,9 +22,10 @@ import java.util.Set;
 @XmlRootElement
 public class RoleDTO {
     @Id
-    @GeneratedValue
-	@Column(name="ID")
-	private Long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "role_id_seq")
+    @SequenceGenerator(name = "role_id_seq", sequenceName = "role_id_seq", allocationSize=1)
+    @Column(name="ID")
+    private Long id;
 
 	@Column(name="SHORT_NAME")
 	private String shortName;

@@ -35,7 +35,8 @@ import javax.persistence.*;
 public class ProjectType {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_type_id_seq")
+    @SequenceGenerator(name = "project_type_id_seq", sequenceName = "project_type_id_seq", allocationSize=1)
 	@Column(name="ID")
 	private Long id;
 

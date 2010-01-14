@@ -3,10 +3,13 @@ package com.neosavvy.user.dao.companyManagement;
 import com.neosavvy.user.dao.base.BaseDAO;
 import com.neosavvy.user.dto.companyManagement.RoleDTO;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.Criteria;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,35 +19,39 @@ import org.hibernate.Criteria;
  * To change this template use File | Settings | File Templates.
  */
 public class RoleDAOImpl extends BaseDAO implements RoleDAO{
-    public List<RoleDTO> getRoles() {
-        return getCurrentSession().createCriteria(RoleDTO.class).list();
-    }
+    public RoleDTO saveRole(RoleDTO role) {
+        if (role.getId() == null) {
+            getEntityManager().persist(role);
+        }
+        else {
+            role = getEntityManager().merge(role);
+        }
+        getEntityManager().flush();
 
-    public void saveRole(RoleDTO role) {
-        getCurrentSession().saveOrUpdate(role);
-        getCurrentSession().flush();
+        return role;
     }
 
     public RoleDTO findRoleById(long id) {
-        return (RoleDTO) getCurrentSession()
-                .createCriteria(RoleDTO.class)
-                .add( Restrictions.idEq(id) )
-                .uniqueResult();
+        return getEntityManager().find(RoleDTO.class, id);
     }
 
     public List<RoleDTO> findRoles(RoleDTO role) {
-        Criteria criteria = getCurrentSession().createCriteria(RoleDTO.class);
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<RoleDTO> criteria = builder.createQuery(RoleDTO.class);
+        Root<RoleDTO> root = criteria.from(RoleDTO.class);
+        List<Predicate> searchPredicates = new ArrayList<Predicate>();
+
         if(role.getShortName() != null && role.getShortName().length() > 0) {
-            criteria.add(Restrictions.eq("shortName", role.getShortName()));
+            searchPredicates.add(builder.equal(root.get("shortName"), role.getShortName()));
         }
         if(role.getLongName() != null && role.getLongName().length() > 0) {
-            criteria.add(Restrictions.eq("longName", role.getLongName()));
+            searchPredicates.add(builder.equal(root.get("longName"), role.getLongName()));
         }
-        return criteria.list(); 
+        return getEntityManager().createQuery(criteria.where(searchPredicates.toArray(new Predicate[0]))).getResultList();
     }
 
     public void deleteRole(RoleDTO role) {
-        getCurrentSession().delete(role);
-        getCurrentSession().flush();
+        getEntityManager().remove(role);
+        getEntityManager().flush();
     }
 }

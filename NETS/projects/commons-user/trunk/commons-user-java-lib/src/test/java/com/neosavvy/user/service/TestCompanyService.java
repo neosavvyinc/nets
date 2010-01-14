@@ -7,6 +7,8 @@ import junit.framework.Assert;
 import org.junit.Test;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
@@ -20,7 +22,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     public void testGetCompanies() throws Exception {
         cleanupTables();
         companyService.saveCompany(ProjectTestUtil.createTestCompany());
-        Assert.assertFalse(companyService.getCompanies().isEmpty());
+        Assert.assertFalse(findCompanies().isEmpty());
     }
 
     @Test
@@ -28,7 +30,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         cleanupTables();
         CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
         companyService.saveCompany(testCompany);
-        Assert.assertFalse(companyService.getCompanies().isEmpty());
+        Assert.assertFalse(findCompanies().isEmpty());
 
         Assert.assertNotNull("findCompanyById should return the company that we just added when we search by the id for it",
                 companyService.findCompanyById(testCompany.getId()));
@@ -39,7 +41,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         cleanupTables();
         CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
         companyService.saveCompany(testCompany);
-        Assert.assertFalse(companyService.getCompanies().isEmpty());
+        Assert.assertFalse(findCompanies().isEmpty());
         Assert.assertTrue(companyService.findCompanies(testCompany).contains(testCompany));
     }
 
@@ -326,7 +328,7 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
         insertTestUser("test1@email.com", "testFName","testMName","testLName",true,"test","test","test1");
         insertTestUser("test2@email.com", "testFName","testMName","testLName",false,"test","test","test2");
         insertTestUser("test3@email.com", "testFName","testMName","testLName",true,"test","test","test3");
-        int numUsers = countRowsInTable("USER");
+        int numUsers = countRowsInTable("USERS");
         Assert.assertEquals("There should be three users in the users table",4,numUsers);
 
         int user1 = getUserId("test1");
@@ -347,16 +349,16 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 
     private void insertTestUser(String email, String firstName, String middleName, String lastName, Boolean active, String password, String registrationToken, String username) {
         simpleJdbcTemplate.update(
-                "INSERT INTO USER(EMAIL_ADDRESS,FIRST_NAME,MIDDLE_NAME,LAST_NAME,ACTIVE,PASSWORD,REG_TOKEN,USERNAME) " +
-                "VALUES (?,?,?,?,?,?,?,?)", new Object[]{email,firstName,middleName,lastName,active,password,registrationToken,username});
+                "INSERT INTO USERS(ID,EMAIL_ADDRESS,FIRST_NAME,MIDDLE_NAME,LAST_NAME,ACTIVE,PASSWORD,REG_TOKEN,USERNAME) " +
+                "VALUES (nextval('users_id_seq'),?,?,?,?,?,?,?,?)", new Object[]{email,firstName,middleName,lastName,active,password,registrationToken,username});
     }
 
     private void insertTestUserToCompanyRole(int companyId, int roleId, int userId) {
-        simpleJdbcTemplate.update("INSERT INTO USER_COMPANY_ROLE (COMPANY_FK,ROLE_FK,USER_FK) VALUES (?,?,?)", new Object[]{companyId,roleId,userId});
+        simpleJdbcTemplate.update("INSERT INTO USER_COMPANY_ROLE (ID,COMPANY_FK,ROLE_FK,USER_FK) VALUES (nextval('user_company_role_id_seq'),?,?,?)", new Object[]{companyId,roleId,userId});
     }
 
     private int getUserId(String username) {
-        return simpleJdbcTemplate.queryForInt("SELECT ID FROM USER WHERE USERNAME = ?",new Object[]{username});
+        return simpleJdbcTemplate.queryForInt("SELECT ID FROM USERS WHERE USERNAME = ?",new Object[]{username});
     }
 
     private int getRoleId(String shortName) {
@@ -368,5 +370,11 @@ public class TestCompanyService extends BaseSpringAwareServiceTestCase {
     }
 
 
+    private List<CompanyDTO> findCompanies() {
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery query = builder.createQuery(CompanyDTO.class);
+        query.from(CompanyDTO.class);
+        return getEntityManager().createQuery(query).getResultList();
+    }
 
 }

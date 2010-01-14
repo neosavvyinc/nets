@@ -28,11 +28,7 @@ import java.util.List;
  * Time: 3:38:09 AM
  */
 public interface BaseCompanyDAO<T extends AbstractCompany> {
-    public List<T> getCompanies();
-
-	public T saveCompany(T company);
-
-    public T updateCompany(T company);
+    public T saveCompany(T company);
 
 	public T findCompanyById(long id);
 

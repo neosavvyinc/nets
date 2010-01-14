@@ -1,10 +1,13 @@
 package com.neosavvy.user.dao.companyManagement;
 
 import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
+import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 import org.junit.Test;
 import org.junit.Assert;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 /**
@@ -69,7 +72,7 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase {
 
         Assert.assertEquals("Num of rows is not equal to 1", 1, numRows);
 
-        List<UserInviteDTO> userInvitesFound = userInviteDAO.getUserInvites();
+        List<UserInviteDTO> userInvitesFound = findUserInvites();
 
         Assert.assertTrue("UserInvite objects were found ", userInvitesFound.size() > 0);
     }
@@ -136,4 +139,10 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase {
     }
 
 
+    private List<UserInviteDTO> findUserInvites() {
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery query = builder.createQuery(UserInviteDTO.class);
+        query.from(UserInviteDTO.class);
+        return getEntityManager().createQuery(query).getResultList();
+    }
 }

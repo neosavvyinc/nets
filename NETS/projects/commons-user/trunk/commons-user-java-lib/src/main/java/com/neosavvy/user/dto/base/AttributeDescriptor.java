@@ -38,7 +38,8 @@ import java.util.List;
 public class AttributeDescriptor {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attribute_descriptor_id_seq")
+    @SequenceGenerator(name = "attribute_descriptor_id_seq", sequenceName = "attribute_descriptor_id_seq", allocationSize=1)
     @Column(name="ID")
     private Long id;
 

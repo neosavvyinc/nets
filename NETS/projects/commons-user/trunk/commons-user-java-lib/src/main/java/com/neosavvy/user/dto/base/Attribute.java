@@ -28,11 +28,6 @@ import javax.persistence.*;
 @MappedSuperclass
 public abstract class Attribute {
 
-    @Id
-    @GeneratedValue
-    @Column(name="ID")
-    private Long id;
-
     @ManyToOne
     @JoinColumn(name="DESCRIPTOR_ID")
     private AttributeDescriptor descriptor;
@@ -44,6 +39,8 @@ public abstract class Attribute {
     @Column(name="STRING_VALUE", nullable = true)
     private String stringValue;
 
+    public abstract Long getId();
+    
     public AttributeDescriptor getDescriptor() {
         return descriptor;
     }
@@ -58,14 +55,6 @@ public abstract class Attribute {
 
     public void setEnumValue(AttributeEnumValue enumValue) {
         this.enumValue = enumValue;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getStringValue() {

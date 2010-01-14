@@ -6,10 +6,10 @@ import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.RoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import com.neosavvy.user.util.ProjectTestUtil;
-import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Assert;
 import org.junit.Test;
 
+import javax.persistence.PersistenceException;
 import java.util.List;
 import java.util.HashSet;
 
@@ -29,18 +29,18 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testDeleteUser() {
         cleanupTables();
-        int numRows = countRowsInTable("USER");
+        int numRows = countRowsInTable("USERS");
         Assert.assertEquals(numRows, 0);
 
         UserDTO user = ProjectTestUtil.createTestUser();
         userDAO.saveUser(user);
 
-        numRows = countRowsInTable("USER");
+        numRows = countRowsInTable("USERS");
         Assert.assertEquals(numRows, 1);
 
         userDAO.deleteUser(user);
 
-        numRows = countRowsInTable("USER");
+        numRows = countRowsInTable("USERS");
         Assert.assertEquals(0,numRows);
     }
 
@@ -51,7 +51,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
         UserDTO user = ProjectTestUtil.createTestUser();
         userDAO.saveUser(user);
 
-        int numRows = countRowsInTable("USER");
+        int numRows = countRowsInTable("USERS");
 
         Assert.assertEquals("Num of rows is not equal to 1", 1, numRows);
 
@@ -121,16 +121,12 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
         assertSearchCriteriaResults(usersFounds,2);        
     }
 
-    @Test
+    @Test(expected = PersistenceException.class)
     public void testSaveTwoUsersSameUserName() {
         cleanupTables();
         userDAO.saveUser(ProjectTestUtil.createTestUser());
-        try {
-            Assert.assertEquals("Should be a row in the table for the user",  1,  countRowsInTable("USER"));
-            userDAO.saveUser(ProjectTestUtil.createTestUser());
-        } catch (ConstraintViolationException e) {
-            return;
-        }
+        Assert.assertEquals("Should be a row in the table for the user",  1,  countRowsInTable("USER"));
+        userDAO.saveUser(ProjectTestUtil.createTestUser());
         Assert.fail("No data access exception was thrown when saving a user by the same id");
     }
 
@@ -143,7 +139,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
         userDAO.saveUser(user);
         userDAO.saveUser(user2);
 
-        int numRows = countRowsInTable("USER");
+        int numRows = countRowsInTable("USERS");
         Assert.assertEquals("Num of rows is not equal to 2", 2, numRows);
     }
 

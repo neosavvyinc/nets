@@ -2,9 +2,12 @@ package com.neosavvy.user.dao.base;
 
 import com.neosavvy.user.dto.base.BaseUserDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
-import org.hibernate.Criteria;
-import org.hibernate.criterion.Restrictions;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 /*************************************************************************
  *
@@ -33,45 +36,54 @@ import java.util.List;
 public abstract class BaseUserDAOImpl<T extends BaseUserDTO> extends BaseDAO implements BaseUserDAO<T> {
 
     public void deleteUser(T user) {
-		getCurrentSession().delete(user);
-        getCurrentSession().flush();
+		getEntityManager().remove(user);
+        getEntityManager().flush();
 	}
 
-	public UserDTO findUserById(long id) {
-        return (UserDTO) getCurrentSession()
-                .createCriteria(UserDTO.class)
-                .add( Restrictions.idEq(id) )
-                .uniqueResult();
+	public T findUserById(long id) {
+        return getEntityManager().find(getTypeClass(), id);
     }
 
     public List<T> findUsers(T user) {
-        Criteria c = generateCommonCriteriaFromBaseClass(user);
-        return c.list();
+        CriteriaQuery<T> q = generateCommonCriteriaFromBaseClass(user);
+        return getEntityManager().createQuery(q).getResultList();
     }
 
-    protected Criteria generateCommonCriteriaFromBaseClass(T user) {
-        Criteria criteria = getCurrentSession().createCriteria(UserDTO.class);
+    protected CriteriaQuery<T> generateCommonCriteriaFromBaseClass(T user) {
+        CriteriaBuilder builder = getEntityManager().getCriteriaBuilder();
+        CriteriaQuery<T> criteria = builder.createQuery(getTypeClass());
+        Root<T> root = criteria.from(getTypeClass());
+        List<Predicate> searchPredicates = new ArrayList<Predicate>();
+        addSearchPredicates(user, builder, root, searchPredicates);
+        return criteria.where(searchPredicates.toArray(new Predicate[0]));
+    }
+
+    protected void addSearchPredicates(T user, CriteriaBuilder builder, Root<T> root, List<Predicate> searchPredicates) {
         if(user.getFirstName() != null && user.getFirstName().length() > 0) {
-            criteria.add(Restrictions.eq("firstName", user.getFirstName()));
+            searchPredicates.add(builder.equal(root.get("firstName"), user.getFirstName()));
         }
         if(user.getMiddleName() != null && user.getMiddleName().length() > 0) {
-            criteria.add(Restrictions.eq("middleName", user.getMiddleName()));
+            searchPredicates.add(builder.equal(root.get("middleName"), user.getMiddleName()));
         }
         if(user.getLastName() != null && user.getLastName().length() > 0) {
-            criteria.add(Restrictions.eq("lastName", user.getLastName()));
+            searchPredicates.add(builder.equal(root.get("lastName"), user.getLastName()));
         }
         if(user.getEmailAddress() != null && user.getEmailAddress().length() > 0) {
-            criteria.add(Restrictions.eq("emailAddress", user.getEmailAddress()));
+            searchPredicates.add(builder.equal(root.get("emailAddress"), user.getEmailAddress()));
         }
-        return criteria;
     }
 
-    public List<T> getUsers() {
-		return getCurrentSession().createCriteria(BaseUserDTO.class).list();
+    public T saveUser(T user) {
+        if (user.getId() == null) {
+            getEntityManager().persist(user);
+        }
+        else {
+		    user = getEntityManager().merge(user);
+        }
+
+        getEntityManager().flush();
+        return user;
 	}
 
-	public void saveUser(T user) {
-		getCurrentSession().saveOrUpdate(user);
-        getCurrentSession().flush();
-	}
+    protected abstract Class<T> getTypeClass();
 }

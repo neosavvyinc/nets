@@ -2,6 +2,7 @@ package com.neosavvy.user.dao.project;
 
 import com.neosavvy.user.dao.base.BaseUserDAO;
 import com.neosavvy.user.dao.base.BaseUserDAOImpl;
+import com.neosavvy.user.dto.project.ClientUserContact;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -27,4 +28,8 @@ import com.neosavvy.user.dao.base.BaseUserDAOImpl;
  * Time: 4:24:48 PM
  */
 public class ClientUserContactDAOImpl extends BaseUserDAOImpl implements ClientUserContactDAO {
+    @Override
+    protected Class getTypeClass() {
+        return ClientUserContact.class;
+    }
 }
