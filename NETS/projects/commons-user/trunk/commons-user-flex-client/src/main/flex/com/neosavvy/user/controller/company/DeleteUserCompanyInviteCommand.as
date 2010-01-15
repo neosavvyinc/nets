@@ -1,24 +1,24 @@
 package com.neosavvy.user.controller.company {
     import com.neosavvy.user.ApplicationFacade;
+    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
     import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
-
     import com.neosavvy.user.util.RemoteObjectUtils;
 
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.rpc.IResponder;
-
     import mx.rpc.events.FaultEvent;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
-    public class DeleteUserCompanyInviteCommand extends AsyncCommand implements IResponder {
+    public class DeleteUserCompanyInviteCommand extends NeosavvyAsyncCommand implements IResponder {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.company.DeleteUserCompanyInviteCommand");
 
         override public function execute(notification:INotification):void {
+            super.execute(notification);
             var companyServiceProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
             var userInvite:UserInviteDTO = notification.getBody() as UserInviteDTO;
             companyServiceProxy.deleteUserCompanyInvite(userInvite, this);

@@ -4,13 +4,7 @@ import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Dec 9, 2009
- * Time: 1:00:01 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public interface UserCompanyRoleDAO {
 	public UserCompanyRoleDTO saveUserCompanyRole(UserCompanyRoleDTO userCompanyRole);
 

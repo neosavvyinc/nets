@@ -8,12 +8,6 @@ import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import java.util.List;
 
 
-/**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Nov 27, 2009
- * Time: 2:53:27 PM
- */
 public class CompanyDAOImpl extends BaseCompanyDAOImpl<CompanyDTO> implements CompanyDAO {
 
     @Override

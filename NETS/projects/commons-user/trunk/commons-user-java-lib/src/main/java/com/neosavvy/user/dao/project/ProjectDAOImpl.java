@@ -50,7 +50,10 @@ public class ProjectDAOImpl extends BaseDAO implements ProjectDAO {
         }
         if(project.getName() != null && project.getName().length() > 0 ) {
             searchPredicates.add(builder.equal(root.get("name"), project.getName()));
-        }       
+        }
+        if((project.getCompany() != null) && (project.getCompany().getId() != null)) {
+            searchPredicates.add(builder.equal(root.get("company"), project.getCompany()));
+        }
 
         return getEntityManager().createQuery(criteria.where(searchPredicates.toArray(new Predicate[0]))).getResultList();
     }
@@ -78,7 +81,7 @@ public class ProjectDAOImpl extends BaseDAO implements ProjectDAO {
 
     public List<Project> findProjectsForParentCompany(long parentCompanyId) {
         Query projectSearchQuery = getEntityManager().createQuery("select project from Project project, CompanyDTO company" +
-                " where project.client.id = company.id and company.id = :companyId");
+                " where project.company.id = company.id and company.id = :companyId");
         projectSearchQuery.setParameter("companyId", parentCompanyId);
         return projectSearchQuery.getResultList();
 

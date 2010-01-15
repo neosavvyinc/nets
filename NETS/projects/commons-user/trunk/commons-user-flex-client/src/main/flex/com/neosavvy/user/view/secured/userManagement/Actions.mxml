@@ -10,7 +10,6 @@
         import com.neosavvy.user.model.SecurityProxy;
         import com.neosavvy.user.view.secured.userManagement.event.UserManagementEvent;
 
-
         override public function set data(value:Object):void {
             if (value is UserDTO) {
                 var user:UserDTO = value as UserDTO;
@@ -27,19 +26,19 @@
         }
 
         protected function handleToggleActivationClicked():void {
-            dispatchEvent( new UserManagementEvent(activationButton.label, data as UserDTO) );
+            dispatchEvent(new UserManagementEvent(activationButton.label, data as UserDTO));
         }
 
 
         protected function handleResetPasswordClicked():void {
-            dispatchEvent( new UserManagementEvent(UserManagementEvent.ACTION_RESET_PASSWORD, data as UserDTO) );
+            dispatchEvent(new UserManagementEvent(UserManagementEvent.ACTION_RESET_PASSWORD, data as UserDTO));
         }
 
         private function isButtonEnabledForUser():Boolean {
 
             var securityProxy:SecurityProxy = ApplicationFacade.getSecurityProxy(CommonsUser.APPLICATION_NAME);
-            if( data ) {
-                if(securityProxy.user == data.username) {
+            if (data) {
+                if (securityProxy.user == data.username) {
                     return false;
                 }
             }
@@ -48,10 +47,9 @@
         }
 
         override protected function commitProperties():void {
-            if( activationButton )
+            if (activationButton)
                 activationButton.visible = isButtonEnabledForUser();
         }
-
 
 
         ]]></mx:Script>

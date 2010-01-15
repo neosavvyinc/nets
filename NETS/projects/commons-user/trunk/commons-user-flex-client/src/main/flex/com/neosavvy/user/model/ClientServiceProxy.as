@@ -28,21 +28,21 @@ package com.neosavvy.user.model {
 
         public function set clientCompanies(value:ArrayCollection):void {
             data = value;
+
         }
 
-        public function findClientsForParentCompany(company:CompanyDTO, responder:IResponder ):void
+        public function findClientsForParentCompany(company:CompanyDTO, responder:IResponder):void
         {
             var companyService:RemoteObject = getService(ProxyConstants.clientServiceDestiation);
             addCallbackHandler(companyService, responder);
-            companyService.findClientsForParentCompany( company );
+            companyService.findClientsForParentCompany(company);
         }
 
 
-
-        public function saveClientCompany(clientCompany:ClientCompany, clientUserContact:ClientUserContact, responder:IResponder ):void {
+        public function saveClientCompany(clientCompany:ClientCompany, clientUserContact:ClientUserContact, responder:IResponder):void {
             var companyService:RemoteObject = getService(ProxyConstants.clientServiceDestiation);
             addCallbackHandler(companyService, responder);
-            companyService.saveClientForCompany( clientCompany, clientUserContact);
+            companyService.saveClientForCompany(clientCompany, clientUserContact);
         }
 
     }

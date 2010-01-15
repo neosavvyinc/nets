@@ -14,5 +14,9 @@ package com.neosavvy.user.dto.project {
             super();
         }
 
+        public function get clientCompanyName():String {
+            return this.client.companyName;
+        }
+
     }
 }

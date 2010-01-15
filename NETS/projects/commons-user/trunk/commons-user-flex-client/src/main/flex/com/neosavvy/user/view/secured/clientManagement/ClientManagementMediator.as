@@ -4,12 +4,10 @@ package com.neosavvy.user.view.secured.clientManagement {
     import com.neosavvy.user.dto.project.ClientCompany;
     import com.neosavvy.user.dto.project.ClientUserContact;
     import com.neosavvy.user.model.ClientServiceProxy;
-
     import com.neosavvy.user.model.CompanyServiceProxy;
 
     import flash.events.MouseEvent;
 
-    import mx.containers.Form;
     import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
     import mx.logging.ILogger;
@@ -69,19 +67,19 @@ package com.neosavvy.user.view.secured.clientManagement {
 
         private function handleSaveClientButtonClicked(event:MouseEvent):void {
 
-            if( isClientCompanyFormValid() && isClientContactFormValid() ) {
+            if (isClientCompanyFormValid() && isClientContactFormValid()) {
                 var activeCompany:CompanyDTO = _companyProxy.activeCompany;
                 var clientCompany:ClientCompany = getClientCompany();
                 clientCompany.parentCompany = activeCompany;
                 var clientContact:ClientUserContact = getClientContact();
                 var params:Array = [clientCompany,clientContact];
-                sendNotification(ApplicationFacade.SAVE_CLIENT_COMPANY_REQUEST, params);                
+                sendNotification(ApplicationFacade.SAVE_CLIENT_COMPANY_REQUEST, params);
             } else {
 
                 // should return some messages to the user to show what went wrong...
 
             }
-            
+
         }
 
         private function getClientContact():ClientUserContact {
@@ -109,14 +107,14 @@ package com.neosavvy.user.view.secured.clientManagement {
             return [
                 ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT
                 ,ApplicationFacade.SAVE_CLIENT_COMPANY_SUCCESS
-                ,ApplicationFacade.FIND_CLIENTS_FOR_PARENT_COMPANY_SUCCESS    
+                ,ApplicationFacade.FIND_CLIENTS_FOR_PARENT_COMPANY_SUCCESS
             ];
         }
 
 
         override public function handleNotification(notification:INotification):void {
 
-            switch(notification.getName()) {
+            switch (notification.getName()) {
                 case ApplicationFacade.SAVE_CLIENT_COMPANY_SUCCESS:
                 case ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT:
                     sendNotification(ApplicationFacade.FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST);

@@ -1,4 +1,5 @@
 package com.neosavvy.user.controller.user {
+    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
@@ -13,13 +14,14 @@ package com.neosavvy.user.controller.user {
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
-    public class GetActiveUserCommand extends AsyncCommand implements IResponder {
+    public class GetActiveUserCommand extends NeosavvyAsyncCommand implements IResponder {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.user.GetActiveUserCommand");
 
         override public function execute(notification:INotification):void {
-            var userProxy:UserServiceProxy = facade.retrieveProxy( UserServiceProxy.NAME ) as UserServiceProxy;
-            userProxy.getActiveUser( this );
+            super.execute(notification);
+            var userProxy:UserServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
+            userProxy.getActiveUser(this);
         }
 
         public function fault(info:Object):void {
@@ -34,7 +36,7 @@ package com.neosavvy.user.controller.user {
             var event:ResultEvent = data as ResultEvent;
             var users:ArrayCollection = event.result as ArrayCollection;
             var _activeUser:UserDTO = users.getItemAt(0) as UserDTO;
-            var userProxy:UserServiceProxy = facade.retrieveProxy( UserServiceProxy.NAME ) as UserServiceProxy;
+            var userProxy:UserServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
             userProxy.activeUser = _activeUser;
             commandComplete();
         }

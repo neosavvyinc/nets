@@ -6,6 +6,7 @@ import com.neosavvy.user.service.exception.CompanyServiceException;
 import com.neosavvy.user.service.exception.UserServiceException;
 import com.neosavvy.util.StringUtil;
 import org.apache.log4j.Logger;
+import org.springframework.dao.DataAccessException;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -48,7 +49,7 @@ public class CompanyServiceImpl implements CompanyService{
         return companyDao.findCompanies(company);
     }
 
-    @Transactional(rollbackFor={CompanyServiceException.class})
+    @Transactional(rollbackFor={CompanyServiceException.class, DataAccessException.class})
     public void addCompany(CompanyDTO company, UserDTO user) {
         saveUserAndEmailConfirmation(user);
         saveCompany(company);
@@ -189,10 +190,16 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public List<UserInviteDTO> getInvitedUsers(CompanyDTO company) {
-        // for now we are going to access this via company but later on this should probably be a direct
-        // query against the userInvites table.
-        company = verifyAndAttachCompany(company);
-        return new ArrayList(company.getUserInvites());
+        if( company == null ) {
+            throw new CompanyServiceException("Company can not be null otherwise no invites will be returned");
+        }
+        if( company.getId() == null ) {
+            throw new CompanyServiceException("Company must have an id to have user invites requested");
+        }
+
+        UserInviteDTO userInvite = new UserInviteDTO();
+        userInvite.setCompany(company);
+        return userInviteDao.findUserInvites(userInvite);
     }
 
     public List<UserDTO> findUsersForCompany(CompanyDTO company) {

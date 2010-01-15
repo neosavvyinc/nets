@@ -13,9 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 
-/**
- * @author lgleason
- */
+
 public class TestCompanyService extends BaseSpringAwareServiceTestCase {
 
     @Test

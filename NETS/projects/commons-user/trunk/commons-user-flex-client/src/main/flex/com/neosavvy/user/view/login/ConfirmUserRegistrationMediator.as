@@ -5,14 +5,8 @@ package com.neosavvy.user.view.login {
     import flash.events.MouseEvent;
 
     import mx.controls.Button;
-    import mx.controls.Label;
-    import mx.events.CloseEvent;
     import mx.logging.ILogger;
     import mx.logging.Log;
-    import mx.managers.PopUpManager;
-    import mx.rpc.events.FaultEvent;
-    import mx.rpc.events.ResultEvent;
-
     import mx.validators.Validator;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
@@ -59,7 +53,7 @@ package com.neosavvy.user.view.login {
         }
 
         private function handleConfirmUserButtonClickHandler(event:MouseEvent):void {
-            if(isUserConfirmationFormValid()){
+            if (isUserConfirmationFormValid()) {
 
                 var user:UserDTO = new UserDTO();
 
@@ -86,11 +80,11 @@ package com.neosavvy.user.view.login {
             validators.push(confirmUserRegistration.confirmPasswordValidator);
             var validationResults:Array = Validator.validateAll(validators);
 
-            for each ( var result:Object in validationResults ) {
+            for each (var result:Object in validationResults) {
                 LOGGER.debug(result.message);
             }
 
-            return validationResults.length == 0 ? true : false ;
+            return validationResults.length == 0 ? true : false;
         }
 
         /*********

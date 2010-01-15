@@ -1,7 +1,6 @@
 package com.neosavvy.user.view.companyManagement {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.companyManagement.CompanyDTO;
-
     import com.neosavvy.user.dto.companyManagement.UserDTO;
 
     import flash.events.MouseEvent;
@@ -11,7 +10,6 @@ package com.neosavvy.user.view.companyManagement {
     import mx.controls.Button;
     import mx.logging.ILogger;
     import mx.logging.Log;
-
     import mx.validators.Validator;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
@@ -84,7 +82,7 @@ package com.neosavvy.user.view.companyManagement {
                     LOGGER.debug("Save company succeeded");
                     companyManavementViewStack.selectedIndex = CONFIRMATION_INDEX;
                     companyManagement.usernameConfirmation.text = userName;
-                    if( userName != null && userName.length > 0 ) {
+                    if (userName != null && userName.length > 0) {
                         companyManagement.usernameConfirmation.editable = companyManagement.usernameConfirmation.enabled = false;
                     }
                     break;
@@ -103,7 +101,7 @@ package com.neosavvy.user.view.companyManagement {
         }
 
         private function registerCompanyButtonClickHandler(event:MouseEvent):void {
-            if(isEmployeeFormValid()) {
+            if (isEmployeeFormValid()) {
                 var company:CompanyDTO = new CompanyDTO();
                 company.addressOne = companyManagement.addressOne.text;
                 company.addressTwo = companyManagement.addressTwo.text;
@@ -111,7 +109,7 @@ package com.neosavvy.user.view.companyManagement {
                 company.companyName = companyManagement.companyName.text;
                 company.country = companyManagement.country.selectedItem as String;
                 company.postalCode = companyManagement.postalCode.text;
-                
+
                 var user:UserDTO = new UserDTO();
                 userName = user.username = companyManagement.administrativeUser.text;
                 user.password = companyManagement.administrativePassword.text;
@@ -137,15 +135,15 @@ package com.neosavvy.user.view.companyManagement {
             validators.push(companyManagement.adminEmailValidator);
             var validationResults:Array = Validator.validateAll(validators);
 
-            for each ( var result:Object in validationResults ) {
+            for each (var result:Object in validationResults) {
                 LOGGER.debug(result.message);
             }
 
-            return validationResults.length == 0 ? true : false ;
+            return validationResults.length == 0 ? true : false;
         }
 
         private function resetForm():void {
-            
+
         }
 
 

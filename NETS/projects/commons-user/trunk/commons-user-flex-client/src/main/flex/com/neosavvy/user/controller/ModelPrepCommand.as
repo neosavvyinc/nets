@@ -3,7 +3,6 @@ package com.neosavvy.user.controller {
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
     import com.neosavvy.user.model.SecurityProxy;
-
     import com.neosavvy.user.model.UserServiceProxy;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -12,11 +11,11 @@ package com.neosavvy.user.controller {
     public class ModelPrepCommand extends SimpleCommand {
 
         override public function execute(notification:INotification):void {
-            facade.registerProxy( new SecurityProxy() );
-            facade.registerProxy( new UserServiceProxy() );
-            facade.registerProxy( new CompanyServiceProxy() );
-            facade.registerProxy( new ClientServiceProxy() );
-            facade.registerProxy( new ProjectServiceProxy() );
+            facade.registerProxy(new SecurityProxy());
+            facade.registerProxy(new UserServiceProxy());
+            facade.registerProxy(new CompanyServiceProxy());
+            facade.registerProxy(new ClientServiceProxy());
+            facade.registerProxy(new ProjectServiceProxy());
         }
     }
 }

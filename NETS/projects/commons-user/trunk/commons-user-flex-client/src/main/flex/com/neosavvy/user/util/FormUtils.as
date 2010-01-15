@@ -5,11 +5,11 @@ package com.neosavvy.user.util {
 
         public static function isInputSet(textInputField:TextInput):Boolean {
 
-            if(textInputField == null) {
+            if (textInputField == null) {
                 return false;
             }
 
-            if(textInputField.text == null || textInputField.text == "") {
+            if (textInputField.text == null || textInputField.text == "") {
                 return false;
             }
 

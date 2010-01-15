@@ -1,17 +1,15 @@
 package com.neosavvy.user.view.secured.projectManagement.projects {
+    import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.companyManagement.CompanyDTO;
     import com.neosavvy.user.dto.project.ClientCompany;
     import com.neosavvy.user.dto.project.Project;
-    import com.neosavvy.user.view.secured.projectManagement.*;
-    import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.model.ClientServiceProxy;
-
     import com.neosavvy.user.model.CompanyServiceProxy;
-
     import com.neosavvy.user.model.ProjectServiceProxy;
 
     import flash.events.MouseEvent;
 
+    import mx.collections.ArrayCollection;
     import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
     import mx.controls.ComboBox;
@@ -84,27 +82,31 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
             project.code = manageProjects.projectCode.text;
             return project;
         }
-        
+
         override public function listNotificationInterests():Array {
             return [
                 ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT
                 ,ApplicationFacade.INITIALIZE_MANAGE_PROJECTS_VIEW_COMPLETE
                 ,ApplicationFacade.GET_PROJECTS_FOR_COMPANY_SUCCESS
+                ,ApplicationFacade.SAVE_PROJECT_SUCCESS
             ];
         }
 
 
         override public function handleNotification(notification:INotification):void {
 
-            switch(notification.getName()) {
+            switch (notification.getName()) {
                 case ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT:
                     sendNotification(ApplicationFacade.INITIALIZE_MANAGE_PROJECTS_VIEW);
                     break;
                 case ApplicationFacade.INITIALIZE_MANAGE_PROJECTS_VIEW_COMPLETE:
-                    clientSelectorDropdown.dataProvider = _clientProxy.clientCompanies;
+                    manageProjects.clientCompanies = _clientProxy.clientCompanies;
                     break;
                 case ApplicationFacade.GET_PROJECTS_FOR_COMPANY_SUCCESS:
                     projectmanagementGrid.dataProvider = _projectProxy.projects;
+                    break;
+                case ApplicationFacade.SAVE_PROJECT_SUCCESS:
+                    sendNotification(ApplicationFacade.GET_PROJECTS_FOR_COMPANY_REQUEST);
                     break;
             }
 

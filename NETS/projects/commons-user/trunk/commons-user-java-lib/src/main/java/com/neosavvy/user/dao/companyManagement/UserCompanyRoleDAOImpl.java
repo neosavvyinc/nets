@@ -11,13 +11,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Dec 9, 2009
- * Time: 1:00:17 PM
- * To change this template use File | Settings | File Templates.
- */
+
 public class UserCompanyRoleDAOImpl extends BaseDAO implements UserCompanyRoleDAO{
     public UserCompanyRoleDTO saveUserCompanyRole(UserCompanyRoleDTO userCompanyRole) {
         if (userCompanyRole.getId() == null) {

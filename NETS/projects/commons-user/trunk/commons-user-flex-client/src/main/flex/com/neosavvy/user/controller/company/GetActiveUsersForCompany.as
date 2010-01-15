@@ -1,7 +1,7 @@
 package com.neosavvy.user.controller.company {
     import com.neosavvy.user.ApplicationFacade;
+    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
     import com.neosavvy.user.model.CompanyServiceProxy;
-
     import com.neosavvy.user.util.RemoteObjectUtils;
 
     import mx.collections.ArrayCollection;
@@ -14,11 +14,12 @@ package com.neosavvy.user.controller.company {
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
-    public class GetActiveUsersForCompany extends AsyncCommand implements IResponder {
+    public class GetActiveUsersForCompany extends NeosavvyAsyncCommand implements IResponder {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.company.GetActiveUsersForCompany");
 
         override public function execute(notification:INotification):void {
+            super.execute(notification);
             var companyProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
             companyProxy.findActiveUsersForCompany(this);
         }
@@ -35,7 +36,7 @@ package com.neosavvy.user.controller.company {
             var companyProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
             var _activeUsersForCompany:ArrayCollection;
 
-            if( event.result )
+            if (event.result)
                 _activeUsersForCompany = event.result as ArrayCollection;
             else
                 _activeUsersForCompany = new ArrayCollection();
@@ -46,6 +47,6 @@ package com.neosavvy.user.controller.company {
             commandComplete();
         }
 
-        
+
     }
 }

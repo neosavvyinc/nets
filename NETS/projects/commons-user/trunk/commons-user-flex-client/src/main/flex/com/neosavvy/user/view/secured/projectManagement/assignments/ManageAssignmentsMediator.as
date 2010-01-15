@@ -1,11 +1,7 @@
 package com.neosavvy.user.view.secured.projectManagement.assignments {
-    import com.neosavvy.user.view.secured.projectManagement.*;
-    import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.model.ClientServiceProxy;
-
     import com.neosavvy.user.model.CompanyServiceProxy;
-
     import com.neosavvy.user.model.ProjectServiceProxy;
+    import com.neosavvy.user.view.secured.projectManagement.*;
 
     import mx.logging.ILogger;
     import mx.logging.Log;

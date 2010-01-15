@@ -1,7 +1,5 @@
 package com.neosavvy.user {
 
-    import com.neosavvy.user.dto.companyManagement.UserDTO;
-
     import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.view.secured.SecuredContainer;
 
@@ -9,7 +7,6 @@ package com.neosavvy.user {
 
     import mx.containers.ViewStack;
     import mx.controls.Button;
-
     import mx.controls.Label;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
@@ -23,12 +20,12 @@ package com.neosavvy.user {
      */
     public class ApplicationMediator extends Mediator implements IMediator {
 
-        public static var LANDING_NAVIGATION_INDEX:Number               = 0;
-        public static var COMPANY_MANAGEMENT_NAVIGATION_INDEX:Number    = 1;
-        public static var SECURED_CONTAINER_NAVIGATION_INDEX:Number     = 2;
-        public static var EMPLOYEE_MANAGEMENT_NAVIGATION_INDEX:Number   = 3;
-        public static var LOGIN_NAVIGATION_INDEX:Number                 = 4;
-        public static var NEW_USER_CONFIRMATION_INDEX:Number            = 5;
+        public static var LANDING_NAVIGATION_INDEX:Number = 0;
+        public static var COMPANY_MANAGEMENT_NAVIGATION_INDEX:Number = 1;
+        public static var SECURED_CONTAINER_NAVIGATION_INDEX:Number = 2;
+        public static var EMPLOYEE_MANAGEMENT_NAVIGATION_INDEX:Number = 3;
+        public static var LOGIN_NAVIGATION_INDEX:Number = 4;
+        public static var NEW_USER_CONFIRMATION_INDEX:Number = 5;
 
         private var _lastNavigationIndex:Number = 0;
 
@@ -42,7 +39,7 @@ package com.neosavvy.user {
             return viewComponent as CommonsUser;
         }
 
-        public function get newCompanyButton():Button{
+        public function get newCompanyButton():Button {
             return app.newCompanyButton;
         }
 
@@ -104,7 +101,7 @@ package com.neosavvy.user {
         }
 
         override public function handleNotification(notification:INotification):void {
-            switch ( notification.getName() ) {
+            switch (notification.getName()) {
                 case ApplicationFacade.USER_LOGIN_SUCCESS:
                 case ApplicationFacade.USER_LOGGED_IN:
                     saveLastNavigationIndex();

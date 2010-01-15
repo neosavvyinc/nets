@@ -2,14 +2,12 @@ package com.neosavvy.user.view.secured.progress {
     import com.neosavvy.user.ApplicationFacade;
 
     import flash.display.DisplayObject;
-    import flash.events.Event;
 
     import mx.controls.ProgressBar;
     import mx.controls.ProgressBarMode;
     import mx.core.Application;
     import mx.logging.ILogger;
     import mx.logging.Log;
-
     import mx.managers.PopUpManager;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -40,8 +38,8 @@ package com.neosavvy.user.view.secured.progress {
             _progressBar.width = 200;
             _progressBar.indeterminate = true;
             _progressBar.labelPlacement = 'center';
-//                progressBar.setStyle("removedEffect", fade);
-//                progressBar.setStyle("addedEffect", fade);
+            //                progressBar.setStyle("removedEffect", fade);
+            //                progressBar.setStyle("addedEffect", fade);
             _progressBar.setStyle("color", 0xFFFFFF);
             _progressBar.setStyle("borderColor", 0x000000);
             _progressBar.setStyle("barColor", 0xf4b60f);
@@ -59,7 +57,7 @@ package com.neosavvy.user.view.secured.progress {
             this.progressBar = null;
 
         }
-        
+
 
         override public function listNotificationInterests():Array {
             return [
@@ -71,7 +69,7 @@ package com.neosavvy.user.view.secured.progress {
         }
 
         override public function handleNotification(notification:INotification):void {
-            switch( notification.getName() ) {
+            switch (notification.getName()) {
                 case ApplicationFacade.SHOW_PROGRESS_INDICATOR:
                     showLoading();
                     break;

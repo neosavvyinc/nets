@@ -62,4 +62,8 @@ public class CompanyDTO extends AbstractCompany implements IAnnotatedProxy {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public CompanyDTO() {
+        super();
+    }
 }

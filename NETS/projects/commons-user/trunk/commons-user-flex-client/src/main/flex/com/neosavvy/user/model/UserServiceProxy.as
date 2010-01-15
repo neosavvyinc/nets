@@ -17,13 +17,13 @@ package com.neosavvy.user.model {
 
         public static var NAME:String = "userProxy";
 
-		private var remote:Boolean = ProxyConstants.isRemoteEnabled;
+        private var remote:Boolean = ProxyConstants.isRemoteEnabled;
 
         private var _activeUser:UserDTO;
 
-		public function UserServiceProxy()
-		{
-			super(NAME, null);
+        public function UserServiceProxy()
+        {
+            super(NAME, null);
         }
 
         public function get users():ArrayCollection {
@@ -38,8 +38,8 @@ package com.neosavvy.user.model {
             _activeUser = activeUser;
         }
 
-        public function getUsers(completionCallback:Function ):void {
-            var userService:RemoteObject =  getService(ProxyConstants.userServiceDestination);
+        public function getUsers(completionCallback:Function):void {
+            var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             //addCallbackHandler(userService, completionCallback);
             userService.addEventListener(ResultEvent.RESULT, handleGetUsersResult);
             userService.addEventListener(FaultEvent.FAULT, handleGetUsersFault);
@@ -58,12 +58,12 @@ package com.neosavvy.user.model {
             sendNotification(ApplicationFacade.GET_USERS_SUCCESS);
         }
 
-        public function saveUser(param:UserDTO, completionCallback:Function ):void {
-            var userService:RemoteObject =  getService(ProxyConstants.userServiceDestination);
+        public function saveUser(param:UserDTO, completionCallback:Function):void {
+            var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             //addCallbackHandler(userService, completionCallback);
             userService.addEventListener(ResultEvent.RESULT, handleSaveUserResult);
             userService.addEventListener(FaultEvent.FAULT, handleSaveUserFault);
-            userService.saveUser( param );
+            userService.saveUser(param);
         }
 
         private function handleSaveUserFault(event:FaultEvent):void {
@@ -77,12 +77,12 @@ package com.neosavvy.user.model {
             sendNotification(ApplicationFacade.SAVE_USER_SUCCESS);
         }
 
-        public function confirmUser(userName:String, hashCode:String, completionCallback:Function ):void {
-            var userService:RemoteObject =  getService(ProxyConstants.userServiceDestination);
+        public function confirmUser(userName:String, hashCode:String, completionCallback:Function):void {
+            var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             //addCallbackHandler(userService, completionCallback);
             userService.addEventListener(ResultEvent.RESULT, handleConfirmUserSuccess);
             userService.addEventListener(FaultEvent.FAULT, handleConfirmUserFault);
-            userService.confirmUser( userName, hashCode );
+            userService.confirmUser(userName, hashCode);
         }
 
         private function handleConfirmUserSuccess(event:ResultEvent):void {
@@ -97,20 +97,20 @@ package com.neosavvy.user.model {
         }
 
         public function getActiveUser(responder:IResponder):void {
-            var userService:RemoteObject =  getService(ProxyConstants.userServiceDestination);
+            var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             addCallbackHandler(userService, responder);
-            var securityProxy:SecurityProxy = facade.retrieveProxy( SecurityProxy.NAME ) as SecurityProxy;
+            var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
             var user:UserDTO = new UserDTO();
             user.username = securityProxy.user;
-            userService.findUsers( user );
+            userService.findUsers(user);
         }
 
-        public function resetPassword(user:UserDTO, completionCallback:Function ):void {
-            var userService:RemoteObject =  getService(ProxyConstants.userServiceDestination);
+        public function resetPassword(user:UserDTO, completionCallback:Function):void {
+            var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             //addCallbackHandler(userService, completionCallback);
             userService.addEventListener(ResultEvent.RESULT, handleResetPasswordSuccess);
             userService.addEventListener(FaultEvent.FAULT, handleResetPasswordFault);
-            userService.resetPassword( user );
+            userService.resetPassword(user);
         }
 
         private function handleResetPasswordFault(event:FaultEvent):void {

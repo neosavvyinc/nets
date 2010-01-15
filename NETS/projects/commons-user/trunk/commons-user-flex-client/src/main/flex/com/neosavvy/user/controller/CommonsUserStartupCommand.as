@@ -1,25 +1,17 @@
 package com.neosavvy.user.controller {
-    import com.neosavvy.user.ApplicationMediator;
-
-    import com.neosavvy.user.controller.security.CheckLoggedIn;
-
     import mx.logging.Log;
-
     import mx.logging.LogEventLevel;
-
     import mx.logging.targets.TraceTarget;
 
     import org.puremvc.as3.multicore.interfaces.ICommand;
-    import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.MacroCommand;
-    import org.puremvc.as3.multicore.patterns.command.SimpleCommand;
 
     public class CommonsUserStartupCommand extends MacroCommand implements ICommand {
 
         override protected function initializeMacroCommand():void {
             initLogging();
-            addSubCommand( ModelPrepCommand );
-			addSubCommand( ViewPrepCommand );
+            addSubCommand(ModelPrepCommand);
+            addSubCommand(ViewPrepCommand);
         }
 
         private function initLogging():void {
@@ -28,7 +20,7 @@ package com.neosavvy.user.controller {
 
             // Log only messages for the classes in the mx.rpc.* and
             // mx.messaging packages.
-            logTarget.filters=["*"];
+            logTarget.filters = ["*"];
 
             // Log all log levels.
             logTarget.level = LogEventLevel.DEBUG;

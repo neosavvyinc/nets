@@ -1,5 +1,6 @@
 package com.neosavvy.user.controller.client {
     import com.neosavvy.user.ApplicationFacade;
+    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
     import com.neosavvy.user.model.ClientServiceProxy;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
@@ -12,13 +13,13 @@ package com.neosavvy.user.controller.client {
     import mx.rpc.events.ResultEvent;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
-    import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
-    public class GetClientsForCompany extends AsyncCommand implements IResponder {
+    public class GetClientsForCompany extends NeosavvyAsyncCommand implements IResponder {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.model.ClientServiceProxy");
 
         override public function execute(notification:INotification):void {
+            super.execute(notification);
             var companyProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
             var clientProxy:ClientServiceProxy = facade.retrieveProxy(ClientServiceProxy.NAME) as ClientServiceProxy;
             clientProxy.findClientsForParentCompany(companyProxy.activeCompany, this);
@@ -37,9 +38,10 @@ package com.neosavvy.user.controller.client {
         public function fault(info:Object):void {
             var event:FaultEvent = info as FaultEvent;
             RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
-
             sendNotification(ApplicationFacade.FIND_CLIENTS_FOR_PARENT_COMPANY_FAILED);
             commandComplete();
         }
+
+
     }
 }

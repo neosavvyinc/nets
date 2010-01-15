@@ -1,11 +1,8 @@
 package com.neosavvy.user.view.secured.leftNavigation.admin {
     import com.neosavvy.user.ApplicationFacade;
 
-    import com.neosavvy.user.model.SecurityProxy;
-
     import flash.events.MouseEvent;
 
-    import mx.controls.Button;
     import mx.controls.LinkButton;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -42,7 +39,7 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
         }
 
         private function handleWelcomeButtonClicked(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.NAVIGATE_TO_WELCOME,ApplicationFacade.NAVIGATE_TO_WELCOME);
+            sendNotification(ApplicationFacade.NAVIGATE_TO_WELCOME, ApplicationFacade.NAVIGATE_TO_WELCOME);
         }
 
         private function handleViewNonActiveEmployeesClicked(event:MouseEvent):void {
@@ -98,7 +95,7 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
         }
 
         override public function handleNotification(notification:INotification):void {
-            
+
         }
 
     }

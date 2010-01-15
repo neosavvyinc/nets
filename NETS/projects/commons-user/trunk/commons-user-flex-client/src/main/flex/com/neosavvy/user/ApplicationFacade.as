@@ -1,6 +1,5 @@
 package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
-
     import com.neosavvy.user.controller.client.GetClientsForCompany;
     import com.neosavvy.user.controller.client.SaveClientCompany;
     import com.neosavvy.user.controller.clientManagement.InitializeManageProjects;
@@ -14,21 +13,16 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.company.SendUserInviteCommand;
     import com.neosavvy.user.controller.project.GetProjectsForCompany;
     import com.neosavvy.user.controller.project.SaveProject;
-    import com.neosavvy.user.controller.secured.SecuredViewPrepCommand;
     import com.neosavvy.user.controller.secured.SecuredViewTeardownCommand;
     import com.neosavvy.user.controller.secured.UserLoggedInStartupCommand;
     import com.neosavvy.user.controller.security.CheckLoggedIn;
     import com.neosavvy.user.controller.security.LoginCommand;
-
     import com.neosavvy.user.controller.security.LogoutCommand;
+    import com.neosavvy.user.controller.user.ConfirmAccountCommand;
     import com.neosavvy.user.controller.user.GetUsersCommand;
-
     import com.neosavvy.user.controller.user.ResetUserPasswordCommand;
     import com.neosavvy.user.controller.user.SaveEmployeeToCompanyCommand;
     import com.neosavvy.user.controller.user.SaveUserCommand;
-
-    import com.neosavvy.user.controller.user.ConfirmAccountCommand;
-
     import com.neosavvy.user.model.SecurityProxy;
 
     import org.puremvc.as3.multicore.patterns.facade.Facade;
@@ -82,20 +76,20 @@ package com.neosavvy.user {
         public static const INITIALIZE_SECURED_VIEW:String = "initializeSecuredViewRequest";
         public static const DEINITIALIZE_SECURED_VIEW:String = "deinitializeSecuredViewRequest";
 
-        public static const ACTIVE_EMPLOYEES_REQUEST:String="activeEmployeesRequest";
-        public static const ACTIVE_EMPLOYEES_SUCCESS:String="activeEmployeesSuccess";
-        public static const ACTIVE_EMPLOYEES_FAILED:String ="activeEmployeesFailed";
+        public static const ACTIVE_EMPLOYEES_REQUEST:String = "activeEmployeesRequest";
+        public static const ACTIVE_EMPLOYEES_SUCCESS:String = "activeEmployeesSuccess";
+        public static const ACTIVE_EMPLOYEES_FAILED:String = "activeEmployeesFailed";
 
-        public static const NON_ACTIVE_EMPLOYEES_REQUEST:String="nonActiveEmployeesRequest";
-        public static const NON_ACTIVE_EMPLOYEES_SUCCESS:String="nonActiveEmployeesSuccess";
-        public static const NON_ACTIVE_EMPLOYEES_FAILED:String="nonActiveEmployeesFailed";
+        public static const NON_ACTIVE_EMPLOYEES_REQUEST:String = "nonActiveEmployeesRequest";
+        public static const NON_ACTIVE_EMPLOYEES_SUCCESS:String = "nonActiveEmployeesSuccess";
+        public static const NON_ACTIVE_EMPLOYEES_FAILED:String = "nonActiveEmployeesFailed";
 
         public static const ALL_EMPLOYEES_REQUEST:String = "allEmployeesRequest";
         public static const ALL_EMPLOYEES_SUCCESS:String = "allEmployeesSuccess";
         public static const ALL_EMPLOYEES_FAILED:String = "allEmployeesFailed";
 
-        public static const NAVIGATE_TO_INVITE_EMPLOYEES:String="navigateToInviteEmployees";
-        public static const NAVIGATE_TO_COMPANY_REGISTRATION:String="navigateToCompanyRegistration";
+        public static const NAVIGATE_TO_INVITE_EMPLOYEES:String = "navigateToInviteEmployees";
+        public static const NAVIGATE_TO_COMPANY_REGISTRATION:String = "navigateToCompanyRegistration";
         public static const NAVIGATE_TO_PROJECT_MANAGEMENT:String = "navigateToProjectManagement";
         public static const NAVIGATE_TO_CLIENT_MANAGEMENT:String = "navigateToClientManagement";
 
@@ -107,7 +101,7 @@ package com.neosavvy.user {
         public static const DELETE_USER_COMPANY_INVITE_FAILED:String = "deleteUserCompanyInviteFailed";
         public static const DELETE_USER_COMPANY_INVITE_SUCCESS:String = "deleteUserCompanyInviteSuccess";
 
-        public static const NAVIGATE_TO_WELCOME:String="navigateToWelcome";
+        public static const NAVIGATE_TO_WELCOME:String = "navigateToWelcome";
 
         public static const SEND_USER_INVITE_REQUEST:String = "sendUserInviteRequest";
         public static const SEND_USER_INVITE_FAILED:String = "sendUserInviteFailed";
@@ -188,7 +182,7 @@ package com.neosavvy.user {
 
             registerCommand(FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST, GetClientsForCompany);
             registerCommand(SAVE_CLIENT_COMPANY_REQUEST, SaveClientCompany);
-            registerCommand(INITIALIZE_MANAGE_PROJECTS_VIEW, InitializeManageProjects );
+            registerCommand(INITIALIZE_MANAGE_PROJECTS_VIEW, InitializeManageProjects);
             registerCommand(SAVE_PROJECT_REQUEST, SaveProject);
             registerCommand(GET_PROJECTS_FOR_COMPANY_REQUEST, GetProjectsForCompany);
         }

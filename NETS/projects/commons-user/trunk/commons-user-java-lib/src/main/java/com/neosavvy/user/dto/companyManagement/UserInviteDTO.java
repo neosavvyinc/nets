@@ -54,4 +54,8 @@ public class UserInviteDTO extends BaseUserDTO {
     public void setRegistrationToken(String registrationToken) {
         this.registrationToken = registrationToken;
     }
+
+    public UserInviteDTO() {
+        super();
+    }
 }

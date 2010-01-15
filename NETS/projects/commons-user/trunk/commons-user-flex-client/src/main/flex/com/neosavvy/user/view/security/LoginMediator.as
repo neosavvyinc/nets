@@ -1,13 +1,10 @@
 package com.neosavvy.user.view.security {
     import com.neosavvy.user.ApplicationFacade;
-
     import com.neosavvy.user.dto.companyManagement.UserDTO;
 
     import flash.events.MouseEvent;
 
     import mx.controls.Button;
-    import mx.events.ListEvent;
-
     import mx.logging.ILogger;
     import mx.logging.Log;
 

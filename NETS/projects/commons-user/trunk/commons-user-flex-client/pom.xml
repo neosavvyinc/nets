@@ -179,7 +179,7 @@
             <classifier>multicore</classifier>
             <type>swc</type>
         </dependency>
-        
+
 
     </dependencies>
 

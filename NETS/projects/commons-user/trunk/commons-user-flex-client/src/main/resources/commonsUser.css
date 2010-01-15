@@ -1,21 +1,20 @@
-
-.paddedContainer{
-    paddingBottom:  10;
-    paddingLeft:    10;
-    paddingRight:   10;
-    paddingTop:     10;
+.paddedContainer {
+    paddingBottom: 10;
+    paddingLeft: 10;
+    paddingRight: 10;
+    paddingTop: 10;
 }
 
 .textInputError {
-    borderColor:        red;
-    borderThickness:    1;
-    borderStyle:        solid;
+    borderColor: red;
+    borderThickness: 1;
+    borderStyle: solid;
 }
 
 Form {
-    paddingBottom:  0;
-    paddingLeft:    0;
-    paddingRight:   0;
-    paddingTop:     0;
+    paddingBottom: 0;
+    paddingLeft: 0;
+    paddingRight: 0;
+    paddingTop: 0;
 }
 

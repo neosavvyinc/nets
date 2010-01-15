@@ -1,6 +1,7 @@
 package com.neosavvy.user.dao.companyManagement;
 
 import com.neosavvy.user.dao.base.BaseDAO;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -10,13 +11,6 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Dec 19, 2009
- * Time: 11:30:52 PM
- * To change this template use File | Settings | File Templates.
- */
 public class UserInviteDAOImpl extends BaseDAO implements UserInviteDAO{
     public UserInviteDTO saveUserInvite(UserInviteDTO userInvite) {
         if (userInvite.getId() == null) {
@@ -53,6 +47,9 @@ public class UserInviteDAOImpl extends BaseDAO implements UserInviteDAO{
         }
         if((userInvite.getRegistrationToken() != null) && (userInvite.getRegistrationToken().length() > 0)){
             searchPredicates.add(builder.equal(root.get("registrationToken"), userInvite.getRegistrationToken()));
+        }
+        if((userInvite.getCompany() != null) && (userInvite.getCompany().getId() != null)) {
+            searchPredicates.add(builder.equal(root.get("company"), userInvite.getCompany()));
         }
 
         return getEntityManager().createQuery(criteria.where(searchPredicates.toArray(new Predicate[0]))).getResultList();

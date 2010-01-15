@@ -6,7 +6,8 @@
 
     <mx:Panel id="loginPanel" title="Login" width="500" styleName="paddedContainer">
         <flexlib:PromptingTextInput prompt="Username" automationName="username" id="username" width="100%"/>
-        <flexlib:PromptingTextInput prompt="Password" automationName="password" id="password" width="100%" displayAsPassword="true"/>
+        <flexlib:PromptingTextInput prompt="Password" automationName="password" id="password" width="100%"
+                                    displayAsPassword="true"/>
 
         <mx:HBox>
             <mx:Button id="loginButton" label="Login"/>

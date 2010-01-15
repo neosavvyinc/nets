@@ -11,13 +11,7 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-/**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Nov 28, 2009
- * Time: 4:04:03 AM
- * To change this template use File | Settings | File Templates.
- */
+
 public class RoleDAOImpl extends BaseDAO implements RoleDAO{
     public RoleDTO saveRole(RoleDTO role) {
         if (role.getId() == null) {

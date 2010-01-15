@@ -1,5 +1,6 @@
 package com.neosavvy.user.controller.user {
     import com.neosavvy.user.ApplicationFacade;
+    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
@@ -12,11 +13,12 @@ package com.neosavvy.user.controller.user {
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
-    public class SaveEmployeeToCompanyCommand extends AsyncCommand implements IResponder {
+    public class SaveEmployeeToCompanyCommand extends NeosavvyAsyncCommand implements IResponder {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.user.SaveEmployeeToCompanyCommand");
 
         override public function execute(notification:INotification):void {
+            super.execute(notification);
             var companyServiceProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
             var user:UserDTO = notification.getBody() as UserDTO;
             companyServiceProxy.addEmployeeToCompany(user, this);

@@ -4,13 +4,7 @@ import org.eclipse.persistence.internal.descriptors.PersistenceObject;
 
 import javax.persistence.*;
 
-/**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Dec 19, 2009
- * Time: 12:57:22 AM
- * To change this template use File | Settings | File Templates.
- */
+
 @MappedSuperclass
 public abstract class BaseUserDTO {
     @Column(name="FIRST_NAME")
@@ -28,7 +22,7 @@ public abstract class BaseUserDTO {
     @Column(name="CONTACT_PHONE_NUMBER")
     private String contactPhoneNumber;
 
-    protected BaseUserDTO() {
+    public BaseUserDTO() {
 
     }
 

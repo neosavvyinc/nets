@@ -1,25 +1,20 @@
 package com.neosavvy.user.controller.company {
     import com.neosavvy.user.ApplicationFacade;
+    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
     import com.neosavvy.user.dto.companyManagement.CompanyDTO;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
-    import com.neosavvy.user.model.UserServiceProxy;
-
     import com.neosavvy.user.util.RemoteObjectUtils;
 
-    import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.rpc.IResponder;
-
     import mx.rpc.events.FaultEvent;
-    import mx.rpc.events.ResultEvent;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
-    import org.puremvc.as3.multicore.patterns.command.SimpleCommand;
 
-    public class SaveCompanyCommand extends AsyncCommand implements IResponder {
+    public class SaveCompanyCommand extends NeosavvyAsyncCommand implements IResponder {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.company.SaveCompanyCommand");
 

@@ -2,13 +2,9 @@ package com.neosavvy.user.view.secured.userManagement {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
-
     import com.neosavvy.user.view.secured.userManagement.event.UserManagementEvent;
 
-    import flash.events.Event;
-
     import mx.controls.AdvancedDataGrid;
-    import mx.events.ListEvent;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -84,7 +80,7 @@ package com.neosavvy.user.view.secured.userManagement {
         }
 
         private function refreshLastUserNotifcation():void {
-            switch(_userManagementMode) {
+            switch (_userManagementMode) {
                 case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:
                     sendNotification(ApplicationFacade.ACTIVE_EMPLOYEES_REQUEST);
                     break;
@@ -99,16 +95,16 @@ package com.neosavvy.user.view.secured.userManagement {
 
 
         private function userManagementEventHandler(event:UserManagementEvent):void {
-             switch ( event.action ) {
+            switch (event.action) {
                 case UserManagementEvent.ACTION_ACTIVATE:
                 case UserManagementEvent.ACTION_DEACTIVATE:
                     var userToUpdate:UserDTO = event.user;
                     userToUpdate.active = !userToUpdate.active;
-                    sendNotification(ApplicationFacade.SAVE_USER_REQUEST, userToUpdate );
+                    sendNotification(ApplicationFacade.SAVE_USER_REQUEST, userToUpdate);
                     break;
                 case UserManagementEvent.ACTION_RESET_PASSWORD:
                     var userToReset:UserDTO = event.user;
-                    sendNotification(ApplicationFacade.RESET_USER_PASSWORD_REQUEST, userToReset );
+                    sendNotification(ApplicationFacade.RESET_USER_PASSWORD_REQUEST, userToReset);
                     break;
             }
         }

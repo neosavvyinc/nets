@@ -56,7 +56,7 @@ public abstract class AbstractCompany {
     private String country;
 
     protected AbstractCompany() {
-        
+
     }
 
     public abstract Long getId();

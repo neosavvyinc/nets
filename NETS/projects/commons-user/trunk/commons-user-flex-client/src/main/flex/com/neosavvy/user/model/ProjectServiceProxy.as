@@ -1,17 +1,13 @@
 package com.neosavvy.user.model {
-    import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.ProxyConstants;
     import com.neosavvy.user.dto.companyManagement.CompanyDTO;
     import com.neosavvy.user.dto.project.ClientCompany;
     import com.neosavvy.user.dto.project.Project;
-    import com.neosavvy.user.util.RemoteObjectUtils;
 
     import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.rpc.IResponder;
-    import mx.rpc.events.FaultEvent;
-    import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.mxml.RemoteObject;
 
     public class ProjectServiceProxy extends AbstractRemoteObjectProxy {
@@ -29,23 +25,23 @@ package com.neosavvy.user.model {
         public function get projects():ArrayCollection {
             return data as ArrayCollection;
         }
+
         public function set projects(value:ArrayCollection):void {
             data = value;
         }
 
 
-
-        public function addProject(project:Project, company:CompanyDTO, clientCompany:ClientCompany, responder:IResponder ):void {
+        public function addProject(project:Project, company:CompanyDTO, clientCompany:ClientCompany, responder:IResponder):void {
             var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);
             addCallbackHandler(projectService, responder);
-            projectService.addProject(project,company,clientCompany);
+            projectService.addProject(project, company, clientCompany);
         }
 
 
-        public function findProjectsForCompany(company:CompanyDTO, responder:IResponder ):void {
+        public function findProjectsForCompany(company:CompanyDTO, responder:IResponder):void {
             var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);
             addCallbackHandler(projectService, responder);
-            projectService.findProjectsForParentCompany( company );
+            projectService.findProjectsForParentCompany(company);
         }
     }
 }

@@ -75,4 +75,8 @@ public class ClientCompany extends AbstractCompany {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public ClientCompany() {
+        super();
+    }
 }

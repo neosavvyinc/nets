@@ -32,7 +32,8 @@ public class UserDAOImpl extends BaseUserDAOImpl<UserDTO> implements UserDAO {
             userQuery.setParameter("userActive", user.getActive());
         }
 
-        return userQuery.getResultList();
+        List resultList = userQuery.getResultList();
+        return resultList;
     }
 
     @Override

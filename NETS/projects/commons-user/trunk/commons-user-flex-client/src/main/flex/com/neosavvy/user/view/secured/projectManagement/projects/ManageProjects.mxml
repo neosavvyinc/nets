@@ -1,10 +1,32 @@
 <?xml version="1.0"?>
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
-        xmlns:flexlib="http://code.google.com/p/flexlib/"
-        xmlns:controls="controls.*"
-        xmlns:validators="com.visualempathy.validators.*"
-        styleName="paddedContainer" width="100%" height="100%">
+         xmlns:flexlib="http://code.google.com/p/flexlib/"
+         xmlns:controls="controls.*"
+         xmlns:validators="com.visualempathy.validators.*"
+         styleName="paddedContainer" width="100%" height="100%">
 
+    <mx:Script>
+        <![CDATA[
+
+        import mx.collections.ArrayCollection;
+        import mx.events.CollectionEvent;
+
+        [Bindable]
+        private var _clientCompanies:ArrayCollection
+
+        public function get clientCompanies():ArrayCollection {
+            return _clientCompanies;
+        }
+
+        public function set clientCompanies(value:ArrayCollection):void {
+            _clientCompanies = value;
+            dispatchEvent(new CollectionEvent(CollectionEvent.COLLECTION_CHANGE));
+        }
+
+
+
+        ]]>
+    </mx:Script>
 
     <mx:Array id="projectFormValidators">
         <mx:StringValidator id="projectNameValidator" source="{this.projectName}" property="text" required="true"/>
@@ -15,10 +37,12 @@
     <mx:HBox width="100%">
         <mx:Form id="projectEntryForm" width="50%">
             <mx:FormItem label="Project Name:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="projectName" prompt="Project Name" change="this.projectFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="projectName" prompt="Project Name"
+                                            change="this.projectFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="Project Code:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="projectCode" prompt="Three Letter Code" change="this.projectFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="projectCode" prompt="Three Letter Code"
+                                            change="this.projectFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="State Date:" width="100%" required="true">
                 <mx:DateField id="startDate"/>
@@ -31,7 +55,8 @@
             </mx:FormItem>
         </mx:Form>
         <mx:VBox width="50%" height="{projectEntryForm.height}">
-            <mx:ComboBox id="clientSelectorDropdown" labelField="companyName" width="60%" prompt="Select Client Company..."/>
+            <mx:ComboBox id="clientSelectorDropdown" labelField="companyName" width="60%"
+                         prompt="Select Client Company..." dataProvider="{_clientCompanies}"/>
 
             <mx:HBox horizontalAlign="right" verticalAlign="bottom" height="100%" width="100%">
                 <mx:Button id="saveProject" label="Save Project"/>
@@ -39,19 +64,19 @@
         </mx:VBox>
     </mx:HBox>
     <mx:AdvancedDataGrid
-        id="projectManagementGrid"
-        width="100%"
-        height="100%"
-        >
+            id="projectManagementGrid"
+            width="100%"
+            height="100%"
+            >
         <mx:columns>
             <mx:AdvancedDataGridColumn
                     id="projectNameColumn"
-                    dataField="projectName"
+                    dataField="name"
                     headerText="Project Name"
                     />
             <mx:AdvancedDataGridColumn
                     id="projectCodeColumn"
-                    dataField="projectCode"
+                    dataField="code"
                     headerText="Project Code"
                     />
             <mx:AdvancedDataGridColumn

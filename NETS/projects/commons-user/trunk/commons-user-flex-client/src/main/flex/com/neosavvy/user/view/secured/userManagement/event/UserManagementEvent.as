@@ -14,7 +14,7 @@ package com.neosavvy.user.view.secured.userManagement.event {
         private var _action:String;
 
         public function UserManagementEvent(action:String, user:UserDTO) {
-            super(TYPE,true, false);
+            super(TYPE, true, false);
             _user = user;
             _action = action;
         }

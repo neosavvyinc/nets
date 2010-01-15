@@ -13,7 +13,8 @@
 
     <mx:Array id="companyFormValidators">
         <mx:StringValidator id="companyNameValidator" source="{this.companyName}" property="text" required="true"/>
-        <mx:StringValidator id="billingAddress1Validator" source="{this.billingAddressOne}" property="text" required="true"/>
+        <mx:StringValidator id="billingAddress1Validator" source="{this.billingAddressOne}" property="text"
+                            required="true"/>
         <mx:StringValidator id="billingAddress2Validator" source="{this.billingAddressTwo}" property="text"/>
         <mx:ZipCodeValidator id="zipCodeValidator" source="{this.zipCode}" property="text" required="true"/>
         <mx:StringValidator id="cityValidator" source="{this.city}" property="text" required="true"/>
@@ -36,40 +37,51 @@
 
         <mx:Form id="companyForm" width="100%" height="100%" paddingLeft="0" defaultButton="{saveButton}">
             <mx:FormItem label="Company Name:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="companyName" prompt="Client Company Name" change="this.clientCompanyFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="companyName" prompt="Client Company Name"
+                                            change="this.clientCompanyFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="Billing Address 1:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="billingAddressOne" prompt="Billing Address 1" change="this.clientCompanyFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="billingAddressOne" prompt="Billing Address 1"
+                                            change="this.clientCompanyFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="Billing Address 2:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="billingAddressTwo" prompt="Billing Address 2" change="this.clientCompanyFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="billingAddressTwo" prompt="Billing Address 2"
+                                            change="this.clientCompanyFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="Zip Code:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="zipCode" prompt="Zip Code" change="this.clientCompanyFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="zipCode" prompt="Zip Code"
+                                            change="this.clientCompanyFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="City:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="city" prompt="City" change="this.clientCompanyFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="city" prompt="City"
+                                            change="this.clientCompanyFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="State:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="state" prompt="State" change="this.clientCompanyFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="state" prompt="State"
+                                            change="this.clientCompanyFormValidator.validateForm(event);"/>
             </mx:FormItem>
         </mx:Form>
 
         <mx:Form id="clientPocForm" width="100%" height="100%" paddingLeft="0" defaultButton="{saveButton}">
             <mx:FormItem label="First Name:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="firstName" prompt="Client Contact First Name" change="this.clientFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="firstName" prompt="Client Contact First Name"
+                                            change="this.clientFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="Middle Name:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="middleName" prompt="Client Contact Middle Name" change="this.clientFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="middleName" prompt="Client Contact Middle Name"
+                                            change="this.clientFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="Last Name:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="lastName" prompt="Client Contact Last Name" change="this.clientFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="lastName" prompt="Client Contact Last Name"
+                                            change="this.clientFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="Email:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="email" prompt="Client Contact Email" change="this.clientFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="email" prompt="Client Contact Email"
+                                            change="this.clientFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="Phone:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="phone" prompt="Client Contact Phone" change="this.clientFormValidator.validateForm(event);"/>
+                <flexlib:PromptingTextInput id="phone" prompt="Client Contact Phone"
+                                            change="this.clientFormValidator.validateForm(event);"/>
             </mx:FormItem>
         </mx:Form>
 

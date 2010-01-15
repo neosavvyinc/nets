@@ -57,7 +57,9 @@ public class ProjectServiceImpl implements ProjectService {
         if( company == null ) {
             throw new ProjectServiceException("Cannot find projects without a parent company");
         }
-        return projectDAO.findProjectsForParentCompany(company.getId());
+        Project project = new Project();
+        project.setCompany(company);
+        return projectDAO.findProject(project);
     }
 
     public ProjectDAO getProjectDAO() {

@@ -14,7 +14,7 @@ package com.neosavvy.user.view.secured.employeeInvitation.event {
         private var _action:String;
 
         public function UserCompanyInviteEvent(action:String, object:UserInviteDTO) {
-            super(TYPE,true, false);
+            super(TYPE, true, false);
             _userInvite = object;
             _action = action;
         }

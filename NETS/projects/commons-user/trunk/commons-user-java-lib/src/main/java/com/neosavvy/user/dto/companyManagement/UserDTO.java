@@ -93,4 +93,8 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy {// implemen
     public void setConfirmedRegistration(Boolean confirmedRegistration) {
         this.confirmedRegistration = confirmedRegistration;
     }
+
+    public UserDTO() {
+        super();
+    }
 }

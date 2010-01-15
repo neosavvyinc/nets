@@ -1,5 +1,6 @@
 package com.neosavvy.user.controller.project {
     import com.neosavvy.user.ApplicationFacade;
+    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
     import com.neosavvy.user.dto.companyManagement.CompanyDTO;
     import com.neosavvy.user.dto.project.ClientCompany;
     import com.neosavvy.user.dto.project.Project;
@@ -11,18 +12,17 @@ package com.neosavvy.user.controller.project {
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.rpc.IResponder;
-
     import mx.rpc.events.FaultEvent;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
-    public class SaveProject extends AsyncCommand implements IResponder {
+    public class SaveProject extends NeosavvyAsyncCommand implements IResponder {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.project.SaveProject");
 
         override public function execute(notification:INotification):void {
-
+            super.execute(notification);
             var projectProxy:ProjectServiceProxy = facade.retrieveProxy(ProjectServiceProxy.NAME) as ProjectServiceProxy;
 
             if (notification.getBody() is Array && (notification.getBody() as Array).length == 3) {

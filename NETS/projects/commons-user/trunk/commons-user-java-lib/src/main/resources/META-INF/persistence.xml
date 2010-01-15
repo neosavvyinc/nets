@@ -35,6 +35,7 @@
         
         <properties>            
             <property name="eclipselink.logging.level" value="FINEST"/>
+            <property name="eclipselink.weaving" value="false" />
         </properties>
     </persistence-unit>
 </persistence>

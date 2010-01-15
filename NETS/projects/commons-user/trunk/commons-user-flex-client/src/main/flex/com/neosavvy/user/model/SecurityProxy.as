@@ -17,30 +17,30 @@ package com.neosavvy.user.model {
 
         public static var NAME:String = "securityProxy";
 
-		private var remote:Boolean = ProxyConstants.isRemoteEnabled;
+        private var remote:Boolean = ProxyConstants.isRemoteEnabled;
 
-		public function SecurityProxy()
-		{
-			super(NAME, null);
-		}
+        public function SecurityProxy()
+        {
+            super(NAME, null);
+        }
 
         public function get user():String {
-            if(data)
+            if (data)
                 return data.name as String;
             else
                 return null;
         }
 
         public function get authorities():Array {
-            if(data)
+            if (data)
                 return data.authorities as Array;
             else
                 return new Array();
         }
 
         public function isActiveUserEmployee():Boolean {
-            for each ( var authority:String in authorities ) {
-                if( authority == "ROLE_EMPLOYEE") {
+            for each (var authority:String in authorities) {
+                if (authority == "ROLE_EMPLOYEE") {
                     return true
                 }
             }
@@ -48,8 +48,8 @@ package com.neosavvy.user.model {
         }
 
         public function isActiveUserAdmin():Boolean {
-            for each ( var authority:String in authorities ) {
-                if( authority == "ROLE_ADMIN") {
+            for each (var authority:String in authorities) {
+                if (authority == "ROLE_ADMIN") {
                     return true
                 }
             }
@@ -62,21 +62,21 @@ package com.neosavvy.user.model {
          *
          *******/
 
-        public function login(user:UserDTO, completionCallback:Function ):void {
-            var channelSet:ChannelSet =  getServiceChannelSet();
+        public function login(user:UserDTO, completionCallback:Function):void {
+            var channelSet:ChannelSet = getServiceChannelSet();
             channelSet.login(user.username, user.password);
             channelSet.addEventListener(ResultEvent.RESULT, login_resultHandler);
             channelSet.addEventListener(FaultEvent.FAULT, login_faultHandler);
         }
 
-        public function checkUserLoggedIn(completionCallback:Function ):void {
+        public function checkUserLoggedIn(completionCallback:Function):void {
             var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             userService.addEventListener(ResultEvent.RESULT, user_loggedAlreadyLoggedInHandler);
             userService.addEventListener(FaultEvent.FAULT, user_notLoggedInHandler);
             userService.checkUserLoggedIn();
         }
 
-        public function logout(completionCallback:Function ) {
+        public function logout(completionCallback:Function) {
             var channelSet:ChannelSet = getServiceChannelSet();
             channelSet.logout();
             sendNotification(ApplicationFacade.USER_NOT_LOGGED_IN);
@@ -102,6 +102,7 @@ package com.neosavvy.user.model {
             LOGGER.debug("User is not yet logged in");
             sendNotification(ApplicationFacade.USER_NOT_LOGGED_IN);
         }
+
         protected function user_loggedAlreadyLoggedInHandler(event:ResultEvent):void {
             LOGGER.debug("User is already logged in");
             var security:SecurityWrapperDTO = event.result as SecurityWrapperDTO;

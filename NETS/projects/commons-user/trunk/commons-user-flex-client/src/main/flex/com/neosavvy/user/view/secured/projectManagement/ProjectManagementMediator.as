@@ -1,9 +1,6 @@
 package com.neosavvy.user.view.secured.projectManagement {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.model.ClientServiceProxy;
-
     import com.neosavvy.user.model.CompanyServiceProxy;
-
     import com.neosavvy.user.model.ProjectServiceProxy;
 
     import mx.logging.ILogger;

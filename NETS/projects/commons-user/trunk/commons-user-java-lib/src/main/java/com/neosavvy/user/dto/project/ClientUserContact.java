@@ -48,4 +48,8 @@ public class ClientUserContact extends BaseUserDTO {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public ClientUserContact() {
+        super();
+    }
 }

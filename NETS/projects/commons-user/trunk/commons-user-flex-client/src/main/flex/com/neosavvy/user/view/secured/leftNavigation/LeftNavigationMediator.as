@@ -1,10 +1,7 @@
 package com.neosavvy.user.view.secured.leftNavigation {
     import com.neosavvy.user.ApplicationFacade;
-
     import com.neosavvy.user.model.SecurityProxy;
-
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigation;
-
     import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigation;
 
     import mx.logging.ILogger;
@@ -53,9 +50,9 @@ package com.neosavvy.user.view.secured.leftNavigation {
                 case ApplicationFacade.USER_LOGGED_IN:
                 case ApplicationFacade.POST_SECURE_VIEW_PREP:
                     var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
-                    if(securityProxy.isActiveUserAdmin()) {
-                        if( removedAdminNavigation ) {
-                            leftNavigation.addChildAt(removedAdminNavigation,0);
+                    if (securityProxy.isActiveUserAdmin()) {
+                        if (removedAdminNavigation) {
+                            leftNavigation.addChildAt(removedAdminNavigation, 0);
                         }
                     } else {
                         removedAdminNavigation = leftNavigation.removeChild(adminNavigation) as AdminNavigation;
