@@ -26,13 +26,17 @@ package com.neosavvy.user.controller.user {
 
         public function fault(info:Object):void {
             RemoteObjectUtils.logRemoteServiceFault(info as FaultEvent, LOGGER);
+            var faultEvent:FaultEvent = info as FaultEvent;
             commandComplete()
-            sendNotification(ApplicationFacade.SAVE_USER_TO_COMPANY_FAILED);
+            var faultString:String = faultEvent.fault.faultString;
+            var faultParts:Array = faultString.split(":");
+            sendNotification(ApplicationFacade.SAVE_USER_TO_COMPANY_FAILED, faultParts[1]);
         }
 
         public function result(data:Object):void {
             commandComplete()
-            sendNotification(ApplicationFacade.SAVE_USER_TO_COMPANY_SUCCESS);
+            var message:String = "Confirmation Success! Thanks for registering, please login to continue."
+            sendNotification(ApplicationFacade.SAVE_USER_TO_COMPANY_SUCCESS, message);
         }
     }
 }

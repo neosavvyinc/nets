@@ -8,6 +8,7 @@
         xmlns:login="com.neosavvy.user.view.login.*"
         creationComplete="{facade.startup(this)}"
         layout="absolute"
+        pageTitle="Neosavvy Expense Tracker"
         >
 
     <mx:Script>
@@ -22,8 +23,6 @@
     <mx:Style source="/commonsUser.css"/>
 
     <mx:ApplicationControlBar dock="true" horizontalAlign="right" width="100%" id="appControlBar">
-        <mx:Button id="backButton" label="Back"/>
-        <mx:Spacer width="100%"/>
         <mx:Label id="loggedInUserName"/>
         <mx:Canvas>
             <mx:Button id="loginButton" label="Login"/>

@@ -75,8 +75,6 @@
                         maxLength="255"/>
     <mx:StringValidator id="adminFirstNameValidator" source="{administrativeFirstName}" property="text" minLength="0"
                         maxLength="255"/>
-    <mx:StringValidator id="adminMiddleNameValidator" source="{administrativeMiddleName}" property="text" minLength="0"
-                        maxLength="255"/>
     <mx:StringValidator id="adminLastNameValidator" source="{administrativeLastName}" property="text" minLength="0"
                         maxLength="255"/>
     <mx:EmailValidator id="adminEmailValidator" source="{administrativeEmail}" property="text"/>
@@ -133,7 +131,7 @@
                                     prompt="First Name"
                                     width="100%"/>
                         </mx:FormItem>
-                        <mx:FormItem label="Middle Name" width="100%" required="true">
+                        <mx:FormItem label="Middle Name" width="100%" required="false">
                             <flexlib:PromptingTextInput
                                     id="administrativeMiddleName"
                                     prompt="Middle Name"

@@ -63,10 +63,6 @@ package com.neosavvy.user {
             return app.logoutButton;
         }
 
-        public function get backButton():Button {
-            return app.backButton;
-        }
-
         public function get newCompanyConfirmationButton():Button {
             return app.newCompanyConfirmationButton;
         }
@@ -87,7 +83,6 @@ package com.neosavvy.user {
             this.logoutButton.addEventListener(MouseEvent.CLICK, logoutButtonClickHandler);
             this.invitationButton.addEventListener(MouseEvent.CLICK, invitationButtonClickHandler);
             this.newCompanyConfirmationButton.addEventListener(MouseEvent.CLICK, newCompanyConfirmationButtonClickHandler);
-            this.backButton.addEventListener(MouseEvent.CLICK, backButtonClickHandler);
         }
 
 
@@ -104,70 +99,51 @@ package com.neosavvy.user {
             switch (notification.getName()) {
                 case ApplicationFacade.USER_LOGIN_SUCCESS:
                 case ApplicationFacade.USER_LOGGED_IN:
-                    saveLastNavigationIndex();
                     this.navigationViewStack.selectedIndex = SECURED_CONTAINER_NAVIGATION_INDEX;
                     var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
                     var roles:String = securityProxy.authorities.join(",");
                     var activeUser:String = notification.getBody() as String;
                     loggedInUserName.text = "You are logged in as " + activeUser + " with role(s): " + roles;
-                    backButton.visible = false;
                     loginButton.visible = false;
                     logoutButton.visible = true;
                     sendNotification(ApplicationFacade.INITIALIZE_SECURED_VIEW, securedContainer);
                     break;
                 case ApplicationFacade.USER_NOT_LOGGED_IN:
-                    saveLastNavigationIndex();
                     this.navigationViewStack.selectedIndex = LOGIN_NAVIGATION_INDEX;
                     loginButton.visible = true;
                     logoutButton.visible = false;
-                    backButton.visible = true;
                     loggedInUserName.text = "You are not logged in";
                     sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
                     break;
                 case ApplicationFacade.NAVIGATE_TO_COMPANY_REGISTRATION:
-                    saveLastNavigationIndex();
                     this.navigationViewStack.selectedIndex = COMPANY_MANAGEMENT_NAVIGATION_INDEX;
                     break;
             }
         }
 
         private function newCompanyButtonClicked(event:MouseEvent):void {
-            saveLastNavigationIndex();
             this.navigationViewStack.selectedIndex = COMPANY_MANAGEMENT_NAVIGATION_INDEX;
         }
 
         private function existingUserButtonClicked(event:MouseEvent):void {
-            saveLastNavigationIndex();
             sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
         }
 
         private function logoutButtonClickHandler(event:MouseEvent):void {
-            saveLastNavigationIndex();
             sendNotification(ApplicationFacade.REQUEST_LOGOUT);
         }
 
         private function loginButtonClickedHandler(event:MouseEvent):void {
-            saveLastNavigationIndex();
             sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
         }
 
         private function invitationButtonClickHandler(event:MouseEvent):void {
-            saveLastNavigationIndex();
             this.navigationViewStack.selectedIndex = NEW_USER_CONFIRMATION_INDEX;
         }
 
         private function newCompanyConfirmationButtonClickHandler(event:MouseEvent):void {
-            saveLastNavigationIndex();
             this.navigationViewStack.selectedIndex = COMPANY_MANAGEMENT_NAVIGATION_INDEX;
             sendNotification(ApplicationFacade.SAVE_COMPANY_SUCCESS);
-        }
-
-        private function backButtonClickHandler(event:MouseEvent):void {
-            this.navigationViewStack.selectedIndex = _lastNavigationIndex;
-        }
-
-        private function saveLastNavigationIndex():void {
-            _lastNavigationIndex = this.navigationViewStack.selectedIndex;
         }
 
     }

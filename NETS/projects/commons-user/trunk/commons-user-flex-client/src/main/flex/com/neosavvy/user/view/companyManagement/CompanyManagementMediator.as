@@ -130,7 +130,6 @@ package com.neosavvy.user.view.companyManagement {
             validators.push(companyManagement.zipValidator);
             validators.push(companyManagement.adminUserValidator);
             validators.push(companyManagement.adminFirstNameValidator);
-            validators.push(companyManagement.adminMiddleNameValidator);
             validators.push(companyManagement.adminLastNameValidator);
             validators.push(companyManagement.adminEmailValidator);
             var validationResults:Array = Validator.validateAll(validators);

@@ -2,99 +2,18 @@
 <mx:VBox
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:flexlib="http://code.google.com/p/flexlib/"
+        xmlns:login="com.neosavvy.user.view.login.*"
         horizontalAlign="center"
         >
+    <mx:ViewStack
+            id="confirmationViewStack"
+            creationPolicy="all"
+            horizontalScrollPolicy="off"
+            verticalScrollPolicy="off"
+            width="420">
+        <login:ConfirmationPanel id="confirmationPanel"/>
+        <login:ConfirmationSuccessPanel id="confirmationSuccessPanel"/>
+        <login:ConfirmationErrorPanel id="confirmationErrorPanel"/>
+    </mx:ViewStack>
 
-    <mx:StringValidator id="confirmationKeyValidator" source="{confirmationKey}" property="text" minLength="16"
-                        maxLength="16"/>
-    <mx:StringValidator id="userNameValidator" source="{username}" property="text" minLength="0" maxLength="255"/>
-    <mx:StringValidator id="firstNameValidator" source="{firstName}" property="text" minLength="0" maxLength="255"/>
-    <mx:StringValidator id="middleNameValidator" source="{middleName}" property="text" minLength="0" maxLength="255"/>
-    <mx:StringValidator id="lastNameValidator" source="{lastName}" property="text" minLength="0" maxLength="255"/>
-    <mx:StringValidator id="passwordValidator" source="{password}" property="text" minLength="0" maxLength="255"/>
-    <mx:StringValidator id="confirmPasswordValidator" source="{confirmPassword}" property="text" minLength="0"
-                        maxLength="255"/>
-
-    <mx:Panel id="confirmationPanel" layout="vertical" title="Confirm Your User Account" width="400"
-              styleName="paddedContainer">
-
-        <mx:Text width="{confirmationPanel.width - 75}"
-                 text="You have been invited to participate in your company's expense tracking system. Please use the registration number emailed to you to validate that you can create a user with your company"/>
-
-        <mx:Form id="confirmationForm" defaultButton="{confirmUserBtn}" width="100%">
-
-            <mx:FormItem
-                    id="confirmationKeyForm"
-                    label="Confirmation Key"
-                    width="100%">
-                <flexlib:PromptingTextInput
-                        id="confirmationKey"
-                        prompt="Confirmation Key"
-                        />
-            </mx:FormItem>
-            <mx:FormItem
-                    id="usernameForm"
-                    label="Username"
-                    width="100%">
-                <flexlib:PromptingTextInput
-                        id="username"
-                        prompt="Username"
-                        />
-            </mx:FormItem>
-            <mx:FormItem
-                    id="firstNameForm"
-                    label="First Name"
-                    width="100%">
-                <flexlib:PromptingTextInput
-                        id="firstName"
-                        prompt="First Name"
-                        />
-            </mx:FormItem>
-            <mx:FormItem
-                    id="middleNameForm"
-                    label="Middle Name"
-                    width="100%">
-                <flexlib:PromptingTextInput
-                        id="middleName"
-                        prompt="Middle Name"
-                        />
-            </mx:FormItem>
-            <mx:FormItem
-                    id="lastNameForm"
-                    label="Last Name"
-                    width="100%">
-                <flexlib:PromptingTextInput
-                        id="lastName"
-                        prompt="Last Name"
-                        />
-            </mx:FormItem>
-
-            <mx:FormItem
-                    id="passwordForm"
-                    label="Password"
-                    width="100%">
-                <flexlib:PromptingTextInput
-                        id="password"
-                        prompt="Password"
-                        displayAsPassword="true"
-                        />
-            </mx:FormItem>
-            <mx:FormItem
-                    id="confirmPasswordForm"
-                    label="Confirm Password"
-                    width="100%">
-                <flexlib:PromptingTextInput
-                        id="confirmPassword"
-                        prompt="Confirm Password"
-                        displayAsPassword="true"
-                        />
-            </mx:FormItem>
-        </mx:Form>
-
-
-        <mx:HBox width="100%">
-            <mx:Button id="confirmUserBtn" label="Confirm Your Account"/>
-        </mx:HBox>
-
-    </mx:Panel>
 </mx:VBox>

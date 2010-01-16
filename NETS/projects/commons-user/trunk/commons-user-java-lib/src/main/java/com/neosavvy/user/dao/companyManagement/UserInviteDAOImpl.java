@@ -57,6 +57,7 @@ public class UserInviteDAOImpl extends BaseDAO implements UserInviteDAO{
     }
 
     public void deleteUserInvite(UserInviteDTO userInvite) {
+        userInvite = findUserInviteById(userInvite.getId());
         getEntityManager().remove(userInvite);
         getEntityManager().flush();
     }
