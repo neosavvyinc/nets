@@ -165,22 +165,8 @@
                         </mx:FormItem>
                     </mx:Form>
                 </mx:Panel>
-            </mx:VBox>
-            <mx:VBox width="400">
-                <mx:Panel title="Company Information" width="100%" styleName="paddedContainer">
-                    <mx:Text text="Please give us just a bit more information about your company"/>
-                    <mx:RadioButtonGroup id="numberOfEmployeesGroup"/>
-                    <mx:RadioButton group="{numberOfEmployeesGroup}" id="oneToTen" label="1-10"/>
-                    <mx:RadioButton group="{numberOfEmployeesGroup}" id="elevenToFifty" label="11-50"/>
-                    <mx:RadioButton group="{numberOfEmployeesGroup}" id="fiftyOneToOneHundred" label="51-100"/>
-                    <mx:RadioButton group="{numberOfEmployeesGroup}" id="oneHundredOneToOneThousand" label="101-1,000"/>
-                    <mx:RadioButton group="{numberOfEmployeesGroup}" id="oneThousandOneToTenThousand"
-                                    label="1,000-10,000"/>
-                    <mx:RadioButton group="{numberOfEmployeesGroup}" id="moreThanTenThousand" label="&gt;10,001"/>
-                </mx:Panel>
                 <mx:Button id="registerCompanyButton" label="Register Company"/>
             </mx:VBox>
-
         </mx:HBox>
         <mx:VBox horizontalAlign="center">
             <mx:Panel title="Thanks for registering!!!" width="400" styleName="paddedContainer">

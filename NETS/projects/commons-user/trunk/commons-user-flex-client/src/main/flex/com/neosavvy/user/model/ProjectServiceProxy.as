@@ -30,6 +30,9 @@ package com.neosavvy.user.model {
             data = value;
         }
 
+        override public function clearCachedValues():void {
+            data = null;
+        }
 
         public function addProject(project:Project, company:CompanyDTO, clientCompany:ClientCompany, responder:IResponder):void {
             var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);

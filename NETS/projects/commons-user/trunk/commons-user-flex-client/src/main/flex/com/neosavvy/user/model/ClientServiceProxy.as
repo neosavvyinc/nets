@@ -45,5 +45,8 @@ package com.neosavvy.user.model {
             companyService.saveClientForCompany(clientCompany, clientUserContact);
         }
 
+        override public function clearCachedValues():void {
+            data = null;
+        }
     }
 }

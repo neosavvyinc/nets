@@ -5,6 +5,8 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 
+    import flash.errors.IllegalOperationError;
+
     import mx.collections.ArrayCollection;
     import mx.collections.ListCollectionView;
     import mx.logging.ILogger;
@@ -42,12 +44,24 @@ package com.neosavvy.user.model {
                         var userCompanyRole:UserCompanyRoleDTO = userCompanyRoles.getItemAt(0) as UserCompanyRoleDTO;
                         var company:CompanyDTO = userCompanyRole.company;
                         data = company;
+                    } else {
+                        throw new IllegalOperationError("Could not determine your active company");
                     }
+                } else {
+                    throw new IllegalOperationError("Could not determine your active user");
                 }
             }
 
 
             return data as CompanyDTO;
+        }
+
+        override public function clearCachedValues():void {
+            data = null;
+            _inactiveUsersForCompany = new ArrayCollection();
+            _allUsersForCompany = new ArrayCollection();
+            _activeUsersForCompany = new ArrayCollection();
+            _invitedUsersForActiveCompany = new ArrayCollection();
         }
 
         private var _invitedUsersForActiveCompany:ArrayCollection = new ArrayCollection();
@@ -145,7 +159,6 @@ package com.neosavvy.user.model {
             addCallbackHandler(companyService, responder);
             companyService.findInactiveUsersForCompany(activeCompany);
         }
-
 
     }
 }

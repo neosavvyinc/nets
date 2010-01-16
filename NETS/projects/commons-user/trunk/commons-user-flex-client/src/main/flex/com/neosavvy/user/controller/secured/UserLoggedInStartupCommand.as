@@ -11,7 +11,9 @@ package com.neosavvy.user.controller.secured {
             addSubCommand(ShowProgressBarCommand);
             addSubCommand(SecuredViewPrepCommand);
             addSubCommand(GetActiveUserCommand);
+            addSubCommand(UserLoggedIn);            
             addSubCommand(HideProgressBarCommand);
+
         }
 
     }

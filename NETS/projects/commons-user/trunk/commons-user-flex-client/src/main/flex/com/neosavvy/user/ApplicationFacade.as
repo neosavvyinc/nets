@@ -136,6 +136,8 @@ package com.neosavvy.user {
         public static const UPDATE_PROGRESS_INDICATOR:String = "updateProgressIndicator";
         public static const HIDE_PROGRESS_INDICATOR:String = "hideProgressIndicator";
 
+        public static const USER_LOGIN_STARTUP_COMPLETE:String = "userLoginStartupComplete";
+
         public function ApplicationFacade(key:String)
         {
             super(key);
@@ -200,5 +202,6 @@ package com.neosavvy.user {
         public static function getSecurityProxy(key:String):SecurityProxy {
             return ApplicationFacade.getInstance(key).retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
         }
+
     }
 }

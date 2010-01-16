@@ -38,6 +38,10 @@ package com.neosavvy.user.model {
                 return new Array();
         }
 
+        override public function clearCachedValues():void {
+            data = null;
+        }
+
         public function isActiveUserEmployee():Boolean {
             for each (var authority:String in authorities) {
                 if (authority == "ROLE_EMPLOYEE") {

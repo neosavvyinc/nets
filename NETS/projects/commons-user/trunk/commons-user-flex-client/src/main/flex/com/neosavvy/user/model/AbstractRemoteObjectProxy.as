@@ -1,6 +1,8 @@
 package com.neosavvy.user.model {
     import com.neosavvy.user.ProxyConstants;
 
+    import flash.errors.IllegalOperationError;
+
     import mx.messaging.ChannelSet;
     import mx.messaging.channels.AMFChannel;
     import mx.rpc.IResponder;
@@ -34,6 +36,10 @@ package com.neosavvy.user.model {
         protected function addCallbackHandler(service:RemoteObject, responder:IResponder):void {
             service.addEventListener(ResultEvent.RESULT, responder.result);
             service.addEventListener(FaultEvent.FAULT, responder.fault);
+        }
+
+        public function clearCachedValues():void {
+            throw new IllegalOperationError("Must implement AbstractRemoteObjectProxy::clearCachedValues() to ensure data is properly removed when logging out"); 
         }
     }
 }

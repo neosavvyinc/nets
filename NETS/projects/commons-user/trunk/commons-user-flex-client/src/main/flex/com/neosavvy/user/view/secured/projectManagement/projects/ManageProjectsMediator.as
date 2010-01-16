@@ -83,6 +83,15 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
             return project;
         }
 
+        public function resetForm():void {
+            manageProjects.startDate.selectedDate = null;
+            manageProjects.endDate.selectedDate = null;
+            manageProjects.projectName.text = null;
+            manageProjects.projectCode.text = null;
+            manageProjects.ongoingProject.selected = false;
+            clientSelectorDropdown.selectedIndex = 0;
+        }
+
         override public function listNotificationInterests():Array {
             return [
                 ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT
@@ -101,12 +110,14 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
                     break;
                 case ApplicationFacade.INITIALIZE_MANAGE_PROJECTS_VIEW_COMPLETE:
                     manageProjects.clientCompanies = _clientProxy.clientCompanies;
+                    resetForm();
                     break;
                 case ApplicationFacade.GET_PROJECTS_FOR_COMPANY_SUCCESS:
                     projectmanagementGrid.dataProvider = _projectProxy.projects;
                     break;
                 case ApplicationFacade.SAVE_PROJECT_SUCCESS:
                     sendNotification(ApplicationFacade.GET_PROJECTS_FOR_COMPANY_REQUEST);
+                    resetForm();
                     break;
             }
 

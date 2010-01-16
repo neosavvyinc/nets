@@ -38,6 +38,11 @@ package com.neosavvy.user.model {
             _activeUser = activeUser;
         }
 
+        override public function clearCachedValues():void {
+            data = null;
+            _activeUser = null;
+        }
+
         public function getUsers(completionCallback:Function):void {
             var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             //addCallbackHandler(userService, completionCallback);

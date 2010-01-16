@@ -8,6 +8,7 @@ package com.neosavvy.user.view.security {
     import mx.logging.ILogger;
     import mx.logging.Log;
 
+    import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.mediator.Mediator;
 
     public class LoginMediator extends Mediator {
@@ -32,6 +33,12 @@ package com.neosavvy.user.view.security {
             return login.newCompanyButtonFromExistingLogin;
         }
 
+        public function resetForm():void {
+           login.username.text = null;
+           login.password.text = null;
+           login.errorLbl.text = null;
+        }
+
         private function handleLoginClickedEvent(event:MouseEvent):void {
             var user:UserDTO = new UserDTO();
             user.username = login.username.text;
@@ -40,10 +47,26 @@ package com.neosavvy.user.view.security {
         }
 
         private function handleNewCompanyButtonFromExistingLogingClicked(event:MouseEvent):void {
-
             sendNotification(ApplicationFacade.NAVIGATE_TO_COMPANY_REGISTRATION);
-
         }
 
+
+        override public function listNotificationInterests():Array {
+            return [
+                ApplicationFacade.USER_LOGIN_SUCCESS
+                ,ApplicationFacade.USER_LOGIN_FAILED
+            ];
+        }
+
+        override public function handleNotification(notification:INotification):void {
+            switch ( notification.getName() ) {
+                case ApplicationFacade.USER_LOGIN_SUCCESS:
+                    resetForm();
+                    break;
+                case ApplicationFacade.USER_LOGIN_FAILED:
+                    login.errorLbl.text = "Username or Password were not valid";
+                    break;
+            }
+        }
     }
 }

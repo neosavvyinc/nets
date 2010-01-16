@@ -103,6 +103,21 @@ package com.neosavvy.user.view.secured.clientManagement {
             return clientCompany;
         }
 
+        public function resetForm():void {
+            clientManagement.companyName.text = null;
+            clientManagement.billingAddressOne.text = null;
+            clientManagement.billingAddressTwo.text = null;
+            clientManagement.city.text = null;
+            clientManagement.zipCode.text = null;
+            clientManagement.state.text = null;
+
+            clientManagement.firstName.text = null;
+            clientManagement.middleName.text = null;
+            clientManagement.lastName.text = null;
+            clientManagement.email.text = null;
+            clientManagement.phone.text = null;
+        }
+
         override public function listNotificationInterests():Array {
             return [
                 ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT
@@ -117,6 +132,7 @@ package com.neosavvy.user.view.secured.clientManagement {
             switch (notification.getName()) {
                 case ApplicationFacade.SAVE_CLIENT_COMPANY_SUCCESS:
                 case ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT:
+                    resetForm();
                     sendNotification(ApplicationFacade.FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST);
                     break;
                 case ApplicationFacade.FIND_CLIENTS_FOR_PARENT_COMPANY_SUCCESS:
