@@ -8,38 +8,17 @@ package com.neosavvy.user.controller.base {
 
     public class NeosavvyAsyncCommand extends AsyncCommand {
 
-
-        override public function execute(notification:INotification):void {
-
-           isCallerAsyncMacro = isCallerAsyncMacroCommand();
-
+        override public function setOnComplete(value:Function):void {
+            isCallerAsyncMacro = true;
+            super.setOnComplete(value);
         }
-
-        protected function isCallerAsyncMacroCommand():Boolean {
-            try {
-                throw new Error("Throwing an error to attempt to get the stack trace");
-            } catch ( e:Error ) {
-                var stackTrace:String = e.getStackTrace();
-                var stackElements:Array = stackTrace.split("\n");
-                var stack:ArrayCollection = new ArrayCollection();
-                for each (var item:String in stackElements) {
-                    stack.addItem( item.substr(4,item.indexOf("/")-4));
-                }
-                if ( stack.contains("org.puremvc.as3.multicore.patterns.command::AsyncMacroCommand")) {
-                    return true;
-                }
-                return false
-            }
-            throw new IllegalOperationError("Could not determine if the caller was a macro command or simple command");
-        }
-
 
         override protected function commandComplete():void {
             if( isCallerAsyncMacro )
                 super.commandComplete();
         }
 
-        private var _isCallerAsyncMacro:Boolean;
+        private var _isCallerAsyncMacro:Boolean = false;
 
 
         public function get isCallerAsyncMacro():Boolean {
