@@ -17,8 +17,6 @@ package com.neosavvy.user.model {
 
         public static var NAME:String = "userProxy";
 
-        private var remote:Boolean = ProxyConstants.isRemoteEnabled;
-
         private var _activeUser:UserDTO;
 
         public function UserServiceProxy()

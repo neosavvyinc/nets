@@ -7,6 +7,7 @@ package com.neosavvy.user.model {
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.messaging.ChannelSet;
+    import mx.rpc.IResponder;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.mxml.RemoteObject;
@@ -16,8 +17,6 @@ package com.neosavvy.user.model {
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.model.SecurityProxy");
 
         public static var NAME:String = "securityProxy";
-
-        private var remote:Boolean = ProxyConstants.isRemoteEnabled;
 
         public function SecurityProxy()
         {
@@ -60,58 +59,34 @@ package com.neosavvy.user.model {
             return false;
         }
 
-        /*******
-         *
-         * Service Proxied Functions
-         *
-         *******/
-
-        public function login(user:UserDTO, completionCallback:Function):void {
+        /****
+         * This method explicitly does not follow the pattern since it
+         * does not require a remoteObject to perform the login - notice
+         * that it uses a channelSet to interact with the service rather
+         * than a remoteObject.
+         * 
+         * @param user
+         * @param responder
+         */
+        public function login(user:UserDTO, responder:IResponder):void {
             var channelSet:ChannelSet = getServiceChannelSet();
             channelSet.login(user.username, user.password);
-            channelSet.addEventListener(ResultEvent.RESULT, login_resultHandler);
-            channelSet.addEventListener(FaultEvent.FAULT, login_faultHandler);
+            channelSet.addEventListener(ResultEvent.RESULT, responder.result);
+            channelSet.addEventListener(FaultEvent.FAULT, responder.fault);
         }
 
-        public function checkUserLoggedIn(completionCallback:Function):void {
+        public function checkUserLoggedIn(completionCallback:Function, responder:IResponder):void {
             var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
-            userService.addEventListener(ResultEvent.RESULT, user_loggedAlreadyLoggedInHandler);
-            userService.addEventListener(FaultEvent.FAULT, user_notLoggedInHandler);
+            addCallbackHandler(userService, responder);
             userService.checkUserLoggedIn();
         }
 
-        public function logout(completionCallback:Function) {
+        public function logout(responder:IResponder) {
             var channelSet:ChannelSet = getServiceChannelSet();
             channelSet.logout();
+            channelSet.addEventListener(ResultEvent.RESULT, responder.result);
+            channelSet.addEventListener(FaultEvent.FAULT, responder.fault);
             sendNotification(ApplicationFacade.USER_NOT_LOGGED_IN);
-        }
-
-        /********
-         *
-         * Result Handler functions
-         *
-         ********/
-
-        protected function login_resultHandler(result:ResultEvent):void {
-            setData(result.result);
-            sendNotification(ApplicationFacade.USER_LOGIN_SUCCESS, user);
-        }
-
-        protected function login_faultHandler(fault:FaultEvent):void {
-            LOGGER.debug("Login Failed: " + fault.fault.faultString);
-            sendNotification(ApplicationFacade.USER_LOGIN_FAILED);
-        }
-
-        protected function user_notLoggedInHandler(event:FaultEvent):void {
-            LOGGER.debug("User is not yet logged in");
-            sendNotification(ApplicationFacade.USER_NOT_LOGGED_IN);
-        }
-
-        protected function user_loggedAlreadyLoggedInHandler(event:ResultEvent):void {
-            LOGGER.debug("User is already logged in");
-            var security:SecurityWrapperDTO = event.result as SecurityWrapperDTO;
-            setData(security);
-            sendNotification(ApplicationFacade.USER_LOGGED_IN, user);
         }
     }
 }

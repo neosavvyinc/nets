@@ -15,8 +15,6 @@ package com.neosavvy.user.model {
 
         public static var NAME:String = "clientProxy";
 
-        private var remote:Boolean = ProxyConstants.isRemoteEnabled;
-
         public function ClientServiceProxy()
         {
             super(NAME, null);
