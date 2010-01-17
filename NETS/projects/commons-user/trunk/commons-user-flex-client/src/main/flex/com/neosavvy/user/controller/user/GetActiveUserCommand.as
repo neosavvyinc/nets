@@ -1,5 +1,5 @@
 package com.neosavvy.user.controller.user {
-    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
+    import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
@@ -14,7 +14,7 @@ package com.neosavvy.user.controller.user {
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
-    public class GetActiveUserCommand extends NeosavvyAsyncCommand implements IResponder {
+    public class GetActiveUserCommand extends ResponderAsyncCommand implements IResponder {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.user.GetActiveUserCommand");
 
@@ -24,21 +24,18 @@ package com.neosavvy.user.controller.user {
             userProxy.getActiveUser(this);
         }
 
-        public function fault(info:Object):void {
-            var event:FaultEvent = info as FaultEvent;
-            LOGGER.debug("User retrieval for active user failed");
-            RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
-            commandComplete();
-        }
-
-        public function result(data:Object):void {
+        override protected function resultHandler(resultEvent:ResultEvent):void {
             LOGGER.debug("User retrieval for active user succeeded");
-            var event:ResultEvent = data as ResultEvent;
-            var users:ArrayCollection = event.result as ArrayCollection;
+            var users:ArrayCollection = resultEvent.result as ArrayCollection;
             var _activeUser:UserDTO = users.getItemAt(0) as UserDTO;
             var userProxy:UserServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
             userProxy.activeUser = _activeUser;
-            commandComplete();
+        }
+
+
+        override protected function faultHandler(faultEvent:FaultEvent):void {
+            LOGGER.debug("User retrieval for active user failed");
+            RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
         }
     }
 }

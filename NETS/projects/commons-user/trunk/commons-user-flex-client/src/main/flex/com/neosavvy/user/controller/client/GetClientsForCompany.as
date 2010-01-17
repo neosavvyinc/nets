@@ -1,6 +1,6 @@
 package com.neosavvy.user.controller.client {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
+    import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.model.ClientServiceProxy;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
@@ -14,7 +14,7 @@ package com.neosavvy.user.controller.client {
 
     import org.puremvc.as3.multicore.interfaces.INotification;
 
-    public class GetClientsForCompany extends NeosavvyAsyncCommand implements IResponder {
+    public class GetClientsForCompany extends ResponderAsyncCommand {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.model.ClientServiceProxy");
 
@@ -25,23 +25,19 @@ package com.neosavvy.user.controller.client {
             clientProxy.findClientsForParentCompany(companyProxy.activeCompany, this);
         }
 
-        public function result(data:Object):void {
-            LOGGER.debug("Clients were returned");
-            var event:ResultEvent = data as ResultEvent;
-            var clientProxy:ClientServiceProxy = facade.retrieveProxy(ClientServiceProxy.NAME) as ClientServiceProxy;
-            clientProxy.clientCompanies = event.result as ArrayCollection;
 
+        override protected function resultHandler(resultEvent:ResultEvent):void {
+            LOGGER.debug("Clients were returned");
+            var clientProxy:ClientServiceProxy = facade.retrieveProxy(ClientServiceProxy.NAME) as ClientServiceProxy;
+            clientProxy.clientCompanies = resultEvent.result as ArrayCollection;
             sendNotification(ApplicationFacade.FIND_CLIENTS_FOR_PARENT_COMPANY_SUCCESS);
-            commandComplete();
         }
 
-        public function fault(info:Object):void {
-            var event:FaultEvent = info as FaultEvent;
+
+        override protected function faultHandler(faultEvent:FaultEvent):void {
+            var event:FaultEvent = faultEvent as FaultEvent;
             RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
             sendNotification(ApplicationFacade.FIND_CLIENTS_FOR_PARENT_COMPANY_FAILED);
-            commandComplete();
         }
-
-
     }
 }

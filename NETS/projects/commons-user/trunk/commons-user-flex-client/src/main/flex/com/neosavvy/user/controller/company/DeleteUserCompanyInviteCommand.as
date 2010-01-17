@@ -1,6 +1,6 @@
 package com.neosavvy.user.controller.company {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
+    import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
@@ -10,10 +10,12 @@ package com.neosavvy.user.controller.company {
     import mx.rpc.IResponder;
     import mx.rpc.events.FaultEvent;
 
+    import mx.rpc.events.ResultEvent;
+
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
-    public class DeleteUserCompanyInviteCommand extends NeosavvyAsyncCommand implements IResponder {
+    public class DeleteUserCompanyInviteCommand extends ResponderAsyncCommand {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.company.DeleteUserCompanyInviteCommand");
 
@@ -24,18 +26,16 @@ package com.neosavvy.user.controller.company {
             companyServiceProxy.deleteUserCompanyInvite(userInvite, this);
         }
 
-        public function fault(info:Object):void {
-            var faultEvent:FaultEvent = info as FaultEvent;
-            RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
-
-            sendNotification(ApplicationFacade.DELETE_USER_COMPANY_INVITE_FAILED);
-            commandComplete();
-        }
-
-        public function result(data:Object):void {
+        override protected function resultHandler(resultEvent:ResultEvent):void {
             LOGGER.debug("User Invite Delete Succeeded");
             sendNotification(ApplicationFacade.DELETE_USER_COMPANY_INVITE_SUCCESS);
-            commandComplete();
+        }
+
+
+        override protected function faultHandler(faultEvent:FaultEvent):void {
+            var faultEvent:FaultEvent = faultEvent as FaultEvent;
+            RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
+            sendNotification(ApplicationFacade.DELETE_USER_COMPANY_INVITE_FAILED);
         }
     }
 }

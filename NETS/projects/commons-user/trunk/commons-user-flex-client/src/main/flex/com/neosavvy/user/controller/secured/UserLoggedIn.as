@@ -1,6 +1,6 @@
 package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
+    import com.neosavvy.user.controller.base.ResponderAsyncCommand;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.SimpleCommand;

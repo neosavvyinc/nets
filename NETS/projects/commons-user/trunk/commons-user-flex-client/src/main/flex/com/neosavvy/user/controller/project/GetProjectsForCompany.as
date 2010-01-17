@@ -1,6 +1,6 @@
 package com.neosavvy.user.controller.project {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
+    import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
@@ -13,9 +13,8 @@ package com.neosavvy.user.controller.project {
     import mx.rpc.events.ResultEvent;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
-    import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
-    public class GetProjectsForCompany extends NeosavvyAsyncCommand implements IResponder {
+    public class GetProjectsForCompany extends ResponderAsyncCommand {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.project.GetProjectsForCompany");
 
@@ -27,19 +26,17 @@ package com.neosavvy.user.controller.project {
 
         }
 
-        public function result(data:Object):void {
-            var event:ResultEvent = data as ResultEvent;
+        override protected function resultHandler(resultEvent:ResultEvent):void {
             var projectServiceProxy:ProjectServiceProxy = facade.retrieveProxy(ProjectServiceProxy.NAME) as ProjectServiceProxy;
-            projectServiceProxy.projects = event.result as ArrayCollection;
+            projectServiceProxy.projects = resultEvent.result as ArrayCollection;
             sendNotification(ApplicationFacade.GET_PROJECTS_FOR_COMPANY_SUCCESS);
-            commandComplete();
         }
 
-        public function fault(info:Object):void {
-            var fault:FaultEvent = info as FaultEvent;
-            RemoteObjectUtils.logRemoteServiceFault(fault, LOGGER);
+
+        override protected function faultHandler(faultEvent:FaultEvent):void {
+            RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
             sendNotification(ApplicationFacade.GET_PROJECTS_FOR_COMPANY_FAILED);
-            commandComplete();
         }
+        
     }
 }

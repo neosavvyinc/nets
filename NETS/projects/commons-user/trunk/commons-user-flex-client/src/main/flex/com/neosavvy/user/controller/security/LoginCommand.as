@@ -1,6 +1,6 @@
 package com.neosavvy.user.controller.security {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
+    import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.SecurityProxy;
 
@@ -13,7 +13,7 @@ package com.neosavvy.user.controller.security {
 
     import org.puremvc.as3.multicore.interfaces.INotification;
 
-    public class LoginCommand extends NeosavvyAsyncCommand implements IResponder {
+    public class LoginCommand extends ResponderAsyncCommand {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.security.LoginCommand");
 
@@ -24,19 +24,18 @@ package com.neosavvy.user.controller.security {
             securityProxy.login(user, this);
         }
 
-        public function fault(info:Object):void {
-            var faultEvent:FaultEvent = info as FaultEvent;
-            LOGGER.debug("Login Failed: " + faultEvent.fault.faultString);
-            sendNotification(ApplicationFacade.USER_LOGIN_FAILED);
-            commandComplete();
+        override protected function resultHandler(resultEvent:ResultEvent):void {
+            var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
+            securityProxy.setData(resultEvent.result);
+            sendNotification(ApplicationFacade.USER_LOGIN_SUCCESS, securityProxy.user);
         }
 
-        public function result(data:Object):void {
-            var result:ResultEvent = data as ResultEvent;
-            var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
-            securityProxy.setData(result.result);
-            sendNotification(ApplicationFacade.USER_LOGIN_SUCCESS, securityProxy.user);
-            commandComplete();
+
+        override protected function faultHandler(faultEvent:FaultEvent):void {
+            LOGGER.debug("Login Failed: " + faultEvent.fault.faultString);
+            sendNotification(ApplicationFacade.USER_LOGIN_FAILED);
         }
+
+
     }
 }

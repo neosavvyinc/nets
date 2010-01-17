@@ -1,6 +1,6 @@
 package com.neosavvy.user.controller.project {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
+    import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.dto.companyManagement.CompanyDTO;
     import com.neosavvy.user.dto.project.ClientCompany;
     import com.neosavvy.user.dto.project.Project;
@@ -14,10 +14,11 @@ package com.neosavvy.user.controller.project {
     import mx.rpc.IResponder;
     import mx.rpc.events.FaultEvent;
 
-    import org.puremvc.as3.multicore.interfaces.INotification;
-    import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
+    import mx.rpc.events.ResultEvent;
 
-    public class SaveProject extends NeosavvyAsyncCommand implements IResponder {
+    import org.puremvc.as3.multicore.interfaces.INotification;
+
+    public class SaveProject extends ResponderAsyncCommand implements IResponder {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.project.SaveProject");
 
@@ -37,14 +38,14 @@ package com.neosavvy.user.controller.project {
         }
 
 
-        public function fault(info:Object):void {
-            var event:FaultEvent = info as FaultEvent;
-            RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
-            sendNotification(ApplicationFacade.SAVE_PROJECT_FAILED);
+        override protected function resultHandler(resultEvent:ResultEvent):void {
+            sendNotification(ApplicationFacade.SAVE_PROJECT_SUCCESS);
         }
 
-        public function result(data:Object):void {
-            sendNotification(ApplicationFacade.SAVE_PROJECT_SUCCESS);
+
+        override protected function faultHandler(faultEvent:FaultEvent):void {
+            RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
+            sendNotification(ApplicationFacade.SAVE_PROJECT_FAILED);
         }
     }
 }

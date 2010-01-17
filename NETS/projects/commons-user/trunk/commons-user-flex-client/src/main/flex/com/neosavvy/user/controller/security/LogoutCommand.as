@@ -1,5 +1,5 @@
 package com.neosavvy.user.controller.security {
-    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
+    import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.model.SecurityProxy;
 
     import com.neosavvy.user.util.RemoteObjectUtils;
@@ -14,7 +14,7 @@ package com.neosavvy.user.controller.security {
 
     import org.puremvc.as3.multicore.interfaces.INotification;
 
-    public class LogoutCommand extends NeosavvyAsyncCommand implements IResponder {
+    public class LogoutCommand extends ResponderAsyncCommand {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.security.LogoutCommand");
 
@@ -24,16 +24,13 @@ package com.neosavvy.user.controller.security {
             securityProxy.logout(this)
         }
 
-        public function fault(info:Object):void {
-            var faultEvent:FaultEvent = info as FaultEvent;
-            RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
-            commandComplete();
+        override protected function resultHandler(resultEvent:ResultEvent):void {
+            LOGGER.debug("User has successfully been logged out");
         }
 
-        public function result(data:Object):void {
-            var result:ResultEvent = data as ResultEvent;
-            LOGGER.debug("User has successfully been logged out");
-            commandComplete();
+
+        override protected function faultHandler(faultEvent:FaultEvent):void {
+            RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
         }
     }
 }

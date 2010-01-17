@@ -1,6 +1,6 @@
 package com.neosavvy.user.controller.client {
     import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.controller.base.NeosavvyAsyncCommand;
+    import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.dto.project.ClientCompany;
     import com.neosavvy.user.dto.project.ClientUserContact;
     import com.neosavvy.user.model.ClientServiceProxy;
@@ -13,10 +13,12 @@ package com.neosavvy.user.controller.client {
     import mx.rpc.IResponder;
     import mx.rpc.events.FaultEvent;
 
+    import mx.rpc.events.ResultEvent;
+
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
-    public class SaveClientCompany extends NeosavvyAsyncCommand implements IResponder {
+    public class SaveClientCompany extends ResponderAsyncCommand {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.controller.client.SaveClientCompany");
 
@@ -35,19 +37,15 @@ package com.neosavvy.user.controller.client {
             }
         }
 
-
-        public function fault(info:Object):void {
-            var event:FaultEvent = info as FaultEvent;
-            RemoteObjectUtils.logRemoteServiceFault(event, LOGGER);
-
-            sendNotification(ApplicationFacade.SAVE_CLIENT_COMPANY_FAILED);
-            commandComplete();
-        }
-
-        public function result(data:Object):void {
+        override protected function resultHandler(resultEvent:ResultEvent):void {
             LOGGER.debug("Save Client For Company was successful");
             sendNotification(ApplicationFacade.SAVE_CLIENT_COMPANY_SUCCESS);
-            commandComplete();
+        }
+
+
+        override protected function faultHandler(faultEvent:FaultEvent):void {
+            RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
+            sendNotification(ApplicationFacade.SAVE_CLIENT_COMPANY_FAILED);
         }
     }
 }
