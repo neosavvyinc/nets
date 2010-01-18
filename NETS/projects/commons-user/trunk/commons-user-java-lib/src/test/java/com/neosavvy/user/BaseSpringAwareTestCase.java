@@ -17,12 +17,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.sql.DataSource;
 
-/**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Dec 29, 2009
- * Time: 4:45:35 PM
- */
 @ContextConfiguration(locations = {
         "classpath:testSecurityContext.xml"
         })

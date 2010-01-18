@@ -109,18 +109,6 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
         assertSearchCriteriaResults(usersFounds,1);
     }
 
-    @Test
-    public void testFindByPassword() {
-        setupCriteriaBasedSearchTest();
-
-        UserDTO searchCriteria = new UserDTO();
-        searchCriteria.setPassword("testPassword");
-
-        List<UserDTO> usersFounds = userDAO.findUsers(searchCriteria);
-
-        assertSearchCriteriaResults(usersFounds,2);        
-    }
-
     @Test(expected = PersistenceException.class)
     public void testSaveTwoUsersSameUserName() {
         cleanupTables();

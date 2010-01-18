@@ -34,9 +34,6 @@ public interface CompanyService {
     @Secured("ROLE_ADMIN")
     public void deleteInvitedUser(CompanyDTO company, UserInviteDTO userInvite);
 
-    @Secured("ROLE_ADMIN")
-    public void sendInvite(UserInviteDTO userInvite);
-
     /****
      * Interface for helper search methods
      ****/

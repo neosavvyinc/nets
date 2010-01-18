@@ -103,14 +103,19 @@ public class ProjectTestUtil {
         return user;
     }
 
+    public static UserDTO createEmailableTestUser() {
+        UserDTO user = createTestUser();
+        user.setEmailAddress("aparrish@neosavvy.com");
+        return user;
+    }
+
     public static UserDTO createAltTestUser() {
         UserDTO user = new UserDTO();
-        user.setFirstName("Lance");
-        user.setMiddleName("B");
-        user.setLastName("Gleason");
-        user.setUsername("lgleason");
-        user.setPassword("testPassword");
-        user.setEmailAddress("lg@neosavvy.com");
+        user.setFirstName("Tommy");
+        user.setLastName("Odom");
+        user.setUsername("todom");
+        user.setPassword("test");
+        user.setEmailAddress("todom@neosavvy.com");
         return user;
     }
 
@@ -143,6 +148,12 @@ public class ProjectTestUtil {
         return invite;
     }
 
+    public static UserInviteDTO createEmailableTestInvite() {
+        UserInviteDTO invite = createTestInvite();
+        invite.setEmailAddress("aparrish@neosavvy.com");
+        return invite;
+    }
+
     public static RoleDTO createEmployeeTestRole() {
         RoleDTO role = new RoleDTO();
         role.setShortName("ROLE_EMPLOYEE");
@@ -161,19 +172,18 @@ public class ProjectTestUtil {
 
     public static UserInviteDTO createAltTestUserInvite(){
         UserInviteDTO userInvite = new UserInviteDTO();
-        userInvite.setFirstName("Lance");
-        userInvite.setMiddleName("B");
-        userInvite.setLastName("Gleason");
-        userInvite.setEmailAddress("lg@neosavvy.com");
+        userInvite.setFirstName("Tommy");
+        userInvite.setLastName("Odom");
+        userInvite.setEmailAddress("todom@neosavvy.com");
         return userInvite;
     }
 
     public static UserInviteDTO createAnotherTestUserInvite(){
         UserInviteDTO userInvite = new UserInviteDTO();
-        userInvite.setFirstName("Ted");
-        userInvite.setMiddleName("B");
-        userInvite.setLastName("Bundy");
-        userInvite.setEmailAddress("tb@neosavvy.com");
+        userInvite.setFirstName("Dana");
+        userInvite.setMiddleName("L");
+        userInvite.setLastName("Hamlett");
+        userInvite.setEmailAddress("dana@neosavvy.com");
         return userInvite;
     }
 

@@ -26,17 +26,8 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
 
     private UserDAO userDao;
-    private MailSender mailSender;
-    private SimpleMailMessage templateMessage;
-    private String hostName;
 
-    public String getHostName() {
-        return hostName;
-    }
-
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
-    }
+    private MailService mailService;
 
     public void setUserDao(UserDAO userDao) {
         this.userDao = userDao;
@@ -45,23 +36,6 @@ public class UserServiceImpl implements UserService {
     public UserDAO getUserDao() {
         return userDao;
     }
-
-    public void setMailSender(MailSender mailSender) {
-        this.mailSender = mailSender;
-    }
-
-    public MailSender getMailSender() {
-        return this.mailSender;
-    }
-
-    public void setTemplateMessage(SimpleMailMessage templateMessage) {
-        this.templateMessage = templateMessage;
-    }
-
-    public SimpleMailMessage getTemplateMessage() {
-        return this.templateMessage;
-    }
-
 
     public void saveUser(UserDTO user) {
         userDao.saveUser(user);
@@ -122,39 +96,7 @@ public class UserServiceImpl implements UserService {
 
         userDao.saveUser(user);
 
-        SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setTo(user.getEmailAddress());
-        msg.setText("Your new password is: " + user.getPassword());
-        try {
-            mailSender.send(msg);
-        }
-        catch (MailException ex) {
-            logger.error(ex.getMessage());
-            throw new UserServiceException("Unable to mail the password to user: " + user.toString(), ex);
-        }
+        mailService.resetPasswordForUserEmail(user);
 
     }
-
-    public void createAdminUser(UserDTO user) {
-        try {
-            user.setRegistrationToken(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));
-        } catch (UnsupportedEncodingException e) {
-            logger.error(e);
-            throw new UserServiceException("Unable to generate token for user: "+ user.toString(),e);
-        }
-
-        userDao.saveUser(user);
-
-        SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
-        msg.setTo(user.getEmailAddress());
-        msg.setText("Please click here to activate your account: http://" + hostName + "/commons-user-webapp/users/data/" + user.getUsername() + "/" + user.getRegistrationToken());
-        try{
-            mailSender.send(msg);
-        }
-        catch(MailException ex) {
-            logger.error(ex.getMessage());
-            throw new UserServiceException("Unable to mail message to user: " + user.toString(), ex);
-        }
-    }
-
 }

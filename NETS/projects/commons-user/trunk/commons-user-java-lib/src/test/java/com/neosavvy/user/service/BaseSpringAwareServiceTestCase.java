@@ -9,16 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.context.SecurityContextHolder;
 import org.junit.Before;
 
-/**
- * @author lgleason
- * todo: refactor this and the other base service out for common classes
- */
 public abstract class BaseSpringAwareServiceTestCase extends BaseSpringAwareTestCase {
 
     @Autowired
     protected UserService userService;
     @Autowired
     protected CompanyService companyService;
+    @Autowired
+    protected MailService mailService;    
 
     @Before
     public void loginTestUser() {

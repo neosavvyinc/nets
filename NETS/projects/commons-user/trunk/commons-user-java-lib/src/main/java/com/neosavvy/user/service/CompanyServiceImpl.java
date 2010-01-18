@@ -15,14 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.HashSet;
-import java.util.ArrayList;
 import java.util.Set;
 
-/**
- * User: lgleason
- * Date: Dec 4, 2009
- * Time: 4:18:34 PM
- */
 @Transactional
 public class CompanyServiceImpl implements CompanyService{
 
@@ -33,9 +27,8 @@ public class CompanyServiceImpl implements CompanyService{
     private RoleDAO roleDao;
     private UserDAO userDao;
     private UserInviteDAO userInviteDao;
-    private MailSender mailSender;
-    private SimpleMailMessage templateMessage;
-    private String hostName;
+
+    private MailService mailService;
 
     public CompanyDTO saveCompany(CompanyDTO company) {
         return companyDao.saveCompany(company);
@@ -81,16 +74,10 @@ public class CompanyServiceImpl implements CompanyService{
 
         userDao.saveUser(user);
 
-        SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
-        msg.setTo(user.getEmailAddress());
-        msg.setText("Use your registration token to confirm that you are actually whom you say you are. \n\nThis is your registration token: " + user.getRegistrationToken());
-        try{
-            mailSender.send(msg);
-        }
-        catch(MailException ex) {
-            logger.error(ex.getMessage());
-        }
+        mailService.newUserConfirmationTokenEmail(user);
     }
+
+
 
     public void addUserToCompany(CompanyDTO company, UserDTO user) {
         if(user == null || user.getId() == null){
@@ -157,23 +144,11 @@ public class CompanyServiceImpl implements CompanyService{
         }
         userInviteDao.saveUserInvite(userInvite);
         companyDao.saveCompany(company);
-        sendInvite(userInvite);
+        mailService.sendInvite(userInvite);
     }
 
     public void deleteInvitedUser(CompanyDTO company, UserInviteDTO userInvite) {
         userInviteDao.deleteUserInvite(userInvite);
-    }
-
-    public void sendInvite(UserInviteDTO userInvite){
-        SimpleMailMessage msg = new SimpleMailMessage(this.templateMessage);
-        msg.setTo(userInvite.getEmailAddress());
-        msg.setText("This is an invite to join your company's expense tracking tool!!!\n\nUse this key as your confirmation: " + userInvite.getRegistrationToken());
-        try{
-            mailSender.send(msg);
-        }
-        catch(MailException ex) {
-            logger.error(ex.getMessage());
-        }
     }
 
     protected CompanyDTO verifyAndAttachCompany(CompanyDTO company){
@@ -264,21 +239,10 @@ public class CompanyServiceImpl implements CompanyService{
         userCompanyRoleDao.saveUserCompanyRole(userCompanyRole);
 
         // email them to tell them how grateful you are for joining
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("customerservice@company.com");
-        message.setTo(user.getEmailAddress());
-        message.setSubject("Welcome to " + company.getCompanyName()+ "'s expense tracking system");
-        message.setText(
-            "username: " + user.getUsername() + "\n"
-            + "password: "+ user.getPassword() + "\n"
-            + "\n\n\nThanks, Expense Tracking Team!");
-        try{
-            mailSender.send(message);
-        }
-        catch(MailException ex) {
-            logger.error(ex.getMessage());
-        }
+        mailService.newUserConfirmationEmail(user, company);
     }
+
+
 
     private RoleDTO getEmployeeRoleFromDatabase() {
         RoleDTO role = new RoleDTO();
@@ -322,35 +286,19 @@ public class CompanyServiceImpl implements CompanyService{
         this.userDao = userDao;
     }
 
-    public void setMailSender(MailSender mailSender) {
-        this.mailSender = mailSender;
-    }
-
-    public MailSender getMailSender() {
-        return this.mailSender;
-    }
-
-    public void setTemplateMessage(SimpleMailMessage templateMessage) {
-        this.templateMessage = templateMessage;
-    }
-
-    public SimpleMailMessage getTemplateMessage() {
-        return this.templateMessage;
-    }
-
-    public String getHostName() {
-        return hostName;
-    }
-
-    public void setHostName(String hostName) {
-        this.hostName = hostName;
-    }
-
     public UserInviteDAO getUserInviteDao() {
         return userInviteDao;
     }
 
     public void setUserInviteDao(UserInviteDAO userinviteDao) {
         this.userInviteDao = userinviteDao;
+    }
+
+    public MailService getMailService() {
+        return mailService;
+    }
+
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
     }
 }

@@ -13,28 +13,22 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <context:load-time-weaver />
     <tx:annotation-driven />
 
-
     <!-- enables interpretation of the @PersistenceUnit/@PersistenceContext annotations providing convenient
          access to EntityManagerFactory/EntityManager -->
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
     <bean id="abstractDao" class="com.neosavvy.user.dao.base.BaseDAO" abstract="true"/>
-    <bean id="userCompanyRoleDAO" class="com.neosavvy.user.dao.companyManagement.UserCompanyRoleDAOImpl"
-          parent="abstractDao"/>
+    <bean id="userCompanyRoleDAO" class="com.neosavvy.user.dao.companyManagement.UserCompanyRoleDAOImpl" parent="abstractDao"/>
     <bean id="userDAO" class="com.neosavvy.user.dao.companyManagement.UserDAOImpl" parent="abstractDao"/>
     <bean id="userInviteDAO" class="com.neosavvy.user.dao.companyManagement.UserInviteDAOImpl" parent="abstractDao"/>
     <bean id="companyDAO" class="com.neosavvy.user.dao.companyManagement.CompanyDAOImpl" parent="abstractDao"/>
     <bean id="roleDAO" class="com.neosavvy.user.dao.companyManagement.RoleDAOImpl" parent="abstractDao"/>
-    <bean id="clientUserContactDAO" class="com.neosavvy.user.dao.project.ClientUserContactDAOImpl"
-          parent="abstractDao"/>
+    <bean id="clientUserContactDAO" class="com.neosavvy.user.dao.project.ClientUserContactDAOImpl" parent="abstractDao"/>
     <bean id="clientCompanyDAO" class="com.neosavvy.user.dao.project.ClientCompanyDAOImpl" parent="abstractDao"/>
     <bean id="projectDAO" class="com.neosavvy.user.dao.project.ProjectDAOImpl" parent="abstractDao"/>
 
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
-        <property name="templateMessage" ref="newUserAddedToCompanyTemplateMessage"/>
-        <property name="mailSender" ref="mailSender"/>
-        <property name="hostName" value="localhost:8080"/>
     </bean>
 
     <bean id="companyService" class="com.neosavvy.user.service.CompanyServiceImpl">
@@ -43,9 +37,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="roleDao" ref="roleDAO"/>
         <property name="userCompanyRoleDao" ref="userCompanyRoleDAO"/>
         <property name="userInviteDao" ref="userInviteDAO"/>
-        <property name="templateMessage" ref="adminUserAddedToCompanyTemplateMessage"/>
-        <property name="mailSender" ref="mailSender"/>
-        <property name="hostName" value="localhost:8080"/>
+        <property name="mailService" ref="mailService"/>
     </bean>
 
     <bean id="clientService" class="com.neosavvy.user.service.ClientServiceImpl">
@@ -57,27 +49,12 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="projectDAO" ref="projectDAO"/>
     </bean>
 
-
+    <bean id="mailService" class="com.neosavvy.user.service.MailServiceImpl">
+        <property name="mailSender" ref="mailSender"/>
+    </bean>
+    
     <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
         <property name="host" value="localhost"/>
-    </bean>
-
-    <bean id="newUserAddedToCompanyTemplateMessage" class="org.springframework.mail.SimpleMailMessage">
-        <property name="from" value="customerservice@mycompany.com"/>
-        <property name="subject" value="You have been invited to join your company's expense tracking system!"/>
-    </bean>
-
-    <bean id="adminUserAddedToCompanyTemplateMessage" class="org.springframework.mail.SimpleMailMessage">
-        <property name="from" value="customerservice@mycompany.com"/>
-        <property name="subject"
-                  value="Confirm that you have just been added as the admin user for your company's expense tracking system"/>
-    </bean>
-
-    <bean id="viewResolver"
-          class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-        <property name="prefix" value="/WEB-INF/"/>
-        <property name="suffix" value=".jsp"/>
     </bean>
 
     <bean id="flexInitializerBean" class="com.neosavvy.user.util.FlexInitializer"/>

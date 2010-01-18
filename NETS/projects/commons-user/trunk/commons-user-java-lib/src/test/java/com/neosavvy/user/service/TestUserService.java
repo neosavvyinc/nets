@@ -14,9 +14,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-/**
- * @author lgleason
- */
 public class TestUserService extends BaseSpringAwareServiceTestCase {
 
     @Test
@@ -28,63 +25,12 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
     }
 
     @Test
-    public void testCreateAdminUser() throws Exception{
-        cleanupTables();
-        Assert.assertTrue(findUsers().isEmpty());
-        MailSender mailSender = EasyMock.createMock(MailSender.class);
-        userService.setMailSender(mailSender);
-
-        mailSender.send((SimpleMailMessage) EasyMock.anyObject());
-        EasyMock.replay(mailSender);
-
-        userService.createAdminUser(ProjectTestUtil.createTestUser());
-        Assert.assertFalse(findUsers().isEmpty());
-    }
-
-    @Test
     public void testSaveUser() throws Exception{
         cleanupTables();
         Assert.assertTrue(findUsers().isEmpty());
 
         userService.saveUser(ProjectTestUtil.createTestUser());
         Assert.assertFalse(findUsers().isEmpty());
-    }
-
-    @Test
-    public void testConfirmUser() throws Exception{
-        cleanupTables();
-        MailSender mailSender = EasyMock.createMock(MailSender.class);
-        userService.setMailSender(mailSender);
-
-        mailSender.send((SimpleMailMessage) EasyMock.anyObject());
-        EasyMock.replay(mailSender);
-
-
-        UserDTO  testUser = ProjectTestUtil.createTestUser();
-        testUser.setConfirmedRegistration(false);
-        testUser.setActive(false);
-        userService.createAdminUser(testUser);
-        Assert.assertFalse(findUsers().isEmpty());
-
-        Assert.assertTrue(userService.confirmUser(testUser.getUsername(), testUser.getRegistrationToken()));
-
-        UserDTO foundUser = userDAO.findUserById(testUser.getId());
-        Assert.assertTrue(foundUser.getActive());
-        Assert.assertTrue(foundUser.getConfirmedRegistration());
-    }
-
-    @Test(expected = PersistenceException.class)
-    public void testCreateDuplicateAdminUser() throws Exception{
-        cleanupTables();
-        MailSender mailSender = EasyMock.createMock(MailSender.class);
-        userService.setMailSender(mailSender);
-
-        mailSender.send((SimpleMailMessage) EasyMock.anyObject());
-        EasyMock.replay(mailSender);
-
-        userDAO.saveUser(ProjectTestUtil.createTestUser());
-        userService.createAdminUser(ProjectTestUtil.createTestUser());
-
     }
 
     @Test

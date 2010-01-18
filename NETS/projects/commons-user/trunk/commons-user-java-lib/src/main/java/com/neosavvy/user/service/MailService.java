@@ -1,13 +1,8 @@
 package com.neosavvy.user.service;
 
-import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
-import org.springframework.security.annotation.Secured;
-import org.springframework.mail.MailSender;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-
+import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -29,28 +24,17 @@ import java.util.List;
 
 /**
  * User: adamparrish
- * Date: Jan 6, 2010
- * Time: 1:04:18 PM
+ * Date: Jan 17, 2010
+ * Time: 8:46:54 PM
  */
-@Transactional
-public interface UserService {
+public interface MailService {
 
-	public void saveUser(UserDTO user);
+    public void resetPasswordForUserEmail(UserDTO user);
 
-    @Secured("ROLE_ADMIN")
-	public UserDTO findUserById(long id);
+    public void newUserConfirmationTokenEmail(UserDTO user);
 
-    @Secured("ROLE_ADMIN")
-	public List<UserDTO> findUsers(UserDTO user);
+    public void sendInvite(UserInviteDTO userInvite);
 
-    @Secured("ROLE_ADMIN")
-	public void deleteUser(UserDTO user);
-
-    @Secured("ROLE_ADMIN")
-    public SecurityWrapperDTO checkUserLoggedIn();
-
-    @Secured("ROLE_ADMIN")
-    public void resetPassword(UserDTO user);
+    public void newUserConfirmationEmail(UserDTO user, CompanyDTO company);
     
-    public boolean confirmUser(String userName, String hashCode);
 }
