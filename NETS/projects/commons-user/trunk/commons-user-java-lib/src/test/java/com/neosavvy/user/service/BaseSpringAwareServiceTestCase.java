@@ -3,6 +3,7 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.BaseSpringAwareTestCase;
 import com.neosavvy.user.dto.companyManagement.RoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;

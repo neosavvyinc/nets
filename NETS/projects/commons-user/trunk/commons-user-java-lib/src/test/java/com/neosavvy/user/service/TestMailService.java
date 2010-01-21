@@ -30,7 +30,6 @@ import org.junit.Test;
  * Date: Jan 17, 2010
  * Time: 9:10:16 PM
  */
-@Ignore
 public class TestMailService extends BaseSpringAwareServiceTestCase {
 
     @Test

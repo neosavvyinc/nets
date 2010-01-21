@@ -309,10 +309,26 @@
             <version>1.6.2</version>
         </dependency>
         <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>fop</artifactId>
+            <version>0.95-1</version>
+        </dependency>
+        <dependency>
             <groupId>fop</groupId>
             <artifactId>fop</artifactId>
             <version>0.93</version>
             <classifier>jdk15</classifier>
+        </dependency>
+
+        <dependency>
+            <groupId>avalon-framework</groupId>
+            <artifactId>avalon-framework-api</artifactId>
+            <version>4.3</version>
+        </dependency>
+        <dependency>
+            <groupId>avalon-framework</groupId>
+            <artifactId>avalon-framework-impl</artifactId>
+            <version>4.3</version>
         </dependency>
 
     </dependencies>

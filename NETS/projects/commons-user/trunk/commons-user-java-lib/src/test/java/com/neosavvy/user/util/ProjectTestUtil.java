@@ -106,6 +106,7 @@ public class ProjectTestUtil {
     public static UserDTO createEmailableTestUser() {
         UserDTO user = createTestUser();
         user.setEmailAddress("aparrish@neosavvy.com");
+        user.setRegistrationToken("0000999933334444");
         return user;
     }
 
@@ -151,6 +152,7 @@ public class ProjectTestUtil {
     public static UserInviteDTO createEmailableTestInvite() {
         UserInviteDTO invite = createTestInvite();
         invite.setEmailAddress("aparrish@neosavvy.com");
+        invite.setRegistrationToken("0000333344445555");
         return invite;
     }
 

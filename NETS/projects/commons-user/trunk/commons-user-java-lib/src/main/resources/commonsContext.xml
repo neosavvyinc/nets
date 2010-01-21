@@ -50,12 +50,19 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     </bean>
 
     <bean id="mailService" class="com.neosavvy.user.service.MailServiceImpl">
-        <property name="mailSender" ref="mailSender"/>
+        <property name="mailSender" ref="focalJavaMailSender"/>
+        <property name="docGenerator" ref="docGenerator"/>
+        <property name="resetPasswordForUserEmail" value="${templatesRoot}/resetPasswordForUserEmail.gsp" />
+        <property name="newUserConfirmationTokenEmail" value="${templatesRoot}/newUserConfirmationTokenEmail.gsp" />
+        <property name="sendInvite" value="${templatesRoot}/sendInvite.gsp" />
+        <property name="newUserConfirmationEmail" value="${templatesRoot}/newUserConfirmationEmail.gsp" />
     </bean>
-    
-    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+    <bean id="focalJavaMailSender" class="com.neosavvy.user.service.mail.FocalMailSender">
         <property name="host" value="localhost"/>
+        <property name="test" value="false"/>
+        <property name="testRecipients" value="aparrish@neosavvy.com"/>
     </bean>
+    <bean id="docGenerator" class="com.neosavvy.user.service.mail.DocumentGenerator"/>
 
     <bean id="flexInitializerBean" class="com.neosavvy.user.util.FlexInitializer"/>
 
@@ -63,7 +70,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="ignoreResourceNotFound" value="true"/>
         <property name="locations">
             <list>
-                <value>WEB-INF/default.properties</value>
+                <value>classpath:default.properties</value>
                 <value>classpath:commonsuser.properties</value>
             </list>
         </property>

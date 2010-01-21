@@ -3,11 +3,19 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
+import com.neosavvy.user.service.exception.MailServiceException;
 import com.neosavvy.user.service.exception.UserServiceException;
+import com.neosavvy.user.service.mail.DocumentGenerationException;
+import com.neosavvy.user.service.mail.DocumentGenerator;
 import org.apache.log4j.Logger;
+import org.springframework.core.io.Resource;
 import org.springframework.mail.MailException;
+import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -36,13 +44,19 @@ public class MailServiceImpl implements MailService {
 
     private static final Logger logger = Logger.getLogger(MailServiceImpl.class);
 
-    private JavaMailSender mailSender;
+    private MailSender mailSender;
+    private DocumentGenerator docGenerator;
 
-    public JavaMailSender getMailSender() {
+    private Resource resetPasswordForUserEmail;
+    private Resource newUserConfirmationTokenEmail;
+    private Resource sendInvite;
+    private Resource newUserConfirmationEmail;
+
+    public MailSender getMailSender() {
         return mailSender;
     }
 
-    public void setMailSender(JavaMailSender mailSender) {
+    public void setMailSender(MailSender mailSender) {
         this.mailSender = mailSender;
     }
 
@@ -50,8 +64,20 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage msg = new SimpleMailMessage();
         msg.setFrom("customerservice@mycompany.com");
         msg.setTo(user.getEmailAddress());
-        msg.setText("Your new password is: " + user.getPassword());
         msg.setSubject("Password reset email for expense tracker");
+
+        try {
+            Map<String, Object> bindings = new HashMap<String, Object>();
+            bindings.put("password", user.getPassword());
+            msg.setText( docGenerator.processTemplate(resetPasswordForUserEmail.getURL(), bindings) );
+        } catch (IOException e) {
+            logger.error("The email template could not be found", e);
+            throw new MailServiceException("The email template could not be found", e);
+        } catch (DocumentGenerationException e) {
+            logger.error("Unable to send the reset password email" + user.toString(), e);
+            throw new MailServiceException("An error occurred generating the quote summary message body", e);
+        }
+
         try {
             mailSender.send(msg);
         }
@@ -66,7 +92,20 @@ public class MailServiceImpl implements MailService {
         msg.setFrom("customerservice@mycompany.com");
         msg.setTo(user.getEmailAddress());
         msg.setSubject("Confirm that you have just been added as the admin user for your company's expense tracking system");
-        msg.setText("Use your registration token to confirm that you are actually whom you say you are. \n\nThis is your registration token: " + user.getRegistrationToken());
+
+        try {
+            Map<String, Object> bindings = new HashMap<String, Object>();
+            bindings.put("registrationToken", user.getRegistrationToken());
+            msg.setText( docGenerator.processTemplate(newUserConfirmationTokenEmail.getURL(), bindings) );
+        } catch (IOException e) {
+            logger.error("The email template could not be found", e);
+            throw new MailServiceException("The email template could not be found", e);
+        }
+        catch (DocumentGenerationException e) {
+            logger.error("Unable to send the invite for the user registration" + user.toString(), e);
+            throw new MailServiceException("An error occurred generating the quote summary message body", e);
+        }
+
         try{
             mailSender.send(msg);
         }
@@ -80,7 +119,20 @@ public class MailServiceImpl implements MailService {
         msg.setFrom("customerservice@mycompany.com");
         msg.setTo(userInvite.getEmailAddress());
         msg.setSubject("Welcome to your company's expense tracking tool");
-        msg.setText("This is an invite to join your company's expense tracking tool!!!\n\nUse this key as your confirmation: " + userInvite.getRegistrationToken());
+
+        try {
+            Map<String, Object> bindings = new HashMap<String, Object>();
+            bindings.put("registrationToken", userInvite.getRegistrationToken());
+            msg.setText( docGenerator.processTemplate(sendInvite.getURL(), bindings) );
+        } catch (IOException e) {
+            logger.error("The email template could not be found", e);
+            throw new MailServiceException("The email template could not be found", e);
+        }
+        catch (DocumentGenerationException e) {
+            logger.error("Unable to send the invite for the user registration" + userInvite.toString(), e);
+            throw new MailServiceException("An error occurred generating the quote summary message body", e);
+        }
+
         try{
             mailSender.send(msg);
         }
@@ -94,10 +146,21 @@ public class MailServiceImpl implements MailService {
         msg.setFrom("customerservice@company.com");
         msg.setTo(user.getEmailAddress());
         msg.setSubject("Welcome to " + company.getCompanyName()+ "'s expense tracking system");
-        msg.setText(
-            "username: " + user.getUsername() + "\n"
-            + "password: "+ user.getPassword() + "\n"
-            + "\n\n\nThanks, Expense Tracking Team!");
+
+        try {
+            Map<String, Object> bindings = new HashMap<String, Object>();
+            bindings.put("username", user.getUsername());
+            bindings.put("password", user.getPassword());
+            msg.setText( docGenerator.processTemplate(newUserConfirmationEmail.getURL(), bindings) );
+        } catch (IOException e) {
+            logger.error("The email template could not be found", e);
+            throw new MailServiceException("The email template could not be found", e);
+        }
+        catch (DocumentGenerationException e) {
+            logger.error("Unable to create body for new user confirmation - the message was not setn", e);
+            throw new MailServiceException("An error occurred generating the quote summary message body", e);
+        }
+
         try{
             mailSender.send(msg);
         }
@@ -105,5 +168,44 @@ public class MailServiceImpl implements MailService {
             logger.error(ex.getMessage());
         }
     }
-    
+
+    public void setDocGenerator(DocumentGenerator docGenerator) {
+        this.docGenerator = docGenerator;
+    }
+
+    public DocumentGenerator getDocGenerator() {
+        return docGenerator;
+    }
+
+    public void setResetPasswordForUserEmail(Resource resetPasswordForUserEmail) {
+        this.resetPasswordForUserEmail = resetPasswordForUserEmail;
+    }
+
+    public Resource getResetPasswordForUserEmail() {
+        return resetPasswordForUserEmail;
+    }
+
+    public void setNewUserConfirmationTokenEmail(Resource newUserConfirmationTokenEmail) {
+        this.newUserConfirmationTokenEmail = newUserConfirmationTokenEmail;
+    }
+
+    public Resource getNewUserConfirmationTokenEmail() {
+        return newUserConfirmationTokenEmail;
+    }
+
+    public void setSendInvite(Resource sendInvite) {
+        this.sendInvite = sendInvite;
+    }
+
+    public Resource getSendInvite() {
+        return sendInvite;
+    }
+
+    public void setNewUserConfirmationEmail(Resource newUserConfirmationEmail) {
+        this.newUserConfirmationEmail = newUserConfirmationEmail;
+    }
+
+    public Resource getNewUserConfirmationEmail() {
+        return newUserConfirmationEmail;
+    }
 }
