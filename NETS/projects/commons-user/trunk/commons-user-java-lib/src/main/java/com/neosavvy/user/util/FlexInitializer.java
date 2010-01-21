@@ -2,6 +2,7 @@ package com.neosavvy.user.util;
 
 import flex.messaging.annotations.IAnnotatedProxy;
 import flex.messaging.io.AnnotatedBeanProxy;
+import flex.messaging.io.ExceptionBeanProxy;
 import flex.messaging.io.PropertyProxyRegistry;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -15,5 +16,6 @@ import org.springframework.beans.factory.InitializingBean;
 public class FlexInitializer implements InitializingBean {
     public void afterPropertiesSet () {
         PropertyProxyRegistry.getRegistry().register(IAnnotatedProxy.class, new AnnotatedBeanProxy());
+        PropertyProxyRegistry.getRegistry().register(Exception.class, new ExceptionBeanProxy());
     }
 }
