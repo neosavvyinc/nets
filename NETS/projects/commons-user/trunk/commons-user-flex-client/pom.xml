@@ -61,16 +61,25 @@
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <id>unpack-config</id>
+                        <id>copy</id>
+                        <phase>package</phase>
                         <goals>
-                            <goal>unpack-dependencies</goal>
+                            <goal>copy</goal>
                         </goals>
-                        <phase>generate-resources</phase>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
-                            <includeArtifacIds>commons-user-config</includeArtifacIds>
-                            <includeGroupIds>${project.groupId}</includeGroupIds>
-                            <excludeTransitive>true</excludeTransitive>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.neosavvy.commons.user</groupId>
+                                    <artifactId>commons-user-icons</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>swf</type>
+                                    <overWrite>false</overWrite>
+                                    <destFileName>CommonsUserAssets.swf</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
                         </configuration>
                     </execution>
                 </executions>
@@ -79,6 +88,12 @@
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>commons-user-icons-api</artifactId>
+            <version>${project.parent.version}</version>
+            <type>swc</type>
+        </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>commons-user-flex-model-lib</artifactId>

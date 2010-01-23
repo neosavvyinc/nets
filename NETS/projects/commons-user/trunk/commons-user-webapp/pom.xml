@@ -60,6 +60,34 @@
                 </configuration>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.neosavvy.commons.user</groupId>
+                                    <artifactId>commons-user-icons</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>swf</type>
+                                    <overWrite>false</overWrite>
+                                    <destFileName>CommonsUserAssets.swf</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/${project.build.finalName}/</outputDirectory>
+                            <overWriteReleases>false</overWriteReleases>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
 				<artifactId>maven-dependency-plugin</artifactId>
 				<executions>
 					<execution>

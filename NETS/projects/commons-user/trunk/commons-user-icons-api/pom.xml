@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+    
+    <parent>
+		<groupId>com.neosavvy.commons.user</groupId>
+        <artifactId>maven-flex-webapp-commons-user-toplevel</artifactId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.neosavvy.commons.user</groupId>
+	<artifactId>commons-user-icons-api</artifactId>
+	<name>commons-user-icons-api</name>
+    <packaging>swc</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<version>${flex.mojos.maven.version}</version>
+				<configuration>
+                    <configurationReport>true</configurationReport>
+					<debug>true</debug>
+					<locales>
+						<param>en_US</param>
+					</locales>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex.version}</version>
+			<type>pom</type>
+		</dependency>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>playerglobal</artifactId>
+            <classifier>10</classifier>
+            <type>swc</type>
+        </dependency>
+	</dependencies>
+</project>

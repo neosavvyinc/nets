@@ -42,7 +42,9 @@
 		<module>commons-user-flex-model-lib</module>
 		<module>commons-user-java-lib</module>
 		<module>commons-user-webapp</module>
-	</modules>
+    <module>commons-user-icons</module>
+    <module>commons-user-icons-api</module>
+  </modules>
 
 	<properties>
 		<flex.version>3.5.0.12683</flex.version>

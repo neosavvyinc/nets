@@ -13,11 +13,7 @@
         override public function set data(value:Object):void {
             if (value is UserDTO) {
                 var user:UserDTO = value as UserDTO;
-                if (user.active) {
-                    activationButton.label = UserManagementEvent.ACTION_DEACTIVATE
-                } else {
-                    activationButton.label = UserManagementEvent.ACTION_ACTIVATE
-                }
+                setButtonLabelAndIcon(user);
             }
 
             super.data = value;
@@ -26,7 +22,7 @@
         }
 
         protected function handleToggleActivationClicked():void {
-            dispatchEvent(new UserManagementEvent(activationButton.label, data as UserDTO));
+            dispatchEvent(new UserManagementEvent(activationButton.toolTip, data as UserDTO));
         }
 
 
@@ -49,13 +45,26 @@
         override protected function commitProperties():void {
             if (activationButton)
                 activationButton.visible = isButtonEnabledForUser();
+
+            //resetPassword.setStyle("icon", CommonsUserAssetsManager.assets.images.sampleIcon);
+
+            if ( data )
+                setButtonLabelAndIcon(data as UserDTO);
         }
 
 
-        ]]></mx:Script>
+        private function setButtonLabelAndIcon(user:UserDTO):void {
+            if (user.active) {
+                activationButton.toolTip = activationButton.label = UserManagementEvent.ACTION_DEACTIVATE
+                //activationButton.setStyle("icon", CommonsUserAssetsManager.assets.images.bulletDelete);
+            } else {
+                activationButton.toolTip = activationButton.label = UserManagementEvent.ACTION_ACTIVATE
+                //activationButton.setStyle("icon", CommonsUserAssetsManager.assets.images.bulletAdd);
+            }
+        }]]></mx:Script>
 
-    <mx:Button id="activationButton" click="{handleToggleActivationClicked()}"/>
-    <mx:Button id="resetPassword" label="Reset Password" click="{handleResetPasswordClicked()}"/>
+    <mx:Button id="activationButton"  click="{handleToggleActivationClicked()}"/>
+    <mx:Button id="resetPassword" toolTip="Reset Password" click="{handleResetPasswordClicked()}"/>
 
 
 </mx:HBox>

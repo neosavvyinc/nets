@@ -16,10 +16,16 @@
             dispatchEvent(new UserCompanyInviteEvent(UserCompanyInviteEvent.ACTION_INVITE, userInvite));
         }
 
+        protected override function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
 
+//            deleteBtn.setStyle("icon",CommonsUserAssetsManager.assets.images.bulletDelete);
+//            inviteBtn.setStyle("icon",CommonsUserAssetsManager.assets.images.bulletAdd);
+
+            super.updateDisplayList(unscaledWidth, unscaledHeight);
+        }
 
         ]]>
     </mx:Script>
-    <mx:Button id="deleteBtn" label="Delete" click="{deleteHandler()}"/>
-    <mx:Button id="inviteBtn" label="Resend Invite" click="{resendInviteHandler()}"/>
+    <mx:Button id="deleteBtn" label="Delete" toolTip="Delete" click="{deleteHandler()}"/>
+    <mx:Button id="inviteBtn" label="Resend Invite" toolTip="Resend Invite" click="{resendInviteHandler()}"/>
 </mx:HBox>

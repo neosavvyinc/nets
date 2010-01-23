@@ -12,6 +12,7 @@ package com.neosavvy.user.controller {
             initLogging();
             addSubCommand(ModelPrepCommand);
             addSubCommand(ViewPrepCommand);
+            addSubCommand(LoadGraphicalAssets);
         }
 
         private function initLogging():void {
