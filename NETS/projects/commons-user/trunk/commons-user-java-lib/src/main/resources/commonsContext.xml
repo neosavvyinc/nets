@@ -70,8 +70,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="ignoreResourceNotFound" value="true"/>
         <property name="locations">
             <list>
-                <value>classpath:default.properties</value>
-                <value>classpath:commonsuser.properties</value>
+                <value>classpath*:default.properties</value>
             </list>
         </property>
     </bean>

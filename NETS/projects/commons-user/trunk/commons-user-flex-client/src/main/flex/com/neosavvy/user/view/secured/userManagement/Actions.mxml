@@ -64,7 +64,7 @@
         }]]></mx:Script>
 
     <mx:Button id="activationButton"  click="{handleToggleActivationClicked()}"/>
-    <mx:Button id="resetPassword" toolTip="Reset Password" click="{handleResetPasswordClicked()}"/>
+    <mx:Button id="resetPassword" label="Reset Password" toolTip="Reset Password" click="{handleResetPasswordClicked()}"/>
 
 
 </mx:HBox>

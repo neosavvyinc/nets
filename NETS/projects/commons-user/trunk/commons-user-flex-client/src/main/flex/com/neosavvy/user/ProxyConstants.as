@@ -16,7 +16,7 @@ package com.neosavvy.user {
         /**
          * Potential URLs for runtime environments
          */
-        public static var LOCAL:String = "http://localhost:8080/commons-user-webapp/messagebroker/amf";
+        public static var LOCAL:String = "http://localhost:8080/nets/expenseTracker/messagebroker/amf";
         public static var TEST:String = "http://www.neosavvy.com:8080/commons-user-webapp/messagebroker/amf";
         public static var PROD:String = "http://localhost:8080/commons-user-webapp/messagebroker/amf";
 

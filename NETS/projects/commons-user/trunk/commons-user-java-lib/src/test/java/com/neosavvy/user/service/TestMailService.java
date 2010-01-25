@@ -30,9 +30,10 @@ import org.junit.Test;
  * Date: Jan 17, 2010
  * Time: 9:10:16 PM
  */
+@Ignore // this test sends a lot of spam
 public class TestMailService extends BaseSpringAwareServiceTestCase {
 
-    @Test
+    @Test    
     public void resetPasswordForUserEmail() {
         UserDTO user = ProjectTestUtil.createEmailableTestUser();
         mailService.resetPasswordForUserEmail(user);

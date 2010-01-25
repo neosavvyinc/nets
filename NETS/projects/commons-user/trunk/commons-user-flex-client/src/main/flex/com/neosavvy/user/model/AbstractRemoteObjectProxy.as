@@ -3,6 +3,10 @@ package com.neosavvy.user.model {
 
     import flash.errors.IllegalOperationError;
 
+    import flash.external.ExternalInterface;
+
+    import mx.logging.ILogger;
+    import mx.logging.Log;
     import mx.messaging.ChannelSet;
     import mx.messaging.channels.AMFChannel;
     import mx.rpc.IResponder;
@@ -14,6 +18,8 @@ package com.neosavvy.user.model {
 
     public class AbstractRemoteObjectProxy extends Proxy {
 
+        public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.model.AbstractRemoteObjectProxy");
+
         public function AbstractRemoteObjectProxy(proxyName:String = null, data:Object = null)
         {
             super(proxyName, null);
@@ -22,6 +28,13 @@ package com.neosavvy.user.model {
         protected function getServiceChannelSet():ChannelSet {
             var channel:AMFChannel = new AMFChannel(ProxyConstants.channelName, ProxyConstants.url);
             var channelSet:ChannelSet = new ChannelSet();
+            var swfLocation:String = ExternalInterface.call("function(){ return document.location.toString();}");
+			if (swfLocation.indexOf("http:") >= 0 || swfLocation.indexOf("https") >= 0)
+			{
+                channel.url = swfLocation.substr(0, swfLocation.lastIndexOf("/")) + "/messagebroker/amf";
+
+			}
+            LOGGER.debug("Connecting to AMF over the following URL" + channel.url);
             channelSet.addChannel(channel);
             return channelSet;
         }

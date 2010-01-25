@@ -171,6 +171,7 @@
 			<artifactId>commons-user-flex-client</artifactId>
 			<version>${project.parent.version}</version>
 			<type>swf</type>
+            <scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
