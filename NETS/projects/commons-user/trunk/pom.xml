@@ -47,6 +47,7 @@
         <module>commons-user-icons</module>
         <module>commons-user-icons-api</module>
         <module>commons-user-enterprise-application</module>
+        <module>commons-user-groovy-templates</module>
     </modules>
 
     <properties>
