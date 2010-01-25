@@ -49,6 +49,13 @@
             <version>1.1.1</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>commons-user-groovy-templates</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+            <scope>provided</scope>
+        </dependency>
 
         <!-- Transaction Manager Dependencies -->
         <dependency>
