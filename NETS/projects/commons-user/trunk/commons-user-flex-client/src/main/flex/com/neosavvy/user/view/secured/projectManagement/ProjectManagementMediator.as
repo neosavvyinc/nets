@@ -3,6 +3,9 @@ package com.neosavvy.user.view.secured.projectManagement {
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
 
+    import mx.containers.TabNavigator;
+    import mx.events.IndexChangedEvent;
+    import mx.events.ItemClickEvent;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -18,12 +21,19 @@ package com.neosavvy.user.view.secured.projectManagement {
             super(NAME, viewComponent);
         }
 
+        public static const MANAGE_PROJECTS_NAV_INDEX:int = 0;
+        public static const MANAGE_ASSIGNMENTS_NAV_INDEX:int = 1;
+
+        private var _previousIndex:int = MANAGE_PROJECTS_NAV_INDEX;
+
         private var _companyProxy:CompanyServiceProxy;
         private var _projectProject:ProjectServiceProxy;
 
         override public function onRegister():void {
             _companyProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
             _projectProject = facade.retrieveProxy(ProjectServiceProxy.NAME) as ProjectServiceProxy;
+
+            projectManagementTabNavigator.addEventListener(IndexChangedEvent.CHANGE, handleProjectManagementTabNavigatorClicked);
         }
 
         override public function onRemove():void {
@@ -35,16 +45,33 @@ package com.neosavvy.user.view.secured.projectManagement {
             return viewComponent as ProjectManagement;
         }
 
+        public function get projectManagementTabNavigator():TabNavigator {
+            return projectManagement.projectManagementTabNavigator;
+        }
+
         override public function listNotificationInterests():Array {
             return [
                 ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT
             ];
         }
 
-
         override public function handleNotification(notification:INotification):void {
 
         }
+
+        private function handleProjectManagementTabNavigatorClicked(event:IndexChangedEvent):void {
+
+            switch (projectManagementTabNavigator.selectedIndex) {
+                case MANAGE_PROJECTS_NAV_INDEX:
+                    sendNotification(ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS);
+                    break;
+                case MANAGE_ASSIGNMENTS_NAV_INDEX:
+                    sendNotification(ApplicationFacade.NAVIGATE_TO_ASSIGNMENTS);
+                    break;
+            }
+
+        }
+
 
     }
 }

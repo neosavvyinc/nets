@@ -1,3 +1,24 @@
 <?xml version="1.0"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%">
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="100%" styleName="paddedContainer" horizontalAlign="right">
+
+    <mx:HBox width="100%">
+        <mx:Label text="Select Project:"/>
+        <mx:ComboBox id="projectSelector" labelField="name"/>
+        <mx:Spacer width="100%"/>
+        <mx:Button id="saveAssignments" label="Save Assignments"/>
+    </mx:HBox>
+
+    <mx:HBox width="100%" height="100%">
+
+        <mx:List id="availableEmployees" width="45%" height="100%"/>
+        <mx:VBox width="10%" height="100%" verticalAlign="middle" horizontalAlign="center">
+            <mx:Button id="addSelectedToLeft" label="&lt;&lt;"/>
+            <mx:Button id="addAllToLeft" label="&lt;"/>
+            <mx:Button id="addAllToRight" label="&gt;"/>
+            <mx:Button id="addSelectedToRight" label="&gt;&gt;"/>
+        </mx:VBox>
+        <mx:List id="selectedEmployees" width="45%" height="100%"/>
+
+    </mx:HBox>
+
 </mx:VBox>

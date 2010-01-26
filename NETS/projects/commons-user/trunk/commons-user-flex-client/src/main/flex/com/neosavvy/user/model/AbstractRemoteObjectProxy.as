@@ -34,7 +34,7 @@ package com.neosavvy.user.model {
                 channel.url = swfLocation.substr(0, swfLocation.lastIndexOf("/")) + "/messagebroker/amf";
 
 			}
-            LOGGER.debug("Connecting to AMF over the following URL" + channel.url);
+            LOGGER.debug("Connecting to AMF over the following URL " + channel.url);
             channelSet.addChannel(channel);
             return channelSet;
         }

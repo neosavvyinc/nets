@@ -2,6 +2,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
     import com.neosavvy.user.controller.client.GetClientsForCompany;
     import com.neosavvy.user.controller.client.SaveClientCompany;
+    import com.neosavvy.user.controller.clientManagement.InitializeManageAssignments;
     import com.neosavvy.user.controller.clientManagement.InitializeManageProjects;
     import com.neosavvy.user.controller.company.DeleteUserCompanyInviteCommand;
     import com.neosavvy.user.controller.company.GetActiveUsersForCompany;
@@ -11,6 +12,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.company.InviteUsersToCompanyCommand;
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
     import com.neosavvy.user.controller.company.SendUserInviteCommand;
+    import com.neosavvy.user.controller.project.GetAvailableUsersForProject;
     import com.neosavvy.user.controller.project.GetProjectsForCompany;
     import com.neosavvy.user.controller.project.SaveProject;
     import com.neosavvy.user.controller.secured.SecuredViewTeardownCommand;
@@ -128,6 +130,9 @@ package com.neosavvy.user {
         public static const INITIALIZE_MANAGE_PROJECTS_VIEW:String = "initializeManageProjectsView";
         public static const INITIALIZE_MANAGE_PROJECTS_VIEW_COMPLETE:String = "initializeManageProjectsViewComplete";
 
+        public static const INITIALIZE_MANAGE_ASSIGNMENTS_VIEW:String = "initializeManageAssignments";
+        public static const INITIALIZE_MANAGE_ASSIGNMENTS_VIEW_COMPLETE:String = "initializeManageAssignmentsComplete";
+
         public static const GET_PROJECTS_FOR_COMPANY_REQUEST:String = "getProjectsForCompanyRequest";
         public static const GET_PROJECTS_FOR_COMPANY_SUCCESS:String = "getProjectsForCompanySuccess";
         public static const GET_PROJECTS_FOR_COMPANY_FAILED:String = "getProjectsForCompanyFailed";
@@ -137,6 +142,8 @@ package com.neosavvy.user {
         public static const HIDE_PROGRESS_INDICATOR:String = "hideProgressIndicator";
 
         public static const USER_LOGIN_STARTUP_COMPLETE:String = "userLoginStartupComplete";
+        public static const NAVIGATE_TO_ASSIGNMENTS:String = "navigateToAssignments";
+        public static const NAVIGATE_TO_MANAGE_PROJECTS:String = "navigateToManageProjects" ;
 
         public function ApplicationFacade(key:String)
         {
@@ -185,8 +192,13 @@ package com.neosavvy.user {
             registerCommand(FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST, GetClientsForCompany);
             registerCommand(SAVE_CLIENT_COMPANY_REQUEST, SaveClientCompany);
             registerCommand(INITIALIZE_MANAGE_PROJECTS_VIEW, InitializeManageProjects);
+            registerCommand(INITIALIZE_MANAGE_ASSIGNMENTS_VIEW, InitializeManageAssignments);
             registerCommand(SAVE_PROJECT_REQUEST, SaveProject);
             registerCommand(GET_PROJECTS_FOR_COMPANY_REQUEST, GetProjectsForCompany);
+
+            registerCommand(GET_AVAILABLE_USERS_FOR_PROJECT_REQUEST, GetAvailableUsersForProject);
+
+
         }
 
         /**
@@ -203,5 +215,13 @@ package com.neosavvy.user {
             return ApplicationFacade.getInstance(key).retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
         }
 
+        public static const GET_AVAILABLE_USERS_FOR_PROJECT_REQUEST:String = "getAvailableUsersForProjectRequest";
+        public static const GET_AVAILABLE_USERS_FOR_PROJECT_SUCCESS:String = "getAvailableUsersForProjectSuccess";
+        public static const GET_AVAILABLE_USERS_FOR_PROJECT_FAILED:String = "getAvailableUsersForProjectFailed";
+
+
+        public static const GET_ASSIGNED_USERS_FOR_PROJECT_REQUEST:String = "getAssignedUsersForProjectRequest";
+        public static const GET_ASSIGNED_USERS_FOR_PROJECT_SUCCESS:String = "getAssignedUsersForProjectSuccess";
+        public static const GET_ASSIGNED_USERS_FOR_PROJECT_FAILED:String = "getAssignedUsersForProjectFailed";
     }
 }

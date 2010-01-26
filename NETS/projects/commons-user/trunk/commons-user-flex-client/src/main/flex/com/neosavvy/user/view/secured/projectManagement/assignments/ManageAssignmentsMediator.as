@@ -1,4 +1,5 @@
 package com.neosavvy.user.view.secured.projectManagement.assignments {
+    import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
     import com.neosavvy.user.view.secured.projectManagement.*;
@@ -37,11 +38,20 @@ package com.neosavvy.user.view.secured.projectManagement.assignments {
 
         override public function listNotificationInterests():Array {
             return [
+                ApplicationFacade.NAVIGATE_TO_ASSIGNMENTS
+                ,ApplicationFacade.INITIALIZE_MANAGE_ASSIGNMENTS_VIEW_COMPLETE
             ];
         }
 
 
         override public function handleNotification(notification:INotification):void {
+            switch ( notification.getName() ) {
+                case ApplicationFacade.NAVIGATE_TO_ASSIGNMENTS:
+                    sendNotification(ApplicationFacade.INITIALIZE_MANAGE_ASSIGNMENTS_VIEW);
+                    break;
+                case ApplicationFacade.INITIALIZE_MANAGE_ASSIGNMENTS_VIEW_COMPLETE:
+                    break;
+            }
         }
 
     }

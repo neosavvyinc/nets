@@ -9,6 +9,7 @@
         creationComplete="{facade.startup(this)}"
         layout="absolute"
         pageTitle="Neosavvy Expense Tracker"
+        historyManagementEnabled="false"
         >
 
     <mx:Script>
