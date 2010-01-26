@@ -16,19 +16,6 @@
 	<build>
 		<finalName>commons-user-webapp</finalName>
 		<plugins>
-
-			<plugin>
-				<groupId>org.sonatype.flexmojos</groupId>
-				<artifactId>flexmojos-maven-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>copy-swf-resources</id>
-						<goals>
-							<goal>copy-flex-resources</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
             <plugin>
                 <groupId>org.codehaus.cargo</groupId>
                 <artifactId>cargo-maven2-plugin</artifactId>
@@ -71,6 +58,14 @@
                         </goals>
                         <configuration>
                             <artifactItems>
+                                <artifactItem>
+                                    <groupId>com.neosavvy.commons.user</groupId>
+                                    <artifactId>commons-user-flex-client</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>swf</type>
+                                    <overWrite>false</overWrite>
+                                    <destFileName>commons-user-flex-client.swf</destFileName>
+                                </artifactItem>
                                 <artifactItem>
                                     <groupId>com.neosavvy.commons.user</groupId>
                                     <artifactId>commons-user-icons</artifactId>
