@@ -8,12 +8,13 @@ package com.neosavvy.user.controller.clientManagement {
 
     import org.puremvc.as3.multicore.patterns.command.AsyncMacroCommand;
 
-    public class InitializeManageAssignments extends AsyncMacroCommand {
+    public class InitializeAssignmentsForProject extends AsyncMacroCommand {
 
         override protected function initializeAsyncMacroCommand():void {
             addSubCommand(ShowProgressBarCommand);
-            addSubCommand(GetProjectsForCompany);
-            addSubCommand(InitializeManageAssignmentsCompleteCommand);
+            addSubCommand(GetAssignedUsersForProject);
+            addSubCommand(GetAvailableUsersForProject);            
+            addSubCommand(InitializeAssignmentsForProjectCompleteCommand);
             addSubCommand(HideProgressBarCommand);
         }
 

@@ -5,6 +5,7 @@ import com.neosavvy.user.dto.base.BaseUserDTO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
+import com.neosavvy.user.dto.project.Project;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -32,6 +33,15 @@ public class UserDAOImpl extends BaseUserDAOImpl<UserDTO> implements UserDAO {
             userQuery.setParameter("userActive", user.getActive());
         }
 
+        List resultList = userQuery.getResultList();
+        return resultList;
+    }
+
+    public List<UserDTO> findAvailableUsersForProject(Project project) {
+        Query userQuery = getEntityManager().createQuery("select user from UserDTO user, UserCompanyRoleDTO ucl, Project project " +
+                "where user = ucl.user and ucl.company = project.company and user not member of project.participants " +
+                "and project.id = :projectId");
+        userQuery.setParameter("projectId",project.getId());
         List resultList = userQuery.getResultList();
         return resultList;
     }

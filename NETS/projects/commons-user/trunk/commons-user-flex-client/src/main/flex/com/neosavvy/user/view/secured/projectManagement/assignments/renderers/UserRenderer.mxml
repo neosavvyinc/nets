@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" styleName="paddedContainer">
+    <mx:Label text="{(data as UserDTO).firstName}"/>
+    <mx:Label text="{(data as UserDTO).middleName}"/>
+    <mx:Label text="{(data as UserDTO).lastName}"/>
+    <mx:Label text="{(data as UserDTO).emailAddress}"/>
+
+    <mx:Script><![CDATA[
+        import com.neosavvy.user.dto.companyManagement.UserDTO;
+        ]]></mx:Script>
+</mx:VBox>

@@ -116,7 +116,27 @@ public class ProjectTestUtil {
         user.setLastName("Odom");
         user.setUsername("todom");
         user.setPassword("test");
-        user.setEmailAddress("todom@neosavvy.com");
+        user.setEmailAddress("todom1@neosavvy.com");
+        return user;
+    }
+
+    public static UserDTO createAltTestUser2() {
+        UserDTO user = new UserDTO();
+        user.setFirstName("Dana");
+        user.setLastName("Hamlett");
+        user.setUsername("dhamlett");
+        user.setPassword("test");
+        user.setEmailAddress("dhamlett1@neosavvy.com");
+        return user;
+    }
+
+    public static UserDTO createAltTestUser3() {
+        UserDTO user = new UserDTO();
+        user.setFirstName("Whitney");
+        user.setLastName("Odom");
+        user.setUsername("wodom");
+        user.setPassword("test");
+        user.setEmailAddress("wodom@neosavvy.com");
         return user;
     }
 

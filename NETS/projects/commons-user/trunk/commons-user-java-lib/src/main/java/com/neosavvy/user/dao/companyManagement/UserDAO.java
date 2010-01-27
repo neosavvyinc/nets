@@ -3,6 +3,7 @@ package com.neosavvy.user.dao.companyManagement;
 import com.neosavvy.user.dao.base.BaseUserDAO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
+import com.neosavvy.user.dto.project.Project;
 
 import java.util.List;
 /*************************************************************************
@@ -31,6 +32,8 @@ import java.util.List;
  */
 public interface UserDAO extends BaseUserDAO<UserDTO> {
 
-     public List<UserDTO> findUsersForCompany(CompanyDTO company, UserDTO user);
-    
+    public List<UserDTO> findUsersForCompany(CompanyDTO company, UserDTO user);
+
+    public List<UserDTO> findAvailableUsersForProject(Project project);
+
 }

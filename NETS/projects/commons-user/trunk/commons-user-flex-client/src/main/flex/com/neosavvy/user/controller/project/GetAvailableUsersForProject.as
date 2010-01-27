@@ -1,6 +1,7 @@
 package com.neosavvy.user.controller.project {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
+    import com.neosavvy.user.dto.project.Project;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
@@ -21,13 +22,12 @@ package com.neosavvy.user.controller.project {
         override public function execute(notification:INotification):void {
             super.execute(notification);
             var projectServiceProxy:ProjectServiceProxy = facade.retrieveProxy(ProjectServiceProxy.NAME) as ProjectServiceProxy;
-            var companyServiceProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
-            //FIXME: Make this call the correct method
-            result(null);
+            projectServiceProxy.findAvailableUsersForProject(notification.getBody() as Project, this);
         }
 
         override protected function resultHandler(resultEvent:ResultEvent):void {
             var projectServiceProxy:ProjectServiceProxy = facade.retrieveProxy(ProjectServiceProxy.NAME) as ProjectServiceProxy;
+            projectServiceProxy.availableEmployees = resultEvent.result as ArrayCollection;
             sendNotification(ApplicationFacade.GET_AVAILABLE_USERS_FOR_PROJECT_SUCCESS);
         }
 

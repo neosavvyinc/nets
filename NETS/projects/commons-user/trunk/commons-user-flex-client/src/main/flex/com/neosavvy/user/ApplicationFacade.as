@@ -2,6 +2,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
     import com.neosavvy.user.controller.client.GetClientsForCompany;
     import com.neosavvy.user.controller.client.SaveClientCompany;
+    import com.neosavvy.user.controller.clientManagement.InitializeAssignmentsForProject;
     import com.neosavvy.user.controller.clientManagement.InitializeManageAssignments;
     import com.neosavvy.user.controller.clientManagement.InitializeManageProjects;
     import com.neosavvy.user.controller.company.DeleteUserCompanyInviteCommand;
@@ -12,6 +13,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.company.InviteUsersToCompanyCommand;
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
     import com.neosavvy.user.controller.company.SendUserInviteCommand;
+    import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
     import com.neosavvy.user.controller.project.GetAvailableUsersForProject;
     import com.neosavvy.user.controller.project.GetProjectsForCompany;
     import com.neosavvy.user.controller.project.SaveProject;
@@ -31,6 +33,79 @@ package com.neosavvy.user {
 
     public class ApplicationFacade extends Facade
     {
+
+        public function ApplicationFacade(key:String)
+        {
+            super(key);
+        }
+
+        /**
+         * Singleton ApplicationFacade Factory Method
+         */
+        public static function getInstance(key:String):ApplicationFacade
+        {
+            if (instanceMap[key ] == null) instanceMap[ key ] = new ApplicationFacade(key);
+            return instanceMap[ key ] as ApplicationFacade;
+        }
+
+        /**
+         * Register Commands with the Controller
+         */
+
+        override protected function initializeController():void
+        {
+            super.initializeController();
+
+            registerCommand(STARTUP, CommonsUserStartupCommand);
+            registerCommand(CHECK_USER_LOGGED_IN, CheckLoggedIn)
+            registerCommand(REQUEST_USER_LOGIN, LoginCommand);
+            registerCommand(REQUEST_LOGOUT, LogoutCommand);
+            registerCommand(GET_USERS_REQUEST, GetUsersCommand);
+            registerCommand(SAVE_USER_REQUEST, SaveUserCommand);
+            registerCommand(SAVE_COMPANY_REQUEST, SaveCompanyCommand);
+            registerCommand(SAVE_USER_TO_COMPANY_REQUEST, SaveEmployeeToCompanyCommand)
+            registerCommand(CONFIRM_ACCOUNT_REQUEST, ConfirmAccountCommand);
+
+            registerCommand(INITIALIZE_SECURED_VIEW, UserLoggedInStartupCommand);
+            registerCommand(DEINITIALIZE_SECURED_VIEW, SecuredViewTeardownCommand);
+
+            registerCommand(INVITE_USER_TO_COMPANY_REQUEST, InviteUsersToCompanyCommand);
+            registerCommand(GET_INVITED_USERS_REQUEST, GetInvitedUsersForCompanyCommand);
+            registerCommand(DELETE_USER_COMPANY_INVITE, DeleteUserCompanyInviteCommand);
+            registerCommand(SEND_USER_INVITE_REQUEST, SendUserInviteCommand);
+            registerCommand(RESET_USER_PASSWORD_REQUEST, ResetUserPasswordCommand);
+
+            registerCommand(ACTIVE_EMPLOYEES_REQUEST, GetActiveUsersForCompany);
+            registerCommand(NON_ACTIVE_EMPLOYEES_REQUEST, GetInActiveUsersForCompany);
+            registerCommand(ALL_EMPLOYEES_REQUEST, GetAllUsersForCompany);
+
+            registerCommand(FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST, GetClientsForCompany);
+            registerCommand(SAVE_CLIENT_COMPANY_REQUEST, SaveClientCompany);
+            registerCommand(INITIALIZE_MANAGE_PROJECTS_VIEW, InitializeManageProjects);
+            registerCommand(INITIALIZE_MANAGE_ASSIGNMENTS_VIEW, InitializeManageAssignments);
+            registerCommand(SAVE_PROJECT_REQUEST, SaveProject);
+            registerCommand(GET_PROJECTS_FOR_COMPANY_REQUEST, GetProjectsForCompany);
+
+            registerCommand(INITIALIZE_ASSIGNMENTS_FOR_PROJECT, InitializeAssignmentsForProject);
+            registerCommand(GET_ASSIGNED_USERS_FOR_PROJECT_REQUEST, GetAssignedUsersForProject);
+            registerCommand(GET_AVAILABLE_USERS_FOR_PROJECT_REQUEST, GetAvailableUsersForProject);
+
+
+        }
+
+        /**
+         * Application startup
+         *
+         * @param app a reference to the application component
+         */
+        public function startup(app:CommonsUser):void
+        {
+            sendNotification(STARTUP, app);
+        }
+
+        public static function getSecurityProxy(key:String):SecurityProxy {
+            return ApplicationFacade.getInstance(key).retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
+        }
 
         public static const STARTUP:String = 'startup';
 
@@ -143,77 +218,10 @@ package com.neosavvy.user {
 
         public static const USER_LOGIN_STARTUP_COMPLETE:String = "userLoginStartupComplete";
         public static const NAVIGATE_TO_ASSIGNMENTS:String = "navigateToAssignments";
-        public static const NAVIGATE_TO_MANAGE_PROJECTS:String = "navigateToManageProjects" ;
+        public static const NAVIGATE_TO_MANAGE_PROJECTS:String = "navigateToManageProjects";
 
-        public function ApplicationFacade(key:String)
-        {
-            super(key);
-        }
-
-        /**
-         * Singleton ApplicationFacade Factory Method
-         */
-        public static function getInstance(key:String):ApplicationFacade
-        {
-            if (instanceMap[key ] == null) instanceMap[ key ] = new ApplicationFacade(key);
-            return instanceMap[ key ] as ApplicationFacade;
-        }
-
-        /**
-         * Register Commands with the Controller
-         */
-        override protected function initializeController():void
-        {
-            super.initializeController();
-
-            registerCommand(STARTUP, CommonsUserStartupCommand);
-            registerCommand(CHECK_USER_LOGGED_IN, CheckLoggedIn)
-            registerCommand(REQUEST_USER_LOGIN, LoginCommand);
-            registerCommand(REQUEST_LOGOUT, LogoutCommand);
-            registerCommand(GET_USERS_REQUEST, GetUsersCommand);
-            registerCommand(SAVE_USER_REQUEST, SaveUserCommand);
-            registerCommand(SAVE_COMPANY_REQUEST, SaveCompanyCommand);
-            registerCommand(SAVE_USER_TO_COMPANY_REQUEST, SaveEmployeeToCompanyCommand)
-            registerCommand(CONFIRM_ACCOUNT_REQUEST, ConfirmAccountCommand);
-
-            registerCommand(INITIALIZE_SECURED_VIEW, UserLoggedInStartupCommand);
-            registerCommand(DEINITIALIZE_SECURED_VIEW, SecuredViewTeardownCommand);
-
-            registerCommand(INVITE_USER_TO_COMPANY_REQUEST, InviteUsersToCompanyCommand);
-            registerCommand(GET_INVITED_USERS_REQUEST, GetInvitedUsersForCompanyCommand);
-            registerCommand(DELETE_USER_COMPANY_INVITE, DeleteUserCompanyInviteCommand);
-            registerCommand(SEND_USER_INVITE_REQUEST, SendUserInviteCommand);
-            registerCommand(RESET_USER_PASSWORD_REQUEST, ResetUserPasswordCommand);
-
-            registerCommand(ACTIVE_EMPLOYEES_REQUEST, GetActiveUsersForCompany);
-            registerCommand(NON_ACTIVE_EMPLOYEES_REQUEST, GetInActiveUsersForCompany);
-            registerCommand(ALL_EMPLOYEES_REQUEST, GetAllUsersForCompany);
-
-            registerCommand(FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST, GetClientsForCompany);
-            registerCommand(SAVE_CLIENT_COMPANY_REQUEST, SaveClientCompany);
-            registerCommand(INITIALIZE_MANAGE_PROJECTS_VIEW, InitializeManageProjects);
-            registerCommand(INITIALIZE_MANAGE_ASSIGNMENTS_VIEW, InitializeManageAssignments);
-            registerCommand(SAVE_PROJECT_REQUEST, SaveProject);
-            registerCommand(GET_PROJECTS_FOR_COMPANY_REQUEST, GetProjectsForCompany);
-
-            registerCommand(GET_AVAILABLE_USERS_FOR_PROJECT_REQUEST, GetAvailableUsersForProject);
-
-
-        }
-
-        /**
-         * Application startup
-         *
-         * @param app a reference to the application component
-         */
-        public function startup(app:CommonsUser):void
-        {
-            sendNotification(STARTUP, app);
-        }
-
-        public static function getSecurityProxy(key:String):SecurityProxy {
-            return ApplicationFacade.getInstance(key).retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
-        }
+        public static const INITIALIZE_ASSIGNMENTS_FOR_PROJECT:String = "initializeAssignmentsForProject";
+        public static const INITIALIZE_ASSIGNMENTS_FOR_PROJECT_COMPLETE:String = "initializeAssignmentsForProjectComplete";
 
         public static const GET_AVAILABLE_USERS_FOR_PROJECT_REQUEST:String = "getAvailableUsersForProjectRequest";
         public static const GET_AVAILABLE_USERS_FOR_PROJECT_SUCCESS:String = "getAvailableUsersForProjectSuccess";
@@ -223,5 +231,6 @@ package com.neosavvy.user {
         public static const GET_ASSIGNED_USERS_FOR_PROJECT_REQUEST:String = "getAssignedUsersForProjectRequest";
         public static const GET_ASSIGNED_USERS_FOR_PROJECT_SUCCESS:String = "getAssignedUsersForProjectSuccess";
         public static const GET_ASSIGNED_USERS_FOR_PROJECT_FAILED:String = "getAssignedUsersForProjectFailed";
+
     }
 }

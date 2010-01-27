@@ -1,6 +1,7 @@
 package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
 
@@ -34,5 +35,11 @@ public interface ProjectService {
     public void addProject(Project project, CompanyDTO company, ClientCompany clientCompany);
 
     public List<Project> findProjectsForParentCompany(CompanyDTO company);
-    
+
+    public List<UserDTO> findAvailableUsersForProject(Project project);
+
+    public List<UserDTO> findAssignedUsersForProject(Project project);
+
+    public void saveProjectAssignments(Project project, List<UserDTO> assignedUsers);
+
 }

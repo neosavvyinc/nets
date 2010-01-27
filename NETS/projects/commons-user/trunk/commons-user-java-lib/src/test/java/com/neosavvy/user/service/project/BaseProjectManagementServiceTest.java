@@ -3,12 +3,21 @@ package com.neosavvy.user.service.project;
 import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
 import com.neosavvy.user.dao.project.ClientCompanyDAO;
 import com.neosavvy.user.dao.project.ClientUserContactDAO;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
+import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.ClientUserContact;
 import com.neosavvy.user.service.BaseSpringAwareServiceTestCase;
 import com.neosavvy.user.service.ClientService;
 import com.neosavvy.user.service.CompanyService;
+import com.neosavvy.user.service.ProjectService;
+import com.neosavvy.user.util.ProjectTestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -37,6 +46,9 @@ public abstract class BaseProjectManagementServiceTest extends BaseSpringAwareSe
 
 
     @Autowired
+    protected ProjectService projectService;
+
+    @Autowired
     protected ClientService clientService;
 
     @Autowired
@@ -48,5 +60,56 @@ public abstract class BaseProjectManagementServiceTest extends BaseSpringAwareSe
 
     public void setClientService(ClientService clientService) {
         this.clientService = clientService;
-    }    
+    }
+
+    public CompanyService getCompanyService() {
+        return companyService;
+    }
+
+    public void setCompanyService(CompanyService companyService) {
+        this.companyService = companyService;
+    }
+
+    public ProjectService getProjectService() {
+        return projectService;
+    }
+
+    public void setProjectService(ProjectService projectService) {
+        this.projectService = projectService;
+    }
+
+    protected CompanyDTO saveTestCompanyForParent() {
+        CompanyDTO companyDTO = ProjectTestUtil.createParentCompany();
+        UserDTO companyUser = ProjectTestUtil.createTestUser();
+        companyService.addCompany(companyDTO, companyUser);
+
+
+        ClientCompany clientCompany = ProjectTestUtil.createTestClientCompany();
+        ClientUserContact clientContact = ProjectTestUtil.createTestClientContact();
+        clientCompany.setParentCompany(companyDTO);
+
+        clientService.saveClientForCompany(clientCompany, clientContact);
+        return companyDTO;
+    }
+
+    protected void saveAltTestCompanyForParent(CompanyDTO parentCompany) {
+        ClientCompany clientCompany = ProjectTestUtil.createTestAltClientCompany();
+        ClientUserContact clientContact = ProjectTestUtil.createTestAltClientContact();
+        clientCompany.setParentCompany(parentCompany);
+
+        clientService.saveClientForCompany(clientCompany, clientContact);
+    }
+
+    protected void addUserToCompany(CompanyDTO parent, UserDTO user) {
+        UserInviteDTO userToInvite = new UserInviteDTO();
+        userToInvite.setFirstName(user.getFirstName());
+        userToInvite.setLastName(user.getLastName());
+        userToInvite.setEmailAddress(user.getEmailAddress());
+        companyService.inviteUsers(parent,userToInvite);
+
+        // Populate a user with the confirmation token and call addEmployeToCompany
+        user.setRegistrationToken(userToInvite.getRegistrationToken());
+
+        companyService.addEmployeeToCompany(user);
+    }
 }

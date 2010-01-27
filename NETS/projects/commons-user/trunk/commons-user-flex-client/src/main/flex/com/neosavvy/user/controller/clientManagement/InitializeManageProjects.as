@@ -12,7 +12,7 @@ package com.neosavvy.user.controller.clientManagement {
             addSubCommand(ShowProgressBarCommand);
             addSubCommand(GetClientsForCompany);
             addSubCommand(GetProjectsForCompany);
-            addSubCommand(InitializeCompleteCommand);
+            addSubCommand(InitializeManageProjectsCompleteCommand);
             addSubCommand(HideProgressBarCommand);
         }
 

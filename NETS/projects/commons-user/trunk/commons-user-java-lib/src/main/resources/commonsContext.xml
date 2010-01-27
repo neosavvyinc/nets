@@ -47,6 +47,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <bean id="projectService" class="com.neosavvy.user.service.ProjectServiceImpl">
         <property name="projectDAO" ref="projectDAO"/>
+        <property name="userDAO" ref="userDAO"/>
     </bean>
 
     <bean id="mailService" class="com.neosavvy.user.service.MailServiceImpl">

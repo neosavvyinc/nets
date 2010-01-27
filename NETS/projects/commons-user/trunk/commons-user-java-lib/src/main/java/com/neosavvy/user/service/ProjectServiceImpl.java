@@ -1,7 +1,9 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.user.dao.companyManagement.UserDAO;
 import com.neosavvy.user.dao.project.ProjectDAO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
 import com.neosavvy.user.service.exception.ProjectServiceException;
@@ -37,14 +39,17 @@ public class ProjectServiceImpl implements ProjectService {
 
     private ProjectDAO projectDAO;
 
+    private UserDAO userDAO;
+
+
     public void addProject(Project project, CompanyDTO company, ClientCompany clientCompany) {
-        if( project == null ) {
+        if (project == null) {
             throw new ProjectServiceException("Cannot create a null project");
         }
-        if( company == null ) {
+        if (company == null) {
             throw new ProjectServiceException("Cannot create a project without a company to own it");
         }
-        if( clientCompany == null ) {
+        if (clientCompany == null) {
             throw new ProjectServiceException("Cannot create a project without a client to send invoices to");
         }
 
@@ -54,12 +59,49 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     public List<Project> findProjectsForParentCompany(CompanyDTO company) {
-        if( company == null ) {
+        if (company == null) {
             throw new ProjectServiceException("Cannot find projects without a parent company");
         }
         Project project = new Project();
         project.setCompany(company);
         return projectDAO.findProject(project);
+    }
+
+    public List<UserDTO> findAssignedUsersForProject(Project project) {
+        if (project == null) {
+            throw new ProjectServiceException("Must supply a project to find users who are assigned to it");
+        }
+
+        Project attachedProject = projectDAO.findProjectById(project.getId());
+
+        if (attachedProject == null) {
+            throw new ProjectServiceException("The project supplied did not yet exist in the database");
+        }
+
+        return attachedProject.getParticipants();
+    }
+
+    public List<UserDTO> findAvailableUsersForProject(Project project) {
+        if (project == null) {
+            throw new ProjectServiceException("Must supply a project to find users who are assigned to it");
+        }
+
+        Project attachedProject = projectDAO.findProjectById(project.getId());
+
+        if (attachedProject == null) {
+            throw new ProjectServiceException("The project supplied did not yet exist in the database");
+        }
+
+        return userDAO.findAvailableUsersForProject(attachedProject);
+    }
+
+    public void saveProjectAssignments(Project project, List<UserDTO> assignedUsers) {
+        if (project == null) {
+            throw new ProjectServiceException("Must supply a project to assign users to it");
+        }
+
+        project.setParticipants(assignedUsers);
+        projectDAO.save(project);
     }
 
     public ProjectDAO getProjectDAO() {
@@ -69,4 +111,13 @@ public class ProjectServiceImpl implements ProjectService {
     public void setProjectDAO(ProjectDAO projectDAO) {
         this.projectDAO = projectDAO;
     }
+
+    public UserDAO getUserDAO() {
+        return userDAO;
+    }
+
+    public void setUserDAO(UserDAO userDAO) {
+        this.userDAO = userDAO;
+    }
+
 }

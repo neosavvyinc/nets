@@ -106,27 +106,5 @@ public class TestClientService extends BaseProjectManagementServiceTest {
         Assert.assertEquals("There should be two client companies", clientCompanies.size(), 2);
     }
 
-    private CompanyDTO saveTestCompanyForParent() {
-        CompanyDTO companyDTO = ProjectTestUtil.createParentCompany();
-        UserDTO companyUser = ProjectTestUtil.createTestUser();
-        companyService.addCompany(companyDTO, companyUser);
-
-
-        ClientCompany clientCompany = ProjectTestUtil.createTestClientCompany();
-        ClientUserContact clientContact = ProjectTestUtil.createTestClientContact();
-        clientCompany.setParentCompany(companyDTO);
-
-        clientService.saveClientForCompany(clientCompany, clientContact);
-        return companyDTO;
-    }
-
-    private void saveAltTestCompanyForParent(CompanyDTO parentCompany) {
-        ClientCompany clientCompany = ProjectTestUtil.createTestAltClientCompany();
-        ClientUserContact clientContact = ProjectTestUtil.createTestAltClientContact();
-        clientCompany.setParentCompany(parentCompany);
-
-        clientService.saveClientForCompany(clientCompany, clientContact);
-    }
-
 
 }

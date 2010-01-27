@@ -32,6 +32,26 @@ package com.neosavvy.user.model {
             data = null;
         }
 
+        private var _availableEmployees:ArrayCollection;
+
+        private var _assignedEmployees:ArrayCollection;
+
+        public function get availableEmployees():ArrayCollection {
+            return _availableEmployees;
+        }
+
+        public function set availableEmployees(value:ArrayCollection):void {
+            _availableEmployees = value;
+        }
+
+        public function get assignedEmployees():ArrayCollection {
+            return _assignedEmployees;
+        }
+
+        public function set assignedEmployees(value:ArrayCollection):void {
+            _assignedEmployees = value;
+        }
+
         public function addProject(project:Project, company:CompanyDTO, clientCompany:ClientCompany, responder:IResponder):void {
             var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);
             addCallbackHandler(projectService, responder);
@@ -44,5 +64,19 @@ package com.neosavvy.user.model {
             addCallbackHandler(projectService, responder);
             projectService.findProjectsForParentCompany(company);
         }
+
+        public function findAvailableUsersForProject(project:Project, responder:IResponder):void {
+            var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);
+            addCallbackHandler(projectService, responder);
+            projectService.findAvailableUsersForProject(project);
+        }
+
+
+        public function findAssignedUsersForProject(project:Project, responder:IResponder):void {
+            var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);
+            addCallbackHandler(projectService, responder);
+            projectService.findAssignedUsersForProject(project);
+        }
+
     }
 }
