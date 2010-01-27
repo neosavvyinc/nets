@@ -16,7 +16,9 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
     import com.neosavvy.user.controller.project.GetAvailableUsersForProject;
     import com.neosavvy.user.controller.project.GetProjectsForCompany;
+    import com.neosavvy.user.controller.project.SaveAssignmentsForProjectChain;
     import com.neosavvy.user.controller.project.SaveProject;
+    import com.neosavvy.user.controller.project.SaveProjectAssignments;
     import com.neosavvy.user.controller.secured.SecuredViewTeardownCommand;
     import com.neosavvy.user.controller.secured.UserLoggedInStartupCommand;
     import com.neosavvy.user.controller.security.CheckLoggedIn;
@@ -90,6 +92,8 @@ package com.neosavvy.user {
             registerCommand(GET_ASSIGNED_USERS_FOR_PROJECT_REQUEST, GetAssignedUsersForProject);
             registerCommand(GET_AVAILABLE_USERS_FOR_PROJECT_REQUEST, GetAvailableUsersForProject);
 
+            registerCommand(SAVE_PROJECT_ASSIGNMENTS_REQUEST, SaveProjectAssignments);
+            registerCommand(SAVE_PROJECT_ASSIGNMENTS_CHAIN_START, SaveAssignmentsForProjectChain)
 
         }
 
@@ -227,10 +231,15 @@ package com.neosavvy.user {
         public static const GET_AVAILABLE_USERS_FOR_PROJECT_SUCCESS:String = "getAvailableUsersForProjectSuccess";
         public static const GET_AVAILABLE_USERS_FOR_PROJECT_FAILED:String = "getAvailableUsersForProjectFailed";
 
-
         public static const GET_ASSIGNED_USERS_FOR_PROJECT_REQUEST:String = "getAssignedUsersForProjectRequest";
         public static const GET_ASSIGNED_USERS_FOR_PROJECT_SUCCESS:String = "getAssignedUsersForProjectSuccess";
         public static const GET_ASSIGNED_USERS_FOR_PROJECT_FAILED:String = "getAssignedUsersForProjectFailed";
+
+        public static const SAVE_PROJECT_ASSIGNMENTS_CHAIN_START:String = "saveProjectAssignmentsChainStart";
+        public static const SAVE_PROJECT_ASSIGNMENTS_REQUEST:String = "saveProjectAssignmentsRequest";
+        public static const SAVE_PROJECT_ASSIGNMENTS_SUCCESS:String = "saveProjectAssignmentsSuccess";
+        public static const SAVE_PROJECT_ASSIGNMENTS_FAILED:String = "saveProjectAssignmentsFailed";
+        public static const SAVE_PROJECT_ASSIGNMENTS_CHAIN_COMPLETE:String = "saveProjectAssignmentsChainComplte";
 
     }
 }

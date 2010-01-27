@@ -78,5 +78,11 @@ package com.neosavvy.user.model {
             projectService.findAssignedUsersForProject(project);
         }
 
+
+        public function saveProjectAssignments(project:Project, assignments:ArrayCollection, responder:IResponder):void {
+            var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);
+            addCallbackHandler(projectService, responder);
+            projectService.saveProjectAssignments(project, assignments);
+        }
     }
 }

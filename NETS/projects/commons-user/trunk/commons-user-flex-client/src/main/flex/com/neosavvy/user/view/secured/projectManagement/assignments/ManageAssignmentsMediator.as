@@ -7,6 +7,7 @@ package com.neosavvy.user.view.secured.projectManagement.assignments {
 
     import flash.events.MouseEvent;
 
+    import mx.collections.ArrayCollection;
     import mx.controls.Button;
     import mx.controls.ComboBox;
     import mx.controls.List;
@@ -33,6 +34,8 @@ package com.neosavvy.user.view.secured.projectManagement.assignments {
             _projectProxy = facade.retrieveProxy(ProjectServiceProxy.NAME) as ProjectServiceProxy;
 
             projectLoadButton.addEventListener(MouseEvent.CLICK, handleProjectLoadButtonClicked);
+            saveProjectButton.addEventListener(MouseEvent.CLICK, handleSaveProjectButtonClicked);
+
         }
 
         override public function onRemove():void {
@@ -40,6 +43,7 @@ package com.neosavvy.user.view.secured.projectManagement.assignments {
             _projectProxy = null;
 
             projectLoadButton.removeEventListener(MouseEvent.CLICK, handleProjectLoadButtonClicked);
+            saveProjectButton.removeEventListener(MouseEvent.CLICK, handleSaveProjectButtonClicked);
         }
 
         public function get manageAssignments():ManageAssignments {
@@ -62,9 +66,19 @@ package com.neosavvy.user.view.secured.projectManagement.assignments {
             return manageAssignments.loadProjectBtn;
         }
 
+        public function get saveProjectButton():Button {
+            return manageAssignments.saveAssignments;
+        }
+
         private function handleProjectLoadButtonClicked(event:MouseEvent):void {
             var project:Project = projectSelector.selectedItem as Project;
             sendNotification(ApplicationFacade.INITIALIZE_ASSIGNMENTS_FOR_PROJECT, project);
+        }
+
+        private function handleSaveProjectButtonClicked(event:MouseEvent):void {
+            var project:Project = projectSelector.selectedItem as Project;
+            var assigned:ArrayCollection = assignedEmployees.dataProvider as ArrayCollection;
+            sendNotification(ApplicationFacade.SAVE_PROJECT_ASSIGNMENTS_REQUEST,[project,assigned]);            
         }
 
         override public function listNotificationInterests():Array {

@@ -6,6 +6,8 @@ package com.neosavvy.user.controller.project {
     import com.neosavvy.user.model.ProjectServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
 
+    import flash.errors.IllegalOperationError;
+
     import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -21,8 +23,25 @@ package com.neosavvy.user.controller.project {
 
         override public function execute(notification:INotification):void {
             super.execute(notification);
+
+            var project:Project;
+            if( notification.getBody() is Array ) {
+                var params:Array = notification.getBody() as Array;
+                for each ( var param:Object in params) {
+                    if (param is Project) {
+                        project = param as Project;
+                    }
+                }
+                if (!project) {
+                    commandComplete()
+                    throw IllegalOperationError("Retrieving available users requires a project parameter");
+                }
+            } else if ( notification.getBody() is Project ) {
+                project = notification.getBody() as Project;
+            }
+
             var projectServiceProxy:ProjectServiceProxy = facade.retrieveProxy(ProjectServiceProxy.NAME) as ProjectServiceProxy;
-            projectServiceProxy.findAvailableUsersForProject(notification.getBody() as Project, this);
+            projectServiceProxy.findAvailableUsersForProject(project, this);
         }
 
         override protected function resultHandler(resultEvent:ResultEvent):void {
