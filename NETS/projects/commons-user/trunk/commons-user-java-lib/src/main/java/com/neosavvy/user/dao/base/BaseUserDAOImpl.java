@@ -35,6 +35,10 @@ import java.util.List;
  */
 public abstract class BaseUserDAOImpl<T extends BaseUserDTO> extends BaseDAO implements BaseUserDAO<T> {
 
+    public void refreshUser(T user) {
+        getEntityManager().refresh(user);
+    }
+
     public void deleteUser(T user) {
 		getEntityManager().remove(user);
         getEntityManager().flush();

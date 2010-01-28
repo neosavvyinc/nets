@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 
 @MappedSuperclass
-public abstract class BaseUserDTO {
+public abstract class BaseUserDTO extends BaseDTO {
     @Column(name="FIRST_NAME")
     private String firstName;
 
@@ -26,6 +26,14 @@ public abstract class BaseUserDTO {
 
     }
 
+    public BaseUserDTO(BaseUserDTO copy) {
+        this.firstName = copy.firstName;
+        this.middleName = copy.middleName;
+        this.lastName = copy.lastName;
+        this.emailAddress = copy.emailAddress;
+        this.contactPhoneNumber = copy.contactPhoneNumber;
+    }
+    
     public abstract Long getId();
     
     public String getFirstName() {

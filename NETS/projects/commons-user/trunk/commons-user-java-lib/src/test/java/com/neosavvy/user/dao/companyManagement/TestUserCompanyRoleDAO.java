@@ -25,7 +25,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testSaveUserCompanyRole() {
         cleanupTables();
-        RoleDTO role = ProjectTestUtil.createTestRole();
+        RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
 
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
@@ -37,7 +37,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testAltSaveUserCompanyRole() {
         cleanupTables();
-        RoleDTO role = ProjectTestUtil.createTestRole();
+        RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
         CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
@@ -51,7 +51,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testGetUserCompanyRoleData() {
         cleanupTables();
-        RoleDTO role = ProjectTestUtil.createTestRole();
+        RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
         CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
@@ -76,7 +76,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testFindUserCompanyRoleById() {
         cleanupTables();
-        RoleDTO role = ProjectTestUtil.createTestRole();
+        RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
@@ -93,7 +93,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testFindUserCompanyRoleByRoleId() {
         cleanupTables();
-        RoleDTO role = ProjectTestUtil.createTestRole();
+        RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
@@ -114,7 +114,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
         cleanupTables();
         UserDTO user = ProjectTestUtil.createTestUser();
         userDAO.saveUser(user);
-        RoleDTO role = ProjectTestUtil.createTestRole();
+        RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, user);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
@@ -140,7 +140,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
         cleanupTables();
         CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
-        RoleDTO role = ProjectTestUtil.createTestRole();
+        RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
@@ -166,7 +166,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
         cleanupTables();
         CompanyDTO company = ProjectTestUtil.createTestCompany();
         companyDAO.saveCompany(company);
-        RoleDTO role = ProjectTestUtil.createTestRole();
+        RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
         UserDTO user = ProjectTestUtil.createTestUser();
         userDAO.saveUser(user);
@@ -192,7 +192,7 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testDeleteUserCompanyRole() {
         cleanupTables();
-        RoleDTO role = ProjectTestUtil.createTestRole();
+        RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
         userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);

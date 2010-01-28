@@ -3,39 +3,62 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.util.ProjectTestUtil;
+import org.junit.Before;
 import org.junit.Test;
-import org.springframework.mail.MailSender;
-import org.springframework.mail.SimpleMailMessage;
-import org.easymock.EasyMock;
 import junit.framework.Assert;
 
-import javax.persistence.PersistenceException;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 public class TestUserService extends BaseSpringAwareServiceTestCase {
+    protected UserDTO adminUser;
 
-    @Test
-    public void testGetUsers() throws Exception{
-        cleanupTables();
-        Assert.assertTrue(findUsers().isEmpty());
-        userDAO.saveUser(ProjectTestUtil.createTestUser());
-        Assert.assertFalse(findUsers().isEmpty());
+    @Before
+    public void setupAdministrator() {
+        adminUser = setupAsAdminUser();
     }
 
     @Test
-    public void testSaveUser() throws Exception{
-        cleanupTables();
-        Assert.assertTrue(findUsers().isEmpty());
+    public void testGetUsers() throws Exception{
+        List<UserDTO> users = userService.findUsers(adminUser);
+        Assert.assertFalse(users.isEmpty());
+    }
 
-        userService.saveUser(ProjectTestUtil.createTestUser());
+    @Test
+    public void testEmployeeUpdateUser() throws Exception{
+        UserDTO user = setupAsEmployeeUser();
+        user.setMiddleName(null);
+        userService.updateUser(user);
+        UserDTO foundUser = userDAO.findUserById(user.getId());
+        Assert.assertNotNull(foundUser);
+        Assert.assertNull(foundUser.getMiddleName());
+    }
+
+    @Test
+    public void testAdminUpdateUser() throws Exception{
+        adminUser.setMiddleName(null);
+        userService.updateUser(adminUser);
+        UserDTO foundUser = userDAO.findUserById(adminUser.getId());
+        Assert.assertNotNull(foundUser);
+        Assert.assertNull(foundUser.getMiddleName());
+    }
+
+    @Test
+    public void testConfirmUser() throws Exception{
         Assert.assertFalse(findUsers().isEmpty());
+        clearAuthentication();
+        Assert.assertTrue(userService.confirmUser(adminUser.getUsername(), adminUser.getRegistrationToken()));
+        loginAsUser(adminUser);
+
+        UserDTO foundUser = userDAO.findUserById(adminUser.getId());
+        Assert.assertTrue(foundUser.getActive());
+        Assert.assertTrue(foundUser.getConfirmedRegistration());
     }
 
     @Test
     public void testFindUserById() throws Exception{
-        cleanupTables();
+
         UserDTO  testUser = ProjectTestUtil.createTestUser();
         userDAO.saveUser(testUser);
         Assert.assertFalse(findUsers().isEmpty());

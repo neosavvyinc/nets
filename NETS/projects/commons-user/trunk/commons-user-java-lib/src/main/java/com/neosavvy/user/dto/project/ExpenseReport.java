@@ -1,5 +1,10 @@
 package com.neosavvy.user.dto.project;
 
+import com.neosavvy.security.SecuredObject;
+import com.neosavvy.user.dto.base.BaseDTO;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
+import fineline.focal.common.types.v1.EntityListenerManager;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -34,7 +39,8 @@ import java.util.List;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-public class ExpenseReport {
+@EntityListeners(EntityListenerManager.class)
+public class ExpenseReport extends BaseDTO implements SecuredObject<ExpenseReport> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_report_id_seq")
@@ -42,7 +48,11 @@ public class ExpenseReport {
 	@Column(name = "ID")
 	private Long id; 
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "OWNER_FK")
+    private UserDTO owner;
+
+    @ManyToOne
     @JoinColumn(name = "PROJECT_FK")
     private Project project;
 
@@ -60,8 +70,7 @@ public class ExpenseReport {
     @Column(name = "LOCATION")
     private String location;
 
-    @OneToMany
-    @JoinColumn(name = "EXPENSE_ITEM_FK")
+    @OneToMany(mappedBy = "expenseReport")
     private List<ExpenseItem> expenseItems;
 
     public Date getEndDate() {
@@ -118,5 +127,33 @@ public class ExpenseReport {
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public UserDTO getOwner() {
+        return owner;
+    }
+
+    public void setOwner(UserDTO owner) {
+        this.owner = owner;
+    }
+
+    public SecuredObject getAclParentObject() {
+        return project;
+    }
+
+    public Class getAclParentClass() {
+        return Project.class;
+    }
+
+    public Class<ExpenseReport> getAclClass() {
+        return ExpenseReport.class;
+    }
+    
+    public String getOwnerUsername() {
+        if (getOwner() != null) {
+            return getOwner().getUsername();
+        }
+
+        return null;
     }
 }

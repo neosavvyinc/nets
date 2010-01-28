@@ -4,10 +4,9 @@ import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import fineline.focal.common.utils.StringUtils;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
-
-import com.neosavvy.user.util.StringUtils;
 
 /**
  * This class is a derivative work of Fineline via Tommy Odom.

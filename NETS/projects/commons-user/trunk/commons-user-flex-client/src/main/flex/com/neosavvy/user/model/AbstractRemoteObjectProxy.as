@@ -1,7 +1,10 @@
 package com.neosavvy.user.model {
-    import com.neosavvy.user.ProxyConstants;
+import com.flexpasta.utils.HTTPUtil;
+import com.neosavvy.user.ProxyConstants;
 
-    import flash.errors.IllegalOperationError;
+import com.neosavvy.user.util.StringUtils;
+
+import flash.errors.IllegalOperationError;
 
     import flash.external.ExternalInterface;
 
@@ -20,20 +23,26 @@ package com.neosavvy.user.model {
 
         public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.model.AbstractRemoteObjectProxy");
 
-        public function AbstractRemoteObjectProxy(proxyName:String = null, data:Object = null)
+        private var contextRoot:String;
+
+        public function AbstractRemoteObjectProxy(proxyName:String, data:Object, contextRoot:String)
         {
-            super(proxyName, null);
+            super(proxyName, data);
+            this.contextRoot = contextRoot;
         }
 
         protected function getServiceChannelSet():ChannelSet {
             var channel:AMFChannel = new AMFChannel(ProxyConstants.channelName, ProxyConstants.url);
             var channelSet:ChannelSet = new ChannelSet();
-            var swfLocation:String = ExternalInterface.call("function(){ return document.location.toString();}");
-			if (swfLocation.indexOf("http:") >= 0 || swfLocation.indexOf("https") >= 0)
-			{
-                channel.url = swfLocation.substr(0, swfLocation.lastIndexOf("/")) + "/messagebroker/amf";
-
+            try {
+                if (HTTPUtil.getUrl().substring(0, 4) == 'http') {
+                    var url:String = HTTPUtil.getProtocol() + '//' + HTTPUtil.getHostName() + ':' + (StringUtils.isEmpty(HTTPUtil.getPort()) ? '80' : HTTPUtil.getPort()) + contextRoot;
+                    channel.url = url + "/messagebroker/amf";
+                }
 			}
+            catch (e:Error) {
+                
+            }
             LOGGER.debug("Connecting to AMF over the following URL " + channel.url);
             channelSet.addChannel(channel);
             return channelSet;

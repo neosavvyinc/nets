@@ -1,7 +1,10 @@
 package com.neosavvy.user.dto.project;
 
+import com.neosavvy.security.SecuredObject;
+import com.neosavvy.user.dto.base.BaseDTO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
+import fineline.focal.common.types.v1.EntityListenerManager;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -37,7 +40,8 @@ import java.util.List;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-public class Project {
+@EntityListeners(EntityListenerManager.class)
+public class Project extends BaseDTO implements SecuredObject<Project> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_id_seq")
@@ -183,5 +187,21 @@ public class Project {
 
     public void setClient(ClientCompany client) {
         this.client = client;
+    }
+
+    public SecuredObject getAclParentObject() {
+        return company;
+    }
+
+    public Class getAclParentClass() {
+        return CompanyDTO.class;
+    }
+
+    public Class<Project> getAclClass() {
+        return Project.class;
+    }
+
+    public String getOwnerUsername() {
+        return getCompany().getOwnerUsername();
     }
 }

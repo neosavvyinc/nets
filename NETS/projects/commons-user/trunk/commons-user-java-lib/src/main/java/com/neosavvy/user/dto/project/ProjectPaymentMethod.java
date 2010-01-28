@@ -46,4 +46,6 @@ public class ProjectPaymentMethod extends PaymentMethod {
     public void setProject(Project project) {
         this.project = project;
     }
+
+
 }

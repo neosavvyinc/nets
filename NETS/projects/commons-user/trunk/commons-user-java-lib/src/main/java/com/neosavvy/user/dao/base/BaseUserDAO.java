@@ -14,4 +14,6 @@ public interface BaseUserDAO<T extends BaseUserDTO> {
 	public List<T> findUsers(T user);
 
 	public void deleteUser(T user);
+
+    public void refreshUser(T user);
 }

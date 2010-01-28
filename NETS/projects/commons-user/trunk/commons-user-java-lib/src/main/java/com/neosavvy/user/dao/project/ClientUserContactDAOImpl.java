@@ -27,7 +27,7 @@ import com.neosavvy.user.dto.project.ClientUserContact;
  * Date: Jan 5, 2010
  * Time: 4:24:48 PM
  */
-public class ClientUserContactDAOImpl extends BaseUserDAOImpl implements ClientUserContactDAO {
+public class ClientUserContactDAOImpl extends BaseUserDAOImpl<ClientUserContact> implements ClientUserContactDAO {
     @Override
     protected Class getTypeClass() {
         return ClientUserContact.class;

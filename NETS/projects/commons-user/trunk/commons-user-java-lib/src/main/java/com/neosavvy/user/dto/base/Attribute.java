@@ -26,7 +26,7 @@ import javax.persistence.*;
  * Time: 10:31:32 PM
  */
 @MappedSuperclass
-public abstract class Attribute {
+public abstract class Attribute extends BaseDTO {
 
     @ManyToOne
     @JoinColumn(name="DESCRIPTOR_ID")

@@ -1,5 +1,7 @@
 package com.neosavvy.user.dto.companyManagement;
 
+import com.neosavvy.user.dto.base.BaseDTO;
+
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -17,7 +19,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     }
 )
 @XmlRootElement
-public class UserCompanyRoleDTO {
+public class UserCompanyRoleDTO extends BaseDTO {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_company_role_id_seq")
     @SequenceGenerator(name = "user_company_role_id_seq", sequenceName = "user_company_role_id_seq", allocationSize=1)

@@ -140,7 +140,7 @@ public class TestCompanyDAO extends BaseSpringAwareDAOTestCase {
     @Test
     public void testUserCompanyRolesRole(){
         cleanupTables();
-        RoleDTO role = ProjectTestUtil.createTestRole();
+        RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
 
         UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);

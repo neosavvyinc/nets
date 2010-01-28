@@ -11,15 +11,18 @@ package com.neosavvy.user {
         /**
          * Change this variable to point to an environment
          */
-        public static var url:String = LOCAL_TOMCAT;
+        public static var url:String = LOCAL;
+        public static var expenseContextRoot:String = CONTEXT_ROOT_APACHE;
 
         /**
          * Potential URLs for runtime environments
          */
-        public static var LOCAL_TOMCAT:String = "http://localhost:8080/commons-user-webapp/messagebroker/amf";
-        public static var LOCAL_GLASSFISH:String = "http://localhost:8080/nets/expenseTracker/messagebroker/amf";
-        public static var TEST:String = "http://www.neosavvy.com:8080/commons-user-webapp/messagebroker/amf";
-        public static var PROD:String = "http://localhost:8080/commons-user-webapp/messagebroker/amf";
+        public static var CONTEXT_ROOT_TOMCAT:String = "/commons-user-webapp";
+        public static var CONTEXT_ROOT_GLASSFISH:String = "/nets/expense";
+        public static var CONTEXT_ROOT_APACHE:String = "/services/nets/expense";
+        public static var LOCAL:String = "http://localhost:8080";
+        public static var TEST:String = "http://www.neosavvy.com:8080";
+        public static var PROD:String = "http://localhost:8080";
 
 
         /**

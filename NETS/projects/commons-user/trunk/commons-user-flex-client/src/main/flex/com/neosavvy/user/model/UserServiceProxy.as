@@ -21,7 +21,7 @@ package com.neosavvy.user.model {
 
         public function UserServiceProxy()
         {
-            super(NAME, null);
+            super(NAME, null, ProxyConstants.expenseContextRoot);
         }
 
         public function set users(value:ArrayCollection):void {

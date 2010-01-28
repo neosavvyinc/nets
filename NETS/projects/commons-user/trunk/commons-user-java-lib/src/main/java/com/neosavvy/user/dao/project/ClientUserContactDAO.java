@@ -2,6 +2,7 @@ package com.neosavvy.user.dao.project;
 
 import com.neosavvy.user.dao.base.BaseUserDAO;
 import com.neosavvy.user.dao.companyManagement.UserDAO;
+import com.neosavvy.user.dto.project.ClientUserContact;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -26,5 +27,5 @@ import com.neosavvy.user.dao.companyManagement.UserDAO;
  * Date: Jan 5, 2010
  * Time: 4:24:21 PM
  */
-public interface ClientUserContactDAO extends BaseUserDAO {
+public interface ClientUserContactDAO extends BaseUserDAO<ClientUserContact> {
 }

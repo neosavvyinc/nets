@@ -21,7 +21,7 @@ package com.neosavvy.user.model {
 
         public function CompanyServiceProxy()
         {
-            super(NAME, null);
+            super(NAME, null, ProxyConstants.expenseContextRoot);
         }
 
         /***

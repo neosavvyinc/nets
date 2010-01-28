@@ -1,9 +1,12 @@
 package com.neosavvy.user.dto.project;
 
+import com.neosavvy.security.SecuredObject;
+import com.neosavvy.user.dto.base.BaseDTO;
+import fineline.focal.common.types.v1.EntityListenerManager;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /*************************************************************************
@@ -37,7 +40,8 @@ import java.util.Set;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-public class ExpenseItem {
+@EntityListeners(EntityListenerManager.class)
+public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_item_id_seq")
@@ -71,6 +75,10 @@ public class ExpenseItem {
 
     @OneToMany(mappedBy="expenseItem")
     private Set<ExpenseItemValue> expenseItemValues;
+
+    @ManyToOne
+    @JoinColumn(name="EXPENSE_REPORT_FK", nullable=false, updatable=false)
+    private ExpenseReport expenseReport;
 
     @Column(name = "COMMENT")
     private String comment;
@@ -137,5 +145,29 @@ public class ExpenseItem {
 
     public void setProjectType(ProjectType projectType) {
         this.projectType = projectType;
+    }
+
+    public ExpenseReport getExpenseReport() {
+        return expenseReport;
+    }
+
+    public void setExpenseReport(ExpenseReport expenseReport) {
+        this.expenseReport = expenseReport;
+    }
+
+    public SecuredObject getAclParentObject() {
+        return expenseReport;
+    }
+
+    public Class getAclParentClass() {
+        return ExpenseReport.class;
+    }
+
+    public Class<ExpenseItem> getAclClass() {
+        return ExpenseItem.class;
+    }
+    
+    public String getOwnerUsername() {
+        return null;
     }
 }

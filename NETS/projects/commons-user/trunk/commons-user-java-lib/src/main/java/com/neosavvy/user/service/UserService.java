@@ -2,6 +2,7 @@ package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
+import com.neosavvy.user.service.exception.UserServiceException;
 import org.springframework.security.annotation.Secured;
 import org.springframework.mail.MailSender;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,21 +36,22 @@ import java.util.List;
 @Transactional
 public interface UserService {
 
-	public void saveUser(UserDTO user);
+    @Secured({"ROLE_EMPLOYEE", "OBJECT_ACL_WRITE"})
+	public void updateUser(UserDTO user) throws UserServiceException;
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "AFTER_ACL_READ"})
 	public UserDTO findUserById(long id);
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
 	public List<UserDTO> findUsers(UserDTO user);
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "OBJECT_ACL_DELETE"})
 	public void deleteUser(UserDTO user);
 
     @Secured("ROLE_ADMIN")
     public SecurityWrapperDTO checkUserLoggedIn();
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "OBJECT_ACL_WRITE"})
     public void resetPassword(UserDTO user);
     
     public boolean confirmUser(String userName, String hashCode);

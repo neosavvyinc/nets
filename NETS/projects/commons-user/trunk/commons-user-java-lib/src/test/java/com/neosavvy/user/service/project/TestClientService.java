@@ -1,13 +1,14 @@
 package com.neosavvy.user.service.project;
 
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
-import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.ClientUserContact;
 import com.neosavvy.user.service.exception.ClientServiceException;
 import com.neosavvy.user.util.ProjectTestUtil;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
+import org.springframework.security.AccessDeniedException;
 import org.springframework.test.annotation.ExpectedException;
 
 import java.util.List;
@@ -36,6 +37,10 @@ import java.util.List;
  * Time: 1:22:36 PM
  */
 public class TestClientService extends BaseProjectManagementServiceTest {
+    @Before
+    public void setupAdmin() {
+        setupAsAdminUser();
+    }
 
     @Test
     @ExpectedException( value = ClientServiceException.class )
@@ -44,7 +49,7 @@ public class TestClientService extends BaseProjectManagementServiceTest {
         ClientCompany clientCompany = ProjectTestUtil.createTestClientCompany();
         ClientUserContact clientContact = ProjectTestUtil.createTestClientContact();
 
-        clientService.saveClientForCompany(clientCompany, clientContact);
+        clientService.saveClientForCompany(null, clientCompany, clientContact);
 
     }
 
@@ -54,7 +59,7 @@ public class TestClientService extends BaseProjectManagementServiceTest {
 
         ClientUserContact clientContact = ProjectTestUtil.createTestClientContact();
 
-        clientService.saveClientForCompany(null, clientContact);
+        clientService.saveClientForCompany(null, null, clientContact);
 
     }
 
@@ -64,17 +69,12 @@ public class TestClientService extends BaseProjectManagementServiceTest {
 
         ClientCompany clientCompany = ProjectTestUtil.createTestClientCompany();
 
-        clientService.saveClientForCompany(clientCompany, null);
+        clientService.saveClientForCompany(null, clientCompany, null);
 
     }
 
     @Test
     public void testSaveClientForCompany() {
-        cleanupTables();
-
-        // Admin role required to add a company
-        roleDAO.saveRole(ProjectTestUtil.createTestRole());
-
         // add a company so that the parent relationship can be established
         saveTestCompanyForParent();
 
@@ -90,11 +90,6 @@ public class TestClientService extends BaseProjectManagementServiceTest {
     @Test
     public void testSaveTwoClientsAndTestFindForCompany() {
 
-        cleanupTables();
-
-        // Admin role required to add a company
-        roleDAO.saveRole(ProjectTestUtil.createTestRole());
-
         // add a company so that the parent relationship can be established
         CompanyDTO parentCompany = saveTestCompanyForParent();
         saveAltTestCompanyForParent(parentCompany);
@@ -103,7 +98,46 @@ public class TestClientService extends BaseProjectManagementServiceTest {
         List<ClientCompany> clientCompanies = clientService.findClientsForParentCompany(parentCompany);
 
         Assert.assertNotNull(clientCompanies);
-        Assert.assertEquals("There should be two client companies", clientCompanies.size(), 2);
+        Assert.assertEquals("There should be two client companies", 2, clientCompanies.size());
+    }
+
+    @Test(expected = AccessDeniedException.class)
+    public void testNotAllowedFindClients() {
+
+        // add a company so that the parent relationship can be established
+        CompanyDTO parentCompany = saveTestCompanyForParent();
+        loginTestEmployee1();
+
+        List<ClientCompany> clientCompanies = clientService.findClientsForParentCompany(parentCompany);
+
+        Assert.assertNotNull(clientCompanies);
+        Assert.assertEquals("Employees should not be able to read clients", 0, clientCompanies.size());
+    }
+
+    @Test(expected = AccessDeniedException.class)
+    public void testNotAllowedOtherAdminFindClients() {
+
+        // add a company so that the parent relationship can be established
+        CompanyDTO parentCompany = saveTestCompanyForParent();
+        setupAsAdmin2User();
+        saveAltTestCompanyForParent(parentCompany);
+    }
+
+    private CompanyDTO saveTestCompanyForParent() {
+        ClientCompany clientCompany = ProjectTestUtil.createTestClientCompany();
+        ClientUserContact clientContact = ProjectTestUtil.createTestClientContact();
+        clientCompany.setParentCompany(adminCompany);
+
+        clientService.saveClientForCompany(adminCompany, clientCompany, clientContact);
+        return adminCompany;
+    }
+
+    private void saveAltTestCompanyForParent(CompanyDTO parentCompany) {
+        ClientCompany clientCompany = ProjectTestUtil.createTestAltClientCompany();
+        ClientUserContact clientContact = ProjectTestUtil.createTestAltClientContact();
+        clientCompany.setParentCompany(parentCompany);
+
+        clientService.saveClientForCompany(adminCompany, clientCompany, clientContact);
     }
 
 

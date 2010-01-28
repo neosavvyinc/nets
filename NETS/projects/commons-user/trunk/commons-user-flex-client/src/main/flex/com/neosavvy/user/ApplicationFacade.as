@@ -223,6 +223,7 @@ package com.neosavvy.user {
         public static const USER_LOGIN_STARTUP_COMPLETE:String = "userLoginStartupComplete";
         public static const NAVIGATE_TO_ASSIGNMENTS:String = "navigateToAssignments";
         public static const NAVIGATE_TO_MANAGE_PROJECTS:String = "navigateToManageProjects";
+        public static const ERROR:String = "errorOccurred";
 
         public static const INITIALIZE_ASSIGNMENTS_FOR_PROJECT:String = "initializeAssignmentsForProject";
         public static const INITIALIZE_ASSIGNMENTS_FOR_PROJECT_COMPLETE:String = "initializeAssignmentsForProjectComplete";

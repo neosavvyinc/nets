@@ -1,5 +1,6 @@
 package com.neosavvy.user.dto.companyManagement;
 
+import com.neosavvy.user.dto.base.BaseDTO;
 import org.eclipse.persistence.internal.descriptors.PersistenceObject;
 
 import javax.persistence.Column;
@@ -32,7 +33,7 @@ import javax.ws.rs.FormParam;
  * Time: 9:18:33 AM
  */
 @MappedSuperclass
-public abstract class AbstractCompany {
+public abstract class AbstractCompany extends BaseDTO {
 
     @Column(name="COMPANY_NAME")
     private String companyName;

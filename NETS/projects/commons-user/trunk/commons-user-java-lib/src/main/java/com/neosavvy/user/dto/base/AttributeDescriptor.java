@@ -35,7 +35,7 @@ import java.util.List;
 )
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn( name = "TYPE", length = 50)
-public class AttributeDescriptor {
+public class AttributeDescriptor extends BaseDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attribute_descriptor_id_seq")

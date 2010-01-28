@@ -27,6 +27,12 @@
                             <contextRoot>nets/expense</contextRoot>
                             <unpack>true</unpack>
                         </webModule>
+                        <!--webModule>
+                            <groupId>fineline.focal.storage</groupId>
+                            <artifactId>storage-service-impl</artifactId>
+                            <contextRoot>storage</contextRoot>
+                            <unpack>true</unpack>
+                        </webModule-->
                     </modules>
                 </configuration>
             </plugin>
@@ -164,5 +170,11 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--dependency>
+            <groupId>fineline.focal.storage</groupId>
+            <artifactId>storage-service-impl</artifactId>
+            <version>1.1.6-SNAPSHOT</version>
+            <type>war</type>
+        </dependency-->        
     </dependencies>
 </project>

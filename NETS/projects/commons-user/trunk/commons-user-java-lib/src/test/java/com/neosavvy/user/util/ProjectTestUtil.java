@@ -92,6 +92,65 @@ public class ProjectTestUtil {
         return companyDTO;
     }
 
+    public static UserDTO createAdminUser() {
+        UserDTO user = new UserDTO();
+        user.setUsername("admin");
+        user.setFirstName("William");
+        user.setMiddleName("Adam");
+        user.setLastName("Parrish");
+        user.setPassword("admin");
+        user.setEmailAddress("aparrish1@neosavvy.com");
+
+        return user;
+    }
+
+    public static UserDTO createAdmin2User() {
+        UserDTO user = new UserDTO();
+        user.setUsername("admin2");
+        user.setFirstName("William");
+        user.setMiddleName("Adam");
+        user.setLastName("Parrish");
+        user.setPassword("admin2");
+        user.setEmailAddress("aparrishAdmin2@neosavvy.com");
+
+        return user;
+    }
+
+    public static UserDTO createEmployee1User() {
+        UserDTO user = new UserDTO();
+        user.setUsername("empl1");
+        user.setFirstName("William");
+        user.setMiddleName("Adam");
+        user.setLastName("Parrish");
+        user.setPassword("pass1");
+        user.setEmailAddress("aparrish1@neosavvy.com");
+
+        return user;
+    }
+
+    public static UserDTO createEmployee2User() {
+        UserDTO user = new UserDTO();
+        user.setUsername("empl2");
+        user.setFirstName("William");
+        user.setMiddleName("Adam");
+        user.setLastName("Parrish");
+        user.setPassword("pass2");
+        user.setEmailAddress("aparrish1@neosavvy.com");
+
+        return user;
+    }
+
+    public static UserDTO createUnauthenticatedUser() {
+        UserDTO user = new UserDTO();
+        user.setFirstName("William");
+        user.setMiddleName("Adam");
+        user.setLastName("Parrish");
+        user.setUsername("testUser");
+        user.setPassword("testPassword");
+        user.setEmailAddress("aparrish1@neosavvy.com");
+        return user;
+    }
+
     public static UserDTO createTestUser() {
         UserDTO user = new UserDTO();
         user.setFirstName("William");
@@ -140,6 +199,16 @@ public class ProjectTestUtil {
         return user;
     }
 
+    public static UserDTO createTestUser3() {
+        UserDTO user = new UserDTO();
+        user.setFirstName("Tommy");
+        user.setLastName("Odom");
+        user.setUsername("todom2");
+        user.setPassword("testPassword");
+        user.setEmailAddress("tommy.odom@gmail.com");
+        return user;
+    }
+
     public static CompanyDTO createTestCompany() {
         CompanyDTO company = new CompanyDTO();
         company.setCompanyName("BFD Enterprises");
@@ -152,11 +221,16 @@ public class ProjectTestUtil {
         return company;
     }
 
-    public static RoleDTO createTestRole() {
-        RoleDTO role = new RoleDTO();
-        role.setShortName("ROLE_ADMIN");
-        role.setLongName("Administrator");
-        return role;
+    public static CompanyDTO createAltTestCompany() {
+        CompanyDTO company = new CompanyDTO();
+        company.setCompanyName("Widgets, Inc.");
+        company.setAddressOne("address one");
+        company.setAddressTwo("address two");
+        company.setCity("Atlanta");
+        company.setState("GA");
+        company.setPostalCode("30312");
+        company.setCountry("USA");
+        return company;
     }
 
     public static UserInviteDTO createTestInvite() {
@@ -182,6 +256,14 @@ public class ProjectTestUtil {
         role.setLongName("Employee");
         return role;
     }
+    
+    public static RoleDTO createAdminTestRole() {
+        RoleDTO role = new RoleDTO();
+        role.setShortName("ROLE_ADMIN");
+        role.setLongName("Administrator");
+        return role;
+    }
+    
 
     public static UserInviteDTO createTestUserInvite(){
         UserInviteDTO userInvite = new UserInviteDTO();

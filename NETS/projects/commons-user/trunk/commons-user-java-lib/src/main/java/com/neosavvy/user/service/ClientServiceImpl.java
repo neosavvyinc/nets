@@ -1,12 +1,14 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.security.AclSecurityUtil;
+import com.neosavvy.security.RunAsExecutor;
 import com.neosavvy.user.dao.project.ClientCompanyDAO;
 import com.neosavvy.user.dao.project.ClientUserContactDAO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.ClientUserContact;
 import com.neosavvy.user.service.exception.ClientServiceException;
-import com.neosavvy.user.service.exception.CompanyServiceException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -39,8 +41,10 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
 
     private ClientCompanyDAO clientCompanyDAO;
-
     private ClientUserContactDAO clientUserContactDAO;
+    private AclSecurityUtil aclSecurityUtil;
+    private RunAsExecutor adminExecutor;
+
 
     public List<ClientCompany> findClientsForParentCompany(CompanyDTO company) {
 
@@ -54,11 +58,13 @@ public class ClientServiceImpl implements ClientService {
         return clientCompanyDAO.findCompanies(clientCompanyExample);
     }
 
-    public void saveClientForCompany(ClientCompany client, ClientUserContact contact) {
+    public void saveClientForCompany(CompanyDTO parentCompany, ClientCompany client, ClientUserContact contact) {
         if( client == null ) {
             throw new ClientServiceException("ClientCompany must be provided to save it");
         }
 
+        client.setParentCompany(parentCompany);
+        
         if( client.getParentCompany() == null ) {
             throw new ClientServiceException("ClientCompany must be associated with a parentCompany to establish client relationship");
         }
@@ -68,17 +74,28 @@ public class ClientServiceImpl implements ClientService {
         }
 
         try {
-            clientUserContactDAO.saveUser(contact);
+            contact = clientUserContactDAO.saveUser(contact);
         } catch (DataAccessException e) {
             throw new ClientServiceException("There was an error saving the client contact",e);
         }
 
         try {
             client.setClientContact(contact);
-            clientCompanyDAO.saveCompany(client);
+            client = clientCompanyDAO.saveCompany(client);
         } catch (DataAccessException e) {
             throw new ClientServiceException("There was an error saving the client company",e);
         }
+
+/*
+        final ClientCompany savedCompany = client;
+        final ClientUserContact savedContact = contact;
+        adminExecutor.runAsAdmin(new Runnable() {
+            public void run() {
+                aclSecurityUtil.addAcl(savedCompany, ClientCompany.class);
+                aclSecurityUtil.addAcl(savedContact, ClientUserContact.class);
+            }
+        });
+*/
     }
 
     public ClientCompanyDAO getClientCompanyDAO() {
@@ -95,5 +112,21 @@ public class ClientServiceImpl implements ClientService {
 
     public void setClientUserContactDAO(ClientUserContactDAO clientUserContactDAO) {
         this.clientUserContactDAO = clientUserContactDAO;
+    }
+
+    public AclSecurityUtil getAclSecurityUtil() {
+        return aclSecurityUtil;
+    }
+
+    public void setAclSecurityUtil(AclSecurityUtil aclSecurityUtil) {
+        this.aclSecurityUtil = aclSecurityUtil;
+    }
+
+    public RunAsExecutor getAdminExecutor() {
+        return adminExecutor;
+    }
+
+    public void setAdminExecutor(RunAsExecutor adminExecutor) {
+        this.adminExecutor = adminExecutor;
     }
 }

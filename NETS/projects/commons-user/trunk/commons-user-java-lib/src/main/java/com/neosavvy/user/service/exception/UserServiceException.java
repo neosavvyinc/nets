@@ -25,6 +25,10 @@ package com.neosavvy.user.service.exception;
  */
 public class UserServiceException extends RuntimeException {
 
+    public UserServiceException(String message) {
+        super(message);
+    }
+    
     public UserServiceException(String message, Exception cause) {
         super(message, cause);
     }

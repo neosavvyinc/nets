@@ -1,5 +1,7 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.security.AclSecurityUtil;
+import com.neosavvy.security.RunAsExecutor;
 import com.neosavvy.user.dao.companyManagement.*;
 import com.neosavvy.user.dto.companyManagement.*;
 import com.neosavvy.user.service.exception.CompanyServiceException;
@@ -10,6 +12,10 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.acls.Permission;
+import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.security.acls.sid.PrincipalSid;
+import org.springframework.security.acls.sid.Sid;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.io.UnsupportedEncodingException;
@@ -27,7 +33,8 @@ public class CompanyServiceImpl implements CompanyService{
     private RoleDAO roleDao;
     private UserDAO userDao;
     private UserInviteDAO userInviteDao;
-
+    private AclSecurityUtil aclSecurityUtil;
+    private RunAsExecutor adminExecutor;
     private MailService mailService;
 
     public CompanyDTO saveCompany(CompanyDTO company) {
@@ -39,12 +46,13 @@ public class CompanyServiceImpl implements CompanyService{
     }
 
     public List<CompanyDTO> findCompanies(CompanyDTO company) {
-        return companyDao.findCompanies(company);
+        List<CompanyDTO> companies = companyDao.findCompanies(company);
+        return companies;
     }
 
     @Transactional(rollbackFor={CompanyServiceException.class, DataAccessException.class})
     public void addCompany(CompanyDTO company, UserDTO user) {
-        saveUserAndEmailConfirmation(user);
+        final UserDTO savedUser = saveUserAndEmailConfirmation(user);
         saveCompany(company);
         // At some point we should look at getting rid of this hard coding.
         RoleDTO roleToFind = new RoleDTO();
@@ -53,7 +61,8 @@ public class CompanyServiceImpl implements CompanyService{
         if((adminRoles.size() > 1) || (adminRoles.size() < 1)){
           throw new CompanyServiceException("invalid number of ROLE_ADMINS found " + adminRoles.size(), null);
         }
-        UserCompanyRoleDTO userCompanyRole = new UserCompanyRoleDTO();
+
+        final UserCompanyRoleDTO userCompanyRole = new UserCompanyRoleDTO();
         userCompanyRole.setRole(adminRoles.get(0));
         userCompanyRole.setUser(user);
         userCompanyRole.setCompany(company);
@@ -62,9 +71,24 @@ public class CompanyServiceImpl implements CompanyService{
         userCompanyRoles.add(userCompanyRole);
         company.setUserCompanyRoles(userCompanyRoles);
         companyDao.saveCompany(company);
+
+        final CompanyDTO savedCompany = company;
+        userDao.refreshUser(savedUser);
+
+        // we have to add the company permissions here because the admin user role didn't exist
+        // when we persisted the company
+        adminExecutor.runAsAdmin(new Runnable() {
+            public void run() {
+                Sid sid = new PrincipalSid(savedUser.getUsername());
+                aclSecurityUtil.addPermission(savedCompany, sid, BasePermission.READ, CompanyDTO.class);
+                aclSecurityUtil.addPermission(savedCompany, sid, BasePermission.WRITE, CompanyDTO.class);
+                aclSecurityUtil.addPermission(savedCompany, sid, BasePermission.DELETE, CompanyDTO.class);
+            }
+        });
+
     }
 
-    protected void saveUserAndEmailConfirmation(UserDTO user) {
+    protected UserDTO saveUserAndEmailConfirmation(UserDTO user) {
         try {
             user.setRegistrationToken(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));
         } catch (UnsupportedEncodingException e) {
@@ -72,9 +96,11 @@ public class CompanyServiceImpl implements CompanyService{
             throw new UserServiceException("Unable to generate token for user: "+ user.toString(),e);
         }
 
-        userDao.saveUser(user);
+        UserDTO savedUser = userDao.saveUser(user);
 
         mailService.newUserConfirmationTokenEmail(user);
+
+        return savedUser;
     }
 
 
@@ -121,7 +147,7 @@ public class CompanyServiceImpl implements CompanyService{
             throw new CompanyServiceException("Empty email addresses won't allow us to invite your users - please provide an email address");
         }
 
-        verifyAndAttachCompany(company);
+        company = verifyAndAttachCompany(company);
 
         UserInviteDTO userInvitesToFind = new UserInviteDTO();
         userInvitesToFind.setCompany(company);
@@ -142,9 +168,16 @@ public class CompanyServiceImpl implements CompanyService{
             logger.error(e);
             throw new UserServiceException("Unable to generate token for user: " + userInvite.toString(), e);
         }
-        userInviteDao.saveUserInvite(userInvite);
-        companyDao.saveCompany(company);
-        mailService.sendInvite(userInvite);
+        final UserInviteDTO savedInvite = userInviteDao.saveUserInvite(userInvite);
+/*
+        adminExecutor.runAsAdmin(new Runnable() {
+            public void run() {
+                aclSecurityUtil.addAcl(savedInvite, UserInviteDTO.class);
+            }
+        });
+*/
+        
+        mailService.sendInvite(userInvite);        
     }
 
     public void deleteInvitedUser(CompanyDTO company, UserInviteDTO userInvite) {
@@ -182,8 +215,8 @@ public class CompanyServiceImpl implements CompanyService{
             throw new CompanyServiceException("To find users for a company, you must supply a company parameter");
         }
 
-
-        return userDao.findUsersForCompany(company, null);
+        List<UserDTO> users = userDao.findUsersForCompany(company, null);
+        return users; 
     }
 
     public List<UserDTO> findActiveUsersForCompany(CompanyDTO company) {
@@ -206,6 +239,7 @@ public class CompanyServiceImpl implements CompanyService{
         return userDao.findUsersForCompany(company, user);
     }
 
+    @Transactional(rollbackFor=CompanyServiceException.class)
     public void addEmployeeToCompany(UserDTO user) {
         // find a user invite via registration token
         UserInviteDTO searchByRegistration = new UserInviteDTO();
@@ -222,7 +256,7 @@ public class CompanyServiceImpl implements CompanyService{
         //Ensure that the user is active and enabled
         user.setConfirmedRegistration(true);
         user.setActive(true);
-        userDao.saveUser(user);
+        final UserDTO savedUser = userDao.saveUser(user);
 
         // get the company from the UserInvite
         CompanyDTO company = userInvite.getCompany();
@@ -240,6 +274,17 @@ public class CompanyServiceImpl implements CompanyService{
 
         // email them to tell them how grateful you are for joining
         mailService.newUserConfirmationEmail(user, company);
+        userDao.refreshUser(savedUser);
+
+        adminExecutor.runAsAdmin(new Runnable() {
+            public void run() {
+                Sid sid = new PrincipalSid(savedUser.getUsername());
+                // we have to update the ACL here because the company roles didn't exist
+                // yet when we persisted the user
+                aclSecurityUtil.addAcl(savedUser, UserDTO.class);
+            }
+        });
+
     }
 
 
@@ -301,4 +346,20 @@ public class CompanyServiceImpl implements CompanyService{
     public void setMailService(MailService mailService) {
         this.mailService = mailService;
     }
+    
+    public AclSecurityUtil getAclSecurityUtil() {
+        return aclSecurityUtil;
+    }
+
+    public void setAclSecurityUtil(AclSecurityUtil aclSecurityUtil) {
+        this.aclSecurityUtil = aclSecurityUtil;
+    }
+
+    public RunAsExecutor getAdminExecutor() {
+        return adminExecutor;
+    }
+
+    public void setAdminExecutor(RunAsExecutor adminExecutor) {
+        this.adminExecutor = adminExecutor;
+    }    
 }

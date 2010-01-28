@@ -1,6 +1,9 @@
 package com.neosavvy.user.dto.project;
 
+import com.neosavvy.security.SecuredObject;
 import com.neosavvy.user.dto.base.BaseUserDTO;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import fineline.focal.common.types.v1.EntityListenerManager;
 
 import javax.persistence.*;
 /*************************************************************************
@@ -34,12 +37,17 @@ import javax.persistence.*;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-public class ClientUserContact extends BaseUserDTO {
+@EntityListeners(EntityListenerManager.class)
+public class ClientUserContact extends BaseUserDTO implements SecuredObject<ClientUserContact> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_user_contact_id_seq")
     @SequenceGenerator(name = "client_user_contact_id_seq", sequenceName = "client_user_contact_id_seq", allocationSize=1)
     @Column(name="ID")
     private Long id;
+
+
+    @OneToOne(mappedBy = "clientContact")
+    private ClientCompany clientCompany;
 
     public Long getId() {
         return id;
@@ -47,6 +55,33 @@ public class ClientUserContact extends BaseUserDTO {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public ClientCompany getClientCompany() {
+        return clientCompany;
+    }
+
+    public void setClientCompany(ClientCompany clientCompany) {
+        this.clientCompany = clientCompany;
+    }
+
+    public SecuredObject getAclParentObject() {
+        if (clientCompany != null) {
+            return clientCompany.getParentCompany();
+        }
+        return null;
+    }
+
+    public Class getAclParentClass() {
+        return CompanyDTO.class;
+    }
+
+    public Class<ClientUserContact> getAclClass() {
+        return ClientUserContact.class;
+    }
+    
+    public String getOwnerUsername() {
+        return null;
     }
 
     public ClientUserContact() {

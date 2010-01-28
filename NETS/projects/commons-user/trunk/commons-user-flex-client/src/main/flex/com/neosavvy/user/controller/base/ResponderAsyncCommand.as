@@ -1,9 +1,13 @@
 package com.neosavvy.user.controller.base {
-    import flash.errors.IllegalOperationError;
+import com.neosavvy.user.ApplicationFacade;
+
+import flash.errors.IllegalOperationError;
 
     import mx.collections.ArrayCollection;
 
-    import mx.rpc.IResponder;
+import mx.logging.ILogger;
+import mx.logging.Log;
+import mx.rpc.IResponder;
 
     import mx.rpc.events.FaultEvent;
 
@@ -13,6 +17,7 @@ package com.neosavvy.user.controller.base {
     import org.puremvc.as3.multicore.patterns.command.AsyncCommand;
 
     public class ResponderAsyncCommand extends AsyncCommand implements IResponder {
+        public static var LOGGER:ILogger = Log.getLogger("com.neosavvy.user.command.base.ResponderAsyncCommand");
 
         public function fault(info:Object):void {
             var faultEvent:FaultEvent = info as FaultEvent;
@@ -22,7 +27,14 @@ package com.neosavvy.user.controller.base {
 
         public function result(data:Object):void {
             var resultEvent:ResultEvent = data as ResultEvent;
-            resultHandler(resultEvent);            
+            try {
+                resultHandler(resultEvent);
+            }
+            catch (e:Error) {
+                LOGGER.error(e.message + "\n" + e.getStackTrace());
+                sendNotification(ApplicationFacade.ERROR, "An unexpected error occurred.  Please try again or contact support@neosavvy.com for assistance.");
+            }
+
             commandComplete();
         }
 

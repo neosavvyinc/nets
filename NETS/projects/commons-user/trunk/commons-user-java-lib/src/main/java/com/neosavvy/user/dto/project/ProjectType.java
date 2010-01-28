@@ -1,5 +1,7 @@
 package com.neosavvy.user.dto.project;
 
+import com.neosavvy.user.dto.base.BaseDTO;
+
 import javax.persistence.*;
 /*************************************************************************
  *
@@ -32,7 +34,7 @@ import javax.persistence.*;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-public class ProjectType {
+public class ProjectType extends BaseDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_type_id_seq")
@@ -42,5 +44,20 @@ public class ProjectType {
 
     @Column(name="TYPE")
     private String type;
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

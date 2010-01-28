@@ -17,7 +17,7 @@ package com.neosavvy.user.model {
 
         public function ProjectServiceProxy()
         {
-            super(NAME, null);
+            super(NAME, null, ProxyConstants.expenseContextRoot);
         }
 
         public function get projects():ArrayCollection {

@@ -20,7 +20,7 @@ package com.neosavvy.user.model {
 
         public function SecurityProxy()
         {
-            super(NAME, null);
+            super(NAME, null, ProxyConstants.expenseContextRoot);
         }
 
         public function get user():String {

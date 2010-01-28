@@ -1,5 +1,7 @@
 package com.neosavvy.user.dto.project;
 
+import com.neosavvy.user.dto.base.BaseDTO;
+
 import javax.persistence.*;
 /*************************************************************************
  *
@@ -34,7 +36,7 @@ import javax.persistence.*;
 )
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn( name = "TYPE" )
-public abstract class PaymentMethod {
+public abstract class PaymentMethod extends BaseDTO {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_method_id_seq")
@@ -47,5 +49,28 @@ public abstract class PaymentMethod {
 
     @Column(name="DESCRIPTION")
     private String description;
-    
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

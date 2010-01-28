@@ -17,7 +17,7 @@ package com.neosavvy.user.model {
 
         public function ClientServiceProxy()
         {
-            super(NAME, null);
+            super(NAME, null, ProxyConstants.expenseContextRoot);
         }
 
         public function get clientCompanies():ArrayCollection {
@@ -40,7 +40,7 @@ package com.neosavvy.user.model {
         public function saveClientCompany(clientCompany:ClientCompany, clientUserContact:ClientUserContact, responder:IResponder):void {
             var companyService:RemoteObject = getService(ProxyConstants.clientServiceDestiation);
             addCallbackHandler(companyService, responder);
-            companyService.saveClientForCompany(clientCompany, clientUserContact);
+            companyService.saveClientForCompany(clientCompany.parentCompany, clientCompany, clientUserContact);
         }
 
         override public function clearCachedValues():void {

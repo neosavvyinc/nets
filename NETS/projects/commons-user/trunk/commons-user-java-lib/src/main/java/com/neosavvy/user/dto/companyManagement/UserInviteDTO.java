@@ -1,6 +1,8 @@
 package com.neosavvy.user.dto.companyManagement;
 
+import com.neosavvy.security.SecuredObject;
 import com.neosavvy.user.dto.base.BaseUserDTO;
+import fineline.focal.common.types.v1.EntityListenerManager;
 
 import javax.persistence.*;
 
@@ -17,7 +19,8 @@ import javax.persistence.*;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-public class UserInviteDTO extends BaseUserDTO {
+@EntityListeners(EntityListenerManager.class)
+public class UserInviteDTO extends BaseUserDTO implements SecuredObject<UserInviteDTO> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_invite_id_seq")
     @SequenceGenerator(name = "user_invite_id_seq", sequenceName = "user_invite_id_seq", allocationSize=1)
@@ -31,6 +34,14 @@ public class UserInviteDTO extends BaseUserDTO {
     @Column(name="REGISTRATION_TOKEN")
     private String registrationToken;
 
+    public UserInviteDTO() {
+        super();
+    }
+
+    public UserInviteDTO(BaseUserDTO baseCopy) {
+        super(baseCopy);
+    }
+    
     public Long getId() {
         return id;
     }
@@ -55,7 +66,19 @@ public class UserInviteDTO extends BaseUserDTO {
         this.registrationToken = registrationToken;
     }
 
-    public UserInviteDTO() {
-        super();
+    public SecuredObject getAclParentObject() {
+        return getCompany();
+    }
+
+    public Class getAclParentClass() {
+        return CompanyDTO.class;
+    }
+
+    public String getOwnerUsername() {
+        return null;
+    }
+
+    public Class<UserInviteDTO> getAclClass() {
+        return UserInviteDTO.class;
     }
 }

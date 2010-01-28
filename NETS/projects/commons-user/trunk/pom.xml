@@ -40,12 +40,14 @@
 
     <modules>
         <module>commons-user-config</module>
-        <module>commons-user-flex-client</module>
-        <module>commons-user-flex-model-lib</module>
-        <module>commons-user-java-lib</module>
-        <module>commons-user-webapp</module>
-        <module>commons-user-icons</module>
         <module>commons-user-icons-api</module>
+        <module>commons-user-icons</module>
+        <module>commons-java-lib</module>
+        <module>commons-user-java-lib</module>
+        <module>commons-user-flex-model-lib</module>
+        <module>commons-user-flex-client</module>
+        <module>commons-user-webapp</module>
+        <module>storage-service</module>
         <module>commons-user-enterprise-application</module>
         <module>commons-user-groovy-templates</module>
     </modules>
@@ -57,9 +59,10 @@
         <jotm.version>2.0.10</jotm.version>
         <flex.mojos.maven.version>3.5.0</flex.mojos.maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>2.5.6</spring.version>
-        <spring.security.version>2.0.4</spring.security.version>
-        <commons.flex.version>1.0-SNAPSHOT</commons.flex.version>
+        <spring.version>3.0.0.RELEASE</spring.version>
+        <spring.security.version>2.0.5.RELEASE</spring.security.version>
+	    <commons.flex.version>1.0-SNAPSHOT</commons.flex.version>
+        <eclipselink.version>2.0.0</eclipselink.version>
 
         <cargo.container.id>tomcat6x</cargo.container.id>
         <cargo.download.url>
@@ -98,9 +101,9 @@
                             <version>${flex.version}</version>
                         </dependency>
                         <dependency>
-                            <groupId>org.sonatype.flexmojos</groupId>
-                            <artifactId>flexmojos-generator-graniteds-1.1.0</artifactId>
-                            <version>3.5.0.patch01</version>
+                          <groupId>org.sonatype.flexmojos</groupId>
+                          <artifactId>flexmojos-generator-graniteds-1.1.0</artifactId>
+                          <version>3.5.0.patch04</version>
                         </dependency>
                         <dependency>
                             <groupId>com.neosavvy.commons.flex</groupId>
@@ -192,19 +195,24 @@
 
             <dependency>
                 <groupId>org.springframework</groupId>
-                <artifactId>spring-agent</artifactId>
+                <artifactId>spring-instrument</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
             <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-core</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+            <dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-orm</artifactId>
@@ -213,6 +221,16 @@
             <dependency>
                 <groupId>org.springframework</groupId>
                 <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-web</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context-support</artifactId>
                 <version>${spring.version}</version>
             </dependency>
             <dependency>
@@ -227,6 +245,16 @@
                 </exclusions>
             </dependency>
             <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-jdbc</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-aop</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
                 <groupId>org.springframework.flex</groupId>
                 <artifactId>spring-flex</artifactId>
                 <version>1.0.1.RELEASE</version>
@@ -239,6 +267,11 @@
             <dependency>
                 <groupId>org.springframework.security</groupId>
                 <artifactId>spring-security-core-tiger</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-acl</artifactId>
                 <version>${spring.security.version}</version>
             </dependency>
 
@@ -309,6 +342,52 @@
                 <artifactId>commons-flex-annotations</artifactId>
                 <version>1.0</version>
             </dependency>
-        </dependencies>
-    </dependencyManagement>
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>org.eclipse.persistence.jpa</artifactId>
+                <version>${eclipselink.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>org.eclipse.persistence.core</artifactId>
+                <version>${eclipselink.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>org.eclipse.persistence.asm</artifactId>
+                <version>${eclipselink.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>org.eclipse.persistence.antlr</artifactId>
+                <version>${eclipselink.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.eclipse.persistence</groupId>
+                <artifactId>javax.persistence</artifactId>
+                <version>${eclipselink.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>commons-lang</groupId>
+                <artifactId>commons-lang</artifactId>
+                <version>2.4</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-net</groupId>
+                <artifactId>commons-net</artifactId>
+                <version>2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-httpclient</groupId>
+                <artifactId>commons-httpclient</artifactId>
+                <version>3.1</version>
+            </dependency>
+            
+		</dependencies>
+	</dependencyManagement>
 </project>

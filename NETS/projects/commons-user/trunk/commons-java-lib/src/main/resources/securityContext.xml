@@ -2,9 +2,11 @@
   xmlns:beans="http://www.springframework.org/schema/beans"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://www.springframework.org/schema/beans
-                      http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
                       http://www.springframework.org/schema/security
                       http://www.springframework.org/schema/security/spring-security-2.0.4.xsd">
+
+    <beans:import resource="classpath:securityAuthorizationContext.xml" />
 
     <http entry-point-ref="preAuthenticatedEntryPoint" />
 
@@ -12,7 +14,7 @@
         class="org.springframework.security.ui.preauth.PreAuthenticatedProcessingFilterEntryPoint" />
 
     <authentication-provider user-service-ref="authenticationDao"/>
-    
+
     <beans:bean id="authenticationDao" class="org.springframework.security.userdetails.jdbc.JdbcDaoImpl">
         <beans:property name="dataSource" ref="dataSource"/>
         <beans:property name="usersByUsernameQuery">
@@ -27,5 +29,6 @@
         </beans:property>
     </beans:bean>
 
-    <global-method-security secured-annotations="enabled" jsr250-annotations="enabled"/>
+    <global-method-security secured-annotations="enabled" jsr250-annotations="enabled" access-decision-manager-ref="businessAccessDecisionManager" />
+
 </beans:beans>

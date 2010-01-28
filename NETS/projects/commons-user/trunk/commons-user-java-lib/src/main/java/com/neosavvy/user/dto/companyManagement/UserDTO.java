@@ -1,6 +1,8 @@
 package com.neosavvy.user.dto.companyManagement;
 
+import com.neosavvy.security.SecuredObject;
 import com.neosavvy.user.dto.base.BaseUserDTO;
+import fineline.focal.common.types.v1.EntityListenerManager;
 import flex.messaging.annotations.FlexClass;
 import flex.messaging.annotations.IAnnotatedProxy;
 
@@ -16,7 +18,8 @@ import java.util.Set;
     }
 )
 @FlexClass(classType= FlexClass.FlexClassType.RemoteObject)
-public class UserDTO extends BaseUserDTO implements IAnnotatedProxy {// implements Externalizable {
+@EntityListeners(EntityListenerManager.class)
+public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObject<UserDTO> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "users_id_seq")
@@ -94,7 +97,33 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy {// implemen
         this.confirmedRegistration = confirmedRegistration;
     }
 
+    public SecuredObject getAclParentObject() {
+        if (getUserCompanyRoles() == null) {
+            return null;
+        }
+
+        for (UserCompanyRoleDTO role : getUserCompanyRoles()) {
+            return role.getCompany();
+        }
+
+        return null;
+    }
+
+    public Class getAclParentClass() {
+        return CompanyDTO.class;
+    }
+
+    public Class<UserDTO> getAclClass() {
+        return UserDTO.class;
+    }
+
+    public String getOwnerUsername() {
+        return getUsername();
+    }
+
     public UserDTO() {
         super();
     }
+
+    
 }

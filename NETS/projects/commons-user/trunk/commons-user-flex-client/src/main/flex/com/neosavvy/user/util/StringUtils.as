@@ -7,5 +7,8 @@ package com.neosavvy.user.util {
             return emailExpression.test(email);
         }
 
+        public static function isEmpty(value:String):Boolean {
+            return (value == null || value.length == 0);
+        }
     }
 }

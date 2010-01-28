@@ -2,12 +2,13 @@ package com.neosavvy.user.dto.companyManagement;
 
 
 
+import com.neosavvy.security.SecuredObject;
+import fineline.focal.common.types.v1.EntityListenerManager;
 import flex.messaging.annotations.FlexClass;
 import flex.messaging.annotations.FlexField;
 import flex.messaging.annotations.IAnnotatedProxy;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Set;
 
 /**
@@ -24,7 +25,8 @@ import java.util.Set;
     }
 )
 @FlexClass(classType= FlexClass.FlexClassType.RemoteObject)
-public class CompanyDTO extends AbstractCompany implements IAnnotatedProxy {
+@EntityListeners(EntityListenerManager.class)
+public class CompanyDTO extends AbstractCompany implements IAnnotatedProxy, SecuredObject<CompanyDTO> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_id_seq")
     @SequenceGenerator(name = "company_id_seq", sequenceName = "company_id_seq", allocationSize=1)
@@ -61,6 +63,30 @@ public class CompanyDTO extends AbstractCompany implements IAnnotatedProxy {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public SecuredObject getAclParentObject() {
+        return null;
+    }
+
+    public Class getAclParentClass() {
+        return Object.class;
+    }
+
+    public Class<CompanyDTO> getAclClass() {
+        return CompanyDTO.class;
+    }
+
+    public String getOwnerUsername() {
+        if (getUserCompanyRoles() != null) {
+            for (UserCompanyRoleDTO userRole : getUserCompanyRoles()) {
+                if (userRole.getRole() != null && userRole.getRole().equals(RoleDTO.ADMIN_ROLE)) {
+                    return userRole.getUser().getUsername();
+                }
+            }
+        }
+
+        return null;
     }
 
     public CompanyDTO() {

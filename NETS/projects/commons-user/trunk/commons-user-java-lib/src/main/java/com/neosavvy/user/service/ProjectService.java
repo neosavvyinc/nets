@@ -4,6 +4,7 @@ import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
+import org.springframework.security.annotation.Secured;
 
 import java.util.List;
 /*************************************************************************
@@ -32,8 +33,10 @@ import java.util.List;
  */
 public interface ProjectService {
 
+    @Secured({"ROLE_ADMIN", "OBJECT_ACL_WRITE"})
     public void addProject(Project project, CompanyDTO company, ClientCompany clientCompany);
 
+    @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
     public List<Project> findProjectsForParentCompany(CompanyDTO company);
 
     public List<UserDTO> findAvailableUsersForProject(Project project);

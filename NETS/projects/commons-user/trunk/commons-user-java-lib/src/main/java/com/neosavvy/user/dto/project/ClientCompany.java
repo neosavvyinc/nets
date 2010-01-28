@@ -1,7 +1,9 @@
 package com.neosavvy.user.dto.project;
 
+import com.neosavvy.security.SecuredObject;
 import com.neosavvy.user.dto.companyManagement.AbstractCompany;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import fineline.focal.common.types.v1.EntityListenerManager;
 
 import javax.persistence.*;
 /*************************************************************************
@@ -36,7 +38,8 @@ import javax.persistence.*;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-public class ClientCompany extends AbstractCompany {
+@EntityListeners(EntityListenerManager.class)
+public class ClientCompany extends AbstractCompany implements SecuredObject<ClientCompany> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_company_id_seq")
     @SequenceGenerator(name = "client_company_id_seq", sequenceName = "client_company_id_seq", allocationSize=1)
@@ -47,7 +50,7 @@ public class ClientCompany extends AbstractCompany {
     @JoinColumn(name="CLIENT_USER_CONTACT_FK")
     private ClientUserContact clientContact;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="PARENT_COMPANY_FK")
     private CompanyDTO parentCompany;
 
@@ -76,6 +79,22 @@ public class ClientCompany extends AbstractCompany {
         this.id = id;
     }
 
+    public SecuredObject getAclParentObject() {
+        return parentCompany;
+    }
+
+    public Class getAclParentClass() {
+        return CompanyDTO.class;
+    }
+
+    public Class<ClientCompany> getAclClass() {
+        return ClientCompany.class;
+    }
+
+    public String getOwnerUsername() {
+        return null;
+    }
+    
     public ClientCompany() {
         super();
     }

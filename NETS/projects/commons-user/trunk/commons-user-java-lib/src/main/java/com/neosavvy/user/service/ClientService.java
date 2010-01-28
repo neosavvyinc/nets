@@ -3,6 +3,7 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.ClientUserContact;
+import org.springframework.security.annotation.Secured;
 
 import java.util.List;
 /*************************************************************************
@@ -31,8 +32,10 @@ import java.util.List;
  */
 public interface ClientService {
 
+    @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
     public List<ClientCompany> findClientsForParentCompany(CompanyDTO company);
 
-    public void saveClientForCompany(ClientCompany client, ClientUserContact contact);
+    @Secured({"ROLE_ADMIN", "ACL_OBJECT_WRITE"})
+    public void saveClientForCompany(CompanyDTO parentCompany, ClientCompany client, ClientUserContact contact);
 
 }
