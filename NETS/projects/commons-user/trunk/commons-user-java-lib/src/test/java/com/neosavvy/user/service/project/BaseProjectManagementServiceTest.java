@@ -79,17 +79,12 @@ public abstract class BaseProjectManagementServiceTest extends BaseSpringAwareSe
     }
 
     protected CompanyDTO saveTestCompanyForParent() {
-        CompanyDTO companyDTO = ProjectTestUtil.createParentCompany();
-        UserDTO companyUser = ProjectTestUtil.createTestUser();
-        companyService.addCompany(companyDTO, companyUser);
-
-
         ClientCompany clientCompany = ProjectTestUtil.createTestClientCompany();
         ClientUserContact clientContact = ProjectTestUtil.createTestClientContact();
-        clientCompany.setParentCompany(companyDTO);
+        clientCompany.setParentCompany(adminCompany);
 
-        clientService.saveClientForCompany(clientCompany, clientContact);
-        return companyDTO;
+        clientService.saveClientForCompany(adminCompany, clientCompany, clientContact);
+        return adminCompany;
     }
 
     protected void saveAltTestCompanyForParent(CompanyDTO parentCompany) {
@@ -97,8 +92,9 @@ public abstract class BaseProjectManagementServiceTest extends BaseSpringAwareSe
         ClientUserContact clientContact = ProjectTestUtil.createTestAltClientContact();
         clientCompany.setParentCompany(parentCompany);
 
-        clientService.saveClientForCompany(clientCompany, clientContact);
+        clientService.saveClientForCompany(adminCompany, clientCompany, clientContact);
     }
+    
 
     protected void addUserToCompany(CompanyDTO parent, UserDTO user) {
         UserInviteDTO userToInvite = new UserInviteDTO();

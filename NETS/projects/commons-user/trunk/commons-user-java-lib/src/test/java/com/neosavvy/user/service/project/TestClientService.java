@@ -123,22 +123,6 @@ public class TestClientService extends BaseProjectManagementServiceTest {
         saveAltTestCompanyForParent(parentCompany);
     }
 
-    private CompanyDTO saveTestCompanyForParent() {
-        ClientCompany clientCompany = ProjectTestUtil.createTestClientCompany();
-        ClientUserContact clientContact = ProjectTestUtil.createTestClientContact();
-        clientCompany.setParentCompany(adminCompany);
-
-        clientService.saveClientForCompany(adminCompany, clientCompany, clientContact);
-        return adminCompany;
-    }
-
-    private void saveAltTestCompanyForParent(CompanyDTO parentCompany) {
-        ClientCompany clientCompany = ProjectTestUtil.createTestAltClientCompany();
-        ClientUserContact clientContact = ProjectTestUtil.createTestAltClientContact();
-        clientCompany.setParentCompany(parentCompany);
-
-        clientService.saveClientForCompany(adminCompany, clientCompany, clientContact);
-    }
 
 
 }

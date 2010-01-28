@@ -44,12 +44,7 @@ public class TestProjectService extends BaseProjectManagementServiceTest {
 
     @Before
     public void setupCommonData() {
-        cleanupTables();
-
-        // Admin role required to add a company
-        roleDAO.saveRole(ProjectTestUtil.createTestRole());
-        roleDAO.saveRole(ProjectTestUtil.createEmployeeTestRole());
-
+        setupAsAdminUser();
         // add a company so that the parent relationship can be established
         CompanyDTO testCompany = saveTestCompanyForParent();
 
