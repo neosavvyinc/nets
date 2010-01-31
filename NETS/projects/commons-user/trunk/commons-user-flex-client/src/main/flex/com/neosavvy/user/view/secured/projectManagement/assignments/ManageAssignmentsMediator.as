@@ -86,6 +86,7 @@ package com.neosavvy.user.view.secured.projectManagement.assignments {
                 ApplicationFacade.NAVIGATE_TO_ASSIGNMENTS
                 ,ApplicationFacade.INITIALIZE_MANAGE_ASSIGNMENTS_VIEW_COMPLETE
                 ,ApplicationFacade.INITIALIZE_ASSIGNMENTS_FOR_PROJECT_COMPLETE
+                ,ApplicationFacade.REQUEST_LOGOUT
             ];
         }
 
@@ -104,6 +105,13 @@ package com.neosavvy.user.view.secured.projectManagement.assignments {
 
                     availableEmployees.dataProvider = _projectProxy.availableEmployees;
                     assignedEmployees.dataProvider = _projectProxy.assignedEmployees;
+
+                    break;
+
+                case ApplicationFacade.REQUEST_LOGOUT:
+
+                    availableEmployees.dataProvider = null;
+                    assignedEmployees.dataProvider = null;
 
                     break;
             }

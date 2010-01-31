@@ -45,8 +45,9 @@ package com.neosavvy.user.view.secured.welcome {
         override public function handleNotification(notification:INotification):void {
             switch (notification.getName()) {
                 case ApplicationFacade.USER_LOGIN_STARTUP_COMPLETE:
-                case ApplicationFacade.NAVIGATE_TO_WELCOME:
                     setTitle();
+                    break;
+                case ApplicationFacade.NAVIGATE_TO_WELCOME:
                     break;
             }
         }

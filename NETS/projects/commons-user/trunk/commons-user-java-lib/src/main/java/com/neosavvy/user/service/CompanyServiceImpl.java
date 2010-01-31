@@ -7,7 +7,8 @@ import com.neosavvy.user.dto.companyManagement.*;
 import com.neosavvy.user.service.exception.CompanyServiceException;
 import com.neosavvy.user.service.exception.UserServiceException;
 import com.neosavvy.util.StringUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.dao.DataAccessException;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
@@ -26,7 +27,7 @@ import java.util.Set;
 @Transactional
 public class CompanyServiceImpl implements CompanyService{
 
-    private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private CompanyDAO companyDao;
     private UserCompanyRoleDAO userCompanyRoleDao;
@@ -92,7 +93,7 @@ public class CompanyServiceImpl implements CompanyService{
         try {
             user.setRegistrationToken(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));
         } catch (UnsupportedEncodingException e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new UserServiceException("Unable to generate token for user: "+ user.toString(),e);
         }
 
@@ -165,7 +166,7 @@ public class CompanyServiceImpl implements CompanyService{
         try {
             userInvite.setRegistrationToken(StringUtil.getHash64(userInvite.toString() + System.currentTimeMillis() + ""));
         } catch (UnsupportedEncodingException e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new UserServiceException("Unable to generate token for user: " + userInvite.toString(), e);
         }
         final UserInviteDTO savedInvite = userInviteDao.saveUserInvite(userInvite);

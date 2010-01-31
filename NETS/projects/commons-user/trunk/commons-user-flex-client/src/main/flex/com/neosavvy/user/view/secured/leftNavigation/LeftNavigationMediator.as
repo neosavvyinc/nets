@@ -36,9 +36,10 @@ package com.neosavvy.user.view.secured.leftNavigation {
 
         override public function listNotificationInterests():Array {
             return [
-                ApplicationFacade.USER_LOGIN_SUCCESS,
-                ApplicationFacade.USER_LOGGED_IN,
-                ApplicationFacade.POST_SECURE_VIEW_PREP
+                ApplicationFacade.USER_LOGIN_SUCCESS
+                ,ApplicationFacade.USER_LOGGED_IN
+                ,ApplicationFacade.POST_SECURE_VIEW_PREP
+                ,ApplicationFacade.REQUEST_LOGOUT
             ];
         }
 
@@ -55,8 +56,11 @@ package com.neosavvy.user.view.secured.leftNavigation {
                             leftNavigation.addChildAt(removedAdminNavigation, 0);
                         }
                     } else {
-                        removedAdminNavigation = leftNavigation.removeChild(adminNavigation) as AdminNavigation;
+                        if ( leftNavigation.contains(adminNavigation) )
+                            removedAdminNavigation = leftNavigation.removeChild(adminNavigation) as AdminNavigation;
                     }
+                    break;
+                case ApplicationFacade.REQUEST_LOGOUT:
                     break;
             }
         }

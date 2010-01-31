@@ -54,7 +54,7 @@ package com.neosavvy.user.model {
         public function saveUser(param:UserDTO, responder:IResponder):void {
             var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             addCallbackHandler(userService, responder);
-            userService.saveUser(param);
+            userService.updateUser(param);
         }
 
         public function confirmUser(userName:String, hashCode:String, responder:IResponder):void {

@@ -10,7 +10,8 @@ import java.util.List;
 
 import com.neosavvy.user.service.exception.UserServiceException;
 import com.neosavvy.util.StringUtil;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -23,7 +24,7 @@ import org.springframework.util.Assert;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-    private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private UserDAO userDao;
 
@@ -46,7 +47,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<UserDTO> findUsers(UserDTO user) {
-        return userDao.findUsers(user);
+        List<UserDTO> userDTOList = userDao.findUsers(user);
+
+        return userDTOList;
     }
 
     public void deleteUser(UserDTO user) {
@@ -90,7 +93,7 @@ public class UserServiceImpl implements UserService {
         try {
             user.setPassword(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));
         } catch (UnsupportedEncodingException e) {
-            logger.error(e);
+            logger.error(e.toString());
             throw new UserServiceException("Unable to generate new password for user: "+ user.toString(),e);
         }
 

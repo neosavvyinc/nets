@@ -105,17 +105,28 @@ package com.neosavvy.user.view.secured.clientManagement {
 
         public function resetForm():void {
             clientManagement.companyName.text = null;
+            clientManagement.companyName.errorString = null;
             clientManagement.billingAddressOne.text = null;
+            clientManagement.billingAddressOne.errorString = null;
             clientManagement.billingAddressTwo.text = null;
+            clientManagement.billingAddressTwo.errorString = null;
             clientManagement.city.text = null;
+            clientManagement.city.errorString = null;
             clientManagement.zipCode.text = null;
+            clientManagement.zipCode.errorString = null;
             clientManagement.state.text = null;
+            clientManagement.state.errorString = null;
 
             clientManagement.firstName.text = null;
+            clientManagement.firstName.errorString = null;
             clientManagement.middleName.text = null;
+            clientManagement.middleName.errorString = null;
             clientManagement.lastName.text = null;
+            clientManagement.lastName.errorString = null;
             clientManagement.email.text = null;
+            clientManagement.email.errorString = null;
             clientManagement.phone.text = null;
+            clientManagement.phone.errorString = null;
         }
 
         override public function listNotificationInterests():Array {
@@ -123,6 +134,7 @@ package com.neosavvy.user.view.secured.clientManagement {
                 ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT
                 ,ApplicationFacade.SAVE_CLIENT_COMPANY_SUCCESS
                 ,ApplicationFacade.FIND_CLIENTS_FOR_PARENT_COMPANY_SUCCESS
+                ,ApplicationFacade.REQUEST_LOGOUT
             ];
         }
 
@@ -137,6 +149,9 @@ package com.neosavvy.user.view.secured.clientManagement {
                     break;
                 case ApplicationFacade.FIND_CLIENTS_FOR_PARENT_COMPANY_SUCCESS:
                     clientManagementGrid.dataProvider = _clientProxy.clientCompanies;
+                    break;
+                case ApplicationFacade.REQUEST_LOGOUT:
+                    resetForm();
                     break;
             }
 

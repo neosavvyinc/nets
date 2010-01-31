@@ -51,6 +51,7 @@ package com.neosavvy.user.view.secured.userManagement {
                 ,ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS
                 ,ApplicationFacade.ALL_EMPLOYEES_SUCCESS
                 ,ApplicationFacade.SAVE_USER_SUCCESS
+                ,ApplicationFacade.REQUEST_LOGOUT
             ];
         }
 
@@ -74,6 +75,9 @@ package com.neosavvy.user.view.secured.userManagement {
                     break;
                 case ApplicationFacade.SAVE_USER_SUCCESS:
                     refreshLastUserNotifcation();
+                    break;
+                case ApplicationFacade.REQUEST_LOGOUT:
+                    grid.dataProvider = null;
                     break;
 
             }

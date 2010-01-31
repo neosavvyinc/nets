@@ -49,6 +49,7 @@ package com.neosavvy.user.view.secured.employeeInvitation {
                 ,ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES
                 ,ApplicationFacade.INVITE_USER_TO_COMPANY_SUCCESS
                 ,ApplicationFacade.DELETE_USER_COMPANY_INVITE_SUCCESS
+                ,ApplicationFacade.REQUEST_LOGOUT
             ];
         }
 
@@ -65,6 +66,11 @@ package com.neosavvy.user.view.secured.employeeInvitation {
                     break;
                 case ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES:
                     sendNotification(ApplicationFacade.GET_INVITED_USERS_REQUEST);
+                    break;
+                case ApplicationFacade.REQUEST_LOGOUT:
+                    resetFormEntry();
+                    resetFormStylesAndErrors();
+                    grid.dataProvider = null;
                     break;
             }
         }

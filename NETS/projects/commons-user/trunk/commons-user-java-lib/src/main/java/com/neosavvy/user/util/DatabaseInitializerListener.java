@@ -1,6 +1,7 @@
 package com.neosavvy.user.util;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,7 +34,7 @@ import javax.sql.DataSource;
  */
 public class DatabaseInitializerListener implements InitializingBean {
 
-    public static Logger logger = Logger.getLogger(DatabaseInitializerListener.class);
+    public static Logger logger = LoggerFactory.getLogger(DatabaseInitializerListener.class);
 
     private JdbcTemplate template;
 
@@ -56,7 +57,7 @@ public class DatabaseInitializerListener implements InitializingBean {
             template.update("INSERT INTO ROLE(ID,LONG_NAME,SHORT_NAME) VALUES (nextval('role_id_seq'),?, ?)",new Object[]{"Administrator","ROLE_ADMIN"});
             template.update("INSERT INTO ROLE(ID,LONG_NAME,SHORT_NAME) VALUES (nextval('role_id_seq'),?, ?)",new Object[]{"Employee","ROLE_EMPLOYEE"});
         } catch (DataAccessException e) {
-            logger.error(e);
+            logger.error(e.toString());
         }
         
     }

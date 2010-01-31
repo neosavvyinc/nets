@@ -32,11 +32,14 @@ import flash.errors.IllegalOperationError;
         }
 
         protected function getServiceChannelSet():ChannelSet {
-            var channel:AMFChannel = new AMFChannel(ProxyConstants.channelName, ProxyConstants.url);
+            var channel:AMFChannel = new AMFChannel(ProxyConstants.channelName);
             var channelSet:ChannelSet = new ChannelSet();
             try {
                 if (HTTPUtil.getUrl().substring(0, 4) == 'http') {
                     var url:String = HTTPUtil.getProtocol() + '//' + HTTPUtil.getHostName() + ':' + (StringUtils.isEmpty(HTTPUtil.getPort()) ? '80' : HTTPUtil.getPort()) + contextRoot;
+                    channel.url = url + "/messagebroker/amf";
+                } else if(HTTPUtil.getUrl().substring(0, 4) == 'file') {
+                    var url:String = ProxyConstants.url + ProxyConstants.expenseContextRoot;
                     channel.url = url + "/messagebroker/amf";
                 }
 			}

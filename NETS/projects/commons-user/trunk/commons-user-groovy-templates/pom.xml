@@ -43,9 +43,9 @@
                         <phase>install</phase>
                         <configuration>
                             <tasks>
-                                <mkdir dir="/tmp/neosavvy"/>
+                                <mkdir dir="/nets/"/>
                                 <unzip src="${project.build.directory}/${project.artifactId}-${project.version}-resources.zip"
-                                       dest="/tmp/neosavvy"/>
+                                       dest="/nets/"/>
                             </tasks>
                         </configuration>
                         <goals>

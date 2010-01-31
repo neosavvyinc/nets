@@ -45,6 +45,8 @@ package com.neosavvy.user.view.secured {
                 ,ApplicationFacade.ALL_EMPLOYEES_SUCCESS
                 ,ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS
                 ,ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS
+
+                ,ApplicationFacade.REQUEST_LOGOUT
             ];
         }
 
@@ -66,6 +68,9 @@ package com.neosavvy.user.view.secured {
                 case ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS:
                 case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:
                     navigationViewStack.selectedIndex = NAV_INDEX_USER_MANAGEMENT;
+                    break;
+                case ApplicationFacade.REQUEST_LOGOUT:
+                    navigationViewStack.selectedIndex = NAV_INDEX_WELCOME;
                     break;
 
 

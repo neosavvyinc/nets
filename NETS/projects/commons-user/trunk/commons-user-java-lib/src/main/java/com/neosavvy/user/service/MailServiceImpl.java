@@ -7,7 +7,8 @@ import com.neosavvy.user.service.exception.MailServiceException;
 import com.neosavvy.user.service.exception.UserServiceException;
 import com.neosavvy.user.service.mail.DocumentGenerationException;
 import com.neosavvy.user.service.mail.DocumentGenerator;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
@@ -42,7 +43,7 @@ import java.util.Map;
  */
 public class MailServiceImpl implements MailService {
 
-    private static final Logger logger = Logger.getLogger(MailServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(MailServiceImpl.class);
 
     private MailSender mailSender;
     private DocumentGenerator docGenerator;

@@ -85,10 +85,15 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
 
         public function resetForm():void {
             manageProjects.startDate.selectedDate = null;
+            manageProjects.startDate.errorString = null;
             manageProjects.endDate.selectedDate = null;
+            manageProjects.endDate.errorString = null;
             manageProjects.projectName.text = null;
+            manageProjects.projectName.errorString = null;
             manageProjects.projectCode.text = null;
+            manageProjects.projectCode.errorString = null;
             manageProjects.ongoingProject.selected = false;
+            manageProjects.ongoingProject.errorString = null;
             clientSelectorDropdown.selectedIndex = 0;
         }
 
@@ -118,6 +123,11 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
                 case ApplicationFacade.SAVE_PROJECT_SUCCESS:
                     sendNotification(ApplicationFacade.GET_PROJECTS_FOR_COMPANY_REQUEST);
                     resetForm();
+                    break;
+                case ApplicationFacade.REQUEST_LOGOUT:
+                    resetForm();
+                    projectmanagementGrid.dataProvider = null;
+                    manageProjects.clientCompanies = null;
                     break;
             }
 

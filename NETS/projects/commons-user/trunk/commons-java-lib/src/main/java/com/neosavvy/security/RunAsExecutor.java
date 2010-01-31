@@ -19,7 +19,6 @@ import java.util.logging.Logger;
  * To change this template use File | Settings | File Templates.
  */
 public class RunAsExecutor {
-    private final static Logger logger = Logger.getLogger(RunAsExecutor.class.getCanonicalName());
 
     private String administratorUser;
     private String administratorPassword;

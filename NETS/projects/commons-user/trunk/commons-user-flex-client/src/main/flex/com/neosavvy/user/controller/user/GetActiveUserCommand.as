@@ -27,9 +27,15 @@ package com.neosavvy.user.controller.user {
         override protected function resultHandler(resultEvent:ResultEvent):void {
             LOGGER.debug("User retrieval for active user succeeded");
             var users:ArrayCollection = resultEvent.result as ArrayCollection;
-            var _activeUser:UserDTO = users.getItemAt(0) as UserDTO;
-            var userProxy:UserServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
-            userProxy.activeUser = _activeUser;
+            if( users != null && users.length == 1) {
+                var _activeUser:UserDTO = users.getItemAt(0) as UserDTO;
+                var userProxy:UserServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
+                userProxy.activeUser = _activeUser;
+            } else if(users != null && users.length > 1) {
+                LOGGER.debug("User retrieval returned more than one active user");
+            } else {
+                LOGGER.debug("User retrieval returned no active user");
+            }
         }
 
 
