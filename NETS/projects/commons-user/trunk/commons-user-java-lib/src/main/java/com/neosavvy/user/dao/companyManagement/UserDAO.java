@@ -6,6 +6,7 @@ import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.Project;
 
 import java.util.List;
+import java.util.Set;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL

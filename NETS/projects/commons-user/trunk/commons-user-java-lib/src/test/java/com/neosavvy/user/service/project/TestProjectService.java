@@ -10,9 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -40,7 +38,8 @@ import java.util.List;
 public class TestProjectService extends BaseProjectManagementServiceTest {
 
 
-    private Project project;
+    private Project p0;
+    private Project p1;
 
     @Before
     public void setupCommonData() {
@@ -59,26 +58,34 @@ public class TestProjectService extends BaseProjectManagementServiceTest {
 
         List<ClientCompany> clientCompanies = clientService.findClientsForParentCompany(testCompany);
 
-        Project p = new Project();
-        p.setCompany(testCompany);
-        p.setName("TestProject");
-        p.setStartDate(new Date());
-        p.setEndDate(new Date());
-        projectService.addProject(p,testCompany,clientCompanies.get(0));
+        Project p0 = new Project();
+        p0.setCompany(testCompany);
+        p0.setName("TestProject");
+        p0.setStartDate(new Date());
+        p0.setEndDate(new Date());
+        projectService.addProject(p0,testCompany,clientCompanies.get(0));
 
-        this.project = p;
+        Project p1 = new Project();
+        p1.setCompany(testCompany);
+        p1.setName("TestProject2");
+        p1.setStartDate(new Date());
+        p1.setEndDate(new Date());
+        projectService.addProject(p1,testCompany,clientCompanies.get(0));
+
+        this.p0 = p0;
+        this.p1 = p1;
     }
 
     @After
     public void tearDown() {
-        project = null;
+        p0 = null;
     }
 
     @Test
     public void testGetAssignedUsersForProjectWithNoneAssigned() {
         //should returned none
 
-        List<UserDTO> usersForProject = projectService.findAssignedUsersForProject(project);
+        List<UserDTO> usersForProject = projectService.findAssignedUsersForProject(p0);
 
         Assert.assertNotNull("The user list from the find method should not be null", usersForProject);
         Assert.assertEquals("There should be no assigned users at this time", 0, usersForProject.size());
@@ -90,7 +97,7 @@ public class TestProjectService extends BaseProjectManagementServiceTest {
     public void testGetAvailableUsersForProjectWithNoneAssigned() {
         //should return three users
 
-        List<UserDTO> availableUsers = projectService.findAvailableUsersForProject(project);
+        List<UserDTO> availableUsers = projectService.findAvailableUsersForProject(p0);
 
         Assert.assertNotNull("The available users list should not be null" , availableUsers);
         Assert.assertEquals("There should be 4 available users when none are assigned", availableUsers.size(), 4);
@@ -99,13 +106,13 @@ public class TestProjectService extends BaseProjectManagementServiceTest {
     @Test
     public void testGetAvailableUsersForProjectWithOneAssigned() {
 
-        List<UserDTO> availableUsers = projectService.findAvailableUsersForProject(project);
-        List<UserDTO> assignments = new ArrayList<UserDTO>();
+        List<UserDTO> availableUsers = projectService.findAvailableUsersForProject(p0);
+        List<UserDTO> assignments = new ArrayList();
         assignments.add(availableUsers.get(0));
 
-        projectService.saveProjectAssignments(project, assignments);
+        projectService.saveProjectAssignments(p0, assignments);
 
-        List<UserDTO> availableUsersAfterAssignments = projectService.findAvailableUsersForProject(project);
+        List<UserDTO> availableUsersAfterAssignments = projectService.findAvailableUsersForProject(p0);
         Assert.assertNotNull("The available users list should not be null" , availableUsersAfterAssignments);
         Assert.assertEquals("There should be 3 available users when 1 is assigned", availableUsersAfterAssignments.size(), 3);
     }
@@ -113,11 +120,13 @@ public class TestProjectService extends BaseProjectManagementServiceTest {
     @Test
     public void testGetAvailableUsersForProjectWithAllAssigned() {
 
-        List<UserDTO> availableUsers = projectService.findAvailableUsersForProject(project);
+        List<UserDTO> availableUsers = projectService.findAvailableUsersForProject(p0);
 
-        projectService.saveProjectAssignments(project, availableUsers);
+        List<UserDTO> assignedUsers = new ArrayList();
+        assignedUsers.addAll(availableUsers);
+        projectService.saveProjectAssignments(p0, assignedUsers);
 
-        List<UserDTO> availableUsersAfterAssignments = projectService.findAvailableUsersForProject(project);
+        List<UserDTO> availableUsersAfterAssignments = projectService.findAvailableUsersForProject(p0);
 
         Assert.assertNotNull("The available users list should not be null" , availableUsersAfterAssignments);
         Assert.assertEquals("There should be no available users when all are assigned", availableUsersAfterAssignments.size(), 0);
@@ -125,26 +134,59 @@ public class TestProjectService extends BaseProjectManagementServiceTest {
 
     @Test
     public void testGetAssignedUsersForProjectWithAllAssigned() {
-        List<UserDTO> availableUsers = projectService.findAvailableUsersForProject(project);
+        List<UserDTO> availableUsers = projectService.findAvailableUsersForProject(p0);
+        List<UserDTO> assignedUsers = new ArrayList();
+        assignedUsers.addAll(availableUsers);
+        projectService.saveProjectAssignments(p0, assignedUsers);
 
-        projectService.saveProjectAssignments(project, availableUsers);
+        List<UserDTO> assignedUsersAfterSave = projectService.findAssignedUsersForProject(p0);
 
-        List<UserDTO> assignedUsers = projectService.findAssignedUsersForProject(project);
-
-        Assert.assertNotNull("The assigned users list should not be null" , assignedUsers);
-        Assert.assertEquals("There should be 4 users assigned", assignedUsers.size(), 4);
+        Assert.assertNotNull("The assigned users list should not be null" , assignedUsersAfterSave);
+        Assert.assertEquals("There should be 4 users assigned", assignedUsersAfterSave.size(), 4);
     }
 
     @Test
     public void testGetAssignedUsersForProjectsWithOneAssigned() {
-        List<UserDTO> availableUsers = projectService.findAvailableUsersForProject(project);
+        List<UserDTO> availableUsers = projectService.findAvailableUsersForProject(p0);
         List<UserDTO> assignments = new ArrayList<UserDTO>();
         assignments.add(availableUsers.get(0));
 
-        projectService.saveProjectAssignments(project, assignments);
+        projectService.saveProjectAssignments(p0, assignments);
 
-        List<UserDTO> assignedUsers = projectService.findAssignedUsersForProject(project);
+        List<UserDTO> assignedUsers = projectService.findAssignedUsersForProject(p0);
         Assert.assertNotNull("The assigned users list should not be null" , assignedUsers);
         Assert.assertEquals("There should be 1 assigned users when 1 is assigned", assignedUsers.size(), 1);
+    }
+
+    @Test
+    public void testThreeUsersWithTwoProjects() {
+        List<UserDTO> p0availableUsers = projectService.findAvailableUsersForProject(p0);
+        List<UserDTO> p1availableUsers = projectService.findAvailableUsersForProject(p1);
+
+        Assert.assertNotNull("All users should be available for p0 thus should not be null",p0availableUsers);
+        Assert.assertNotNull("All users should be available for p1 thus should not be null",p1availableUsers);
+
+        Assert.assertEquals("There should be 3 availble users for p0",p0availableUsers.size(),4);
+        Assert.assertEquals("There should be 3 available users for p1", p1availableUsers.size(),4);
+
+        projectService.saveProjectAssignments(p0,p0availableUsers);
+        List<UserDTO> p0assignedUsers = projectService.findAssignedUsersForProject(p0);
+        Assert.assertEquals("There should be 3 assigned users to p0",4,p0assignedUsers.size());
+
+        List<UserDTO> p1availableUsersAfterP0Assignments = projectService.findAvailableUsersForProject(p1);
+        Assert.assertEquals("P0 assignments should not affect p1 availability",p1availableUsersAfterP0Assignments.size(),4);
+
+        UserDTO p1Assignment = p1availableUsersAfterP0Assignments.get(2);
+        List<UserDTO> p1Assignments = new ArrayList<UserDTO>();
+        p1Assignments.add(p1Assignment);
+        projectService.saveProjectAssignments(p1, p1Assignments);
+
+        List<UserDTO> p0availabilityAfterBothProjectsModified = projectService.findAvailableUsersForProject(p0);
+        List<UserDTO> p1availabilityAfterBothProjectsModified = projectService.findAvailableUsersForProject(p1);
+
+        Assert.assertEquals("Should be no availability on P0",p0availabilityAfterBothProjectsModified.size(),0);
+        Assert.assertEquals("Should be 3 available users on P1",p1availabilityAfterBothProjectsModified.size(),3);
+
+
     }
 }

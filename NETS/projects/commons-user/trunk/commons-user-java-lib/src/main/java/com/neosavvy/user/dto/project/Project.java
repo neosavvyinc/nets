@@ -65,15 +65,27 @@ public class Project extends BaseDTO implements SecuredObject<Project> {
     /**
      * These are the people who enter expenses
      */
-    @OneToMany
-    @JoinColumn(name="PARTICIPANTS_FK")
+    @ManyToMany
+    @JoinTable(
+        name="PROJECT_PARTICIPANTS",
+        joinColumns=
+            @JoinColumn(name="PROJECT_ID", referencedColumnName="ID"),
+        inverseJoinColumns=
+            @JoinColumn(name="USER_ID", referencedColumnName="ID")
+    )
     private List<UserDTO> participants;
 
     /**
      * These are the users who can approve expenses - this may need to change to be hierarchical
      */
-    @OneToMany
-    @JoinColumn(name="APPROVERS_FK")
+    @ManyToMany
+    @JoinTable(
+        name="PROJECT_APPROVERS",
+        joinColumns=
+            @JoinColumn(name="PROJECT_ID", referencedColumnName="ID"),
+        inverseJoinColumns=
+            @JoinColumn(name="USER_ID", referencedColumnName="ID")
+    )
     private List<UserDTO> approvers;
 
     /**
@@ -125,20 +137,20 @@ public class Project extends BaseDTO implements SecuredObject<Project> {
         this.company = company;
     }
 
-    public List<UserDTO> getParticipants() {
-        return participants;
-    }
-
-    public void setParticipants(List<UserDTO> participants) {
-        this.participants = participants;
-    }
-
     public List<UserDTO> getApprovers() {
         return approvers;
     }
 
     public void setApprovers(List<UserDTO> approvers) {
         this.approvers = approvers;
+    }
+
+    public List<UserDTO> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<UserDTO> participants) {
+        this.participants = participants;
     }
 
     public String getName() {
@@ -204,4 +216,6 @@ public class Project extends BaseDTO implements SecuredObject<Project> {
     public String getOwnerUsername() {
         return getCompany().getOwnerUsername();
     }
+
+
 }

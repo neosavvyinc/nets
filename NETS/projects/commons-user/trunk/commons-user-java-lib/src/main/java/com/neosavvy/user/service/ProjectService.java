@@ -7,6 +7,7 @@ import com.neosavvy.user.dto.project.Project;
 import org.springframework.security.annotation.Secured;
 
 import java.util.List;
+import java.util.Set;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL

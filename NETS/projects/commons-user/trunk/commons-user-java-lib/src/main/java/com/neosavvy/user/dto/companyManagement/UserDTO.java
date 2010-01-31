@@ -2,11 +2,13 @@ package com.neosavvy.user.dto.companyManagement;
 
 import com.neosavvy.security.SecuredObject;
 import com.neosavvy.user.dto.base.BaseUserDTO;
+import com.neosavvy.user.dto.project.Project;
 import fineline.focal.common.types.v1.EntityListenerManager;
 import flex.messaging.annotations.FlexClass;
 import flex.messaging.annotations.IAnnotatedProxy;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -44,6 +46,26 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
 
     @OneToMany(mappedBy="user", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
+
+    @ManyToMany
+    @JoinTable(
+        name="PROJECT_PARTICIPANTS",
+        joinColumns=
+             @JoinColumn(name="USER_ID", referencedColumnName="ID"),
+        inverseJoinColumns=
+            @JoinColumn(name="PROJECT_ID", referencedColumnName="ID")
+    )
+    private List<Project> participantOfProjects;
+
+    @ManyToMany
+    @JoinTable(
+        name="PROJECT_APPROVERS",
+        joinColumns=
+             @JoinColumn(name="USER_ID", referencedColumnName="ID"),
+        inverseJoinColumns=
+            @JoinColumn(name="PROJECT_ID", referencedColumnName="ID")
+    )
+    private List<Project> approversOfProjects;
 
     public Long getId() {
         return id;
@@ -119,6 +141,22 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
 
     public String getOwnerUsername() {
         return getUsername();
+    }
+
+    public List<Project> getApproversOfProjects() {
+        return approversOfProjects;
+    }
+
+    public void setApproversOfProjects(List<Project> approversOfProjects) {
+        this.approversOfProjects = approversOfProjects;
+    }
+
+    public List<Project> getParticipantOfProjects() {
+        return participantOfProjects;
+    }
+
+    public void setParticipantOfProjects(List<Project> participantOfProjects) {
+        this.participantOfProjects = participantOfProjects;
     }
 
     public UserDTO() {
