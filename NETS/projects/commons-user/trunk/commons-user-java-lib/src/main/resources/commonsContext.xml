@@ -10,7 +10,6 @@ http://www.springframework.org/schema/aop http://www.springframework.org/schema/
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
     <context:annotation-config/>
-    <context:load-time-weaver />
     <tx:annotation-driven />
     
     <bean id="runAsExecutor" class="com.neosavvy.security.RunAsExecutor">
