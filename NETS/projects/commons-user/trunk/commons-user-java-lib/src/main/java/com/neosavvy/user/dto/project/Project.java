@@ -51,14 +51,14 @@ public class Project extends BaseDTO implements SecuredObject<Project> {
     /**
      * This is the owning company of the project - for whom the project should be billed from
      */
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="PARENT_COMPANY_FK")
     private CompanyDTO company;
 
     /**
      * This is the client who will receive invoices for these expenses
      */
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="CLIENT_COMPANY_FK")
     private ClientCompany client;
 
@@ -117,8 +117,7 @@ public class Project extends BaseDTO implements SecuredObject<Project> {
     /**
      * A collection of all the expense reports
      */
-    @OneToMany
-    @JoinColumn(name="EXPENSE_REPORTS_FK")
+    @OneToMany(mappedBy="project")
     private List<ExpenseReport> expenseReports;
 
     public Long getId() {
