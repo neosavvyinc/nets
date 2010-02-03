@@ -40,10 +40,15 @@ public interface ProjectService {
     @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
     public List<Project> findProjectsForParentCompany(CompanyDTO company);
 
+    @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
     public List<UserDTO> findAvailableUsersForProject(Project project);
 
+    @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
     public List<UserDTO> findAssignedUsersForProject(Project project);
 
+    @Secured({"ROLE_ADMIN", "OBJECT_ACL_WRITE"})
     public void saveProjectAssignments(Project project, List<UserDTO> assignedUsers);
 
+    @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
+    List<Project> findProjectsForUser(UserDTO user);
 }

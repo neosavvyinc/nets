@@ -8,6 +8,7 @@ import com.neosavvy.user.util.ProjectTestUtil;
 import junit.framework.Assert;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.*;
@@ -43,6 +44,7 @@ public class TestProjectService extends BaseProjectManagementServiceTest {
 
     @Before
     public void setupCommonData() {
+        super.setup();
         setupAsAdminUser();
         // add a company so that the parent relationship can be established
         CompanyDTO testCompany = saveTestCompanyForParent();
@@ -186,6 +188,29 @@ public class TestProjectService extends BaseProjectManagementServiceTest {
 
         Assert.assertEquals("Should be no availability on P0",p0availabilityAfterBothProjectsModified.size(),0);
         Assert.assertEquals("Should be 3 available users on P1",p1availabilityAfterBothProjectsModified.size(),3);
+
+    }
+
+    @Test
+    @Ignore
+    public void testFindProjectsForCompanyAndUser() {
+
+        UserDTO user = ProjectTestUtil.createAltTestUser();
+
+        List<Project> projectsForUser = projectService.findProjectsForUser(user);
+
+        Assert.assertNotNull("There should be no projects set for the user at this point.",projectsForUser);
+        Assert.assertEquals("There should be a 0 length arraylist at this point",0,projectsForUser.size());
+
+        List<UserDTO> users = userService.findUsers(user);
+
+        projectService.saveProjectAssignments(p0,users);
+        projectService.saveProjectAssignments(p1,users);
+
+        List<Project> projectsForUserAfterAssignments = projectService.findProjectsForUser(user);
+
+        Assert.assertNotNull("There should be a non null return after assigning the project to a user", projectsForUserAfterAssignments);
+        Assert.assertEquals("There should be two assigned projects to this user", 2, projectsForUserAfterAssignments.size());
 
 
     }

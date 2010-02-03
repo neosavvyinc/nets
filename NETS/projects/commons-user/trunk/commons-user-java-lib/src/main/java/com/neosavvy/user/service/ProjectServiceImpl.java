@@ -105,6 +105,20 @@ public class ProjectServiceImpl implements ProjectService {
         projectDAO.save(project);
     }
 
+    public List<Project> findProjectsForUser(UserDTO user) {
+        List<UserDTO> users = userDAO.findUsers(user);
+        if( users == null || users.size() == 0) {
+            throw new ProjectServiceException("Could not find the user specified: " + user.toString());
+        }
+        if( users.size() > 1 ) {
+            throw new ProjectServiceException("Found more than one user for the user specified: " + user.toString());
+        }
+
+        UserDTO attachedUser = users.get(0);
+
+        return attachedUser.getParticipantOfProjects();        
+    }
+
     public ProjectDAO getProjectDAO() {
         return projectDAO;
     }

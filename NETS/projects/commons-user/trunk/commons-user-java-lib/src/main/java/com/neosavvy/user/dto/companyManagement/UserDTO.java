@@ -5,6 +5,7 @@ import com.neosavvy.user.dto.base.BaseUserDTO;
 import com.neosavvy.user.dto.project.Project;
 import fineline.focal.common.types.v1.EntityListenerManager;
 import flex.messaging.annotations.FlexClass;
+import flex.messaging.annotations.FlexField;
 import flex.messaging.annotations.IAnnotatedProxy;
 
 import javax.persistence.*;
@@ -143,6 +144,7 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
         return getUsername();
     }
 
+    @FlexField(fieldType = FlexField.FlexFieldType.Excluded)
     public List<Project> getApproversOfProjects() {
         return approversOfProjects;
     }
@@ -151,6 +153,7 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
         this.approversOfProjects = approversOfProjects;
     }
 
+    @FlexField(fieldType = FlexField.FlexFieldType.Excluded)
     public List<Project> getParticipantOfProjects() {
         return participantOfProjects;
     }
@@ -162,6 +165,8 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
     public UserDTO() {
         super();
     }
+
+    
 
     
 }
