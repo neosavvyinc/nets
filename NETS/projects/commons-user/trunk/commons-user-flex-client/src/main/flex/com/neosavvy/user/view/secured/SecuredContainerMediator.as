@@ -17,11 +17,16 @@ package com.neosavvy.user.view.secured {
             super(NAME, viewComponent);
         }
 
-        public static const NAV_INDEX_WELCOME:Number = 0;
-        public static const NAV_INDEX_INVITE_EMPLOYEES:Number = 1;
-        public static const NAV_INDEX_USER_MANAGEMENT:Number = 2;
-        public static const NAV_INDEX_CLIENT_MANAGEMENT:Number = 3;
-        public static const NAV_INDEX_PROJECT_MANAGEMENT:Number = 4;
+        public static const NAV_INDEX_WELCOME:Number                = 0;
+        public static const NAV_INDEX_INVITE_EMPLOYEES:Number       = 1;
+        public static const NAV_INDEX_USER_MANAGEMENT:Number        = 2;
+        public static const NAV_INDEX_CLIENT_MANAGEMENT:Number      = 3;
+        public static const NAV_INDEX_PROJECT_MANAGEMENT:Number     = 4;
+
+        public static const NAV_INDEX_CREATE_EXPENSE_REPORT:Number  = 5;
+        public static const NAV_INDEX_VIEW_OPEN_EXPENSES:Number     = 6;
+        public static const NAV_INDEX_VIEW_APPROVED_EXPENSES:Number = 7;
+        public static const NAV_INDEX_RECONCILE_EXPENSES:Number     = 8;
 
         override public function onRegister():void {
         }
@@ -46,6 +51,11 @@ package com.neosavvy.user.view.secured {
                 ,ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS
                 ,ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS
 
+                ,ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT
+                ,ApplicationFacade.NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS
+                ,ApplicationFacade.NAVIGATE_TO_VIEW_APPROVED_EXPENSE_REPORTS
+                ,ApplicationFacade.NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS
+
                 ,ApplicationFacade.REQUEST_LOGOUT
             ];
         }
@@ -64,14 +74,31 @@ package com.neosavvy.user.view.secured {
                 case ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT:
                     navigationViewStack.selectedIndex = NAV_INDEX_PROJECT_MANAGEMENT;
                     break;
+                case ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT:
+                    navigationViewStack.selectedIndex = NAV_INDEX_CREATE_EXPENSE_REPORT;
+                    break;
+                case ApplicationFacade.NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS:
+                    navigationViewStack.selectedIndex = NAV_INDEX_VIEW_OPEN_EXPENSES;
+                    break;
+
+                case ApplicationFacade.NAVIGATE_TO_VIEW_APPROVED_EXPENSE_REPORTS:
+                    navigationViewStack.selectedIndex = NAV_INDEX_VIEW_APPROVED_EXPENSES;
+                    break;
+                case ApplicationFacade.NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS:
+                    navigationViewStack.selectedIndex = NAV_INDEX_RECONCILE_EXPENSES;
+                    break;                
+
                 case ApplicationFacade.ALL_EMPLOYEES_SUCCESS:
                 case ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS:
                 case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:
                     navigationViewStack.selectedIndex = NAV_INDEX_USER_MANAGEMENT;
                     break;
+
                 case ApplicationFacade.REQUEST_LOGOUT:
                     navigationViewStack.selectedIndex = NAV_INDEX_WELCOME;
                     break;
+
+
 
 
             }

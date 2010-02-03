@@ -1,6 +1,7 @@
 package com.neosavvy.user {
     public class ProxyConstants {
 
+
         /**
          * Set this variable to true if not running within the context
          * of a WAR file such as locally to a remote service or from a
@@ -12,7 +13,7 @@ package com.neosavvy.user {
          * Change this variable to point to an environment
          */
         public static var url:String = LOCAL;
-        public static var expenseContextRoot:String = CONTEXT_ROOT_APACHE;
+        public static var expenseContextRoot:String = CONTEXT_ROOT_GLASSFISH;
 
         /**
          * Potential URLs for runtime environments

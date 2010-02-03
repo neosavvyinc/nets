@@ -174,6 +174,11 @@ package com.neosavvy.user {
         public static const NAVIGATE_TO_PROJECT_MANAGEMENT:String = "navigateToProjectManagement";
         public static const NAVIGATE_TO_CLIENT_MANAGEMENT:String = "navigateToClientManagement";
 
+        public static const NAVIGATE_TO_CREATE_EXPENSE_REPORT:String = "navigateToCreateExpenseReport";
+        public static const NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS:String = "navigateToViewOpenExpenses";
+        public static const NAVIGATE_TO_VIEW_APPROVED_EXPENSE_REPORTS:String = "navigateToViewSubmittedExpenseReports";
+        public static const NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS:String = "navigateToReconcileExpenseReports";
+
         public static const GET_INVITED_USERS_REQUEST:String = "getInvitedUsersRequest";
         public static const GET_INVITED_USERS_FAILED:String = "getInvitedUsersFailed";
         public static const GET_INVITED_USERS_SUCCESS:String = "getInvitedUsersSuccess";

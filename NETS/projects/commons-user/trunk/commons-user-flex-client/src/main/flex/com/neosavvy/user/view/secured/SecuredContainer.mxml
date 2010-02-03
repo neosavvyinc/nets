@@ -6,7 +6,11 @@
          xmlns:employeeInvitation="com.neosavvy.user.view.secured.employeeInvitation.*"
          xmlns:welcome="com.neosavvy.user.view.secured.welcome.*"
          xmlns:clientManagement="com.neosavvy.user.view.secured.clientManagement.*"
-         xmlns:projectManagement="com.neosavvy.user.view.secured.projectManagement.*">
+         xmlns:projectManagement="com.neosavvy.user.view.secured.projectManagement.*"
+         xmlns:report="com.neosavvy.user.view.secured.expenses.report.*"
+         xmlns:open="com.neosavvy.user.view.secured.expenses.open.*"
+         xmlns:approved="com.neosavvy.user.view.secured.expenses.approved.*"
+         xmlns:reconcile="com.neosavvy.user.view.secured.expenses.reconcile.*">
 
     <mx:HDividedBox width="100%" height="100%">
 
@@ -19,6 +23,11 @@
             <userManagement:UserManagement id="userManagement" width="100%" height="100%"/>
             <clientManagement:ClientManagement id="clientManagement" width="100%" height="100%"/>
             <projectManagement:ProjectManagement id="projectManagement" width="100%" height="100%"/>
+
+            <report:ExpenseReportDetail id="expenseReportDetail" width="100%" height="100%"/>
+            <open:OpenExpenseReport id="openExpenseReportDetail" width="100%" height="100%"/>
+            <approved:ApprovedExpenseReport id="approvedExpenseReports" width="100%" height="100%"/>
+            <reconcile:ReconcileExpenseReport id="reconcileExpenseReports" width="100%" height="100%"/>
         </mx:ViewStack>
 
     </mx:HDividedBox>
