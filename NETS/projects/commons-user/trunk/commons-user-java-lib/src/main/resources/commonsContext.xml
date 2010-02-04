@@ -56,6 +56,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean id="projectService" class="com.neosavvy.user.service.ProjectServiceImpl">
         <property name="projectDAO" ref="projectDAO"/>
         <property name="userDAO" ref="userDAO"/>
+        <property name="aclSecurityUtil" ref="aclSecurityUtil" />
+        <property name="adminExecutor" ref="runAsExecutor" />
     </bean>
 
     <bean id="mailService" class="com.neosavvy.user.service.MailServiceImpl">

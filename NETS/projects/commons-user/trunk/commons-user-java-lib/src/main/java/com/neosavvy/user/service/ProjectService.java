@@ -49,6 +49,6 @@ public interface ProjectService {
     @Secured({"ROLE_ADMIN", "OBJECT_ACL_WRITE"})
     public void saveProjectAssignments(Project project, List<UserDTO> assignedUsers);
 
-    @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
+    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
     List<Project> findProjectsForUser(UserDTO user);
 }

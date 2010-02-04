@@ -1,5 +1,7 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.security.AclSecurityUtil;
+import com.neosavvy.security.RunAsExecutor;
 import com.neosavvy.user.dao.companyManagement.UserDAO;
 import com.neosavvy.user.dao.project.ProjectDAO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
@@ -7,8 +9,12 @@ import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
 import com.neosavvy.user.service.exception.ProjectServiceException;
+import org.springframework.security.acls.domain.BasePermission;
+import org.springframework.security.acls.sid.PrincipalSid;
+import org.springframework.security.acls.sid.Sid;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 /*************************************************************************
@@ -39,8 +45,9 @@ import java.util.Set;
 public class ProjectServiceImpl implements ProjectService {
 
     private ProjectDAO projectDAO;
-
     private UserDAO userDAO;
+    private RunAsExecutor adminExecutor;
+    private AclSecurityUtil aclSecurityUtil;
 
 
     public void addProject(Project project, CompanyDTO company, ClientCompany clientCompany) {
@@ -96,13 +103,43 @@ public class ProjectServiceImpl implements ProjectService {
         return userDAO.findAvailableUsersForProject(attachedProject);
     }
 
-    public void saveProjectAssignments(Project project, List<UserDTO> assignedUsers) {
+    public void saveProjectAssignments(Project project, final List<UserDTO> assignedUsers) {
         if (project == null) {
             throw new ProjectServiceException("Must supply a project to assign users to it");
         }
 
+        final List<UserDTO> originalUsers = findAssignedUsersForProject(project);
+
         project.setParticipants(assignedUsers);
-        projectDAO.save(project);
+        final Project savedProject = projectDAO.save(project);
+
+        // we have to add the company permissions here because the admin user role didn't exist
+        // when we persisted the company
+        adminExecutor.runAsAdmin(new Runnable() {
+            public void run() {
+                List<UserDTO> usersToRemove = new ArrayList<UserDTO>(originalUsers);
+                List<UserDTO> usersToAdd = new ArrayList<UserDTO>(assignedUsers);
+
+                for (UserDTO assignedUser : assignedUsers) {
+                    for (UserDTO originalUser : originalUsers) {
+                        if (originalUser.equals(assignedUsers)) {
+                            usersToAdd.remove(assignedUser);
+                            usersToRemove.remove(originalUser);
+                        }
+                    }
+                }
+
+                for (UserDTO user : usersToRemove) {
+                    Sid sid = new PrincipalSid(user.getUsername());
+                    aclSecurityUtil.deletePermission(savedProject, sid, BasePermission.READ, Project.class);
+                }
+
+                for (UserDTO user : usersToAdd) {
+                    Sid sid = new PrincipalSid(user.getUsername());
+                    aclSecurityUtil.addPermission(savedProject, sid, BasePermission.READ, Project.class);
+                }
+            }
+        });
     }
 
     public List<Project> findProjectsForUser(UserDTO user) {
@@ -115,8 +152,9 @@ public class ProjectServiceImpl implements ProjectService {
         }
 
         UserDTO attachedUser = users.get(0);
-
-        return attachedUser.getParticipantOfProjects();        
+        userDAO.refreshUser(attachedUser);
+        List<Project> projects = attachedUser.getParticipantOfProjects();
+        return projects;
     }
 
     public ProjectDAO getProjectDAO() {
@@ -135,4 +173,19 @@ public class ProjectServiceImpl implements ProjectService {
         this.userDAO = userDAO;
     }
 
+    public RunAsExecutor getAdminExecutor() {
+        return adminExecutor;
+    }
+
+    public void setAdminExecutor(RunAsExecutor adminExecutor) {
+        this.adminExecutor = adminExecutor;
+    }
+
+    public AclSecurityUtil getAclSecurityUtil() {
+        return aclSecurityUtil;
+    }
+
+    public void setAclSecurityUtil(AclSecurityUtil aclSecurityUtil) {
+        this.aclSecurityUtil = aclSecurityUtil;
+    }
 }

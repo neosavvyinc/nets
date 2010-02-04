@@ -48,24 +48,10 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
     @OneToMany(mappedBy="user", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
 
-    @ManyToMany
-    @JoinTable(
-        name="PROJECT_PARTICIPANTS",
-        joinColumns=
-             @JoinColumn(name="USER_ID", referencedColumnName="ID"),
-        inverseJoinColumns=
-            @JoinColumn(name="PROJECT_ID", referencedColumnName="ID")
-    )
+    @ManyToMany(mappedBy="participants", fetch=FetchType.EAGER)
     private List<Project> participantOfProjects;
 
-    @ManyToMany
-    @JoinTable(
-        name="PROJECT_APPROVERS",
-        joinColumns=
-             @JoinColumn(name="USER_ID", referencedColumnName="ID"),
-        inverseJoinColumns=
-            @JoinColumn(name="PROJECT_ID", referencedColumnName="ID")
-    )
+    @ManyToMany(mappedBy="approvers")
     private List<Project> approversOfProjects;
 
     public Long getId() {

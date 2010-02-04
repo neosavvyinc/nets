@@ -192,7 +192,6 @@ public class TestProjectService extends BaseProjectManagementServiceTest {
     }
 
     @Test
-    @Ignore
     public void testFindProjectsForCompanyAndUser() {
 
         UserDTO user = ProjectTestUtil.createAltTestUser();
