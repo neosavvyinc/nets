@@ -1,6 +1,7 @@
 package com.neosavvy.user.model {
     import com.neosavvy.user.ProxyConstants;
     import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.dto.project.ClientCompany;
     import com.neosavvy.user.dto.project.Project;
 
@@ -58,7 +59,6 @@ package com.neosavvy.user.model {
             projectService.addProject(project, company, clientCompany);
         }
 
-
         public function findProjectsForCompany(company:CompanyDTO, responder:IResponder):void {
             var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);
             addCallbackHandler(projectService, responder);
@@ -71,18 +71,22 @@ package com.neosavvy.user.model {
             projectService.findAvailableUsersForProject(project);
         }
 
-
         public function findAssignedUsersForProject(project:Project, responder:IResponder):void {
             var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);
             addCallbackHandler(projectService, responder);
             projectService.findAssignedUsersForProject(project);
         }
 
-
         public function saveProjectAssignments(project:Project, assignments:ArrayCollection, responder:IResponder):void {
             var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);
             addCallbackHandler(projectService, responder);
             projectService.saveProjectAssignments(project, assignments);
+        }
+
+        public function findProjectsForUser(activeUser:UserDTO, responder:IResponder):void {
+            var projectService:RemoteObject = getService(ProxyConstants.projectServiceDestiation);
+            addCallbackHandler(projectService, responder);
+            projectService.findProjectsForUser(activeUser);
         }
     }
 }

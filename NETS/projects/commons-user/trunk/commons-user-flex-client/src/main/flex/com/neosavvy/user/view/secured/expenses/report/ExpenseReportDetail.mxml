@@ -1,11 +1,78 @@
 <?xml version="1.0"?>
 <mx:Panel
     xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:flexlib="http://code.google.com/p/flexlib/"
     width="100%"
     height="100%"
     styleName="paddedContainer"
     horizontalAlign="right"
     title="Create/Edit Expense Report">
 
+    <mx:HBox width="100%" horizontalAlign="right">
+        <mx:Form id="expenseReportSummaryForm" width="100%">
+            <mx:FormItem id="projectFormItem" label="Project:">
+                <mx:ComboBox id="availableProjectsCmb" prompt="Select Project..." labelField="name"/>
+            </mx:FormItem>
+            <mx:FormItem id="purposeFormItem" label="Purpose:">
+                <flexlib:PromptingTextInput prompt="Enter Purpose Here..." id="purposeTextInput"/>
+            </mx:FormItem>
+            <mx:FormItem id="locationFormItem" label="Location:">
+                <flexlib:PromptingTextInput prompt="Enter Location Here..." id="locationTextInput"/>
+            </mx:FormItem>
+        </mx:Form>
+        <mx:Button id="deleteButton" label="Delete"/>
+        <mx:Button id="saveButton" label="Save"/>
+    </mx:HBox>
+    <mx:VDividedBox width="100%" height="100%">
+        <mx:AdvancedDataGrid id="expenseReportGrid" width="100%" height="50%">
+            <mx:columns>
+                <mx:AdvancedDataGridColumn
+                        id="dateColumn"
+                        headerText="Date"
+                        dataField="date"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="expenseTypeColumn"
+                        headerText="Expense Type"
+                        dataField="expenseType"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="amountColumn"
+                        headerText="Amount"
+                        dataField="amount"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="paymentMethodColumn"
+                        headerText="Payment Method"
+                        dataField="paymentMethod"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="projectTypeColumn"
+                        headerText="Project Type"
+                        dataField="projectType"
+                        />
+            </mx:columns>
+        </mx:AdvancedDataGrid>
+        <mx:HBox horizontalAlign="right" width="100%" height="50%">
+            <mx:Form id="expenseItemEntryForm" width="100%" height="100%">
+                <mx:FormItem id="expenseDateFormItem" label="Date:">
+                    <mx:DateField id="expenseDatePicker"/>
+                </mx:FormItem>
+                <mx:FormItem id="expenseType" label="Expense Type:">
+                    <mx:ComboBox id="expenseTypeCmb" prompt="Select Expense Type..."/>
+                </mx:FormItem>
+                <mx:FormItem id="amountFormItem" label="Amount:">
+                    <flexlib:PromptingTextInput id="amountInput" prompt="$0.00"/>
+                </mx:FormItem>
+                <mx:FormItem id="paymentMethodFormItem" label="Payment Method:">
+                    <mx:ComboBox id="paymentMethodCmb" prompt="Select Payment Method..."/>
+                </mx:FormItem>
+                <mx:FormItem id="projectTypeFormItem" label="Project Type:">
+                    <mx:ComboBox id="projectTypeCmb" prompt="Select Project Type..."/>
+                </mx:FormItem>
+            </mx:Form>
+            <mx:Button id="addExpenseItem" label="Add Expense Item"/>
+        </mx:HBox>
+    </mx:VDividedBox>
 
 </mx:Panel>

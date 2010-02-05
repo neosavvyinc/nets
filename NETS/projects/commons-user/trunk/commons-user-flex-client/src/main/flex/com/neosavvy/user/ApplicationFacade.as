@@ -13,6 +13,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.company.InviteUsersToCompanyCommand;
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
     import com.neosavvy.user.controller.company.SendUserInviteCommand;
+    import com.neosavvy.user.controller.expenses.report.InitializeExpenseReportView;
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
     import com.neosavvy.user.controller.project.GetAvailableUsersForProject;
     import com.neosavvy.user.controller.project.GetProjectsForCompany;
@@ -93,7 +94,9 @@ package com.neosavvy.user {
             registerCommand(GET_AVAILABLE_USERS_FOR_PROJECT_REQUEST, GetAvailableUsersForProject);
 
             registerCommand(SAVE_PROJECT_ASSIGNMENTS_REQUEST, SaveProjectAssignments);
-            registerCommand(SAVE_PROJECT_ASSIGNMENTS_CHAIN_START, SaveAssignmentsForProjectChain)
+            registerCommand(SAVE_PROJECT_ASSIGNMENTS_CHAIN_START, SaveAssignmentsForProjectChain);
+
+            registerCommand(INITIALIZE_EXPENSE_REPORT_VIEW, InitializeExpenseReportView);
 
         }
 
@@ -247,5 +250,11 @@ package com.neosavvy.user {
         public static const SAVE_PROJECT_ASSIGNMENTS_FAILED:String = "saveProjectAssignmentsFailed";
         public static const SAVE_PROJECT_ASSIGNMENTS_CHAIN_COMPLETE:String = "saveProjectAssignmentsChainComplte";
 
+        public static const GET_PROJECTS_FOR_USER_SUCCESS:String = "getProjectsForUserSuccess";
+        public static const GET_PROJECTS_FOR_USER_FAILURE:String = "getProjectsForUserFailure";
+        public static const GET_PROJECTS_FOR_USER_REQUEST:String = "getProjectsForUserRequest";
+
+        public static const INITIALIZE_EXPENSE_REPORT_VIEW_COMPLETE:String = "initializeExpenseReportViewComplete";
+        public static const INITIALIZE_EXPENSE_REPORT_VIEW:String = "initializeExpenseReportView";
     }
 }
