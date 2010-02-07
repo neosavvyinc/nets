@@ -37,4 +37,12 @@ import javax.persistence.UniqueConstraint;
 )
 @DiscriminatorValue("STANDARD_EXPENSE_ITEM_TYPE")
 public class StandardExpenseItemType extends ExpenseItemType {
+
+    public StandardExpenseItemType() {
+        super();
+    }
+
+    public StandardExpenseItemType(String name, String description) {
+        super(name,description);
+    }
 }

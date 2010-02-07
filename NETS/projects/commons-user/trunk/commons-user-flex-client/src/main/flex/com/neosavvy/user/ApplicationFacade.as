@@ -13,7 +13,12 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.company.InviteUsersToCompanyCommand;
     import com.neosavvy.user.controller.company.SaveCompanyCommand;
     import com.neosavvy.user.controller.company.SendUserInviteCommand;
-    import com.neosavvy.user.controller.expenses.report.InitializeExpenseReportView;
+    import com.neosavvy.user.controller.expenses.report.init.FindExpenseTypes;
+    import com.neosavvy.user.controller.expenses.report.init.FindPaymentMethods;
+    import com.neosavvy.user.controller.expenses.report.init.FindProjectTypes;
+    import com.neosavvy.user.controller.expenses.report.init.InitializeExpenseReportView;
+    import com.neosavvy.user.controller.expenses.report.save.FindExpenseReport;
+    import com.neosavvy.user.controller.expenses.report.save.SaveExpenseReport;
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
     import com.neosavvy.user.controller.project.GetAvailableUsersForProject;
     import com.neosavvy.user.controller.project.GetProjectsForCompany;
@@ -97,6 +102,11 @@ package com.neosavvy.user {
             registerCommand(SAVE_PROJECT_ASSIGNMENTS_CHAIN_START, SaveAssignmentsForProjectChain);
 
             registerCommand(INITIALIZE_EXPENSE_REPORT_VIEW, InitializeExpenseReportView);
+            registerCommand(SAVE_EXPENSE_REPORT_REQUEST, SaveExpenseReport);
+            registerCommand(FIND_EXPENSE_REPORT_REQUEST, FindExpenseReport);
+            registerCommand(FIND_EXPENSE_ITEM_TYPES_REQUEST, FindExpenseTypes);
+            registerCommand(FIND_PAYMENT_METHODS_REQUEST, FindPaymentMethods);
+            registerCommand(FIND_PROJECT_TYPES_REQUEST, FindProjectTypes);
 
         }
 
@@ -256,5 +266,25 @@ package com.neosavvy.user {
 
         public static const INITIALIZE_EXPENSE_REPORT_VIEW_COMPLETE:String = "initializeExpenseReportViewComplete";
         public static const INITIALIZE_EXPENSE_REPORT_VIEW:String = "initializeExpenseReportView";
+
+        public static const SAVE_EXPENSE_REPORT_REQUEST:String = "saveExpenseReportRequest";
+        public static const SAVE_EXPENSE_REPORT_SUCCESS:String = "saveExpenseReportSuccess";
+        public static const SAVE_EXPENSE_REPORT_FAILURE:String = "saveExpenseReportFailure";
+
+        public static const FIND_EXPENSE_REPORT_REQUEST:String = "findExpenseReportRequest";
+        public static const FIND_EXPENSE_REPORT_SUCCESS:String = "findExpenseReportSuccess";
+        public static const FIND_EXPENSE_REPORT_FAILURE:String = "findExpenseReportFailure";
+
+        public static const FIND_PAYMENT_METHODS_REQUEST:String = "findPaymentMethodsRequest";
+        public static const FIND_PAYMENT_METHODS_SUCCESS:String = "findPaymentMethodsSuccess";
+        public static const FIND_PAYMENT_METHODS_FAILURE:String = "findPaymentMethodsFailure";
+
+        public static const FIND_EXPENSE_ITEM_TYPES_REQUEST:String = "findExpenseItemTypesRequest";
+        public static const FIND_EXPENSE_ITEM_TYPES_SUCCESS:String = "findExpenseItemTypesSuccess";
+        public static const FIND_EXPENSE_ITEM_TYPES_FAILURE:String = "findExpenseItemTypesFailure";
+
+        public static const FIND_PROJECT_TYPES_REQUEST:String = "findProjectTypesRequest";
+        public static const FIND_PROJECT_TYPES_SUCCESS:String = "findProjectTypesSuccess";
+        public static const FIND_PROJECT_TYPES_FAILURE:String = "findProjectTypesFailure";
     }
 }

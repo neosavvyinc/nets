@@ -10,6 +10,8 @@ package com.neosavvy.user.dto.base;
 public abstract class BaseDTO {
     public abstract Long getId();
 
+    protected BaseDTO() {}
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

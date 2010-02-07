@@ -1,4 +1,4 @@
-package com.neosavvy.user.controller.expenses.report {
+package com.neosavvy.user.controller.expenses.report.init {
     import com.neosavvy.user.ApplicationFacade;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

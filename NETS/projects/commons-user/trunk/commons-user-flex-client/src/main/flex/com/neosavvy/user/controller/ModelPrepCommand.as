@@ -1,6 +1,7 @@
 package com.neosavvy.user.controller {
     import com.neosavvy.user.model.ClientServiceProxy;
     import com.neosavvy.user.model.CompanyServiceProxy;
+    import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
     import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.model.UserServiceProxy;
@@ -16,6 +17,7 @@ package com.neosavvy.user.controller {
             facade.registerProxy(new CompanyServiceProxy());
             facade.registerProxy(new ClientServiceProxy());
             facade.registerProxy(new ProjectServiceProxy());
+            facade.registerProxy(new ExpenseReportServiceProxy());
         }
     }
 }

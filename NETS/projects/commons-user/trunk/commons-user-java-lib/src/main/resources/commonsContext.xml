@@ -60,6 +60,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="adminExecutor" ref="runAsExecutor" />
     </bean>
 
+    <bean id="expenseReportService" class="com.neosavvy.user.service.MockExpenseServiceImpl">
+    </bean>
+
     <bean id="mailService" class="com.neosavvy.user.service.MailServiceImpl">
         <property name="mailSender" ref="focalJavaMailSender"/>
         <property name="docGenerator" ref="docGenerator"/>

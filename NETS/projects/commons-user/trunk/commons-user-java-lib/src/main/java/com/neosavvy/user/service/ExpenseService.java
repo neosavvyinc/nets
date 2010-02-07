@@ -1,9 +1,10 @@
-package com.neosavvy.user.dto.project;
+package com.neosavvy.user.service;
 
-import javax.persistence.DiscriminatorValue;
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import com.neosavvy.user.dto.companyManagement.UserDTO;
+import com.neosavvy.user.dto.project.*;
+
+import java.util.ArrayList;
+import java.util.List;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -25,25 +26,23 @@ import javax.persistence.UniqueConstraint;
 
 /**
  * User: adamparrish
- * Date: Jan 2, 2010
- * Time: 1:49:07 PM
+ * Date: Feb 6, 2010
+ * Time: 9:55:58 AM
  */
-@Entity
-@Table(
-    name="STANDARD_PAYMENT_METHOD" ,
-    uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"ID"})
-    }
-)
-@DiscriminatorValue(value = "STANDARD")
-public class StandardPaymentMethod extends PaymentMethod {
-
-    public StandardPaymentMethod() {
-        super();
-    }
-
-    public StandardPaymentMethod(Long id, String name, String description) {
-        super(name, description, id);
-    }
+public interface ExpenseService {
     
+    public Long saveExpenseReport(Project p, ExpenseReport report, List<ExpenseItem> expenseItems);
+
+    public void deleteExpenseReport(ExpenseReport report);
+
+    public ExpenseReport findExpenseReportById(Long id);
+    
+    public List<ExpenseReport> findExpenseReportsForUser(UserDTO user);
+
+    public List<PaymentMethod> findPaymentMethods();
+
+    public List<ExpenseItemType> findExpenseItemTypes();
+
+    public List<ProjectType> findProjectTypes();
+
 }

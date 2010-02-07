@@ -71,6 +71,15 @@ public class AttributeDescriptor extends BaseDTO {
     @Column(name="PRECISION")
     private int precision = 2;
 
+    public AttributeDescriptor(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public AttributeDescriptor() {
+        super();
+    }
+
     public String getDescription() {
         return description;
     }

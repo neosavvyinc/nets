@@ -38,6 +38,14 @@ import javax.persistence.*;
 @DiscriminatorColumn( name = "TYPE" )
 public abstract class PaymentMethod extends BaseDTO {
 
+    protected PaymentMethod(){}
+
+    protected PaymentMethod(String name, String description, Long id) {
+        this.name = name;
+        this.description = description;
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "payment_method_id_seq")
     @SequenceGenerator(name = "payment_method_id_seq", sequenceName = "payment_method_id_seq", allocationSize=1)

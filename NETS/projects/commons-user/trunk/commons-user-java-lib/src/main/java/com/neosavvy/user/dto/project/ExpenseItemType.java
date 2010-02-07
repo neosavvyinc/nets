@@ -36,4 +36,8 @@ import javax.persistence.*;
 )
 @DiscriminatorValue("EXPENSE_ITEM_TYPE")
 public abstract class ExpenseItemType extends AttributeDescriptor {
+    public ExpenseItemType(){}
+    public ExpenseItemType(String name, String description) {
+        super(name,description);
+    }
 }

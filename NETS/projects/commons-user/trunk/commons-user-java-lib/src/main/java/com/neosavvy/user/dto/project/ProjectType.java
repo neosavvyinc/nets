@@ -45,6 +45,15 @@ public class ProjectType extends BaseDTO {
     @Column(name="TYPE")
     private String type;
 
+    public ProjectType() {
+        super();
+    }
+
+    public ProjectType(String type) {
+        super();
+        this.type = type;
+    }
+
     public Long getId() {
         return id;
     }
