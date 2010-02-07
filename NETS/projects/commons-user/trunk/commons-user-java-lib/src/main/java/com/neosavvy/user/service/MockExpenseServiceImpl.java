@@ -5,9 +5,7 @@ import com.neosavvy.user.dto.project.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -119,8 +117,11 @@ public class MockExpenseServiceImpl implements ExpenseService {
     }
 
     public List<ExpenseReport> findExpenseReportsForUser(UserDTO user) {
-        ArrayList arrayList = new ArrayList();
-        arrayList.addAll(expenseReports.entrySet());
+        ArrayList<ExpenseReport> arrayList = new ArrayList<ExpenseReport>();
+        Set<Map.Entry<Long,ExpenseReport>> entries = expenseReports.entrySet();
+        for (Map.Entry<Long, ExpenseReport> entry : entries) {
+            arrayList.add(entry.getValue());
+        }
         return arrayList;
     }
 

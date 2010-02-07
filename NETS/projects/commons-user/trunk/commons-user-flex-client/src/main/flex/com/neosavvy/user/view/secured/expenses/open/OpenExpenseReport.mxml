@@ -7,5 +7,28 @@
     horizontalAlign="right"
     title="View Open Expense Reports">
 
+    <mx:AdvancedDataGrid id="openExpenseGrid" width="100%" height="100%">
+        <mx:columns>
+            <mx:AdvancedDataGridColumn
+                id="voucherNumberColumn"
+                headerText="Voucher Number"
+                dataField="id"/>
+            <mx:AdvancedDataGridColumn
+                id="amountNumberColumn"
+                headerText="Expense Amount"
+                dataField="totalExpenseAmount"/>
+            <mx:AdvancedDataGridColumn
+                id="amountToReimburseColumn"
+                headerText="Amount to Reimburse"
+                dataField="totalReimbursableExpenseAmount"/>
+            <mx:AdvancedDataGridColumn
+                id="statusColumn"
+                headerText="Status"
+                dataField="status"/>
+            <mx:AdvancedDataGridColumn
+                id="actionColumn"
+                headerText="Actions"/>
+        </mx:columns>
+    </mx:AdvancedDataGrid>
 
 </mx:Panel>

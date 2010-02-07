@@ -17,6 +17,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.expenses.report.init.FindPaymentMethods;
     import com.neosavvy.user.controller.expenses.report.init.FindProjectTypes;
     import com.neosavvy.user.controller.expenses.report.init.InitializeExpenseReportView;
+    import com.neosavvy.user.controller.expenses.report.init.InitializeViewOpenExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.save.FindExpenseReport;
     import com.neosavvy.user.controller.expenses.report.save.SaveExpenseReport;
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
@@ -107,6 +108,8 @@ package com.neosavvy.user {
             registerCommand(FIND_EXPENSE_ITEM_TYPES_REQUEST, FindExpenseTypes);
             registerCommand(FIND_PAYMENT_METHODS_REQUEST, FindPaymentMethods);
             registerCommand(FIND_PROJECT_TYPES_REQUEST, FindProjectTypes);
+
+            registerCommand(INITIALIZE_VIEW_OPEN_EXPENSE_REPORTS_VIEW, InitializeViewOpenExpenseReportView);
 
         }
 
@@ -286,5 +289,12 @@ package com.neosavvy.user {
         public static const FIND_PROJECT_TYPES_REQUEST:String = "findProjectTypesRequest";
         public static const FIND_PROJECT_TYPES_SUCCESS:String = "findProjectTypesSuccess";
         public static const FIND_PROJECT_TYPES_FAILURE:String = "findProjectTypesFailure";
+
+        public static const INITIALIZE_VIEW_OPEN_EXPENSE_REPORTS_VIEW:String = "initializeOpenExpenseReportsView";
+        public static const INITIALIZE_VIEW_OPEN_EXPENSE_REPORTS_VIEW_COMPLETE:String = "initializeOpenExpenseReportsView";
+
+        public static const FIND_EXPENSE_REPORTS_FOR_USER_REQUEST:String = "findExpenseReportsForUserRequest";
+        public static const FIND_EXPENSE_REPORTS_FOR_USER_SUCCESS:String = "findExpenseReportsForUserSuccess";
+        public static const FIND_EXPENSE_REPORTS_FOR_USER_FAILURE:String = "findExpenseReportsForUserFailure";
     }
 }

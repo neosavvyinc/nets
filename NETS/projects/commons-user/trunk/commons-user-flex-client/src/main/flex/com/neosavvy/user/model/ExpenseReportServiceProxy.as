@@ -29,6 +29,7 @@ package com.neosavvy.user.model {
         private var _paymentMethods:ArrayCollection = null;
         private var _expenseTypes:ArrayCollection = null;
         private var _projectTypes:ArrayCollection = null;
+        private var _openExpenseReports:ArrayCollection = null;
 
         public function get paymentMethods():ArrayCollection {
             return _paymentMethods;
@@ -68,6 +69,14 @@ package com.neosavvy.user.model {
 
         public function get activeExpenseReportId():Number {
             return _activeExpenseReportId;
+        }
+
+        public function get openExpenseReports():ArrayCollection {
+            return _openExpenseReports;
+        }
+
+        public function set openExpenseReports(value:ArrayCollection):void {
+            _openExpenseReports = value;
         }
 
         public function saveExpenseReport(p:Project, report:ExpenseReport , expenseItems:ArrayCollection, responder:IResponder):void {
