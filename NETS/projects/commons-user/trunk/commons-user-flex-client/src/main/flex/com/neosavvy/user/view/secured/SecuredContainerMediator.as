@@ -52,6 +52,7 @@ package com.neosavvy.user.view.secured {
                 ,ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS
 
                 ,ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT
+                ,ApplicationFacade.NAVIGATE_TO_EDIT_EXPENSE_REPORT
                 ,ApplicationFacade.NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS
                 ,ApplicationFacade.NAVIGATE_TO_VIEW_APPROVED_EXPENSE_REPORTS
                 ,ApplicationFacade.NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS
@@ -75,6 +76,7 @@ package com.neosavvy.user.view.secured {
                     navigationViewStack.selectedIndex = NAV_INDEX_PROJECT_MANAGEMENT;
                     break;
                 case ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT:
+                case ApplicationFacade.NAVIGATE_TO_EDIT_EXPENSE_REPORT:
                     navigationViewStack.selectedIndex = NAV_INDEX_CREATE_EXPENSE_REPORT;
                     break;
                 case ApplicationFacade.NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS:

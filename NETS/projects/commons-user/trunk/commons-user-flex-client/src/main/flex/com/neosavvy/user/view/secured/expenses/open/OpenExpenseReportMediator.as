@@ -1,7 +1,10 @@
 package com.neosavvy.user.view.secured.expenses.open {
+    import com.neosavvy.user.dto.project.ExpenseReport;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.ApplicationFacade;
+
+    import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
 
     import mx.controls.AdvancedDataGrid;
     import mx.logging.ILogger;
@@ -25,12 +28,17 @@ package com.neosavvy.user.view.secured.expenses.open {
         override public function onRegister():void {
             _userServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
             _expenseServiceProxy = facade.retrieveProxy(ExpenseReportServiceProxy.NAME) as ExpenseReportServiceProxy;
+
+            openExpenseGrid.addEventListener(ExpenseReportEvent.TYPE, handleExpenseReportEvent);
         }
 
         override public function onRemove():void {
             _userServiceProxy = null;
             _expenseServiceProxy = null;
+
+            openExpenseGrid.removeEventListener(ExpenseReportEvent.TYPE, handleExpenseReportEvent);
         }
+
 
         public function get openExpenseReport():OpenExpenseReport {
             return viewComponent as OpenExpenseReport;
@@ -59,5 +67,12 @@ package com.neosavvy.user.view.secured.expenses.open {
             }
         }
 
+        private function handleExpenseReportEvent(event:ExpenseReportEvent):void {
+
+            var expenseReport:ExpenseReport = event.expenseReport;
+            sendNotification(ApplicationFacade.INITIALIZE_EDIT_EXPENSE_REPORT_VIEW, expenseReport.id);
+            sendNotification(ApplicationFacade.NAVIGATE_TO_EDIT_EXPENSE_REPORT);
+
+        }
     }
 }

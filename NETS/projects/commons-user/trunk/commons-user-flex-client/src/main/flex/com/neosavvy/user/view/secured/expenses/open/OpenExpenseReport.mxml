@@ -27,7 +27,8 @@
                 dataField="status"/>
             <mx:AdvancedDataGridColumn
                 id="actionColumn"
-                headerText="Actions"/>
+                headerText="Actions"
+                itemRenderer="com.neosavvy.user.view.secured.expenses.open.Actions"/>
         </mx:columns>
     </mx:AdvancedDataGrid>
 

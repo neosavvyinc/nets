@@ -16,6 +16,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.expenses.report.init.FindExpenseTypes;
     import com.neosavvy.user.controller.expenses.report.init.FindPaymentMethods;
     import com.neosavvy.user.controller.expenses.report.init.FindProjectTypes;
+    import com.neosavvy.user.controller.expenses.report.init.InitializeEditExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.init.InitializeExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.init.InitializeViewOpenExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.save.FindExpenseReport;
@@ -110,6 +111,7 @@ package com.neosavvy.user {
             registerCommand(FIND_PROJECT_TYPES_REQUEST, FindProjectTypes);
 
             registerCommand(INITIALIZE_VIEW_OPEN_EXPENSE_REPORTS_VIEW, InitializeViewOpenExpenseReportView);
+            registerCommand(INITIALIZE_EDIT_EXPENSE_REPORT_VIEW, InitializeEditExpenseReportView);
 
         }
 
@@ -191,6 +193,7 @@ package com.neosavvy.user {
         public static const NAVIGATE_TO_CLIENT_MANAGEMENT:String = "navigateToClientManagement";
 
         public static const NAVIGATE_TO_CREATE_EXPENSE_REPORT:String = "navigateToCreateExpenseReport";
+        public static const NAVIGATE_TO_EDIT_EXPENSE_REPORT:String = "navigateToEditExpenseReport";
         public static const NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS:String = "navigateToViewOpenExpenses";
         public static const NAVIGATE_TO_VIEW_APPROVED_EXPENSE_REPORTS:String = "navigateToViewSubmittedExpenseReports";
         public static const NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS:String = "navigateToReconcileExpenseReports";
@@ -296,5 +299,12 @@ package com.neosavvy.user {
         public static const FIND_EXPENSE_REPORTS_FOR_USER_REQUEST:String = "findExpenseReportsForUserRequest";
         public static const FIND_EXPENSE_REPORTS_FOR_USER_SUCCESS:String = "findExpenseReportsForUserSuccess";
         public static const FIND_EXPENSE_REPORTS_FOR_USER_FAILURE:String = "findExpenseReportsForUserFailure";
+
+        public static const FIND_EXPENSE_REPORT_BY_ID_REQUEST:String = "findExpenseReportByIdRequest";
+        public static const FIND_EXPENSE_REPORT_BY_ID_SUCCESS:String = "findExpenseReportByIdSuccess";
+        public static const FIND_EXPENSE_REPORT_BY_ID_FAILURE:String = "findExpenseReportByIdFailure";
+
+        public static const INITIALIZE_EDIT_EXPENSE_REPORT_VIEW:String = "initializeEditExpenseReportViewComplete";
+        public static const INITIALIZE_EDIT_EXPENSE_REPORT_VIEW_COMPLETE:String = "initializeEditExpenseReportViewComplete";
     }
 }

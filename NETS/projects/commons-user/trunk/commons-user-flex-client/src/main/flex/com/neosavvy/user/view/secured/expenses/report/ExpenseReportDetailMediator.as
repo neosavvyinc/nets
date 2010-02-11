@@ -12,6 +12,7 @@ package com.neosavvy.user.view.secured.expenses.report {
     import flash.events.MouseEvent;
 
     import mx.collections.ArrayCollection;
+    import mx.collections.ListCollectionView;
     import mx.containers.Form;
     import mx.controls.AdvancedDataGrid;
     import mx.logging.ILogger;
@@ -73,11 +74,14 @@ package com.neosavvy.user.view.secured.expenses.report {
         override public function listNotificationInterests():Array {
             return [
                 ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT
+                ,ApplicationFacade.NAVIGATE_TO_EDIT_EXPENSE_REPORT
                 ,ApplicationFacade.GET_PROJECTS_FOR_USER_SUCCESS
                 ,ApplicationFacade.FIND_EXPENSE_REPORT_SUCCESS
                 ,ApplicationFacade.FIND_PAYMENT_METHODS_SUCCESS
                 ,ApplicationFacade.FIND_EXPENSE_ITEM_TYPES_SUCCESS
                 ,ApplicationFacade.FIND_PROJECT_TYPES_SUCCESS
+
+                ,ApplicationFacade.FIND_EXPENSE_REPORT_BY_ID_SUCCESS
             ];
         }
 
@@ -85,6 +89,9 @@ package com.neosavvy.user.view.secured.expenses.report {
             switch(notification.getName()) {
                 case ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT:
                     sendNotification(ApplicationFacade.INITIALIZE_EXPENSE_REPORT_VIEW);
+                    break;
+                case ApplicationFacade.NAVIGATE_TO_EDIT_EXPENSE_REPORT:
+
                     break;
                 case ApplicationFacade.GET_PROJECTS_FOR_USER_SUCCESS:
                     expenseReportDetail.availableProjectsCmb.dataProvider = _projectProxy.projects;
@@ -103,7 +110,19 @@ package com.neosavvy.user.view.secured.expenses.report {
                 case ApplicationFacade.FIND_PROJECT_TYPES_SUCCESS:
                     expenseReportDetail.projectTypeCmb.dataProvider = _expenseReportProxy.projectTypes;
                     break;
+
+                case ApplicationFacade.FIND_EXPENSE_REPORT_BY_ID_SUCCESS:
+                    handleLoadActiveExpenseReport(_expenseReportProxy.activeExpenseReport);
+                    break;
             }
+        }
+
+        private function handleLoadActiveExpenseReport(activeExpenseReport:ExpenseReport):void {
+
+            setProject( activeExpenseReport.project );
+            setExpenseReport( activeExpenseReport );
+            setExpenseReportItems( activeExpenseReport.expenseItems );
+
         }
 
         private function handleSaveButtonClicked(event:MouseEvent):void {
@@ -128,9 +147,25 @@ package com.neosavvy.user.view.secured.expenses.report {
             expenseReportDetail.expenseReportGrid.dataProvider = _expenseItems;
         }
 
+        private function setProject(project:Project):void {
+            var expenseDetailDP:ArrayCollection = expenseReportDetail.availableProjectsCmb.dataProvider as ArrayCollection;
+            for (var i:int = 0 ; i < expenseDetailDP.length; i++) {
+                if( (expenseDetailDP.getItemAt(i) as Project ).id == project.id ) {
+                    expenseReportDetail.availableProjectsCmb.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+
         private function getProject():Project {
             var project:Project = expenseReportDetail.availableProjectsCmb.selectedItem as Project;
             return project;
+        }
+
+
+        private function setExpenseReport(activeExpenseReport:ExpenseReport):void {
+            expenseReportDetail.purposeTextInput.text = activeExpenseReport.purpose;
+            expenseReportDetail.locationTextInput.text = activeExpenseReport.location;
         }
 
         private function getExpenseReport():ExpenseReport {
@@ -138,6 +173,12 @@ package com.neosavvy.user.view.secured.expenses.report {
             expenseReport.purpose = expenseReportDetail.purposeTextInput.text;
             expenseReport.location = expenseReportDetail.locationTextInput.text;
             return expenseReport;
+        }
+
+
+        private function setExpenseReportItems(expenseItems:ListCollectionView):void {
+            _expenseItems = expenseItems as ArrayCollection;
+            expenseReportDetail.expenseReportGrid.dataProvider = _expenseItems;
         }
 
         private function getExpenseReportItems():ArrayCollection {
@@ -155,6 +196,10 @@ package com.neosavvy.user.view.secured.expenses.report {
 
             return expenseItem;
         }
+
+
+
+
 
     }
 }
