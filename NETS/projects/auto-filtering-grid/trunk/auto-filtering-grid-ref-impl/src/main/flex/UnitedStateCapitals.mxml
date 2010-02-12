@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        layout="horizontal"
+        verticalScrollPolicy="off"
+        xmlns:grid="com.neosavvy.grid.*"
+        xmlns:pbFilters="pbFilters.*">
+
+    <mx:Script>
+    <![CDATA[
+        import com.neosavvy.grid.AutoFilteringGridColumn;
+        import com.neosavvy.grid.PaginationControlBox;
+        import com.neosavvy.grid.model.GridFilterModel;
+        import com.neosavvy.grid.model.GridFilterModels;
+        import com.neosavvy.grid.AutoFilteringGrid
+        import mx.collections.ArrayCollection;
+        import mx.controls.Alert;
+
+        [Bindable]
+        private var stateInformation:ArrayCollection = new ArrayCollection();
+
+        /***
+         * This is a variable to store the grid values and selected filters
+         * when a user clicks on the save button. Restoring this object map
+         * into the grid will restore the state of the filters in the grid
+         * at the time the save button was pressed.
+         */
+        private var selectedGridValues:Object;
+
+        public function applyData():void {
+            //stateInformation = new ArrayCollection();
+            stateInformation.addItem(new State("Alabama", "Ala.", "AL", "Montgomery", "Central"));
+            stateInformation.addItem(new State("Alaska", "Alaska", "AK", "Juneau", "Alaskan"));
+            stateInformation.addItem(new State("Arizona", "Ariz.", "AZ", "Phoenix", "Mountain"));
+            stateInformation.addItem(new State("Arkansas", "Ark.", "AR", "Little Rock", "Central"));
+            stateInformation.addItem(new State("California", "Calif.", "CA", "Sacramento", "Pacific"));
+            stateInformation.addItem(new State("Colorado", "Colo.", "CO", "Denver", "Mountain"));
+            stateInformation.addItem(new State("Connecticut", "Conn.", "CT", "Hartford", "Eastern"));
+            stateInformation.addItem(new State("Delaware", "Del.", "DE", "Dover", "Eastern"));
+            stateInformation.addItem(new State("Florida", "Fla.", "FL", "Tallahassee", "Eastern"));
+            stateInformation.addItem(new State("Georgia", "Ga.", "GA", "Atlanta", "Eastern"));
+            stateInformation.addItem(new State("Hawaii", "Hawaii", "HI", "Honolulu", "Hawaiian"));
+            stateInformation.addItem(new State("Idaho", "Idaho", "ID", "Boise", "Mountain"));
+            stateInformation.addItem(new State("Illinois", "Ill.", "IL", "Springfield", "Central"));
+            stateInformation.addItem(new State("Indiana", "Ind.", "IN", "Indianapolis", "Eastern"));
+            stateInformation.addItem(new State("Iowa", "Iowa", "IA", "Des Moines", "Central"));
+            stateInformation.addItem(new State("Kansas", "Kans.", "KS", "Topeka", "Central"));
+            stateInformation.addItem(new State("Kentucky", "Ky.", "KY", "Frankfort", "Central"));
+            stateInformation.addItem(new State("Louisiana", "La.", "LA", "Baton Rouge", "Central"));
+            stateInformation.addItem(new State("Maine", "Maine", "ME", "Augusta", "Eastern"));
+            stateInformation.addItem(new State("Maryland", "Md.", "MD", "Annapolis", "Eastern"));
+            stateInformation.addItem(new State("Massachusetts", "Mass.", "MA", "Boston", "Eastern"));
+            stateInformation.addItem(new State("Michigan", "Mich.", "MI", "Lansing", "Eastern"));
+            stateInformation.addItem(new State("Minnesota", "Minn.", "MN", "St. Paul", "Central"));
+            stateInformation.addItem(new State("Mississippi", "Miss.", "MS", "Jackson", "Central"));
+            stateInformation.addItem(new State("Missouri", "Mo.", "MO", "Jefferson City", "Central"));
+            stateInformation.addItem(new State("Montana", "Mont.", "MT", "Helena", "Mountain"));
+            stateInformation.addItem(new State("Nebraska", "Nebr.", "NE", "Lincoln", "Central"));
+            stateInformation.addItem(new State("Nevada", "Nev.", "NV", "Carson City", "Pacific"));
+            stateInformation.addItem(new State("New Hampshire", "N.H.", "NH", "Concord", "Eastern"));
+            stateInformation.addItem(new State("New Jersey", "N.J.", "NJ", "Trenton", "Eastern"));
+            stateInformation.addItem(new State("New Mexico", "N.M.", "NM", "Santa Fe", "Mountain"));
+            stateInformation.addItem(new State("New York", "N.Y.", "NY", "Albany", "Eastern"));
+            stateInformation.addItem(new State("North Carolina", "N.C.", "NC", "Raleigh", "Eastern"));
+            stateInformation.addItem(new State("North Dakota", "N.D.", "ND", "Bismarck", "Central"));
+            stateInformation.addItem(new State("Ohio", "Ohio", "OH", "Columbus", "Eastern"));
+            stateInformation.addItem(new State("Oklahoma", "Okla.", "OK", "Oklahoma City", "Central"));
+            stateInformation.addItem(new State("Oregon", "Ore.", "OR", "Salem", "Pacific"));
+            stateInformation.addItem(new State("Pennsylvania", "Pa.", "PA", "Harrisburg", "Eastern"));
+            stateInformation.addItem(new State("Rhode Island", "R.I.", "RI", "Providence", "Eastern"));
+            stateInformation.addItem(new State("South Carolina", "S.C.", "SC", "Columbia", "Eastern"));
+            stateInformation.addItem(new State("South Dakota", "S.D.", "SD", "Pierre", "Central"));
+            stateInformation.addItem(new State("Tennessee", "Tenn.", "TN", "Nashville", "Central"));
+            stateInformation.addItem(new State("Texas", "Tex.", "TX", "Austin", "Central"));
+            stateInformation.addItem(new State("Utah", "Utah", "UT", "Salt Lake City", "Mountain"));
+            stateInformation.addItem(new State("Vermont", "Vt.", "VT", "Montpelier", "Eastern"));
+            stateInformation.addItem(new State("Virginia", "Va.", "VA", "Richmond", "Eastern"));
+            stateInformation.addItem(new State("Washington", "Wash.", "WA", "Olympia", "Pacific"));
+            stateInformation.addItem(new State("West Virginia", "W.Va.", "WV", "Charleston", "Eastern"));
+            stateInformation.addItem(new State("Wisconsin", "Wis.", "WI", "Madison", "Central"));
+            stateInformation.addItem(new State("Wyoming", "Wyo.", "WY", "Cheyenne", "Mountain"));
+            stateInformation.addItem(new State("Empty", "Emp", null, "Blah", "Central"));
+            //grid.dataProvider = stateInformation;
+        }
+
+        protected function handleColumnsChangedEvent():void {
+            Alert.show("Columns Changed Event!!!!");
+        }
+
+        private function addFilter():void {
+
+            var gridFilterModels:GridFilterModels = new GridFilterModels();
+
+            if (filtersToAdd.text) {
+                var gridFilterModel:GridFilterModel = new GridFilterModel();
+                gridFilterModel.columnName = (columnToFilter.selectedItem as AutoFilteringGridColumn).dataField;
+                for each (var item:String in filtersToAdd.text.split(",")) {
+                    gridFilterModel.addSelectedValue(item);
+                }
+                gridFilterModels.addGridFilterModel(gridFilterModel);
+            }
+
+            if (filtersToAdd1.text) {
+                var gridFilterModel1:GridFilterModel = new GridFilterModel();
+                gridFilterModel1.columnName = (columnToFilter1.selectedItem as AutoFilteringGridColumn).dataField;
+                for each (var item1:String in filtersToAdd1.text.split(",")) {
+                    gridFilterModel1.addSelectedValue(item1);
+                }
+                gridFilterModels.addGridFilterModel(gridFilterModel1);
+            }
+            grid.gridFilterModels = gridFilterModels;
+        }
+      
+    ]]>
+  </mx:Script>
+
+    <mx:Style source="/styles/customDataGrid.css"/>
+
+
+    <mx:VBox height="80%" width="70%" verticalGap="0">
+        <mx:HBox id="titleBox" width="100%" styleName="dgTitleBox">
+            <mx:Label text="States" styleName="titleLbl"/>
+            <mx:Spacer width="30"/>
+            <grid:PaginationControlBox defaultRecPerPageComboToAll="true" autoFilteringGrid="{grid}"
+                                       recPerPageOptions="{[5, 10, 20, 30, PaginationControlBox.ALL_RECORDS]}"/>
+            <mx:Spacer width="100%"/>
+            <!--<mx:Button id="testRestoreState" label="Restore" click="{grid.setAllActiveFiltersWithSelectedValues(selectedGridValues)}"/>-->
+            <!--<mx:Button id="testSaveState" label="Save Filters" toolTip="Click here to save the state of your grid" click="{grid.getAllActiveFiltersWithSelectedValues()}"/>-->
+            <mx:LinkButton id="manageColumns" toolTip="Manage Columns" styleName="configureLBtn"
+                           click="{grid.horizontalScrollPosition=0;grid.manageColumns()}"/>
+            <mx:LinkButton id="reset" toolTip="Reset Filters" styleName="resetLBtn" click="{grid.resetFilters()}"/>
+        </mx:HBox>
+
+        <grid:AutoFilteringGrid
+                id="grid"
+                width="100%"
+                height="100%"
+                horizontalScrollPolicy="on"
+                sortExpertMode="true"
+                autoResizeColumnHeaders="true"
+                dataProvider="{stateInformation}"
+                autoFilterColumnsChanged="{handleColumnsChangedEvent()}"
+                >
+            <grid:columns>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="false"
+                        dataField="name"
+                        headerText="Name"
+                        removable="false"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="false"
+                        dataField="name"
+                        headerText="Name"
+                        removable="false"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        dataField="abbreviation"
+                        headerText="Abbreviation"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="true"
+                        dataField="capital"
+                        headerText="Capital"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="true"
+                        dataField="postalCode"
+                        headerText="Postal Code"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="true"
+                        dataField="timeZone"
+                        headerText="Time Zone"/>
+
+
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="false"
+                        autoFilterEnabled="false"
+                        dataField="fakeCol1"
+                        headerText="fakeCol1"
+                        removable="false"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="false"
+                        dataField="fakeCol2"
+                        headerText="fakeCol2"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="false"
+                        autoFilterEnabled="true"
+                        dataField="fakeCol3"
+                        headerText="fakeCol3"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="false"
+                        autoFilterEnabled="true"
+                        dataField="fakeCol4"
+                        headerText="fakeCol4"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="false"
+                        autoFilterEnabled="true"
+                        dataField="fakeCol5"
+                        headerText="TimefakeCol5"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="false"
+                        autoFilterEnabled="false"
+                        dataField="fakeCol6"
+                        headerText="fakeCol6"
+                        removable="false"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="false"
+                        dataField="fakeCol7"
+                        headerText="fakeCol7"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="false"
+                        autoFilterEnabled="true"
+                        dataField="fakeCol8"
+                        headerText="fakeCol8"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="false"
+                        autoFilterEnabled="true"
+                        dataField="fakeCol9"
+                        headerText="fakeCol9"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="false"
+                        autoFilterEnabled="true"
+                        dataField="fakeCol10"
+                        headerText="TimefakeCol10"/>
+            </grid:columns>
+        </grid:AutoFilteringGrid>
+    </mx:VBox>
+    <mx:VBox id="controlBox"
+             height="80%"
+             width="20%"
+             verticalAlign="top"
+             styleName="dgTitleBox"
+             paddingBottom="5"
+             paddingLeft="5"
+             paddingRight="5">
+        <mx:HBox width="100%">
+            <mx:Label text="Selected Filters" styleName="titleLbl"/>
+            <mx:LinkButton
+                    id="refreshSelectedFilters"
+                    toolTip="Reset Filters"
+                    styleName="resetLBtn"
+                    click="{selectedColumns.dataProvider = grid.gridFilterModels.gridFilterModels}"/>
+        </mx:HBox>
+        <mx:List
+                id="selectedColumns"
+                dataProvider="{grid.gridFilterModels.gridFilterModels}"
+                width="100%"
+                itemRenderer="renderer.SelectedFilterRenderer"
+                />
+        <mx:Label text="Set a filter here"/>
+        <mx:ComboBox id="columnToFilter" dataProvider="{grid.columns}" labelField="dataField"/>
+        <mx:TextInput id="filtersToAdd" width="100%"/>
+        <mx:ComboBox id="columnToFilter1" dataProvider="{grid.columns}" labelField="dataField"/>
+        <mx:TextInput id="filtersToAdd1" width="100%"/>
+        <mx:Button label="Add Filter" click="{addFilter()}"/>
+        <mx:Button label="Apply Data To Grid" click="{applyData()}"/>
+        <mx:Button label="Clear Grid" click="{grid.dataProvider = new ArrayCollection()}"/>
+    </mx:VBox>
+</mx:Application>
