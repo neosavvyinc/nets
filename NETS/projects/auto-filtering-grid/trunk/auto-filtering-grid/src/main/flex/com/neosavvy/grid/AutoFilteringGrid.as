@@ -38,38 +38,6 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
     private var bColumnsChanged:Boolean = false;
 
-    /** PAGINATION SUPPORT **/
-    public var paginationEnabled:Boolean = false;
-    private var _itemsPerPage:int = 1;
-    
-    //keeps track of what selection has been 
-    //chosen for num of records per page; _itemsPerPage is calculated 
-    //based on the actual records and might not correspond to any 
-    //available option 
-    [Bindable]
-    public var itemsPerPageComboSelection:int = -1;
-
-    /**
-     * Used in a filter function to determine whether
-     * an item falls within a visible page range. Need to have a
-     * separate collection to ensure that grid sort does not affect
-     * pagination.
-     */
-    [Bindable]
-    public var dataProviderClone:ArrayCollection;
-
-    [Bindable]
-    public var pageStartIndex:int;
-    [Bindable]
-    public var pageEndIndex:int;
-    [Bindable]
-    public var currentPage:int = 1;
-    [Bindable]
-    public var numOfPages:int = 1;
-    [Bindable]
-    public var maxRecords:int = 0;
-    /** END PAGINATION SUPPORT **/
-
     public function AutoFilteringGrid()
     {
         super();
@@ -162,7 +130,6 @@ public class AutoFilteringGrid extends AdvancedDataGrid
         if(this.dataProvider) 
             this.dataProvider.refresh();
 
-        conditionallyGoToPageOne();
     }
 
     public function removeFilters(filterType:String, refresh:Boolean):void {
@@ -193,28 +160,14 @@ public class AutoFilteringGrid extends AdvancedDataGrid
         }
 
         if(this.dataProvider)
+        {
+            this.dataProvider.filterFunction = filterFunction;
             this.dataProvider.refresh();
-    }
-
-    protected function filterFunctionWithPagination(item:Object):Boolean {
-
-        //Determine whether item falls within the range of the
-        //visible page, ie between pageStartIndex and pageEndIndex
-        var prePaginationResult:Boolean = filterFunctionNoPagination(item);
-        if (prePaginationResult && paginationEnabled) {
-            var itemIndex:int = getIndex(dataProviderClone, item);
-            if (itemIndex >= pageStartIndex && itemIndex <= pageEndIndex) {
-                return true;
-            }
-            else {
-                return false;
-            }
         }
 
-        return prePaginationResult;
     }
 
-    public function filterFunctionNoPagination(item:Object):Boolean {
+    public function filterFunction(item:Object):Boolean {
         var matches:Object = new Object();
 
         //Iterate through each column's filter selections
@@ -326,207 +279,6 @@ public class AutoFilteringGrid extends AdvancedDataGrid
         this.columns = columnsToActivate;
     }
 
-    /**
-     * Exposing renderer array
-     */
-    public function get rendererArray():Array {
-        return super.rendererArray;
-    }
-
-    /** PAGINATION SUPPORT **/
-    protected function dataProviderChanged(evt:CollectionEvent):void {
-        if (evt.kind == CollectionEventKind.ADD || evt.kind == CollectionEventKind.REMOVE) {
-            maxRecords = collection.length;
-            enablePagination(paginationEnabled, _itemsPerPage);
-            processFilters();
-        }
-    }
-
-    override public function set dataProvider(value:Object):void {
-        for each (var val in value) {
-            trace("Dataprovider value: " + val.toString());
-        }
-        super.dataProvider = value;
-        collection.filterFunction = filterFunctionWithPagination;
-        collection.addEventListener(CollectionEvent.COLLECTION_CHANGE, dataProviderChanged);
-
-        maxRecords = collection.length;
-        enablePagination(paginationEnabled, _itemsPerPage);
-    }
-
-    public function enablePagination(val:Boolean, itemsPerPageValue:int = -1):void {
-        if (val == true) {
-            paginationEnabled = true;
-            populateDataProviderClone();
-
-            //calc default page size, ie split into 3 pages
-            if (itemsPerPageValue == -1) {
-                itemsPerPageValue = Math.floor(collection.length / 3);
-            }
-        }
-        else {
-            paginationEnabled = false;
-            itemsPerPageValue = collection.length;
-        }
-        itemsPerPage = itemsPerPageValue;
-    }
-
-    /**
-     * Pagination filter function can't depend on the
-     * original data provider since .refersh() first
-     * applies the filterFunction and then applies the sort.
-     * This makes it impossible to paginate a sorted list.
-     *
-     * This is a shallow clone!
-     **/
-    private function populateDataProviderClone():void {
-        dataProviderClone = new ArrayCollection();
-        dataProviderClone.filterFunction = filterFunctionNoPagination;
-
-        var cursor:IViewCursor = collection.createCursor();
-        while (!cursor.afterLast) {
-            dataProviderClone.addItem(cursor.current);
-            cursor.moveNext();
-        }
-
-        maxRecords = dataProviderClone.length;
-    }
-
-    /**
-     * Setter for itemsPerPage
-     * Defaults to page 1
-     */
-    public function set itemsPerPage(val:int):void {
-        if (val < 1) {
-            return;
-        }
-
-        if (val > maxRecords) {
-            val = maxRecords;
-        }
-
-        _itemsPerPage = val;
-        pageStartIndex = 0;
-        pageEndIndex = val - 1;
-        currentPage = 1;
-        numOfPages = calcNumOfPages();
-
-        if (pageEndIndex > maxRecords - 1) {
-            pageEndIndex = maxRecords - 1
-        }
-
-        collection.refresh();
-    }
-
-    public function calcNumOfPages():int {
-        var numOfPages:Number = maxRecords / _itemsPerPage;
-        numOfPages = Math.ceil(numOfPages);
-        return numOfPages;
-    }
-
-    public function goToPage(pageNumber:int):void {
-        pageStartIndex = pageNumber * _itemsPerPage - _itemsPerPage;
-        pageEndIndex = pageNumber * _itemsPerPage - 1;
-
-        if (pageEndIndex > maxRecords - 1) {
-            pageEndIndex = maxRecords - 1;
-        }
-
-        numOfPages = calcNumOfPages();
-        if (pageNumber > numOfPages) {
-            pageNumber = numOfPages;
-        }
-
-        if (pageNumber < 1) {
-            pageNumber = 1;
-        }
-
-        currentPage = pageNumber;
-        collection.refresh();
-    }
-
-    public function nextPage():void {
-        if (pageEndIndex == maxRecords - 1) {
-            return;
-            trace("No next page.");
-        }
-
-        pageStartIndex = pageEndIndex + 1;
-        pageEndIndex = pageStartIndex + _itemsPerPage - 1;
-
-        if (pageEndIndex > maxRecords - 1) {
-            pageEndIndex = maxRecords - 1;
-        }
-
-        currentPage++;
-        collection.refresh();
-    }
-
-    public function prevPage():void {
-        if (pageStartIndex == 0) {
-            return;
-            trace("No previous page.");
-        }
-
-        pageEndIndex = pageStartIndex - 1;
-        pageStartIndex = pageEndIndex - _itemsPerPage + 1;
-
-        currentPage--;
-        collection.refresh();
-    }
-
-    /**
-     * Intercept sort to ensure that sort is applied to
-     * the entire collection, not just the visible rows
-     */
-    override protected function headerReleaseHandler(event:AdvancedDataGridEvent):void {
-        if (paginationEnabled) {
-            collection.filterFunction = null;
-            super.headerReleaseHandler(event);
-
-            //mimic the sort on dataProviderClone
-            dataProviderClone.sort = this.collection.sort;
-            dataProviderClone.refresh();
-
-            collection.filterFunction = filterFunctionWithPagination;
-            goToPage(1);
-        }
-        else {
-            super.headerReleaseHandler(event);
-        }
-    }
-
-    /**
-     * Utility function to find item index in an array.
-     * Built-in getItemIndex() relies on sort and other internal
-     * variables that result in exceptions.
-     */
-    protected function getIndex(arr:ArrayCollection, item:Object):int {
-        for (var i:int = 0; i < arr.length; i++) {
-            if (arr.getItemAt(i) == item) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * If pagination is enabled, need to respond to every
-     * filter change. Filter changes impact the underlying
-     * data set and thus affect pagination functionality.
-     *
-     * Once fitler changes are in effect,
-     * default back to page 1.
-     */
-    public function conditionallyGoToPageOne():void {
-        if (paginationEnabled) {
-            dataProviderClone.refresh();
-            maxRecords = dataProviderClone.length;
-            goToPage(1);
-        }
-    }
-    /** END PAGINATION SUPPORT **/
-
     /** Begin Save Filter Support **/
     [Bindable]
     var _gridFilterModels:GridFilterModels = new GridFilterModels();
@@ -559,16 +311,6 @@ public class AutoFilteringGrid extends AdvancedDataGrid
     public function saveOrUpdateGridFilterModel( gridFilterModel:GridFilterModel ) :void {
         _gridFilterModels.saveOrUpdateGridFilterModel( gridFilterModel );
     }
-
-//    public function isValueValidForData(value:String, column:String):Boolean {
-//        for each (var obj:Object in dataProvider.source) {
-//            if(obj.hasOwnProperty(column) && obj[column] == value){
-//                return true;
-//            }
-//        }
-//        return false;
-//    }
-    /** END Save Filter Support **/
 
 }
 

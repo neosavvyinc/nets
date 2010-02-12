@@ -299,7 +299,6 @@ public class FilterSelectorDropdown extends VBox
         _grid.removeFilters(_adgListData.dataField, true);
         _grid.saveOrUpdateGridFilterModel(_gridFilterModel);
         clearFilters();
-        conditionallyGoToPageOne();
         dispatchEvent(new CloseEvent(CloseEvent.CLOSE));
 
     }
@@ -327,15 +326,9 @@ public class FilterSelectorDropdown extends VBox
             _grid.addActiveFilters(_adgListData.dataField, selectedFilters.toArray());
             _grid.saveOrUpdateGridFilterModel(_gridFilterModel);
             _selectedFilters = selectedFilters.toArray();
-            conditionallyGoToPageOne();
             dispatchEvent(new CloseEvent(CloseEvent.CLOSE));
 
         }
-    }
-
-    /** Function to support pagination **/
-    protected function conditionallyGoToPageOne():void {
-        _grid.conditionallyGoToPageOne();
     }
 
     protected function cancelClickHandler(event:MouseEvent):void {

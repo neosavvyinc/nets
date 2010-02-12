@@ -15,9 +15,9 @@
 	<packaging>pom</packaging>
 
 	<scm>
-		<connection>scm:svn:https://svn.roundarch.com/repos/USADS/sandbox/auto-filtering-grid/trunk/</connection>
-	    <developerConnection>scm:svn:https://svn.roundarch.com/repos/USADS/sandbox/auto-filtering-grid/trunk/</developerConnection>
-		<url>https://svn.roundarch.com/repos/USADS/sandbox/auto-filtering-grid/trunk/</url>
+		<connection>scm:svn:http://www.neosavvy.com/svn/internal/projects/auto-filtering-grid/trunk/</connection>
+	    <developerConnection>scm:svn:http://www.neosavvy.com/svn/internal/projects/auto-filtering-grid/trunk/</developerConnection>
+		<url>http://www.neosavvy.com/svn/internal/projects/auto-filtering-grid/trunk/</url>
 	</scm>
 
     <properties>
@@ -30,5 +30,42 @@
 		<module>auto-filtering-grid-ref-impl</module>
 	</modules>
 
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.adobe.flex.framework</groupId>
+                <artifactId>flex-framework</artifactId>
+                <version>${flex.version}</version>
+                <type>pom</type>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <type>pom</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+              <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flex.mojos.maven.version}</version>
+                <dependencies>
+                  <dependency>
+                    <groupId>com.adobe.flex</groupId>
+                    <artifactId>compiler</artifactId>
+                    <version>${flex.version}</version>
+                    <type>pom</type>
+                  </dependency>
+                </dependencies>
+              </plugin>
+            </plugins>            
+        </pluginManagement>
+    </build>
 </project>
 
