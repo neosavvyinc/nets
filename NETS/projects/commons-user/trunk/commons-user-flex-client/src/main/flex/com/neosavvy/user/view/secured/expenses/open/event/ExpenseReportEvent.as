@@ -12,7 +12,7 @@ package com.neosavvy.user.view.secured.expenses.open.event {
         private var _expenseReport:ExpenseReport;
         private var _action:String;
 
-        public function ExpenseReportEvent(action:String, object:ExpenseReport) {
+        public function ExpenseReportEvent(action:String, object:ExpenseReport = null) {
             super(TYPE, true, false);
             _expenseReport = object;
             _action = action;

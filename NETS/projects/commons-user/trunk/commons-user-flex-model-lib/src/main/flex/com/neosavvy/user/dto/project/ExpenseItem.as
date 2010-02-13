@@ -13,6 +13,5 @@ package com.neosavvy.user.dto.project {
         public function ExpenseItem() {
             super();
         }
-
     }
 }

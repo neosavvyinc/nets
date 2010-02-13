@@ -55,6 +55,12 @@
                         dataField="projectType"
                         labelFunction="{projectTypeLabelFunction}"
                         />
+                <mx:AdvancedDataGridColumn
+                        id="actionsColumn"
+                        headerText="Actions"
+                        itemRenderer="com.neosavvy.user.view.secured.expenses.report.Actions"
+                        />
+
             </mx:columns>
         </mx:AdvancedDataGrid>
         <mx:HBox horizontalAlign="right" width="100%" height="50%">

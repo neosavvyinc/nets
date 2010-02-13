@@ -19,6 +19,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.expenses.report.init.InitializeEditExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.init.InitializeExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.init.InitializeViewOpenExpenseReportView;
+    import com.neosavvy.user.controller.expenses.report.save.DeleteExpenseReport;
     import com.neosavvy.user.controller.expenses.report.save.FindExpenseReport;
     import com.neosavvy.user.controller.expenses.report.save.SaveExpenseReport;
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
@@ -112,6 +113,8 @@ package com.neosavvy.user {
 
             registerCommand(INITIALIZE_VIEW_OPEN_EXPENSE_REPORTS_VIEW, InitializeViewOpenExpenseReportView);
             registerCommand(INITIALIZE_EDIT_EXPENSE_REPORT_VIEW, InitializeEditExpenseReportView);
+
+            registerCommand(DELETE_ACTIVE_EXPENSE_REPORT_REQUEST, DeleteExpenseReport);
 
         }
 
@@ -303,6 +306,10 @@ package com.neosavvy.user {
         public static const FIND_EXPENSE_REPORT_BY_ID_REQUEST:String = "findExpenseReportByIdRequest";
         public static const FIND_EXPENSE_REPORT_BY_ID_SUCCESS:String = "findExpenseReportByIdSuccess";
         public static const FIND_EXPENSE_REPORT_BY_ID_FAILURE:String = "findExpenseReportByIdFailure";
+
+        public static const DELETE_ACTIVE_EXPENSE_REPORT_REQUEST:String = "deleteActiveExpenseReportRequest";
+        public static const DELETE_ACTIVE_EXPENSE_REPORT_SUCCESS:String = "deleteActiveExpenseReportSuccess";
+        public static const DELETE_ACTIVE_EXPENSE_REPORT_FAILURE:String = "deleteActiveExpenseReportFailure";
 
         public static const INITIALIZE_EDIT_EXPENSE_REPORT_VIEW:String = "initializeEditExpenseReportViewComplete";
         public static const INITIALIZE_EDIT_EXPENSE_REPORT_VIEW_COMPLETE:String = "initializeEditExpenseReportViewComplete";

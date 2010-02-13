@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<mx:TitleWindow
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        close="{close()}"
+        showCloseButton="true"
+        title="Delete Expense Report Confirmation"
+        width="400"
+        >
+
+    <mx:Script>
+        <![CDATA[
+        import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
+
+        import mx.managers.PopUpManager;
+
+            private function confirmDelete():void {
+                dispatchEvent( new ExpenseReportEvent( ExpenseReportEvent.ACTION_DELETE ));
+                close();
+            }
+
+            private function close():void {
+                PopUpManager.removePopUp(this);
+            }
+        ]]>
+    </mx:Script>
+
+    <mx:Text width="100%">
+        <mx:text>
+            Are you sure that you want to delete this expense report, your changes will be lost forever?
+        </mx:text>
+    </mx:Text>
+    <mx:ControlBar>
+        <mx:Button label="Delete Forever" click="confirmDelete()"/>
+        <mx:Button label="No" click="close()"/>
+    </mx:ControlBar>
+</mx:TitleWindow>

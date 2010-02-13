@@ -9,14 +9,24 @@ package com.neosavvy.user.view.secured.expenses.report {
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
 
+    import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
+    import com.neosavvy.user.view.secured.expenses.report.event.ExpenseItemEvent;
+
+    import com.neosavvy.user.view.secured.expenses.report.popup.DeleteConfirmationPanel;
+
+    import flash.display.DisplayObject;
     import flash.events.MouseEvent;
 
     import mx.collections.ArrayCollection;
     import mx.collections.ListCollectionView;
     import mx.containers.Form;
     import mx.controls.AdvancedDataGrid;
+    import mx.core.Application;
+    import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
     import mx.logging.Log;
+
+    import mx.managers.PopUpManager;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.mediator.Mediator;
@@ -41,9 +51,11 @@ package com.neosavvy.user.view.secured.expenses.report {
 
             expenseReportDetail.saveButton.addEventListener(MouseEvent.CLICK, handleSaveButtonClicked);
             expenseReportDetail.refreshButton.addEventListener(MouseEvent.CLICK, handleRefreshButtonClicked);
-            expenseReportDetail.deleteButton.addEventListener(MouseEvent.CLICK, handleDeleteButtonClicked);
+            expenseReportDetail.deleteButton.addEventListener(MouseEvent.CLICK, handleDeleteExpenseReportButtonClicked);
 
             expenseReportDetail.addExpenseItemButton.addEventListener(MouseEvent.CLICK, handleAddExpenseItemButtonClicked);
+
+            expenseReportDetail.expenseReportGrid.addEventListener(ExpenseItemEvent.TYPE, handleExpenseItemEvent);
         }
 
         override public function onRemove():void {
@@ -52,7 +64,7 @@ package com.neosavvy.user.view.secured.expenses.report {
 
             expenseReportDetail.saveButton.removeEventListener(MouseEvent.CLICK, handleSaveButtonClicked);
             expenseReportDetail.refreshButton.removeEventListener(MouseEvent.CLICK, handleRefreshButtonClicked);
-            expenseReportDetail.deleteButton.removeEventListener(MouseEvent.CLICK, handleDeleteButtonClicked);
+            expenseReportDetail.deleteButton.removeEventListener(MouseEvent.CLICK, handleDeleteExpenseReportButtonClicked);
         }
 
         public function get expenseReportDetail():ExpenseReportDetail {
@@ -82,16 +94,18 @@ package com.neosavvy.user.view.secured.expenses.report {
                 ,ApplicationFacade.FIND_PROJECT_TYPES_SUCCESS
 
                 ,ApplicationFacade.FIND_EXPENSE_REPORT_BY_ID_SUCCESS
+                ,ApplicationFacade.DELETE_ACTIVE_EXPENSE_REPORT_SUCCESS
             ];
         }
 
         override public function handleNotification(notification:INotification):void {
             switch(notification.getName()) {
                 case ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT:
+                    resetForm();
                     sendNotification(ApplicationFacade.INITIALIZE_EXPENSE_REPORT_VIEW);
                     break;
                 case ApplicationFacade.NAVIGATE_TO_EDIT_EXPENSE_REPORT:
-
+                    resetForm();
                     break;
                 case ApplicationFacade.GET_PROJECTS_FOR_USER_SUCCESS:
                     expenseReportDetail.availableProjectsCmb.dataProvider = _projectProxy.projects;
@@ -110,11 +124,35 @@ package com.neosavvy.user.view.secured.expenses.report {
                 case ApplicationFacade.FIND_PROJECT_TYPES_SUCCESS:
                     expenseReportDetail.projectTypeCmb.dataProvider = _expenseReportProxy.projectTypes;
                     break;
-
                 case ApplicationFacade.FIND_EXPENSE_REPORT_BY_ID_SUCCESS:
                     handleLoadActiveExpenseReport(_expenseReportProxy.activeExpenseReport);
                     break;
+                case ApplicationFacade.DELETE_ACTIVE_EXPENSE_REPORT_SUCCESS:
+                    resetForm();
+                    break;
             }
+        }
+
+        private function resetForm():void {
+
+            expenseReportDetail.availableProjectsCmb.selectedIndex = -1;
+            expenseReportDetail.locationTextInput.text = null;
+            expenseReportDetail.purposeTextInput.text = null;
+            _expenseItems = new ArrayCollection();
+            expenseReportDetail.expenseReportGrid.dataProvider = _expenseItems;
+
+            resetExpenseItemForm();            
+
+        }
+
+        private function resetExpenseItemForm():void {
+
+            expenseReportDetail.expenseDatePicker.selectedDate = null;
+            expenseReportDetail.expenseTypeCmb.selectedIndex = -1;
+            expenseReportDetail.amountInput.text = null;
+            expenseReportDetail.paymentMethodCmb.selectedIndex = -1;
+            expenseReportDetail.projectTypeCmb.selectedIndex = -1;
+
         }
 
         private function handleLoadActiveExpenseReport(activeExpenseReport:ExpenseReport):void {
@@ -133,7 +171,18 @@ package com.neosavvy.user.view.secured.expenses.report {
             sendNotification(ApplicationFacade.SAVE_EXPENSE_REPORT_REQUEST, params);
         }
 
-        private function handleDeleteButtonClicked(event:MouseEvent):void {
+        var deleteExpenseReportPopup:IFlexDisplayObject;
+        private function handleDeleteExpenseReportButtonClicked(event:MouseEvent):void {
+
+            deleteExpenseReportPopup = PopUpManager.createPopUp(Application.application as DisplayObject, DeleteConfirmationPanel, true);
+            PopUpManager.centerPopUp( deleteExpenseReportPopup );
+            deleteExpenseReportPopup.addEventListener(ExpenseReportEvent.TYPE, handleDeleteConfirmedEvent);
+
+        }
+
+        private function handleDeleteConfirmedEvent(event:ExpenseReportEvent):void {
+            deleteExpenseReportPopup.removeEventListener(ExpenseReportEvent.TYPE, handleDeleteConfirmedEvent);
+            sendNotification(ApplicationFacade.DELETE_ACTIVE_EXPENSE_REPORT_REQUEST);
         }
 
         private function handleRefreshButtonClicked(event:MouseEvent):void {
@@ -145,6 +194,21 @@ package com.neosavvy.user.view.secured.expenses.report {
             var expenseItem:ExpenseItem = getExpenseReportItem();
             _expenseItems.addItem(expenseItem);
             expenseReportDetail.expenseReportGrid.dataProvider = _expenseItems;
+            resetExpenseItemForm();
+        }
+
+        private function handleExpenseItemEvent(event:ExpenseItemEvent):void {
+
+            switch ( event.action ) {
+                case ExpenseItemEvent.ACTION_DELETE:
+                    handleActionDelete( event.expenseItem );
+                    break;
+
+                case ExpenseItemEvent.ACTION_EDIT:
+                    handleActionEdit( event.expenseItem );
+                    break;
+            }
+
         }
 
         private function setProject(project:Project):void {
@@ -197,9 +261,47 @@ package com.neosavvy.user.view.secured.expenses.report {
             return expenseItem;
         }
 
+        private function handleActionEdit(expenseItem:ExpenseItem):void {
 
+            expenseReportDetail.amountInput.text = expenseItem.amount as String;
+            expenseReportDetail.expenseDatePicker.selectedDate = expenseItem.expenseDate;
+            expenseReportDetail.expenseTypeCmb.selectedIndex = findIndexForExpenseItemType( expenseItem.expenseItemType );
+            expenseReportDetail.paymentMethodCmb.selectedIndex = findIndexForPaymentMethod( expenseItem.paymentMethod );
+            expenseReportDetail.projectTypeCmb.selectedIndex = findIndexForProjectType( expenseItem.projectType );
 
+        }
 
+        private function handleActionDelete(expenseItem:ExpenseItem):void {
+            var idx:int = _expenseItems.getItemIndex(expenseItem);
+            _expenseItems.removeItemAt(idx);
+            expenseReportDetail.expenseReportGrid.dataProvider = _expenseItems;
+        }
 
+        private function findIndexForProjectType(projectType:ProjectType):int {
+            for ( var i:int = 0 ; i < _expenseReportProxy.projectTypes.length ; i++ ) {
+                if ( projectType.id == _expenseReportProxy.projectTypes[i].id ) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private function findIndexForPaymentMethod(paymentMethod:PaymentMethod):int {
+            for ( var i:int = 0 ; i < _expenseReportProxy.paymentMethods.length ; i++ ) {
+                if ( paymentMethod.id == _expenseReportProxy.paymentMethods[i].id ) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private function findIndexForExpenseItemType(expenseItemType:ExpenseItemType):int {
+            for ( var i:int = 0 ; i < _expenseReportProxy.expenseTypes.length ; i++ ) {
+                if ( expenseItemType.id == _expenseReportProxy.expenseTypes[i].id ) {
+                    return i;
+                }
+            }
+            return -1;
+        }
     }
 }

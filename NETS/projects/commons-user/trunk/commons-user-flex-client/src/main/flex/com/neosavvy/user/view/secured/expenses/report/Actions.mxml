@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+
+    <mx:Script>
+        <![CDATA[
+
+        import com.neosavvy.user.dto.project.ExpenseItem;
+        import com.neosavvy.user.view.secured.expenses.report.event.ExpenseItemEvent;
+
+        protected function editExpenseItemHandler():void {
+            dispatchEvent(new ExpenseItemEvent(ExpenseItemEvent.ACTION_EDIT, data as ExpenseItem));
+        }
+
+        protected function deleteExpenseItemHandler():void {
+            dispatchEvent(new ExpenseItemEvent(ExpenseItemEvent.ACTION_DELETE, data as ExpenseItem));
+        }
+        ]]>
+    </mx:Script>
+    <mx:Button id="editBtn" label="Edit" toolTip="Edit Expense Item" click="{editExpenseItemHandler()}"/>
+    <mx:Button id="deleteBtn" label="Delete" toolTip="Delete Expense Item" click="{deleteExpenseItemHandler()}"/>
+</mx:HBox>
