@@ -279,7 +279,7 @@ package com.neosavvy.user.view.secured.expenses.report {
 
         private function findIndexForProjectType(projectType:ProjectType):int {
             for ( var i:int = 0 ; i < _expenseReportProxy.projectTypes.length ; i++ ) {
-                if ( projectType.id == _expenseReportProxy.projectTypes[i].id ) {
+                if ( projectType.type == _expenseReportProxy.projectTypes[i].type ) {
                     return i;
                 }
             }
@@ -288,7 +288,7 @@ package com.neosavvy.user.view.secured.expenses.report {
 
         private function findIndexForPaymentMethod(paymentMethod:PaymentMethod):int {
             for ( var i:int = 0 ; i < _expenseReportProxy.paymentMethods.length ; i++ ) {
-                if ( paymentMethod.id == _expenseReportProxy.paymentMethods[i].id ) {
+                if ( paymentMethod.name == _expenseReportProxy.paymentMethods[i].name ) {
                     return i;
                 }
             }
@@ -297,7 +297,7 @@ package com.neosavvy.user.view.secured.expenses.report {
 
         private function findIndexForExpenseItemType(expenseItemType:ExpenseItemType):int {
             for ( var i:int = 0 ; i < _expenseReportProxy.expenseTypes.length ; i++ ) {
-                if ( expenseItemType.id == _expenseReportProxy.expenseTypes[i].id ) {
+                if ( expenseItemType.name == _expenseReportProxy.expenseTypes[i].name ) {
                     return i;
                 }
             }
