@@ -66,6 +66,13 @@
 			<type>swc</type>
 		</dependency>
 
+        <dependency>
+			<groupId>com.neosavvy.grid</groupId>
+			<artifactId>auto-filtering-grid</artifactId>
+			<version>1.3-SNAPSHOT</version>
+			<type>swc</type>
+		</dependency>
+
 		<dependency>
 			<groupId>com.google.flexlib</groupId>
 			<artifactId>flexlib</artifactId>

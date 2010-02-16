@@ -12,8 +12,8 @@
         import mx.collections.ArrayCollection;
 
         private function emailMe():void {
-         var webPageURL:URLRequest = new URLRequest( "mailto:aparrish@neosavvy.com" );
-         navigateToURL(webPageURL, '_blank')
+            var webPageURL:URLRequest = new URLRequest("mailto:aparrish@neosavvy.com");
+            navigateToURL(webPageURL, '_blank')
         }
 
         [Embed(source="/icons/neosavvy_logo_sm.png")]
@@ -84,6 +84,8 @@
             stateInformation.addItem(new State("Wisconsin", "Wis.", "WI", "Madison", "Central"));
             stateInformation.addItem(new State("Wyoming", "Wyo.", "WY", "Cheyenne", "Mountain"));
             stateInformation.addItem(new State("Empty", "Emp", null, "Blah", "Central"));
+
+            grid.dataProvider = stateInformation;
         }
 
     ]]>
@@ -120,35 +122,48 @@
             <mx:Label text="States" styleName="titleLbl"/>
             <mx:Spacer width="100%"/>
             <mx:Button label="Apply Data To Grid" click="{applyData()}"/>
+            <mx:Button label="Reset Filters" click="{grid.resetFilters()}"/>
+            <mx:Button label="Reset Default Sort" click="{grid.setDefaultSort()}"/>
         <mx:Button label="Clear Grid" click="{grid.dataProvider = new ArrayCollection()}"/>
         </mx:HBox>
-
-        <mx:AdvancedDataGrid
+        <grid:PickFilterGrid
                 y="{titleBox.height}"
                 id="grid"
                 width="100%"
                 height="100%"
                 horizontalScrollPolicy="on"
                 sortExpertMode="true"
-                dataProvider="{stateInformation}">
-            <mx:columns>
-                <mx:AdvancedDataGridColumn
+                autoResizeColumnHeaders="true"
+                dataProvider="{stateInformation}"
+                >
+            <grid:columns>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="false"
                         dataField="name"
-                        headerText="Name"/>
-                <mx:AdvancedDataGridColumn
+                        headerText="Name"
+                        removable="false"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
                         dataField="abbreviation"
                         headerText="Abbreviation"/>
-                <mx:AdvancedDataGridColumn
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="true"
                         dataField="capital"
                         headerText="Capital"/>
-                <mx:AdvancedDataGridColumn
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="true"
                         dataField="postalCode"
                         headerText="Postal Code"/>
-                <mx:AdvancedDataGridColumn
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="true"
                         dataField="timeZone"
                         headerText="Time Zone"/>
-            </mx:columns>
-        </mx:AdvancedDataGrid>
+            </grid:columns>
+        </grid:PickFilterGrid>
     </mx:Canvas>
     <pbFilters:Reflector target="{wholepage}" width="100%" falloff="0.7" alpha="0.3" />
 
