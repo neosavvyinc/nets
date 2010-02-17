@@ -1,33 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">	
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-		<groupId>org.sonatype.flexmojos</groupId>
-		<artifactId>flexmojos-flex-super-pom</artifactId>
-		<version>3.5.0</version>
-	</parent>
+    <parent>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-flex-super-pom</artifactId>
+        <version>3.5.0</version>
+    </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.neosavvy.grid</groupId>
-	<artifactId>auto-filtering-grid-top-level</artifactId>
-	<version>1.3-SNAPSHOT</version>
-	<name>auto-filtering-grid-top-level</name>
-	<packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.neosavvy.grid</groupId>
+    <artifactId>auto-filtering-grid-top-level</artifactId>
+    <version>1.3-SNAPSHOT</version>
+    <name>auto-filtering-grid-top-level</name>
+    <packaging>pom</packaging>
 
-	<scm>
-		<connection>scm:svn:http://www.neosavvy.com/svn/internal/projects/auto-filtering-grid/trunk/</connection>
-	    <developerConnection>scm:svn:http://www.neosavvy.com/svn/internal/projects/auto-filtering-grid/trunk/</developerConnection>
-		<url>http://www.neosavvy.com/svn/internal/projects/auto-filtering-grid/trunk/</url>
-	</scm>
+    <scm>
+        <connection>scm:svn:http://www.neosavvy.com/svn/internal/projects/auto-filtering-grid/trunk/</connection>
+        <developerConnection>scm:svn:http://www.neosavvy.com/svn/internal/projects/auto-filtering-grid/trunk/
+        </developerConnection>
+        <url>http://www.neosavvy.com/svn/internal/projects/auto-filtering-grid/trunk/</url>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>nexus</id>
+            <name>Nexus Releases Repository</name>
+            <url>http://maven.neosavvy.com/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>Nexus Snapshots Repository</name>
+            <url>http://maven.neosavvy.com/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <site>
+            <id>www.neosavvy.com</id>
+            <url>scp://www.neosavvy.com/var/www/auto-filtering-grid/</url>
+        </site>
+    </distributionManagement>
 
     <properties>
-        <flex.version>3.5.0.12683</flex.version>
+        <flex.version>3.4.0.9271</flex.version>
         <flex.mojos.maven.version>3.5.0</flex.mojos.maven.version>
-	</properties>
-    
-	<modules>
-		<module>auto-filtering-grid</module>
-		<module>auto-filtering-grid-ref-impl</module>
+    </properties>
+
+    <modules>
+        <module>auto-filtering-grid</module>
+        <module>auto-filtering-grid-ref-impl</module>
         <module>auto-filtering-grid-picker</module>
         <module>auto-filtering-grid-picker-ref-impl</module>
     </modules>
@@ -53,20 +72,20 @@
     <build>
         <pluginManagement>
             <plugins>
-              <plugin>
-                <groupId>org.sonatype.flexmojos</groupId>
-                <artifactId>flexmojos-maven-plugin</artifactId>
-                <version>${flex.mojos.maven.version}</version>
-                <dependencies>
-                  <dependency>
-                    <groupId>com.adobe.flex</groupId>
-                    <artifactId>compiler</artifactId>
-                    <version>${flex.version}</version>
-                    <type>pom</type>
-                  </dependency>
-                </dependencies>
-              </plugin>
-            </plugins>            
+                <plugin>
+                    <groupId>org.sonatype.flexmojos</groupId>
+                    <artifactId>flexmojos-maven-plugin</artifactId>
+                    <version>${flex.mojos.maven.version}</version>
+                    <dependencies>
+                        <dependency>
+                            <groupId>com.adobe.flex</groupId>
+                            <artifactId>compiler</artifactId>
+                            <version>${flex.version}</version>
+                            <type>pom</type>
+                        </dependency>
+                    </dependencies>
+                </plugin>
+            </plugins>
         </pluginManagement>
     </build>
 </project>
