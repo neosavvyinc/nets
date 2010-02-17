@@ -60,7 +60,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="adminExecutor" ref="runAsExecutor" />
     </bean>
 
-    <bean id="expenseReportService" class="com.neosavvy.user.service.MockExpenseServiceImpl">
+    <bean id="expenseReportService" class="com.neosavvy.user.service.MockExpenseServiceImpl" init-method="initializeBean">
     </bean>
 
     <bean id="mailService" class="com.neosavvy.user.service.MailServiceImpl">

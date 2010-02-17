@@ -2,6 +2,8 @@ package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.*;
+import com.neosavvy.user.util.EnumProxy;
+import flex.messaging.io.PropertyProxyRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,6 +88,10 @@ public class MockExpenseServiceImpl implements ExpenseService {
         paymentMethods.add(new StandardPaymentMethod(3L,"Corp Card","Expense was on the corporate card and will not be reimbursed"));
     }
 
+    public void initializeBean() {
+        PropertyProxyRegistry.getRegistry().register(ExpenseReportStatus.class, new EnumProxy());
+    }
+
     public Long saveExpenseReport(Project p, ExpenseReport report, List<ExpenseItem> expenseItems) {
 
         logger.debug("Project info===========");
@@ -97,12 +103,21 @@ public class MockExpenseServiceImpl implements ExpenseService {
         logger.debug(report.getOwnerUsername());
         logger.debug(report.getPurpose());
 
-        report.setId(++idSequence);
+        if ( report.getId() == null){
+            report.setId(++idSequence);
+        }
+        
         report.setExpenseItems(expenseItems);
         report.setProject(p);
+        if ( report.getStatus() == null ) {
+            report.setStatus(ExpenseReportStatus.OPEN);
+        }
+
+        if ( expenseReports.containsKey( report.getId() ) ) {
+            expenseReports.remove(report.getId());
+        }
 
         expenseReports.put(report.getId(),report);
-
         return report.getId();
     }
 
@@ -116,11 +131,25 @@ public class MockExpenseServiceImpl implements ExpenseService {
         return expenseReports.get(id);
     }
 
-    public List<ExpenseReport> findExpenseReportsForUser(UserDTO user) {
+    public List<ExpenseReport> findOpenExpenseReportsForUser(UserDTO user) {
+        return findExpenseReportForUserAndStatus(user, ExpenseReportStatus.OPEN);
+    }
+
+    public List<ExpenseReport> findSubmittedReportsForUser(UserDTO user) {
+        return findExpenseReportForUserAndStatus(user, ExpenseReportStatus.SUBMITTED);
+    }
+
+    public List<ExpenseReport> findReimbursedReportsForUser(UserDTO user) {
+        return findExpenseReportForUserAndStatus(user, ExpenseReportStatus.REIMBURSEMENT_SENT);
+    }
+
+    private List<ExpenseReport> findExpenseReportForUserAndStatus(UserDTO user, ExpenseReportStatus status) {
         ArrayList<ExpenseReport> arrayList = new ArrayList<ExpenseReport>();
         Set<Map.Entry<Long,ExpenseReport>> entries = expenseReports.entrySet();
         for (Map.Entry<Long, ExpenseReport> entry : entries) {
-            arrayList.add(entry.getValue());
+            if ( entry.getValue().getStatus() == status ) {
+                arrayList.add(entry.getValue());
+            }
         }
         return arrayList;
     }
@@ -136,4 +165,5 @@ public class MockExpenseServiceImpl implements ExpenseService {
     public List<ProjectType> findProjectTypes() {
         return MockExpenseServiceImpl.projectTypes;
     }
+
 }

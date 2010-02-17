@@ -39,7 +39,7 @@ package com.neosavvy.user.view.secured.leftNavigation.employee {
         }
 
         private function handleViewSubmittedExpensesButtonClicked(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.NAVIGATE_TO_VIEW_APPROVED_EXPENSE_REPORTS);
+            sendNotification(ApplicationFacade.NAVIGATE_TO_VIEW_SUBMITTED_EXPENSE_REPORTS);
         }
 
         private function handleViewOpenExpensesButtonClicked(event:MouseEvent):void {

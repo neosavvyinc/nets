@@ -7,6 +7,10 @@
         import com.neosavvy.user.dto.project.ExpenseReport;
         import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
 
+        private function submitExpenseHandler():void {
+            dispatchEvent(new ExpenseReportEvent(ExpenseReportEvent.ACTION_SUBMIT, data as ExpenseReport));
+        }
+
         protected function editExpenseHandler():void {
             dispatchEvent(new ExpenseReportEvent(ExpenseReportEvent.ACTION_EDIT, data as ExpenseReport));
         }
@@ -14,4 +18,5 @@
         ]]>
     </mx:Script>
     <mx:Button id="editBtn" label="Edit" toolTip="Edit Expense Report" click="{editExpenseHandler()}"/>
+    <mx:Button id="submitBtn" label="Submit" toolTip="Submit Expense Report" click="{submitExpenseHandler()}"/>
 </mx:HBox>

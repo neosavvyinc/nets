@@ -73,6 +73,8 @@ public class ExpenseReport extends BaseDTO implements SecuredObject<ExpenseRepor
     @OneToMany(mappedBy = "expenseReport")
     private List<ExpenseItem> expenseItems;
 
+    private ExpenseReportStatus status;
+
     public Date getEndDate() {
         return endDate;
     }
@@ -127,6 +129,14 @@ public class ExpenseReport extends BaseDTO implements SecuredObject<ExpenseRepor
 
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
+    }
+
+    public ExpenseReportStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(ExpenseReportStatus status) {
+        this.status = status;
     }
 
     public UserDTO getOwner() {

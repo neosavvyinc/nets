@@ -36,13 +36,17 @@ public interface ExpenseService {
     public void deleteExpenseReport(ExpenseReport report);
 
     public ExpenseReport findExpenseReportById(Long id);
-    
-    public List<ExpenseReport> findExpenseReportsForUser(UserDTO user);
 
     public List<PaymentMethod> findPaymentMethods();
 
     public List<ExpenseItemType> findExpenseItemTypes();
 
     public List<ProjectType> findProjectTypes();
+
+    public List<ExpenseReport> findOpenExpenseReportsForUser(UserDTO user);
+
+    public List<ExpenseReport> findSubmittedReportsForUser(UserDTO user);
+
+    public List<ExpenseReport> findReimbursedReportsForUser(UserDTO user);
 
 }

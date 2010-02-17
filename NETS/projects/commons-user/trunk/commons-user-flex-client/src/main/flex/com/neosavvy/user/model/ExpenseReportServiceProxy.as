@@ -26,10 +26,11 @@ package com.neosavvy.user.model {
 
         private var _activeExpenseReport:ExpenseReport;
         private var _activeExpenseReportId:Number;
-        private var _paymentMethods:ArrayCollection = null;
-        private var _expenseTypes:ArrayCollection = null;
-        private var _projectTypes:ArrayCollection = null;
-        private var _openExpenseReports:ArrayCollection = null;
+        private var _paymentMethods:ArrayCollection             = null;
+        private var _expenseTypes:ArrayCollection               = null;
+        private var _projectTypes:ArrayCollection               = null;
+        private var _openExpenseReports:ArrayCollection         = null;
+        private var _submittedExpenseReports:ArrayCollection    = null;
 
         public function get paymentMethods():ArrayCollection {
             return _paymentMethods;
@@ -79,6 +80,14 @@ package com.neosavvy.user.model {
             _openExpenseReports = value;
         }
 
+        public function get submittedExpenseReports():ArrayCollection {
+            return _submittedExpenseReports;
+        }
+
+        public function set submittedExpenseReports(value:ArrayCollection):void {
+            _submittedExpenseReports = value;
+        }
+
         public function saveExpenseReport(p:Project, report:ExpenseReport , expenseItems:ArrayCollection, responder:IResponder):void {
             var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
             addCallbackHandler(service, responder);
@@ -97,10 +106,22 @@ package com.neosavvy.user.model {
             service.deleteExpenseReport(report);
         }
 
-        public function findExpenseReportsForUser( user : UserDTO , responder:IResponder ) : void {
+        public function findOpenExpenseReportsForUser( user : UserDTO , responder:IResponder ) : void {
             var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
             addCallbackHandler(service, responder);
-            service.findExpenseReportsForUser( user );
+            service.findOpenExpenseReportsForUser( user );
+        }
+
+        public function findSubmittedReportsForUser( user : UserDTO , responder:IResponder ) : void {
+            var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
+            addCallbackHandler(service, responder);
+            service.findSubmittedReportsForUser( user );
+        }
+
+        public function findReimbursedReportsForUser( user : UserDTO , responder:IResponder ) : void {
+            var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
+            addCallbackHandler(service, responder);
+            service.findReimbursedReportsForUser( user );
         }
 
         public function findPaymentMethods( responder:IResponder ) : void {

@@ -3,6 +3,7 @@ package com.neosavvy.user.controller.expenses.report.init {
     import com.neosavvy.user.controller.clientManagement.*;
     import com.neosavvy.user.controller.client.GetClientsForCompany;
     import com.neosavvy.user.controller.expenses.report.view.FindOpenExpenseReportsForUser;
+    import com.neosavvy.user.controller.expenses.report.view.FindSubmittedExpenseReportsForUser;
     import com.neosavvy.user.controller.progress.HideProgressBarCommand;
     import com.neosavvy.user.controller.progress.ShowProgressBarCommand;
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
@@ -13,12 +14,12 @@ package com.neosavvy.user.controller.expenses.report.init {
 
     import org.puremvc.as3.multicore.patterns.command.AsyncMacroCommand;
 
-    public class InitializeViewOpenExpenseReportView extends AsyncMacroCommand {
+    public class InitializeViewSubmittedExpenseReportView extends AsyncMacroCommand {
 
         override protected function initializeAsyncMacroCommand():void {
             addSubCommand(ShowProgressBarCommand);
-            addSubCommand(FindOpenExpenseReportsForUser);
-            addSubCommand(InitializeViewOpenExpenseReportViewComplete);
+            addSubCommand(FindSubmittedExpenseReportsForUser);
+            addSubCommand(InitializeViewSubmittedExpenseReportViewComplete);
             addSubCommand(HideProgressBarCommand);
         }
 

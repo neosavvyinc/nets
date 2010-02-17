@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<mx:TitleWindow
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        close="{close()}"
+        showCloseButton="true"
+        title="Submit Expense Report For Approval"
+        width="400"
+        >
+
+    <mx:Script>
+        <![CDATA[
+        import com.neosavvy.user.dto.project.ExpenseReport;
+        import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
+
+        import mx.managers.PopUpManager;
+
+        private var _expenseReport:ExpenseReport;
+
+        private function confirmDelete():void {
+            dispatchEvent(new ExpenseReportEvent(ExpenseReportEvent.ACTION_SUBMIT, expenseReport));
+            close();
+        }
+
+        private function close():void {
+            PopUpManager.removePopUp(this);
+        }
+
+        public function get expenseReport():ExpenseReport {
+            return _expenseReport;
+        }
+
+        public function set expenseReport(value:ExpenseReport):void {
+            _expenseReport = value;
+        }
+        ]]>
+    </mx:Script>
+
+    <mx:Text width="100%">
+        <mx:text>
+            Clicking Submit for Approval will remove this expense report from the open expenses
+            and move it to submitted. It will be processed by the approvers in your company's
+            workflow before it will be reimbursed.
+        </mx:text>
+    </mx:Text>
+    <mx:ControlBar>
+        <mx:Button label="Submit For Approval" click="confirmDelete()"/>
+        <mx:Spacer width="100%"/>
+        <mx:Button label="No" click="close()"/>
+    </mx:ControlBar>
+</mx:TitleWindow>

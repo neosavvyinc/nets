@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<mx:TitleWindow
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        close="{close()}"
+        showCloseButton="true"
+        title="Submit Expense Report For Approval"
+        width="400"
+        >
+
+    <mx:Script>
+        <![CDATA[
+        import com.neosavvy.user.dto.project.ExpenseReport;
+        import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
+
+        import mx.managers.PopUpManager;
+
+        private var _expenseReport:ExpenseReport;
+
+        private function confirmReopen():void {
+            dispatchEvent(new ExpenseReportEvent(ExpenseReportEvent.ACTION_REOPEN, expenseReport));
+            close();
+        }
+
+        private function close():void {
+            PopUpManager.removePopUp(this);
+        }
+
+        public function get expenseReport():ExpenseReport {
+            return _expenseReport;
+        }
+
+        public function set expenseReport(value:ExpenseReport):void {
+            _expenseReport = value;
+        }
+        ]]>
+    </mx:Script>
+
+    <mx:Text width="100%">
+        <mx:text>
+            Clicking Reopen will allow you to go back and edit your expense report.
+            However it will have to be resubmitted and go through the full approval process.
+        </mx:text>
+    </mx:Text>
+    <mx:ControlBar>
+        <mx:Button label="Reopen" click="confirmReopen()"/>
+        <mx:Spacer width="100%"/>
+        <mx:Button label="No" click="close()"/>
+    </mx:ControlBar>
+</mx:TitleWindow>

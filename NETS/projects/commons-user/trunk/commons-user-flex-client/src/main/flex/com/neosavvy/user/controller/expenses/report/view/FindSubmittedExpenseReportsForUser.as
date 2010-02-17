@@ -14,25 +14,24 @@ package com.neosavvy.user.controller.expenses.report.view {
 
     import org.puremvc.as3.multicore.interfaces.INotification;
 
-    public class FindExpenseReportsForUser extends ResponderAsyncCommand {
+    public class FindSubmittedExpenseReportsForUser extends ResponderAsyncCommand {
 
         override public function execute(notification:INotification):void {
             super.execute(notification);
             var expenseReportProxy:ExpenseReportServiceProxy = facade.retrieveProxy(ExpenseReportServiceProxy.NAME) as ExpenseReportServiceProxy;
             var user:UserDTO = notification.getBody() as UserDTO;
-            expenseReportProxy.findExpenseReportsForUser(user, this);
+            expenseReportProxy.findSubmittedReportsForUser(user, this);
         }
 
         override protected function resultHandler(resultEvent:ResultEvent):void {
             var expenseReportProxy:ExpenseReportServiceProxy = facade.retrieveProxy(ExpenseReportServiceProxy.NAME) as ExpenseReportServiceProxy;
-            expenseReportProxy.openExpenseReports = resultEvent.result as ArrayCollection;
-            sendNotification(ApplicationFacade.FIND_EXPENSE_REPORTS_FOR_USER_SUCCESS);
+            expenseReportProxy.submittedExpenseReports = resultEvent.result as ArrayCollection;
+            sendNotification(ApplicationFacade.FIND_SUBMITTED_EXPENSE_REPORTS_FOR_USER_SUCCESS);
         }
 
         override protected function faultHandler(faultEvent:FaultEvent):void {
             RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
-            sendNotification(ApplicationFacade.FIND_EXPENSE_REPORTS_FOR_USER_FAILURE);
+            sendNotification(ApplicationFacade.FIND_SUBMITTED_EXPENSE_REPORTS_FOR_USER_FAILURE);
         }
-
     }
 }

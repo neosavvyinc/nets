@@ -6,6 +6,8 @@ package com.neosavvy.user.view.secured.expenses.open.event {
     public class ExpenseReportEvent extends Event {
         public static const TYPE:String = "expenseReportEvent";
 
+        public static const ACTION_REOPEN:String = "reopen";
+        public static const ACTION_SUBMIT:String = "submit";
         public static const ACTION_DELETE:String = "delete";
         public static const ACTION_EDIT:String = "edit";
 
@@ -26,6 +28,7 @@ package com.neosavvy.user.view.secured.expenses.open.event {
         public function get action():String {
             return _action;
         }
+
 
     }
 }
