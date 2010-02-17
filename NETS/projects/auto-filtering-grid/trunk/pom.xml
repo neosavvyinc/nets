@@ -33,10 +33,6 @@
             <name>Nexus Snapshots Repository</name>
             <url>http://maven.neosavvy.com/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
-        <site>
-            <id>www.neosavvy.com</id>
-            <url>scp://www.neosavvy.com/var/www/auto-filtering-grid/</url>
-        </site>
     </distributionManagement>
 
     <properties>
