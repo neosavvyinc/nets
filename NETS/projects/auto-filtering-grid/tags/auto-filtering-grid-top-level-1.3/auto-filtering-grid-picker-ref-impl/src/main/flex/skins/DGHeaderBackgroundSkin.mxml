@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GraphicBorderSkin xmlns="http://www.degrafa.com/2007" xmlns:mx="http://www.adobe.com/2006/mxml">
+
+	<mx:Script>
+		<![CDATA[
+			import mx.utils.ColorUtil;
+
+			[Bindable] private var _skinWidth:Number;
+			[Bindable] private var _skinHeight:Number;
+
+			//Styles
+			[Bindable] private var _fillColor:uint = 0xffffff;
+			[Bindable] private var _downColor:uint = 0x000000;			
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				
+				_skinWidth = unscaledWidth;
+				_skinHeight = unscaledHeight;	
+			}
+		]]>
+	</mx:Script>
+
+	<!-- _______________ Strokes, Fills, Filters _______________ -->
+
+	<strokes>
+		<SolidStroke id="separatorStroke" color="#d7d9db" weight="1" alpha="1"/>
+		<SolidStroke id="borderStroke" color="#d7d9db" weight="1"/>
+	</strokes>
+	
+	<fills>
+		<LinearGradientFill id="upFill" angle="90">
+			<GradientStop ratio="0" color="{ColorUtil.adjustBrightness(_fillColor, 0)}"/>
+			<GradientStop ratio=".5" color="{ColorUtil.adjustBrightness(_fillColor,-30)}"/>
+			<GradientStop ratio=".5" color="{ColorUtil.adjustBrightness(_fillColor,-40)}"/>
+		</LinearGradientFill>
+		<LinearGradientFill id="overFill" angle="90">
+			<GradientStop ratio="0" color="{ColorUtil.adjustBrightness(_fillColor,-25)}"/>
+			<GradientStop ratio=".5" color="{ColorUtil.adjustBrightness(_fillColor,-60)}"/>
+			<GradientStop ratio=".5" color="{ColorUtil.adjustBrightness(_fillColor,-80)}"/>
+		</LinearGradientFill>
+		<LinearGradientFill id="downFill" angle="90">
+			<GradientStop ratio="0" color="{ColorUtil.adjustBrightness(_fillColor,-50)}"/>
+			<GradientStop ratio=".5" color="{ColorUtil.adjustBrightness(_fillColor,-60)}"/>
+			<GradientStop ratio=".5" color="{ColorUtil.adjustBrightness(_fillColor,-80)}"/>
+		</LinearGradientFill>
+	</fills>
+		
+	<!-- _______________ Drawing _______________ -->
+	
+	<geometry>
+		<!-- Disabled State -->
+		<GeometryComposition state="disabledSkin">
+			<RegularRectangle width="{_skinWidth}" height="{_skinHeight}" fill="{upFill}"/>
+			<HorizontalLine stroke="{separatorStroke}"  y="{_skinHeight - 1}" x="0" x1="{_skinWidth}"/>
+			<VerticalLine stroke="{borderStroke}" y="0" y1="{_skinHeight}"/>	
+		</GeometryComposition>
+	
+		<!-- Up State -->
+		<GeometryComposition>
+			<RegularRectangle width="{_skinWidth}" height="{_skinHeight}" fill="{upFill}"/>
+			<HorizontalLine stroke="{separatorStroke}"  y="{_skinHeight - 1}" x="0" x1="{_skinWidth}"/>
+		</GeometryComposition>
+	
+		<!-- Over State -->
+		<GeometryComposition state="rollOver">
+			<RegularRectangle width="{_skinWidth}" height="{_skinHeight}" fill="{overFill}"/>
+			<HorizontalLine stroke="{separatorStroke}"  y="{_skinHeight - 1}" x="0" x1="{_skinWidth}"/>
+			<VerticalLine stroke="{borderStroke}" y="0" y1="{_skinHeight}"/>				
+		</GeometryComposition>
+	
+		<!-- Down State -->
+		<GeometryComposition state="selectedColor">
+			<RegularRectangle width="{_skinWidth}" height="{_skinHeight}" fill="{downFill}"/>
+			<HorizontalLine stroke="{separatorStroke}"  y="{_skinHeight - 1}" x="0" x1="{_skinWidth}"/>
+			<VerticalLine stroke="{borderStroke}" y="0" y1="{_skinHeight}"/>					
+		</GeometryComposition>
+	</geometry>		
+</GraphicBorderSkin>

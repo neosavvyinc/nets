@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        layout="vertical"
+        paddingRight="20" paddingLeft="20"
+        verticalScrollPolicy="off"
+        xmlns:grid="com.neosavvy.grid.*"
+        xmlns:pbFilters="reflector.*">
+
+    <mx:Script>
+    <![CDATA[
+        import mx.collections.ArrayCollection;
+
+        private function emailMe():void {
+            var webPageURL:URLRequest = new URLRequest("mailto:aparrish@neosavvy.com");
+            navigateToURL(webPageURL, '_blank')
+        }
+
+        [Embed(source="/icons/neosavvy_logo_sm.png")]
+        [Bindable]
+        public var imgCls:Class;
+
+
+        [Bindable]
+        private var stateInformation:ArrayCollection = new ArrayCollection();
+
+        /***
+         * This is a variable to store the grid values and selected filters
+         * when a user clicks on the save button. Restoring this object map
+         * into the grid will restore the state of the filters in the grid
+         * at the time the save button was pressed.
+         */
+        private var selectedGridValues:Object;
+
+        public function applyData():void {
+            stateInformation = new ArrayCollection();
+            stateInformation.addItem(new State("Alabama", "Ala.", "AL", "Montgomery", "Central"));
+            stateInformation.addItem(new State("Alaska", "Alaska", "AK", "Juneau", "Alaskan"));
+            stateInformation.addItem(new State("Arizona", "Ariz.", "AZ", "Phoenix", "Mountain"));
+            stateInformation.addItem(new State("Arkansas", "Ark.", "AR", "Little Rock", "Central"));
+            stateInformation.addItem(new State("California", "Calif.", "CA", "Sacramento", "Pacific"));
+            stateInformation.addItem(new State("Colorado", "Colo.", "CO", "Denver", "Mountain"));
+            stateInformation.addItem(new State("Connecticut", "Conn.", "CT", "Hartford", "Eastern"));
+            stateInformation.addItem(new State("Delaware", "Del.", "DE", "Dover", "Eastern"));
+            stateInformation.addItem(new State("Florida", "Fla.", "FL", "Tallahassee", "Eastern"));
+            stateInformation.addItem(new State("Georgia", "Ga.", "GA", "Atlanta", "Eastern"));
+            stateInformation.addItem(new State("Hawaii", "Hawaii", "HI", "Honolulu", "Hawaiian"));
+            stateInformation.addItem(new State("Idaho", "Idaho", "ID", "Boise", "Mountain"));
+            stateInformation.addItem(new State("Illinois", "Ill.", "IL", "Springfield", "Central"));
+            stateInformation.addItem(new State("Indiana", "Ind.", "IN", "Indianapolis", "Eastern"));
+            stateInformation.addItem(new State("Iowa", "Iowa", "IA", "Des Moines", "Central"));
+            stateInformation.addItem(new State("Kansas", "Kans.", "KS", "Topeka", "Central"));
+            stateInformation.addItem(new State("Kentucky", "Ky.", "KY", "Frankfort", "Central"));
+            stateInformation.addItem(new State("Louisiana", "La.", "LA", "Baton Rouge", "Central"));
+            stateInformation.addItem(new State("Maine", "Maine", "ME", "Augusta", "Eastern"));
+            stateInformation.addItem(new State("Maryland", "Md.", "MD", "Annapolis", "Eastern"));
+            stateInformation.addItem(new State("Massachusetts", "Mass.", "MA", "Boston", "Eastern"));
+            stateInformation.addItem(new State("Michigan", "Mich.", "MI", "Lansing", "Eastern"));
+            stateInformation.addItem(new State("Minnesota", "Minn.", "MN", "St. Paul", "Central"));
+            stateInformation.addItem(new State("Mississippi", "Miss.", "MS", "Jackson", "Central"));
+            stateInformation.addItem(new State("Missouri", "Mo.", "MO", "Jefferson City", "Central"));
+            stateInformation.addItem(new State("Montana", "Mont.", "MT", "Helena", "Mountain"));
+            stateInformation.addItem(new State("Nebraska", "Nebr.", "NE", "Lincoln", "Central"));
+            stateInformation.addItem(new State("Nevada", "Nev.", "NV", "Carson City", "Pacific"));
+            stateInformation.addItem(new State("New Hampshire", "N.H.", "NH", "Concord", "Eastern"));
+            stateInformation.addItem(new State("New Jersey", "N.J.", "NJ", "Trenton", "Eastern"));
+            stateInformation.addItem(new State("New Mexico", "N.M.", "NM", "Santa Fe", "Mountain"));
+            stateInformation.addItem(new State("New York", "N.Y.", "NY", "Albany", "Eastern"));
+            stateInformation.addItem(new State("North Carolina", "N.C.", "NC", "Raleigh", "Eastern"));
+            stateInformation.addItem(new State("North Dakota", "N.D.", "ND", "Bismarck", "Central"));
+            stateInformation.addItem(new State("Ohio", "Ohio", "OH", "Columbus", "Eastern"));
+            stateInformation.addItem(new State("Oklahoma", "Okla.", "OK", "Oklahoma City", "Central"));
+            stateInformation.addItem(new State("Oregon", "Ore.", "OR", "Salem", "Pacific"));
+            stateInformation.addItem(new State("Pennsylvania", "Pa.", "PA", "Harrisburg", "Eastern"));
+            stateInformation.addItem(new State("Rhode Island", "R.I.", "RI", "Providence", "Eastern"));
+            stateInformation.addItem(new State("South Carolina", "S.C.", "SC", "Columbia", "Eastern"));
+            stateInformation.addItem(new State("South Dakota", "S.D.", "SD", "Pierre", "Central"));
+            stateInformation.addItem(new State("Tennessee", "Tenn.", "TN", "Nashville", "Central"));
+            stateInformation.addItem(new State("Texas", "Tex.", "TX", "Austin", "Central"));
+            stateInformation.addItem(new State("Utah", "Utah", "UT", "Salt Lake City", "Mountain"));
+            stateInformation.addItem(new State("Vermont", "Vt.", "VT", "Montpelier", "Eastern"));
+            stateInformation.addItem(new State("Virginia", "Va.", "VA", "Richmond", "Eastern"));
+            stateInformation.addItem(new State("Washington", "Wash.", "WA", "Olympia", "Pacific"));
+            stateInformation.addItem(new State("West Virginia", "W.Va.", "WV", "Charleston", "Eastern"));
+            stateInformation.addItem(new State("Wisconsin", "Wis.", "WI", "Madison", "Central"));
+            stateInformation.addItem(new State("Wyoming", "Wyo.", "WY", "Cheyenne", "Mountain"));
+            stateInformation.addItem(new State("Empty", "Emp", null, "Blah", "Central"));
+
+            grid.dataProvider = stateInformation;
+        }
+
+    ]]>
+  </mx:Script>
+
+    <mx:Style source="/styles/customDataGrid.css"/>
+    <mx:Panel horizontalAlign="left" width="100%" layout="horizontal" paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
+        <mx:Image source="{imgCls}"/>
+        <mx:Text width="30%">
+            <mx:text>
+                Column 1 Text
+            </mx:text>
+        </mx:Text>
+        <mx:Text width="30%">
+            <mx:text>
+                Column 2 Text
+            </mx:text>
+        </mx:Text>
+        <mx:VBox width="30%" verticalGap="0">
+            <mx:Text width="100%">
+                <mx:text>
+                    Column 3 Text
+                </mx:text>
+            </mx:Text>
+            <mx:Spacer height="30"/>
+            <mx:Label text="Component Author: Adam Parrish"/>
+            <mx:Label text="Thanks to Jaivin Anzalota for Styling expertise"/>
+            <mx:LinkButton label="Contact Me!" click="emailMe()"/>
+        </mx:VBox>
+    </mx:Panel>
+    <mx:Spacer height="10"/>
+    <mx:Canvas id="wholepage" height="100%" width="100%">
+        <mx:HBox id="titleBox" width="100%" styleName="dgTitleBox">
+            <mx:Label text="States" styleName="titleLbl"/>
+            <mx:Spacer width="100%"/>
+            <mx:Button label="Apply Data To Grid" click="{applyData()}"/>
+            <mx:Button label="Reset Filters" click="{grid.resetFilters()}"/>
+            <mx:Button label="Reset Default Sort" click="{grid.setDefaultSort()}"/>
+        <mx:Button label="Clear Grid" click="{grid.dataProvider = new ArrayCollection()}"/>
+        </mx:HBox>
+        <grid:PickFilterGrid
+                y="{titleBox.height}"
+                id="grid"
+                width="100%"
+                height="100%"
+                horizontalScrollPolicy="on"
+                sortExpertMode="true"
+                autoResizeColumnHeaders="true"
+                dataProvider="{stateInformation}"
+                >
+            <grid:columns>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="false"
+                        dataField="name"
+                        headerText="Name"
+                        removable="false"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        dataField="abbreviation"
+                        headerText="Abbreviation"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="true"
+                        dataField="capital"
+                        headerText="Capital"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="true"
+                        dataField="postalCode"
+                        headerText="Postal Code"/>
+                <grid:AutoFilteringGridColumn
+                        enabledByDefault="true"
+                        autoFilterEnabled="true"
+                        dataField="timeZone"
+                        headerText="Time Zone"/>
+            </grid:columns>
+        </grid:PickFilterGrid>
+    </mx:Canvas>
+    <pbFilters:Reflector target="{wholepage}" width="100%" falloff="0.7" alpha="0.3" />
+
+</mx:Application>
