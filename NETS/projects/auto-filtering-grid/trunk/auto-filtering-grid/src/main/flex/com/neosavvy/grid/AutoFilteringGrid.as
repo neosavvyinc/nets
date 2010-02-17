@@ -176,9 +176,27 @@ public class AutoFilteringGrid extends AdvancedDataGrid
             //Ensure that at least one value in the selection matches the incoming object
             var typeFilterValues:Array = _activeFilters[filterType] as Array;
             for each (var value:String in typeFilterValues) {
-                if (value == item[filterType]) {
-                    matches[filterType] = true;
-                    break;
+                var itemValue:* = item[filterType];
+                if (itemValue is String)
+                {
+                    if(value == itemValue) {
+                        matches[filterType] = true;
+                        break;
+                    }
+                }
+                else if ( itemValue is ArrayCollection )
+                {
+                    // the type from the passed in object's data is an array collection
+                    // so one must iterative over possible values of that array collection
+                    // and check to see if they have a match for the selected filter
+                    for each ( var itemVal:Object in itemValue )
+                    {
+                        if( itemVal.toString() == value )
+                        {
+                            matches[filterType] = true;
+                            break;
+                        }
+                    }
                 }
             }
 

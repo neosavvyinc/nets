@@ -33,6 +33,7 @@
         private var selectedGridValues:Object;
 
         public function applyData():void {
+            stateInformation = new ArrayCollection();
             stateInformation.addItem(new State("Alabama", "Ala.", "AL", "Montgomery", "Central"));
             stateInformation.addItem(new State("Alaska", "Alaska", "AK", "Juneau", "Alaskan"));
             stateInformation.addItem(new State("Arizona", "Ariz.", "AZ", "Phoenix", "Mountain"));

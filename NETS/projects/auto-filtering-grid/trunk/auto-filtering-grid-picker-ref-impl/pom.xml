@@ -37,7 +37,7 @@
 					<locales>
 						<param>en_US</param>
 					</locales>
-					<sourceFile>./UnitedStateCapitals.mxml</sourceFile>
+					<sourceFile>./ContractResources.mxml</sourceFile>
                     <configurationReport>true</configurationReport>
 				</configuration>
 				<dependencies>

@@ -216,7 +216,17 @@ public class FilterSelectorDropdown extends VBox
 
                 if (object.hasOwnProperty(_adgListData.dataField)) {
                     var valueFromObject:Object = object[_adgListData.dataField];
-                    uniqueFilterValueMap[valueFromObject] = valueFromObject;
+
+                    if ( valueFromObject is String )
+                    {
+                        uniqueFilterValueMap[valueFromObject] = valueFromObject;
+                    }
+                    else if ( valueFromObject is ArrayCollection )
+                    {
+                        for each ( var valueFromArrayCollection:Object in valueFromObject ) {
+                            uniqueFilterValueMap[valueFromArrayCollection.toString()] = valueFromArrayCollection.toString();
+                        }
+                    }
                 }
 
             }
@@ -228,9 +238,13 @@ public class FilterSelectorDropdown extends VBox
             var uniqueCollection:ArrayCollection = new ArrayCollection();
 
             for each (var fv:Object in uniqueFilterValueMap) {
-                var isFilterActiveInGrid:Boolean = activeFilters.hasOwnProperty(fv)
-                var fvVO:AutoFilteringDropdownVO = new AutoFilteringDropdownVO(fv as String, isFilterActiveInGrid);
-                uniqueCollection.addItem(fvVO);
+
+                if ( fv is String )
+                {
+                    var isFilterActiveInGrid:Boolean = activeFilters.hasOwnProperty(fv)
+                    var fvVO:AutoFilteringDropdownVO = new AutoFilteringDropdownVO(fv as String, isFilterActiveInGrid);
+                    uniqueCollection.addItem(fvVO);
+                }
             }
 
             sortCollectionOnField(uniqueCollection, ["displayValue"]);
