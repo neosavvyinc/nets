@@ -1,8 +1,10 @@
 package com.neosavvy.user.dao.companyManagement;
 
 import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
+import com.neosavvy.user.util.ProjectTestUtil;
 import org.junit.Test;
 import org.junit.Assert;
 
@@ -20,8 +22,10 @@ import java.util.List;
 public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase {
     @Test
 	public void testSaveUserInvite() {
-        cleanupTables();
         UserInviteDTO userInvite = createTestUserInvite();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
+        testCompany = companyDAO.saveCompany(testCompany);
+        userInvite.setCompany(testCompany);
 
 		userInviteDAO.saveUserInvite(userInvite);
 		Assert.assertTrue(userInvite.getId() > 0);
@@ -29,11 +33,13 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testDeleteUserInvite() {
-        cleanupTables();
         int numRows = countRowsInTable("USER_INVITE");
         Assert.assertEquals("The table should be empty", 0, numRows);
 
         UserInviteDTO userInvite = createTestUserInvite();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
+        testCompany = companyDAO.saveCompany(testCompany);
+        userInvite.setCompany(testCompany);
         userInviteDAO.saveUserInvite(userInvite);
 
         numRows = countRowsInTable("USER_INVITE");
@@ -47,9 +53,11 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindUserInviteById() {
-        cleanupTables();
 
         UserInviteDTO userInvite = createTestUserInvite();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
+        testCompany = companyDAO.saveCompany(testCompany);
+        userInvite.setCompany(testCompany);
         userInviteDAO.saveUserInvite(userInvite);
 
         int numRows = countRowsInTable("USER_INVITE");
@@ -63,9 +71,10 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testGetUserInvites() {
-        cleanupTables();
-
         UserInviteDTO userInvite = createTestUserInvite();
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
+        testCompany = companyDAO.saveCompany(testCompany);
+        userInvite.setCompany(testCompany);
         userInviteDAO.saveUserInvite(userInvite);
 
         int numRows = countRowsInTable("USER_INVITE");
@@ -128,8 +137,13 @@ public class TestUserInviteDAO extends BaseSpringAwareDAOTestCase {
     private void setupCriteriaBasedSearchTest() {
         cleanupTables();
 
+        CompanyDTO testCompany = ProjectTestUtil.createTestCompany();
+        testCompany = companyDAO.saveCompany(testCompany);
+
         UserInviteDTO userInvite = createTestUserInvite();
+        userInvite.setCompany(testCompany);
         UserInviteDTO userInvite2 = createAltTestUserInvite();
+        userInvite2.setCompany(testCompany);
 
         userInviteDAO.saveUserInvite(userInvite);
         userInviteDAO.saveUserInvite(userInvite2);

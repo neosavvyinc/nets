@@ -32,7 +32,7 @@ import mx.rpc.IResponder;
             }
             catch (e:Error) {
                 LOGGER.error(e.message + "\n" + e.getStackTrace());
-                sendNotification(ApplicationFacade.ERROR, "An unexpected error occurred.  Please try again or contact support@neosavvy.com for assistance.");
+                sendNotification(ApplicationFacade.DISPLAY_ERROR, e.message);
             }
 
             commandComplete();

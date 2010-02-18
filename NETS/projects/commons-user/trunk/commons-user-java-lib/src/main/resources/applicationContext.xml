@@ -19,9 +19,4 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <jee:jndi-lookup id="entityManagerFactory" jndi-name="java:comp/env/NetsPU" />
     <jee:jndi-lookup id="dataSource" jndi-name="jdbc/CommonsUserDS"/>
 
-
-    <!--bean id="databaseInitializerBean" class="com.neosavvy.user.util.DatabaseInitializerListener">
-        <property name="dataSource" ref="dataSource"/>
-    </bean-->
-
 </beans>

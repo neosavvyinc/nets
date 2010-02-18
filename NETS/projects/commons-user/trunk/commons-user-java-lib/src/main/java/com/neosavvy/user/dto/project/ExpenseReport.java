@@ -4,8 +4,10 @@ import com.neosavvy.security.SecuredObject;
 import com.neosavvy.user.dto.base.BaseDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import fineline.focal.common.types.v1.EntityListenerManager;
+import flex.messaging.annotations.FlexField;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 /*************************************************************************
@@ -70,9 +72,10 @@ public class ExpenseReport extends BaseDTO implements SecuredObject<ExpenseRepor
     @Column(name = "LOCATION")
     private String location;
 
-    @OneToMany(mappedBy = "expenseReport")
+    @OneToMany(mappedBy = "expenseReport", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<ExpenseItem> expenseItems;
 
+    @Enumerated(EnumType.STRING)
     private ExpenseReportStatus status;
 
     public Date getEndDate() {
@@ -83,6 +86,7 @@ public class ExpenseReport extends BaseDTO implements SecuredObject<ExpenseRepor
         this.endDate = endDate;
     }
 
+    @FlexField(fieldType = FlexField.FlexFieldType.Excluded)
     public List<ExpenseItem> getExpenseItems() {
         return expenseItems;
     }
@@ -165,5 +169,30 @@ public class ExpenseReport extends BaseDTO implements SecuredObject<ExpenseRepor
         }
 
         return null;
+    }
+
+    @FlexField(fieldType = FlexField.FlexFieldType.Transient)
+    public BigDecimal getTotalExpenseAmount() {
+        BigDecimal total = BigDecimal.valueOf(0);
+
+        for (ExpenseItem item : getExpenseItems()) {
+            total.add(item.getAmount());
+        }
+
+        return total.setScale(2, BigDecimal.ROUND_HALF_UP);
+    }
+
+    @FlexField(fieldType = FlexField.FlexFieldType.Transient)
+    public BigDecimal getTotalReimbursableExpenseAmount() {
+        BigDecimal total = BigDecimal.valueOf(0);
+
+        for (ExpenseItem item : getExpenseItems()) {
+            if (item.getPaymentMethod().getId().equals(PaymentMethod.PAYMENT_METHOD_EMPLOYEE_PAID_ID)) {
+                total.add(item.getAmount());
+            }
+        }
+
+        return total.setScale(2, BigDecimal.ROUND_HALF_UP);
+
     }
 }

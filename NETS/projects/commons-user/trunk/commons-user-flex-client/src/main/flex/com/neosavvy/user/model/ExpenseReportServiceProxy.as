@@ -25,7 +25,6 @@ package com.neosavvy.user.model {
         }
 
         private var _activeExpenseReport:ExpenseReport;
-        private var _activeExpenseReportId:Number;
         private var _paymentMethods:ArrayCollection             = null;
         private var _expenseTypes:ArrayCollection               = null;
         private var _projectTypes:ArrayCollection               = null;
@@ -64,14 +63,6 @@ package com.neosavvy.user.model {
             _activeExpenseReport = value;
         }
 
-        public function set activeExpenseReportId(activeExpenseReportId:Number):void {
-            _activeExpenseReportId = activeExpenseReportId;
-        }
-
-        public function get activeExpenseReportId():Number {
-            return _activeExpenseReportId;
-        }
-
         public function get openExpenseReports():ArrayCollection {
             return _openExpenseReports;
         }
@@ -91,7 +82,8 @@ package com.neosavvy.user.model {
         public function saveExpenseReport(p:Project, report:ExpenseReport , expenseItems:ArrayCollection, responder:IResponder):void {
             var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
             addCallbackHandler(service, responder);
-            service.saveExpenseReport(p,report,expenseItems);
+            report.project = p;
+            service.saveExpenseReport(report, expenseItems);
         }
 
         public function findExpenseReportById(id:Number, responder:IResponder):void {

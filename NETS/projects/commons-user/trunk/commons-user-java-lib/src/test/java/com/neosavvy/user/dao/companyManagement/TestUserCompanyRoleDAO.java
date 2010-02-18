@@ -2,6 +2,7 @@ package com.neosavvy.user.dao.companyManagement;
 
 import com.neosavvy.user.dao.BaseSpringAwareDAOTestCase;
 import com.neosavvy.user.util.ProjectTestUtil;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
@@ -13,52 +14,22 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: lgleason
- * Date: Dec 9, 2009
- * Time: 12:58:01 PM
- * To change this template use File | Settings | File Templates.
- */
 public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
+    private CompanyDTO testCompany;
+    private UserDTO testUser;
 
-    @Test
-    public void testSaveUserCompanyRole() {
-        cleanupTables();
-        RoleDTO role = ProjectTestUtil.createAdminTestRole();
-        roleDAO.saveRole(role);
-
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
-        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
-
-        Assert.assertTrue("record was added in the db", userCompanyRole.getId() > 0);
-    }
-
-    @Test
-    public void testAltSaveUserCompanyRole() {
-        cleanupTables();
-        RoleDTO role = ProjectTestUtil.createAdminTestRole();
-        roleDAO.saveRole(role);
+    @Before
+    public void setupUserCompanyRole() {
         CompanyDTO company = ProjectTestUtil.createTestCompany();
-        companyDAO.saveCompany(company);
+        testCompany = companyDAO.saveCompany(company);
 
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
-        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
-
-        Assert.assertTrue("Record was added in the db", userCompanyRole.getId() > 0);
+        UserDTO user = ProjectTestUtil.createTestUser();
+        testUser = userDAO.saveUser(user);
     }
 
     @Test
     public void testGetUserCompanyRoleData() {
-        cleanupTables();
-        RoleDTO role = ProjectTestUtil.createAdminTestRole();
-        roleDAO.saveRole(role);
-        CompanyDTO company = ProjectTestUtil.createTestCompany();
-        companyDAO.saveCompany(company);
-
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
-        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
-
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole();
         List<UserCompanyRoleDTO> roles = findUserCompanyRoles();
         Assert.assertFalse(roles.isEmpty());
         UserCompanyRoleDTO userCompanyRoleReturned = roles.get(0);
@@ -66,113 +37,96 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
                 userCompanyRole.getId(),
                 userCompanyRoleReturned.getId());
         Assert.assertEquals("role in the returned object is the same one we inserted in it",
-                role,
+                adminRole,
                 userCompanyRoleReturned.getRole());
         Assert.assertEquals("company in the returned object is the same one we inserted in it",
-                company,
+                testCompany,
                 userCompanyRoleReturned.getCompany());        
     }
 
     @Test
     public void testFindUserCompanyRoleById() {
-        cleanupTables();
-        RoleDTO role = ProjectTestUtil.createAdminTestRole();
-        roleDAO.saveRole(role);
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
-        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+        Assert.assertEquals("Num of rows is equal to 0", 0, countRowsInTable("USER_COMPANY_ROLE"));
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole();
+        Assert.assertEquals("Num of rows is equal to 1", 1, countRowsInTable("USER_COMPANY_ROLE"));
 
-        int numRows = countRowsInTable("USER_COMPANY_ROLE");
-
-        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
 
         UserCompanyRoleDTO userCompanyRoleFound = userCompanyRoleDAO.findUserCompanyRoleById(userCompanyRole.getId());
-
-        Assert.assertNotNull("User object was found by id " + role.getId(), userCompanyRoleFound);
+        Assert.assertNotNull("User object was found by id " + adminRole.getId(), userCompanyRoleFound);
     }
 
     @Test
     public void testFindUserCompanyRoleByRoleId() {
-        cleanupTables();
-        RoleDTO role = ProjectTestUtil.createAdminTestRole();
-        roleDAO.saveRole(role);
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
-        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+        Assert.assertEquals("Num of rows is equal to 0", 0, countRowsInTable("USER_COMPANY_ROLE"));
+        createTestUserCompanyRole();
+        Assert.assertEquals("Num of rows is equal to 1", 1, countRowsInTable("USER_COMPANY_ROLE"));
 
-        int numRows = countRowsInTable("USER_COMPANY_ROLE");
-
-        Assert.assertEquals("Num of rows is equal to 1", 1, numRows);
-
+        UserCompanyRoleDTO userCompanyRole = new UserCompanyRoleDTO();
+        userCompanyRole.setRole(adminRole);
         UserCompanyRoleDTO userCompanyRoleFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRole).get(0);
 
         Assert.assertEquals("UserCompanyRole object was found by id ",
-                role.getId(),
+                adminRole.getId(),
                 userCompanyRoleFound.getRole().getId());
     }
 
     @Test
     public void testFindUserCompanyRoleByUserId() {
-        cleanupTables();
-        UserDTO user = ProjectTestUtil.createTestUser();
-        userDAO.saveUser(user);
-        RoleDTO role = ProjectTestUtil.createAdminTestRole();
-        roleDAO.saveRole(role);
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, user);
-        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
-        UserCompanyRoleDTO altUserCompanyRole = createTestUserCompanyRole(role, null, null);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole();
+        UserDTO altUser = ProjectTestUtil.createAltTestUser();
+        altUser = userDAO.saveUser(altUser);
+        UserCompanyRoleDTO altUserCompanyRole = createTestUserCompanyRole(adminRole, testCompany, altUser);
         userCompanyRoleDAO.saveUserCompanyRole(altUserCompanyRole);
 
         int numRows = countRowsInTable("USER_COMPANY_ROLE");
 
         Assert.assertEquals("Num of rows is equal to 1", 2, numRows);
+        UserCompanyRoleDTO filter = new UserCompanyRoleDTO();
+        filter.setUser(testUser);
+        List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDAO.findUserCompanyRoles(filter);
 
-        List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRole);
-
-        Assert.assertEquals("UserCompanyRole object was found by id ",
-                user.getId(),
-                userCompanyRolesFound.get(0).getUser().getId());
         Assert.assertEquals("found only the one usercompany role that we saved and searched for ",
                 1,
                 userCompanyRolesFound.size());
+        Assert.assertEquals("UserCompanyRole object was found by id ",
+                testUser.getId(),
+                userCompanyRolesFound.get(0).getUser().getId());
     }
 
     @Test
     public void testFindUserCompanyRoleByCompanyId() {
-        cleanupTables();
-        CompanyDTO company = ProjectTestUtil.createTestCompany();
-        companyDAO.saveCompany(company);
-        RoleDTO role = ProjectTestUtil.createAdminTestRole();
-        roleDAO.saveRole(role);
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, null);
-        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
-        UserCompanyRoleDTO altUserCompanyRole = createTestUserCompanyRole(role, null, null);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole();
+        CompanyDTO altCompany = ProjectTestUtil.createAltTestCompany();
+        companyDAO.saveCompany(altCompany);
+        UserDTO altUser = ProjectTestUtil.createAltTestUser();
+        userDAO.saveUser(altUser);
+        UserCompanyRoleDTO altUserCompanyRole = createTestUserCompanyRole(adminRole, altCompany, altUser);
         userCompanyRoleDAO.saveUserCompanyRole(altUserCompanyRole);
 
         int numRows = countRowsInTable("USER_COMPANY_ROLE");
 
         Assert.assertEquals("Num of rows is equal to 1", 2, numRows);
 
-        List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRole);
+        UserCompanyRoleDTO filter = new UserCompanyRoleDTO();
+        filter.setCompany(testCompany);
+        List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDAO.findUserCompanyRoles(filter);
 
-        Assert.assertEquals("UserCompanyRole object was found by id ",
-                company.getId(),
-                userCompanyRolesFound.get(0).getCompany().getId());
         Assert.assertEquals("found only the one usercompany role that we saved and searched for ",
                 1,
                 userCompanyRolesFound.size());
+        Assert.assertEquals("UserCompanyRole object was found by id ",
+                testCompany.getId(),
+                userCompanyRolesFound.get(0).getCompany().getId());
     }
 
     @Test
     public void testFindUserCompanyRoleByAllThree() {
-        cleanupTables();
-        CompanyDTO company = ProjectTestUtil.createTestCompany();
-        companyDAO.saveCompany(company);
-        RoleDTO role = ProjectTestUtil.createAdminTestRole();
-        roleDAO.saveRole(role);
-        UserDTO user = ProjectTestUtil.createTestUser();
-        userDAO.saveUser(user);
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, company, user);
-        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
-        UserCompanyRoleDTO altUserCompanyRole = createTestUserCompanyRole(role, null, null);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole();
+        CompanyDTO altCompany = ProjectTestUtil.createAltTestCompany();
+        companyDAO.saveCompany(altCompany);
+        UserDTO altUser = ProjectTestUtil.createAltTestUser();
+        userDAO.saveUser(altUser);
+        UserCompanyRoleDTO altUserCompanyRole = createTestUserCompanyRole(adminRole, altCompany, altUser);
         userCompanyRoleDAO.saveUserCompanyRole(altUserCompanyRole);
 
         int numRows = countRowsInTable("USER_COMPANY_ROLE");
@@ -181,21 +135,18 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
 
         List<UserCompanyRoleDTO> userCompanyRolesFound = userCompanyRoleDAO.findUserCompanyRoles(userCompanyRole);
 
-        Assert.assertEquals("UserCompanyRole object was found by id ",
-                company.getId(),
-                userCompanyRolesFound.get(0).getCompany().getId());
         Assert.assertEquals("found only the one usercompany role that we saved and searched for ",
                 1,
                 userCompanyRolesFound.size());
+        Assert.assertEquals("UserCompanyRole object was found by id ",
+                testCompany.getId(),
+                userCompanyRolesFound.get(0).getCompany().getId());
     }
 
     @Test
     public void testDeleteUserCompanyRole() {
         cleanupTables();
-        RoleDTO role = ProjectTestUtil.createAdminTestRole();
-        roleDAO.saveRole(role);
-        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(role, null, null);
-        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole();
 
         int numRows = countRowsInTable("USER_COMPANY_ROLE");
 
@@ -212,5 +163,13 @@ public class TestUserCompanyRoleDAO extends BaseSpringAwareDAOTestCase {
         CriteriaQuery query = builder.createQuery(UserCompanyRoleDTO.class);
         query.from(UserCompanyRoleDTO.class);
         return getEntityManager().createQuery(query).getResultList();
+    }
+
+    private UserCompanyRoleDTO createTestUserCompanyRole() {
+
+        UserCompanyRoleDTO userCompanyRole = createTestUserCompanyRole(adminRole, testCompany, testUser);
+        userCompanyRoleDAO.saveUserCompanyRole(userCompanyRole);
+
+        return userCompanyRole;
     }
 }

@@ -44,8 +44,8 @@ import java.util.Set;
 public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_item_id_seq")
-    @SequenceGenerator(name = "expense_item_id_seq", sequenceName = "expense_item_id_seq", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_report_item_id_seq")
+    @SequenceGenerator(name = "expense_report_item_id_seq", sequenceName = "expense_report_item_id_seq", allocationSize=1)
 	@Column(name="ID")
 	private Long id;
 
@@ -73,7 +73,7 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
     @JoinColumn(name = "EXPENSE_ITEM_TYPE_FK")
     private ExpenseItemType expenseItemType;
 
-    @OneToMany(mappedBy="expenseItem")
+    @OneToMany(mappedBy="expenseItem", fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval=true)
     private Set<ExpenseItemValue> expenseItemValues;
 
     @ManyToOne

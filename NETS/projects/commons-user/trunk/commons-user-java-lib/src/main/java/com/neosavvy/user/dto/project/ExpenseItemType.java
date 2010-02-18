@@ -3,6 +3,7 @@ package com.neosavvy.user.dto.project;
 import com.neosavvy.user.dto.base.AttributeDescriptor;
 
 import javax.persistence.*;
+import java.util.List;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -34,10 +35,59 @@ import javax.persistence.*;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
-@DiscriminatorValue("EXPENSE_ITEM_TYPE")
-public abstract class ExpenseItemType extends AttributeDescriptor {
+@DiscriminatorColumn(name="type")
+public abstract class ExpenseItemType {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_item_type_id_seq")
+    @SequenceGenerator(name = "expense_item_type_id_seq", sequenceName = "expense_item_type_id_seq", allocationSize=1)
+    @Column(name="ID")
+    private Long id;
+
+    @Column(name="NAME")
+    private String name;
+
+    @Column(name="DESCRIPTION")
+    private String description;
+
+    @Column(name="SORT_ORDER")
+    private int sortOrder;
+
+    @OneToMany(mappedBy="expenseItemType")
+    @OrderBy("sortOrder ASC")
+    private List<ExpenseItemDescriptor> descriptors;
+
     public ExpenseItemType(){}
-    public ExpenseItemType(String name, String description) {
-        super(name,description);
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getSortOrder() {
+        return sortOrder;
+    }
+
+    public void setSortOrder(int sortOrder) {
+        this.sortOrder = sortOrder;
     }
 }

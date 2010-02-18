@@ -186,8 +186,10 @@ package com.neosavvy.user.view.secured.expenses.report {
         }
 
         private function handleRefreshButtonClicked(event:MouseEvent):void {
-            var activeExpenseReportId:Number = _expenseReportProxy.activeExpenseReportId;
-            sendNotification(ApplicationFacade.FIND_EXPENSE_REPORT_REQUEST, activeExpenseReportId);
+            if (_expenseReportProxy.activeExpenseReport) {                
+                var activeExpenseReportId:Number = _expenseReportProxy.activeExpenseReport.idNumber;
+                sendNotification(ApplicationFacade.FIND_EXPENSE_REPORT_REQUEST, activeExpenseReportId);
+            }
         }
 
         private function handleAddExpenseItemButtonClicked(event:MouseEvent):void {

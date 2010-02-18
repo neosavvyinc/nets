@@ -17,5 +17,6 @@ public class FlexInitializer implements InitializingBean {
     public void afterPropertiesSet () {
         PropertyProxyRegistry.getRegistry().register(IAnnotatedProxy.class, new AnnotatedBeanProxy());
         PropertyProxyRegistry.getRegistry().register(Exception.class, new ExceptionBeanProxy());
+        PropertyProxyRegistry.getRegistry().register(EnumProxy.class, new EnumProxy());
     }
 }

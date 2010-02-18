@@ -38,6 +38,8 @@ import javax.persistence.*;
 @DiscriminatorColumn( name = "TYPE" )
 public abstract class PaymentMethod extends BaseDTO {
 
+    public static final long PAYMENT_METHOD_EMPLOYEE_PAID_ID = 1;
+    
     protected PaymentMethod(){}
 
     protected PaymentMethod(String name, String description, Long id) {

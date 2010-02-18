@@ -38,7 +38,7 @@ import javax.persistence.*;
 public class CompanyPaymentMethod extends PaymentMethod {
 
     @OneToOne
-    @JoinColumn(name = "COMPANY_ID")
+    @JoinColumn(name = "COMPANY_FK")
     private CompanyDTO company;
 
     public CompanyDTO getCompany() {

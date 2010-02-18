@@ -22,7 +22,7 @@
         </mx:Form>
         <mx:Button id="saveButton" label="Save"/>
         <mx:Button id="deleteButton" label="Delete"/>
-        <mx:Button id="refreshButton" label="Refresh"/>
+        <mx:Button id="refreshButton" label="Refresh" />
     </mx:HBox>
     <mx:VDividedBox width="100%" height="100%">
         <mx:AdvancedDataGrid id="expenseReportGrid" width="100%" height="50%">

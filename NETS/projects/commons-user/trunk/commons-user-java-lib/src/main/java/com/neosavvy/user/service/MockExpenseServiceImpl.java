@@ -88,12 +88,10 @@ public class MockExpenseServiceImpl implements ExpenseService {
         paymentMethods.add(new StandardPaymentMethod(3L,"Corp Card","Expense was on the corporate card and will not be reimbursed"));
     }
 
-    public void initializeBean() {
-        PropertyProxyRegistry.getRegistry().register(ExpenseReportStatus.class, new EnumProxy());
-    }
+    public ExpenseReport saveExpenseReport(ExpenseReport report, List<ExpenseItem> expenseItems) {
 
-    public Long saveExpenseReport(Project p, ExpenseReport report, List<ExpenseItem> expenseItems) {
-
+        Project p = report.getProject();
+        
         logger.debug("Project info===========");
         logger.debug(p.getName());
         logger.debug(p.getCode());
@@ -108,17 +106,12 @@ public class MockExpenseServiceImpl implements ExpenseService {
         }
         
         report.setExpenseItems(expenseItems);
-        report.setProject(p);
-        if ( report.getStatus() == null ) {
-            report.setStatus(ExpenseReportStatus.OPEN);
-        }
 
         if ( expenseReports.containsKey( report.getId() ) ) {
             expenseReports.remove(report.getId());
         }
 
-        expenseReports.put(report.getId(),report);
-        return report.getId();
+        return report;
     }
 
     public void deleteExpenseReport(ExpenseReport report) {

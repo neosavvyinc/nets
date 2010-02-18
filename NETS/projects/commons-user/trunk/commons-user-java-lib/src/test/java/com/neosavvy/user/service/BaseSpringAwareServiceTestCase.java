@@ -7,7 +7,9 @@ import com.neosavvy.user.dao.companyManagement.UserCompanyRoleDAO;
 import com.neosavvy.user.dao.companyManagement.UserDAO;
 import com.neosavvy.user.dto.companyManagement.*;
 import com.neosavvy.user.util.ProjectTestUtil;
+import org.easymock.EasyMock;
 import org.springframework.aop.framework.Advised;
+import org.springframework.mail.MailSender;
 import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.context.SecurityContextHolder;
@@ -39,7 +41,9 @@ public abstract class BaseSpringAwareServiceTestCase extends BaseSpringAwareTest
 
     @Before
     public void setup() {
-        cleanupTables();
+        MailSender mockMailSender = EasyMock.createMock(MailSender.class);
+        getMailServiceImpl().setMailSender(mockMailSender);
+
         adminRole = findOrCreateRole(ProjectTestUtil.createAdminTestRole());
         employeeRole = findOrCreateRole(ProjectTestUtil.createEmployeeTestRole());
     }
@@ -92,6 +96,10 @@ public abstract class BaseSpringAwareServiceTestCase extends BaseSpringAwareTest
         catch (Exception e) {
             throw new RuntimeException("Failed to cast to company service impl", e);
         }
+    }
+
+    protected MailServiceImpl getMailServiceImpl() {
+        return (MailServiceImpl)mailService;
     }
 
     protected UserDTO findOrCreateUser(UserDTO user, CompanyDTO company, RoleDTO role) {

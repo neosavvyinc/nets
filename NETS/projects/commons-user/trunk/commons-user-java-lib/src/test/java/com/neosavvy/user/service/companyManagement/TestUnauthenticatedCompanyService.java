@@ -62,7 +62,7 @@ public class TestUnauthenticatedCompanyService extends TestCompanyService {
 
     @Test(expected = CompanyServiceException.class)
     public void testAddCompanyMissingAdminRole() {
-        cleanupTables();
+        deleteFromTables("ROLE");
         //this expects to throw an exception
         CompanyDTO testCompany = ProjectTestUtil.createAltTestCompany();
         UserDTO testUser = ProjectTestUtil.createTestUser();

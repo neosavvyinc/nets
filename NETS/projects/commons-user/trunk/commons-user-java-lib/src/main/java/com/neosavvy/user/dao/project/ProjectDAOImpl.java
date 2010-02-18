@@ -64,7 +64,9 @@ public class ProjectDAOImpl extends BaseDAO implements ProjectDAO {
     }
 
     public Project findProjectById(long id) {
-        return getEntityManager().find(Project.class, id);
+        Project project = getEntityManager().find(Project.class, id);
+        getEntityManager().refresh(project);
+        return project;
     }
 
     public Project save(Project project) {

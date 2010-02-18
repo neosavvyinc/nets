@@ -1,8 +1,12 @@
 package com.neosavvy.user.dto.project;
 
-import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import com.neosavvy.user.dto.base.AttributeDescriptor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -21,31 +25,18 @@ import javax.persistence.*;
  * is strictly forbidden unless prior written permission is obtained
  * from Neosavvy Incorporated.
  **************************************************************************/
-
-/**
- * User: adamparrish
- * Date: Jan 7, 2010
- * Time: 10:17:04 PM
- */
 @Entity
-@Table(
-    name="COMPANY_EXPENSE_ITEM_TYPE" ,
-    uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"ID"})
-    }
-)
-@DiscriminatorValue("COMPANY_EXPENSE_ITEM_TYPE")
-public class CompanyExpenseItemType extends ExpenseItemType {
-
+@Table(name="EXPENSE_ITEM_DESCRIPTOR")
+public class ExpenseItemDescriptor extends AttributeDescriptor {
     @ManyToOne
-    @JoinColumn(name = "COMPANY_FK")
-    private CompanyDTO company;
+    @JoinColumn(name="EXPENSE_ITEM_TYPE_FK")
+    private ExpenseItemType expenseItemType;
 
-    public CompanyDTO getCompany() {
-        return company;
+    public ExpenseItemType getExpenseItemType() {
+        return expenseItemType;
     }
 
-    public void setCompany(CompanyDTO company) {
-        this.company = company;
+    public void setExpenseItemType(ExpenseItemType expenseItemType) {
+        this.expenseItemType = expenseItemType;
     }
 }

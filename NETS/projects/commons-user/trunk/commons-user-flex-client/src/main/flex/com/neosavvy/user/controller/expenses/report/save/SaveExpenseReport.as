@@ -36,7 +36,7 @@ package com.neosavvy.user.controller.expenses.report.save {
 
         override protected function resultHandler(resultEvent:ResultEvent):void {
             var expenseReportProxy:ExpenseReportServiceProxy = facade.retrieveProxy(ExpenseReportServiceProxy.NAME) as ExpenseReportServiceProxy;
-            expenseReportProxy.activeExpenseReportId = resultEvent.result as Number;
+            expenseReportProxy.activeExpenseReport = resultEvent.result as ExpenseReport;
             sendNotification(ApplicationFacade.SAVE_EXPENSE_REPORT_SUCCESS);
         }
 

@@ -34,6 +34,7 @@ package com.neosavvy.user.controller.company {
 
         override protected function faultHandler(faultEvent:FaultEvent):void {
             RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
+            sendNotification(ApplicationFacade.DISPLAY_ERROR, faultEvent.message);            
             sendNotification(ApplicationFacade.SAVE_COMPANY_FAILED);
         }
     }

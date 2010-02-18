@@ -14,25 +14,5 @@ package com.neosavvy.user.dto.project {
             super();
         }
 
-        public function get totalExpenseAmount():Number {
-            var total:Number = 0;
-            for each ( var expenseItem:ExpenseItem in expenseItems ) {
-                total += expenseItem.amountNumber;
-            }
-            return total;
-        }
-
-        public function get totalReimbursableExpenseAmount():Number {
-            var total:Number = 0;
-            for each ( var expenseItem:ExpenseItem in expenseItems ) {
-                if( expenseItem.paymentMethod.name == "Employee Paid")
-                    total += expenseItem.amountNumber;
-            }
-            return total;
-        }
-
-
-
-
     }
 }

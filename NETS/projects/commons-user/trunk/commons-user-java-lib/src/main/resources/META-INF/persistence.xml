@@ -35,10 +35,9 @@
         <class>com.neosavvy.user.dto.acl.AclEntry</class>
 
         <properties>
-            <!--property name="eclipselink.target-server" value="SunAS9"/-->
-            <property name="eclipselink.logging.level" value="FINEST"/> 
-            <property name="eclipselink.ddl-generation" value="create-tables" />
-            <property name="eclipselink.ddl-generation.output-mode" value="database" />
+            <property name="eclipselink.target-server" value="SunAS9"/>
+            <property name="eclipselink.logging.level" value="INFO"/> 
+            <property name="eclipselink.ddl-generation" value="none" />
         </properties>
     </persistence-unit>
 
@@ -75,8 +74,5 @@
         <class>com.neosavvy.user.dto.acl.AclObjectIdentity</class>
         <class>com.neosavvy.user.dto.acl.AclEntry</class>
 
-        <properties>
-            <property name="eclipselink.logging.level" value="FINEST"/>            
-        </properties>
     </persistence-unit>
 </persistence>

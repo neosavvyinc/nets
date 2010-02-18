@@ -117,7 +117,7 @@ public class Project extends BaseDTO implements SecuredObject<Project> {
     /**
      * A collection of all the expense reports
      */
-    @OneToMany(mappedBy="project")
+    @OneToMany(mappedBy="project", cascade = CascadeType.ALL)
     private List<ExpenseReport> expenseReports;
 
     public Long getId() {

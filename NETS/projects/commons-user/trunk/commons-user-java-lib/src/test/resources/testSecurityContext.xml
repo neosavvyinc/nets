@@ -36,11 +36,8 @@
         <property name="persistenceUnitName" value="TestNetsPU" />
         <property name="jpaPropertyMap">
             <map>
-                <entry key="eclipselink.ddl-generation" value="drop-and-create-tables"/>
-                <entry key="eclipselink.ddl-generation.output-mode" value="both"/>
-                <entry key="eclipselink.logging.level" value="FINEST"/>
-                <entry key="eclipselink.create-ddl-jdbc-file-name" value="ddl.txt" />
-                <entry key="eclipselink.application-location" value="/tmp" />
+                <entry key="eclipselink.ddl-generation" value="none"/>
+                <entry key="eclipselink.logging.level" value="WARNING"/>
                 <entry key="eclipselink.weaving" value="false"/>
             </map>
         </property>

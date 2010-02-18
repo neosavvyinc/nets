@@ -34,7 +34,7 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
     protected UserCompanyRoleDAO userCompanyRoleDAO;
 
     @PersistenceContext
-    private EntityManager entityManager;
+    protected EntityManager entityManager;
 
     protected UserCompanyRoleDTO createTestUserCompanyRole(RoleDTO role, CompanyDTO company, UserDTO user){
         UserCompanyRoleDTO testUserCompanyRole = new UserCompanyRoleDTO();
@@ -50,19 +50,7 @@ public abstract class BaseSpringAwareTestCase extends AbstractTransactionalJUnit
     }
 
     protected void cleanupTables() {
-        deleteFromTables("EXPENSE_REPORT_ITEM");
-        deleteFromTables("EXPENSE_REPORT");
-        deleteFromTables("PROJECT_PAYMENT_METHOD");
-        deleteFromTables("STANDARD_PAYMENT_METHOD");
-        deleteFromTables("PROJECT_TYPE");
-        deleteFromTables("PROJECT");
-        deleteFromTables("CLIENT_COMPANY");
-        deleteFromTables("CLIENT_USER_CONTACT");
-        deleteFromTables("USER_COMPANY_ROLE");
-        deleteFromTables("USERS");
-        deleteFromTables("ROLE");
-        deleteFromTables("USER_INVITE");
-        deleteFromTables("COMPANY");
+        // not needed, the tests rollback and a separate schema is used
     }
 
     protected EntityManager getEntityManager() {

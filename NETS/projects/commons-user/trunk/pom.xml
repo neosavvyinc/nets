@@ -59,7 +59,7 @@
         <jotm.version>2.0.10</jotm.version>
         <flex.mojos.maven.version>3.5.0</flex.mojos.maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>3.0.0.RELEASE</spring.version>
+        <spring.version>3.0.1.BUILD-SNAPSHOT</spring.version>
         <spring.security.version>2.0.5.RELEASE</spring.security.version>
 	    <commons.flex.version>1.0-SNAPSHOT</commons.flex.version>
         <eclipselink.version>2.0.0</eclipselink.version>
@@ -193,11 +193,6 @@
                 <scope>test</scope>
             </dependency>
 
-            <dependency>
-                <groupId>org.springframework</groupId>
-                <artifactId>spring-instrument</artifactId>
-                <version>${spring.version}</version>
-            </dependency>
             <dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-core</artifactId>

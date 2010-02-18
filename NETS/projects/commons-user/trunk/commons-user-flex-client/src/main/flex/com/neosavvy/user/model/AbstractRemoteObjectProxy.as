@@ -35,16 +35,17 @@ import flash.errors.IllegalOperationError;
             var channel:AMFChannel = new AMFChannel(ProxyConstants.channelName);
             var channelSet:ChannelSet = new ChannelSet();
             try {
+                var url:String = '';
+
                 if (HTTPUtil.getUrl().substring(0, 4) == 'http') {
-                    var url:String = HTTPUtil.getProtocol() + '//' + HTTPUtil.getHostName() + ':' + (StringUtils.isEmpty(HTTPUtil.getPort()) ? '80' : HTTPUtil.getPort()) + contextRoot;
-                    channel.url = url + "/messagebroker/amf";
+                    var url:String = HTTPUtil.getProtocol() + '//' + HTTPUtil.getHostName() + ':' + (StringUtils.isEmpty(HTTPUtil.getPort()) ? '80' : HTTPUtil.getPort());
                 } else if(HTTPUtil.getUrl().substring(0, 4) == 'file') {
-                    var url:String = ProxyConstants.url + ProxyConstants.expenseContextRoot;
-                    channel.url = url + "/messagebroker/amf";
+                    var url:String = ProxyConstants.url;
                 }
+                channel.url = url + contextRoot + "/messagebroker/amf";
 			}
             catch (e:Error) {
-                
+
             }
             LOGGER.debug("Connecting to AMF over the following URL " + channel.url);
             channelSet.addChannel(channel);

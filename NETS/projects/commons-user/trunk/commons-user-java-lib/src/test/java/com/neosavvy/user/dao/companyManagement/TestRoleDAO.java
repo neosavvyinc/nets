@@ -16,7 +16,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testSaveRole() {
-        cleanupTables();
+        deleteFromTables("ROLE");
         RoleDTO role = ProjectTestUtil.createAdminTestRole();
 
         roleDAO.saveRole(role);
@@ -25,7 +25,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testDeleteRole() {
-        cleanupTables();
+        deleteFromTables("ROLE");
         int numRows = countRowsInTable("ROLE");
         Assert.assertEquals(numRows, 0);
 
@@ -43,7 +43,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
 
     @Test
     public void testFindRoleById() {
-        cleanupTables();
+        deleteFromTables("ROLE");
         RoleDTO role = ProjectTestUtil.createAdminTestRole();
         roleDAO.saveRole(role);
 
@@ -57,8 +57,9 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
     }
 
     private void setupCriteriaBasedSearchTest() {
-        cleanupTables();
+        deleteFromTables("ROLE");
         RoleDTO role = ProjectTestUtil.createAdminTestRole();
+        role.setLongName("Company Administrator");
         RoleDTO role2 = createAltTestRole();
 
         roleDAO.saveRole(role);
@@ -86,7 +87,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
         setupCriteriaBasedSearchTest();
 
         RoleDTO searchCriteria = new RoleDTO();
-        searchCriteria.setLongName("Administrator");
+        searchCriteria.setLongName("Company Administrator");
 
         List<RoleDTO> rolesFounds = roleDAO.findRoles(searchCriteria);
 
@@ -96,7 +97,7 @@ public class TestRoleDAO extends BaseSpringAwareDAOTestCase {
 
     @Test(expected = PersistenceException.class)
     public void testSaveTwoUsersSameUserName() {
-        cleanupTables();
+        deleteFromTables("ROLE");
         roleDAO.saveRole(ProjectTestUtil.createAdminTestRole());
         Assert.assertEquals("Should be a row in the table for the user",countRowsInTable("ROLE"),1);
         roleDAO.saveRole(ProjectTestUtil.createAdminTestRole());

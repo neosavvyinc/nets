@@ -1,6 +1,8 @@
 package com.neosavvy.user.dao.project;
 
+import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
+import com.neosavvy.user.dto.project.ClientUserContact;
 import com.neosavvy.user.util.ProjectTestUtil;
 import org.junit.Assert;
 import org.junit.Test;
@@ -32,12 +34,18 @@ public class TestClientCompanyDAO extends BaseProjectManagementDAOTest {
 
     @Test
     public void testSaveClientCompany() {
-        cleanupTables();
         saveAndAssertTestCompany();
     }
 
     private ClientCompany saveAndAssertTestCompany() {
         ClientCompany company = ProjectTestUtil.createTestClientCompany();
+        ClientUserContact contact = ProjectTestUtil.createTestClientContact();
+        clientUserContactDAO.saveUser(contact);
+        company.setClientContact(contact);
+        CompanyDTO parentCompany = ProjectTestUtil.createTestCompany();
+        companyDAO.saveCompany(parentCompany);
+        company.setParentCompany(parentCompany);
+        
         clientCompanyDAO.saveCompany(company);
         int rows = countRowsInTable("CLIENT_COMPANY");
         Assert.assertEquals(rows,1);

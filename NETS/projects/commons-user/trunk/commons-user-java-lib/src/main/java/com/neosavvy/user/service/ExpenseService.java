@@ -2,6 +2,7 @@ package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.*;
+import org.springframework.security.annotation.Secured;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,22 +32,31 @@ import java.util.List;
  */
 public interface ExpenseService {
     
-    public Long saveExpenseReport(Project p, ExpenseReport report, List<ExpenseItem> expenseItems);
+    @Secured({"ROLE_EMPLOYEE", "ACL_OBJECT_WRITE", "AFTER_ACL_READ"})
+    public ExpenseReport saveExpenseReport(ExpenseReport report, List<ExpenseItem> expenseItems);
 
+    @Secured({"ROLE_EMPLOYEE", "ACL_OBJECT_WRITE"})
     public void deleteExpenseReport(ExpenseReport report);
 
+    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_READ"})
     public ExpenseReport findExpenseReportById(Long id);
 
+    @Secured({"ROLE_EMPLOYEE"})
     public List<PaymentMethod> findPaymentMethods();
 
+    @Secured({"ROLE_EMPLOYEE"})
     public List<ExpenseItemType> findExpenseItemTypes();
 
+    @Secured({"ROLE_EMPLOYEE"})
     public List<ProjectType> findProjectTypes();
 
+    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
     public List<ExpenseReport> findOpenExpenseReportsForUser(UserDTO user);
 
+    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
     public List<ExpenseReport> findSubmittedReportsForUser(UserDTO user);
 
+    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
     public List<ExpenseReport> findReimbursedReportsForUser(UserDTO user);
 
 }

@@ -44,6 +44,7 @@ public class ExpenseItemValue extends Attribute {
 	private Long id;
 
     @ManyToOne
+    @JoinColumn(name="EXPENSE_ITEM_FK")
     private ExpenseItem expenseItem;
 
     @Column( name = "PARTITION_DATE")

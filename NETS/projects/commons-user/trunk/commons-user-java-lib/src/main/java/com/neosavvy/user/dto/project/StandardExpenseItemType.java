@@ -30,7 +30,7 @@ import javax.persistence.UniqueConstraint;
  */
 @Entity
 @Table(
-    name="STANDARD_EXPENSE_TYPE" ,
+    name="STANDARD_EXPENSE_ITEM_TYPE" ,
     uniqueConstraints = {
             @UniqueConstraint(columnNames = {"ID"})
     }
@@ -43,6 +43,8 @@ public class StandardExpenseItemType extends ExpenseItemType {
     }
 
     public StandardExpenseItemType(String name, String description) {
-        super(name,description);
+        super();
+        setName(name);
+        setDescription(description);
     }
 }

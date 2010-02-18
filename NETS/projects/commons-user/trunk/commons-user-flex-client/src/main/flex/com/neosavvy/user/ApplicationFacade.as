@@ -1,5 +1,6 @@
 package com.neosavvy.user {
     import com.neosavvy.user.controller.CommonsUserStartupCommand;
+    import com.neosavvy.user.controller.base.DisplayErrorCommand;
     import com.neosavvy.user.controller.client.GetClientsForCompany;
     import com.neosavvy.user.controller.client.SaveClientCompany;
     import com.neosavvy.user.controller.clientManagement.InitializeAssignmentsForProject;
@@ -77,6 +78,7 @@ package com.neosavvy.user {
             registerCommand(SAVE_COMPANY_REQUEST, SaveCompanyCommand);
             registerCommand(SAVE_USER_TO_COMPANY_REQUEST, SaveEmployeeToCompanyCommand)
             registerCommand(CONFIRM_ACCOUNT_REQUEST, ConfirmAccountCommand);
+            registerCommand(DISPLAY_ERROR, DisplayErrorCommand);
 
             registerCommand(INITIALIZE_SECURED_VIEW, UserLoggedInStartupCommand);
             registerCommand(DEINITIALIZE_SECURED_VIEW, SecuredViewTeardownCommand);
@@ -253,7 +255,7 @@ package com.neosavvy.user {
         public static const USER_LOGIN_STARTUP_COMPLETE:String = "userLoginStartupComplete";
         public static const NAVIGATE_TO_ASSIGNMENTS:String = "navigateToAssignments";
         public static const NAVIGATE_TO_MANAGE_PROJECTS:String = "navigateToManageProjects";
-        public static const ERROR:String = "errorOccurred";
+        public static const DISPLAY_ERROR:String = "displayError";
 
         public static const INITIALIZE_ASSIGNMENTS_FOR_PROJECT:String = "initializeAssignmentsForProject";
         public static const INITIALIZE_ASSIGNMENTS_FOR_PROJECT_COMPLETE:String = "initializeAssignmentsForProjectComplete";

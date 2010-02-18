@@ -30,6 +30,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean id="clientUserContactDAO" class="com.neosavvy.user.dao.project.ClientUserContactDAOImpl" parent="abstractDao"/>
     <bean id="clientCompanyDAO" class="com.neosavvy.user.dao.project.ClientCompanyDAOImpl" parent="abstractDao"/>
     <bean id="projectDAO" class="com.neosavvy.user.dao.project.ProjectDAOImpl" parent="abstractDao"/>
+    <bean id="expenseDAO" class="com.neosavvy.user.dao.project.ExpenseDAOImpl" parent="abstractDao"/>
 
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
@@ -60,7 +61,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="adminExecutor" ref="runAsExecutor" />
     </bean>
 
-    <bean id="expenseReportService" class="com.neosavvy.user.service.MockExpenseServiceImpl" init-method="initializeBean">
+    <bean id="expenseReportService" class="com.neosavvy.user.service.ExpenseServiceImpl">
+        <property name="expenseDAO" ref="expenseDAO" />
     </bean>
 
     <bean id="mailService" class="com.neosavvy.user.service.MailServiceImpl">

@@ -4,12 +4,16 @@ import com.neosavvy.user.BaseSpringAwareTestCase;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.RoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
+import org.junit.Before;
 import org.springframework.test.context.ContextConfiguration;
 import org.junit.Assert;
 
 import java.util.List;
 
 public abstract class BaseSpringAwareDAOTestCase extends BaseSpringAwareTestCase {
+
+    protected RoleDTO adminRole;
+    protected RoleDTO employeeRole;
 
     protected CompanyDTO createAltTestCompany() {
         CompanyDTO company = new CompanyDTO();
@@ -53,4 +57,9 @@ public abstract class BaseSpringAwareDAOTestCase extends BaseSpringAwareTestCase
         Assert.assertEquals("Size of returned results should have been " + numRows, numRows,itemsFound.size());
     }
 
+    @Before
+    public void setup() {
+        adminRole = roleDAO.findRoleById(1);
+        employeeRole = roleDAO.findRoleById(2);
+    }
 }

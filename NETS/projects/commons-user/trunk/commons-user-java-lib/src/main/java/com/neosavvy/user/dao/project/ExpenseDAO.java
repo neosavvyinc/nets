@@ -1,8 +1,10 @@
-package com.neosavvy.user.dto.project;
+package com.neosavvy.user.dao.project;
 
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+import com.neosavvy.user.dto.project.*;
 
-import javax.persistence.*;
+import java.util.List;
+
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -21,31 +23,20 @@ import javax.persistence.*;
  * is strictly forbidden unless prior written permission is obtained
  * from Neosavvy Incorporated.
  **************************************************************************/
+public interface ExpenseDAO {
+    List<? extends PaymentMethod> getStandardPaymentMethods();
+    List<? extends PaymentMethod> getCompanyPaymentMethods(CompanyDTO company);
+    List<? extends ExpenseItemType> getStandardExpenseItemTypes();
+    List<? extends ExpenseItemType> getCompanyExpenseItemTypes(CompanyDTO company);
+    List<ProjectType> getProjectTypes();
 
-/**
- * User: adamparrish
- * Date: Jan 7, 2010
- * Time: 10:17:04 PM
- */
-@Entity
-@Table(
-    name="COMPANY_EXPENSE_ITEM_TYPE" ,
-    uniqueConstraints = {
-            @UniqueConstraint(columnNames = {"ID"})
-    }
-)
-@DiscriminatorValue("COMPANY_EXPENSE_ITEM_TYPE")
-public class CompanyExpenseItemType extends ExpenseItemType {
+    ExpenseReport save(ExpenseReport report);
+    void delete(ExpenseReport report);
 
-    @ManyToOne
-    @JoinColumn(name = "COMPANY_FK")
-    private CompanyDTO company;
-
-    public CompanyDTO getCompany() {
-        return company;
-    }
-
-    public void setCompany(CompanyDTO company) {
-        this.company = company;
-    }
+    ExpenseItem save(ExpenseItem item);
+    ExpenseItemValue save(ExpenseItemValue value);
+    
+    ExpenseReport findExpenseReportById(long id);
+    List<ExpenseReport> findExpenseReports(ExpenseReport filter);
+    List<ExpenseItem> findExpenseItemsForReport(long reportId);
 }

@@ -4,12 +4,13 @@ import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.RoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
-import com.neosavvy.user.dto.project.ClientCompany;
-import com.neosavvy.user.dto.project.ClientUserContact;
-import com.neosavvy.user.dto.project.Project;
+import com.neosavvy.user.dto.project.*;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -253,14 +254,12 @@ public class ProjectTestUtil {
     public static RoleDTO createEmployeeTestRole() {
         RoleDTO role = new RoleDTO();
         role.setShortName("ROLE_EMPLOYEE");
-        role.setLongName("Employee");
         return role;
     }
     
     public static RoleDTO createAdminTestRole() {
         RoleDTO role = new RoleDTO();
         role.setShortName("ROLE_ADMIN");
-        role.setLongName("Administrator");
         return role;
     }
     
@@ -312,4 +311,28 @@ public class ProjectTestUtil {
         return project;
     }
 
+    public static ExpenseReport createTextExpenseReport1(UserDTO owner, Project project) {
+        ExpenseReport report = new ExpenseReport();
+        report.setOwner(owner);
+        report.setProject(project);
+        report.setPurpose("Purpose");
+        report.setStartDate(new Date());
+        report.setExpenseItems(new ArrayList<ExpenseItem>());
+        report.setLocation("Location");
+        report.setStatus(ExpenseReportStatus.OPEN);
+
+        return report;
+    }
+
+    public static ExpenseItem createTextExpenseItem1(double value, ExpenseItemType type, PaymentMethod method, ProjectType projectType) {
+        ExpenseItem item = new ExpenseItem();
+        item.setAmount(BigDecimal.valueOf(value).setScale(2, BigDecimal.ROUND_HALF_UP));
+        item.setComment("Comment");
+        item.setExpenseItemType(type);
+        item.setExpenseDate(new Date());
+        item.setExpenseItemValues(new HashSet<ExpenseItemValue>());
+        item.setPaymentMethod(method);
+        item.setProjectType(projectType);
+        return item;
+    }
 }
