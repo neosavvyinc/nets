@@ -171,8 +171,8 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
     public function resetFilters():void {
         _activeFilters = new Object();
-        _searchText = null;
-        _searchTextControl.text = null;
+        _searchText = "";
+        _searchTextControl.text = "";
         
         if (this.dataProvider is ICollectionView) {
             (this.dataProvider as ICollectionView).sort = null;
