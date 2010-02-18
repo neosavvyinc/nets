@@ -11,11 +11,14 @@ import com.neosavvy.grid.renderer.AutoFilteringHeaderRenderer;
 import flash.events.MouseEvent;
 import flash.text.TextLineMetrics;
 
-import mx.collections.ArrayCollection;
+    import mx.binding.utils.BindingUtils;
+    import mx.binding.utils.ChangeWatcher;
+    import mx.collections.ArrayCollection;
 import mx.collections.ICollectionView;
 import mx.collections.IViewCursor;
 import mx.controls.AdvancedDataGrid;
-import mx.core.FlexSprite;
+    import mx.controls.TextInput;
+    import mx.core.FlexSprite;
 import mx.core.IFactory;
 import mx.core.IFlexDisplayObject;
 import mx.core.mx_internal;
@@ -27,8 +30,17 @@ import mx.managers.PopUpManager;
 use namespace mx_internal;
 
 [Event(name="autoFilterColumnsChanged", type="com.neosavvy.grid.event.AutoFilteringGridEvent")]
+[Event(name="headerButtonClicked", type="com.neosavvy.grid.event.AutoFilteringGridEvent")]
+[Event(name="autoFilterChanged", type="com.neosavvy.grid.event.AutoFilteringGridEvent")]
+[Event(name="resetFilters", type="com.neosavvy.grid.event.AutoFilteringGridEvent")]
 public class AutoFilteringGrid extends AdvancedDataGrid
 {
+    private var bTextControlChanged:Boolean;
+    private var _searchTextControl:TextInput;
+
+    [Bindable]
+    private var _searchText:String;
+    private var bSearchTextChanged:Boolean;
 
     private var initializedComplete:Boolean = false;
 
@@ -73,7 +85,27 @@ public class AutoFilteringGrid extends AdvancedDataGrid
             bColumnsChanged = false;
         }
 
+        if (bTextControlChanged) {
+
+            if( _searchTextControl != null )
+            {
+                BindingUtils.bindSetter(this.setSearchText, _searchTextControl, "text");
+            }
+
+            bTextControlChanged = false;
+            
+        }
+
+        if( bSearchTextChanged ) {
+
+            applySearchFilter();
+
+            bSearchTextChanged = false;
+        }
+
     }
+
+
 
     override public function set columns(value:Array):void {
         //Only execute this the first time - not every time columns are set
@@ -99,7 +131,8 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
         bColumnsChanged = true;
         invalidateProperties();
-        dispatchEvent(new AutoFilteringGridEvent(AutoFilteringGridEvent.COLUMNS_CHANGED, true, false));
+        var autoFilteringGridEvent:AutoFilteringGridEvent = new AutoFilteringGridEvent(AutoFilteringGridEvent.COLUMNS_CHANGED, true, false);
+        dispatchEvent(autoFilteringGridEvent);
     }
 
     public function getAvailableColumns():ArrayCollection {
@@ -109,6 +142,23 @@ public class AutoFilteringGrid extends AdvancedDataGrid
     }
 
     private var _activeFilters:Object = new Object();
+
+    [Bindable]
+    public function get orderedActiveFilters():Array {
+
+        var orderFilters:Array = new Array();
+
+        for ( var filter:String in _activeFilters ) {
+            orderFilters.push(filter);
+        }
+
+        return orderFilters;
+
+    }
+
+    public function isAnyHeaderFilterActive():Boolean {
+        return orderedActiveFilters.length > 0;
+    }
 
     public function manageColumns():void {
         var displayObject:IFlexDisplayObject = PopUpManager.createPopUp(this, ColumnSelectorPopup, true);
@@ -121,6 +171,8 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
     public function resetFilters():void {
         _activeFilters = new Object();
+        _searchText = null;
+        _searchTextControl.text = null;
         
         if (this.dataProvider is ICollectionView) {
             (this.dataProvider as ICollectionView).sort = null;
@@ -129,6 +181,8 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
         if(this.dataProvider) 
             this.dataProvider.refresh();
+
+        dispatchEvent(new AutoFilteringGridEvent(AutoFilteringGridEvent.RESET_FILTERS, true, false));
 
     }
 
@@ -139,6 +193,8 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
         if (refresh)
             this.dataProvider.refresh();
+
+        dispatchEvent(new AutoFilteringGridEvent(AutoFilteringGridEvent.FILTER_CHANGED, true, false));
     }
 
     public function getActiveFilters(filterType:String):Object {
@@ -161,9 +217,55 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
         if(this.dataProvider)
         {
-            this.dataProvider.filterFunction = filterFunction;
+            this.dataProvider.filterFunction = searchWrappedFilterFunction;
             this.dataProvider.refresh();
         }
+        var autoFilteringGridEvent:AutoFilteringGridEvent = new AutoFilteringGridEvent(AutoFilteringGridEvent.FILTER_CHANGED, true, false);
+        autoFilteringGridEvent.filterItemAffected = filterType;
+        dispatchEvent(autoFilteringGridEvent);
+    }
+
+    private function applySearchFilter():void {
+
+        if( this.dataProvider )
+        {
+            this.dataProvider.filterFunction = searchWrappedFilterFunction;
+            this.dataProvider.refresh();
+        }
+    }
+
+    public function searchWrappedFilterFunction( item:Object ) : Boolean {
+
+        // If there are any active filters those should be checked first
+        var filterResultsFromHeaderSelections:Boolean = false;
+        if ( isAnyHeaderFilterActive() )
+        {
+            filterResultsFromHeaderSelections = filterFunction( item );
+            if( ! filterResultsFromHeaderSelections )
+            {
+                return false; // no use in searching for the text since no matching filters are set
+            }
+        }
+
+        var searchStringFound:Boolean = false;
+        for each ( var col:AutoFilteringGridColumn in columns )
+        {
+            if( !col.searchEnabled )
+            {
+                continue; // don't check the data on non searchable columns
+            }
+
+            if( item.hasOwnProperty( col.dataField ) && item[col.dataField] is String)
+            {
+                var itemValue:String = item[col.dataField] as String;
+                if( itemValue && itemValue.indexOf(_searchText) > -1)
+                {
+                    searchStringFound = true;
+                    break;
+                }
+            }
+        }
+        return searchStringFound;
 
     }
 
@@ -330,6 +432,33 @@ public class AutoFilteringGrid extends AdvancedDataGrid
         _gridFilterModels.saveOrUpdateGridFilterModel( gridFilterModel );
     }
 
+
+    public function get searchText():String {
+        return _searchText;
+    }
+
+    public function set searchText(value:String):void {
+        _searchText = value;
+        bSearchTextChanged = true;
+        invalidateProperties();
+    }
+
+    public function setSearchText( value:String ) : void {
+        this.searchText = value;
+    }
+
+
+    public function get searchTextControl():TextInput {
+        return _searchTextControl;
+    }
+
+    public function set searchTextControl(value:TextInput):void {
+        _searchTextControl = value;
+
+        bTextControlChanged = true;
+        invalidateProperties();
+
+    }
 }
 
 }

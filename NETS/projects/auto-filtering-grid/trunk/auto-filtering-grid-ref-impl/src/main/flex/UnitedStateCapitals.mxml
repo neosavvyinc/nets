@@ -10,11 +10,32 @@
     <mx:Script>
     <![CDATA[
         import com.neosavvy.grid.AutoFilteringGridColumn;
+        import com.neosavvy.grid.event.AutoFilteringGridEvent;
         import com.neosavvy.grid.model.GridFilterModel;
         import com.neosavvy.grid.model.GridFilterModels;
         import com.neosavvy.grid.AutoFilteringGrid
         import mx.collections.ArrayCollection;
         import mx.controls.Alert;
+
+        private function handleFilterChanged(event:AutoFilteringGridEvent):void {
+            if( event.filterItemAffected == "name" ) {
+                abbreviationColumn.autoFilterEnabled = true;
+            }
+
+            if ( event.filterItemAffected == "abbreviation")
+            {
+                capitalColumn.autoFilterEnabled = true;
+            }
+        }
+
+        private function handleResetFilters():void {
+            nameColumn.autoFilterEnabled = true;
+
+            abbreviationColumn.autoFilterEnabled = false;
+            capitalColumn.autoFilterEnabled = false;
+            postalCodeColumn.autoFilterEnabled = false;
+            timezoneColumn.autoFilterEnabled = false;
+        }
 
         private function emailMe():void {
          var webPageURL:URLRequest = new URLRequest( "mailto:aparrish@neosavvy.com" );
@@ -157,7 +178,9 @@
         <mx:Canvas height="100%" width="70%">
             <mx:HBox id="titleBox" width="100%" styleName="dgTitleBox">
                 <mx:Label text="States" styleName="titleLbl"/>
-                <mx:Spacer width="100%"/>
+                <mx:Spacer width="50%"/>
+                <mx:TextInput id="searchText"/>
+                <mx:Spacer width="50%"/>
                 <!--<mx:Button id="testRestoreState" label="Restore" click="{grid.setAllActiveFiltersWithSelectedValues(selectedGridValues)}"/>-->
                 <!--<mx:Button id="testSaveState" label="Save Filters" toolTip="Click here to save the state of your grid" click="{grid.getAllActiveFiltersWithSelectedValues()}"/>-->
                 <mx:LinkButton id="manageColumns" toolTip="Manage Columns" styleName="configureLBtn"
@@ -167,6 +190,7 @@
 
             <grid:AutoFilteringGrid
                     y="{titleBox.height}"
+                    searchTextControl="{searchText}"
                     id="grid"
                     width="100%"
                     height="100%"
@@ -175,31 +199,39 @@
                     autoResizeColumnHeaders="true"
                     dataProvider="{stateInformation}"
                     autoFilterColumnsChanged="{handleColumnsChangedEvent()}"
+                    resetFilters="{handleResetFilters()}"
+                    autoFilterChanged="{handleFilterChanged(event)}"
                     >
                 <grid:columns>
                     <grid:AutoFilteringGridColumn
+                            id="nameColumn"
                             enabledByDefault="true"
-                            autoFilterEnabled="false"
+                            autoFilterEnabled="true"
                             dataField="name"
                             headerText="Name"
                             removable="false"/>
                     <grid:AutoFilteringGridColumn
+                            id="abbreviationColumn"
                             enabledByDefault="true"
+                            autoFilterEnabled="false"
                             dataField="abbreviation"
                             headerText="Abbreviation"/>
                     <grid:AutoFilteringGridColumn
+                            id="capitalColumn"
                             enabledByDefault="true"
-                            autoFilterEnabled="true"
+                            autoFilterEnabled="false"
                             dataField="capital"
                             headerText="Capital"/>
                     <grid:AutoFilteringGridColumn
+                            id="postalCodeColumn"
                             enabledByDefault="true"
-                            autoFilterEnabled="true"
+                            autoFilterEnabled="false"
                             dataField="postalCode"
                             headerText="Postal Code"/>
                     <grid:AutoFilteringGridColumn
+                            id="timezoneColumn"
                             enabledByDefault="true"
-                            autoFilterEnabled="true"
+                            autoFilterEnabled="false"
                             dataField="timeZone"
                             headerText="Time Zone"/>
                 </grid:columns>

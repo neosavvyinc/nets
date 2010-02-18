@@ -121,6 +121,7 @@
     <mx:Canvas id="wholepage" height="100%" width="100%">
         <mx:HBox id="titleBox" width="100%" styleName="dgTitleBox">
             <mx:Label text="States" styleName="titleLbl"/>
+           
             <mx:Spacer width="100%"/>
             <mx:Button label="Apply Data To Grid" click="{applyData()}"/>
             <mx:Button label="Reset Filters" click="{grid.resetFilters()}"/>

@@ -209,10 +209,10 @@ public class FilterSelectorDropdown extends VBox
     }
 
     protected function calculateUniqueFilterValues():void {
-        if (!_filterValues) {
+//        if (!_filterValues) {
             var uniqueFilterValueMap:Object = new Object();
 
-            for each (var object:Object in (_grid.dataProvider as ArrayCollection).source) {
+            for each (var object:Object in (_grid.dataProvider as ArrayCollection)) {
 
                 if (object.hasOwnProperty(_adgListData.dataField)) {
                     var valueFromObject:Object = object[_adgListData.dataField];
@@ -249,7 +249,7 @@ public class FilterSelectorDropdown extends VBox
 
             sortCollectionOnField(uniqueCollection, ["displayValue"]);
             this.filterValues = uniqueCollection;
-        }
+//        }
     }
 
     protected function refreshRollbackFilterValues():void {

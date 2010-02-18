@@ -17,6 +17,7 @@ public class AutoFilteringGridColumn extends AdvancedDataGridColumn
 
     private var _adjustColumnWidth:Boolean = true;
 
+    private var _searchEnabled:Boolean = true;
 
     public function AutoFilteringGridColumn(columnName:String = null)
     {
@@ -65,6 +66,14 @@ public class AutoFilteringGridColumn extends AdvancedDataGridColumn
 
     public function set adjustColumnWidth(val:Boolean):void {
         _adjustColumnWidth = val;
+    }
+
+    public function get searchEnabled():Boolean {
+        return _searchEnabled;
+    }
+
+    public function set searchEnabled(value:Boolean):void {
+        _searchEnabled = value;
     }
 
     public function getPersistableVO():AutoFilteringGridColumnVO {
