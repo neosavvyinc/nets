@@ -172,7 +172,11 @@ public class AutoFilteringGrid extends AdvancedDataGrid
     public function resetFilters():void {
         _activeFilters = new Object();
         _searchText = "";
-        _searchTextControl.text = "";
+
+        if( _searchTextControl )
+        {
+            _searchTextControl.text = "";
+        }
         
         if (this.dataProvider is ICollectionView) {
             (this.dataProvider as ICollectionView).sort = null;
@@ -253,20 +257,23 @@ public class AutoFilteringGrid extends AdvancedDataGrid
         }
 
         var searchStringFound:Boolean = false;
-        for each ( var col:AutoFilteringGridColumn in columns )
+        if( _searchTextControl )
         {
-            if( !col.searchEnabled )
+            for each ( var col:AutoFilteringGridColumn in columns )
             {
-                continue; // don't check the data on non searchable columns
-            }
-
-            if( item.hasOwnProperty( col.dataField ) && item[col.dataField] is String)
-            {
-                var itemValue:String = item[col.dataField] as String;
-                if( itemValue && itemValue.indexOf(_searchText) > -1)
+                if( !col.searchEnabled )
                 {
-                    searchStringFound = true;
-                    break;
+                    continue; // don't check the data on non searchable columns
+                }
+
+                if( item.hasOwnProperty( col.dataField ) && item[col.dataField] is String)
+                {
+                    var itemValue:String = item[col.dataField] as String;
+                    if( itemValue && itemValue.indexOf(_searchText) > -1)
+                    {
+                        searchStringFound = true;
+                        break;
+                    }
                 }
             }
         }

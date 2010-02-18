@@ -78,6 +78,12 @@ package com.neosavvy.grid{
 
         }
 
+        override public function resetFilters():void
+        {
+            super.resetFilters();
+            setDefaultSort();
+        }
+
         public function setDefaultSort():void {
             var sort:Sort = new Sort();
             var sortField:SortField = new SortField();
@@ -93,7 +99,7 @@ package com.neosavvy.grid{
             dataProvider.refresh();
         }
 
-        override public function filterFunction(item:Object):Boolean {
+        override public function searchWrappedFilterFunction(item:Object):Boolean {
 
             var isItemSelected:Boolean = false;
             if( item.hasOwnProperty(_selectedColumnDatafield) ) {
