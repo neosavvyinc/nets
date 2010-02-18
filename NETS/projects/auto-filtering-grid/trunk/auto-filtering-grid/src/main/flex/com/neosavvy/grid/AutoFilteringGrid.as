@@ -179,6 +179,11 @@ public class AutoFilteringGrid extends AdvancedDataGrid
         }
         DropdownManagerRegistry.getInstance().resetFilterSelections();
 
+        if(this.dataProvider.filterFunction)
+        {
+            this.dataProvider.filterFunction = null;
+        }
+
         if(this.dataProvider) 
             this.dataProvider.refresh();
 
