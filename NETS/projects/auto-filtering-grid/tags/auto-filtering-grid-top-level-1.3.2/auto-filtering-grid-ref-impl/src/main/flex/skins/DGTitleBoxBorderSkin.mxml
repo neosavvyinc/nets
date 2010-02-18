@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GraphicBorderSkin xmlns="http://www.degrafa.com/2007" xmlns:mx="http://www.adobe.com/2006/mxml">
+
+	<mx:Script>
+		<![CDATA[
+			import mx.utils.ColorUtil;
+
+			[Bindable] private var _skinWidth:Number;
+			[Bindable] private var _skinHeight:Number;		
+			
+			override protected function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+				super.updateDisplayList(unscaledWidth, unscaledHeight);
+				
+				_skinWidth = unscaledWidth;
+				_skinHeight = unscaledHeight;	
+			}
+		]]>
+	</mx:Script>
+
+	<!-- _______________ Strokes, Fills, Filters _______________ -->
+	
+	<fills>
+		<LinearGradientFill id="bgFill" angle="90">
+			<GradientStop ratio="0" color="#d4d6d8"/>
+			<GradientStop ratio=".5" color="#f4f5f5"/>
+		</LinearGradientFill>
+	</fills>
+		
+	<!-- _______________ Drawing _______________ -->
+	
+	<geometry>
+		<GeometryComposition >
+			<RoundedRectangleComplex topLeftRadius="6" topRightRadius="6" width="{_skinWidth}" height="{_skinHeight}" fill="{bgFill}"/>	
+		</GeometryComposition>
+	</geometry>		
+</GraphicBorderSkin>
