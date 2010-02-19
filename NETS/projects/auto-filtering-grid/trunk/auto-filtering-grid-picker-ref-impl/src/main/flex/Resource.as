@@ -59,5 +59,10 @@ package {
             _status = status;
             _skills = skills;
         }
+
+
+        public function toString():String {
+            return "Resource{_id=" + String(_id) + ",_firstName=" + String(_firstName) + ",_lastName=" + String(_lastName) + ",_status=" + String(_status) + ",_type=" + String(_type) + ",_skills=" + String(_skills) + "}";
+        }
     }
 }

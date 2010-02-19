@@ -123,7 +123,28 @@ package com.neosavvy.grid{
             return "";
         }
 
+        private var _selectedNonProxiedItems:ArrayCollection = new ArrayCollection();
+
+
+        public function get selectedNonProxiedItems():ArrayCollection {
+            return _selectedNonProxiedItems;
+        }
+
+        public function set selectedNonProxiedItems(value:ArrayCollection):void {
+            _selectedNonProxiedItems = value;
+        }
+
         protected function handleItemSelected(event:PickFilterGridEvent):void {
+
+            if( event.pickFilterRow.selected )
+            {
+                _selectedNonProxiedItems.addItem(event.pickFilterRow.wrappedObject);
+            }
+            else
+            {
+                var index:int = _selectedNonProxiedItems.getItemIndex(event.pickFilterRow.wrappedObject);
+                _selectedNonProxiedItems.removeItemAt(index);
+            }
 
             setDefaultSort();
         }
