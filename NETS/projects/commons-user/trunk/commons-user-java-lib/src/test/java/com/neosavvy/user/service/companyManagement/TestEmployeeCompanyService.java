@@ -2,7 +2,7 @@ package com.neosavvy.user.service.companyManagement;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.security.AccessDeniedException;
+import org.springframework.security.access.AccessDeniedException;
 
 /**
  * Created by IntelliJ IDEA.

@@ -10,10 +10,10 @@ import com.neosavvy.user.util.ProjectTestUtil;
 import org.easymock.EasyMock;
 import org.springframework.aop.framework.Advised;
 import org.springframework.mail.MailSender;
-import org.springframework.security.providers.UsernamePasswordAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.context.SecurityContextHolder;
 import org.junit.Before;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
 

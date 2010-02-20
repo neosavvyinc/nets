@@ -60,7 +60,8 @@
         <flex.mojos.maven.version>3.5.0</flex.mojos.maven.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>3.0.1.BUILD-SNAPSHOT</spring.version>
-        <spring.security.version>2.0.5.RELEASE</spring.security.version>
+        <spring.security.version>3.0.1.RELEASE</spring.security.version>
+        <spring.flex.version>1.0.2.RELEASE</spring.flex.version>
 	    <commons.flex.version>1.0-SNAPSHOT</commons.flex.version>
         <eclipselink.version>2.0.0</eclipselink.version>
 
@@ -252,7 +253,7 @@
             <dependency>
                 <groupId>org.springframework.flex</groupId>
                 <artifactId>spring-flex</artifactId>
-                <version>1.0.1.RELEASE</version>
+                <version>${spring.flex.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
@@ -261,7 +262,12 @@
             </dependency>
             <dependency>
                 <groupId>org.springframework.security</groupId>
-                <artifactId>spring-security-core-tiger</artifactId>
+                <artifactId>spring-security-web</artifactId>
+                <version>${spring.security.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-config</artifactId>
                 <version>${spring.security.version}</version>
             </dependency>
             <dependency>

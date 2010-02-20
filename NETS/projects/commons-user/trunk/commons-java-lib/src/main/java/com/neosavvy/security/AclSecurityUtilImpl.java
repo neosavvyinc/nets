@@ -6,17 +6,17 @@
 
 package com.neosavvy.security;
 
-import org.springframework.security.acls.sid.Sid;
-import org.springframework.security.acls.sid.PrincipalSid;
-import org.springframework.security.acls.objectidentity.ObjectIdentityImpl;
-import org.springframework.security.acls.objectidentity.ObjectIdentity;
-import org.springframework.security.acls.*;
-import org.springframework.security.userdetails.UserDetails;
-import org.springframework.security.Authentication;
-import org.springframework.security.context.SecurityContextHolder;
+import org.springframework.security.acls.domain.ObjectIdentityImpl;
+import org.springframework.security.acls.domain.PrincipalSid;
+import org.springframework.security.acls.model.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Transactional
@@ -74,7 +74,7 @@ public class AclSecurityUtilImpl implements AclSecurityUtil {
             acl = addAcl(securedObject, clazz);
         }        
                                                                   
-        acl.insertAce(acl.getEntries().length, permission, recipient, true);
+        acl.insertAce(acl.getEntries().size(), permission, recipient, true);
         mutableAclService.updateAcl(acl);
 
         if (logger.isDebugEnabled()) {
@@ -87,10 +87,10 @@ public class AclSecurityUtilImpl implements AclSecurityUtil {
         MutableAcl acl = (MutableAcl) mutableAclService.readAclById(oid);
 
         // Remove all permissions associated with this particular recipient (string equality to KISS)
-        AccessControlEntry[] entries = acl.getEntries();
+        List<AccessControlEntry> entries = acl.getEntries();
 
-        for (int i = 0; i < entries.length; i++) {
-            if (entries[i].getSid().equals(recipient) && entries[i].getPermission().equals(permission)) {
+        for (int i = 0; i < entries.size(); i++) {
+            if (entries.get(i).getSid().equals(recipient) && entries.get(i).getPermission().equals(permission)) {
                 acl.deleteAce(i);
             }
         }

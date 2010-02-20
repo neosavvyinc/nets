@@ -10,7 +10,7 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
-import org.springframework.security.AccessDeniedException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.test.annotation.Rollback;
 
 import java.sql.ResultSet;

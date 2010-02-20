@@ -4,8 +4,8 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd
-       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
 
     <!-- ~~~~~~~~~~~~~~~~~~ "BEFORE INVOCATION" AUTHORIZATION DEFINITIONS ~~~~~~~~~~~~~~~~ -->
 
@@ -29,11 +29,11 @@
 
 
     <!-- An access decision voter that reads ROLE_* configuration settings -->
-    <bean id="roleVoter" class="org.springframework.security.vote.RoleHierarchyVoter">
+    <bean id="roleVoter" class="org.springframework.security.access.vote.RoleHierarchyVoter">
         <constructor-arg ref="roleHierarchy" />
     </bean>
 
-    <bean id="roleHierarchy" class="org.springframework.security.userdetails.hierarchicalroles.RoleHierarchyImpl">
+    <bean id="roleHierarchy" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
         <property name="hierarchy">
             <value>
                 ROLE_ADMIN > ROLE_MANAGER >
@@ -43,7 +43,7 @@
     </bean>
 
     <!-- An access decision voter that reads ACL_OBJECT_READ configuration settings -->
-    <bean id="aclObjectReadVoter" class="org.springframework.security.vote.AclEntryVoter">
+    <bean id="aclObjectReadVoter" class="org.springframework.security.acls.AclEntryVoter">
         <constructor-arg ref="aclService"/>
         <constructor-arg value="ACL_OBJECT_READ"/>
         <constructor-arg>
@@ -56,7 +56,7 @@
     </bean>
 
     <!-- An access decision voter that reads ACL_OBJECT_WRITE configuration settings -->
-    <bean id="aclObjectWriteVoter" class="org.springframework.security.vote.AclEntryVoter">
+    <bean id="aclObjectWriteVoter" class="org.springframework.security.acls.AclEntryVoter">
         <constructor-arg ref="aclService"/>
         <constructor-arg value="ACL_OBJECT_WRITE"/>
         <constructor-arg>
@@ -69,7 +69,7 @@
     </bean>
 
     <!-- An access decision voter that reads ACL_CONTACT_DELETE configuration settings -->
-    <bean id="aclObjectDeleteVoter" class="org.springframework.security.vote.AclEntryVoter">
+    <bean id="aclObjectDeleteVoter" class="org.springframework.security.acls.AclEntryVoter">
         <constructor-arg ref="aclService"/>
         <constructor-arg value="ACL_OBJECT_DELETE"/>
         <constructor-arg>
@@ -82,7 +82,7 @@
     </bean>
 
     <!-- An access decision voter that reads ACL_CONTACT_ADMIN configuration settings -->
-    <bean id="aclObjectAdminVoter" class="org.springframework.security.vote.AclEntryVoter">
+    <bean id="aclObjectAdminVoter" class="org.springframework.security.acls.AclEntryVoter">
         <constructor-arg ref="aclService"/>
         <constructor-arg value="ACL_OBJECT_ADMIN"/>
         <constructor-arg>
@@ -94,7 +94,7 @@
     </bean>
 
     <!-- An access decision manager used by the business objects -->
-    <bean id="businessAccessDecisionManager" class="org.springframework.security.vote.UnanimousBased">
+    <bean id="businessAccessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
         <property name="allowIfAllAbstainDecisions" value="true"/>
         <property name="decisionVoters">
             <list>
@@ -120,7 +120,7 @@
         </constructor-arg>
     </bean>
 
-    <bean id="aclCache" class="org.springframework.security.acls.jdbc.EhCacheBasedAclCache">
+    <bean id="aclCache" class="org.springframework.security.acls.domain.EhCacheBasedAclCache">
         <constructor-arg>
             <bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
                 <property name="cacheManager">
@@ -135,15 +135,15 @@
         <constructor-arg>
             <list>
                 <!-- authority needed to change ownership -->
-                <bean class="org.springframework.security.GrantedAuthorityImpl">
+                <bean class="org.springframework.security.core.authority.GrantedAuthorityImpl">
                     <constructor-arg value="ROLE_RUN_AS_ADMINISTRATOR"/>
                 </bean>
                 <!-- authority needed to modify auditing details -->
-                <bean class="org.springframework.security.GrantedAuthorityImpl">
+                <bean class="org.springframework.security.core.authority.GrantedAuthorityImpl">
                     <constructor-arg value="ROLE_RUN_AS_ADMINISTRATOR"/>
                 </bean>
                 <!-- authority needed to change other ACL and ACE details -->
-                <bean class="org.springframework.security.GrantedAuthorityImpl">
+                <bean class="org.springframework.security.core.authority.GrantedAuthorityImpl">
                     <constructor-arg value="ROLE_RUN_AS_ADMINISTRATOR"/>
                 </bean>
             </list>
@@ -162,8 +162,7 @@
 
     <!-- Processes AFTER_ACL_COLLECTION_READ configuration settings -->
     <bean id="afterAclCollectionRead"
-          class="org.springframework.security.afterinvocation.AclEntryAfterInvocationCollectionFilteringProvider">
-        <security:custom-after-invocation-provider/>
+          class="org.springframework.security.acls.afterinvocation.AclEntryAfterInvocationCollectionFilteringProvider">
         <constructor-arg ref="aclService"/>
         <constructor-arg>
             <list>
@@ -176,7 +175,6 @@
     <!-- Processes AFTER_ACL_READ configuration settings -->
     <!--<bean id="afterAclRead" class="org.springframework.security.afterinvocation.AclEntryAfterInvocationProvider">-->
     <bean id="afterAclRead" class="com.neosavvy.security.CustomAclEntryAfterInvocationProvider">
-        <security:custom-after-invocation-provider/>
         <constructor-arg ref="aclService"/>
         <constructor-arg>
             <list>

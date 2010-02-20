@@ -3,11 +3,11 @@ package com.neosavvy.user.service;
 import com.neosavvy.security.RunAs;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
-import org.springframework.security.annotation.Secured;
 
 import java.util.List;
 
 import com.neosavvy.user.dto.companyManagement.UserDTO;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 
 /**

@@ -10,8 +10,8 @@ import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
 import com.neosavvy.user.service.exception.ProjectServiceException;
 import org.springframework.security.acls.domain.BasePermission;
-import org.springframework.security.acls.sid.PrincipalSid;
-import org.springframework.security.acls.sid.Sid;
+import org.springframework.security.acls.domain.PrincipalSid;
+import org.springframework.security.acls.model.Sid;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;

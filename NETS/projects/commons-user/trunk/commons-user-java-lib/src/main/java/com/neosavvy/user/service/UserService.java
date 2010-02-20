@@ -3,8 +3,8 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.service.exception.UserServiceException;
-import org.springframework.security.annotation.Secured;
 import org.springframework.mail.MailSender;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

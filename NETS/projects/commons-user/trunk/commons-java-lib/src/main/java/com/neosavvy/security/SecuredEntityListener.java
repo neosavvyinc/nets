@@ -1,12 +1,9 @@
 package com.neosavvy.security;
 
-import com.neosavvy.security.AclSecurityUtil;
-import com.neosavvy.security.RunAsExecutor;
-import com.neosavvy.security.SecuredObject;
 import fineline.focal.common.types.v1.EntityListener;
 import org.springframework.security.acls.domain.BasePermission;
-import org.springframework.security.acls.sid.PrincipalSid;
-import org.springframework.security.acls.sid.Sid;
+import org.springframework.security.acls.domain.PrincipalSid;
+import org.springframework.security.acls.model.Sid;
 
 /**
  * Created by IntelliJ IDEA.

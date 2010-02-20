@@ -6,9 +6,9 @@
 
 package com.neosavvy.security;
 
-import org.springframework.security.userdetails.hierarchicalroles.UserDetailsWrapper;
-import org.springframework.security.userdetails.hierarchicalroles.RoleHierarchy;
-import org.springframework.security.userdetails.UserDetails;
+import org.springframework.security.access.hierarchicalroles.UserDetailsWrapper;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public class CustomUserDetailsWrapper extends UserDetailsWrapper {
 

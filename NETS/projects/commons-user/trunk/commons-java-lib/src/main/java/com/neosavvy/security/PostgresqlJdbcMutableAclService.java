@@ -6,31 +6,21 @@
 
 package com.neosavvy.security;
 
-import org.springframework.security.Authentication;
-
-import org.springframework.security.acls.AccessControlEntry;
-import org.springframework.security.acls.Acl;
-import org.springframework.security.acls.AlreadyExistsException;
-import org.springframework.security.acls.ChildrenExistException;
-import org.springframework.security.acls.MutableAcl;
-import org.springframework.security.acls.MutableAclService;
-import org.springframework.security.acls.NotFoundException;
 import org.springframework.security.acls.domain.AccessControlEntryImpl;
-import org.springframework.security.acls.objectidentity.ObjectIdentity;
-import org.springframework.security.acls.objectidentity.ObjectIdentityImpl;
-import org.springframework.security.acls.sid.GrantedAuthoritySid;
-import org.springframework.security.acls.sid.PrincipalSid;
-import org.springframework.security.acls.sid.Sid;
 
-import org.springframework.security.acls.jdbc.AclCache;
+import org.springframework.security.acls.domain.GrantedAuthoritySid;
+import org.springframework.security.acls.domain.ObjectIdentityImpl;
+import org.springframework.security.acls.domain.PrincipalSid;
 import org.springframework.security.acls.jdbc.LookupStrategy;
 
-import org.springframework.security.context.SecurityContextHolder;
 
 import org.springframework.dao.DataAccessException;
 
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 
+import org.springframework.security.acls.model.*;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import org.springframework.util.Assert;
@@ -46,7 +36,7 @@ import javax.sql.DataSource;
 
 
 /**
- * Provides a base implementation of {@link org.springframework.security.acls.MutableAclService}.
+ * Provides a base implementation of {@link org.springframework.security.acls.model.MutableAclService}.
  *
  * @author Ben Alex
  * @author Johannes Zlattinger
@@ -120,7 +110,7 @@ public class PostgresqlJdbcMutableAclService extends PostgresqlJdbcAclService im
         jdbcTemplate.batchUpdate(insertEntry,
             new BatchPreparedStatementSetter() {
                 public int getBatchSize() {
-                    return acl.getEntries().length;
+                    return acl.getEntries().size();
                 }
 
                 public void setValues(PreparedStatement stmt, int i)
@@ -150,7 +140,7 @@ public class PostgresqlJdbcMutableAclService extends PostgresqlJdbcAclService im
      */
     protected void createObjectIdentity(ObjectIdentity object, Sid owner) {
         Long sidId = createOrRetrieveSidPrimaryKey(owner, true);
-        Long classId = createOrRetrieveClassPrimaryKey(object.getJavaType(), true);
+        Long classId = createOrRetrieveClassPrimaryKey(object.getType(), true);
         Long objectId = Long.parseLong( object.getIdentifier().toString() );
         jdbcTemplate.update(insertObjectIdentity,
         		new Object[] {classId, objectId, sidId, new Boolean(true)});
@@ -165,14 +155,14 @@ public class PostgresqlJdbcMutableAclService extends PostgresqlJdbcAclService im
      *
      * @return the primary key or null if not found
      */
-    protected Long createOrRetrieveClassPrimaryKey(Class clazz, boolean allowCreate) {
-        List classIds = jdbcTemplate.queryForList(selectClassPrimaryKey, new Object[] {clazz.getName()}, Long.class);
+    protected Long createOrRetrieveClassPrimaryKey(String clazz, boolean allowCreate) {
+        List classIds = jdbcTemplate.queryForList(selectClassPrimaryKey, new Object[] {clazz}, Long.class);
         Long classId = null;
 
         if (classIds.isEmpty()) {
             if (allowCreate) {
                 classId = null;
-                jdbcTemplate.update(insertClass, new Object[] {clazz.getName()});
+                jdbcTemplate.update(insertClass, new Object[] {clazz});
                 Assert.isTrue(TransactionSynchronizationManager.isSynchronizationActive(),
                         "Transaction must be running");
                 classId = new Long(jdbcTemplate.queryForLong(classIdentityQuery));
@@ -235,14 +225,14 @@ public class PostgresqlJdbcMutableAclService extends PostgresqlJdbcAclService im
         Assert.notNull(objectIdentity.getIdentifier(), "Object Identity doesn't provide an identifier");
 
         // Recursively call this method for children, or handle children if they don't want automatic recursion
-        ObjectIdentity[] children = findChildren(objectIdentity);
+        List<ObjectIdentity> children = findChildren(objectIdentity);
 
         if (deleteChildren) {
-            for (int i = 0; i < children.length; i++) {
-                deleteAcl(children[i], true);
+            for (int i = 0; i < children.size(); i++) {
+                deleteAcl(children.get(i), true);
             }
-        } else if (children.length > 0) {
-            throw new ChildrenExistException("Cannot delete '" + objectIdentity + "' (has " + children.length
+        } else if (children.size() > 0) {
+            throw new ChildrenExistException("Cannot delete '" + objectIdentity + "' (has " + children.size()
                 + " children)");
         }
 
@@ -278,7 +268,7 @@ public class PostgresqlJdbcMutableAclService extends PostgresqlJdbcAclService im
         jdbcTemplate.update(deleteObjectIdentityByPrimaryKey, new Object[] {retrieveObjectIdentityPrimaryKey(oid)});
 
         // Delete the acl_class row, assuming there are no other references to it in acl_object_identity
-        Object[] className = {oid.getJavaType().getName()};
+        Object[] className = {oid.getType()};
         long numObjectIdentities = jdbcTemplate.queryForLong(selectCountObjectIdentityRowsForParticularClassNameString,
                 className);
 
@@ -300,7 +290,7 @@ public class PostgresqlJdbcMutableAclService extends PostgresqlJdbcAclService im
     protected Long retrieveObjectIdentityPrimaryKey(ObjectIdentity oid) {
         try {
             return new Long(jdbcTemplate.queryForLong(selectObjectIdentityPrimaryKey,
-                    new Object[] {oid.getJavaType().getName(), oid.getIdentifier()}));
+                    new Object[] {oid.getType(), oid.getIdentifier()}));
         } catch (DataAccessException notFound) {
             return null;
         }

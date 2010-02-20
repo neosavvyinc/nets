@@ -2,7 +2,7 @@ package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.*;
-import org.springframework.security.annotation.Secured;
+import org.springframework.security.access.annotation.Secured;
 
 import java.util.ArrayList;
 import java.util.List;

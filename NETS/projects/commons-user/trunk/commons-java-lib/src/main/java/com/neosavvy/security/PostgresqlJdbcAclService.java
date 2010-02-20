@@ -14,12 +14,12 @@
  */
 package com.neosavvy.security;
 
-import org.springframework.security.acls.Acl;
-import org.springframework.security.acls.AclService;
-import org.springframework.security.acls.NotFoundException;
-import org.springframework.security.acls.objectidentity.ObjectIdentity;
-import org.springframework.security.acls.objectidentity.ObjectIdentityImpl;
-import org.springframework.security.acls.sid.Sid;
+import org.springframework.security.acls.model.Acl;
+import org.springframework.security.acls.model.AclService;
+import org.springframework.security.acls.model.NotFoundException;
+import org.springframework.security.acls.model.ObjectIdentity;
+import org.springframework.security.acls.domain.ObjectIdentityImpl;
+import org.springframework.security.acls.model.Sid;
 
 import org.springframework.security.acls.jdbc.LookupStrategy;
 
@@ -34,6 +34,7 @@ import org.springframework.util.Assert;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -79,8 +80,8 @@ public class PostgresqlJdbcAclService implements AclService {
 
     //~ Methods ========================================================================================================
 
-    public ObjectIdentity[] findChildren(ObjectIdentity parentIdentity) {
-        Object[] args = {parentIdentity.getIdentifier(), parentIdentity.getJavaType().getName()};
+    public List<ObjectIdentity> findChildren(ObjectIdentity parentIdentity) {
+        Object[] args = {parentIdentity.getIdentifier(), parentIdentity.getType()};
         List objects = jdbcTemplate.query(selectAclObjectWithParent, args,
                 new RowMapper() {
                     public Object mapRow(ResultSet rs, int rowNum)
@@ -92,30 +93,31 @@ public class PostgresqlJdbcAclService implements AclService {
                     }
                 });
 
-        return (ObjectIdentityImpl[]) objects.toArray(new ObjectIdentityImpl[] {});
-    }
-
-    public Acl readAclById(ObjectIdentity object, Sid[] sids)
-        throws NotFoundException {
-        Map map = readAclsById(new ObjectIdentity[] {object}, sids);
-
-        if (map.size() == 0) {
-            throw new NotFoundException("Could not find ACL");
-        } else {
-            return (Acl) map.get(object);
-        }
+        return objects;
     }
 
     public Acl readAclById(ObjectIdentity object) throws NotFoundException {
         return readAclById(object, null);
     }
 
-    public Map readAclsById(ObjectIdentity[] objects) {
-        return readAclsById(objects, null);
+    public Acl readAclById(ObjectIdentity objectIdentity, List<Sid> sids) throws NotFoundException {
+        List<ObjectIdentity> objectIdentities = new ArrayList<ObjectIdentity>();
+        objectIdentities.add(objectIdentity);
+        Map map = readAclsById(objectIdentities, sids);
+
+        if (map.size() == 0) {
+            throw new NotFoundException("Could not find ACL");
+        } else {
+            return (Acl) map.get(objectIdentity);
+        }
     }
 
-    public Map readAclsById(ObjectIdentity[] objects, Sid[] sids)
-        throws NotFoundException {
-        return lookupStrategy.readAclsById(objects, sids);
+    public Map<ObjectIdentity, Acl> readAclsById(List<ObjectIdentity> objectIdentities) throws NotFoundException {
+        return readAclsById(objectIdentities, null);
     }
+
+    public Map<ObjectIdentity, Acl> readAclsById(List<ObjectIdentity> objectIdentities, List<Sid> sids) throws NotFoundException {
+        return lookupStrategy.readAclsById(objectIdentities, sids);
+    }
+
 }

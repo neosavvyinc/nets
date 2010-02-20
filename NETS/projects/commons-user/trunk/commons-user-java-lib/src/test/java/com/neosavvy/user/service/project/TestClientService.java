@@ -8,7 +8,7 @@ import com.neosavvy.user.util.ProjectTestUtil;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.security.AccessDeniedException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.test.annotation.ExpectedException;
 
 import java.util.List;

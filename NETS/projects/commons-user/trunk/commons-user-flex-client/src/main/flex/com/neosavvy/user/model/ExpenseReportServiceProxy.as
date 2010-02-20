@@ -25,6 +25,7 @@ package com.neosavvy.user.model {
         }
 
         private var _activeExpenseReport:ExpenseReport;
+        private var _activeExpenseReportId:Number;
         private var _paymentMethods:ArrayCollection             = null;
         private var _expenseTypes:ArrayCollection               = null;
         private var _projectTypes:ArrayCollection               = null;
@@ -61,6 +62,14 @@ package com.neosavvy.user.model {
 
         public function set activeExpenseReport(value:ExpenseReport):void {
             _activeExpenseReport = value;
+        }
+
+        public function set activeExpenseReportId(activeExpenseReportId:Number):void {
+            _activeExpenseReportId = activeExpenseReportId;
+        }
+
+        public function get activeExpenseReportId():Number {
+            return _activeExpenseReportId;
         }
 
         public function get openExpenseReports():ArrayCollection {

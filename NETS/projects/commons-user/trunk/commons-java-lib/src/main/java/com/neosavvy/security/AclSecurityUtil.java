@@ -6,10 +6,9 @@
 
 package com.neosavvy.security;
 
-import org.springframework.security.acls.sid.Sid;
-import org.springframework.security.acls.*;
-
-
+import org.springframework.security.acls.model.MutableAcl;
+import org.springframework.security.acls.model.Permission;
+import org.springframework.security.acls.model.Sid;
 
 public interface AclSecurityUtil {
 

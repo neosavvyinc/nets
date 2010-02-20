@@ -1,14 +1,13 @@
 package com.neosavvy.security;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.Around;
-import org.aspectj.lang.annotation.Aspect;
-import org.springframework.security.Authentication;
-import org.springframework.security.GrantedAuthority;
-import org.springframework.security.GrantedAuthorityImpl;
-import org.springframework.security.context.SecurityContextHolder;
-import org.springframework.security.providers.preauth.PreAuthenticatedAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -51,8 +50,8 @@ public class RunAsExecutor {
     }
 
     private Authentication createAuthentication(String role) {
-        GrantedAuthority[] authorities = new GrantedAuthority[1];
-        authorities[0] = new GrantedAuthorityImpl(role);
+        List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+        authorities.add(new GrantedAuthorityImpl(role));
         PreAuthenticatedAuthenticationToken token = new PreAuthenticatedAuthenticationToken(administratorUser, administratorPassword, authorities);
         return token;
     }
