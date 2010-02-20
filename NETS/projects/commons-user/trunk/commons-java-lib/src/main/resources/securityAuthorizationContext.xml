@@ -150,11 +150,13 @@
         </constructor-arg>
     </bean>
 
-    <!--<bean id="aclService" class="org.springframework.security.acls.jdbc.JdbcMutableAclService">-->
-    <bean id="aclService" class="com.neosavvy.security.PostgresqlJdbcMutableAclService">
+    <bean id="aclService" class="org.springframework.security.acls.jdbc.JdbcMutableAclService">
+    <!--bean id="aclService" class="com.neosavvy.security.PostgresqlJdbcMutableAclService"-->
         <constructor-arg ref="dataSource"/>
         <constructor-arg ref="lookupStrategy"/>
         <constructor-arg ref="aclCache"/>
+        <property name="sidIdentityQuery" value="SELECT currval('acl_sid_id_seq')" />
+        <property name="classIdentityQuery" value="SELECT currval('acl_class_id_seq')" />
     </bean>
 
 

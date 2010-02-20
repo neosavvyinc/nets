@@ -64,13 +64,6 @@
         <spring.flex.version>1.0.2.RELEASE</spring.flex.version>
 	    <commons.flex.version>1.0-SNAPSHOT</commons.flex.version>
         <eclipselink.version>2.0.0</eclipselink.version>
-
-        <cargo.container.id>tomcat6x</cargo.container.id>
-        <cargo.download.url>
-            http://www.ibiblio.org/pub/mirrors/apache/tomcat/tomcat-6/v6.0.20/bin/apache-tomcat-6.0.20.zip
-        </cargo.download.url>
-        <cargo.install.dir>${java.io.tmpdir}/cargo/installs</cargo.install.dir>
-        <cargo.servlet.port>8080</cargo.servlet.port>
     </properties>
 
     <build>
@@ -124,19 +117,6 @@
                               Use value below for target Java 1.4 builds (backward compatibility)
                               <target>jsr14</target>
                               -->
-                    </configuration>
-                </plugin>
-                <plugin>
-                    <groupId>org.mortbay.jetty</groupId>
-                    <artifactId>maven-jetty-plugin</artifactId>
-                    <version>6.1.15</version>
-                    <configuration>
-                        <connectors>
-                            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                                <port>9090</port>
-                                <maxIdleTime>60000</maxIdleTime>
-                            </connector>
-                        </connectors>
                     </configuration>
                 </plugin>
                 <plugin>

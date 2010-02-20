@@ -12,9 +12,11 @@
 
     <beans:bean id="preAuthenticatedEntryPoint"
         class="org.springframework.security.web.authentication.preauth.PreAuthenticatedProcessingFilterEntryPoint" />
+
     <authentication-manager>
         <authentication-provider user-service-ref="authenticationDao"/>
     </authentication-manager>
+
     <beans:bean id="authenticationDao" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
         <beans:property name="dataSource" ref="dataSource"/>
         <beans:property name="usersByUsernameQuery">

@@ -21,8 +21,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.cxf.jaxrs.ext.MessageContext;
 import org.apache.geronimo.mail.util.RFC2231Encoder;
-import org.springframework.security.AccessDecisionManager;
-import org.springframework.security.context.SecurityContextHolder;
 
 import fineline.focal.common.storage.FileStorage;
 import fineline.focal.common.storage.ResourceNotFoundException;
@@ -30,6 +28,8 @@ import fineline.focal.common.storage.StorageBucketType;
 import fineline.focal.common.types.v1.StorageServiceFileRef;
 import fineline.focal.common.utils.FileUtils;
 import fineline.focal.common.utils.StringUtils;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 public class StorageServiceImpl implements StorageService
 {   

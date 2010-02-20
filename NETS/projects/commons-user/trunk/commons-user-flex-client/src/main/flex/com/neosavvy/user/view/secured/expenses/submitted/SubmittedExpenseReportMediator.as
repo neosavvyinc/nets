@@ -86,7 +86,7 @@ package com.neosavvy.user.view.secured.expenses.submitted {
                     submittedExpenseReportGrid.dataProvider = _expenseServiceProxy.submittedExpenseReports;
                     break;
                 case ApplicationFacade.SAVE_EXPENSE_REPORT_SUCCESS:
-                    if(_statusChangedExpenseReport && _statusChangedExpenseReport.id == _expenseServiceProxy.activeExpenseReportId)
+                    if(_statusChangedExpenseReport && _statusChangedExpenseReport.id == _expenseServiceProxy.activeExpenseReport.id)
                     {
                         // only send the notification if the active expense matches the one that was just saved
                         sendNotification(ApplicationFacade.INITIALIZE_VIEW_SUBMITTED_EXPENSE_REPORTS_VIEW, _userServiceProxy.activeUser);
