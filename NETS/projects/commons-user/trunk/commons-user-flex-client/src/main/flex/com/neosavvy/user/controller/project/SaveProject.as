@@ -24,6 +24,7 @@ package com.neosavvy.user.controller.project {
 
         override public function execute(notification:INotification):void {
             super.execute(notification);
+            sendNotification(ApplicationFacade.SHOW_PROGRESS_INDICATOR);
             var projectProxy:ProjectServiceProxy = facade.retrieveProxy(ProjectServiceProxy.NAME) as ProjectServiceProxy;
 
             if (notification.getBody() is Array && (notification.getBody() as Array).length == 3) {
@@ -40,12 +41,14 @@ package com.neosavvy.user.controller.project {
 
         override protected function resultHandler(resultEvent:ResultEvent):void {
             sendNotification(ApplicationFacade.SAVE_PROJECT_SUCCESS);
+            sendNotification(ApplicationFacade.HIDE_PROGRESS_INDICATOR);
         }
 
 
         override protected function faultHandler(faultEvent:FaultEvent):void {
             RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
             sendNotification(ApplicationFacade.SAVE_PROJECT_FAILED);
+            sendNotification(ApplicationFacade.HIDE_PROGRESS_INDICATOR);
         }
     }
 }

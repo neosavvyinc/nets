@@ -24,6 +24,7 @@ package com.neosavvy.user.controller.client {
 
         override public function execute(notification:INotification):void {
             super.execute(notification);
+            sendNotification(ApplicationFacade.SHOW_PROGRESS_INDICATOR);
             var clientProxy:ClientServiceProxy = facade.retrieveProxy(ClientServiceProxy.NAME) as ClientServiceProxy;
 
             if (notification.getBody() is Array && (notification.getBody() as Array).length == 2) {
@@ -40,12 +41,14 @@ package com.neosavvy.user.controller.client {
         override protected function resultHandler(resultEvent:ResultEvent):void {
             LOGGER.debug("Save Client For Company was successful");
             sendNotification(ApplicationFacade.SAVE_CLIENT_COMPANY_SUCCESS);
+            sendNotification(ApplicationFacade.HIDE_PROGRESS_INDICATOR);
         }
 
 
         override protected function faultHandler(faultEvent:FaultEvent):void {
             RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
             sendNotification(ApplicationFacade.SAVE_CLIENT_COMPANY_FAILED);
+            sendNotification(ApplicationFacade.HIDE_PROGRESS_INDICATOR);
         }
     }
 }
