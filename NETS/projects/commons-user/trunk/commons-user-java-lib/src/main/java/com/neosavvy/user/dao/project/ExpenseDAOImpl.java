@@ -92,15 +92,19 @@ public class ExpenseDAOImpl extends BaseDAO implements ExpenseDAO {
     }
 
     private void prepareForSave(ExpenseReport report) {
-        for (ExpenseItem item : report.getExpenseItems()) {
-            item.setExpenseReport(report);
-            prepareForSave(item);
+        if (report.getExpenseItems() != null) {
+            for (ExpenseItem item : report.getExpenseItems()) {
+                item.setExpenseReport(report);
+                prepareForSave(item);
+            }
         }
     }
 
     private void prepareForSave(ExpenseItem item) {
-        for (ExpenseItemValue value : item.getExpenseItemValues()) {
-            value.setExpenseItem(item);
+        if (item.getExpenseItemValues() != null) {
+            for (ExpenseItemValue value : item.getExpenseItemValues()) {
+                value.setExpenseItem(item);
+            }
         }
     }
 

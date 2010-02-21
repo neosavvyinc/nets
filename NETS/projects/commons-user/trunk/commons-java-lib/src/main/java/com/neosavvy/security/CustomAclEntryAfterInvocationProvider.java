@@ -30,7 +30,7 @@ public class CustomAclEntryAfterInvocationProvider extends AclEntryAfterInvocati
 
     public Object decide(Authentication authentication, Object object, Collection<ConfigAttribute> config, Object returnedObject) throws AccessDeniedException {
         if(returnedObject != null) {
-            if(!(object instanceof SecuredObject) || getIdentity((SecuredObject)object) == 0) {
+            if(!(object instanceof SecuredObject) || SecurityHelper.getIdentity((SecuredObject)object) == 0) {
                 return returnedObject;
             }
         }
@@ -38,10 +38,4 @@ public class CustomAclEntryAfterInvocationProvider extends AclEntryAfterInvocati
         return super.decide(authentication, object, config, returnedObject);
     }
 
-    private long getIdentity(SecuredObject object)  {
-        if (object.getId() == null) {
-            return 0;
-        }
-        return object.getId();
-    }
 }

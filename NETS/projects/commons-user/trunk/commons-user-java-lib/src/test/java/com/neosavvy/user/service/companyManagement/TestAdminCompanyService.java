@@ -18,13 +18,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by IntelliJ IDEA.
- * User: tommyodom
- * Date: Jan 19, 2010
- * Time: 7:03:22 PM
- * To change this template use File | Settings | File Templates.
- */
 public class TestAdminCompanyService extends TestCompanyService {
     @Before
     public void setupAdministrator() {
@@ -53,7 +46,7 @@ public class TestAdminCompanyService extends TestCompanyService {
         Assert.assertTrue(companies.contains(adminCompany));
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = CompanyServiceException.class)
     public void testAddUserToCompanyWithNullUser(){
         companyService.addUserToCompany(ProjectTestUtil.createTestCompany(), null);
     }
@@ -68,7 +61,7 @@ public class TestAdminCompanyService extends TestCompanyService {
         companyService.addUserToCompany(adminCompany, ProjectTestUtil.createTestUser());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = CompanyServiceException.class)
     public void testAddUserToCompanyWithCompanyThatDoesNotExistInDatabase() {
         UserDTO testUser = ProjectTestUtil.createTestUser();
         userDAO.saveUser(testUser);
@@ -123,7 +116,7 @@ public class TestAdminCompanyService extends TestCompanyService {
         companyService.inviteUsers(null, ProjectTestUtil.createTestUserInvite());
     }
 
-    @Test(expected = IllegalArgumentException.class)
+    @Test(expected = CompanyServiceException.class)
     public void testInviteUsersNoPersistedCompany(){
         companyService.inviteUsers(ProjectTestUtil.createParentCompany(), ProjectTestUtil.createTestUserInvite());
     }

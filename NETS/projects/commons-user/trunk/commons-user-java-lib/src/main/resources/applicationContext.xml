@@ -27,11 +27,4 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <jee:jndi-lookup id="entityManagerFactory" jndi-name="java:comp/env/NetsPU" />
     <jee:jndi-lookup id="dataSource" jndi-name="jdbc/CommonsUserDS"/>
 
-
-    <jaxrs:server id="userServiceEndpoint" address="/users">
-      <jaxrs:serviceBeans>
-        <ref bean="userService" />
-      </jaxrs:serviceBeans>
-    </jaxrs:server>
-
 </beans>
