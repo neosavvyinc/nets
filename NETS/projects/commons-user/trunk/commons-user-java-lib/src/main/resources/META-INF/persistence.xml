@@ -35,8 +35,7 @@
         <class>com.neosavvy.user.dto.acl.AclEntry</class>
 
         <properties>
-            <!--property name="eclipselink.target-server" value="SunAS9"/-->
-            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.logging.level" value="FINEST"/>
             <property name="eclipselink.ddl-generation" value="none" />
         </properties>
     </persistence-unit>

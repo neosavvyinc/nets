@@ -2,6 +2,7 @@ package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.*;
+import com.neosavvy.user.service.exception.ExpenseServiceException;
 import org.springframework.security.access.annotation.Secured;
 
 import java.util.ArrayList;
@@ -33,7 +34,7 @@ import java.util.List;
 public interface ExpenseService {
     
     @Secured({"ROLE_EMPLOYEE", "ACL_OBJECT_WRITE", "AFTER_ACL_READ"})
-    public ExpenseReport saveExpenseReport(ExpenseReport report, List<ExpenseItem> expenseItems);
+    public ExpenseReport saveExpenseReport(ExpenseReport report, List<ExpenseItem> expenseItems) throws ExpenseServiceException;
 
     @Secured({"ROLE_EMPLOYEE", "ACL_OBJECT_WRITE"})
     public void deleteExpenseReport(ExpenseReport report);

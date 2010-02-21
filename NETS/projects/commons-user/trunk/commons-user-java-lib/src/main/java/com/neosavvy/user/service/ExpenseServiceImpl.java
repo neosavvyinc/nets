@@ -3,6 +3,7 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dao.project.ExpenseDAO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.*;
+import com.neosavvy.user.service.exception.ExpenseServiceException;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
@@ -30,11 +31,12 @@ import java.util.List;
 public class ExpenseServiceImpl implements ExpenseService {
     private ExpenseDAO expenseDAO;
 
-    public ExpenseReport saveExpenseReport(ExpenseReport report, List<ExpenseItem> expenseItems) {
+    public ExpenseReport saveExpenseReport(ExpenseReport report, List<ExpenseItem> expenseItems) throws ExpenseServiceException {
         if (report == null) {
             return null;
         }
         report.setExpenseItems(expenseItems);
+        validateExpenseReport(report);
         return expenseDAO.save(report);
     }
 
@@ -109,6 +111,12 @@ public class ExpenseServiceImpl implements ExpenseService {
         return types;
     }
 
+    private void validateExpenseReport(ExpenseReport report) throws ExpenseServiceException {
+        if (report.getOwner() == null) {
+            throw new ExpenseServiceException("Expense reports owner is required.");
+        }
+    }
+    
     public List<ProjectType> findProjectTypes() {
         return expenseDAO.getProjectTypes();
     }

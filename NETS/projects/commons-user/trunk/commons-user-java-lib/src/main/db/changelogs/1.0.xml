@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+
+    <includeAll path="src/main/db/changelogs/init/" />
+
+    <changeSet id="1" author="tommy">
+        <createTable tableName="persistent_logins">
+            <column name="series" type="varchar(64)">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="varchar(64)">
+                <constraints nullable="false" />
+            </column>
+            <column name="token" type="varchar(64)">
+                <constraints nullable="false" />
+            </column>
+            <column name="last_used" type="timestamp">
+              <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="tommy">
+        <addNotNullConstraint tableName="EXPENSE_REPORT" columnName="OWNER_FK" defaultNullValue="1" />
+    </changeSet>
+</databaseChangeLog>

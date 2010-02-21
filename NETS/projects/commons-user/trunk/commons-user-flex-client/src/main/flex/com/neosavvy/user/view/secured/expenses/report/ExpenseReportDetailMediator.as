@@ -3,12 +3,14 @@ package com.neosavvy.user.view.secured.expenses.report {
     import com.neosavvy.user.dto.project.ExpenseItem;
     import com.neosavvy.user.dto.project.ExpenseItemType;
     import com.neosavvy.user.dto.project.ExpenseReport;
+    import com.neosavvy.user.dto.project.ExpenseReportStatus;
     import com.neosavvy.user.dto.project.PaymentMethod;
     import com.neosavvy.user.dto.project.Project;
     import com.neosavvy.user.dto.project.ProjectType;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
 
+    import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
     import com.neosavvy.user.view.secured.expenses.report.event.ExpenseItemEvent;
 
@@ -235,7 +237,13 @@ package com.neosavvy.user.view.secured.expenses.report {
         }
 
         private function getExpenseReport():ExpenseReport {
-            var expenseReport:ExpenseReport = new ExpenseReport();
+            var expenseReport:ExpenseReport = _expenseReportProxy.activeExpenseReport;
+
+            if (expenseReport == null) {
+                expenseReport = new ExpenseReport();
+                expenseReport.status = ExpenseReportStatus.OPEN;
+                expenseReport.owner = userServiceProxy.activeUser; 
+            }
             expenseReport.purpose = expenseReportDetail.purposeTextInput.text;
             expenseReport.location = expenseReportDetail.locationTextInput.text;
             return expenseReport;
@@ -304,6 +312,10 @@ package com.neosavvy.user.view.secured.expenses.report {
                 }
             }
             return -1;
+        }
+
+        private function get userServiceProxy():UserServiceProxy {
+            return facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
         }
     }
 }

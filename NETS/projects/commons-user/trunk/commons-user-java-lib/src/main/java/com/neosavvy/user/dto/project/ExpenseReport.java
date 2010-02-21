@@ -4,7 +4,9 @@ import com.neosavvy.security.SecuredObject;
 import com.neosavvy.user.dto.base.BaseDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import fineline.focal.common.types.v1.EntityListenerManager;
+import flex.messaging.annotations.FlexClass;
 import flex.messaging.annotations.FlexField;
+import flex.messaging.annotations.IAnnotatedProxy;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -42,7 +44,8 @@ import java.util.List;
     }
 )
 @EntityListeners(EntityListenerManager.class)
-public class ExpenseReport extends BaseDTO implements SecuredObject<ExpenseReport> {
+@FlexClass(classType = FlexClass.FlexClassType.RemoteObject)
+public class ExpenseReport extends BaseDTO implements IAnnotatedProxy, SecuredObject<ExpenseReport> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_report_id_seq")
@@ -176,7 +179,7 @@ public class ExpenseReport extends BaseDTO implements SecuredObject<ExpenseRepor
         BigDecimal total = BigDecimal.valueOf(0);
 
         for (ExpenseItem item : getExpenseItems()) {
-            total.add(item.getAmount());
+            total = total.add(item.getAmount());
         }
 
         return total.setScale(2, BigDecimal.ROUND_HALF_UP);
@@ -188,7 +191,7 @@ public class ExpenseReport extends BaseDTO implements SecuredObject<ExpenseRepor
 
         for (ExpenseItem item : getExpenseItems()) {
             if (item.getPaymentMethod().getId().equals(PaymentMethod.PAYMENT_METHOD_EMPLOYEE_PAID_ID)) {
-                total.add(item.getAmount());
+                total = total.add(item.getAmount());
             }
         }
 
