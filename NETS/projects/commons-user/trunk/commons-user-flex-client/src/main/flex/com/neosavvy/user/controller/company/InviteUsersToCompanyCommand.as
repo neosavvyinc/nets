@@ -21,6 +21,7 @@ package com.neosavvy.user.controller.company {
 
         override public function execute(notification:INotification):void {
             super.execute(notification);
+            sendNotification(ApplicationFacade.SHOW_PROGRESS_INDICATOR);
             var companyServiceProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
             var userInvite:UserInviteDTO = notification.getBody() as UserInviteDTO;
             companyServiceProxy.inviteUsers(userInvite, this);
@@ -30,6 +31,7 @@ package com.neosavvy.user.controller.company {
         override protected function resultHandler(resultEvent:ResultEvent):void {
             LOGGER.debug("User invites successful");
             sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_SUCCESS);
+            sendNotification(ApplicationFacade.HIDE_PROGRESS_INDICATOR);
         }
 
 
@@ -37,6 +39,7 @@ package com.neosavvy.user.controller.company {
             LOGGER.debug("User invites failed!");
             RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
             sendNotification(ApplicationFacade.INVITE_USER_TO_COMPANY_FAILED);
+            sendNotification(ApplicationFacade.HIDE_PROGRESS_INDICATOR);
         }
     }
 }
