@@ -3,6 +3,7 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dao.project.ExpenseDAO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.*;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,6 +26,7 @@ import java.util.List;
  * from Neosavvy Incorporated.
  **************************************************************************/
 
+@Transactional
 public class ExpenseServiceImpl implements ExpenseService {
     private ExpenseDAO expenseDAO;
 
