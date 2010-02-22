@@ -276,6 +276,8 @@ public class AutoFilteringGrid extends AdvancedDataGrid
                     }
                 }
             }
+        } else {
+            searchStringFound = true;
         }
         return searchStringFound;
 

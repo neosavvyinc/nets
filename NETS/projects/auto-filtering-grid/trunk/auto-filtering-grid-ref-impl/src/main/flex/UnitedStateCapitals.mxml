@@ -180,6 +180,7 @@
                 <mx:Label text="States" styleName="titleLbl"/>
                 <mx:Spacer width="50%"/>
                 <mx:TextInput id="searchText"/>
+                <mx:Button id="attachSearch" label="Attach Search Box" click="{grid.searchTextControl = searchText}"/>
                 <mx:Spacer width="50%"/>
                 <!--<mx:Button id="testRestoreState" label="Restore" click="{grid.setAllActiveFiltersWithSelectedValues(selectedGridValues)}"/>-->
                 <!--<mx:Button id="testSaveState" label="Save Filters" toolTip="Click here to save the state of your grid" click="{grid.getAllActiveFiltersWithSelectedValues()}"/>-->
@@ -190,7 +191,6 @@
 
             <grid:AutoFilteringGrid
                     y="{titleBox.height}"
-                    searchTextControl="{searchText}"
                     id="grid"
                     width="100%"
                     height="100%"
@@ -234,6 +234,12 @@
                             autoFilterEnabled="false"
                             dataField="timeZone"
                             headerText="Time Zone"/>
+                    <grid:AutoFilteringGridColumn
+                            id="nullValueColumn"
+                            enabledByDefault="true"
+                            autoFilterEnabled="true"
+                            dataField="nullString"
+                            headerText="Null Value Column"/>
                 </grid:columns>
             </grid:AutoFilteringGrid>
         </mx:Canvas>
