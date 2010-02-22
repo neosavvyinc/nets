@@ -42,7 +42,6 @@
     <modules>
         <module>auto-filtering-grid</module>
         <module>auto-filtering-grid-ref-impl</module>
-        <module>auto-filtering-grid-picker</module>
         <module>auto-filtering-grid-picker-ref-impl</module>
     </modules>
 
