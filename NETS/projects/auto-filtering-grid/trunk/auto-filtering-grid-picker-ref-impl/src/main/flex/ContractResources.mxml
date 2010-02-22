@@ -127,6 +127,7 @@
         <mx:HBox id="titleBox" width="100%" styleName="dgTitleBox">
             <mx:Label text="Resources" styleName="titleLbl"/>
             <mx:Spacer width="100%"/>
+            <mx:TextInput id="searchBar"/>
             <mx:Button label="Apply Data To Grid" click="{applyData()}"/>
             <mx:Button label="Reset Filters" click="{grid.resetFilters()}"/>
             <mx:Button label="Reset Default Sort" click="{grid.setDefaultSort()}"/>
@@ -141,6 +142,7 @@
                 sortExpertMode="true"
                 autoResizeColumnHeaders="true"
                 dataProvider="{ resources}"
+                searchTextControl="{searchBar}"
                 >
             <grid:columns>
                 <grid:AutoFilteringGridColumn

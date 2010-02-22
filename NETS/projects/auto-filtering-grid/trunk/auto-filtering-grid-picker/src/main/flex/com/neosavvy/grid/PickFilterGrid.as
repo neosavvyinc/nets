@@ -105,7 +105,11 @@ package com.neosavvy.grid{
             if( item.hasOwnProperty(_selectedColumnDatafield) ) {
                 isItemSelected = item[_selectedColumnDatafield] as Boolean;
             }
-            return super.filterFunction(item) || isItemSelected;
+
+            if( super.searchTextControl != null )
+                return super.searchWrappedFilterFunction(item) || isItemSelected;
+            else
+                return super.filterFunction(item) || isItemSelected;
             
         }
 
