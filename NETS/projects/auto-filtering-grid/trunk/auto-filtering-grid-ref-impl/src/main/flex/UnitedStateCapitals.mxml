@@ -182,8 +182,6 @@
                 <mx:TextInput id="searchText"/>
                 <mx:Button id="attachSearch" label="Attach Search Box" click="{grid.searchTextControl = searchText}"/>
                 <mx:Spacer width="50%"/>
-                <!--<mx:Button id="testRestoreState" label="Restore" click="{grid.setAllActiveFiltersWithSelectedValues(selectedGridValues)}"/>-->
-                <!--<mx:Button id="testSaveState" label="Save Filters" toolTip="Click here to save the state of your grid" click="{grid.getAllActiveFiltersWithSelectedValues()}"/>-->
                 <mx:LinkButton id="manageColumns" toolTip="Manage Columns" styleName="configureLBtn"
                                click="{grid.horizontalScrollPosition=0;grid.manageColumns()}"/>
                 <mx:LinkButton id="reset" toolTip="Reset Filters" styleName="resetLBtn" click="{grid.resetFilters()}"/>
@@ -201,6 +199,7 @@
                     autoFilterColumnsChanged="{handleColumnsChangedEvent()}"
                     resetFilters="{handleResetFilters()}"
                     autoFilterChanged="{handleFilterChanged(event)}"
+                    cascadeFilterDropdowns="true"
                     >
                 <grid:columns>
                     <grid:AutoFilteringGridColumn

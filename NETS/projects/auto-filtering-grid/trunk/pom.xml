@@ -43,6 +43,7 @@
         <module>auto-filtering-grid</module>
         <module>auto-filtering-grid-ref-impl</module>
         <module>auto-filtering-grid-picker-ref-impl</module>
+        <module>auto-filtering-grid-hierachical-ref-impl</module>
     </modules>
 
     <dependencyManagement>
