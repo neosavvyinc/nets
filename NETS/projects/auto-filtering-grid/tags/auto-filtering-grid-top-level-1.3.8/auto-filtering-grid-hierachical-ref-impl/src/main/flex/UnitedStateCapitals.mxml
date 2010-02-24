@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        layout="vertical"
+        paddingRight="20" paddingLeft="20"
+        verticalScrollPolicy="off"
+        xmlns:grid="com.neosavvy.grid.*"
+        xmlns:pbFilters="pbFilters.*">
+
+    <mx:Script>
+    <![CDATA[
+        import com.neosavvy.grid.AutoFilteringGridColumn;
+        import com.neosavvy.grid.event.AutoFilteringGridEvent;
+        import com.neosavvy.grid.model.GridFilterModel;
+        import com.neosavvy.grid.model.GridFilterModels;
+        import com.neosavvy.grid.AutoFilteringGrid
+        import mx.collections.ArrayCollection;
+        import mx.collections.HierarchicalData;
+        import mx.controls.Alert;
+
+        private function handleFilterChanged(event:AutoFilteringGridEvent):void {
+            if( event.filterItemAffected == "name" ) {
+                abbreviationColumn.autoFilterEnabled = true;
+            }
+
+            if ( event.filterItemAffected == "abbreviation")
+            {
+                capitalColumn.autoFilterEnabled = true;
+            }
+        }
+
+        private function handleResetFilters():void {
+            nameColumn.autoFilterEnabled = true;
+
+            abbreviationColumn.autoFilterEnabled = false;
+            capitalColumn.autoFilterEnabled = false;
+            postalCodeColumn.autoFilterEnabled = false;
+            timezoneColumn.autoFilterEnabled = false;
+        }
+
+        private function emailMe():void {
+         var webPageURL:URLRequest = new URLRequest( "mailto:aparrish@neosavvy.com" );
+         navigateToURL(webPageURL, '_blank')
+        }
+
+        [Embed(source="/icons/neosavvy_logo_sm.png")]
+        [Bindable]
+        public var imgCls:Class;
+
+
+        [Bindable]
+        private var stateInformation:ArrayCollection = new ArrayCollection();
+
+        [Bindable]
+        private var hierarchicalStateInformation:HierarchicalData
+
+        /***
+         * This is a variable to store the grid values and selected filters
+         * when a user clicks on the save button. Restoring this object map
+         * into the grid will restore the state of the filters in the grid
+         * at the time the save button was pressed.
+         */
+        private var selectedGridValues:Object;
+
+        public function applyData():void {
+            stateInformation.addItem(new State("North Carolina", "N.C.", "NC", "Raleigh", "Eastern",Counties.northCarolinaCounties));
+            stateInformation.addItem(new State("South Carolina", "S.C.", "SC", "Columbia", "Eastern",Counties.southCarolinaCounties));
+
+            hierarchicalStateInformation = new HierarchicalData(stateInformation);
+            hierarchicalStateInformation.childrenField = "counties";
+        }
+
+        protected function handleColumnsChangedEvent():void {
+            Alert.show("Columns Changed Event!!!!");
+        }
+
+        private function addFilter():void {
+
+            var gridFilterModels:GridFilterModels = new GridFilterModels();
+
+            if (filtersToAdd.text) {
+                var gridFilterModel:GridFilterModel = new GridFilterModel();
+                gridFilterModel.columnName = (columnToFilter.selectedItem as AutoFilteringGridColumn).dataField;
+                for each (var item:String in filtersToAdd.text.split(",")) {
+                    gridFilterModel.addSelectedValue(item);
+                }
+                gridFilterModels.addGridFilterModel(gridFilterModel);
+            }
+
+            if (filtersToAdd1.text) {
+                var gridFilterModel1:GridFilterModel = new GridFilterModel();
+                gridFilterModel1.columnName = (columnToFilter1.selectedItem as AutoFilteringGridColumn).dataField;
+                for each (var item1:String in filtersToAdd1.text.split(",")) {
+                    gridFilterModel1.addSelectedValue(item1);
+                }
+                gridFilterModels.addGridFilterModel(gridFilterModel1);
+            }
+            grid.gridFilterModels = gridFilterModels;
+        }
+      
+    ]]>
+  </mx:Script>
+
+    <mx:Style source="/styles/customDataGrid.css"/>
+    <mx:Panel horizontalAlign="left" width="100%" layout="horizontal" paddingBottom="10" paddingLeft="10" paddingRight="10" paddingTop="10">
+        <mx:Image source="{imgCls}"/>
+        <mx:Text width="30%">
+            <mx:text>
+                This component is an auto filtering grid. It can be used to assign a data provider much like the
+                existing advanced data grid and it will then allow the user to filter within that dataset by
+                clicking the filter button at the top of each column.
+            </mx:text>
+        </mx:Text>
+        <mx:Text width="30%">
+            <mx:text>
+                Currently the component supports only showing filter values that are in the dataset in the data provider.
+                There is also a state saving feature so that when the filters are set they can be extracted into a model
+                and persisted if need be. That model can then be reassigned back to the grid to set the selected filters.
+            </mx:text>
+        </mx:Text>
+        <mx:VBox width="30%" verticalGap="0">
+            <mx:Text width="100%">
+                <mx:text>
+                    If the selected filters in the model have gone away since the persistence request, they will be ignored and
+                    should not be set since they no longer exist.
+                </mx:text>
+            </mx:Text>
+            <mx:Spacer height="30"/>
+            <mx:Label text="Component Author: Adam Parrish"/>
+            <mx:Label text="Thanks to Jaivin Anzalota for Styling expertise"/>
+            <mx:LinkButton label="Contact Me!" click="emailMe()"/>
+        </mx:VBox>
+    </mx:Panel>
+    <mx:Spacer height="10"/>
+    <mx:HBox id="wholepage" width="100%" horizontalAlign="center">
+        <mx:Canvas height="100%" width="70%">
+            <mx:HBox id="titleBox" width="100%" styleName="dgTitleBox">
+                <mx:Label text="States" styleName="titleLbl"/>
+                <mx:Spacer width="50%"/>
+                <mx:TextInput id="searchText"/>
+                <mx:Button id="attachSearch" label="Attach Search Box" click="{grid.searchTextControl = searchText}"/>
+                <mx:Spacer width="50%"/>
+                <!--<mx:Button id="testRestoreState" label="Restore" click="{grid.setAllActiveFiltersWithSelectedValues(selectedGridValues)}"/>-->
+                <!--<mx:Button id="testSaveState" label="Save Filters" toolTip="Click here to save the state of your grid" click="{grid.getAllActiveFiltersWithSelectedValues()}"/>-->
+                <mx:LinkButton id="manageColumns" toolTip="Manage Columns" styleName="configureLBtn"
+                               click="{grid.horizontalScrollPosition=0;grid.manageColumns()}"/>
+                <mx:LinkButton id="reset" toolTip="Reset Filters" styleName="resetLBtn" click="{grid.resetFilters()}"/>
+            </mx:HBox>
+
+            <grid:AutoFilteringGrid
+                    y="{titleBox.height}"
+                    id="grid"
+                    width="100%"
+                    height="100%"
+                    horizontalScrollPolicy="on"
+                    sortExpertMode="true"
+                    autoResizeColumnHeaders="true"
+                    dataProvider="{hierarchicalStateInformation}"
+                    autoFilterColumnsChanged="{handleColumnsChangedEvent()}"
+                    resetFilters="{handleResetFilters()}"
+                    autoFilterChanged="{handleFilterChanged(event)}"
+                    >
+                <grid:columns>
+                    <grid:AutoFilteringGridColumn
+                            id="nameColumn"
+                            enabledByDefault="true"
+                            autoFilterEnabled="true"
+                            dataField="name"
+                            headerText="Name"
+                            removable="false"/>
+                    <grid:AutoFilteringGridColumn
+                            id="abbreviationColumn"
+                            enabledByDefault="true"
+                            autoFilterEnabled="false"
+                            dataField="abbreviation"
+                            headerText="Abbreviation"/>
+                    <grid:AutoFilteringGridColumn
+                            id="capitalColumn"
+                            enabledByDefault="true"
+                            autoFilterEnabled="false"
+                            dataField="capital"
+                            headerText="Capital"/>
+                    <grid:AutoFilteringGridColumn
+                            id="postalCodeColumn"
+                            enabledByDefault="true"
+                            autoFilterEnabled="false"
+                            dataField="postalCode"
+                            headerText="Postal Code"/>
+                    <grid:AutoFilteringGridColumn
+                            id="timezoneColumn"
+                            enabledByDefault="true"
+                            autoFilterEnabled="false"
+                            dataField="timeZone"
+                            headerText="Time Zone"/>
+                    <grid:AutoFilteringGridColumn
+                            id="nullValueColumn"
+                            enabledByDefault="true"
+                            autoFilterEnabled="true"
+                            dataField="nullString"
+                            headerText="Null Value Column"/>
+                </grid:columns>
+            </grid:AutoFilteringGrid>
+        </mx:Canvas>
+        <mx:VBox id="controlBox"
+                 height="80%"
+                 width="30%"
+                 verticalAlign="top"
+                 styleName="dgTitleBox"
+                 paddingBottom="5"
+                 paddingLeft="5"
+                 paddingRight="5">
+            <mx:HBox width="100%">
+                <mx:Label text="Selected Filters" styleName="titleLbl"/>
+                <mx:LinkButton
+                        id="refreshSelectedFilters"
+                        toolTip="Reset Filters"
+                        styleName="resetLBtn"
+                        click="{selectedColumns.dataProvider = grid.gridFilterModels.gridFilterModels}"/>
+            </mx:HBox>
+            <mx:List
+                    id="selectedColumns"
+                    dataProvider="{grid.gridFilterModels.gridFilterModels}"
+                    width="100%"
+                    itemRenderer="renderer.SelectedFilterRenderer"
+                    />
+            <mx:Label text="Set a filter here"/>
+            <mx:ComboBox id="columnToFilter" dataProvider="{grid.columns}" labelField="dataField"/>
+            <mx:TextInput id="filtersToAdd" width="100%"/>
+            <mx:ComboBox id="columnToFilter1" dataProvider="{grid.columns}" labelField="dataField"/>
+            <mx:TextInput id="filtersToAdd1" width="100%"/>
+            <mx:Button label="Add Filter" click="{addFilter()}"/>
+            <mx:Button label="Apply Data To Grid" click="{applyData()}"/>
+            <mx:Button label="Clear Grid" click="{grid.dataProvider = new ArrayCollection()}"/>
+        </mx:VBox>
+    </mx:HBox>
+    <pbFilters:Reflector target="{wholepage}" width="100%" falloff="0.7" alpha="0.3" />
+
+</mx:Application>
