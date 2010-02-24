@@ -8,7 +8,12 @@ import com.neosavvy.grid.renderer.AutoFilteringGridColumnCheckboxRenderer;
 import flash.events.MouseEvent;
 
 import mx.collections.ArrayCollection;
-import mx.collections.Sort;
+    import mx.collections.HierarchicalCollectionView;
+    import mx.collections.HierarchicalData;
+    import mx.collections.IHierarchicalCollectionView;
+    import mx.collections.IHierarchicalData;
+    import mx.collections.IHierarchicalData;
+    import mx.collections.Sort;
 import mx.collections.SortField;
 import mx.containers.HBox;
 import mx.containers.VBox;
@@ -208,22 +213,34 @@ public class FilterSelectorDropdown extends VBox
         bGridFilterModelChanged = true;
     }
 
-    protected function calculateUniqueFilterValues():void {
-//        if (!_filterValues) {
+    private function calculateUniqueFilterValuesForFlatData() : void {
+        if (!_filterValues || _grid.cascadeFilterDropdowns ) {
             var uniqueFilterValueMap:Object = new Object();
+            var dataCollection:ArrayCollection;
 
-            for each (var object:Object in (_grid.dataProvider as ArrayCollection)) {
+            if( _grid.cascadeFilterDropdowns )
+            {
+                dataCollection = _grid.dataProvider as ArrayCollection;
+            }
+            else
+            {
+                var source:Array = (_grid.dataProvider as ArrayCollection).source;
+                dataCollection = new ArrayCollection(source);
+            }
+
+
+            for each (var object:Object in dataCollection) {
 
                 if (object.hasOwnProperty(_adgListData.dataField)) {
                     var valueFromObject:Object = object[_adgListData.dataField];
 
-                    if ( valueFromObject is String )
+                    if (valueFromObject is String)
                     {
                         uniqueFilterValueMap[valueFromObject] = valueFromObject;
                     }
-                    else if ( valueFromObject is ArrayCollection )
+                    else if (valueFromObject is ArrayCollection)
                     {
-                        for each ( var valueFromArrayCollection:Object in valueFromObject ) {
+                        for each (var valueFromArrayCollection:Object in valueFromObject) {
                             uniqueFilterValueMap[valueFromArrayCollection.toString()] = valueFromArrayCollection.toString();
                         }
                     }
@@ -239,18 +256,79 @@ public class FilterSelectorDropdown extends VBox
 
             for each (var fv:Object in uniqueFilterValueMap) {
 
-                if ( fv is String )
+                if (fv is String)
                 {
                     var isFilterActiveInGrid:Boolean = activeFilters.hasOwnProperty(fv)
                     var fvVO:AutoFilteringDropdownVO = new AutoFilteringDropdownVO(fv as String, isFilterActiveInGrid);
                     uniqueCollection.addItem(fvVO);
                 }
             }
-
             sortCollectionOnField(uniqueCollection, ["displayValue"]);
             this.filterValues = uniqueCollection;
-//        }
+        }
     }
+
+    private function calculateUniqueFilterValuesForHierarchicalData():void {
+        if (!_filterValues || _grid.cascadeFilterDropdowns ) {
+            var uniqueFilterValueMap:Object = new Object();
+            var dataCollection:ArrayCollection;
+           
+            var treeCollection:HierarchicalData = (_grid.dataProvider as HierarchicalCollectionView).source as HierarchicalData;
+            dataCollection = treeCollection.source as ArrayCollection;
+
+            for each (var object:Object in dataCollection) {
+
+                if (object.hasOwnProperty(_adgListData.dataField)) {
+                    var valueFromObject:Object = object[_adgListData.dataField];
+
+                    if (valueFromObject is String)
+                    {
+                        uniqueFilterValueMap[valueFromObject] = valueFromObject;
+                    }
+                    else if (valueFromObject is ArrayCollection)
+                    {
+                        for each (var valueFromArrayCollection:Object in valueFromObject) {
+                            uniqueFilterValueMap[valueFromArrayCollection.toString()] = valueFromArrayCollection.toString();
+                        }
+                    }
+                }
+
+            }
+            var activeFilters:Object = _grid.getActiveFilters(_adgListData.dataField);
+
+            /**
+             * This holds the actual unique values that are displayed
+             */
+            var uniqueCollection:ArrayCollection = new ArrayCollection();
+
+            for each (var fv:Object in uniqueFilterValueMap) {
+
+                if (fv is String)
+                {
+                    var isFilterActiveInGrid:Boolean = activeFilters.hasOwnProperty(fv)
+                    var fvVO:AutoFilteringDropdownVO = new AutoFilteringDropdownVO(fv as String, isFilterActiveInGrid);
+                    uniqueCollection.addItem(fvVO);
+                }
+            }
+            sortCollectionOnField(uniqueCollection, ["displayValue"]);
+            this.filterValues = uniqueCollection;
+        }
+    }
+
+    protected function calculateUniqueFilterValues():void {
+
+        if( _grid.dataProvider is ArrayCollection)
+        {
+            calculateUniqueFilterValuesForFlatData();
+        }
+        else if (_grid.dataProvider is HierarchicalCollectionView)
+        {
+            calculateUniqueFilterValuesForHierarchicalData();
+        }
+
+    }
+
+
 
     protected function refreshRollbackFilterValues():void {
         if (!_filterValues) {

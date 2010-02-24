@@ -1,7 +1,7 @@
 package com.neosavvy.grid.model {
     import mx.collections.ArrayCollection;
 
-    [RemoteClass(alias="com.roundarch.grid.model.GridFilterModels")]
+    [RemoteClass(alias="com.neosavvy.grid.model.GridFilterModels")]
     public class GridFilterModels {
 
         private var _gridFilterModels:ArrayCollection = new ArrayCollection();
@@ -20,7 +20,7 @@ package com.neosavvy.grid.model {
 
         public function saveOrUpdateGridFilterModel(gridFilterModel:GridFilterModel):void {
             for each (var gfm:GridFilterModel in _gridFilterModels) {
-                if (!gfm) {
+                if (!gfm || !gridFilterModel) {
                     continue;
                 }
                 if (gfm.columnName == gridFilterModel.columnName) {

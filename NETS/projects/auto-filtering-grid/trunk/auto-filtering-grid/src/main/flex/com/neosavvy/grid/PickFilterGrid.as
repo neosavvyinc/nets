@@ -9,11 +9,30 @@ package com.neosavvy.grid{
 
     public class PickFilterGrid extends AutoFilteringGrid {
 
+        private var bPreSelectedIndicesChanged:Boolean = false;
+        private var _preSelectedIndices:ArrayCollection;
 
         override protected function commitProperties():void {
 
             addEventListener(PickFilterGridEvent.ITEM_SELECTED, handleItemSelected);
             setDefaultSort();
+
+            if (bPreSelectedIndicesChanged)
+            {
+                for each (var idx:Number in _preSelectedIndices)
+                {
+                    var pickFilterRow:PickFilterRow = this.dataProvider.getItemAt(idx) as PickFilterRow;
+                    if( pickFilterRow )
+                        pickFilterRow.selected = true;
+
+                    updatePickFilterRow(pickFilterRow);
+                }
+                invalidateProperties();
+                bPreSelectedIndicesChanged = false;
+                setDefaultSort();
+            }
+
+
             super.commitProperties();
         }
 
@@ -138,17 +157,23 @@ package com.neosavvy.grid{
             _selectedNonProxiedItems = value;
         }
 
-        protected function handleItemSelected(event:PickFilterGridEvent):void {
-
-            if( event.pickFilterRow.selected )
+        private function updatePickFilterRow(pickFilterRow:PickFilterRow):void {
+            if (pickFilterRow.selected)
             {
-                _selectedNonProxiedItems.addItem(event.pickFilterRow.wrappedObject);
+                _selectedNonProxiedItems.addItem(pickFilterRow.wrappedObject);
             }
             else
             {
-                var index:int = _selectedNonProxiedItems.getItemIndex(event.pickFilterRow.wrappedObject);
+                var index:int = _selectedNonProxiedItems.getItemIndex(pickFilterRow.wrappedObject);
                 _selectedNonProxiedItems.removeItemAt(index);
             }
+        }
+
+        protected function handleItemSelected(event:PickFilterGridEvent):void {
+
+            var pickFilterRow:PickFilterRow = event.pickFilterRow;
+
+            updatePickFilterRow(pickFilterRow);
 
             setDefaultSort();
         }
@@ -161,13 +186,22 @@ package com.neosavvy.grid{
             _selectedColumnDatafield = value;
         }
 
-
         public function get selectedColumnHeaderText():String {
             return _selectedColumnHeaderText;
         }
 
         public function set selectedColumnHeaderText(value:String):void {
             _selectedColumnHeaderText = value;
+        }
+
+        public function get preSelectedIndices():ArrayCollection {
+            return _preSelectedIndices;
+        }
+
+        public function set preSelectedIndices(value:ArrayCollection):void {
+            _preSelectedIndices = value;
+            bPreSelectedIndicesChanged = true;
+            invalidateProperties();
         }
     }
 }

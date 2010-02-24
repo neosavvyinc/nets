@@ -50,6 +50,8 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
     private var bColumnsChanged:Boolean = false;
 
+    private var _cascadeFilterDropdowns:Boolean = true;
+
     public function AutoFilteringGrid()
     {
         super();
@@ -471,7 +473,14 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
         bTextControlChanged = true;
         invalidateProperties();
+    }
 
+    public function get cascadeFilterDropdowns():Boolean {
+        return _cascadeFilterDropdowns;
+    }
+
+    public function set cascadeFilterDropdowns(value:Boolean):void {
+        _cascadeFilterDropdowns = value;
     }
 }
 
