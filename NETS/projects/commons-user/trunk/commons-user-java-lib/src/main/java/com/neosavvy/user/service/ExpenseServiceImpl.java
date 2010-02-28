@@ -53,6 +53,16 @@ public class ExpenseServiceImpl implements ExpenseService {
         return expenseDAO.findExpenseReportById(id);
     }
 
+    public List<ExpenseItem> getExpenseItems(long expenseReportId) {
+        ExpenseReport report = expenseDAO.findExpenseReportById(expenseReportId);
+
+        if (report == null) {
+            return new ArrayList<ExpenseItem>();
+        }
+
+        return report.getExpenseItems();
+    }
+    
     public List<ExpenseReport> findOpenExpenseReportsForUser(UserDTO user) {
         if (user == null) {
             return new ArrayList<ExpenseReport>();

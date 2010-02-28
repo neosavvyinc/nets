@@ -42,6 +42,9 @@ public interface ExpenseService {
     @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_READ"})
     public ExpenseReport findExpenseReportById(Long id);
 
+    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
+    public List<ExpenseItem> getExpenseItems(long expenseReportId);
+
     @Secured({"ROLE_EMPLOYEE"})
     public List<PaymentMethod> findPaymentMethods();
 

@@ -3,6 +3,7 @@ package com.neosavvy.user.controller.expenses.report.init {
     import com.neosavvy.user.controller.clientManagement.*;
     import com.neosavvy.user.controller.client.GetClientsForCompany;
     import com.neosavvy.user.controller.expenses.report.view.FindExpenseReportById;
+    import com.neosavvy.user.controller.expenses.report.view.GetExpenseReportItems;
     import com.neosavvy.user.controller.progress.HideProgressBarCommand;
     import com.neosavvy.user.controller.progress.ShowProgressBarCommand;
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
@@ -22,6 +23,7 @@ package com.neosavvy.user.controller.expenses.report.init {
             addSubCommand(FindPaymentMethods);
             addSubCommand(FindProjectTypes);
             addSubCommand(FindExpenseReportById);
+            addSubCommand(GetExpenseReportItems);
             addSubCommand(InitializeExpenseReportViewCompleteCommand);
             addSubCommand(HideProgressBarCommand);
         }

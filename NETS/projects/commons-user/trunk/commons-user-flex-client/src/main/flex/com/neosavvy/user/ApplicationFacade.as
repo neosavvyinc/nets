@@ -328,5 +328,8 @@ package com.neosavvy.user {
 
         public static const INITIALIZE_EDIT_EXPENSE_REPORT_VIEW:String = "initializeEditExpenseReportViewComplete";
         public static const INITIALIZE_EDIT_EXPENSE_REPORT_VIEW_COMPLETE:String = "initializeEditExpenseReportViewComplete";
+
+        public static const GET_EXPENSE_ITEMS_SUCCESS:String = "getExpenseItemsSuccess";
+        public static const GET_EXPENSE_ITEMS_FAILURE:String = "getExpenseItemsFailure";
     }
 }

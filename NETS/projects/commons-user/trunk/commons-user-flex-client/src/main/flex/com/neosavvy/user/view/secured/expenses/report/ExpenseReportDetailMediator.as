@@ -97,6 +97,7 @@ package com.neosavvy.user.view.secured.expenses.report {
 
                 ,ApplicationFacade.FIND_EXPENSE_REPORT_BY_ID_SUCCESS
                 ,ApplicationFacade.DELETE_ACTIVE_EXPENSE_REPORT_SUCCESS
+                ,ApplicationFacade.GET_EXPENSE_ITEMS_SUCCESS
             ];
         }
 
@@ -132,6 +133,9 @@ package com.neosavvy.user.view.secured.expenses.report {
                 case ApplicationFacade.DELETE_ACTIVE_EXPENSE_REPORT_SUCCESS:
                     resetForm();
                     break;
+                case ApplicationFacade.GET_EXPENSE_ITEMS_SUCCESS:
+                    setExpenseReportItems(_expenseReportProxy.activeExpenseReportItems);
+                    break;
             }
         }
 
@@ -161,8 +165,6 @@ package com.neosavvy.user.view.secured.expenses.report {
 
             setProject( activeExpenseReport.project );
             setExpenseReport( activeExpenseReport );
-            setExpenseReportItems( activeExpenseReport.expenseItems );
-
         }
 
         private function handleSaveButtonClicked(event:MouseEvent):void {

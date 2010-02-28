@@ -159,4 +159,7 @@ public class MockExpenseServiceImpl implements ExpenseService {
         return MockExpenseServiceImpl.projectTypes;
     }
 
+    public List<ExpenseItem> getExpenseItems(long expenseReportId) {
+        return findExpenseReportById(expenseReportId).getExpenseItems();
+    }
 }
