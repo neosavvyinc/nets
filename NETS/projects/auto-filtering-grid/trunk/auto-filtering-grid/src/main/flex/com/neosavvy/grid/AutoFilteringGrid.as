@@ -271,7 +271,7 @@ public class AutoFilteringGrid extends AdvancedDataGrid
                 if( item.hasOwnProperty( col.dataField ) && item[col.dataField] is String)
                 {
                     var itemValue:String = item[col.dataField] as String;
-                    if( itemValue && itemValue.indexOf(_searchText) > -1)
+                    if( itemValue && itemValue.toLowerCase().indexOf(_searchText.toLowerCase()) > -1)
                     {
                         searchStringFound = true;
                         break;
