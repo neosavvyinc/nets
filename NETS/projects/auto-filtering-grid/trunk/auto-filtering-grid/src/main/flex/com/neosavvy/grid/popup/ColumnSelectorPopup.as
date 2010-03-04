@@ -1,7 +1,9 @@
 package com.neosavvy.grid.popup
 {
-import com.neosavvy.grid.AutoFilteringGrid;
-import com.neosavvy.grid.AutoFilteringGridColumn;
+    import com.neosavvy.grid.AutoFilteringColumnGroup;
+    import com.neosavvy.grid.AutoFilteringGrid;
+    import com.neosavvy.grid.AutoFilteringGridColumn;
+    import com.neosavvy.grid.AutoFilteringGridColumn;
 import com.neosavvy.grid.model.AutoFilteringDropdownVO;
 import com.neosavvy.grid.renderer.AutoFilteringGridColumnCheckboxRenderer;
 
@@ -14,7 +16,8 @@ import mx.containers.TitleWindow;
 import mx.controls.Button;
 import mx.controls.Label;
 import mx.controls.List;
-import mx.core.ClassFactory;
+    import mx.controls.advancedDataGridClasses.AdvancedDataGridColumn;
+    import mx.core.ClassFactory;
 import mx.events.CloseEvent;
 import mx.managers.PopUpManager;
 
@@ -61,10 +64,16 @@ public class ColumnSelectorPopup extends TitleWindow
         if (bColumnsChanged) {
 
             var columnVOs:ArrayCollection = new ArrayCollection();
-            for each (var col:AutoFilteringGridColumn in _columns) {
-                if( col.removable )
+
+            for each (var col:Object in _columns) {
+                if( col is AutoFilteringColumnGroup && (col as AutoFilteringColumnGroup))
                 {
-                    var dropdownVO:AutoFilteringDropdownVO = new AutoFilteringDropdownVO(col.headerText, col.enabled);
+                    var dropdownVO:AutoFilteringDropdownVO = new AutoFilteringDropdownVO((col as AutoFilteringColumnGroup).headerText, (col as AutoFilteringColumnGroup).enabled);
+                    columnVOs.addItem(dropdownVO);
+                }
+                else if ( col is AutoFilteringGridColumn && (col as AutoFilteringGridColumn).removable )
+                {
+                    var dropdownVO:AutoFilteringDropdownVO = new AutoFilteringDropdownVO((col as AutoFilteringGridColumn).headerText, (col as AutoFilteringGridColumn).enabled);
                     columnVOs.addItem(dropdownVO);
                 }
             }
@@ -74,7 +83,7 @@ public class ColumnSelectorPopup extends TitleWindow
         }
 
         if (_okButton) {
-            _okButton.label = "Ok";
+            _okButton.label = "OK";
             _okButton.addEventListener(MouseEvent.CLICK, okClickHandler);
         }
 
@@ -179,18 +188,42 @@ public class ColumnSelectorPopup extends TitleWindow
 
         var valueObjectsFromDropdown:ArrayCollection = _list.dataProvider as ArrayCollection;
         var selectedColumsnFromVOs:ArrayCollection = new ArrayCollection();
+        var groupedColumnsFoundInAvailableColumns:Boolean = false;
 
         for each (var columnFromDropdown:AutoFilteringDropdownVO in valueObjectsFromDropdown) {
 
-            for each (var adgColumn:AutoFilteringGridColumn in _grid.getAvailableColumns()) {
-                if (adgColumn.headerText == columnFromDropdown.displayValue) {
-                    adgColumn.enabled = columnFromDropdown.enabled;
-                    selectedColumsnFromVOs.addItem(adgColumn);
+            for each (var col:Object in _grid.getAvailableColumns()) {
+
+                if ( col is AutoFilteringGridColumn)
+                {
+                    var adgColumn:AutoFilteringGridColumn = col as AutoFilteringGridColumn
+                    if (adgColumn.headerText == columnFromDropdown.displayValue) {
+                        adgColumn.enabled = columnFromDropdown.enabled;
+                        selectedColumsnFromVOs.addItem(adgColumn);
+                    }
+                }
+
+                else if ( col is AutoFilteringColumnGroup )
+                {
+                    groupedColumnsFoundInAvailableColumns = true;
+                    var adgColumnGroup:AutoFilteringColumnGroup = col as AutoFilteringColumnGroup
+                    if (adgColumnGroup.headerText == columnFromDropdown.displayValue) {
+                        adgColumnGroup.enabled = columnFromDropdown.enabled;
+                        selectedColumsnFromVOs.addItem(adgColumnGroup);
+                    }
                 }
             }
 
         }
-        _grid.columns = selectedColumsnFromVOs.toArray();
+
+        if( groupedColumnsFoundInAvailableColumns )
+        {
+            _grid.groupedColumns = selectedColumsnFromVOs.toArray();
+        }
+        else
+        {
+            _grid.columns = selectedColumsnFromVOs.toArray();
+        }
         PopUpManager.removePopUp(this);
     }
 

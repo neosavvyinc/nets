@@ -18,6 +18,8 @@ import mx.collections.ICollectionView;
 import mx.collections.IViewCursor;
 import mx.controls.AdvancedDataGrid;
     import mx.controls.TextInput;
+    import mx.controls.advancedDataGridClasses.AdvancedDataGridColumn;
+    import mx.controls.advancedDataGridClasses.AdvancedDataGridColumnGroup;
     import mx.core.FlexSprite;
 import mx.core.IFactory;
 import mx.core.IFlexDisplayObject;
@@ -42,7 +44,9 @@ public class AutoFilteringGrid extends AdvancedDataGrid
     private var _searchText:String;
     private var bSearchTextChanged:Boolean;
 
-    private var initializedComplete:Boolean = false;
+    private var initializedColumnsComplete:Boolean = false;
+
+    private var initializedGroupingColumnsComplete:Boolean = false;
 
     private var _availableColumns:ArrayCollection;
 
@@ -111,7 +115,7 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
     override public function set columns(value:Array):void {
         //Only execute this the first time - not every time columns are set
-        if (!initializedComplete) {
+        if (!initializedColumnsComplete) {
             _availableColumns = new ArrayCollection(value);
             for each (var adgColumn:AutoFilteringGridColumn in _availableColumns) {
                 adgColumn.headerRenderer = IFactory(new AutoFilteringHeaderRenderer());
@@ -119,7 +123,7 @@ public class AutoFilteringGrid extends AdvancedDataGrid
                     adgColumn.enabled = true;
                 }
             }
-            initializedComplete = true;
+            initializedColumnsComplete = true;
         }
 
         _availableColumns.filterFunction = function f(item:Object):Boolean {
@@ -130,6 +134,49 @@ public class AutoFilteringGrid extends AdvancedDataGrid
         }
         _availableColumns.refresh();
         super.columns = _availableColumns.toArray();
+
+        bColumnsChanged = true;
+        invalidateProperties();
+        var autoFilteringGridEvent:AutoFilteringGridEvent = new AutoFilteringGridEvent(AutoFilteringGridEvent.COLUMNS_CHANGED, true, false);
+        dispatchEvent(autoFilteringGridEvent);
+    }
+
+
+    override public function set groupedColumns(value:Array):void {
+        if (!initializedGroupingColumnsComplete) {
+            _availableColumns = new ArrayCollection(value);
+            for each (var col:Object in _availableColumns) {
+
+                if( col is AutoFilteringGridColumn )
+                {
+                    var adgColumn:AutoFilteringGridColumn = col as AutoFilteringGridColumn;
+                    adgColumn.headerRenderer = IFactory(new AutoFilteringHeaderRenderer());
+                    if (adgColumn.enabledByDefault) {
+                        adgColumn.enabled = true;
+                    }
+                }
+                else if ( col is AutoFilteringColumnGroup )
+                {
+                    var adgColGroup:AutoFilteringColumnGroup = col as AutoFilteringColumnGroup;
+                    if( adgColGroup.enabledByDefault ) {
+                        adgColGroup.enabled = true;
+                    }
+                }
+            }
+            initializedGroupingColumnsComplete = true;
+        }
+
+        _availableColumns.filterFunction = function f(item:Object):Boolean {
+            if (item is AutoFilteringGridColumn) {
+                return (item as AutoFilteringGridColumn).enabled;
+            }
+            else if ( item is AutoFilteringColumnGroup ) {
+                return (item as AutoFilteringColumnGroup).enabled;
+            }
+            return false;
+        }
+        _availableColumns.refresh();
+        super.groupedColumns = _availableColumns.toArray();
 
         bColumnsChanged = true;
         invalidateProperties();
@@ -481,6 +528,11 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
     public function set cascadeFilterDropdowns(value:Boolean):void {
         _cascadeFilterDropdowns = value;
+    }
+
+    public function invalidateColumns():void {
+        initializedColumnsComplete = false;
+        initializedGroupingColumnsComplete = false;
     }
 }
 
