@@ -118,6 +118,16 @@ public class ExpenseServiceImpl implements ExpenseService {
     public List<ExpenseItemType> findExpenseItemTypes() {
         List<ExpenseItemType> types = new ArrayList<ExpenseItemType>();
         types.addAll(expenseDAO.getStandardExpenseItemTypes());
+
+        for (ExpenseItemType type : types) {
+            if (type.getDescriptors() != null) {
+                for (ExpenseItemDescriptor descriptor : type.getDescriptors()) {
+                    if (descriptor != null) {
+                        
+                    }
+                }
+            }
+        }
         return types;
     }
 

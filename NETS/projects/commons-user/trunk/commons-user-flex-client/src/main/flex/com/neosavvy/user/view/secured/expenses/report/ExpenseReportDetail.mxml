@@ -2,6 +2,7 @@
 <mx:Panel
     xmlns:mx="http://www.adobe.com/2006/mxml"
     xmlns:flexlib="http://code.google.com/p/flexlib/"
+    xmlns:report="com.neosavvy.user.view.secured.expenses.report.*"
     width="100%"
     height="100%"
     styleName="paddedContainer"
@@ -25,46 +26,52 @@
         <mx:Button id="refreshButton" label="Refresh" />
     </mx:HBox>
     <mx:VDividedBox width="100%" height="100%">
-        <mx:AdvancedDataGrid id="expenseReportGrid" width="100%" height="50%">
-            <mx:columns>
-                <mx:AdvancedDataGridColumn
-                        id="dateColumn"
-                        headerText="Date"
-                        dataField="expenseDate"
-                        />
-                <mx:AdvancedDataGridColumn
-                        id="expenseTypeColumn"
-                        headerText="Expense Type"
-                        dataField="expenseItemType"
-                        labelFunction="{expenseTypeLabelFunction}"
-                        />
-                <mx:AdvancedDataGridColumn
-                        id="amountColumn"
-                        headerText="Amount"
-                        dataField="amountNumber"
-                        />
-                <mx:AdvancedDataGridColumn
-                        id="paymentMethodColumn"
-                        headerText="Payment Method"
-                        dataField="paymentMethod"
-                        labelFunction="{paymentMethodLabelFunction}"
-                        />
-                <mx:AdvancedDataGridColumn
-                        id="projectTypeColumn"
-                        headerText="Project Type"
-                        dataField="projectType"
-                        labelFunction="{projectTypeLabelFunction}"
-                        />
-                <mx:AdvancedDataGridColumn
-                        id="actionsColumn"
-                        headerText="Actions"
-                        itemRenderer="com.neosavvy.user.view.secured.expenses.report.Actions"
-                        />
+        <mx:VBox width="100%" height="50%">
+            <mx:AdvancedDataGrid id="expenseReportGrid" width="100%" height="100%">
+                <mx:columns>
+                    <mx:AdvancedDataGridColumn
+                            id="dateColumn"
+                            headerText="Date"
+                            dataField="expenseDate"
+                            />
+                    <mx:AdvancedDataGridColumn
+                            id="expenseTypeColumn"
+                            headerText="Expense Type"
+                            dataField="expenseItemType"
+                            labelFunction="{expenseTypeLabelFunction}"
+                            />
+                    <mx:AdvancedDataGridColumn
+                            id="paymentMethodColumn"
+                            headerText="Payment Method"
+                            dataField="paymentMethod"
+                            labelFunction="{paymentMethodLabelFunction}"
+                            />
+                    <mx:AdvancedDataGridColumn
+                            id="projectTypeColumn"
+                            headerText="Project Type"
+                            dataField="projectType"
+                            labelFunction="{projectTypeLabelFunction}"
+                            />
+                    <mx:AdvancedDataGridColumn
+                            id="amountColumn"
+                            headerText="Amount"
+                            dataField="amountNumber"
+                            />
 
-            </mx:columns>
-        </mx:AdvancedDataGrid>
+                </mx:columns>
+            </mx:AdvancedDataGrid>
+            <mx:HBox width="100%">
+                <mx:Button id="newExpenseItemButton" label="New" />
+                <mx:Button id="editExpenseItemButton" label="Edit" enabled="false" />
+                <mx:Button id="deleteExpenseItemButton" label="Delete" enabled="false" />
+                <mx:Spacer width="100%" />
+                <mx:Label text="Total Expense Amount: " />
+                <mx:Label id="totalExpenseAmountLabel" text="$0.00" fontWeight="bold" />
+            </mx:HBox>
+        </mx:VBox>
+
         <mx:HBox horizontalAlign="right" width="100%" height="50%">
-            <mx:Form id="expenseItemEntryForm" width="100%" height="100%">
+            <mx:Form id="expenseItemEntryForm" height="100%" label="Expense Item Details">
                 <mx:FormItem id="expenseDateFormItem" label="Date:">
                     <mx:DateField id="expenseDatePicker"/>
                 </mx:FormItem>
@@ -80,8 +87,20 @@
                 <mx:FormItem id="projectTypeFormItem" label="Project Type:">
                     <mx:ComboBox id="projectTypeCmb" labelField="type" prompt="Select Project Type..."/>
                 </mx:FormItem>
+                <mx:HBox width="100%" horizontalAlign="right">
+                    <mx:Button id="saveExpenseItemButton" label="Save" enabled="false" />
+                    <mx:Button id="cancelExpenseItemButton" label="Cancel" enabled="false" />                    
+                </mx:HBox>
             </mx:Form>
-            <mx:Button id="addExpenseItemButton" label="Add Expense Item"/>
+            <mx:VBox height="100%" width="100%">
+                <mx:Form id="expenseItemValuesForm" width="100%" height="100%">
+                    <mx:Repeater id="expenseItemValuesRepeater">
+                        <mx:FormItem id="expenseItemValue" label="{expenseItemValuesRepeater.currentItem.descriptor.name}">
+                            <report:AttributeField id="expenseItemAttribute" attribute="{expenseItemValuesRepeater.currentItem}" />
+                        </mx:FormItem>
+                    </mx:Repeater>
+                </mx:Form>
+            </mx:VBox>
         </mx:HBox>
     </mx:VDividedBox>
 

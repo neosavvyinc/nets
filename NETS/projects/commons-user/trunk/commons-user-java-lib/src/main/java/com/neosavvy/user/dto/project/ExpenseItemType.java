@@ -35,6 +35,7 @@ import java.util.List;
             @UniqueConstraint(columnNames = {"ID"})
     }
 )
+@Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(name="type")
 public abstract class ExpenseItemType {
 
@@ -89,5 +90,13 @@ public abstract class ExpenseItemType {
 
     public void setSortOrder(int sortOrder) {
         this.sortOrder = sortOrder;
+    }
+
+    public List<ExpenseItemDescriptor> getDescriptors() {
+        return descriptors;
+    }
+
+    public void setDescriptors(List<ExpenseItemDescriptor> descriptors) {
+        this.descriptors = descriptors;
     }
 }

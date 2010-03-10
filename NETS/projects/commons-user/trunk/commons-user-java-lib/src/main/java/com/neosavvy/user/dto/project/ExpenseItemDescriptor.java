@@ -2,10 +2,7 @@ package com.neosavvy.user.dto.project;
 
 import com.neosavvy.user.dto.base.AttributeDescriptor;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /*************************************************************************
  *
@@ -27,6 +24,7 @@ import javax.persistence.Table;
  **************************************************************************/
 @Entity
 @Table(name="EXPENSE_ITEM_DESCRIPTOR")
+@DiscriminatorValue("EXPENSE_ITEM_DESCRIPTOR")
 public class ExpenseItemDescriptor extends AttributeDescriptor {
     @ManyToOne
     @JoinColumn(name="EXPENSE_ITEM_TYPE_FK")

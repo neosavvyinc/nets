@@ -25,6 +25,7 @@
         <class>com.neosavvy.user.dto.project.ExpenseItemType</class>
         <class>com.neosavvy.user.dto.project.ExpenseItemValue</class>
         <class>com.neosavvy.user.dto.project.StandardExpenseItemType</class>
+        <class>com.neosavvy.user.dto.project.ExpenseItemDescriptor</class>
         <class>com.neosavvy.user.dto.base.Attribute</class>
         <class>com.neosavvy.user.dto.base.AttributeDescriptor</class>
         <class>com.neosavvy.user.dto.base.AttributeType</class>
@@ -37,6 +38,7 @@
         <properties>
             <property name="eclipselink.logging.level" value="FINEST"/>
             <property name="eclipselink.ddl-generation" value="none" />
+            <property name="eclipselink.weaving" value="static" />
         </properties>
     </persistence-unit>
 
@@ -64,6 +66,7 @@
         <class>com.neosavvy.user.dto.project.ExpenseItemType</class>
         <class>com.neosavvy.user.dto.project.ExpenseItemValue</class>
         <class>com.neosavvy.user.dto.project.StandardExpenseItemType</class>
+        <class>com.neosavvy.user.dto.project.ExpenseItemDescriptor</class>
         <class>com.neosavvy.user.dto.base.Attribute</class>
         <class>com.neosavvy.user.dto.base.AttributeDescriptor</class>
         <class>com.neosavvy.user.dto.base.AttributeType</class>

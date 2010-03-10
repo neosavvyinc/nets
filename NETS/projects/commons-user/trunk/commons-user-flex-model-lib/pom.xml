@@ -84,5 +84,10 @@
             <classifier>10</classifier>
             <type>swc</type>
         </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.core</artifactId>
+        </dependency>
+        
 	</dependencies>
 </project>

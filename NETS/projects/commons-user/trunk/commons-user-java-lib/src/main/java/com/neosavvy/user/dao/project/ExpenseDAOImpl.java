@@ -104,6 +104,10 @@ public class ExpenseDAOImpl extends BaseDAO implements ExpenseDAO {
         if (item.getExpenseItemValues() != null) {
             for (ExpenseItemValue value : item.getExpenseItemValues()) {
                 value.setExpenseItem(item);
+
+                if (value.getPartitionDate() == null) {
+                    value.setPartitionDate(new Date());
+                }
             }
         }
     }

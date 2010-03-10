@@ -38,7 +38,7 @@
             <map>
                 <entry key="eclipselink.ddl-generation" value="none"/>
                 <entry key="eclipselink.logging.level" value="WARNING"/>
-                <entry key="eclipselink.weaving" value="false"/>
+                <entry key="eclipselink.weaving" value="static"/>
             </map>
         </property>
     </bean>
