@@ -34,21 +34,23 @@ package com.neosavvy.user.view.secured.progress {
 
         private function showLoading():void
         {
-            var _progressBar:ProgressBar = new ProgressBar();
-            _progressBar.width = 200;
-            _progressBar.indeterminate = true;
-            _progressBar.labelPlacement = 'center';
-            //                progressBar.setStyle("removedEffect", fade);
-            //                progressBar.setStyle("addedEffect", fade);
-            _progressBar.setStyle("color", 0xFFFFFF);
-            _progressBar.setStyle("borderColor", 0x000000);
-            _progressBar.setStyle("barColor", 0xf4b60f);
-            _progressBar.label = "";
-            _progressBar.mode = ProgressBarMode.MANUAL;
-            this.progressBar = _progressBar;
-            PopUpManager.addPopUp(_progressBar, Application.application as DisplayObject, true);
-            PopUpManager.centerPopUp(_progressBar);
-            _progressBar.setProgress(0, 0);
+            if( _progressBar == null ) {
+                var _progressBar:ProgressBar = new ProgressBar();
+                _progressBar.width = 200;
+                _progressBar.indeterminate = true;
+                _progressBar.labelPlacement = 'center';
+                //                progressBar.setStyle("removedEffect", fade);
+                //                progressBar.setStyle("addedEffect", fade);
+                _progressBar.setStyle("color", 0xFFFFFF);
+                _progressBar.setStyle("borderColor", 0x000000);
+                _progressBar.setStyle("barColor", 0xf4b60f);
+                _progressBar.label = "";
+                _progressBar.mode = ProgressBarMode.MANUAL;
+                this.progressBar = _progressBar;
+                PopUpManager.addPopUp(_progressBar, Application.application as DisplayObject, true);
+                PopUpManager.centerPopUp(_progressBar);
+                _progressBar.setProgress(0, 0);
+            }
         }
 
         private function hideLoading():void {
