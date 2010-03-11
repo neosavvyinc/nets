@@ -100,6 +100,19 @@
                             <sqlCommand>CREATE SCHEMA ${test.db.schema}</sqlCommand>
                         </configuration>
                     </execution>
+                    <execution>
+                        <id>initialize-sql</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/db/changelogs/init/initial.sql</srcFile>
+                            </srcFiles>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
             <plugin>
