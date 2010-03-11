@@ -21,7 +21,7 @@
                 <artifactId>maven-glassfish-plugin</artifactId>
                 <version>2.1</version>
                 <configuration>
-                    <glassfishDirectory>/Users/adamparrish/glassfishv3/</glassfishDirectory>
+                    <glassfishDirectory>${env.GLASSFISH_HOME}</glassfishDirectory>
                     <user>admin</user>
                     <adminPassword>adminadmin</adminPassword>
                     <autoCreate>true</autoCreate>
