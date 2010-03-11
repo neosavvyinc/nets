@@ -23,7 +23,8 @@ import mx.controls.AdvancedDataGrid;
     import mx.core.FlexSprite;
 import mx.core.IFactory;
 import mx.core.IFlexDisplayObject;
-import mx.core.mx_internal;
+    import mx.core.UIComponent;
+    import mx.core.mx_internal;
 import mx.events.AdvancedDataGridEvent;
 import mx.events.CollectionEvent;
 import mx.events.CollectionEventKind;
@@ -239,6 +240,12 @@ public class AutoFilteringGrid extends AdvancedDataGrid
 
         if(this.dataProvider) 
             this.dataProvider.refresh();
+
+        invalidateProperties();
+        for each(var aHeaderRenderer : AutoFilteringHeaderRenderer in headerItems[0]) 
+        {
+            aHeaderRenderer.invalidateFilters();
+        }
 
         dispatchEvent(new AutoFilteringGridEvent(AutoFilteringGridEvent.RESET_FILTERS, true, false));
 

@@ -253,12 +253,16 @@ public class AutoFilteringHeaderRenderer extends AdvancedDataGridHeaderRenderer 
         }
     }
 
+    public function invalidateFilters():void {
+        bFilterDataChanged = true;
+        invalidateProperties();
+    }
+
     protected function hidePopup(_dropdownManager:DropdownManager, me:Event):void {
         if (_dropdownManager.showingPopup) {
             _dropdownManager.hide(me);
             if (_dropdownManager.popup is FilterSelectorDropdown) {
-                bFilterDataChanged = true;
-                invalidateProperties();
+                invalidateFilters();
             }
         }
     }
