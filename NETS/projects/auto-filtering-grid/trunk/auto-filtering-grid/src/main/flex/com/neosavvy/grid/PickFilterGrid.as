@@ -19,14 +19,21 @@ package com.neosavvy.grid{
 
             if (bPreSelectedIndicesChanged)
             {
+                var rowsToMarkSelected:ArrayCollection = new ArrayCollection();
                 for each (var idx:Number in _preSelectedIndices)
                 {
-                    var pickFilterRow:PickFilterRow = this.dataProvider.getItemAt(idx) as PickFilterRow;
+                    var pickFilterRow:PickFilterRow = new ArrayCollection(this.dataProvider.source).getItemAt(idx) as PickFilterRow;
                     if( pickFilterRow )
-                        pickFilterRow.selected = true;
-
-                    updatePickFilterRow(pickFilterRow);
+                        rowsToMarkSelected.addItem(pickFilterRow);
                 }
+
+
+                for each ( var row:PickFilterRow in rowsToMarkSelected)
+                {
+                    row.selected = true;
+                    updatePickFilterRow(row);
+                }
+
                 invalidateProperties();
                 bPreSelectedIndicesChanged = false;
                 setDefaultSort();
