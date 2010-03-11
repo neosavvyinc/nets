@@ -30,6 +30,16 @@ import mx.styles.StyleManager;
 public class AutoFilteringHeaderRenderer extends AdvancedDataGridHeaderRenderer implements IDataRenderer, IListItemRenderer, IDropInListItemRenderer, IFactory
 {
 
+    [Embed(source="/icons/add.png")]
+    [Bindable]
+    private var addFilterIcon:Class;
+
+    [Embed(source="/icons/link.png")]
+    [Bindable]
+    private var filterAddedIcon:Class;
+
+    private var bFilterDataChanged:Boolean = true;
+
     public static var FILTER_BUTTON_WIDTH:int = 16;
     public static var FILTER_BUTTON_HEIGHT:int = 16;
 
@@ -81,9 +91,8 @@ public class AutoFilteringHeaderRenderer extends AdvancedDataGridHeaderRenderer 
             _showFilterDropdownButton.addEventListener(MouseEvent.MOUSE_OVER, cancelEvent);
             _showFilterDropdownButton.addEventListener(MouseEvent.ROLL_OUT, cancelEvent);
             _showFilterDropdownButton.addEventListener(MouseEvent.ROLL_OVER, cancelEvent);
-            _showFilterDropdownButton.styleName = "filterDropdownButton";
+            //_showFilterDropdownButton.styleName = "filterDropdownButton";
         }
-
     }
 
     override protected function commitProperties():void {
@@ -97,6 +106,33 @@ public class AutoFilteringHeaderRenderer extends AdvancedDataGridHeaderRenderer 
             _showFilterDropdownButton.styleName = "filterDropdownButtonFiltered";
         } else {
             _showFilterDropdownButton.styleName = "filterDropdownButton";
+        }
+
+        if ( bFilterDataChanged  && _showFilterDropdownButton)
+        {
+            bFilterDataChanged = false;
+            if( _adgListData && _adgListData.dataField && _grid.isFilterActive(_adgListData.dataField) )
+            {
+                _showFilterDropdownButton.setStyle("upIcon", filterAddedIcon);
+                _showFilterDropdownButton.setStyle("downIcon", filterAddedIcon);
+                _showFilterDropdownButton.setStyle("overIcon", filterAddedIcon);
+                _showFilterDropdownButton.setStyle("disabledIcon", filterAddedIcon);
+                _showFilterDropdownButton.setStyle("selectedUpIcon", filterAddedIcon);
+                _showFilterDropdownButton.setStyle("selectedDownIcon", filterAddedIcon);
+                _showFilterDropdownButton.setStyle("selectedOverIcon", filterAddedIcon);
+                _showFilterDropdownButton.setStyle("selectedDisabledIcon", filterAddedIcon);
+            }
+            else
+            {
+                _showFilterDropdownButton.setStyle("upIcon", addFilterIcon);
+                _showFilterDropdownButton.setStyle("downIcon", addFilterIcon);
+                _showFilterDropdownButton.setStyle("overIcon", addFilterIcon);
+                _showFilterDropdownButton.setStyle("disabledIcon", addFilterIcon);
+                _showFilterDropdownButton.setStyle("selectedUpIcon", addFilterIcon);
+                _showFilterDropdownButton.setStyle("selectedDownIcon", addFilterIcon);
+                _showFilterDropdownButton.setStyle("selectedOverIcon", addFilterIcon);
+                _showFilterDropdownButton.setStyle("selectedDisabledIcon", addFilterIcon);
+            }
         }
 
 
@@ -221,6 +257,7 @@ public class AutoFilteringHeaderRenderer extends AdvancedDataGridHeaderRenderer 
         if (_dropdownManager.showingPopup) {
             _dropdownManager.hide(me);
             if (_dropdownManager.popup is FilterSelectorDropdown) {
+                bFilterDataChanged = true;
                 invalidateProperties();
             }
         }
@@ -235,7 +272,6 @@ public class AutoFilteringHeaderRenderer extends AdvancedDataGridHeaderRenderer 
         } else {
             _grid.addActiveFilters(_adgListData.dataField, selectedItems);
         }
-
     }
 
 }

@@ -265,6 +265,19 @@ public class AutoFilteringGrid extends AdvancedDataGrid
         return activeFiltersAsObjectMap;
     }
 
+    public function isFilterActive( filterType:String ) : Boolean {
+        var active:Array = _activeFilters[filterType] as Array;
+        if( !active )
+        {
+            return false;
+        }
+        else if ( active.length > 0 )
+        {
+            return true;
+        }
+        return false;
+    }
+
     public function addActiveFilters(filterType:String, filterValues:Array):void {
         if (!(_activeFilters.hasOwnProperty(filterType))) {
             _activeFilters[filterType] = new Array();
