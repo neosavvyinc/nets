@@ -6,7 +6,8 @@
   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
 
-    <includeAll path="src/main/db/changelogs/init/" />
+    <include file="src/main/db/changelogs/init/initial.sql" />
+    <include file="src/main/db/changelogs/init/standardData.xml" />
 
     <changeSet id="1" author="tommy">
         <createTable tableName="persistent_logins">
