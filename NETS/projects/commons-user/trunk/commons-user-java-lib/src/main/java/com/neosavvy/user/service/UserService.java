@@ -48,7 +48,7 @@ public interface UserService {
     @Secured({"ROLE_ADMIN", "OBJECT_ACL_DELETE"})
 	public void deleteUser(UserDTO user);
 
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_EMPLOYEE", "ROLE_ADMIN"})
     public SecurityWrapperDTO checkUserLoggedIn();
 
     @Secured({"ROLE_ADMIN", "OBJECT_ACL_WRITE"})
