@@ -42,7 +42,7 @@ public interface UserService {
     @Secured({"ROLE_ADMIN", "AFTER_ACL_READ"})
 	public UserDTO findUserById(long id);
 
-    @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
+    @Secured({"ROLE_ADMIN", "ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
 	public List<UserDTO> findUsers(UserDTO user);
 
     @Secured({"ROLE_ADMIN", "OBJECT_ACL_DELETE"})
