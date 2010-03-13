@@ -35,6 +35,9 @@ public interface CompanyService {
     @Secured({"ROLE_ADMIN", "ACL_OBJECT_WRITE", "ACL_OBJECT_DELETE"})
     public void deleteInvitedUser(CompanyDTO company, UserInviteDTO userInvite);
 
+    @Secured({"ROLE_ADMIN", "ACL_OBJECT_WRITE"})
+    public void sendInvite(UserInviteDTO userInvite);
+
     /****
      * Interface for helper search methods
      ****/

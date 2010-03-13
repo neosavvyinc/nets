@@ -184,6 +184,10 @@ public class CompanyServiceImpl implements CompanyService{
         userInviteDao.deleteUserInvite(userInvite);
     }
 
+    public void sendInvite(UserInviteDTO userInvite){
+        mailService.sendInvite(userInvite);
+    }
+
     protected CompanyDTO verifyAndAttachCompany(CompanyDTO company){
         if(company == null || company.getId() == null){
             throw new CompanyServiceException("Can not save a user to a company that isn't in the database", null);
