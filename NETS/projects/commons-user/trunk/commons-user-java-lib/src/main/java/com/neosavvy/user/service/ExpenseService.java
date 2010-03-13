@@ -63,4 +63,6 @@ public interface ExpenseService {
     @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
     public List<ExpenseReport> findReimbursedReportsForUser(UserDTO user);
 
+    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
+    public List<ExpenseReport> findExpenseReportsAwaitingApproval(UserDTO user);
 }

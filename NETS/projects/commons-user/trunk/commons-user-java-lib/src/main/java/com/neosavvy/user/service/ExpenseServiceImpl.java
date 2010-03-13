@@ -109,6 +109,25 @@ public class ExpenseServiceImpl implements ExpenseService {
         return expenseDAO.findExpenseReports(filter);
     }
 
+    public List<ExpenseReport> findExpenseReportsAwaitingApproval(UserDTO user) {
+        if (user == null) {
+            return new ArrayList<ExpenseReport>();
+        }
+
+        ExpenseReport filter = new ExpenseReport();
+        filter.setStatus(ExpenseReportStatus.SUBMITTED);
+        List<ExpenseReport> expenseReportListSubmitted = expenseDAO.findExpenseReports(filter);
+
+        filter.setStatus(ExpenseReportStatus.APPROVING);
+        List<ExpenseReport> expenseReportListApproved = expenseDAO.findExpenseReports(filter);
+
+        List<ExpenseReport> submittedAndApproved = new ArrayList<ExpenseReport>();
+        submittedAndApproved.addAll(expenseReportListSubmitted);
+        submittedAndApproved.addAll(expenseReportListApproved);
+
+        return submittedAndApproved;
+    }
+
     public List<PaymentMethod> findPaymentMethods() {
         List<PaymentMethod> methods = new ArrayList<PaymentMethod>();
         methods.addAll(expenseDAO.getStandardPaymentMethods());

@@ -7,7 +7,10 @@
     <mx:LinkButton id="viewActiveEmployeesButton" label="View Active Employees"/>
     <mx:LinkButton id="viewNonActiveEmployeesButton" label="View Inactive Employees"/>
 
-    <mx:LinkButton id="manageProjectsButton" label="Manage Projects"/>
     <mx:LinkButton id="manageClientsButton" label="Manage Clients"/>
+    <mx:LinkButton id="manageProjectsButton" label="Manage Projects"/>
+
+    <mx:LinkButton id="approveExpenses" label="Approve Expenses"/>
+
 
 </mx:Panel>

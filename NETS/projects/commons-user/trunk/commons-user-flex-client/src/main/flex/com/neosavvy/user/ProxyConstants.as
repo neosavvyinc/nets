@@ -22,7 +22,7 @@ package com.neosavvy.user {
         public static var CONTEXT_ROOT_GLASSFISH:String = "/nets/expense";
         public static var CONTEXT_ROOT_APACHE:String = "/services/nets/expense";
         public static var LOCAL:String = "http://localhost:8080";
-        public static var TEST:String = "http://www.neosavvy.com:8080";
+        public static var TEST:String = "http://nets.neosavvy.com:8080";
         public static var PROD:String = "http://localhost:8080";
 
 

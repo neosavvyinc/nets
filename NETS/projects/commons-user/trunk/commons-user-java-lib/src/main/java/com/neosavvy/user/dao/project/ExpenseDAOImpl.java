@@ -60,8 +60,12 @@ public class ExpenseDAOImpl extends BaseDAO implements ExpenseDAO {
         }
         else {
             List<ExpenseItem> savedItems = new ArrayList<ExpenseItem>();
-            for (ExpenseItem item : report.getExpenseItems()) {
-                savedItems.add(save(item));
+
+            if( report.getExpenseItems() != null )
+            {
+                for (ExpenseItem item : report.getExpenseItems()) {
+                    savedItems.add(save(item));
+                }
             }
             report.setExpenseItems(savedItems);
             report = getEntityManager().merge(report);

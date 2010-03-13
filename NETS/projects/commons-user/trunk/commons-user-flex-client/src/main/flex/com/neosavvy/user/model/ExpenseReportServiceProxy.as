@@ -32,6 +32,7 @@ package com.neosavvy.user.model {
         private var _openExpenseReports:ArrayCollection         = null;
         private var _submittedExpenseReports:ArrayCollection    = null;
         private var _activeExpenseReportItems:ListCollectionView = null;
+        private var _awaitingExpenseReportItems:ArrayCollection = null;
 
         public function get paymentMethods():ArrayCollection {
             return _paymentMethods;
@@ -87,6 +88,14 @@ package com.neosavvy.user.model {
 
         public function set activeExpenseReportItems(value:ListCollectionView):void {
             _activeExpenseReportItems = value;
+        }
+
+        public function get awaitingExpenseReportItems():ArrayCollection {
+            return _awaitingExpenseReportItems;
+        }
+
+        public function set awaitingExpenseReportItems(value:ArrayCollection):void {
+            _awaitingExpenseReportItems = value;
         }
 
         public function saveExpenseReport(p:Project, report:ExpenseReport , expenseItems:ArrayCollection, responder:IResponder):void {
@@ -148,6 +157,12 @@ package com.neosavvy.user.model {
             var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
             addCallbackHandler(service, responder);
             service.getExpenseItems(expenseReportId);
+        }
+
+        public function findExpenseReportsAwaitingApproval(user:UserDTO, responder:IResponder):void {
+            var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
+            addCallbackHandler(service, responder);
+            service.findExpenseReportsAwaitingApproval(user);
         }
     }
 }

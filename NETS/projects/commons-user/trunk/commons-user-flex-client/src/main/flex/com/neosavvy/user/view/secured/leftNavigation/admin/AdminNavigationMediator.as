@@ -28,6 +28,12 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
 
             manageClientsButton.addEventListener(MouseEvent.CLICK, handleManageClientsButtonClicked);
             manageProjectsButton.addEventListener(MouseEvent.CLICK, handleManageProjectsButtonClicked);
+
+            approveExpenses.addEventListener(MouseEvent.CLICK, handleApproveExpensesButtonClicked);
+        }
+
+        private function handleApproveExpensesButtonClicked(event:MouseEvent):void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_VIEW_AWAITING_EXPENSE_REPORTS);
         }
 
         private function handleManageProjectsButtonClicked(event:MouseEvent):void {
@@ -90,12 +96,15 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
             return adminNavigation.manageClientsButton;
         }
 
+        public function get approveExpenses():LinkButton {
+            return adminNavigation.approveExpenses;
+        }
+
         override public function listNotificationInterests():Array {
             return super.listNotificationInterests();
         }
 
         override public function handleNotification(notification:INotification):void {
-
         }
 
     }

@@ -7,6 +7,7 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.SecuredContainerMediator;
     import com.neosavvy.user.view.secured.clientManagement.ClientManagementMediator;
     import com.neosavvy.user.view.secured.employeeInvitation.EmployeeManagementMediator;
+    import com.neosavvy.user.view.secured.expenses.approving.ExpenseReportAwaitingApprovalMediator;
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigationMediator;
     import com.neosavvy.user.view.secured.projectManagement.ProjectManagementMediator;
     import com.neosavvy.user.view.secured.projectManagement.assignments.ManageAssignmentsMediator;
@@ -43,6 +44,9 @@ package com.neosavvy.user.controller.secured {
 
             if (facade.hasMediator(ManageAssignmentsMediator.NAME))
                 facade.removeMediator(ManageAssignmentsMediator.NAME);
+
+            if (facade.hasMediator(ExpenseReportAwaitingApprovalMediator.NAME))
+                facade.removeMediator(ExpenseReportAwaitingApprovalMediator.NAME);
         }
 
         protected function cleanupProxies():void {
