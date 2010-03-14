@@ -9,6 +9,7 @@ package com.neosavvy.user.dto.companyManagement;
 public class SecurityWrapperDTO {
 
     private String name;
+    private UserDTO user;
     private String[] authorities;
 
     public SecurityWrapperDTO(String userName, String[] authortiesAsStrings) {
@@ -30,5 +31,13 @@ public class SecurityWrapperDTO {
 
     public void setAuthorities(String[] authorities) {
         this.authorities = authorities;
+    }
+
+    public UserDTO getUser() {
+        return user;
+    }
+
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 }

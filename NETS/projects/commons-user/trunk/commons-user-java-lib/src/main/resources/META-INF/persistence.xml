@@ -34,11 +34,13 @@
         <class>com.neosavvy.user.dto.acl.AclSid</class>
         <class>com.neosavvy.user.dto.acl.AclObjectIdentity</class>
         <class>com.neosavvy.user.dto.acl.AclEntry</class>
+        <class>fineline.focal.common.types.v1.UserSession</class>
 
         <properties>
-            <property name="eclipselink.logging.level" value="FINEST"/>
+            <property name="eclipselink.logging.level" value="INFO"/>
             <property name="eclipselink.ddl-generation" value="none" />
             <property name="eclipselink.weaving" value="static" />
+            <property name="eclipselink.session.customizer" value="fineline.focal.common.model.UUIDSequence"/>
         </properties>
     </persistence-unit>
 

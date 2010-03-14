@@ -95,6 +95,14 @@ package com.neosavvy.user {
             ];
         }
 
+        private function displayLogin():void {
+            this.navigationViewStack.selectedIndex = LOGIN_NAVIGATION_INDEX;
+            loginButton.visible = true;
+            logoutButton.visible = false;
+            loggedInUserName.text = "You are not logged in";
+            sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
+        }
+
         override public function handleNotification(notification:INotification):void {
             switch (notification.getName()) {
                 case ApplicationFacade.USER_LOGIN_SUCCESS:
@@ -109,11 +117,7 @@ package com.neosavvy.user {
                     sendNotification(ApplicationFacade.INITIALIZE_SECURED_VIEW, securedContainer);
                     break;
                 case ApplicationFacade.USER_NOT_LOGGED_IN:
-                    this.navigationViewStack.selectedIndex = LOGIN_NAVIGATION_INDEX;
-                    loginButton.visible = true;
-                    logoutButton.visible = false;
-                    loggedInUserName.text = "You are not logged in";
-                    sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
+                    displayLogin();
                     break;
                 case ApplicationFacade.NAVIGATE_TO_COMPANY_REGISTRATION:
                     this.navigationViewStack.selectedIndex = COMPANY_MANAGEMENT_NAVIGATION_INDEX;
@@ -126,7 +130,7 @@ package com.neosavvy.user {
         }
 
         private function existingUserButtonClicked(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
+            displayLogin();
         }
 
         private function logoutButtonClickHandler(event:MouseEvent):void {
@@ -134,7 +138,7 @@ package com.neosavvy.user {
         }
 
         private function loginButtonClickedHandler(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
+            displayLogin();
         }
 
         private function invitationButtonClickHandler(event:MouseEvent):void {

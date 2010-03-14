@@ -37,6 +37,10 @@ package com.neosavvy.user.model {
                 return new Array();
         }
 
+        public function get activeUser():UserDTO {
+            return (data == null ? null : data.user);
+        }
+        
         override public function clearCachedValues():void {
             data = null;
         }
@@ -75,10 +79,10 @@ package com.neosavvy.user.model {
             channelSet.addEventListener(FaultEvent.FAULT, responder.fault);
         }
 
-        public function checkUserLoggedIn(completionCallback:Function, responder:IResponder):void {
+        public function checkUserLoggedIn(responder:IResponder):void {
             var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             addCallbackHandler(userService, responder);
-            userService.checkUserLoggedIn();
+            userService.getUserDetails();
         }
 
         public function logout(responder:IResponder) {

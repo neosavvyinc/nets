@@ -17,8 +17,6 @@ package com.neosavvy.user.model {
 
         public static var NAME:String = "userProxy";
 
-        private var _activeUser:UserDTO;
-
         public function UserServiceProxy()
         {
             super(NAME, null, ProxyConstants.expenseContextRoot);
@@ -33,16 +31,11 @@ package com.neosavvy.user.model {
         }
 
         public function get activeUser():UserDTO {
-            return _activeUser;
-        }
-
-        public function set activeUser(activeUser:UserDTO):void {
-            _activeUser = activeUser;
+            return securityProxy.activeUser;
         }
 
         override public function clearCachedValues():void {
             data = null;
-            _activeUser = null;
         }
 
         public function getUsers(responder:IResponder):void {
@@ -63,19 +56,14 @@ package com.neosavvy.user.model {
             userService.confirmUser(userName, hashCode);
         }
 
-        public function getActiveUser(responder:IResponder):void {
-            var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
-            addCallbackHandler(userService, responder);
-            var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
-            var user:UserDTO = new UserDTO();
-            user.username = securityProxy.user;
-            userService.findUsers(user);
-        }
-
         public function resetPassword(user:UserDTO, responder:IResponder):void {
             var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             addCallbackHandler(userService, responder);
             userService.resetPassword(user);
+        }
+
+        private function get securityProxy():SecurityProxy {
+            return facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
         }
     }
 }

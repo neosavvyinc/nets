@@ -29,4 +29,19 @@
     <changeSet id="2" author="tommy">
         <addNotNullConstraint tableName="EXPENSE_REPORT" columnName="OWNER_FK" defaultNullValue="1" />
     </changeSet>
+
+    <changeSet id="3" author="tommy">
+        <dropTable tableName="persistent_logins" />
+        <createTable tableName="user_sessions">
+            <column name="id" type="varchar(100)">
+                <constraints nullable="false" />
+            </column>
+            <column name="username" type="varchar(256)">
+                <constraints nullable="false" />
+            </column>
+            <column name="creation_date" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

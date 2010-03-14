@@ -20,16 +20,18 @@ package com.neosavvy.user.controller.security {
         override public function execute(notification:INotification):void {
             super.execute(notification);
             var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
-            securityProxy.checkUserLoggedIn(commandComplete, this);
+            securityProxy.checkUserLoggedIn(this);
 
         }
 
         override protected function resultHandler(resultEvent:ResultEvent):void {
-            LOGGER.debug("User is already logged in");
             var security:SecurityWrapperDTO = resultEvent.result as SecurityWrapperDTO;
-            var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
-            securityProxy.setData(security);
-            sendNotification(ApplicationFacade.USER_LOGGED_IN, securityProxy.user);
+            if (security != null) {
+                LOGGER.debug("User is already logged in");
+                var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
+                securityProxy.setData(security);
+                sendNotification(ApplicationFacade.USER_LOGGED_IN, securityProxy.user);
+            }
         }
 
 

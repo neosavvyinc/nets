@@ -1,6 +1,7 @@
 package com.neosavvy.user.controller.security {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
+    import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.SecurityProxy;
 
@@ -8,6 +9,7 @@ package com.neosavvy.user.controller.security {
     import mx.logging.Log;
     import mx.rpc.IResponder;
 
+    import mx.rpc.Responder;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
 
@@ -26,8 +28,17 @@ package com.neosavvy.user.controller.security {
 
         override protected function resultHandler(resultEvent:ResultEvent):void {
             var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
-            securityProxy.setData(resultEvent.result);
-            sendNotification(ApplicationFacade.USER_LOGIN_SUCCESS, securityProxy.user);
+
+            securityProxy.checkUserLoggedIn(new Responder(
+                function(result:ResultEvent):void {
+                    securityProxy.setData(result.result as SecurityWrapperDTO);
+                    sendNotification(ApplicationFacade.USER_LOGIN_SUCCESS, securityProxy.user);
+                },
+                function (faultEvent:FaultEvent):void {
+                    LOGGER.debug("Login Failed: " + faultEvent.fault.faultString);
+                    sendNotification(ApplicationFacade.USER_LOGIN_FAILED);
+                }
+            ));
         }
 
 

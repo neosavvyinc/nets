@@ -1,4 +1,6 @@
 package com.neosavvy.user.controller {
+    import com.neosavvy.user.controller.security.CheckLoggedIn;
+
     import mx.logging.Log;
     import mx.logging.LogEventLevel;
     import mx.logging.targets.TraceTarget;
@@ -13,6 +15,7 @@ package com.neosavvy.user.controller {
             addSubCommand(ModelPrepCommand);
             addSubCommand(ViewPrepCommand);
             addSubCommand(LoadGraphicalAssets);
+            addSubCommand(CheckLoggedIn);
         }
 
         private function initLogging():void {

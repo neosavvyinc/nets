@@ -42,17 +42,18 @@ public interface UserService {
     @Secured({"ROLE_ADMIN", "AFTER_ACL_READ"})
 	public UserDTO findUserById(long id);
 
-    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
+    @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
 	public List<UserDTO> findUsers(UserDTO user);
 
     @Secured({"ROLE_ADMIN", "OBJECT_ACL_DELETE"})
 	public void deleteUser(UserDTO user);
 
-    @Secured({"ROLE_EMPLOYEE", "ROLE_ADMIN"})
-    public SecurityWrapperDTO checkUserLoggedIn();
 
     @Secured({"ROLE_ADMIN", "OBJECT_ACL_WRITE"})
     public void resetPassword(UserDTO user);
     
     public boolean confirmUser(String userName, String hashCode);
+    public SecurityWrapperDTO getUserDetails();
+    public SecurityWrapperDTO login(String userName, String password);
+    public boolean logout();
 }
