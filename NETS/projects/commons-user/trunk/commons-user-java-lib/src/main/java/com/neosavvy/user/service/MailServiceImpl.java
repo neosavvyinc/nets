@@ -53,6 +53,8 @@ public class MailServiceImpl implements MailService {
     private Resource sendInvite;
     private Resource newUserConfirmationEmail;
 
+    private String serverFromAddress = "info@nets.neosavvy.com";
+
     public MailSender getMailSender() {
         return mailSender;
     }
@@ -63,7 +65,8 @@ public class MailServiceImpl implements MailService {
 
     public void resetPasswordForUserEmail(UserDTO user) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom("customerservice@mycompany.com");
+
+        msg.setFrom(serverFromAddress);
         msg.setTo(user.getEmailAddress());
         msg.setSubject("Password reset email for expense tracker");
 
@@ -90,7 +93,7 @@ public class MailServiceImpl implements MailService {
 
     public void newUserConfirmationTokenEmail(UserDTO user) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom("customerservice@mycompany.com");
+        msg.setFrom(serverFromAddress);
         msg.setTo(user.getEmailAddress());
         msg.setSubject("Confirm that you have just been added as the admin user for your company's expense tracking system");
 
@@ -117,7 +120,7 @@ public class MailServiceImpl implements MailService {
 
     public void sendInvite(UserInviteDTO userInvite){
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom("customerservice@mycompany.com");
+        msg.setFrom(serverFromAddress);
         msg.setTo(userInvite.getEmailAddress());
         msg.setSubject("Welcome to your company's expense tracking tool");
 
@@ -144,7 +147,7 @@ public class MailServiceImpl implements MailService {
 
     public void newUserConfirmationEmail(UserDTO user, CompanyDTO company) {
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom("customerservice@company.com");
+        msg.setFrom(serverFromAddress);
         msg.setTo(user.getEmailAddress());
         msg.setSubject("Welcome to " + company.getCompanyName()+ "'s expense tracking system");
 
@@ -208,5 +211,13 @@ public class MailServiceImpl implements MailService {
 
     public Resource getNewUserConfirmationEmail() {
         return newUserConfirmationEmail;
+    }
+
+    public String getServerFromAddress() {
+        return serverFromAddress;
+    }
+
+    public void setServerFromAddress(String serverFromAddress) {
+        this.serverFromAddress = serverFromAddress;
     }
 }
