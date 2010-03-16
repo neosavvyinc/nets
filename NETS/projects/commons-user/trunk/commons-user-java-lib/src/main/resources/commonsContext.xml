@@ -75,9 +75,17 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="newUserConfirmationEmail" value="${templatesRoot}/newUserConfirmationEmail.gsp" />
     </bean>
     <bean id="focalJavaMailSender" class="com.neosavvy.user.service.mail.FocalMailSender">
-        <property name="host" value="localhost"/>
         <property name="test" value="false"/>
         <property name="testRecipients" value="aparrish@neosavvy.com"/>
+
+        <property name="host" value="secure.emailsrvr.com"/>
+        <property name="username" value="nets@neosavvy.com"/>
+        <property name="password" value="ne0s4vvy_rabbit"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+            </props>
+        </property>
     </bean>
     <bean id="docGenerator" class="com.neosavvy.user.service.mail.DocumentGenerator"/>
 

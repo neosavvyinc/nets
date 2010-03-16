@@ -53,7 +53,7 @@ public class MailServiceImpl implements MailService {
     private Resource sendInvite;
     private Resource newUserConfirmationEmail;
 
-    private String serverFromAddress = "info@nets.neosavvy.com";
+    private String serverFromAddress = "nets@neosavvy.com";
 
     public MailSender getMailSender() {
         return mailSender;
