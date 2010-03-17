@@ -342,5 +342,8 @@ package com.neosavvy.user {
         public static const FIND_AWAITING_EXPENSE_REPORTS_FOR_USER_SUCCESS:String = "findAwaitingExpenseReportsForUserSuccess";
         public static const FIND_AWAITING_EXPENSE_REPORTS_FOR_USER_FAILURE:String = "findAwaitingExpenseReportsForUserFailure";
 
+        public static const SHOW_DECLINE_DIALOG:String = "showDeclineExpenseReportDialog";
+        public static const SHOW_APPROVE_DIALOG:String = "showApproveExpenseReportDialog";
+        public static const SHOW_VIEW_DIALOG:String = "showViewExpenseReportDialog";
     }
 }

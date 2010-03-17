@@ -3,6 +3,8 @@ package com.neosavvy.user.view.secured.expenses.approving {
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.UserServiceProxy;
 
+    import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
+
     import mx.controls.AdvancedDataGrid;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -25,11 +27,17 @@ package com.neosavvy.user.view.secured.expenses.approving {
         override public function onRegister():void {
             _userServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
             _expenseServiceProxy = facade.retrieveProxy(ExpenseReportServiceProxy.NAME) as ExpenseReportServiceProxy;
+
+            expenseReportAwaitingApprovalGrid.addEventListener(ExpenseReportApproveEvent.TYPE, handleExpenseReportApprovalEvent);
         }
+
+
 
         override public function onRemove():void {
             _userServiceProxy = null;
             _expenseServiceProxy = null;
+
+            expenseReportAwaitingApprovalGrid.removeEventListener(ExpenseReportApproveEvent.TYPE, handleExpenseReportApprovalEvent);
         }
 
         public function get expenseReportAwaitingApproval():ExpenseReportAwaitingApproval
@@ -57,6 +65,22 @@ package com.neosavvy.user.view.secured.expenses.approving {
                     break;
                 case ApplicationFacade.FIND_AWAITING_EXPENSE_REPORTS_FOR_USER_SUCCESS:
                     expenseReportAwaitingApprovalGrid.dataProvider = _expenseServiceProxy.awaitingExpenseReportItems;
+                    break;
+            }
+        }
+
+        private function handleExpenseReportApprovalEvent(event:ExpenseReportApproveEvent):void {
+
+            switch ( event.action )
+            {
+                case ExpenseReportApproveEvent.ACTION_APPROVE:
+                    sendNotification(ApplicationFacade.SHOW_APPROVE_DIALOG, event.expenseReport);
+                    break;
+                case ExpenseReportApproveEvent.ACTION_DECLINE:
+                    sendNotification(ApplicationFacade.SHOW_DECLINE_DIALOG, event.expenseReport);
+                    break;
+                case ExpenseReportApproveEvent.ACTION_VIEW:
+                    sendNotification(ApplicationFacade.SHOW_VIEW_DIALOG, event.expenseReport);
                     break;
             }
         }

@@ -10,5 +10,9 @@ package com.neosavvy.user.dto.companyManagement {
     [Bindable]
     [RemoteClass(alias="com.neosavvy.user.dto.companyManagement.UserDTO")]
     public class UserDTO extends UserDTOBase {
+
+        public function get fullName():String {
+            return super.lastName + ", " + super.firstName;
+        }
     }
 }

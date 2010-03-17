@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+
+    <mx:Script>
+        <![CDATA[
+
+        import com.neosavvy.user.dto.project.ExpenseItem;
+        import com.neosavvy.user.dto.project.ExpenseReport;
+        import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
+        import com.neosavvy.user.view.secured.expenses.report.event.ExpenseItemEvent;
+
+        protected function approveExpenseReportHandler():void {
+            dispatchEvent(new ExpenseReportApproveEvent(ExpenseReportApproveEvent.ACTION_APPROVE, data as ExpenseReport));
+        }
+
+        protected function declineExpenseReportHandler():void {
+            dispatchEvent(new ExpenseReportApproveEvent(ExpenseReportApproveEvent.ACTION_DECLINE, data as ExpenseReport));
+        }
+
+        protected function viewExpenseReportHandler():void {
+            dispatchEvent(new ExpenseReportApproveEvent(ExpenseReportApproveEvent.ACTION_VIEW, data as ExpenseReport));
+        }
+
+        ]]>
+    </mx:Script>
+    <mx:Button id="viewBtn" label="View" toolTip="View Expense Report" click="{viewExpenseReportHandler()}"/>
+    <mx:Button id="approveBtn" label="Approve" toolTip="Approve Expense Report" click="{approveExpenseReportHandler()}"/>
+    <mx:Button id="declineBtn" label="Decline" toolTip="Decline Expense Report" click="{declineExpenseReportHandler()}"/>
+</mx:HBox>

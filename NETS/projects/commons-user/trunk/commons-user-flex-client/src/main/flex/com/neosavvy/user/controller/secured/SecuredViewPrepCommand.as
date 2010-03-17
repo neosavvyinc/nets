@@ -5,6 +5,7 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.SecuredContainerMediator;
     import com.neosavvy.user.view.secured.clientManagement.ClientManagementMediator;
     import com.neosavvy.user.view.secured.employeeInvitation.EmployeeManagementMediator;
+    import com.neosavvy.user.view.secured.expenses.approving.ExpenseReportApprovalPopupMediator;
     import com.neosavvy.user.view.secured.expenses.approving.ExpenseReportAwaitingApprovalMediator;
     import com.neosavvy.user.view.secured.expenses.submitted.SubmittedExpenseReportMediator;
     import com.neosavvy.user.view.secured.expenses.open.OpenExpenseReportMediator;
@@ -61,6 +62,10 @@ package com.neosavvy.user.controller.secured {
 
                 if (!facade.hasMediator(ExpenseReportAwaitingApprovalMediator.NAME))
                     facade.registerMediator(new ExpenseReportAwaitingApprovalMediator(securedContainer.expenseReportAwaitingApproval));
+
+                if (!facade.hasMediator(ExpenseReportApprovalPopupMediator.NAME))
+                    facade.registerMediator(new ExpenseReportApprovalPopupMediator(securedContainer.expenseReportAwaitingApproval));
+
 
             }
 

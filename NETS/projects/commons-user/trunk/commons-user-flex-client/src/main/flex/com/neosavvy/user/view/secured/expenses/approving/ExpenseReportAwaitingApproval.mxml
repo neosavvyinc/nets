@@ -7,8 +7,31 @@
     horizontalAlign="right"
     title="View Expense Reports Awaiting Approval">
 
+    <mx:Script>
+        <![CDATA[
+
+        import com.neosavvy.user.dto.companyManagement.UserDTO;
+        import com.neosavvy.user.dto.project.ExpenseReport;
+
+        private function ownerLabel(item:Object, column:AdvancedDataGridColumn):String
+        {
+            var expenseReport:ExpenseReport = item as ExpenseReport;
+            var userDTO:UserDTO = expenseReport.owner;
+            if( userDTO )
+                return (userDTO).fullName;
+            else
+                return "";
+        }
+
+        ]]>
+    </mx:Script>
+
     <mx:AdvancedDataGrid id="awaitingApprovalExpenseGrid" width="100%" height="100%">
         <mx:columns>
+            <mx:AdvancedDataGridColumn
+                id="ownerColumn"
+                headerText="Owner Name"
+                labelFunction="{ownerLabel}"/>
             <mx:AdvancedDataGridColumn
                 id="voucherNumberColumn"
                 headerText="Voucher Number"
@@ -27,7 +50,9 @@
                 dataField="status"/>
             <mx:AdvancedDataGridColumn
                 id="actionColumn"
-                headerText="Actions"/>
+                itemRenderer="com.neosavvy.user.view.secured.expenses.approving.Actions"
+                headerText="Actions"
+                width="270"/>
         </mx:columns>
     </mx:AdvancedDataGrid>
 

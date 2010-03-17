@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<mx:TitleWindow
+        showCloseButton="true"
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        title="Approve Expense Report"
+        close="{close()}"
+        width="400"
+        >
+
+
+    <mx:Script><![CDATA[
+        import mx.managers.PopUpManager;
+
+        private function close():void {
+            PopUpManager.removePopUp(this);
+        }
+
+        private function confirmApprove():void {
+            close();
+        }
+        ]]></mx:Script>
+
+    <mx:Text width="100%">
+        <mx:text>
+            Approving this expense report will notify accounting that it should be
+            reimbursed to the owner of this report.
+        </mx:text>
+    </mx:Text>
+    <mx:ControlBar>
+        <mx:Button label="Approve" click="confirmApprove()"/>
+        <mx:Spacer width="100%"/>
+        <mx:Button label="No" click="close()"/>
+    </mx:ControlBar>
+</mx:TitleWindow>
