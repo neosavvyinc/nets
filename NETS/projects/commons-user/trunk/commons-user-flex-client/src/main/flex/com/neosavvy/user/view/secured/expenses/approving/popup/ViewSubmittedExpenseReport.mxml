@@ -12,6 +12,10 @@
     <mx:Script><![CDATA[
         import com.neosavvy.user.dto.project.ExpenseItem;
 
+        import com.neosavvy.user.dto.project.ExpenseReport;
+
+        import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
+
         import mx.managers.PopUpManager;
 
         private function close():void {
@@ -19,11 +23,35 @@
         }
 
         private function confirmApprove():void {
+
+            dispatchEvent(new ExpenseReportApproveEvent(
+                    ExpenseReportApproveEvent.ACTION_APPROVE_CONFIRM
+                    , _expenseReport
+                    , commentText.text
+                    ))
+
             close();
         }
 
         private function confirmDecline():void {
+
+            dispatchEvent(new ExpenseReportApproveEvent(
+                    ExpenseReportApproveEvent.ACTION_DECLINE_CONFIRM
+                    , _expenseReport
+                    , commentText.text
+                    ))
+
             close();
+        }
+
+        private var _expenseReport:ExpenseReport
+
+        public function get expenseReport():ExpenseReport {
+            return _expenseReport;
+        }
+
+        public function set expenseReport(value:ExpenseReport):void {
+            _expenseReport = value;
         }
 
         private function projectTypeLabelFunction(data:Object, column:AdvancedDataGridColumn):String {
@@ -94,6 +122,8 @@
         </mx:columns>
     </mx:AdvancedDataGrid>
 
+    <mx:Label text="Approve/Decline Comment:"/>
+    <mx:TextArea id="commentText" width="100%" height="150"/>
 
     <mx:ControlBar>
         <mx:Button label="Approve" click="confirmApprove()"/>

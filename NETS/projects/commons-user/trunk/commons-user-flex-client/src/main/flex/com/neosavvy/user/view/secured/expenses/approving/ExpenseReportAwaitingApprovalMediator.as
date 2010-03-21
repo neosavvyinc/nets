@@ -54,6 +54,8 @@ package com.neosavvy.user.view.secured.expenses.approving {
             return [
                 ApplicationFacade.NAVIGATE_TO_VIEW_AWAITING_EXPENSE_REPORTS
                 ,ApplicationFacade.FIND_AWAITING_EXPENSE_REPORTS_FOR_USER_SUCCESS
+                ,ApplicationFacade.APPROVE_EXPENSE_REPORT_SUCCESS
+                ,ApplicationFacade.DECLINE_EXPENSE_REPORT_SUCCESS
             ];
         }
 
@@ -66,6 +68,12 @@ package com.neosavvy.user.view.secured.expenses.approving {
                 case ApplicationFacade.FIND_AWAITING_EXPENSE_REPORTS_FOR_USER_SUCCESS:
                     expenseReportAwaitingApprovalGrid.dataProvider = _expenseServiceProxy.awaitingExpenseReportItems;
                     break;
+                case ApplicationFacade.APPROVE_EXPENSE_REPORT_SUCCESS:
+                    sendNotification(ApplicationFacade.INITIALIZE_AWAITING_EXPENSE_REPORT_VIEW, _userServiceProxy.activeUser);
+                    break;
+                case ApplicationFacade.DECLINE_EXPENSE_REPORT_SUCCESS:
+                    sendNotification(ApplicationFacade.INITIALIZE_AWAITING_EXPENSE_REPORT_VIEW, _userServiceProxy.activeUser);
+                    break;
             }
         }
 
@@ -73,10 +81,10 @@ package com.neosavvy.user.view.secured.expenses.approving {
 
             switch ( event.action )
             {
-                case ExpenseReportApproveEvent.ACTION_APPROVE:
+                case ExpenseReportApproveEvent.ACTION_APPROVE_REQUEST:
                     sendNotification(ApplicationFacade.SHOW_APPROVE_DIALOG, event.expenseReport);
                     break;
-                case ExpenseReportApproveEvent.ACTION_DECLINE:
+                case ExpenseReportApproveEvent.ACTION_DECLINE_REQUEST:
                     sendNotification(ApplicationFacade.SHOW_DECLINE_DIALOG, event.expenseReport);
                     break;
                 case ExpenseReportApproveEvent.ACTION_VIEW:

@@ -71,7 +71,13 @@ public class ExpenseServiceImpl implements ExpenseService {
         ExpenseReport filter = new ExpenseReport();
         filter.setOwner(user);
         filter.setStatus(ExpenseReportStatus.OPEN);
-        return expenseDAO.findExpenseReports(filter);
+        List<ExpenseReport> openExpenseReportList = expenseDAO.findExpenseReports(filter);
+
+        filter.setStatus(ExpenseReportStatus.DECLINED);
+        List<ExpenseReport> declinedExpenseReportList = expenseDAO.findExpenseReports(filter);
+
+        openExpenseReportList.addAll(declinedExpenseReportList);
+        return openExpenseReportList;
     }
 
     public List<ExpenseReport> findSubmittedReportsForUser(UserDTO user) {
@@ -148,6 +154,23 @@ public class ExpenseServiceImpl implements ExpenseService {
             }
         }
         return types;
+    }
+
+    public ExpenseReport approveExpenseReport(ExpenseReport aReport, String comment) {
+
+        ExpenseReport report = expenseDAO.findExpenseReportById(aReport.getId());
+        report.setStatus(ExpenseReportStatus.APPROVED);
+        report = expenseDAO.save(report);
+
+        return report;
+    }
+
+    public ExpenseReport declineExpenseReport(ExpenseReport aReport, String comment) {
+        ExpenseReport report = expenseDAO.findExpenseReportById(aReport.getId());
+        report.setStatus(ExpenseReportStatus.DECLINED);
+        report = expenseDAO.save(report);
+
+        return report;
     }
 
     private void validateExpenseReport(ExpenseReport report) throws ExpenseServiceException {

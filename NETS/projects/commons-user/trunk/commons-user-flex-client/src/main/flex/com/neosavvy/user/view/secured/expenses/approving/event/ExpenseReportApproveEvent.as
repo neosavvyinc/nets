@@ -9,8 +9,11 @@ package com.neosavvy.user.view.secured.expenses.approving.event {
         public static const TYPE:String = "expenseItemEvent";
 
         public static const ACTION_VIEW:String = "view";
-        public static const ACTION_DECLINE:String = "decline";
-        public static const ACTION_APPROVE:String = "approve";
+        public static const ACTION_DECLINE_REQUEST:String = "declineRequest";
+        public static const ACTION_APPROVE_REQUEST:String = "approveRequest";
+
+        public static const ACTION_DECLINE_CONFIRM:String = "declineConfirmed";
+        public static const ACTION_APPROVE_CONFIRM:String = "approveConfirmed";
 
         private var _expenseReport:ExpenseReport;
         private var _action:String;

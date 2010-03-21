@@ -25,6 +25,8 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.expenses.report.save.DeleteExpenseReport;
     import com.neosavvy.user.controller.expenses.report.save.FindExpenseReport;
     import com.neosavvy.user.controller.expenses.report.save.SaveExpenseReport;
+    import com.neosavvy.user.controller.expenses.report.workflow.ApproveExpenseReport;
+    import com.neosavvy.user.controller.expenses.report.workflow.DeclineExpenseReport;
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
     import com.neosavvy.user.controller.project.GetAvailableUsersForProject;
     import com.neosavvy.user.controller.project.GetProjectsForCompany;
@@ -114,6 +116,8 @@ package com.neosavvy.user {
             registerCommand(FIND_EXPENSE_ITEM_TYPES_REQUEST, FindExpenseTypes);
             registerCommand(FIND_PAYMENT_METHODS_REQUEST, FindPaymentMethods);
             registerCommand(FIND_PROJECT_TYPES_REQUEST, FindProjectTypes);
+            registerCommand(APPROVE_EXPENSE_REPORT_REQUEST, ApproveExpenseReport);
+            registerCommand(DECLINE_EXPENSE_REPORT_REQUEST, DeclineExpenseReport);
 
             registerCommand(INITIALIZE_VIEW_OPEN_EXPENSE_REPORTS_VIEW, InitializeViewOpenExpenseReportView);
             registerCommand(INITIALIZE_EDIT_EXPENSE_REPORT_VIEW, InitializeEditExpenseReportView);
@@ -290,6 +294,14 @@ package com.neosavvy.user {
         public static const SAVE_EXPENSE_REPORT_REQUEST:String = "saveExpenseReportRequest";
         public static const SAVE_EXPENSE_REPORT_SUCCESS:String = "saveExpenseReportSuccess";
         public static const SAVE_EXPENSE_REPORT_FAILURE:String = "saveExpenseReportFailure";
+
+        public static const APPROVE_EXPENSE_REPORT_REQUEST:String = "approveExpenseReportRequest";
+        public static const APPROVE_EXPENSE_REPORT_SUCCESS:String = "approveExpenseReportSuccess";
+        public static const APPROVE_EXPENSE_REPORT_FAILURE:String = "approveExpenseReportFailure";
+
+        public static const DECLINE_EXPENSE_REPORT_REQUEST:String = "declineExpenseReportRequest";
+        public static const DECLINE_EXPENSE_REPORT_SUCCESS:String = "declineExpenseReportSuccess";
+        public static const DECLINE_EXPENSE_REPORT_FAILURE:String = "declineExpenseReportFailure";
 
         public static const FIND_EXPENSE_REPORT_REQUEST:String = "findExpenseReportRequest";
         public static const FIND_EXPENSE_REPORT_SUCCESS:String = "findExpenseReportSuccess";

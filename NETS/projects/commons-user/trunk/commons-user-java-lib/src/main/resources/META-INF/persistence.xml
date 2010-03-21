@@ -15,6 +15,7 @@
         <class>com.neosavvy.user.dto.project.ClientUserContact</class>
         <class>com.neosavvy.user.dto.project.CompanyPaymentMethod</class>
         <class>com.neosavvy.user.dto.project.ExpenseItem</class>
+        <class>com.neosavvy.user.dto.project.ExpenseReportAuditHistory</class>
         <class>com.neosavvy.user.dto.project.ExpenseReport</class>
         <class>com.neosavvy.user.dto.project.PaymentMethod</class>
         <class>com.neosavvy.user.dto.project.Project</class>
@@ -58,6 +59,7 @@
         <class>com.neosavvy.user.dto.project.ClientUserContact</class>
         <class>com.neosavvy.user.dto.project.CompanyPaymentMethod</class>
         <class>com.neosavvy.user.dto.project.ExpenseItem</class>
+        <class>com.neosavvy.user.dto.project.ExpenseReportAuditHistory</class>
         <class>com.neosavvy.user.dto.project.ExpenseReport</class>
         <class>com.neosavvy.user.dto.project.PaymentMethod</class>
         <class>com.neosavvy.user.dto.project.Project</class>

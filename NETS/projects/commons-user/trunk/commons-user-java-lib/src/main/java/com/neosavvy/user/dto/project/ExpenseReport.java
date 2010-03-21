@@ -78,6 +78,9 @@ public class ExpenseReport extends BaseDTO implements IAnnotatedProxy, SecuredOb
     @OneToMany(mappedBy = "expenseReport", cascade=CascadeType.ALL, orphanRemoval=true)
     private List<ExpenseItem> expenseItems;
 
+    @OneToMany(mappedBy = "expenseReport", cascade=CascadeType.ALL, orphanRemoval=true)
+    private List<ExpenseReportAuditHistory> auditHistory;
+
     @Enumerated(EnumType.STRING)
     private ExpenseReportStatus status;
 
@@ -96,6 +99,15 @@ public class ExpenseReport extends BaseDTO implements IAnnotatedProxy, SecuredOb
 
     public void setExpenseItems(List<ExpenseItem> expenseItems) {
         this.expenseItems = expenseItems;
+    }
+
+    @FlexField(fieldType = FlexField.FlexFieldType.Excluded)
+    public List<ExpenseReportAuditHistory> getAuditHistory() {
+        return auditHistory;
+    }
+
+    public void setAuditHistory(List<ExpenseReportAuditHistory> auditHistory) {
+        this.auditHistory = auditHistory;
     }
 
     public Long getId() {

@@ -7,15 +7,33 @@
         close="{close()}">
 
     <mx:Script><![CDATA[
-        import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
+        import com.neosavvy.user.dto.project.ExpenseReport;
+        import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
 
         import mx.managers.PopUpManager;
+
+        private var _expenseReport:ExpenseReport
+
+        public function get expenseReport():ExpenseReport {
+            return _expenseReport;
+        }
+
+        public function set expenseReport(value:ExpenseReport):void {
+            _expenseReport = value;
+        }
 
         private function close():void {
             PopUpManager.removePopUp(this);
         }
 
         private function confirmDecline():void {
+
+            dispatchEvent(new ExpenseReportApproveEvent(
+                    ExpenseReportApproveEvent.ACTION_DECLINE_CONFIRM
+                    , _expenseReport
+                    , declineCommentText.text
+                    ))
+
             close();
         }
         ]]></mx:Script>
@@ -25,6 +43,7 @@
             Declining an expense report requires a comment please enter it here
         </mx:text>
     </mx:Text>
+    <mx:TextArea id="declineCommentText" width="100%" height="300"/>
     <mx:ControlBar>
         <mx:Button label="Decline" click="confirmDecline()"/>
         <mx:Spacer width="100%"/>

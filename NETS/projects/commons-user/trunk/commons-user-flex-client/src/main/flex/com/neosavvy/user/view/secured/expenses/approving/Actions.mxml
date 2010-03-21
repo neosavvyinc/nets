@@ -10,11 +10,11 @@
         import com.neosavvy.user.view.secured.expenses.report.event.ExpenseItemEvent;
 
         protected function approveExpenseReportHandler():void {
-            dispatchEvent(new ExpenseReportApproveEvent(ExpenseReportApproveEvent.ACTION_APPROVE, data as ExpenseReport));
+            dispatchEvent(new ExpenseReportApproveEvent(ExpenseReportApproveEvent.ACTION_APPROVE_REQUEST, data as ExpenseReport));
         }
 
         protected function declineExpenseReportHandler():void {
-            dispatchEvent(new ExpenseReportApproveEvent(ExpenseReportApproveEvent.ACTION_DECLINE, data as ExpenseReport));
+            dispatchEvent(new ExpenseReportApproveEvent(ExpenseReportApproveEvent.ACTION_DECLINE_REQUEST, data as ExpenseReport));
         }
 
         protected function viewExpenseReportHandler():void {

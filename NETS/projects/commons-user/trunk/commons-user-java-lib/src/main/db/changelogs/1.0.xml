@@ -44,4 +44,27 @@
             </column>
         </createTable>
     </changeSet>
+
+    <changeSet id="4" author="adam">
+        <createTable tableName="expense_report_audit_history">
+            <column name="ID" type="BIGSERIAL">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COMMENT" type="varchar(4098)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ACTIVITY_DATE" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_FK" type="int8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="OWNER_FK" type="int8">
+                <constraints nullable="false"/>
+            </column>
+            <column name="EXPENSE_REPORT_FK" type="int8">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>

@@ -164,5 +164,20 @@ package com.neosavvy.user.model {
             addCallbackHandler(service, responder);
             service.findExpenseReportsAwaitingApproval(user);
         }
+
+        public function approveExpenseReport( expenseReport:ExpenseReport, comment:String, responder:IResponder ) : void
+        {
+            var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
+            addCallbackHandler(service, responder);
+            service.approveExpenseReport(expenseReport, comment);
+        }
+
+        public function declineExpenseReport( expenseReport:ExpenseReport, comment:String, responder:IResponder) : void
+        {
+            var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
+            addCallbackHandler(service, responder);
+            service.declineExpenseReport(expenseReport, comment);
+        }
+
     }
 }

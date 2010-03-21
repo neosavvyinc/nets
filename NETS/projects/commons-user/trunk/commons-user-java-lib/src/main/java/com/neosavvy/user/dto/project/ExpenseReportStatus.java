@@ -27,6 +27,7 @@ public enum ExpenseReportStatus {
     //"Open","Submitted","Approving","Approved","Reimbursement Sent","Reimbursement Recieved"
     OPEN                        //Open - when an expense report is created it is in an open state
     ,SUBMITTED                  //Submitted - once a user submits it to the workflow it is submitted
+    ,DECLINED                   //Declined - once any approver has found a problem it will be set to this state
     ,APPROVING                  //Approving - once the first approver has touched the expense report it is in this state
     ,APPROVED                   //Approved - once the last approver has agreed that the expense report is valid it is in this state
     ,REIMBURSEMENT_SENT         //Reimbursement Sent - once the accounting personal has sent a check it is in this state
