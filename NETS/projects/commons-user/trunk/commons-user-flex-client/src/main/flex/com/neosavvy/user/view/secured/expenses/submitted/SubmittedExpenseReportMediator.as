@@ -70,7 +70,7 @@ package com.neosavvy.user.view.secured.expenses.submitted {
             return [
                     ApplicationFacade.NAVIGATE_TO_VIEW_SUBMITTED_EXPENSE_REPORTS
                     ,ApplicationFacade.FIND_SUBMITTED_EXPENSE_REPORTS_FOR_USER_SUCCESS
-                    ,ApplicationFacade.SAVE_EXPENSE_REPORT_SUCCESS
+                    ,ApplicationFacade.REOPEN_EXPENSE_REPORT_SUCCESS
             ];
         }
 
@@ -85,13 +85,8 @@ package com.neosavvy.user.view.secured.expenses.submitted {
                 case ApplicationFacade.FIND_SUBMITTED_EXPENSE_REPORTS_FOR_USER_SUCCESS:
                     submittedExpenseReportGrid.dataProvider = _expenseServiceProxy.submittedExpenseReports;
                     break;
-                case ApplicationFacade.SAVE_EXPENSE_REPORT_SUCCESS:
-                    if(_statusChangedExpenseReport && _statusChangedExpenseReport.id == _expenseServiceProxy.activeExpenseReport.id)
-                    {
-                        // only send the notification if the active expense matches the one that was just saved
-                        sendNotification(ApplicationFacade.INITIALIZE_VIEW_SUBMITTED_EXPENSE_REPORTS_VIEW, _userServiceProxy.activeUser);
-                        _statusChangedExpenseReport = null;
-                    }
+                case ApplicationFacade.REOPEN_EXPENSE_REPORT_SUCCESS:
+                    sendNotification(ApplicationFacade.INITIALIZE_VIEW_SUBMITTED_EXPENSE_REPORTS_VIEW, _userServiceProxy.activeUser);
                     break;
             }
 
@@ -107,7 +102,6 @@ package com.neosavvy.user.view.secured.expenses.submitted {
         }
 
         var reopenExpenseReportPopup:IFlexDisplayObject;
-        var _statusChangedExpenseReport:ExpenseReport;
         private function handleReopenExpenseReportDialog(expenseReport:ExpenseReport):void {
             reopenExpenseReportPopup = PopUpManager.createPopUp(Application.application as DisplayObject, ReopenConfirmationPanel, true);
             (reopenExpenseReportPopup as ReopenConfirmationPanel).expenseReport = expenseReport;
@@ -119,16 +113,9 @@ package com.neosavvy.user.view.secured.expenses.submitted {
         private function handleReopenExpenseReportConfirmed(event:ExpenseReportEvent):void {
             reopenExpenseReportPopup.removeEventListener(ExpenseReportEvent.TYPE, handleReopenExpenseReportConfirmed);
             var params:Array = new Array();
-            event.expenseReport.status = ExpenseReportStatus.OPEN;
-
-            params[0] = event.expenseReport.project;
-            params[1] = event.expenseReport;
-            var arrayCollection:ArrayCollection = event.expenseReport.expenseItems as ArrayCollection;
-            params[2] = arrayCollection;
-
-            _statusChangedExpenseReport = event.expenseReport;
-
-            sendNotification(ApplicationFacade.SAVE_EXPENSE_REPORT_REQUEST, params);
+            params[0] = event.expenseReport;
+            params[1] = "Reopening " + new Date();
+            sendNotification(ApplicationFacade.REOPEN_EXPENSE_REPORT_REQUEST, params);
         }
 
     }

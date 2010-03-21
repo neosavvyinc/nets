@@ -27,6 +27,8 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.expenses.report.save.SaveExpenseReport;
     import com.neosavvy.user.controller.expenses.report.workflow.ApproveExpenseReport;
     import com.neosavvy.user.controller.expenses.report.workflow.DeclineExpenseReport;
+    import com.neosavvy.user.controller.expenses.report.workflow.ReopenExpenseReport;
+    import com.neosavvy.user.controller.expenses.report.workflow.SubmitExpenseReport;
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
     import com.neosavvy.user.controller.project.GetAvailableUsersForProject;
     import com.neosavvy.user.controller.project.GetProjectsForCompany;
@@ -116,8 +118,11 @@ package com.neosavvy.user {
             registerCommand(FIND_EXPENSE_ITEM_TYPES_REQUEST, FindExpenseTypes);
             registerCommand(FIND_PAYMENT_METHODS_REQUEST, FindPaymentMethods);
             registerCommand(FIND_PROJECT_TYPES_REQUEST, FindProjectTypes);
+
             registerCommand(APPROVE_EXPENSE_REPORT_REQUEST, ApproveExpenseReport);
             registerCommand(DECLINE_EXPENSE_REPORT_REQUEST, DeclineExpenseReport);
+            registerCommand(SUBMIT_EXPENSE_REPORT_REQUEST, SubmitExpenseReport);
+            registerCommand(REOPEN_EXPENSE_REPORT_REQUEST, ReopenExpenseReport);
 
             registerCommand(INITIALIZE_VIEW_OPEN_EXPENSE_REPORTS_VIEW, InitializeViewOpenExpenseReportView);
             registerCommand(INITIALIZE_EDIT_EXPENSE_REPORT_VIEW, InitializeEditExpenseReportView);
@@ -302,6 +307,14 @@ package com.neosavvy.user {
         public static const DECLINE_EXPENSE_REPORT_REQUEST:String = "declineExpenseReportRequest";
         public static const DECLINE_EXPENSE_REPORT_SUCCESS:String = "declineExpenseReportSuccess";
         public static const DECLINE_EXPENSE_REPORT_FAILURE:String = "declineExpenseReportFailure";
+
+        public static const SUBMIT_EXPENSE_REPORT_REQUEST:String = "submitExpenseReportRequest";
+        public static const SUBMIT_EXPENSE_REPORT_SUCCESS:String = "submitExpenseReportSuccess";
+        public static const SUBMIT_EXPENSE_REPORT_FAILURE:String = "submitExpenseReportFailure";
+
+        public static const REOPEN_EXPENSE_REPORT_REQUEST:String = "reopenExpenseReportRequest";
+        public static const REOPEN_EXPENSE_REPORT_SUCCESS:String = "reopenExpenseReportSuccess";
+        public static const REOPEN_EXPENSE_REPORT_FAILURE:String = "reopenExpenseReportFailure";
 
         public static const FIND_EXPENSE_REPORT_REQUEST:String = "findExpenseReportRequest";
         public static const FIND_EXPENSE_REPORT_SUCCESS:String = "findExpenseReportSuccess";

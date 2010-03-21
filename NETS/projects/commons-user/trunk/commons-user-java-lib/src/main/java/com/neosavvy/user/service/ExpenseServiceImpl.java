@@ -156,19 +156,45 @@ public class ExpenseServiceImpl implements ExpenseService {
         return types;
     }
 
-    public ExpenseReport approveExpenseReport(ExpenseReport aReport, String comment) {
-
+    protected ExpenseReport getAttachedExpenseReport( ExpenseReport aReport ) {
         ExpenseReport report = expenseDAO.findExpenseReportById(aReport.getId());
+        List<ExpenseItem> expenseItems = expenseDAO.findExpenseItemsForReport(aReport.getId());
+        report.setExpenseItems(expenseItems);
+        return report;
+    }
+
+    public ExpenseReport submitExpenseReportForApproval(ExpenseReport report, String comment) {
+
+        report = getAttachedExpenseReport(report);
+        report.setStatus(ExpenseReportStatus.SUBMITTED);
+        expenseDAO.save(report);
+
+        return new ExpenseReport();
+    }
+
+    public ExpenseReport reopenExpenseReportForApproval(ExpenseReport report, String comment) {
+
+        report = getAttachedExpenseReport(report);
+        report.setStatus(ExpenseReportStatus.OPEN);
+        expenseDAO.save(report);
+
+        return new ExpenseReport();
+    }
+
+    public ExpenseReport approveExpenseReport(ExpenseReport report, String comment) {
+
+        report = getAttachedExpenseReport(report);
         report.setStatus(ExpenseReportStatus.APPROVED);
-        report = expenseDAO.save(report);
+        expenseDAO.save(report);
 
         return report;
     }
 
-    public ExpenseReport declineExpenseReport(ExpenseReport aReport, String comment) {
-        ExpenseReport report = expenseDAO.findExpenseReportById(aReport.getId());
+    public ExpenseReport declineExpenseReport(ExpenseReport report, String comment) {
+
+        report = getAttachedExpenseReport(report);
         report.setStatus(ExpenseReportStatus.DECLINED);
-        report = expenseDAO.save(report);
+        expenseDAO.save(report);
 
         return report;
     }

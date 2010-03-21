@@ -65,7 +65,7 @@ package com.neosavvy.user.view.secured.expenses.open {
             return [
                 ApplicationFacade.NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS
                 ,ApplicationFacade.FIND_OPEN_EXPENSE_REPORTS_FOR_USER_SUCCESS
-                ,ApplicationFacade.SAVE_EXPENSE_REPORT_SUCCESS
+                ,ApplicationFacade.SUBMIT_EXPENSE_REPORT_SUCCESS
             ];
         }
 
@@ -78,13 +78,8 @@ package com.neosavvy.user.view.secured.expenses.open {
                 case ApplicationFacade.FIND_OPEN_EXPENSE_REPORTS_FOR_USER_SUCCESS:
                     openExpenseGrid.dataProvider = _expenseServiceProxy.openExpenseReports;
                     break;
-                case ApplicationFacade.SAVE_EXPENSE_REPORT_SUCCESS:
-                    if( _statusChangedExpenseReport && _statusChangedExpenseReport.id == _expenseServiceProxy.activeExpenseReport.id)
-                    {
-                        // only send the notification if the active expense matches the one that was just saved
-                        sendNotification(ApplicationFacade.INITIALIZE_VIEW_OPEN_EXPENSE_REPORTS_VIEW, _userServiceProxy.activeUser);
-                        _statusChangedExpenseReport = null;
-                    }
+                case ApplicationFacade.SUBMIT_EXPENSE_REPORT_SUCCESS:
+                    sendNotification(ApplicationFacade.INITIALIZE_VIEW_OPEN_EXPENSE_REPORTS_VIEW, _userServiceProxy.activeUser);
                     break;
             }
         }
@@ -119,14 +114,9 @@ package com.neosavvy.user.view.secured.expenses.open {
         private function handleSubmitExpenseReportConfirmed(event:ExpenseReportEvent):void {
             submitExpenseReportPopup.removeEventListener(ExpenseReportEvent.TYPE, handleSubmitExpenseReportConfirmed);
             var params:Array = new Array();
-            event.expenseReport.status = ExpenseReportStatus.SUBMITTED;
-
-            params[0] = event.expenseReport.project;
-            params[1] = event.expenseReport;
-            var arrayCollection:ArrayCollection = event.expenseReport.expenseItems as ArrayCollection;
-            params[2] = arrayCollection;
-            _statusChangedExpenseReport = event.expenseReport;
-            sendNotification(ApplicationFacade.SAVE_EXPENSE_REPORT_REQUEST, params);
+            params[0] = event.expenseReport;
+            params[1] = "Submitted to the workflow" + new Date();
+            sendNotification(ApplicationFacade.SUBMIT_EXPENSE_REPORT_REQUEST, params);
         }
     }
 }

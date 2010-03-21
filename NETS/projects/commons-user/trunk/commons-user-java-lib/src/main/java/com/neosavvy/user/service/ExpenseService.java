@@ -66,6 +66,12 @@ public interface ExpenseService {
     @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
     public List<ExpenseReport> findExpenseReportsAwaitingApproval(UserDTO user);
 
+    @Secured({"ROLE_EMPLOYEE", "ACL_OBJECT_WRITE"})
+    public ExpenseReport submitExpenseReportForApproval(ExpenseReport report, String comment);
+
+    @Secured({"ROLE_EMPLOYEE", "ACL_OBJECT_WRITE"})
+    public ExpenseReport reopenExpenseReportForApproval(ExpenseReport report, String comment);
+
     @Secured({"ROLE_ADMIN", "ACL_OBJECT_WRITE"})
     public ExpenseReport approveExpenseReport(ExpenseReport report, String comment);
 
