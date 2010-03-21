@@ -120,6 +120,7 @@ package com.neosavvy.user.view.secured.expenses.report {
                 case ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT:
                     resetForm();
                     sendNotification(ApplicationFacade.INITIALIZE_EXPENSE_REPORT_VIEW);
+                    _expenseReportProxy.activeExpenseReport = null;
                     break;
                 case ApplicationFacade.NAVIGATE_TO_EDIT_EXPENSE_REPORT:
                     resetForm();
