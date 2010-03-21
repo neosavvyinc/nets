@@ -5,7 +5,6 @@
     xmlns:jaxws="http://cxf.apache.org/jaxws"
     xmlns:jaxrs="http://cxf.apache.org/jaxrs"
     xmlns:util="http://www.springframework.org/schema/util"
-    xmlns:security="http://www.springframework.org/schema/security"
     xsi:schemaLocation="
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.0.xsd
@@ -13,26 +12,23 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
 http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
 http://cxf.apache.org/jaxrs http://cxf.apache.org/schemas/jaxrs.xsd
-http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
-http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd">
+http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
     <import resource="classpath:META-INF/cxf/cxf.xml" />
     <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
     <import resource="classpath:META-INF/cxf/cxf-extension-jaxrs-binding.xml" />
     <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
-    <import resource="classpath*:commons-beans.xml" />
-    <import resource="classpath*:securityAuthorizationContext.xml" />
-    <import resource="classpath*:securityContext.xml" />
 
-    <jee:jndi-lookup id="entityManagerFactory" jndi-name="java:comp/env/FocalStoragePU" />
-    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/FocalDS"/>
+    <import resource="classpath*:commons-beans.xml" />
+
+    <jee:jndi-lookup id="entityManagerFactory" jndi-name="java:comp/env/StoragePU" />
+    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/CommonsUserDS"/>
 
     <bean id="storageServiceV1" class="fineline.focal.storage.service.v1.StorageServiceImpl">
     	<property name="fileStorage" ref="localFileStorage" />
     	<property name="fileAccessDecisionManager" ref="businessAccessDecisionManager" />
-    	<property name="unarchiveCommand" value="${unarchiveCommand}"/>
     </bean>
-    
+
     <jaxrs:server id="storageServiceRestEndpointV1" address="/storage/v1/rest">
       <jaxrs:serviceBeans>
         <ref bean="storageServiceV1" />

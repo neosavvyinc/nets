@@ -39,7 +39,6 @@ public class StorageServiceImpl implements StorageService
     private MessageContext messageContext;
     private FileStorage fileStorage;
     private AccessDecisionManager fileAccessDecisionManager;
-    private String unarchiveCommand;
 
     public StorageServiceFileRef findFileRef(String bucket, String key) {
         StorageServiceFileRef ref = fileStorage.findFileRef(bucket, key);
@@ -118,18 +117,6 @@ public class StorageServiceImpl implements StorageService
     }
     
     
-    private void createFileRefs(File dir, List<StorageServiceFileRef> fileRefs, String bucket, String owner) throws IOException, ResourceNotFoundException {
-        for (File child : dir.listFiles()) {
-            if (child.isFile()) {
-                StorageServiceFileRef fileRef = fileStorage.saveFile(bucket, null, child.getName(), FileUtils.getContentType(child.getName()), new FileInputStream(child), owner);
-                fileRefs.add(fileRef);
-            }
-            else if (child.isDirectory()) {
-                createFileRefs(child, fileRefs, bucket, owner);
-            }
-        }
-    }
-
     public String deleteFile(String bucket, String key) throws Exception {
         StorageServiceFileRef ref = fileStorage.findFileRef(bucket, key);
         if (ref == null) {
@@ -139,57 +126,6 @@ public class StorageServiceImpl implements StorageService
         fileAccessDecisionManager.decide(SecurityContextHolder.getContext().getAuthentication(), ref, null);
     	fileStorage.deleteFile(bucket, key);
     	return "File deleted successfully.";
-    }
-    
-    public StorageServiceFileRef cloneFile(String destinationBucket, String sourceBucket, String key) throws Exception {
-        StorageServiceFileRef sourceRef = fileStorage.findFileRef(sourceBucket, key);
-        
-        if (sourceRef == null) {
-            throw new ResourceNotFoundException("The file reference for the key " + key + " under bucket " + sourceBucket + " was not found.");
-        }
-        
-        File source = fileStorage.getFile(sourceRef);
-        
-        if (source == null || !source.exists()) {
-            throw new ResourceNotFoundException("The file for the key " + key + " under bucket " + sourceBucket + " was not found.");
-        }
-        
-        return fileStorage.saveFile(destinationBucket, null, sourceRef.getFileName(), sourceRef.getContentType(), new FileInputStream(source), sourceRef.getOwner());
-    }
-    
-    private String buildContentTypeString(MediaType type) {
-    	if (type == null) {
-    		return null;
-    	}
-    	
-    	StringBuilder builder = new StringBuilder();
-    	builder.append(type.getType());
-    	
-    	if (type.getSubtype() != null) {
-    		builder.append("/");
-    		builder.append(type.getSubtype());
-    	}
-    	
-    	return builder.toString();
-    }
-    
-    private String parseFileName(String contentDispositionValue) throws javax.mail.internet.ParseException, UnsupportedEncodingException, IOException {
-        ContentDisposition disp = new ContentDisposition(contentDispositionValue);
-        if (disp.getParameter("filename") != null) {
-            return disp.getParameter("filename");
-        }
-        else if (disp.getParameter("filename*") != null) {
-            RFC2231Encoder encoder = new RFC2231Encoder();
-            return encoder.decode(disp.getParameter("filename*")); 
-        }
-        else {
-            return "";
-        }
-    }
-    
-    public boolean updateFileOwnership(String oldOwner, String newOwner) {
-        fileStorage.updateOwnership(oldOwner, newOwner);
-        return true;
     }
     
 	public FileStorage getFileStorage() {
@@ -206,10 +142,4 @@ public class StorageServiceImpl implements StorageService
         this.fileAccessDecisionManager = fileAccessDecisionManager;
     }
 
-    public String getUnarchiveCommand() {
-        return unarchiveCommand;
-    }
-    public void setUnarchiveCommand(String unarchiveCommand) {
-        this.unarchiveCommand = unarchiveCommand;
-    }
 }
