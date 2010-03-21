@@ -16,6 +16,8 @@
 
         import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
 
+        import mx.collections.ArrayCollection;
+        import mx.collections.ListCollectionView;
         import mx.managers.PopUpManager;
 
         private function close():void {
@@ -46,12 +48,28 @@
 
         private var _expenseReport:ExpenseReport
 
+        private var _expenseReportItems:ListCollectionView;
+
         public function get expenseReport():ExpenseReport {
             return _expenseReport;
         }
 
         public function set expenseReport(value:ExpenseReport):void {
             _expenseReport = value;
+
+            projectNameLabel.text = _expenseReport.project.name;
+            locationLabel.text = _expenseReport.location;
+            purposeLabel.text = _expenseReport.purpose;
+        }
+
+        public function get expenseReportItems():ListCollectionView {
+            return _expenseReportItems;
+        }
+
+        public function set expenseReportItems(value:ListCollectionView):void {
+            _expenseReportItems = value;
+
+            expenseReportGrid.dataProvider = value;
         }
 
         private function projectTypeLabelFunction(data:Object, column:AdvancedDataGridColumn):String {
@@ -78,13 +96,13 @@
 
     <mx:Form id="expenseReportSummaryForm" width="100%">
         <mx:FormItem id="projectFormItem" label="Project:">
-            <mx:Label text="ProjectName"/>
+            <mx:Label id="projectNameLabel"/>
         </mx:FormItem>
         <mx:FormItem id="purposeFormItem" label="Purpose:">
-            <mx:Label text="PurposeName"/>
+            <mx:Label id="purposeLabel"/>
         </mx:FormItem>
         <mx:FormItem id="locationFormItem" label="Location:">
-            <mx:Label text="LocationName"/>
+            <mx:Label id="locationLabel"/>
         </mx:FormItem>
     </mx:Form>
 

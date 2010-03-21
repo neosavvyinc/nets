@@ -56,6 +56,7 @@ package com.neosavvy.user.view.secured.expenses.approving {
                 ApplicationFacade.SHOW_APPROVE_DIALOG
                 ,ApplicationFacade.SHOW_DECLINE_DIALOG
                 ,ApplicationFacade.SHOW_VIEW_DIALOG
+                ,ApplicationFacade.INITIALIZE_VIEW_EXPENSE_REPORT_VIEW_COMPLETE
 
             ];
         }
@@ -99,6 +100,7 @@ package com.neosavvy.user.view.secured.expenses.approving {
 
                     sendNotification(ApplicationFacade.APPROVE_EXPENSE_REPORT_REQUEST,[expenseReport, comment]);
                     break;
+
             }
         }
 
@@ -120,6 +122,7 @@ package com.neosavvy.user.view.secured.expenses.approving {
             (viewExpenseReportPopup as ViewSubmittedExpenseReport).expenseReport = selectedReport;
             viewExpenseReportPopup.addEventListener(ExpenseReportApproveEvent.TYPE, handleViewEvent);
             PopUpManager.centerPopUp(viewExpenseReportPopup);
+            sendNotification(ApplicationFacade.INITIALIZE_VIEW_EXPENSE_REPORT_VIEW, selectedReport.id);
         }
 
         private function handleViewEvent(event:ExpenseReportApproveEvent):void {
@@ -144,6 +147,14 @@ package com.neosavvy.user.view.secured.expenses.approving {
                     break;
                 case ApplicationFacade.SHOW_VIEW_DIALOG:
                     handleView( selectedReport );
+                    break;
+                case ApplicationFacade.INITIALIZE_VIEW_EXPENSE_REPORT_VIEW_COMPLETE:
+                    if( viewExpenseReportPopup )
+                    {
+                        var verp:ViewSubmittedExpenseReport = (viewExpenseReportPopup as ViewSubmittedExpenseReport);
+                        verp.expenseReport = _expenseServiceProxy.activeExpenseReport;
+                        verp.expenseReportItems = _expenseServiceProxy.activeExpenseReportItems;
+                    }
                     break;
             }
         }

@@ -101,8 +101,6 @@ package com.neosavvy.user.view.secured.expenses.open {
         }
 
         var submitExpenseReportPopup:IFlexDisplayObject;
-        private var _statusChangedExpenseReport:ExpenseReport;
-
         private function handleSubmitExpenseReportDialog(expenseReport:ExpenseReport):void {
             submitExpenseReportPopup = PopUpManager.createPopUp(Application.application as DisplayObject, SubmitConfirmationPanel, true);
             (submitExpenseReportPopup as SubmitConfirmationPanel).expenseReport = expenseReport;

@@ -20,6 +20,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.expenses.report.init.InitializeEditExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.init.InitializeExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.init.InitializeViewAwaitingApprovalExpenseReportView;
+    import com.neosavvy.user.controller.expenses.report.init.InitializeViewExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.init.InitializeViewOpenExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.init.InitializeViewSubmittedExpenseReportView;
     import com.neosavvy.user.controller.expenses.report.save.DeleteExpenseReport;
@@ -126,6 +127,7 @@ package com.neosavvy.user {
 
             registerCommand(INITIALIZE_VIEW_OPEN_EXPENSE_REPORTS_VIEW, InitializeViewOpenExpenseReportView);
             registerCommand(INITIALIZE_EDIT_EXPENSE_REPORT_VIEW, InitializeEditExpenseReportView);
+            registerCommand(INITIALIZE_VIEW_EXPENSE_REPORT_VIEW, InitializeViewExpenseReportView);
 
             registerCommand(DELETE_ACTIVE_EXPENSE_REPORT_REQUEST, DeleteExpenseReport);
 
@@ -354,8 +356,11 @@ package com.neosavvy.user {
         public static const DELETE_ACTIVE_EXPENSE_REPORT_SUCCESS:String = "deleteActiveExpenseReportSuccess";
         public static const DELETE_ACTIVE_EXPENSE_REPORT_FAILURE:String = "deleteActiveExpenseReportFailure";
 
-        public static const INITIALIZE_EDIT_EXPENSE_REPORT_VIEW:String = "initializeEditExpenseReportViewComplete";
+        public static const INITIALIZE_EDIT_EXPENSE_REPORT_VIEW:String = "initializeEditExpenseReportView";
         public static const INITIALIZE_EDIT_EXPENSE_REPORT_VIEW_COMPLETE:String = "initializeEditExpenseReportViewComplete";
+
+        public static const INITIALIZE_VIEW_EXPENSE_REPORT_VIEW:String = "initializeViewExpenseReportView";
+        public static const INITIALIZE_VIEW_EXPENSE_REPORT_VIEW_COMPLETE:String = "initializeViewExpenseReportViewComplete";
 
         public static const GET_EXPENSE_ITEMS_SUCCESS:String = "getExpenseItemsSuccess";
         public static const GET_EXPENSE_ITEMS_FAILURE:String = "getExpenseItemsFailure";
