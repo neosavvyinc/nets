@@ -106,7 +106,7 @@ package com.neosavvy.user.view.login {
         }
 
         private function handleLoginHandler(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
+            sendNotification(ApplicationFacade.DISPLAY_LOGIN_SCREEN);
         }
 
         private function handleRetryConfirmationHandler(event:MouseEvent):void {

@@ -159,6 +159,7 @@ package com.neosavvy.user {
         public static const REQUEST_USER_LOGIN:String = "requestUserLogin";
         public static const USER_LOGIN_SUCCESS:String = "userLoginSuccess";
         public static const USER_LOGIN_FAILED:String = "userLoginFailed";
+        public static const DISPLAY_LOGIN_SCREEN:String = "displayLogin";
 
         public static const REQUEST_FORGOT_USERNAME:String = "requestForgotUsername";
         public static const REQUEST_FORGOT_PASSWORD:String = "requestForgotPassword";

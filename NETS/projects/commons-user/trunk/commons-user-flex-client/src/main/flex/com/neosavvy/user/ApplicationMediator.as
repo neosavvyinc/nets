@@ -89,6 +89,7 @@ package com.neosavvy.user {
         override public function listNotificationInterests():Array {
             return [
                 ApplicationFacade.USER_LOGGED_IN
+                ,ApplicationFacade.DISPLAY_LOGIN_SCREEN
                 ,ApplicationFacade.USER_NOT_LOGGED_IN
                 ,ApplicationFacade.USER_LOGIN_SUCCESS
                 ,ApplicationFacade.NAVIGATE_TO_COMPANY_REGISTRATION
@@ -116,6 +117,7 @@ package com.neosavvy.user {
                     logoutButton.visible = true;
                     sendNotification(ApplicationFacade.INITIALIZE_SECURED_VIEW, securedContainer);
                     break;
+                case ApplicationFacade.DISPLAY_LOGIN_SCREEN:
                 case ApplicationFacade.USER_NOT_LOGGED_IN:
                     displayLogin();
                     break;

@@ -141,10 +141,6 @@ package com.neosavvy.user.view.companyManagement {
             return validationResults.length == 0 ? true : false;
         }
 
-        private function resetForm():void {
-
-        }
-
 
         private function confirmAccountButtonClickHandler(event:MouseEvent):void {
             var hashCode:String = companyManagement.confirmationToken.text;
@@ -154,7 +150,7 @@ package com.neosavvy.user.view.companyManagement {
 
 
         private function loginButtonClickHandler(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.CHECK_USER_LOGGED_IN);
+            sendNotification(ApplicationFacade.DISPLAY_LOGIN_SCREEN);
         }
 
 
