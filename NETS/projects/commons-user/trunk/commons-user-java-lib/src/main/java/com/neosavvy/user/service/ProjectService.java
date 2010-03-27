@@ -4,8 +4,13 @@ import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.ClientCompany;
 import com.neosavvy.user.dto.project.Project;
+import org.springframework.context.annotation.Scope;
 import org.springframework.security.access.annotation.Secured;
+import org.springframework.stereotype.Component;
 
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import java.util.List;
 import java.util.Set;
 /*************************************************************************
@@ -32,6 +37,9 @@ import java.util.Set;
  * Date: Jan 7, 2010
  * Time: 4:13:36 PM
  */
+@Path("/project")
+@Component
+@Scope("singleton")
 public interface ProjectService {
 
     @Secured({"ROLE_ADMIN", "OBJECT_ACL_WRITE"})
@@ -51,4 +59,9 @@ public interface ProjectService {
 
     @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
     List<Project> findProjectsForUser(UserDTO user);
+
+    @GET
+    @Path("/test")
+    @Produces("text/plain")
+    String test();
 }

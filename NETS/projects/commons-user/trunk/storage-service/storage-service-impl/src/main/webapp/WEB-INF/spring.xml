@@ -29,7 +29,7 @@ http://www.springframework.org/schema/util http://www.springframework.org/schema
     	<property name="fileAccessDecisionManager" ref="businessAccessDecisionManager" />
     </bean>
 
-    <jaxrs:server id="storageServiceRestEndpointV1" address="/storage/v1/rest">
+    <jaxrs:server id="storageServiceRestEndpointV1" address="/">
       <jaxrs:serviceBeans>
         <ref bean="storageServiceV1" />
       </jaxrs:serviceBeans>

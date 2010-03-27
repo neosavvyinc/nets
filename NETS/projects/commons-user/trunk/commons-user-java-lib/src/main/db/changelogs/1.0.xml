@@ -34,7 +34,7 @@
         <dropTable tableName="persistent_logins" />
         <createTable tableName="user_sessions">
             <column name="id" type="varchar(100)">
-                <constraints nullable="false" />
+                <constraints primaryKey="true" nullable="false" />
             </column>
             <column name="username" type="varchar(256)">
                 <constraints nullable="false" />
@@ -48,7 +48,7 @@
     <changeSet id="4" author="adam">
         <createTable tableName="expense_report_audit_history">
             <column name="ID" type="BIGSERIAL">
-                <constraints nullable="false"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="COMMENT" type="varchar(4098)">
                 <constraints nullable="false"/>
@@ -66,5 +66,64 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
+    </changeSet>
+
+    <changeSet id="5" author="tommy">
+        <createTable tableName="file_refs">
+            <column name="ID" type="BIGSERIAL">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="TYPE" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FILE_SIZE" type="varchar(4098)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_AT" type="timestamp with time zone">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_MODIFIED_AT" type="timestamp with time zone">
+                <constraints nullable="false"/>
+            </column>
+            <column name="RECORD_STATUS" type="varchar(1)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="storage_service_file_refs">
+            <column name="ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="BUCKET" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FILE_KEY" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="FILE_NAME" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="LOCATION" type="varchar(20)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="CONTENT_TYPE" type="varchar(50)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="OWNER" type="varchar(256)">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint constraintName="FK_STORAGE_SERVICE_FILE_REFS_ID"
+            baseTableName="storage_service_file_refs" baseColumnNames="ID"
+            referencedTableName="file_refs" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK_EXPENSE_REPORT_AUDIT_HISTORY_EXPENSE_REPORT_FK"
+            baseTableName="expense_report_audit_history" baseColumnNames="EXPENSE_REPORT_FK"
+            referencedTableName="expense_report" referencedColumnNames="ID" />
+        <addForeignKeyConstraint constraintName="FK_EXPENSE_REPORT_AUDIT_HISTORY_USER_FK"
+            baseTableName="expense_report_audit_history" baseColumnNames="USER_FK"
+            referencedTableName="users" referencedColumnNames="ID" />        
+        <addForeignKeyConstraint constraintName="FK_EXPENSE_REPORT_AUDIT_HISTORY_OWNER_FK"
+            baseTableName="expense_report_audit_history" baseColumnNames="OWNER_FK"
+            referencedTableName="users" referencedColumnNames="ID" />
     </changeSet>
 </databaseChangeLog>

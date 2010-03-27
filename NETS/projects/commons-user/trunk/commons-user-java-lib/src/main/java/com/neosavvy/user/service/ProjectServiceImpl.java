@@ -157,6 +157,10 @@ public class ProjectServiceImpl implements ProjectService {
         return projects;
     }
 
+    public String test() {
+        return "Test";
+    }
+
     public ProjectDAO getProjectDAO() {
         return projectDAO;
     }

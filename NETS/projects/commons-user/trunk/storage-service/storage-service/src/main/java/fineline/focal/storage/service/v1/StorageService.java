@@ -15,8 +15,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import fineline.focal.common.types.v1.StorageServiceFileRef;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 @Path("/")
+@Component
+@Scope("singleton")
 public interface StorageService
 {
     @GET

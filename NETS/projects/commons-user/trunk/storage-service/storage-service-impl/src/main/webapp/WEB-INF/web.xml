@@ -8,13 +8,17 @@
 
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>WEB-INF/beans.xml
+        <param-value>WEB-INF/spring.xml
             classpath:securityContext.xml
         </param-value>
     </context-param>
 
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+    <listener>
+          <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
 
     <persistence-unit-ref>
@@ -38,14 +42,12 @@
     </filter-mapping>
 
     <servlet>
-        <servlet-name>CXFServlet</servlet-name>
-        <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
-        <load-on-startup>1</load-on-startup>
+        <servlet-name>rest</servlet-name>
+        <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>CXFServlet</servlet-name>
+        <servlet-name>rest</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
-
 </web-app>
