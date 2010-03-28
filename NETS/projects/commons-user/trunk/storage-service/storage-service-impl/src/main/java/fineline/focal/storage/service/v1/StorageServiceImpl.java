@@ -8,11 +8,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.mail.internet.ContentDisposition;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Request;
 import javax.ws.rs.core.Response;
 
+import fineline.focal.common.http.HttpUtils;
 import org.apache.commons.fileupload.FileItemIterator;
 import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -29,14 +32,13 @@ import fineline.focal.common.types.v1.StorageServiceFileRef;
 import fineline.focal.common.utils.FileUtils;
 import fineline.focal.common.utils.StringUtils;
 import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class StorageServiceImpl implements StorageService
 {   
     private static Log log = LogFactory.getLog(StorageServiceImpl.class);
 
-    @Context
-    private MessageContext messageContext;
     private FileStorage fileStorage;
     private AccessDecisionManager fileAccessDecisionManager;
 
@@ -51,7 +53,7 @@ public class StorageServiceImpl implements StorageService
             throw new ResourceNotFoundException("The file reference for the key " + key + " under bucket " + bucket + " was not found.");
         }
         
-        fileAccessDecisionManager.decide(SecurityContextHolder.getContext().getAuthentication(), ref, null);
+        fileAccessDecisionManager.decide(SecurityContextHolder.getContext().getAuthentication(), ref, SecurityConfig.createList("OBJECT_ACL_READ"));
         
         if (ref.isStatusDeleted()) {
             throw new ResourceNotFoundException("The file reference for the key " + key + " under bucket " + bucket + " has been marked deleted.");
@@ -88,10 +90,10 @@ public class StorageServiceImpl implements StorageService
         return builder.build();
     }
     
-    public StorageServiceFileRef uploadFile(String bucket, String key) throws Exception {
+    public StorageServiceFileRef uploadFile(Request request, String bucket, String key) throws Exception {
         String owner = null;
         String fileNameOverride = null;
-        FileItemIterator iter = new ServletFileUpload().getItemIterator(messageContext.getHttpServletRequest());
+        FileItemIterator iter = new ServletFileUpload().getItemIterator(HttpUtils.getHttpRequest());
         
         StorageServiceFileRef ref = fileStorage.findFileRef(bucket, key);
         if (ref != null) {

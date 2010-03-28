@@ -36,6 +36,9 @@
         <class>com.neosavvy.user.dto.acl.AclObjectIdentity</class>
         <class>com.neosavvy.user.dto.acl.AclEntry</class>
         <class>fineline.focal.common.types.v1.UserSession</class>
+        <class>fineline.focal.common.types.v1.FileRef</class>
+        <class>fineline.focal.common.types.v1.StorageServiceFileRef</class>
+        <class>fineline.focal.common.types.v1.UrlFileRef</class>
 
         <properties>
             <property name="eclipselink.logging.level" value="INFO"/>
@@ -79,6 +82,9 @@
         <class>com.neosavvy.user.dto.acl.AclSid</class>
         <class>com.neosavvy.user.dto.acl.AclObjectIdentity</class>
         <class>com.neosavvy.user.dto.acl.AclEntry</class>
+        <class>fineline.focal.common.types.v1.FileRef</class>
+        <class>fineline.focal.common.types.v1.StorageServiceFileRef</class>
+        <class>fineline.focal.common.types.v1.UrlFileRef</class>
 
     </persistence-unit>
 </persistence>

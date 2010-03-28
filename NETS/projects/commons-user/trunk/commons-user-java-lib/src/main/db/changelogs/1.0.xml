@@ -126,4 +126,13 @@
             baseTableName="expense_report_audit_history" baseColumnNames="OWNER_FK"
             referencedTableName="users" referencedColumnNames="ID" />
     </changeSet>
+
+    <changeSet id="6" author="tommy">
+        <addColumn tableName="expense_report_item">
+            <column name="RECEIPT_FILE_REF_FK" type="BIGINT"/>
+        </addColumn>
+        <addForeignKeyConstraint constraintName="FK_EXPENSE_REPORT_ITEM_RECEIPT_FILE_REF_FK"
+            baseTableName="expense_report_item" baseColumnNames="RECEIPT_FILE_REF_FK"
+            referencedTableName="file_refs" referencedColumnNames="ID" />
+    </changeSet>
 </databaseChangeLog>

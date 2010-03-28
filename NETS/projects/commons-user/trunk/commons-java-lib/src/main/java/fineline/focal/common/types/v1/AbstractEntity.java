@@ -16,9 +16,6 @@ import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlTransient;
 
-import org.eclipse.persistence.annotations.Cache;
-import org.eclipse.persistence.annotations.CacheCoordinationType;
-
 import flex.messaging.annotations.FlexClass;
 import flex.messaging.annotations.FlexField;
 import flex.messaging.annotations.FlexClass.FlexClassType;
@@ -32,7 +29,6 @@ import flex.messaging.annotations.FlexField.FlexFieldType;
 @XmlTransient
 @MappedSuperclass
 @FlexClass(classType=FlexClassType.RemoteObject)
-@Cache(coordinationType=CacheCoordinationType.INVALIDATE_CHANGED_OBJECTS)
 @EntityListeners(EntityListenerManager.class)
 public abstract class AbstractEntity implements Serializable, IdentifiableEntity 
 {

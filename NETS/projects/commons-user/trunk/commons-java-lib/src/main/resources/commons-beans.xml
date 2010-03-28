@@ -11,6 +11,21 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <tx:jta-transaction-manager />
     <tx:annotation-driven />
 
+    <bean id="aclSecurityUtil" class="com.neosavvy.security.AclSecurityUtilImpl" />
+
+    <bean id="runAsExecutor" class="com.neosavvy.security.RunAsExecutor">
+        <property name="administratorUser" value="admin" />
+        <property name="administratorPassword" value="ignored" />
+        <property name="administratorRole" value="ROLE_ADMINISTRATOR" />
+    </bean>
+
+    <bean id="securedEntityListener" class="com.neosavvy.security.SecuredEntityListener">
+        <property name="aclSecurityUtil" ref="aclSecurityUtil" />
+        <property name="adminExecutor" ref="runAsExecutor" />
+    </bean>
+
+    <bean id="entityListenerManager" class="fineline.focal.common.types.v1.EntityListenerManager" autowire="byType" />
+    
     <bean id="storageServiceFileRef" class="fineline.focal.common.types.v1.StorageServiceFileRef">
         <property name="storageServiceDownloadUrl" value="${storageServiceDownloadUrl}"/>
     </bean>

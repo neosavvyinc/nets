@@ -9,6 +9,7 @@
              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
     <import resource="classpath*:commonsContext.xml" />
+    <import resource="classpath*:commons-beans.xml" />
     <import resource="classpath:securityAuthorizationContext.xml" />
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">

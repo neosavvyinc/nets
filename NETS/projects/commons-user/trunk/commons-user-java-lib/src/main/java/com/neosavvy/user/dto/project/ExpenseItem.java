@@ -3,6 +3,7 @@ package com.neosavvy.user.dto.project;
 import com.neosavvy.security.SecuredObject;
 import com.neosavvy.user.dto.base.BaseDTO;
 import fineline.focal.common.types.v1.EntityListenerManager;
+import fineline.focal.common.types.v1.FileRef;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -83,6 +84,10 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
     @Column(name = "COMMENT")
     private String comment;
 
+    @ManyToOne
+    @JoinColumn(name="RECEIPT_FILE_REF_FK", nullable=true)
+    private FileRef receiptFileRef;
+
     public BigDecimal getAmount() {
         return amount;
     }
@@ -157,6 +162,14 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
 
     public SecuredObject getAclParentObject() {
         return expenseReport;
+    }
+
+    public FileRef getReceiptFileRef() {
+        return receiptFileRef;
+    }
+
+    public void setReceiptFileRef(FileRef receiptFileRef) {
+        this.receiptFileRef = receiptFileRef;
     }
 
     public Class getAclParentClass() {

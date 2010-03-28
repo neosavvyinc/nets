@@ -5,13 +5,6 @@ import org.springframework.security.acls.domain.BasePermission;
 import org.springframework.security.acls.domain.PrincipalSid;
 import org.springframework.security.acls.model.Sid;
 
-/**
- * Created by IntelliJ IDEA.
- * User: tommyodom
- * Date: Jan 22, 2010
- * Time: 7:56:17 PM
- * To change this template use File | Settings | File Templates.
- */
 public class SecuredEntityListener implements EntityListener {
     private AclSecurityUtil aclSecurityUtil;
     private RunAsExecutor adminExecutor;
