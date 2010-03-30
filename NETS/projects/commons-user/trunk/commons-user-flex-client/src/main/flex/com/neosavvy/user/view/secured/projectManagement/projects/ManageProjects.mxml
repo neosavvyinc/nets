@@ -2,6 +2,7 @@
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
          xmlns:flexlib="http://code.google.com/p/flexlib/"
          xmlns:controls="controls.*"
+         xmlns:neosavvy="com.neosavvy.grid.*"
          xmlns:validators="com.visualempathy.validators.*"
          styleName="paddedContainer" width="100%" height="100%">
 
@@ -60,42 +61,57 @@
 
             <mx:HBox horizontalAlign="right" verticalAlign="bottom" height="100%" width="100%">
                 <mx:Button id="saveProject" label="Save Project"/>
+                <flexlib:PromptingTextInput id="searchTextInput" prompt="Search..."/>
+                <mx:Button id="resetFilters" label="Reset Filters" click="projectManagementGrid.resetFilters()"/>
             </mx:HBox>
         </mx:VBox>
     </mx:HBox>
-    <mx:AdvancedDataGrid
+
+    <neosavvy:AutoFilteringGrid
             id="projectManagementGrid"
             width="100%"
             height="100%"
+            autoResizeColumnHeaders="true"
+            searchTextControl="{searchTextInput}"
             >
-        <mx:columns>
-            <mx:AdvancedDataGridColumn
+        <neosavvy:columns>
+            <neosavvy:AutoFilteringGridColumn
                     id="projectNameColumn"
                     dataField="name"
                     headerText="Project Name"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-            <mx:AdvancedDataGridColumn
+            <neosavvy:AutoFilteringGridColumn
                     id="projectCodeColumn"
                     dataField="code"
                     headerText="Project Code"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-            <mx:AdvancedDataGridColumn
+            <neosavvy:AutoFilteringGridColumn
                     id="startDateColumn"
                     dataField="startDate"
                     headerText="Start Date"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-            <mx:AdvancedDataGridColumn
+            <neosavvy:AutoFilteringGridColumn
                     id="endDateColumn"
                     dataField="endDate"
                     headerText="End Date"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-            <mx:AdvancedDataGridColumn
+            <neosavvy:AutoFilteringGridColumn
                     id="clientCompanyColumn"
                     dataField="clientCompanyName"
                     headerText="Client Company"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-        </mx:columns>
-    </mx:AdvancedDataGrid>
+        </neosavvy:columns>
+    </neosavvy:AutoFilteringGrid>
 
 
 </mx:VBox>

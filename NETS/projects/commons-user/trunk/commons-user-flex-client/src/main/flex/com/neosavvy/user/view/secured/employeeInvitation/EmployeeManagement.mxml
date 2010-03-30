@@ -3,6 +3,7 @@
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:flexlib="http://code.google.com/p/flexlib/"
         xmlns:controls="controls.*"
+        xmlns:neosavvy="com.neosavvy.grid.*"
         title="Queue Employees to be invited here" styleName="paddedContainer" width="100%" height="100%">
     <mx:VBox id="errorContainer"/>
     <mx:HBox width="100%">
@@ -11,31 +12,45 @@
         <flexlib:PromptingTextInput id="empEmail" prompt="Email" width="100%"/>
         <mx:Button id="addUserButton" label="Add User"/>
     </mx:HBox>
-    <mx:AdvancedDataGrid
+    <mx:HBox width="100%" horizontalAlign="right">
+        <flexlib:PromptingTextInput id="searchInvites" prompt="Search..."/>
+        <mx:Button id="resetFilters" label="Reset Filters" click="employeesQueuedToInvite.resetFilters()"/>
+    </mx:HBox>
+    <neosavvy:AutoFilteringGrid
             id="employeesQueuedToInvite"
             width="100%"
             height="100%"
+            autoResizeColumnHeaders="true"
+            searchTextControl="{searchInvites}"
             >
-        <mx:columns>
-            <mx:AdvancedDataGridColumn
+        <neosavvy:columns>
+            <neosavvy:AutoFilteringGridColumn
                     id="firstNameCol"
                     dataField="firstName"
                     headerText="First Name"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-            <mx:AdvancedDataGridColumn
+            <neosavvy:AutoFilteringGridColumn
                     id="lastNameCol"
                     dataField="lastName"
                     headerText="Last Name"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-            <mx:AdvancedDataGridColumn
+            <neosavvy:AutoFilteringGridColumn
                     id="emailCol"
                     dataField="emailAddress"
                     headerText="Email"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-            <mx:AdvancedDataGridColumn
+            <neosavvy:AutoFilteringGridColumn
                     id="actionsCol"
                     headerText="Actions"
+                    enabledByDefault="true"
+                    autoFilterEnabled="false"
                     itemRenderer="com.neosavvy.user.view.secured.employeeInvitation.Actions"/>
-        </mx:columns>
-    </mx:AdvancedDataGrid>
+        </neosavvy:columns>
+    </neosavvy:AutoFilteringGrid>
 </mx:Panel>

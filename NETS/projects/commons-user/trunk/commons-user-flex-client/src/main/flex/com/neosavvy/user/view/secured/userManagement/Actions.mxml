@@ -5,15 +5,15 @@
     <mx:Script>
             <![CDATA[
 
+        import com.neosavvy.grid.PickFilterRow;
         import com.neosavvy.user.ApplicationFacade;
         import com.neosavvy.user.dto.companyManagement.UserDTO;
         import com.neosavvy.user.model.SecurityProxy;
         import com.neosavvy.user.view.secured.userManagement.event.UserManagementEvent;
 
         override public function set data(value:Object):void {
-            if (value is UserDTO) {
-                var user:UserDTO = value as UserDTO;
-                setButtonLabelAndIcon(user);
+            if (value is PickFilterRow )  {
+                setButtonLabelAndIcon((value as PickFilterRow));
             }
 
             super.data = value;
@@ -34,7 +34,7 @@
 
             var securityProxy:SecurityProxy = ApplicationFacade.getSecurityProxy(CommonsUser.APPLICATION_NAME);
             if (data) {
-                if (securityProxy.user == data.username) {
+                if (securityProxy.user == ((data as PickFilterRow).wrappedObject as UserDTO).username) {
                     return false;
                 }
             }
@@ -49,12 +49,12 @@
             //resetPassword.setStyle("icon", CommonsUserAssetsManager.assets.images.sampleIcon);
 
             if ( data )
-                setButtonLabelAndIcon(data as UserDTO);
+                setButtonLabelAndIcon(data as PickFilterRow);
         }
 
 
-        private function setButtonLabelAndIcon(user:UserDTO):void {
-            if (user.active) {
+        private function setButtonLabelAndIcon(user:PickFilterRow):void {
+            if (user && user.wrappedObject.active) {
                 activationButton.toolTip = activationButton.label = UserManagementEvent.ACTION_DEACTIVATE
                 //activationButton.setStyle("icon", CommonsUserAssetsManager.assets.images.bulletDelete);
             } else {

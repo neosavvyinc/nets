@@ -5,6 +5,8 @@
     height="100%"
     styleName="paddedContainer"
     horizontalAlign="right"
+    xmlns:flexlib="http://code.google.com/p/flexlib/"
+    xmlns:neosavvy="com.neosavvy.grid.*"
     title="View Expense Reports Awaiting Approval">
 
     <mx:Script>
@@ -13,7 +15,7 @@
         import com.neosavvy.user.dto.companyManagement.UserDTO;
         import com.neosavvy.user.dto.project.ExpenseReport;
 
-        private function ownerLabel(item:Object, column:AdvancedDataGridColumn):String
+        private function ownerLabel(item:Object, column:AutoFilteringGridColumn):String
         {
             var expenseReport:ExpenseReport = item as ExpenseReport;
             var userDTO:UserDTO = expenseReport.owner;
@@ -25,35 +27,56 @@
 
         ]]>
     </mx:Script>
+    <mx:HBox width="100%" horizontalAlign="right">
+        <flexlib:PromptingTextInput id="searchTextInput" prompt="Search..."/>
+        <mx:Button id="resetFilters" label="Reset Filters" click="awaitingApprovalExpenseGrid.resetFilters()"/>
+    </mx:HBox>
 
-    <mx:AdvancedDataGrid id="awaitingApprovalExpenseGrid" width="100%" height="100%">
-        <mx:columns>
-            <mx:AdvancedDataGridColumn
+    <neosavvy:AutoFilteringGrid
+            id="awaitingApprovalExpenseGrid" 
+            autoResizeColumnHeaders="true"
+            searchTextControl="{searchTextInput}"
+            width="100%"
+            height="100%">
+        <neosavvy:columns>
+            <neosavvy:AutoFilteringGridColumn
                 id="ownerColumn"
                 headerText="Owner Name"
-                labelFunction="{ownerLabel}"/>
-            <mx:AdvancedDataGridColumn
+                labelFunction="{ownerLabel}"
+                autoFilterEnabled="true"
+                enabledByDefault="true"/>
+            <neosavvy:AutoFilteringGridColumn
                 id="voucherNumberColumn"
                 headerText="Voucher Number"
-                dataField="id"/>
-            <mx:AdvancedDataGridColumn
+                dataField="id"
+                autoFilterEnabled="true"
+                enabledByDefault="true"/>
+            <neosavvy:AutoFilteringGridColumn
                 id="amountNumberColumn"
                 headerText="Expense Amount"
-                dataField="totalExpenseAmount"/>
-            <mx:AdvancedDataGridColumn
+                dataField="totalExpenseAmount"
+                autoFilterEnabled="true"
+                enabledByDefault="true"/>
+            <neosavvy:AutoFilteringGridColumn
                 id="amountToReimburseColumn"
                 headerText="Amount to Reimburse"
-                dataField="totalReimbursableExpenseAmount"/>
-            <mx:AdvancedDataGridColumn
+                dataField="totalReimbursableExpenseAmount"
+                autoFilterEnabled="true"
+                enabledByDefault="true"/>
+            <neosavvy:AutoFilteringGridColumn
                 id="statusColumn"
                 headerText="Status"
-                dataField="status"/>
-            <mx:AdvancedDataGridColumn
+                dataField="status"
+                autoFilterEnabled="true"
+                enabledByDefault="true"/>
+            <neosavvy:AutoFilteringGridColumn
                 id="actionColumn"
                 itemRenderer="com.neosavvy.user.view.secured.expenses.approving.Actions"
                 headerText="Actions"
+                enabledByDefault="true"
+                autoFilterEnabled="false"
                 width="270"/>
-        </mx:columns>
-    </mx:AdvancedDataGrid>
+        </neosavvy:columns>
+    </neosavvy:AutoFilteringGrid>
 
 </mx:Panel>

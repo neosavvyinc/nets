@@ -49,6 +49,12 @@ public class UserServiceImpl implements UserService {
         return userDao;
     }
 
+    public void updateUsers(List<UserDTO> users) throws UserServiceException {
+        for (UserDTO userDTO : users) {
+            userDao.saveUser(userDTO);
+        }
+    }
+
     public void updateUser(UserDTO user) {
         userDao.saveUser(user);
     }

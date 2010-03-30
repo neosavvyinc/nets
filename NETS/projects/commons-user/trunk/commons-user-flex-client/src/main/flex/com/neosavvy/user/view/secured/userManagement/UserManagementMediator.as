@@ -1,10 +1,17 @@
 package com.neosavvy.user.view.secured.userManagement {
+    import com.neosavvy.grid.PickFilterGrid;
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.view.secured.userManagement.event.UserManagementEvent;
 
+    import flash.events.MouseEvent;
+
+    import mx.collections.ArrayCollection;
     import mx.controls.AdvancedDataGrid;
+    import mx.controls.Button;
+    import mx.controls.ToggleButtonBar;
+    import mx.events.ItemClickEvent;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -28,6 +35,10 @@ package com.neosavvy.user.view.secured.userManagement {
 
         override public function onRegister():void {
             grid.addEventListener(UserManagementEvent.TYPE, userManagementEventHandler);
+            userStatusFilterButtonBar.addEventListener(ItemClickEvent.ITEM_CLICK, handleStatusFilterChanged);
+
+            deactivateAllSelected.addEventListener(MouseEvent.CLICK, handleDeactivateAllSelected);
+            activateAllSelected.addEventListener(MouseEvent.CLICK, handleActivateAllSelected);
             _companyProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
         }
 
@@ -41,8 +52,23 @@ package com.neosavvy.user.view.secured.userManagement {
             return viewComponent as UserManagement;
         }
 
-        public function get grid():AdvancedDataGrid {
+        public function get grid():PickFilterGrid {
             return userManagement.grid;
+        }
+
+        public function get userStatusFilterButtonBar():ToggleButtonBar
+        {
+            return userManagement.userStatusFilterButtonBar;
+        }
+
+        public function get deactivateAllSelected():Button
+        {
+            return userManagement.deactivateAllSelected;
+        }
+
+        public function get activateAllSelected():Button
+        {
+            return userManagement.activateAllSelected;
         }
 
         override public function listNotificationInterests():Array {
@@ -98,6 +124,24 @@ package com.neosavvy.user.view.secured.userManagement {
         }
 
 
+        private function handleStatusFilterChanged(event:ItemClickEvent):void {
+            switch ( event.label )
+            {
+                case "All":
+                    sendNotification(ApplicationFacade.ALL_EMPLOYEES_REQUEST);
+                    break;
+                case "Active":
+                    sendNotification(ApplicationFacade.ACTIVE_EMPLOYEES_REQUEST);
+                    break;
+                case "Inactive":
+                    sendNotification(ApplicationFacade.NON_ACTIVE_EMPLOYEES_REQUEST);
+                    break;
+            }
+
+
+        }
+
+
         private function userManagementEventHandler(event:UserManagementEvent):void {
             switch (event.action) {
                 case UserManagementEvent.ACTION_ACTIVATE:
@@ -111,6 +155,28 @@ package com.neosavvy.user.view.secured.userManagement {
                     sendNotification(ApplicationFacade.RESET_USER_PASSWORD_REQUEST, userToReset);
                     break;
             }
+        }
+
+        private function handleActivateAllSelected(event:MouseEvent):void {
+
+            var selectedItems:ArrayCollection = grid.selectedNonProxiedItems;
+            for each ( var item:UserDTO in selectedItems )
+            {
+                item.active = true;
+            }
+            sendNotification(ApplicationFacade.SAVE_USER_REQUEST, selectedItems);
+
+        }
+
+        private function handleDeactivateAllSelected(event:MouseEvent):void {
+
+            var selectedItems:ArrayCollection = grid.selectedNonProxiedItems;
+            for each ( var item:UserDTO in selectedItems )
+            {
+                item.active = false;
+            }
+            sendNotification(ApplicationFacade.SAVE_USER_REQUEST,selectedItems);
+
         }
     }
 }

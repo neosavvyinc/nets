@@ -37,6 +37,9 @@ import java.util.List;
 public interface UserService {
 
     @Secured({"ROLE_EMPLOYEE", "OBJECT_ACL_WRITE"})
+	public void updateUsers(List<UserDTO> users) throws UserServiceException;
+
+    @Secured({"ROLE_EMPLOYEE", "OBJECT_ACL_WRITE"})
 	public void updateUser(UserDTO user) throws UserServiceException;
 
     @Secured({"ROLE_ADMIN", "AFTER_ACL_READ"})

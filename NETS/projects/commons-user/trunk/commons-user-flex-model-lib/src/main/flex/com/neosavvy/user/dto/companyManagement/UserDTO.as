@@ -14,5 +14,16 @@ package com.neosavvy.user.dto.companyManagement {
         public function get fullName():String {
             return super.lastName + ", " + super.firstName;
         }
+
+
+        public function toString():String {
+            return "UserDTOBase{_active=" + String(active) +
+                   ",confirmedRegistration=" + String(confirmedRegistration) +
+                   ",id=" + String(id) +
+                   ",password=" + String(password) +
+                   ",registrationToken=" + String(registrationToken) +
+                   ",userCompanyRoles=" + String(userCompanyRoles) +
+                   ",username=" + String(username) + "}";
+        }
     }
 }

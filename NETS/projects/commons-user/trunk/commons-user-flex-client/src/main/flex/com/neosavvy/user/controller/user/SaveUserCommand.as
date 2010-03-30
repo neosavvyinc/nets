@@ -6,6 +6,7 @@ package com.neosavvy.user.controller.user {
 
     import com.neosavvy.user.util.RemoteObjectUtils;
 
+    import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.rpc.events.FaultEvent;
@@ -21,7 +22,14 @@ package com.neosavvy.user.controller.user {
         override public function execute(notification:INotification):void {
             super.execute(notification);
             var userServiceProxy:UserServiceProxy = facade.retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
-            userServiceProxy.saveUser(notification.getBody() as UserDTO, this);
+            if ( notification.getBody() is UserDTO )
+            {
+                userServiceProxy.saveUser(notification.getBody() as UserDTO, this);
+            }
+            else if ( notification.getBody() is ArrayCollection )
+            {
+                userServiceProxy.saveUsers( notification.getBody() as ArrayCollection, this);
+            }
         }
 
         override protected function resultHandler(resultEvent:ResultEvent):void {

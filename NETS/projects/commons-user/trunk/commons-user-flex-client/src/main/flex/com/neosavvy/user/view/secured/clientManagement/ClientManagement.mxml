@@ -3,6 +3,7 @@
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:flexlib="http://code.google.com/p/flexlib/"
         xmlns:controls="controls.*"
+        xmlns:neosavvy="com.neosavvy.grid.*"
         xmlns:validators="com.visualempathy.validators.*"
         title="Client Management"
         styleName="paddedContainer"
@@ -86,30 +87,48 @@
         </mx:Form>
 
     </mx:HBox>
-    <mx:Button id="saveButton" label="Save Client"/>
-    <mx:AdvancedDataGrid id="clientManagementGrid" width="100%" height="100%">
-        <mx:columns>
-            <mx:AdvancedDataGridColumn
+    <mx:HBox width="100%" horizontalAlign="right">
+        <mx:Button id="saveButton" label="Save Client"/>
+        <flexlib:PromptingTextInput id="filterResultSearch" prompt="Search..."/>
+        <mx:Button id="resetFilters" label="Reset Filters" click="{clientManagementGrid.resetFilters()}"/>
+    </mx:HBox>
+    <neosavvy:AutoFilteringGrid
+            id="clientManagementGrid"
+            width="100%"
+            height="100%"
+            autoResizeColumnHeaders="true"
+            searchTextControl="{filterResultSearch}"
+            >
+        <neosavvy:columns>
+            <neosavvy:AutoFilteringGridColumn
                     id="companyNameColumn"
                     dataField="companyName"
                     headerText="Company Name"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-            <mx:AdvancedDataGridColumn
+            <neosavvy:AutoFilteringGridColumn
                     id="clientPOCName"
                     dataField="clientPointOfContact"
                     headerText="Client Contact"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-            <mx:AdvancedDataGridColumn
+            <neosavvy:AutoFilteringGridColumn
                     id="clientPhone"
                     dataField="clientPhone"
                     headerText="Client Phone"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-            <mx:AdvancedDataGridColumn
+            <neosavvy:AutoFilteringGridColumn
                     id="clientEmail"
                     dataField="clientEmail"
                     headerText="Client Email"
+                    autoFilterEnabled="true"
+                    enabledByDefault="true"
                     />
-        </mx:columns>
-    </mx:AdvancedDataGrid>
+        </neosavvy:columns>
+    </neosavvy:AutoFilteringGrid>
 
 </mx:Panel>

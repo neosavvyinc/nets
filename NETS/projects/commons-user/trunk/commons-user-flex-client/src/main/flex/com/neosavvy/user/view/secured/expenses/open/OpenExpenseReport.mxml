@@ -3,33 +3,52 @@
     xmlns:mx="http://www.adobe.com/2006/mxml"
     width="100%"
     height="100%"
+    xmlns:flexlib="http://code.google.com/p/flexlib/"
     styleName="paddedContainer"
     horizontalAlign="right"
+    xmlns:neosavvy="com.neosavvy.grid.*"
     title="View Open Expense Reports">
 
-    <mx:AdvancedDataGrid id="openExpenseGrid" width="100%" height="100%">
-        <mx:columns>
-            <mx:AdvancedDataGridColumn
+    <mx:HBox width="100%" horizontalAlign="right">
+        <flexlib:PromptingTextInput id="searchTextInput" prompt="Search..."/>
+        <mx:Button id="resetFilters" label="Reset Filters" click="openExpenseGrid.resetFilters()"/>
+    </mx:HBox>
+
+    <neosavvy:AutoFilteringGrid id="openExpenseGrid" width="100%" height="100%"
+            autoResizeColumnHeaders="true"
+            searchTextControl="{searchTextInput}">
+        <neosavvy:columns>
+            <neosavvy:AutoFilteringGridColumn
                 id="voucherNumberColumn"
                 headerText="Voucher Number"
-                dataField="id"/>
-            <mx:AdvancedDataGridColumn
+                dataField="id"
+                autoFilterEnabled="true"
+                enabledByDefault="true"/>
+            <neosavvy:AutoFilteringGridColumn
                 id="amountNumberColumn"
                 headerText="Expense Amount"
-                dataField="totalExpenseAmount"/>
-            <mx:AdvancedDataGridColumn
+                dataField="totalExpenseAmount"
+                autoFilterEnabled="true"
+                enabledByDefault="true"/>
+            <neosavvy:AutoFilteringGridColumn
                 id="amountToReimburseColumn"
                 headerText="Amount to Reimburse"
-                dataField="totalReimbursableExpenseAmount"/>
-            <mx:AdvancedDataGridColumn
+                dataField="totalReimbursableExpenseAmount"
+                autoFilterEnabled="true"
+                enabledByDefault="true"/>
+            <neosavvy:AutoFilteringGridColumn
                 id="statusColumn"
                 headerText="Status"
-                dataField="status"/>
-            <mx:AdvancedDataGridColumn
+                dataField="status"
+                autoFilterEnabled="true"
+                enabledByDefault="true"/>
+            <neosavvy:AutoFilteringGridColumn
                 id="actionColumn"
                 headerText="Actions"
+                enabledByDefault="true"
+                autoFilterEnabled="false"
                 itemRenderer="com.neosavvy.user.view.secured.expenses.open.Actions"/>
-        </mx:columns>
-    </mx:AdvancedDataGrid>
+        </neosavvy:columns>
+    </neosavvy:AutoFilteringGrid>
 
 </mx:Panel>

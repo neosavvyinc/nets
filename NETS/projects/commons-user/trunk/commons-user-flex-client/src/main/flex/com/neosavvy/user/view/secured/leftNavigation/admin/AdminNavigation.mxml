@@ -4,8 +4,8 @@
     <mx:LinkButton id="welcomeButton" label="Welcome"/>
     <mx:LinkButton id="inviteEmployeesButton" label="Invite Employees"/>
     <mx:LinkButton id="viewAllEmployeesButton" label="View Employees"/>
-    <mx:LinkButton id="viewActiveEmployeesButton" label="View Active Employees"/>
-    <mx:LinkButton id="viewNonActiveEmployeesButton" label="View Inactive Employees"/>
+    <!--<mx:LinkButton id="viewActiveEmployeesButton" label="View Active Employees"/>-->
+    <!--<mx:LinkButton id="viewNonActiveEmployeesButton" label="View Inactive Employees"/>-->
 
     <mx:LinkButton id="manageClientsButton" label="Manage Clients"/>
     <mx:LinkButton id="manageProjectsButton" label="Manage Projects"/>
