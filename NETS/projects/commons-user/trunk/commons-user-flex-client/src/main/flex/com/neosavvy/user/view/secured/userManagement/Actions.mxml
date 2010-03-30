@@ -22,12 +22,14 @@
         }
 
         protected function handleToggleActivationClicked():void {
-            dispatchEvent(new UserManagementEvent(activationButton.toolTip, data as UserDTO));
+            var row:PickFilterRow = data as PickFilterRow;
+            dispatchEvent(new UserManagementEvent(activationButton.toolTip, row.wrappedObject as UserDTO));
         }
 
 
         protected function handleResetPasswordClicked():void {
-            dispatchEvent(new UserManagementEvent(UserManagementEvent.ACTION_RESET_PASSWORD, data as UserDTO));
+            var row:PickFilterRow = data as PickFilterRow;
+            dispatchEvent(new UserManagementEvent(UserManagementEvent.ACTION_RESET_PASSWORD, row.wrappedObject as UserDTO));
         }
 
         private function isButtonEnabledForUser():Boolean {
