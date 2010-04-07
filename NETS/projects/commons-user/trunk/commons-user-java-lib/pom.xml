@@ -205,6 +205,19 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Jersey / Jax RS Dependencies -->
+        <dependency>
+            <groupId>com.sun.jersey.contribs</groupId>
+            <artifactId>jersey-spring</artifactId>
+            <version>1.1.5.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-core</artifactId>
+            <version>1.1.5.1</version>
+        </dependency>
+        
+
         <!-- Transaction Manager Dependencies -->
         <dependency>
             <groupId>javax.annotation</groupId>

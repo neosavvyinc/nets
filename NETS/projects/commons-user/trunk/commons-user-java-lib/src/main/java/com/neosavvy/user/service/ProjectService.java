@@ -38,7 +38,6 @@ import java.util.Set;
  * Time: 4:13:36 PM
  */
 @Path("/project")
-@Component
 @Scope("singleton")
 public interface ProjectService {
 

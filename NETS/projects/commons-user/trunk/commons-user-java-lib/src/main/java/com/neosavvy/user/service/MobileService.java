@@ -1,19 +1,17 @@
 package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
-import com.neosavvy.user.dto.companyManagement.UserDTO;
-import com.neosavvy.user.service.exception.UserServiceException;
+import com.neosavvy.user.dto.mobile.DashboardData;
 import org.springframework.context.annotation.Scope;
-import org.springframework.mail.MailSender;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import java.util.List;
-
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -35,34 +33,29 @@ import java.util.List;
 
 /**
  * User: adamparrish
- * Date: Jan 6, 2010
- * Time: 1:04:18 PM
+ * Date: Apr 6, 2010
+ * Time: 9:13:24 PM
  */
-
-public interface UserService {
-
-    @Secured({"ROLE_EMPLOYEE", "OBJECT_ACL_WRITE"})
-	public void updateUsers(List<UserDTO> users) throws UserServiceException;
-
-    @Secured({"ROLE_EMPLOYEE", "OBJECT_ACL_WRITE"})
-	public void updateUser(UserDTO user) throws UserServiceException;
-
-    @Secured({"ROLE_ADMIN", "AFTER_ACL_READ"})
-	public UserDTO findUserById(long id);
-
-    @Secured({"ROLE_ADMIN", "AFTER_ACL_COLLECTION_READ"})
-	public List<UserDTO> findUsers(UserDTO user);
-
-    @Secured({"ROLE_ADMIN", "OBJECT_ACL_DELETE"})
-	public void deleteUser(UserDTO user);
+@Path("/mobile")
+@Scope("singleton")
+public interface MobileService {
 
 
-    @Secured({"ROLE_ADMIN", "OBJECT_ACL_WRITE"})
-    public void resetPassword(UserDTO user);
+    @GET
+    @Produces({"application/json"})
+    @Path("/dashboardlogin/{username}/{password}")
+    public SecurityWrapperDTO login(@PathParam("username") String username, @PathParam("password") String password);
+
+
+    @GET
+    @Produces({"application/json"})
+    @Path("/dashboardlogout")
+    public boolean logout();
+
+    @GET
+    @Produces({"application/json"})
+    @Path("/dashboard/{username}/{password}")
+    public DashboardData findDashboardData(@PathParam("username") String username, @PathParam("password") String password);
+
     
-    public boolean confirmUser(String userName, String hashCode);
-    public SecurityWrapperDTO getUserDetails();
-    
-
-
 }

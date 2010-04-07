@@ -15,6 +15,7 @@ import fineline.focal.common.security.UserSessionManager;
 import fineline.focal.common.types.v1.UserSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -24,12 +25,16 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 @Transactional
 public class UserServiceImpl implements UserService {
@@ -127,32 +132,7 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
-    /**
-     * REST login method, still needs request/response access
-     * @param userName
-     * @param password
-     * @return
-     */
-    public SecurityWrapperDTO login(String userName, String password) {
-        Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(userName, password));
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        /**
-         * TODO, sessionManager.initSession(userName, request, response);
-         */
-        return getUserDetails();
-    }
 
-    /**
-     * REST logout method, still needs request/response access
-     * @return
-     */
-    public boolean logout() {
-        SecurityContextHolder.clearContext();
-        /**
-         * TODO, sessionManager.invalidateCurrentSession(request, response);
-         */
-        return true;
-    }
     
     public void resetPassword(UserDTO user) {
         try {
@@ -166,6 +146,7 @@ public class UserServiceImpl implements UserService {
 
         mailService.resetPasswordForUserEmail(user);
     }
+
 
     public AuthenticationManager getAuthManager() {
         return authManager;

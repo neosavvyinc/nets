@@ -9,6 +9,9 @@ import flex.messaging.annotations.FlexField;
 import flex.messaging.annotations.IAnnotatedProxy;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.List;
 import java.util.Set;
 
@@ -22,6 +25,7 @@ import java.util.Set;
 )
 @FlexClass(classType= FlexClass.FlexClassType.RemoteObject)
 @EntityListeners(EntityListenerManager.class)
+@XmlRootElement(namespace = "urn:com:neosavvy:user:dto:companyManagement")
 public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObject<UserDTO> {
 
     @Id
@@ -54,6 +58,7 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
     @ManyToMany(mappedBy="approvers")
     private List<Project> approversOfProjects;
 
+    @XmlElement(required = true)
     public Long getId() {
         return id;
     }
@@ -61,12 +66,14 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
     public void setId(Long id) {
         this.id = id;
     }
+    @XmlElement(required = true)
     public String getUsername() {
         return username;
     }
     public void setUsername(String username) {
         this.username = username;
     }
+    @XmlTransient
 	public String getPassword() {
 		return password;
 	}
@@ -74,6 +81,7 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
 		this.password = password;
 	}
 
+    @XmlTransient
     public String getRegistrationToken() {
         return registrationToken;
     }
@@ -86,10 +94,12 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
         this.active = active;
     }
 
+    @XmlElement(required = true)
     public Boolean getActive() {
         return this.active;
     }
 
+    @XmlTransient
     public Set<UserCompanyRoleDTO> getUserCompanyRoles() {
         return userCompanyRoles;
     }
@@ -98,6 +108,7 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
         this.userCompanyRoles = userCompanyRoles;
     }
 
+    @XmlElement(required = true)
     public Boolean getConfirmedRegistration() {
         return confirmedRegistration;
     }
@@ -106,6 +117,7 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
         this.confirmedRegistration = confirmedRegistration;
     }
 
+    @XmlTransient
     public SecuredObject getAclParentObject() {
         if (getUserCompanyRoles() == null) {
             return null;
@@ -118,6 +130,7 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
         return null;
     }
 
+    @XmlTransient
     public Class getAclParentClass() {
         return CompanyDTO.class;
     }
@@ -126,10 +139,12 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
         return UserDTO.class;
     }
 
+    @XmlTransient
     public String getOwnerUsername() {
         return getUsername();
     }
 
+    @XmlTransient
     @FlexField(fieldType = FlexField.FlexFieldType.Excluded)
     public List<Project> getApproversOfProjects() {
         return approversOfProjects;
@@ -139,6 +154,7 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
         this.approversOfProjects = approversOfProjects;
     }
 
+    @XmlTransient
     @FlexField(fieldType = FlexField.FlexFieldType.Excluded)
     public List<Project> getParticipantOfProjects() {
         return participantOfProjects;
@@ -151,8 +167,6 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
     public UserDTO() {
         super();
     }
-
-    
 
     
 }
