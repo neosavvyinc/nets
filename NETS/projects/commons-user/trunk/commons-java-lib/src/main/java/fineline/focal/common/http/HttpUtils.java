@@ -1,6 +1,7 @@
 package fineline.focal.common.http;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * This class is a derivative work of Fineline via Tommy Odom.
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class HttpUtils {
     private static ThreadLocal<HttpServletRequest> httpRequest = new ThreadLocal<HttpServletRequest>();
+    private static ThreadLocal<HttpServletResponse> httpResponse = new ThreadLocal<HttpServletResponse>();
 
     /**
      * Returns the portion of the request URL up through the context path. This
@@ -59,5 +61,21 @@ public class HttpUtils {
         }
 
         return request;
+    }
+
+    public static void setHttpResponse(HttpServletResponse httpServletResponse) {
+        httpResponse.set(httpServletResponse);
+    }
+
+    public static HttpServletResponse getHttpResponse() {
+        HttpServletResponse response = httpResponse.get();
+
+        if (response == null) {
+            throw new RuntimeException(
+                    "The thread local value has not been set for the HttpServletResponse.  "
+                            + "Please ensure you are calling this within the context of an HTTP response and that the HttpServletRequestFilter servlet filter is configured in your web.xml");
+        }
+
+        return response;
     }
 }

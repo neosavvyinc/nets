@@ -15,6 +15,7 @@ public class SecurityWrapperDTO {
     private String name;
     private UserDTO user;
     private String[] authorities;
+    private String sessionId;
 
     public SecurityWrapperDTO() {
     }
@@ -49,5 +50,14 @@ public class SecurityWrapperDTO {
 
     public void setUser(UserDTO user) {
         this.user = user;
+    }
+
+    @XmlElement(required = true)
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 }

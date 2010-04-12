@@ -48,6 +48,7 @@
     <beans:bean id="userSessionPreAuthenticatedProcessingFilter" class="fineline.focal.common.security.UserSessionPreAuthenticatedProcessingFilter">
       <beans:property name="sessionManager" ref="sessionManager"/>
       <beans:property name="authenticationManager" ref="org.springframework.security.authenticationManager"/>
+      <beans:property name="paramName" value="rabbitHole"/>
     </beans:bean>
 
     <beans:bean id="sessionManager" class="fineline.focal.common.security.UserSessionManager">

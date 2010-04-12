@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UserSessionManager
 {
-    private static final String USER_SESSION_ATTRIBUTE_NAME = "customUserSession";
+    public static final String USER_SESSION_ATTRIBUTE_NAME = "customUserSession";
 
     @PersistenceContext
     private EntityManager entityManager;

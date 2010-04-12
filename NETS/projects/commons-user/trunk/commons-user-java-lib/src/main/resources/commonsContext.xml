@@ -32,6 +32,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="expenseService" ref="expenseReportService"/>
         <property name="userService" ref="userService"/>
         <property name="authManager" ref="org.springframework.security.authenticationManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
     </bean>
 
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">

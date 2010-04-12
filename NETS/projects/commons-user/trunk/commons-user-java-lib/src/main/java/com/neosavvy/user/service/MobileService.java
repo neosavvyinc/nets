@@ -8,10 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -41,21 +40,22 @@ import javax.ws.rs.Produces;
 public interface MobileService {
 
 
-    @GET
-    @Produces({"application/json"})
-    @Path("/dashboardlogin/{username}/{password}")
-    public SecurityWrapperDTO login(@PathParam("username") String username, @PathParam("password") String password);
+    @POST
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/dashboardlogin/")
+    public SecurityWrapperDTO login(@FormParam("username") String username, @FormParam("password") String password);
 
 
     @GET
-    @Produces({"application/json"})
+    @Produces({MediaType.APPLICATION_JSON})
     @Path("/dashboardlogout")
     public boolean logout();
 
     @GET
-    @Produces({"application/json"})
-    @Path("/dashboard/{username}/{password}")
-    public DashboardData findDashboardData(@PathParam("username") String username, @PathParam("password") String password);
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/dashboard/")
+    public DashboardData findDashboardData();
 
     
 }

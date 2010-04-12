@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * This class is a derivative work of Fineline via Tommy Odom.
@@ -25,6 +26,10 @@ public class HttpServletRequestFilter implements Filter
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         if (request instanceof HttpServletRequest) {
             HttpUtils.setHttpRequest((HttpServletRequest)request);
+        }
+
+        if ( response instanceof HttpServletResponse) {
+            HttpUtils.setHttpResponse((HttpServletResponse)response);
         }
 
         chain.doFilter(request, response);
