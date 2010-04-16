@@ -24,6 +24,14 @@
 
     </bean>
 
+    <bean id="sessionManager" class="fineline.focal.common.security.UserSessionManager">
+      <property name="sessionCookieName" value="NETSSESSIONID"/>
+      <property name="cookieDomain" value="${cookieDomain}"/>
+      <property name="commandService" ref="commandService"/>
+    </bean>
+
+    <bean id="commandService" class="fineline.focal.common.service.DefaultCommandService" />
+
     <bean id="entityManagerFactory"
           class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="dataSource"/>
