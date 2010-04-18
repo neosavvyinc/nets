@@ -12,6 +12,7 @@ import java.util.List;
 import com.neosavvy.user.service.exception.UserServiceException;
 import com.neosavvy.util.StringUtil;
 import fineline.focal.common.security.UserSessionManager;
+import fineline.focal.common.types.v1.StorageServiceFileRef;
 import fineline.focal.common.types.v1.UserSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -132,8 +133,10 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    public void associateReceiptUploadWithUser(UserDTO user, StorageServiceFileRef fileRef) {
+    }
 
-    
+
     public void resetPassword(UserDTO user) {
         try {
             user.setPassword(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));

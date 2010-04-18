@@ -53,7 +53,11 @@ public interface MobileService {
     @Path("/dashboardlogout")
     public boolean logout();
 
-    //public void associateReceiptUploadWithUser(StorageServiceFileRef fileRef);
+    @POST
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/savereceipt/")
+    public void associateReceiptUploadWithUser(@FormParam("fileRef") StorageServiceFileRef fileRef);
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})

@@ -6,6 +6,7 @@ import com.neosavvy.user.dto.mobile.DashboardData;
 import com.neosavvy.user.service.exception.MobileServiceException;
 import fineline.focal.common.http.HttpUtils;
 import fineline.focal.common.security.UserSessionManager;
+import fineline.focal.common.types.v1.StorageServiceFileRef;
 import fineline.focal.common.types.v1.UserSession;
 import org.eclipse.persistence.sessions.factories.SessionManager;
 import org.slf4j.Logger;
@@ -81,6 +82,9 @@ public class MobileServiceImpl implements MobileService {
         HttpServletResponse response = HttpUtils.getHttpResponse();
         sessionManager.invalidateCurrentSession(request, response);
         return true;
+    }
+
+    public void associateReceiptUploadWithUser(@FormParam("fileRef") StorageServiceFileRef fileRef) {
     }
 
     public DashboardData findDashboardData() {

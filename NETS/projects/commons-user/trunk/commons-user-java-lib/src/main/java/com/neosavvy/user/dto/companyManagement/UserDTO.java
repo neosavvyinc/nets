@@ -4,6 +4,7 @@ import com.neosavvy.security.SecuredObject;
 import com.neosavvy.user.dto.base.BaseUserDTO;
 import com.neosavvy.user.dto.project.Project;
 import fineline.focal.common.types.v1.EntityListenerManager;
+import fineline.focal.common.types.v1.StorageServiceFileRef;
 import flex.messaging.annotations.FlexClass;
 import flex.messaging.annotations.FlexField;
 import flex.messaging.annotations.IAnnotatedProxy;
@@ -57,6 +58,9 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
 
     @ManyToMany(mappedBy="approvers")
     private List<Project> approversOfProjects;
+
+    @OneToMany(fetch=FetchType.EAGER)
+    private List<StorageServiceFileRef> uncategorizedReceipts;
 
     @XmlElement(required = true)
     public Long getId() {
@@ -168,5 +172,13 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
         super();
     }
 
-    
+    @XmlTransient
+    @FlexField(fieldType = FlexField.FlexFieldType.Excluded)
+    public List<StorageServiceFileRef> getUncategorizedReceipts() {
+        return uncategorizedReceipts;
+    }
+
+    public void setUncategorizedReceipts(List<StorageServiceFileRef> uncategorizedReceipts) {
+        this.uncategorizedReceipts = uncategorizedReceipts;
+    }
 }

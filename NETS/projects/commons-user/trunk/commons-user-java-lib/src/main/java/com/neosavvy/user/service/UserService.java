@@ -3,12 +3,14 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.service.exception.UserServiceException;
+import fineline.focal.common.types.v1.StorageServiceFileRef;
 import org.springframework.context.annotation.Scope;
 import org.springframework.mail.MailSender;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -62,7 +64,11 @@ public interface UserService {
     
     public boolean confirmUser(String userName, String hashCode);
     public SecurityWrapperDTO getUserDetails();
-    
+
+    @Secured({"ROLE_EMPLOYEE", "OBJECT_ACL_WRITE"})
+    public void associateReceiptUploadWithUser(UserDTO user, StorageServiceFileRef fileRef);
+
+
 
 
 }
