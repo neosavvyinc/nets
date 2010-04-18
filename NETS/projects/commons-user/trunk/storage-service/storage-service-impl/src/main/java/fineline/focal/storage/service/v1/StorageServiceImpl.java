@@ -34,6 +34,7 @@ import fineline.focal.common.utils.StringUtils;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 public class StorageServiceImpl implements StorageService
 {   
@@ -91,7 +92,14 @@ public class StorageServiceImpl implements StorageService
     }
     
     public StorageServiceFileRef uploadFile(Request request, String bucket, String key) throws Exception {
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         String owner = null;
+        if (principal instanceof UserDetails)
+            owner = ((UserDetails) principal).getUsername();
+        else if (principal instanceof String )
+            owner = principal.toString();
+
         String fileNameOverride = null;
         FileItemIterator iter = new ServletFileUpload().getItemIterator(HttpUtils.getHttpRequest());
         

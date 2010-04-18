@@ -36,7 +36,7 @@ public interface StorageService
     @Path(value="/file/{bucket:.*?}/{key:.*}")
     @Encoded
     @Consumes(MediaType.MULTIPART_FORM_DATA)
-    @Produces({MediaType.TEXT_XML})
+    @Produces({MediaType.APPLICATION_JSON, MediaType.TEXT_XML})
     @Secured("ROLE_EMPLOYEE")
     public StorageServiceFileRef uploadFile(@Context Request request, @PathParam("bucket")String bucket, @PathParam("key")String key) throws Exception;
 
