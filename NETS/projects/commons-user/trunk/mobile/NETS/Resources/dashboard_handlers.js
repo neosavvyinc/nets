@@ -18,7 +18,7 @@ function onDashboardLoadComplete(data) {
 		displayDashboardLoadError();
 		return;
 	}
-	
+
 	updateDashboard(data);    
 }
 

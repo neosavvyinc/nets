@@ -8,6 +8,8 @@ import fineline.focal.common.http.HttpUtils;
 import fineline.focal.common.security.UserSessionManager;
 import fineline.focal.common.types.v1.UserSession;
 import org.eclipse.persistence.sessions.factories.SessionManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -45,6 +47,8 @@ import javax.ws.rs.core.Response;
  * Time: 9:18:32 PM
  */
 public class MobileServiceImpl implements MobileService {
+
+    private static final Logger logger = LoggerFactory.getLogger(MobileServiceImpl.class);
 
     private ExpenseService expenseService;
 
@@ -94,6 +98,8 @@ public class MobileServiceImpl implements MobileService {
         dashboardData.setNumberExpenseReportsDeclined( expenseService.findDeclinedExpenseReportsForUser( user ).size() );
         dashboardData.setNumberExpenseReportsOpened( expenseService.findOpenExpenseReportsForUser( user ).size() );
         dashboardData.setNumberExpenseReportsReconciled( expenseService.findExpenseReportsReconciled( user ).size() );
+
+        logger.debug(dashboardData.toString());
 
         return dashboardData;
     }

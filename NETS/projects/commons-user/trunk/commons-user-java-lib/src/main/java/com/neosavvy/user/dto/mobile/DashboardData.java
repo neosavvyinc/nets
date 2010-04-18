@@ -94,4 +94,16 @@ public class DashboardData {
     public void setNumberExpenseReportsReconciled(Integer numberExpenseReportsReconciled) {
         this.numberExpenseReportsReconciled = numberExpenseReportsReconciled;
     }
+
+    @Override
+    public String toString() {
+        return "DashboardData{" +
+                "numberExpenseReportsApproved=" + numberExpenseReportsApproved +
+                ", numberExpenseReportsAwaitingApproval=" + numberExpenseReportsAwaitingApproval +
+                ", numberExpenseReportsDeclined=" + numberExpenseReportsDeclined +
+                ", numberExpenseReportsOpened=" + numberExpenseReportsOpened +
+                ", numberExpenseReportsAwaitingReconciliation=" + numberExpenseReportsAwaitingReconciliation +
+                ", numberExpenseReportsReconciled=" + numberExpenseReportsReconciled +
+                '}';
+    }
 }

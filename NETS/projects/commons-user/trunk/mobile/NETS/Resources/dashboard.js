@@ -106,7 +106,7 @@ var openDataLabel = Titanium.UI.createLabel({
 dashboard.add(openDataLabel);
 
 var openLabel = Titanium.UI.createLabel({
-  text: 'Approved',
+  text: 'Open',
   textAlign:'Left',
   height:'auto',
   width:'auto',
@@ -180,7 +180,7 @@ addReceiptButton.addEventListener("click", function(e) {
 
 dashboard.add(addReceiptButton);
 
-function updateDashboardData(data) {
+function updateDashboard(data) {
   dashboardData = data;
   approvingDataLabel.text = dashboardData.numberExpenseReportsAwaitingApproval;
   approvedDataLabel.text = dashboardData.numberExpenseReportsApproved;

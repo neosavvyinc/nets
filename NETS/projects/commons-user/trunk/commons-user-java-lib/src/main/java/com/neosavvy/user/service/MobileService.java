@@ -2,6 +2,7 @@ package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
 import com.neosavvy.user.dto.mobile.DashboardData;
+import fineline.focal.common.types.v1.StorageServiceFileRef;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -51,6 +52,8 @@ public interface MobileService {
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/dashboardlogout")
     public boolean logout();
+
+    //public void associateReceiptUploadWithUser(StorageServiceFileRef fileRef);
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
