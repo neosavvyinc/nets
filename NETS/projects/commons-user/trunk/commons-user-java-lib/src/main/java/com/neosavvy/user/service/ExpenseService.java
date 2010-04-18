@@ -3,6 +3,7 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.*;
 import com.neosavvy.user.service.exception.ExpenseServiceException;
+import org.eclipse.persistence.annotations.Cache;
 import org.springframework.security.access.annotation.Secured;
 
 import java.util.ArrayList;
@@ -64,7 +65,16 @@ public interface ExpenseService {
     public List<ExpenseReport> findReimbursedReportsForUser(UserDTO user);
 
     @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
+    public List<ExpenseReport> findExpenseReportsApproved(UserDTO user);
+
+    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
     public List<ExpenseReport> findExpenseReportsAwaitingApproval(UserDTO user);
+
+    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
+    public List<ExpenseReport> findDeclinedExpenseReportsForUser(UserDTO user);
+
+    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
+    public List<ExpenseReport> findExpenseReportsReconciled(UserDTO user);
 
     @Secured({"ROLE_EMPLOYEE", "ACL_OBJECT_WRITE"})
     public ExpenseReport submitExpenseReportForApproval(ExpenseReport report, String comment);

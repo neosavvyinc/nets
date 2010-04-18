@@ -88,12 +88,12 @@ public class MobileServiceImpl implements MobileService {
         UserDTO user = new UserDTO();
         user.setUsername( userDetails.getUsername() );
 
-        dashboardData.setNumberExpenseReportsApproved( 0 );//expenseService.findExpenseReportsAwaitingApproval( user ).size() );
+        dashboardData.setNumberExpenseReportsApproved( expenseService.findExpenseReportsApproved( user ).size() );
         dashboardData.setNumberExpenseReportsAwaitingApproval( expenseService.findExpenseReportsAwaitingApproval( user ).size() );
-        dashboardData.setNumberExpenseReportsAwaitingReconciliation( 0 );//expenseService.findExpenseReportsAwaitingApproval( user ).size() );
-        dashboardData.setNumberExpenseReportsDeclined( 0 );//expenseService.findDeclinedExpenseReportsForUser( user ).size() );
+        dashboardData.setNumberExpenseReportsAwaitingReconciliation( expenseService.findReimbursedReportsForUser( user ).size() );
+        dashboardData.setNumberExpenseReportsDeclined( expenseService.findDeclinedExpenseReportsForUser( user ).size() );
         dashboardData.setNumberExpenseReportsOpened( expenseService.findOpenExpenseReportsForUser( user ).size() );
-        dashboardData.setNumberExpenseReportsReconciled( 0 );
+        dashboardData.setNumberExpenseReportsReconciled( expenseService.findExpenseReportsReconciled( user ).size() );
 
         return dashboardData;
     }

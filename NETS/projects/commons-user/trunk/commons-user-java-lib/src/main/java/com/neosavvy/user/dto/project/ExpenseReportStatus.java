@@ -31,5 +31,5 @@ public enum ExpenseReportStatus {
     ,APPROVING                  //Approving - once the first approver has touched the expense report it is in this state
     ,APPROVED                   //Approved - once the last approver has agreed that the expense report is valid it is in this state
     ,REIMBURSEMENT_SENT         //Reimbursement Sent - once the accounting personal has sent a check it is in this state
-    ,REIMBURSEMENT_RECEIVED     //Reimbursement Received - once the expense report user who created the expense has recieved reimbursement
+    ,REIMBURSEMENT_RECEIVED     //Reimbursement Received - once the expense report user who created the expense has received reimbursement
 }

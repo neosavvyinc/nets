@@ -115,6 +115,18 @@ public class ExpenseServiceImpl implements ExpenseService {
         return expenseDAO.findExpenseReports(filter);
     }
 
+    public List<ExpenseReport> findExpenseReportsApproved(UserDTO user) {
+        if (user == null) {
+            return new ArrayList<ExpenseReport>();
+        }
+
+        ExpenseReport filter = new ExpenseReport();
+        filter.setStatus(ExpenseReportStatus.APPROVED);
+        List<ExpenseReport> approvedExpenseReports = expenseDAO.findExpenseReports(filter);
+
+        return approvedExpenseReports;
+    }
+
     public List<ExpenseReport> findExpenseReportsAwaitingApproval(UserDTO user) {
         if (user == null) {
             return new ArrayList<ExpenseReport>();
@@ -132,6 +144,30 @@ public class ExpenseServiceImpl implements ExpenseService {
         submittedAndApproved.addAll(expenseReportListApproved);
 
         return submittedAndApproved;
+    }
+
+    public List<ExpenseReport> findDeclinedExpenseReportsForUser(UserDTO user) {
+        if (user == null) {
+            return new ArrayList<ExpenseReport>();
+        }
+
+        ExpenseReport filter = new ExpenseReport();
+        filter.setStatus(ExpenseReportStatus.DECLINED);
+        List<ExpenseReport> declinedExpenseReports = expenseDAO.findExpenseReports(filter);
+
+        return declinedExpenseReports;
+    }
+
+    public List<ExpenseReport> findExpenseReportsReconciled(UserDTO user) {
+        if (user == null) {
+            return new ArrayList<ExpenseReport>();
+        }
+
+        ExpenseReport filter = new ExpenseReport();
+        filter.setStatus(ExpenseReportStatus.REIMBURSEMENT_RECEIVED);
+        List<ExpenseReport> reconciledExpenseReports = expenseDAO.findExpenseReports(filter);
+
+        return reconciledExpenseReports;
     }
 
     public List<PaymentMethod> findPaymentMethods() {
