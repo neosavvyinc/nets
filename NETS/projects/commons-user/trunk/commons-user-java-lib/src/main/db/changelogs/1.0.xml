@@ -135,4 +135,25 @@
             baseTableName="expense_report_item" baseColumnNames="RECEIPT_FILE_REF_FK"
             referencedTableName="file_refs" referencedColumnNames="ID" />
     </changeSet>
+
+    <changeSet id="7" author="adam">
+        <createTable tableName="user_receipts">
+            <column name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_fk" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="receipt_fk" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint constraintName="FK_USER_FK"
+            baseTableName="user_receipts" baseColumnNames="user_fk"
+            referencedTableName="users" referencedColumnNames="id" />
+        <addForeignKeyConstraint constraintName="FK_RECEIPT_FK"
+            baseTableName="user_receipts" baseColumnNames="receipt_fk"
+            referencedTableName="file_refs" referencedColumnNames="id" />
+    </changeSet>
+
 </databaseChangeLog>

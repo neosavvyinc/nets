@@ -6,6 +6,7 @@ import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.Project;
+import fineline.focal.common.types.v1.StorageServiceFileRef;
 
 import javax.persistence.Query;
 import javax.persistence.criteria.CriteriaBuilder;

@@ -4,6 +4,7 @@ import com.neosavvy.user.dao.base.BaseUserDAO;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.Project;
+import fineline.focal.common.types.v1.StorageServiceFileRef;
 
 import java.util.List;
 import java.util.Set;

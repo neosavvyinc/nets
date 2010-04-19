@@ -60,7 +60,16 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
     private List<Project> approversOfProjects;
 
     @OneToMany(fetch=FetchType.EAGER)
+    @JoinTable(name = "user_receipts",
+        joinColumns = {
+          @JoinColumn(name="user_fk", unique = true)
+        },
+        inverseJoinColumns = {
+          @JoinColumn(name="receipt_fk")
+        }
+    )
     private List<StorageServiceFileRef> uncategorizedReceipts;
+
 
     @XmlElement(required = true)
     public Long getId() {
