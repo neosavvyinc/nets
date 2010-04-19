@@ -1,5 +1,6 @@
 package com.neosavvy.user.service;
 
+import com.neosavvy.user.dao.companyManagement.UserDAOImpl;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.util.ProjectTestUtil;
@@ -8,13 +9,14 @@ import fineline.focal.common.types.v1.AbstractEntity;
 import fineline.focal.common.types.v1.FileRef;
 import fineline.focal.common.types.v1.ScratchFileRef;
 import fineline.focal.common.types.v1.StorageServiceFileRef;
-import fineline.focal.storage.service.v1.StorageService;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
 import junit.framework.Assert;
 import org.springframework.test.context.ContextConfiguration;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import java.util.Date;
@@ -22,6 +24,9 @@ import java.util.List;
 
 public class TestUserService extends BaseSpringAwareServiceTestCase {
     protected UserDTO adminUser;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     @Before
     public void setupAdministrator() {
@@ -76,7 +81,6 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
     }
 
     @Test
-    @Ignore
     public void testSaveFileRefToUser() throws Exception
     {
         deleteFromTables("user_company_role","users","user_receipts","storage_service_file_refs");
@@ -85,13 +89,13 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
         userDAO.saveUser( testUser );
 
         StorageServiceFileRef fr = new StorageServiceFileRef();
-        fr.setId(1L);
         fr.setCreationDate(new Date());
         fr.setFileSize(10000L);
         fr.setLastModifiedDate(new Date());
         fr.setRecordStatus(AbstractEntity.STATUS_ACTIVE);
 
         //storage related
+        fr.setId(1L);
         fr.setBucket("testBucket");
         fr.setContentType("testContentType");
         fr.setKey("testFileKey");
@@ -99,8 +103,11 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
         fr.setLocation("testLocation");
         fr.setOwner(testUser.getUsername());
 
-        simpleJdbcTemplate.update("INSERT INTO file_refs (id,created_at,file_size,last_modified_at,record_status,type) values (?,?,?,?,?,?)", new Object[]{fr.getId(),fr.getCreationDate(),fr.getFileSize(),fr.getLastModifiedDate(),new String(fr.getRecordStatus()+""),"image"});
-        simpleJdbcTemplate.update("INSERT INTO storage_service_file_refs values (?,?,?,?,?,?,?)", new Object[]{fr.getId(),fr.getBucket(),fr.getContentType(),fr.getKey(),fr.getFileName(),fr.getLocation(),testUser.getUsername()});
+        entityManager.persist(fr);
+        entityManager.flush();
+
+//        simpleJdbcTemplate.update("INSERT INTO file_refs (id,created_at,file_size,last_modified_at,record_status,type) values (?,?,?,?,?,?)", new Object[]{fr.getId(),fr.getCreationDate(),fr.getFileSize(),fr.getLastModifiedDate(),new String(fr.getRecordStatus()+""),"image"});
+//        simpleJdbcTemplate.update("INSERT INTO storage_service_file_refs values (?,?,?,?,?,?,?)", new Object[]{fr.getId(),fr.getBucket(),fr.getContentType(),fr.getKey(),fr.getFileName(),fr.getLocation(),testUser.getUsername()});
 
 
         int users = countRowsInTable("users");

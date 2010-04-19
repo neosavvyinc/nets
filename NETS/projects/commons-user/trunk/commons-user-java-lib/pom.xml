@@ -190,14 +190,6 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>fineline.focal.storage</groupId>
-            <artifactId>storage-service-impl</artifactId>
-            <version>1.1.6-SNAPSHOT</version>
-            <scope>test</scope>
-        </dependency>
-
-
         <!-- Provided Scope Dependencies -->
         <dependency>
             <groupId>org.apache.geronimo.specs</groupId>
