@@ -85,6 +85,14 @@ public class MobileServiceImpl implements MobileService {
     }
 
     public void associateReceiptUploadWithUser(@FormParam("fileRef") StorageServiceFileRef fileRef) {
+
+        UserDetails userDetails = findUserDetailsOrThrowException();
+
+        UserDTO user = new UserDTO();
+        user.setUsername( userDetails.getUsername() );
+
+        userService.associateReceiptUploadWithUser( user, fileRef);
+
     }
 
     public DashboardData findDashboardData() {

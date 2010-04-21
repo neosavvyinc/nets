@@ -83,10 +83,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
     @Test
     public void testSaveFileRefToUser() throws Exception
     {
-        deleteFromTables("user_company_role","users","user_receipts","storage_service_file_refs");
-
-        UserDTO testUser = ProjectTestUtil.createTestUser();
-        userDAO.saveUser( testUser );
+        UserDTO testUser = setupAsEmployeeUser();
 
         StorageServiceFileRef fr = new StorageServiceFileRef();
         fr.setCreationDate(new Date());
@@ -114,7 +111,7 @@ public class TestUserService extends BaseSpringAwareServiceTestCase {
         int storage_file_refs = countRowsInTable("storage_service_file_refs");
         int user_receipts = countRowsInTable("user_receipts");
 
-        Assert.assertEquals("There should be only one user at this time",1,users);
+        Assert.assertEquals("There should be only two users at this time",2,users);
         Assert.assertEquals("There should be only one file reference at this time",1,storage_file_refs);
         Assert.assertEquals("There should be no user receipts at this time",0,user_receipts);
 
