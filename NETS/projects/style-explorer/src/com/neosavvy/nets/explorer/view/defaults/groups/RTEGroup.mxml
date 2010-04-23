@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" styleName="shadow12Box" creationComplete="creationCompleteHandler()" xmlns:components="styleLibrary.view.components.*">
+	
+	<mx:Script>
+		<![CDATA[
+			private function creationCompleteHandler():void
+			{
+				rte.boldButton.styleName = "rteBoldBtn";
+				rte.italicButton.styleName = "rteItalicBtn";
+				rte.underlineButton.styleName = "rteUnderlineBtn";
+				rte.alignButtons.styleName = "rteAlignTbb";
+				rte.bulletButton.styleName = "rteBulletBtn";
+				
+				rte.boldButton.toolTip = "Use this syntax on creationComplete: rte(id).boldButton.styleName = 'rteBoldBtn';"
+				rte.italicButton.toolTip = "Use this syntax on creationComplete: rte(id).boldButton.styleName = 'rteItalicBtn';"
+				rte.underlineButton.toolTip = "Use this syntax on creationComplete: rte(id).boldButton.styleName = 'rteUnderlineBtn';"
+				rte.alignButtons.toolTip = "Use this syntax on creationComplete: rte(id).boldButton.styleName = 'rteAlignTbb';"
+				rte.bulletButton.toolTip = "Use this syntax on creationComplete: rte(id).boldButton.styleName = 'rteBulletBtn';"
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:FormHeading label="RICH TEXT EDITOR"/>
+	<mx:FormItem width="100%">
+		<mx:RichTextEditor id="rte" width="100%"/>
+	</mx:FormItem>
+</mx:Form>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:cmp="view.components.*"
+	xmlns:fc="http://www.adobe.com/2006/fc"
+	width="100%" xmlns:containers="flexlib.containers.*">
+	
+	<mx:Script>
+		<![CDATA[
+			[Bindable]
+			private var lBtnArr:Array = [
+				{ styleName: "rejectLinkButton", 	isClickable: true, toggle: false },				
+				{ styleName: "approveLinkButton",	isClickable: true, toggle: false },
+				{ styleName: "deleteLinkButton", 	isClickable: true, toggle: false },
+				{ styleName: "editLinkButton", 		isClickable: true, toggle: false },
+				{ styleName: "redFlagLinkButton", 	isClickable: true, toggle: false },	
+				{ styleName: "greenLinkButton", 	isClickable: true, toggle: false, label: "Having Trouble?" },
+				{ styleName: "largeLinkButton", 	isClickable: true, toggle: false, label: "32115" },
+			];
+
+			[Bindable]			
+			private var BtnArr:Array = [
+				{ styleName: "orangeLargeButton", 	toggle: false, label:"Submit For Approval"}, 
+				{ styleName: "orangeMediumButton", 	toggle: false, label:"Confirm Registration"}, 	
+				{ styleName: "orangeSmallButton", 	toggle: false, label:"Invite"}, 	
+				{ styleName: "actionButton", 		toggle: false, label:"Cancel"},
+			];
+			
+			[Bindable]
+			private var colorArr:Array = [0xffffff, 0xf2f6f9, 0xf6f6f6, 0xd6d8d8, 0x63a8c0, 0x43464c];
+
+			private function setLabel(e:Event, s1:String, s2:String):void {
+				if (e.currentTarget.selected) {
+					e.currentTarget.label = s1;
+				} else {
+					e.currentTarget.label = s2;
+				}
+			}
+			
+			private function copyToClipBoard(event:Event):void
+			{
+				System.setClipboard(event.currentTarget.styleName);
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:FormHeading label="Buttons"/>
+	<mx:FormItem direction="horizontal" label="LinkButtons" width="100%">
+		<containers:FlowContainer width="100%">
+			<mx:Repeater id="r1" dataProvider="{lBtnArr}">
+				<mx:LinkButton
+					label="{r1.currentItem.label}"
+					styleName="{r1.currentItem.styleName}" 
+					toolTip="Click to Copy styleName to clipboard" 
+					buttonMode="{r1.currentItem.isClickable}"
+					toggle="{r1.currentItem.toggle}" 
+					enabled="{!disableBtn.selected}"
+					click="copyToClipBoard(event)"/>
+			</mx:Repeater>
+		</containers:FlowContainer>
+	</mx:FormItem>
+	<mx:FormItem direction="horizontal" label="Buttons" width="100%">
+		<containers:FlowContainer width="100%">
+			<mx:Repeater id="r2" dataProvider="{BtnArr}">
+				<mx:Button 
+					styleName="{r2.currentItem.styleName}"
+					toggle="{r2.currentItem.toggle}" 
+					label="{r2.currentItem.label}"
+					toolTip="{'Click to copy styleName to clipboard' + ', toggle = ' + r2.currentItem.toggle.toString()}" 
+					enabled="{!disableBtn.selected}"
+					click="copyToClipBoard(event)"/>
+			</mx:Repeater>
+		</containers:FlowContainer>
+	</mx:FormItem>
+	<mx:HRule width="100%"/>
+	<mx:HBox>
+		<mx:CheckBox id="disableBtn" styleName="switchCbx" label="Icon Buttons Enabled"
+			change="setLabel(event, 'Icon Buttons Disabled', 'Icon Buttons Enabled')"
+			toolTip="switchCbx"/>
+	</mx:HBox>
+</mx:Form>

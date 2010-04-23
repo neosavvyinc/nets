@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" 
+		 xmlns:components="com.neosavvy.nets.explorer.components.*" 
+			>
+	
+	<mx:Script>
+		<![CDATA[
+			[Bindable] 
+			private var arr:Array = ["Item1", "Item2", "Item3"];
+
+			[Bindable] 
+			private var arrTab:Array = ["Tab 1", "Tab 2"];
+			
+			private function setLabel(e:Event, s1:String, s2:String):void {
+				if (e.currentTarget.selected) {
+					e.currentTarget.label = s1;
+				} else {
+					e.currentTarget.label = s2;
+				}
+			}					
+		]]>
+	</mx:Script>
+	
+	<mx:FormHeading label="Buttons"/>
+	<mx:FormItem direction="horizontal" label="Button">
+		<components:SelectedStyleButton label="Label" enabled="{!disableBtn.selected}" toggle="true"/>
+	</mx:FormItem>
+	<mx:FormItem label="ButtonBars">
+		<mx:ButtonBar dataProvider="{arr}" enabled="{!disableBtn.selected}"/>
+		<mx:ToggleButtonBar dataProvider="{arr}" enabled="{!disableBtn.selected}"/>
+	</mx:FormItem>
+	<mx:FormItem label="TabBar">
+		<mx:TabBar dataProvider="{arrTab}" enabled="{!disableBtn.selected}"/>
+	</mx:FormItem>	
+	<mx:FormItem direction="horizontal" label="LinkButton">
+		<mx:LinkButton label="Hello World" enabled="{!disableBtn.selected}"/>
+	</mx:FormItem>
+	<mx:FormItem direction="horizontal" label="LinkBar">
+		<mx:LinkBar dataProvider="{arr}" enabled="{!disableBtn.selected}"/>		
+	</mx:FormItem>
+	<mx:HRule width="100%"/>
+	<mx:CheckBox id="disableBtn" styleName="switchCbx" label="Buttons Enabled"
+		change="setLabel(event, 'Buttons Disabled', 'Buttons Enabled')"
+		toolTip="switchCbx"/>	
+</mx:Form>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:cmp="view.components.*"
+	xmlns:fc="http://www.adobe.com/2006/fc"
+	width="100%" xmlns:containers="flexlib.containers.*">
+	
+	<mx:Script>
+		<![CDATA[
+			[Bindable]			
+			private var labelArr:Array = [
+				{ styleName: "numberedStepLabel", 	text: "1 2 3" },			
+				{ styleName: "contentLabel", 		text: "Total Expense Amount:" },				
+				{ styleName: "contentLabelBold", 	text: "$27.50" },				
+				{ styleName: "calloutTextBold", 	text: "Welcome to NETS" },				
+				{ styleName: "calloutText", 		text: "Complete the following..." },				
+				{ styleName: "companyNameHeading", 	text: "NEOSAVVY INC." },				
+				{ styleName: "secondaryTitle", 		text: "Welcome to NETS" },
+				{ styleName: "bodyText", 			text: "You have 2 expense..." },				
+				{ styleName: "descriptionText", 	text: "Select a step above to get started." }
+			];
+			
+			private function copyToClipBoard(event:Event):void
+			{
+				System.setClipboard(event.currentTarget.styleName);
+			}			
+		]]>
+	</mx:Script>
+	
+	<mx:FormHeading label="Labels / Text"/>
+	<mx:FormItem label="Labels" width="100%">
+		<containers:FlowContainer width="100%">
+			<mx:Repeater id="r1" dataProvider="{labelArr}" width="100%">
+				<mx:Label
+					useHandCursor="true"
+					buttonMode="true"
+					text="{r1.currentItem.text}"
+					styleName="{r1.currentItem.styleName}" 
+					toolTip="Click to copy styleName to clipboard"
+					click="copyToClipBoard(event)"/>
+			</mx:Repeater>
+		</containers:FlowContainer>
+	</mx:FormItem>
+</mx:Form>

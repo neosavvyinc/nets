@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:ViewStack 
+	xmlns:mx="http://www.adobe.com/2006/mxml" 
+	selectedIndex="0"
+	width="100%" height="100%" xmlns:groups="com.neosavvy.nets.explorer.view.custom.groups.*" >
+	
+	<mx:Canvas width="100%" height="100%">
+		<mx:constraintColumns>
+			<mx:ConstraintColumn id="col1" width="312"/>
+			<mx:ConstraintColumn id="col2" width="312"/>
+			<mx:ConstraintColumn id="col3" width="100%"/>
+			<mx:ConstraintColumn id="col4" width="12"/>
+		</mx:constraintColumns>
+		<mx:constraintRows>
+			<mx:ConstraintRow id="row1"/>
+			<mx:ConstraintRow id="row2"/>
+			<mx:ConstraintRow id="row3"/>
+			<mx:ConstraintRow id="row4"/>
+			<mx:ConstraintRow id="row5"/>
+			<mx:ConstraintRow id="row6"/>
+			<mx:ConstraintRow id="row7" height="12"/>
+		</mx:constraintRows>
+		
+		<groups:ButtonsGroup id="btnGp" left="col1:12" right="col3:0" top="row1:12"/>
+		<groups:TextGroup left="col1:12" right="col3:0" top="row2:12" bottom="row2:0"/>
+		<groups:FormElementsGroup left="col1:12" right="col2:0" top="row3:12" bottom="row3:0"/>
+		<mx:Spacer top="row7:0" height="12"/>
+	</mx:Canvas>
+		
+</mx:ViewStack>
