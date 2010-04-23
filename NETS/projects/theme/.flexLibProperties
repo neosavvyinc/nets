@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flexLibProperties includeAllClasses="true" version="3">
+  <includeClasses>
+    <classEntry path="com.neosavvy.nets.theme.skins.DropShadowBorderSkin"/>
+  </includeClasses>
+  <includeResources>
+    <resourceEntry destPath="mxClassSelectors.css" sourcePath="mxClassSelectors.css"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/fonts/OfficinaSans-Book.otf" sourcePath="com/neosavvy/nets/theme/fonts/OfficinaSans-Book.otf"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/fonts/OfficinaSans-Bold.otf" sourcePath="com/neosavvy/nets/theme/fonts/OfficinaSans-Bold.otf"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/fonts/OfficinaSans-BookItalic.otf" sourcePath="com/neosavvy/nets/theme/fonts/OfficinaSans-BookItalic.otf"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/fonts/OfficinaSans.swf" sourcePath="com/neosavvy/nets/theme/fonts/OfficinaSans.swf"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/skins/Application_borderSkin.swf" sourcePath="com/neosavvy/nets/theme/skins/Application_borderSkin.swf"/>
+    <resourceEntry destPath="mxTypeSelectors.css" sourcePath="mxTypeSelectors.css"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/fonts/.DS_Store" sourcePath="com/neosavvy/nets/theme/fonts/.DS_Store"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/fonts/OfficinaSans.fla" sourcePath="com/neosavvy/nets/theme/fonts/OfficinaSans.fla"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/fonts/OfficinaSans.html" sourcePath="com/neosavvy/nets/theme/fonts/OfficinaSans.html"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/fonts/m-OfficinaSans-Bold.otf" sourcePath="com/neosavvy/nets/theme/fonts/m-OfficinaSans-Bold.otf"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/fonts/m-OfficinaSans-Book.otf" sourcePath="com/neosavvy/nets/theme/fonts/m-OfficinaSans-Book.otf"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/fonts/m-OfficinaSans-BookItalic.otf" sourcePath="com/neosavvy/nets/theme/fonts/m-OfficinaSans-BookItalic.otf"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/.DS_Store" sourcePath="com/neosavvy/nets/theme/icons/.DS_Store"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/CheckBox_disabled.png" sourcePath="com/neosavvy/nets/theme/icons/CheckBox_disabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/CheckBox_over.png" sourcePath="com/neosavvy/nets/theme/icons/CheckBox_over.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/CheckBox_selectedDisabled.png" sourcePath="com/neosavvy/nets/theme/icons/CheckBox_selectedDisabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/CheckBox_selectedOver.png" sourcePath="com/neosavvy/nets/theme/icons/CheckBox_selectedOver.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/CheckBox_selectedUp.png" sourcePath="com/neosavvy/nets/theme/icons/CheckBox_selectedUp.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/CheckBox_up.png" sourcePath="com/neosavvy/nets/theme/icons/CheckBox_up.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/DateField_disabled.png" sourcePath="com/neosavvy/nets/theme/icons/DateField_disabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/DateField_over.png" sourcePath="com/neosavvy/nets/theme/icons/DateField_over.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/DateField_up.png" sourcePath="com/neosavvy/nets/theme/icons/DateField_up.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_alert.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_alert.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_approveDisabled.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_approveDisabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_approveUp.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_approveUp.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_budget.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_budget.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_deleteDisabled.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_deleteDisabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_deleteUp.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_deleteUp.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_editDisabled.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_editDisabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_editUp.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_editUp.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_grid.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_grid.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_manage.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_manage.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_redFlagDisabled.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_redFlagDisabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_redFlagUp.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_redFlagUp.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_rejectDisabled.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_rejectDisabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_rejectUp.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_rejectUp.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_16_tasks.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_16_tasks.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_48_addUserDisabled.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_48_addUserDisabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_48_addUserUp.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_48_addUserUp.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_48_clientDisabled.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_48_clientDisabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_48_clientUp.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_48_clientUp.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_48_customizeDisabled.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_48_customizeDisabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_48_customizeUp.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_48_customizeUp.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/Icon_48_lock.png" sourcePath="com/neosavvy/nets/theme/icons/Icon_48_lock.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/RadioButton_disabled.png" sourcePath="com/neosavvy/nets/theme/icons/RadioButton_disabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/RadioButton_over.png" sourcePath="com/neosavvy/nets/theme/icons/RadioButton_over.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/RadioButton_selectedDisabled.png" sourcePath="com/neosavvy/nets/theme/icons/RadioButton_selectedDisabled.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/RadioButton_selectedOver.png" sourcePath="com/neosavvy/nets/theme/icons/RadioButton_selectedOver.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/RadioButton_selectedUp.png" sourcePath="com/neosavvy/nets/theme/icons/RadioButton_selectedUp.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/RadioButton_up.png" sourcePath="com/neosavvy/nets/theme/icons/RadioButton_up.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/icons/ScrollBar_thumbIcon.png" sourcePath="com/neosavvy/nets/theme/icons/ScrollBar_thumbIcon.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/skins/Background_borderSkins.swf" sourcePath="com/neosavvy/nets/theme/skins/Background_borderSkins.swf"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/skins/Box_sectionBorderSkin.png" sourcePath="com/neosavvy/nets/theme/skins/Box_sectionBorderSkin.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/skins/FormItem_requiredSkin.png" sourcePath="com/neosavvy/nets/theme/skins/FormItem_requiredSkin.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/skins/ScrollBar_thumbOverSkin.png" sourcePath="com/neosavvy/nets/theme/skins/ScrollBar_thumbOverSkin.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/skins/ScrollBar_thumbUpSkin.png" sourcePath="com/neosavvy/nets/theme/skins/ScrollBar_thumbUpSkin.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/skins/TextInput_borderSkin.png" sourcePath="com/neosavvy/nets/theme/skins/TextInput_borderSkin.png"/>
+    <resourceEntry destPath="com/neosavvy/nets/theme/skins/TextInput_roundedBorderSkin.png" sourcePath="com/neosavvy/nets/theme/skins/TextInput_roundedBorderSkin.png"/>
+  </includeResources>
+  <namespaceManifests/>
+</flexLibProperties>
