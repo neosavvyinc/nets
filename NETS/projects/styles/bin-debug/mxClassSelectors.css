@@ -1,0 +1,283 @@
+/* 
+	NETS Flex 3.5 Component Selectors
+	Jaivin Anzalota
+	   
+	Serach "=ClassName" to navigate file
+*/
+
+/*	=Typography
+-----------------------------------------------------------------------------*/
+.bodyText {
+	font-size: 14;
+}
+
+.companyNameHeading {
+	color: #085f41;
+	font-weight: bold;
+	font-size: 24;
+	left: 32;
+	top: 24;
+}
+
+.sectionTitle {
+	font-size: 16;
+	font-weight: bold;
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.numberedStepLabel {
+	color: #f9c97a;
+	font-weight: bold;
+	font-size: 56;
+}
+
+.contentLabel, .contentLabelBold {
+	color: #464e55;
+	font-size: 16;
+}
+
+.contentLabelBold {
+	padding-top: 2;
+	font-weight: bold;
+}
+
+.calloutText, .calloutTextBold {
+	color: #085f41;
+	font-size: 28;
+	leading: 2;
+}
+
+.calloutTextBold {
+	padding-top: 5;	
+	font-weight: bold;
+}
+
+.descriptionText {
+	color: #262a2e;
+	font-style: italic;
+	font-size: 14;
+	padding-top: 2;
+}
+
+.secondaryTitle {
+	font-size: 16;
+	font-weight: bold;
+}
+
+/*	=Box
+-----------------------------------------------------------------------------*/
+.mainContainer {
+	border-skin: ClassReference('com.neosavvy.nets.theme.skins.DropShadowBorderSkin');
+	horizontal-gap: -1;
+}
+
+.applicationViewContainer {
+	border-skin: ClassReference('com.neosavvy.nets.theme.skins.ApplicationViewBorderSkin');
+}
+
+.applicationView {
+	padding-bottom: 25;
+	padding-left: 25;
+	padding-right: 25;
+	padding-top: 15;
+}
+
+.altApplicationBackground {
+	border-skin: Embed(source="com/neosavvy/nets/theme/skins/Background_borderSkins.swf", symbol="Application_altBorderSkin");
+}
+
+.dashboardBackground {
+	background-image: Embed(source="com/neosavvy/nets/theme/skins/Background_borderSkins.swf", symbol="Dashboard_background");
+	background-size: "100%";
+}
+
+.headingTitleBox {
+	border-style: solid;
+	border-color: #afafaf;
+	border-sides: 'bottom';
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: 0;
+	vertical-align: middle;
+}
+
+.formSectionContainer {
+	border-skin: Embed("com/neosavvy/nets/theme/skins/Box_sectionBorderSkin.png",
+		scaleGridBottom="126",
+		scaleGridLeft="5",
+		scaleGridRight="8",
+		scaleGridTop="123");
+	padding-bottom: 12;
+	padding-left: 16;
+	padding-right: 16;
+	padding-top: 16;
+}
+
+.formWindow {
+	background-fill-colors: #fcf7e6, #ffffff;
+	border-skin: ClassReference('com.neosavvy.nets.theme.skins.DropShadowBorderSkin');
+}
+
+.callOutBox {
+	background-alpha: 1;
+	background-color: #fff2cc;
+	border-color: #ffffff;
+	border-sides: "bottom";
+	border-style: solid;
+	horizontal-align: right;
+	padding-bottom: 8;
+	padding-left: 8;
+	padding-right: 8;
+	padding-top: 8;
+}
+
+/*	=Button
+-----------------------------------------------------------------------------*/
+.orangeLargeButton, .orangeMediumButton, .orangeSmallButton {
+	color: #ffffff;
+	text-roll-over-color: #ffffff;
+	text-selected-color: #ffffff;
+	disabled-color: #ffffff;
+	corner-radius: 8;
+	font-size: 22;
+	font-weight: bold;
+	up-fill-colors: #feac37, #f6931a, #ef7c01;
+	over-fill-colors: #fc9400, #dc7900, #dc7900;
+	down-fill-colors: #dc7900, #dc7900, #fc9400;
+	disabled-fill-colors: #fec97c, #f8b567, #f5aa5a; 
+	padding-left: 14;
+	padding-right: 14;
+	has-bevel: true;
+}
+
+.orangeSmallButton {
+	font-size: 16;
+	corner-radius: 1;
+}
+
+.orangeMediumButton {
+	font-size: 16;
+}
+
+.actionButton {
+	font-size: 14;
+}
+
+/*	=ButtonBar
+-----------------------------------------------------------------------------*/
+.sideBarNavigationToggleButtonBar {
+	button-style-name: "sideBarButton";	
+	first-button-style-name: "sideBarButton";
+	last-button-style-name: "sideBarButton";
+	vertical-gap: 3;
+	padding-top: 12;
+}
+
+.sideBarButton {
+	color: #2e7cb3;
+	font-size: 16;
+	text-align: left;
+	show-skin-states: false, false, false, false, true;
+	toggled-up-fill-colors: #449b7e, #21785b, #096042;
+	toggled-over-fill-colors: #449b7e, #21785b, #096042;
+	toggled-down-fill-colors: #449b7e, #21785b, #096042;
+	toggled-disabled-fill-colors: #449b7e, #21785b, #096042;
+	ratios: 0, 155, 255;
+	padding-left: 17;
+}
+
+/*	=DataGrid
+-----------------------------------------------------------------------------*/
+.simpleDataGrid {
+	alternating-item-colors: #ffffff, #f5eed9;
+	border-style: none;
+	padding-bottom: 4;
+	padding-top: 4;
+}
+
+/*	=LinkButton
+-----------------------------------------------------------------------------*/
+.greenLinkButton {
+	color: #0a7e57;
+	roll-over-color: #0a7e57;
+	selection-color: #0a7e57;
+	padding-bottom: 1;
+}
+
+.rejectLinkButton, .approveLinkButton, .deleteLinkButton, .editLinkButton, .redFlagLinkButton {
+	skin: ClassReference(null);
+}
+
+.rejectLinkButton {
+	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_rejectUp.png');
+	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_rejectUp.png');
+	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_rejectUp.png');
+	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_rejectDisabled.png');		
+}
+
+.approveLinkButton {
+	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_approveUp.png');
+	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_approveUp.png');
+	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_approveUp.png');
+	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_approveDisabled.png');		
+}
+
+.deleteLinkButton {
+	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_deleteUp.png');
+	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_deleteUp.png');
+	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_deleteUp.png');
+	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_deleteDisabled.png');		
+}
+
+.editLinkButton {
+	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_editUp.png');
+	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_editUp.png');
+	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_editUp.png');
+	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_editDisabled.png');		
+}
+
+.redFlagLinkButton {
+	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_redFlagUp.png');
+	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_redFlagUp.png');
+	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_redFlagUp.png');
+	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_redFlagDisabled.png');		
+}
+
+.largeLinkButton {
+	font-size: 16;
+}
+
+/*	=SuperLabel
+-----------------------------------------------------------------------------*/
+.alertsSuperLabel {
+		icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_alert.png');
+}
+
+.budgetSuperLabel {
+	icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_budget.png');
+}
+
+.expensesSuperLabel {
+	icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_grid.png');
+}
+
+.manageSuperLabel, .tasksSuperLabel {
+	color: #464e55;
+	force-uppercase: yes;
+	icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_manage.png');
+}
+
+.tasksSuperLabel {
+	icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_tasks.png');
+}
+
+.roundedTextInput {
+	corner-radius: 8;
+	border-skin: Embed("com/neosavvy/nets/theme/skins/TextInput_roundedBorderSkin.png",
+		scaleGridBottom="16",
+		scaleGridLeft="8",
+		scaleGridRight="14",
+		scaleGridTop="8");
+	focus-rounded-corners: "tl bl tr br";
+}
