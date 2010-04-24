@@ -135,7 +135,11 @@ public class UserServiceImpl implements UserService {
 
     public void associateReceiptUploadWithUser(UserDTO user, StorageServiceFileRef fileRef) {
 
-        UserDTO persistentUser = findUserById(user.getId());
+        List<UserDTO> users = findUsers(user);
+        if (users.isEmpty()) {
+            return;
+        }
+        UserDTO persistentUser = users.get(0);
         List<StorageServiceFileRef> serviceFileRefList = persistentUser.getUncategorizedReceipts();
         if ( serviceFileRefList == null )
         {

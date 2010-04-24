@@ -54,10 +54,10 @@ public interface MobileService {
     public boolean logout();
 
     @POST
-    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
-    @Produces({MediaType.APPLICATION_JSON})
+    @Consumes({MediaType.APPLICATION_JSON})
+    @Produces({MediaType.TEXT_PLAIN})
     @Path("/savereceipt/")
-    public void associateReceiptUploadWithUser(@FormParam("fileRef") StorageServiceFileRef fileRef);
+    public String associateReceiptUploadWithUser(StorageServiceFileRef fileRef);
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})

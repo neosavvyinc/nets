@@ -30,8 +30,24 @@ function serviceGetDashboardData(successCallback, failureCallback) {
 }
 
 function serviceAddReceiptToUser(fileRef, successCallback, failureCallback) {
-	/*** TODO Implement service call to add the file ref to the user ***/
-    successCallback(fileRef);     	
+    httpClient.onerror = failureCallback;
+    httpClient.onload = function() { 
+        if (this.responseText == 'true') {
+        	successCallback(fileRef);
+        }
+        else {
+        	failureCallback(this.responseText);
+        }
+    };
+    httpClient.onsendstream = function(e) { progressCallback(e.progress); };
+	httpClient.open('POST', mobileServiceBaseUrl + '/savereceipt/');
+	httpClient.setRequestHeader('Content-Type', 'application/json');
+	try {
+    	httpClient.send(JSON.stringify(fileRef));    
+    }
+    catch (err) {
+    	alert(err);
+    }
 }
 
 function serviceUploadReceipt(fileName, image, successCallback, failureCallback, progressCallback) {

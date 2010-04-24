@@ -59,7 +59,7 @@ public class MobileServiceImpl implements MobileService {
 
     private UserSessionManager sessionManager;
 
-    public SecurityWrapperDTO login(@FormParam("username") String username, @FormParam("password") String password) {
+    public SecurityWrapperDTO login(String username, String password) {
         Authentication authentication = authManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
@@ -84,15 +84,14 @@ public class MobileServiceImpl implements MobileService {
         return true;
     }
 
-    public void associateReceiptUploadWithUser(@FormParam("fileRef") StorageServiceFileRef fileRef) {
-
+    public String associateReceiptUploadWithUser(StorageServiceFileRef fileRef) {
         UserDetails userDetails = findUserDetailsOrThrowException();
 
         UserDTO user = new UserDTO();
         user.setUsername( userDetails.getUsername() );
 
         userService.associateReceiptUploadWithUser( user, fileRef);
-
+        return "true";
     }
 
     public DashboardData findDashboardData() {
