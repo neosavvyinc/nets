@@ -51,6 +51,7 @@
         <module>storage-service</module>
         <module>commons-user-enterprise-application</module>
         <module>commons-user-groovy-templates</module>
+        <module>nets-theme</module>
     </modules>
 
     <properties>

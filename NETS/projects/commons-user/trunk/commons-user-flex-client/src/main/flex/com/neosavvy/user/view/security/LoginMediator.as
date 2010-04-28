@@ -22,15 +22,10 @@ package com.neosavvy.user.view.security {
 
         override public function onRegister():void {
             login.loginButton.addEventListener(MouseEvent.CLICK, handleLoginClickedEvent);
-            newCompanyButtonFromExistingLogin.addEventListener(MouseEvent.CLICK, handleNewCompanyButtonFromExistingLogingClicked);
         }
 
         public function get login():Login {
             return viewComponent as Login;
-        }
-
-        public function get newCompanyButtonFromExistingLogin():Button {
-            return login.newCompanyButtonFromExistingLogin;
         }
 
         public function resetForm():void {
@@ -46,9 +41,6 @@ package com.neosavvy.user.view.security {
             sendNotification(ApplicationFacade.REQUEST_USER_LOGIN, user);
         }
 
-        private function handleNewCompanyButtonFromExistingLogingClicked(event:MouseEvent):void {
-            sendNotification(ApplicationFacade.NAVIGATE_TO_COMPANY_REGISTRATION);
-        }
 
 
         override public function listNotificationInterests():Array {
