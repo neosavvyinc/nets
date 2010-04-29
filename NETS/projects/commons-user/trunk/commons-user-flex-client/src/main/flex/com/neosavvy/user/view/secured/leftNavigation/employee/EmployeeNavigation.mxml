@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Employee Navigation" styleName="paddedContainer">
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Employee Navigation" >
 
     <mx:LinkButton id="viewOpenExpensesBtn" label="View Open Expenses"/>
     <mx:LinkButton id="addExpenseReportBtn" label="Create Expense Report"/>

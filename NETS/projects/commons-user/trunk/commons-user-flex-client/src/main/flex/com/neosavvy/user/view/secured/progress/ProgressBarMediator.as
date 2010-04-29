@@ -41,9 +41,6 @@ package com.neosavvy.user.view.secured.progress {
                 _progressBar.labelPlacement = 'center';
                 //                progressBar.setStyle("removedEffect", fade);
                 //                progressBar.setStyle("addedEffect", fade);
-                _progressBar.setStyle("color", 0xFFFFFF);
-                _progressBar.setStyle("borderColor", 0x000000);
-                _progressBar.setStyle("barColor", 0xf4b60f);
                 _progressBar.label = "";
                 _progressBar.mode = ProgressBarMode.MANUAL;
                 this.progressBar = _progressBar;

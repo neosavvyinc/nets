@@ -5,17 +5,34 @@
         verticalAlign="middle"
         horizontalAlign="center">
 
-    <mx:Panel styleName="formWindow" id="loginPanel" width="330">
+    <mx:Panel id="loginPanel"
+              width="330"
+              verticalGap="0"
+              paddingLeft="0"
+              paddingRight="0"
+              paddingTop="0"
+              paddingBottom="0"
+              horizontalScrollPolicy="off"
+              verticalScrollPolicy="off">
 
-        <mx:VBox width="100%" styleName="paddedContainer">
-            <mx:Text styleName="secondaryTitle" text="Welcome to NETS"/>
-            <mx:Text styleName="bodyText" text="Login with your username and password here"/>
+        <mx:HBox width="100%"
+                 paddingLeft="10"
+                 paddingRight="10"
+                 paddingTop="10"
+                 paddingBottom="10"
+                 styleName="formWindow"
+                 horizontalScrollPolicy="off"
+                 verticalScrollPolicy="off">
+            <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_48_lock.png')"/>
+            <mx:VBox width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                <mx:Text styleName="secondaryTitle" text="Welcome to NETS"/>
+                <mx:Text styleName="bodyText" width="200" text="Login with your username and password here"/>
+            </mx:VBox>
+        </mx:HBox>
+        <mx:VBox styleName="formSectionContainer" width="100%">
             <flexlib:PromptingTextInput prompt="Username" automationName="username" id="username" width="100%"/>
             <flexlib:PromptingTextInput prompt="Password" automationName="password" id="password" width="100%"
                                         displayAsPassword="true"/>
-        </mx:VBox>
-
-        <mx:VBox styleName="formSectionContainer" width="100%">
             <mx:Button styleName="orangeLargeButton" width="100%" id="loginButton" label="Login"/>
             <mx:Label id="errorLbl"/>
         </mx:VBox>

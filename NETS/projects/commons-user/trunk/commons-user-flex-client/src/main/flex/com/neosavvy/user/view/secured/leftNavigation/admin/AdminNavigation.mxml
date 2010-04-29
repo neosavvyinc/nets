@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Admin Navigation" styleName="paddedContainer">
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Admin Navigation" >
 
     <mx:LinkButton id="welcomeButton" label="Welcome"/>
     <mx:LinkButton id="inviteEmployeesButton" label="Invite Employees"/>

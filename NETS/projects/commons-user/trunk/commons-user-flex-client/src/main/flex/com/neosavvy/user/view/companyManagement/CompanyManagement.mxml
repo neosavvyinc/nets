@@ -85,7 +85,7 @@
         <mx:HBox width="100%" height="100%" horizontalAlign="center" verticalAlign="top">
 
             <mx:VBox width="450" horizontalScrollPolicy="off" verticalScrollPolicy="off">
-                <mx:Panel title="Basic Company Information" width="100%" styleName="paddedContainer">
+                <mx:Panel title="Basic Company Information" width="100%" >
                     <mx:Form id="companyForm" width="100%" height="100%" paddingLeft="0"
                              defaultButton="{registerCompanyButton}">
                         <mx:FormItem label="Company Name:" width="100%" required="true">
@@ -116,7 +116,7 @@
                         </mx:HBox>
                     </mx:Form>
                 </mx:Panel>
-                <mx:Panel title="Administrative User" width="100%" styleName="paddedContainer">
+                <mx:Panel title="Administrative User" width="100%" >
                     <mx:Form id="userForm" width="100%" height="100%" paddingLeft="0"
                              defaultButton="{registerCompanyButton}">
                         <mx:FormItem label="Username" width="100%" required="true">
@@ -169,7 +169,7 @@
             </mx:VBox>
         </mx:HBox>
         <mx:VBox horizontalAlign="center">
-            <mx:Panel title="Thanks for registering!!!" width="400" styleName="paddedContainer">
+            <mx:Panel title="Thanks for registering!!!" width="400" >
                 <mx:Text width="100%"
                          text="Thank you for registering your company. You should receive an email that must be used to confirm your admin account. Please follow the link to confirm your account and then login to begin adding users."/>
                 <mx:Spacer height="40"/>
@@ -189,7 +189,7 @@
             </mx:Panel>
         </mx:VBox>
         <mx:VBox horizontalAlign="center">
-            <mx:Panel title="Congratulations you are confirmed!!!" width="400" styleName="paddedContainer">
+            <mx:Panel title="Congratulations you are confirmed!!!" width="400" >
                 <mx:Text width="100%"
                          text="Thanks for confirming your account please click below to login to the expense tracker"/>
                 <mx:Button id="loginButton" label="Login"/>
@@ -197,7 +197,7 @@
         </mx:VBox>
         <mx:VBox horizontalAlign="center">
             <mx:Panel title="Sorry, Something went wrong with the confirmation!!!" width="400"
-                      styleName="paddedContainer">
+                      >
                 <mx:Text width="100%" text="Contact customer support at 919-741-9597"/>
             </mx:Panel>
         </mx:VBox>

@@ -30,6 +30,9 @@
                 <configuration>
                     <configurationReport>true</configurationReport>
                     <debug>true</debug>
+                    <parameters>
+                        <bgcolor>a4cfc1</bgcolor>
+                    </parameters>
                     <locales>
                         <param>en_US</param>
                     </locales>

@@ -4,7 +4,7 @@
         xmlns:flexlib="http://code.google.com/p/flexlib/"
         xmlns:controls="controls.*"
         xmlns:neosavvy="com.neosavvy.grid.*"
-        title="Queue Employees to be invited here" styleName="paddedContainer" width="100%" height="100%">
+        title="Queue Employees to be invited here"  width="100%" height="100%">
     <mx:VBox id="errorContainer"/>
     <mx:HBox width="100%">
         <flexlib:PromptingTextInput id="empFName" prompt="First Name" width="100%"/>

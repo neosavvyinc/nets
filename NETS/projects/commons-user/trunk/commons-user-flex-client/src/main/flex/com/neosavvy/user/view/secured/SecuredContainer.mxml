@@ -1,5 +1,8 @@
 <?xml version="1.0"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+<mx:VBox styleName="paddedContainer"
+         horizontalScrollPolicy="off"
+         verticalScrollPolicy="off"
+         xmlns:mx="http://www.adobe.com/2006/mxml"
          xmlns:leftNavigation="com.neosavvy.user.view.secured.leftNavigation.*"
          xmlns:userManagement="com.neosavvy.user.view.secured.userManagement.*"
          xmlns:Mx="http://www.adobe.com/2006/mxml"
@@ -13,13 +16,18 @@
          xmlns:reconcile="com.neosavvy.user.view.secured.expenses.reconcile.*"
          xmlns:approving="com.neosavvy.user.view.secured.expenses.approving.*">
 
-    <mx:HDividedBox width="100%" height="100%">
+    <mx:HBox styleName="mainContainer" width="100%" height="100%">
 
-        <leftNavigation:LeftNavigation id="leftNavigation"/>
+        <leftNavigation:LeftNavigation
+                id="leftNavigation"
+                width="180"
+                height="100%"
+                horizontalScrollPolicy="off"
+                verticalScrollPolicy="off"/>
 
         <mx:ViewStack id="navigationViewStack" width="100%" height="100%"
                       selectedIndex="{SecuredContainerMediator.NAV_INDEX_WELCOME}">
-            <welcome:Welcome id="welcomeContainer"/>
+            <welcome:Welcome id="welcomeContainer" width="100%" height="100%"/>
             <employeeInvitation:EmployeeManagement id="employeeInvitationManagement" width="100%" height="100%"/>
             <userManagement:UserManagement id="userManagement" width="100%" height="100%"/>
             <clientManagement:ClientManagement id="clientManagement" width="100%" height="100%"/>
@@ -32,6 +40,6 @@
             <approving:ExpenseReportAwaitingApproval id="expenseReportAwaitingApproval" width="100%" height="100%"/>
         </mx:ViewStack>
 
-    </mx:HDividedBox>
+    </mx:HBox>
 
 </mx:VBox>

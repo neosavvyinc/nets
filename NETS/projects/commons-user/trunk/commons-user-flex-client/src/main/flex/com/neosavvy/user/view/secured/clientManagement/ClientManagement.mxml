@@ -6,7 +6,7 @@
         xmlns:neosavvy="com.neosavvy.grid.*"
         xmlns:validators="com.visualempathy.validators.*"
         title="Client Management"
-        styleName="paddedContainer"
+
         width="100%"
         height="100%"
         layout="vertical"

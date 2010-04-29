@@ -1,10 +1,3 @@
-.paddedContainer {
-    paddingBottom: 10;
-    paddingLeft: 10;
-    paddingRight: 10;
-    paddingTop: 10;
-}
-
 .textInputError {
     borderColor: red;
     borderThickness: 1;

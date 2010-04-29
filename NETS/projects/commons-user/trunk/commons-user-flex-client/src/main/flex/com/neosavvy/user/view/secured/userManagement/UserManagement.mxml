@@ -2,7 +2,7 @@
 <mx:Panel
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:neosavvy="com.neosavvy.grid.*"
-        xmlns:flexlib="http://code.google.com/p/flexlib/" styleName="paddedContainer">
+        xmlns:flexlib="http://code.google.com/p/flexlib/" >
 
     <mx:HBox width="100%" horizontalAlign="right">
         <mx:ToggleButtonBar id="userStatusFilterButtonBar">

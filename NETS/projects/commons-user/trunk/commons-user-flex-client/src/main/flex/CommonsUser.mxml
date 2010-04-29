@@ -38,7 +38,7 @@
             selectedIndex="0"
             width="100%"
             height="100%"
-            styleName="paddedContainer"
+
             creationPolicy="all">
         <mx:HBox horizontalAlign="center" verticalAlign="middle" width="100%" height="100%">
             <mx:Button label="New Companies Click Here" id="newCompanyButton"/>

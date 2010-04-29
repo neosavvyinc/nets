@@ -5,7 +5,7 @@
         layout="vertical"
         title="Confirmation Success!"
         width="400"
-        styleName="paddedContainer">
+        >
 
     <mx:Text id="confirmationText" width="{calculateMaxTextWidth()}" height="100%"/>
 

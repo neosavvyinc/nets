@@ -3,7 +3,7 @@
     xmlns:mx="http://www.adobe.com/2006/mxml"
     width="100%"
     height="100%"
-    styleName="paddedContainer"
+    
     horizontalAlign="right"
     title="Reconcile Expense Reports">
 

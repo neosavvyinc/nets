@@ -365,8 +365,12 @@ ToolTip {
 
 /*	=Panel
 -----------------------------------------------------------------------------*/
-Panel {
+Panel, TitleWindow {
 	border-skin: ClassReference("com.neosavvy.nets.theme.skins.DropShadowBorderSkin");
+    padding-top: 28;
+    padding-left: 10;
+    padding-right: 10;
+    padding-bottom: 10;
 }
 
 /*	=PieChart
