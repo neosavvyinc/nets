@@ -86,6 +86,13 @@ public class LocalFileStorage implements FileStorage {
         
         String extension = FileUtils.getExtension(fileName);
         
+        if (StringUtils.isEmpty(extension)) {
+            extension = FileUtils.getExtensionFromContentType(contentType);
+            if (!"dat".equals(extension)) {
+                fileName = fileName + "." + extension;
+            }
+        }
+
         if (extension.toLowerCase().equals(FileUtils.STL_EXTENSION)) {
         	contentType = FileUtils.CONTENT_TYPE_STL;
         	extension = FileUtils.STL_EXTENSION;

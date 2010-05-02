@@ -8,7 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.activation.MimetypesFileTypeMap;
-
+import org.clapper.util.misc.MIMETypeUtil;
+                                   
 /**
  * This class is a derivative work of Fineline via Tommy Odom.
  * The code herein cannot be distributed without first establishing prior written consent
@@ -39,7 +40,11 @@ public class FileUtils {
         
         return extension;
 	}
-	
+
+    public static String getExtensionFromContentType(String contentType) {
+        return MIMETypeUtil.fileExtensionForMIMEType(contentType);
+    }
+
 	public static String getBaseName(File file) {
 	    return FileUtils.getBaseName(file.getName());
 	}
