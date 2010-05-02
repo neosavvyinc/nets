@@ -119,7 +119,7 @@ public class StorageServiceImpl implements StorageService
             }
             else if (!item.isFormField()){
                 return fileStorage.saveFile(bucket, key, (!StringUtils.isEmpty(fileNameOverride) ? fileNameOverride : item.getName()), 
-                        item.getContentType(), item.openStream(), owner);
+                        parseContentType(item.getContentType()), item.openStream(), owner);
             }
         }
             
@@ -137,7 +137,20 @@ public class StorageServiceImpl implements StorageService
     	fileStorage.deleteFile(bucket, key);
     	return "File deleted successfully.";
     }
-    
+
+    private String parseContentType(String contentType) {
+        if (!StringUtils.isEmpty(contentType)) {
+            int delimiter = contentType.indexOf(';');
+
+            if (delimiter != -1) {
+                return contentType.substring(0, delimiter);
+            }
+            
+        }
+
+        return contentType;
+    }
+
 	public FileStorage getFileStorage() {
 		return fileStorage;
 	}
