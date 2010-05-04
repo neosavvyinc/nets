@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Employee Navigation" >
-
-    <mx:LinkButton id="viewOpenExpensesBtn" label="View Open Expenses"/>
-    <mx:LinkButton id="addExpenseReportBtn" label="Create Expense Report"/>
-    <mx:LinkButton id="viewSubmittedExpensesBtn" label="View Submitted Expenses"/>
-    <mx:LinkButton id="reconcileExpensesBtn" label="Reconcile Expenses"/>
-
-</mx:Panel>

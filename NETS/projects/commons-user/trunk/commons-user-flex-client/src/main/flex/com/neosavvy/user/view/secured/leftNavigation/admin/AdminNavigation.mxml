@@ -1,16 +1,27 @@
 <?xml version="1.0"?>
-<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml" title="Admin Navigation" >
-
-    <mx:LinkButton id="welcomeButton" label="Welcome"/>
-    <mx:LinkButton id="inviteEmployeesButton" label="Invite Employees"/>
-    <mx:LinkButton id="viewAllEmployeesButton" label="View Employees"/>
-    <!--<mx:LinkButton id="viewActiveEmployeesButton" label="View Active Employees"/>-->
-    <!--<mx:LinkButton id="viewNonActiveEmployeesButton" label="View Inactive Employees"/>-->
-
-    <mx:LinkButton id="manageClientsButton" label="Manage Clients"/>
-    <mx:LinkButton id="manageProjectsButton" label="Manage Projects"/>
-
-    <mx:LinkButton id="approveExpenses" label="Approve Expenses"/>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" verticalScrollPolicy="off" horizontalScrollPolicy="off">
 
 
-</mx:Panel>
+    <mx:ToggleButtonBar
+            id="toggleBar"
+            direction="vertical"
+            width="100%"
+            styleName="sideBarNavigationToggleButtonBar">
+        <mx:dataProvider>
+            <mx:Array>
+                <mx:String>Welcome</mx:String>
+                <mx:String>Invite Employees</mx:String>
+                <mx:String>View Employees</mx:String>
+                <mx:String>Manage Clients</mx:String>
+                <mx:String>Manage Projects</mx:String>
+                <mx:String>Approve Expenses</mx:String>
+                <mx:String>View Open Expenses</mx:String>
+                <mx:String>Create Expense Report</mx:String>
+                <mx:String>View Submitted Expenses</mx:String>
+                <mx:String>Reconcile Expenses</mx:String>
+            </mx:Array>
+        </mx:dataProvider>
+    </mx:ToggleButtonBar>
+
+
+</mx:Canvas>

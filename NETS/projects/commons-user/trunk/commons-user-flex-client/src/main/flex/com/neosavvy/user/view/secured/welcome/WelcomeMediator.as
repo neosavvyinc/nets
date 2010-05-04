@@ -37,15 +37,15 @@ package com.neosavvy.user.view.secured.welcome {
             ];
         }
 
-        private function setTitle():void {
-            var companyProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
-            welcome.title = "Welcome to " + companyProxy.activeCompany.companyName + "'s expense tracking system";
-        }
+//        private function setTitle():void {
+//            var companyProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
+//            welcome.title = "Welcome to " + companyProxy.activeCompany.companyName + "'s expense tracking system";
+//        }
 
         override public function handleNotification(notification:INotification):void {
             switch (notification.getName()) {
                 case ApplicationFacade.USER_LOGIN_STARTUP_COMPLETE:
-                    setTitle();
+                    //setTitle();
                     break;
                 case ApplicationFacade.NAVIGATE_TO_WELCOME:
                     break;

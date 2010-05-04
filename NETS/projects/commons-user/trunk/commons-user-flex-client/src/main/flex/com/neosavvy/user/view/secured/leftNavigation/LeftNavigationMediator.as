@@ -2,7 +2,6 @@ package com.neosavvy.user.view.secured.leftNavigation {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigation;
-    import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigation;
 
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -30,9 +29,6 @@ package com.neosavvy.user.view.secured.leftNavigation {
             return leftNavigation.adminNavigation;
         }
 
-        public function get employeeNavigation():EmployeeNavigation {
-            return leftNavigation.employeeNavigation;
-        }
 
         override public function listNotificationInterests():Array {
             return [

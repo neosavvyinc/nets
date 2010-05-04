@@ -4,6 +4,7 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
     import flash.events.MouseEvent;
 
     import mx.controls.LinkButton;
+    import mx.events.ItemClickEvent;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -20,66 +21,96 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
         }
 
         override public function onRegister():void {
-            welcomeButton.addEventListener(MouseEvent.CLICK, handleWelcomeButtonClicked);
-            inviteEmployeesButton.addEventListener(MouseEvent.CLICK, handleInviteEmployeesButtonClicked);
-            viewAllEmployeesButton.addEventListener(MouseEvent.CLICK, handleViewAllEmployeesClicked);
-
-            manageClientsButton.addEventListener(MouseEvent.CLICK, handleManageClientsButtonClicked);
-            manageProjectsButton.addEventListener(MouseEvent.CLICK, handleManageProjectsButtonClicked);
-
-            approveExpenses.addEventListener(MouseEvent.CLICK, handleApproveExpensesButtonClicked);
+            adminNavigation.toggleBar.addEventListener(ItemClickEvent.ITEM_CLICK, handleAdminNavigationChanged);
+            
+//            welcomeButton.addEventListener(MouseEvent.CLICK, handleWelcomeButtonClicked);
+//            inviteEmployeesButton.addEventListener(MouseEvent.CLICK, handleInviteEmployeesButtonClicked);
+//            viewAllEmployeesButton.addEventListener(MouseEvent.CLICK, handleViewAllEmployeesClicked);
+//
+//            manageClientsButton.addEventListener(MouseEvent.CLICK, handleManageClientsButtonClicked);
+//            manageProjectsButton.addEventListener(MouseEvent.CLICK, handleManageProjectsButtonClicked);
+//
+//            approveExpenses.addEventListener(MouseEvent.CLICK, handleApproveExpensesButtonClicked);
         }
 
-        private function handleApproveExpensesButtonClicked(event:MouseEvent):void {
+        private function handleAdminNavigationChanged(event:ItemClickEvent):void {
+            switch (event.label) 
+            {
+                case "Welcome":
+                    handleWelcomeButtonClicked();
+                    break;
+                case "Invite Employees":
+                    handleInviteEmployeesButtonClicked();
+                    break;
+                case "View Employees":
+                    handleViewAllEmployeesClicked();
+                    break;
+                case "Manage Clients":
+                    handleManageClientsButtonClicked();
+                    break;
+                case "Manage Projects":
+                    handleManageProjectsButtonClicked();
+                    break;
+                case "Approve Expenses":
+                    handleApproveExpensesButtonClicked();
+                    break;
+                case "View Open Expenses":
+                    handleViewOpenExpensesButtonClicked();
+                    break;
+                case "Create Expense Report":
+                    handleAddExpenseReportsButtonClicked();
+                    break;
+                case "View Submitted Expenses":
+                    handleViewSubmittedExpensesButtonClicked();
+                    break;
+                case "Reconcile Expenses":
+                    handleReconcileExpenseReportsButtonClicked();
+                    break;
+            }
+        }
+
+        private function handleApproveExpensesButtonClicked():void {
             sendNotification(ApplicationFacade.NAVIGATE_TO_VIEW_AWAITING_EXPENSE_REPORTS);
         }
 
-        private function handleManageProjectsButtonClicked(event:MouseEvent):void {
+        private function handleManageProjectsButtonClicked():void {
             sendNotification(ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT);
         }
 
-        private function handleManageClientsButtonClicked(event:MouseEvent):void {
+        private function handleManageClientsButtonClicked():void {
             sendNotification(ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT);
         }
 
-        private function handleWelcomeButtonClicked(event:MouseEvent):void {
+        private function handleWelcomeButtonClicked():void {
             sendNotification(ApplicationFacade.NAVIGATE_TO_WELCOME, ApplicationFacade.NAVIGATE_TO_WELCOME);
         }
 
-        private function handleInviteEmployeesButtonClicked(event:MouseEvent):void {
+        private function handleInviteEmployeesButtonClicked():void {
             sendNotification(ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES, ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES);
         }
 
-        private function handleViewAllEmployeesClicked(event:MouseEvent):void {
+        private function handleViewAllEmployeesClicked():void {
             sendNotification(ApplicationFacade.ALL_EMPLOYEES_REQUEST);
+        }
+
+        private function handleViewSubmittedExpensesButtonClicked():void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_VIEW_SUBMITTED_EXPENSE_REPORTS);
+        }
+
+        private function handleViewOpenExpensesButtonClicked():void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS);
+        }
+
+        private function handleReconcileExpenseReportsButtonClicked():void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS);
+        }
+
+        private function handleAddExpenseReportsButtonClicked():void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT);
         }
 
         public function get adminNavigation():AdminNavigation {
             return viewComponent as AdminNavigation;
-        }
-
-        public function get welcomeButton():LinkButton {
-            return adminNavigation.welcomeButton;
-        }
-
-        public function get inviteEmployeesButton():LinkButton {
-            return adminNavigation.inviteEmployeesButton;
-        }
-
-        public function get viewAllEmployeesButton():LinkButton {
-            return adminNavigation.viewAllEmployeesButton;
-        }
-
-        public function get manageProjectsButton():LinkButton {
-            return adminNavigation.manageProjectsButton;
-        }
-
-        public function get manageClientsButton():LinkButton {
-            return adminNavigation.manageClientsButton;
-        }
-
-        public function get approveExpenses():LinkButton {
-            return adminNavigation.approveExpenses;
         }
 
         override public function listNotificationInterests():Array {

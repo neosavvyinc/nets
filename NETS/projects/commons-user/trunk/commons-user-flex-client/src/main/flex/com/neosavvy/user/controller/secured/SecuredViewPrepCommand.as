@@ -13,7 +13,6 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.expenses.report.ExpenseReportDetailMediator;
     import com.neosavvy.user.view.secured.leftNavigation.LeftNavigationMediator;
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigationMediator;
-    import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigationMediator;
     import com.neosavvy.user.view.secured.projectManagement.ProjectManagementMediator;
     import com.neosavvy.user.view.secured.projectManagement.assignments.ManageAssignmentsMediator;
     import com.neosavvy.user.view.secured.projectManagement.projects.ManageProjectsMediator;
@@ -74,9 +73,6 @@ package com.neosavvy.user.controller.secured {
                 //User or Admin related registrations -- these are registered regardless of role
                 if (!facade.hasMediator(LeftNavigationMediator.NAME))
                     facade.registerMediator(new LeftNavigationMediator(securedContainer.leftNavigation));
-
-                if (!facade.hasMediator(EmployeeNavigationMediator.NAME))
-                    facade.registerMediator(new EmployeeNavigationMediator(securedContainer.leftNavigation.employeeNavigation));
 
                 if (!facade.hasMediator(SubmittedExpenseReportMediator.NAME))
                     facade.registerMediator(new SubmittedExpenseReportMediator(securedContainer.submittedExpenseReports));
