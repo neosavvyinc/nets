@@ -32,9 +32,22 @@
 	font-size: 56;
 }
 
-.contentLabel, .contentLabelBold {
+.numberedStepLabelCaption {
+	color: #f9c97a;
+	font-weight: bold;
+	font-size: 12;
+}
+
+.contentLabel, .contentLabelBold, .contentLargeLabel, .contentLargeLabelBold {
 	color: #464e55;
+}
+
+.contentLabel, .contentLabelBold {
 	font-size: 16;
+}
+
+.contentLargeLabel, .contentLargeLabelBold {
+	font-size: 24;
 }
 
 .contentLabelBold {
@@ -44,6 +57,12 @@
 
 .calloutText, .calloutTextBold {
 	color: #085f41;
+	font-size: 28;
+	leading: 2;
+}
+
+.whiteText {
+	color: #ffffff;
 	font-size: 28;
 	leading: 2;
 }
@@ -74,6 +93,18 @@
 
 .applicationViewContainer {
 	border-skin: ClassReference("com.neosavvy.nets.theme.skins.ApplicationViewBorderSkin");
+}
+
+.grayToWhiteViewContainer {
+    border-skin: ClassReference("com.neosavvy.nets.theme.skins.GrayToWhiteGradientBorderSkin");
+}
+
+.grayToGrayViewContainer {
+    border-skin: ClassReference("com.neosavvy.nets.theme.skins.GrayToGrayGradientBorderSkin");
+    paddingRight: 15;
+    paddingBottom: 15;
+    paddingTop: 15;
+    paddingLeft: 15;
 }
 
 .applicationView {
@@ -132,6 +163,14 @@
 	padding-top: 8;
 }
 
+.greenCrossHatchBox {
+    border-skin: ClassReference('com.neosavvy.nets.theme.skins.CrossGradientHatchBorderSkin');
+    paddingBottom: 20;
+    paddingLeft:20;
+    paddingRight:20;
+    paddingTop:20;
+}
+
 /*	=Button
 -----------------------------------------------------------------------------*/
 .orangeLargeButton, .orangeMediumButton, .orangeSmallButton {
@@ -145,7 +184,7 @@
 	up-fill-colors: #feac37, #f6931a, #ef7c01;
 	over-fill-colors: #fc9400, #dc7900, #dc7900;
 	down-fill-colors: #dc7900, #dc7900, #fc9400;
-	disabled-fill-colors: #fec97c, #f8b567, #f5aa5a; 
+	disabled-fill-colors: #fec97c, #f8b567, #f5aa5a;
 	padding-left: 14;
 	padding-right: 14;
 	has-bevel: true;
@@ -158,6 +197,23 @@
 
 .orangeMediumButton {
 	font-size: 16;
+}
+
+.greenLargeButton {
+    color: #ffffff;
+	text-roll-over-color: #ffffff;
+	text-selected-color: #ffffff;
+	disabled-color: #ffffff;
+	corner-radius: 8;
+	font-size: 22;
+	font-weight: bold;
+	up-fill-colors: #feac37, #f6931a, #ef7c01;
+	over-fill-colors: #fc9400, #dc7900, #dc7900;
+	down-fill-colors: #dc7900, #dc7900, #fc9400;
+	disabled-fill-colors: #fec97c, #f8b567, #f5aa5a;
+	padding-left: 14;
+	padding-right: 14;
+	has-bevel: true;
 }
 
 .actionButton {
@@ -185,6 +241,33 @@
 	toggled-disabled-fill-colors: #449b7e, #21785b, #096042;
 	ratios: 0, 155, 255;
 	padding-left: 17;
+}
+
+.noGradientHomeNavigation {
+    cornerRadius: 0;
+	button-style-name: "noGradientButton";
+	first-button-style-name: "noGradientButton";
+	last-button-style-name: "noGradientButton";
+	vertical-gap: 3;
+	padding-top: 12;
+}
+
+.noGradientButton {
+	/*color: #2e7cb3;*/
+    cornerRadius: 0;
+	font-size: 16;
+	text-align: center;
+	show-skin-states: false, false, false, false, true;
+    borderColor: #3c9f7e;
+    selectedUpSkin: ClassReference('com.neosavvy.nets.theme.skins.CrossHatchBorderSkin');
+    selectedDownSkin: ClassReference('com.neosavvy.nets.theme.skins.CrossHatchBorderSkin');
+    selectedOverSkin: ClassReference('com.neosavvy.nets.theme.skins.CrossHatchBorderSkin');
+	toggled-down-fill-colors: #086b4a, #086b4a, #086b4a;
+	toggled-disabled-fill-colors: #086b4a, #086b4a, #086b4a;
+    toggled-up-fill-colors: #3c9f7e, #3c9f7e, #3c9f7e;
+	toggled-over-fill-colors: #3c9f7e, #3c9f7e, #3c9f7e;
+	/*ratios: 0, 155, 255;*/
+	/*padding-left: 17;*/
 }
 
 /*	=DataGrid

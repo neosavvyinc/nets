@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<mx:Application
+        paddingTop="50"
+        paddingLeft="30"
+        paddingRight="30"
+        paddingBottom="30"
+        verticalGap="-1"
+        horizontalScrollPolicy="off" verticalScrollPolicy="off"
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/" xmlns:local="*">
+
+    <mx:Style source="/commonsUser.css"/>
+    <mx:Style source="mxTypeSelectors.css"/>
+    <mx:Style source="mxClassSelectors.css"/>
+
+    <mx:Script>
+        <![CDATA[
+
+        import mx.events.ItemClickEvent;
+
+        protected function handleNavigationChange( event:ItemClickEvent ):void
+        {
+            body.selectedIndex = event.index;
+        }
+
+
+        ]]>
+    </mx:Script>
+
+
+    <mx:HBox id="headerBar" width="100%" horizontalGap="0" verticalAlign="bottom"  horizontalScrollPolicy="off" verticalScrollPolicy="off">
+        <mx:ToggleButtonBar buttonWidth="89" buttonHeight="73" styleName="noGradientHomeNavigation" itemClick="{handleNavigationChange(event)}">
+            <mx:dataProvider>
+                <mx:Array>
+                    <mx:String>HOME</mx:String>
+                    <mx:String>PRICING</mx:String>
+                    <mx:String>SIGN-UP</mx:String>
+                </mx:Array>
+            </mx:dataProvider>
+        </mx:ToggleButtonBar>
+        <mx:VBox horizontalAlign="right" width="100%"  horizontalScrollPolicy="off" verticalScrollPolicy="off">
+            <mx:LinkButton id="havingTrouble" label="Having Trouble?" styleName="greenLinkButton"/>
+            <mx:HBox styleName="grayToGrayViewContainer" width="100%" horizontalAlign="right"  horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                <mx:Label text="Already Registered?" styleName="greenLinkButton"/>
+                <flexlib:PromptingTextInput prompt="User name" id="userName"/>
+                <flexlib:PromptingTextInput prompt="Password" id="password"/>
+                <mx:Button label="Log In"/>
+            </mx:HBox>
+        </mx:VBox>
+    </mx:HBox>
+
+    <mx:ViewStack id="body" width="100%" height="100%" selectedIndex="0">
+        <local:Home id="homeContent" height="100%" width="100%" verticalGap="-1"/>
+        <local:Pricing id="pricingContent" height="100%" width="100%" verticalGap="-1"/>
+        <local:Signup id="signupContent" height="100%" width="100%" verticalGap="-1"/>
+    </mx:ViewStack>
+
+</mx:Application>

@@ -25,13 +25,15 @@
     <mx:Style source="mxTypeSelectors.css"/>
 	<mx:Style source="mxClassSelectors.css"/>
     
-    <mx:ApplicationControlBar dock="true" horizontalAlign="right" width="100%" id="appControlBar">
+    <mx:HBox width="100%">
+        <mx:Label text="NETS" styleName="companyNameHeading"/>
+        <mx:Spacer width="100%"/>
         <mx:Label id="loggedInUserName"/>
         <mx:Canvas>
             <mx:Button id="loginButton" label="Login"/>
             <mx:Button id="logoutButton" label="Logout" visible="false"/>
         </mx:Canvas>
-    </mx:ApplicationControlBar>
+    </mx:HBox>
 
     <mx:ViewStack
             id="navigationViewStack"

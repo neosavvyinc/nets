@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+
+    <mx:VBox id="pricingBody" verticalAlign="middle" styleName="greenCrossHatchBox" width="100%" height="150" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+        <mx:Label text="How Much Does It Cost? NETS is priced on a tiered basis" styleName="whiteText"/>
+        <mx:Label text="depending on the number of employees your company has." styleName="whiteText"/>
+    </mx:VBox>
+    <mx:Canvas id="bodyBox" y="{pricingBody.y + pricingBody.height}"  width="100%" height="100%" styleName="grayToWhiteViewContainer" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+
+        <mx:Canvas id="gradientBox" x="{( bodyBox.width / 2 ) - ( gradientBox.width / 2 ) }" y="{pricingBox.y + pricingBox.height / 6}" styleName="formSectionContainer" cornerRadius="25" width="{pricingBox.width}" height="{200}"/>
+        <mx:HBox x="{( bodyBox.width / 2 ) - ( pricingBox.width / 2 ) }" y="30" id="pricingBox" paddingLeft="10" paddingRight="10">
+
+            <mx:VBox horizontalAlign="center" width="150" height="200" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_48_singleUser.png')"/>
+                <mx:Label text="Single User" styleName="secondaryTitle"/>
+                <mx:Label paddingTop="-10" text="(1-5 Users)" styleName="bodyText"/>
+                <mx:Label paddingLeft="21" text="$10" styleName="numberedStepLabel"/>
+                <mx:Label paddingLeft="25" text="per user" styleName="numberedStepLabelCaption"/>
+                <mx:Label paddingLeft="25" text="per month" styleName="numberedStepLabelCaption"/>
+            </mx:VBox>
+
+            <mx:VBox horizontalAlign="center" width="150" height="200" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_48_twoUser.png')"/>
+                <mx:Label text="Small Company" styleName="secondaryTitle"/>
+                <mx:Label paddingTop="-10" text="(6-50 Users)" styleName="bodyText"/>
+                <mx:Label paddingLeft="25" text="$9" styleName="numberedStepLabel"/>
+                <mx:Label paddingLeft="25" text="per user" styleName="numberedStepLabelCaption"/>
+                <mx:Label paddingLeft="25" text="per month" styleName="numberedStepLabelCaption"/>
+            </mx:VBox>
+
+            <mx:VBox horizontalAlign="center" width="150" height="200" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_48_threeUser.png')"/>
+                <mx:Label text="Medium Company" styleName="secondaryTitle"/>
+                <mx:Label paddingTop="-10" text="(51-100 Users)" styleName="bodyText"/>
+                <mx:Label paddingLeft="25" text="$8" styleName="numberedStepLabel"/>
+                <mx:Label paddingLeft="25" text="per user" styleName="numberedStepLabelCaption"/>
+                <mx:Label paddingLeft="25" text="per month" styleName="numberedStepLabelCaption"/>
+            </mx:VBox>
+
+            <mx:VBox horizontalAlign="center" width="150" height="200" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_48_fourUser.png')"/>
+                <mx:Label text="Large Company" styleName="secondaryTitle"/>
+                <mx:Label paddingTop="-10" text="(101-1000 Users)" styleName="bodyText"/>
+                <mx:Label paddingLeft="25" text="$5" styleName="numberedStepLabel"/>
+                <mx:Label paddingLeft="25" text="per user" styleName="numberedStepLabelCaption"/>
+                <mx:Label paddingLeft="25" text="per month" styleName="numberedStepLabelCaption"/>
+            </mx:VBox>
+
+        </mx:HBox>
+
+        <mx:Button id="tryNowBtn" x="{( bodyBox.width / 2 ) - ( tryNowBtn.width / 2 ) }" y="{pricingBox.y + pricingBox.height + tryNowBtn.height + 10}" styleName="orangeLargeButton" label="Try NETS Free for 30 Days >"/>
+
+        <mx:VBox id="moreInfoBox" y="{bodyBox.height - moreInfoBox.height - 30}" x="{30}">
+            <mx:Label text="Need More?"/>
+            <mx:Label text="Alternatively, if your company is considering the need for a Large Company installation maybe a"/>
+            <mx:Label text="more attractive option would be to evaluate the system as a product and contact us about a private"/>
+            <mx:Label text="installation on a separate Cloud Server"/>
+            <mx:LinkButton label="Contact us >"/>
+        </mx:VBox>
+
+    </mx:Canvas>
+
+</mx:VBox>
