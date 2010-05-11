@@ -3,6 +3,8 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.mobile.DashboardData;
+import com.neosavvy.user.dto.mobile.StatusDashboardData;
+import com.neosavvy.user.dto.project.ExpenseReportStatus;
 import com.neosavvy.user.service.exception.MobileServiceException;
 import fineline.focal.common.http.HttpUtils;
 import fineline.focal.common.security.UserSessionManager;
@@ -23,6 +25,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -113,6 +118,44 @@ public class MobileServiceImpl implements MobileService {
         logger.debug(dashboardData.toString());
 
         return dashboardData;
+    }
+
+    public List<StatusDashboardData> findStatusDashboardData(String status) {
+
+        ExpenseReportStatus reportStatus = ExpenseReportStatus.valueOf(status);
+
+        ArrayList<StatusDashboardData> statusInfo = new ArrayList<StatusDashboardData>();
+
+        StatusDashboardData data1 = new StatusDashboardData();
+        data1.setExpenseReportEndDate(new Date());
+        data1.setExpenseReportStartDate(new Date());
+        data1.setExpenseReportLastActivityDate(new Date());
+        data1.setExpenseReportLocation("Raleigh Fool!");
+        data1.setExpenseReportName("Drinkin' hard");
+        data1.setExpenseReportTotal(500.00);
+
+        StatusDashboardData data2 = new StatusDashboardData();
+        data2.setExpenseReportEndDate(new Date());
+        data2.setExpenseReportStartDate(new Date());
+        data2.setExpenseReportLastActivityDate(new Date());
+        data2.setExpenseReportLocation("Raleigh Fool!");
+        data2.setExpenseReportName("Makin' deals");
+        data2.setExpenseReportTotal(500.00);
+
+
+        StatusDashboardData data3 = new StatusDashboardData();
+        data3.setExpenseReportEndDate(new Date());
+        data3.setExpenseReportStartDate(new Date());
+        data3.setExpenseReportLastActivityDate(new Date());
+        data3.setExpenseReportLocation("Raleigh Fool!");
+        data3.setExpenseReportName("Hirin' Strippers");
+        data3.setExpenseReportTotal(500.00);
+
+        statusInfo.add(data1);
+        statusInfo.add(data2);
+        statusInfo.add(data3);
+
+        return statusInfo;
     }
 
     private UserDetails findUserDetailsOrThrowException() {

@@ -2,6 +2,8 @@ package com.neosavvy.user.service;
 
 import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
 import com.neosavvy.user.dto.mobile.DashboardData;
+import com.neosavvy.user.dto.mobile.StatusDashboardData;
+import com.neosavvy.user.dto.project.ExpenseReportStatus;
 import fineline.focal.common.types.v1.StorageServiceFileRef;
 import org.springframework.context.annotation.Scope;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Component;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
+import java.util.List;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -63,6 +66,11 @@ public interface MobileService {
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/dashboard/")
     public DashboardData findDashboardData();
+
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/statusDashboard/")
+    public List<StatusDashboardData> findStatusDashboardData(@PathParam("status") String status );
 
     
 }
