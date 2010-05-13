@@ -9,28 +9,30 @@ function onLoginFailure(e) {
 
 function onLoginComplete(wrapper, username, password, rememberMe) {
 	Ti.App.fireEvent(evtHideActivityIndicator);
+	
 	var a = Titanium.UI.createAlertDialog({ 
 		title:'Oops...',
 		message: "The login or password were not correct.  Please try again."
 	});
 	  
     if (wrapper == null) {
-		a.show();    
+		a.show();
 		return;
     }
     
     securityWrapper = wrapper;
     
     if (rememberMe) {
-        Titanium.App.Properties.setString("un", username);
-        Titanium.App.Properties.setString("pw", password);
+        Titanium.App.Properties.setString(PROPERTY.USERNAME.name, username);
+        Titanium.App.Properties.setString(PROPERTY.PASSWORD.name, password);
     }
     else {
-        Titanium.App.Properties.setString("un", null);
-        Titanium.App.Properties.setString("pw", null);
+        Titanium.App.Properties.setString(PROPERTY.USERNAME.name, null);
+        Titanium.App.Properties.setString(PROPERTY.PASSWORD.name, null);
     }
     
-    showDashboard();
+    switchToView(VIEW.DASHBOARD);
+	Ti.App.fireEvent(evtLoadDashboard);
 }
 
 function executeLogin(e) {

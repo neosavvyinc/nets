@@ -1,17 +1,19 @@
 function displayDashboardLoadError() {
 	var a = Titanium.UI.createAlertDialog({ 
 		title:'Oops!',
-		message: "We weren't able to load your dashboard data at this time.  Please try again later."		
+		message:"We weren't able to load your dashboard data at this time.  Please try again later."
 	});
 	
 	a.show();    
 }
 
 function onDashboardLoadFailure(e) {
-	Ti.App.fireEvent(evtHideActivityIndicator);
+	displayDashboardLoadError();
 }
 
 function onDashboardLoadComplete(data) {
+	Ti.API.debug('onDashboardLoadComplete data:' + data);
+	
 	Ti.App.fireEvent(evtHideActivityIndicator);
 	  
 	if (data == null) {
@@ -19,7 +21,7 @@ function onDashboardLoadComplete(data) {
 		return;
 	}
 
-	updateDashboard(data);    
+	updateDashboard(data);
 }
 
 function loadDashboardData() {

@@ -7,15 +7,10 @@ NeoSavvy Expense Tracker
 Titanium.UI.setBackgroundColor('#000');
 
 var httpClient = Titanium.Network.createHTTPClient();
-//var mobileServiceBaseUrl = 'http://nets.neosavvy.com:8080/nets/expense/services/mobile';
-//var storageServiceBaseUrl = 'http://nets.neosavvy.com:8080/nets/storage';
-var mobileServiceBaseUrl = 'http://localhost:8080/nets/expense/services/mobile';
-var storageServiceBaseUrl = 'http://localhost:8080/nets/storage';
 var securityWrapper = null;
 
 //Root Window & View
-
-var app = Titanium.UI.createWindow({  
+var rootWin = Titanium.UI.createWindow({  
     title:'NETS',
     //backgroundColor:'#000'
 	backgroundImage:'assets/images/NETS_bg.png'
@@ -29,7 +24,8 @@ var viewContainer = Titanium.UI.createView({
 
 //Includes
 Titanium.include('events.js'); //include this one first. all the uesr-events (should) live in here
-Titanium.include('service.js');
+Titanium.include('constants.js'); //and this one second. important global app mojo in here
+Titanium.include('service.js'); //some views depend on services, so include it before we build views
 Titanium.include('dashboard.js');
 Titanium.include('login.js');
 Titanium.include('confirm_receipt_upload.js');
@@ -37,39 +33,45 @@ Titanium.include('login_handlers.js');
 Titanium.include('dashboard_handlers.js');
 Titanium.include('progress.js');
 
+//add all our views into our view container
 viewContainer.add(login);
 viewContainer.add(dashboard);
 viewContainer.add(confirmReceiptUpload);
 
-function showLogin() {
-  viewContainer.animate({view:login,transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
-  login.visible = true;
-  dashboard.visible = false;
-  confirmReceiptUpload.visible = false;
-}
+/**
+@param v enumerator for the view to switch to. see VIEW in constants.js
+*/
+function switchToView(v) {
+	Ti.API.debug('switchToView value:' + v.value + ' name:' + v.name);
+	
+	login.visible = false;
+	dashboard.visible = false;
+	confirmReceiptUpload.visible = false;
+	
+	switch(v) {
+	case VIEW.LOGIN:
+		viewContainer.animate({view:login,transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+		login.visible = true;
+		break;
+	case VIEW.DASHBOARD:
+		viewContainer.animate({view:dashboard,transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+		dashboard.visible = true;
+		break;
+	case VIEW.CONFIRM_RECEIPT_UPLOAD:
+		viewContainer.animate({view:confirmReceiptUpload,transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
+		confirmReceiptUpload.visible = true;
+		break;
+	default:
+		Ti.API.error('switchToView error: invalid view arg');
+	}
+};
 
-function showDashboard() {
-  viewContainer.animate({view:dashboard,transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
-  login.visible = false;
-  dashboard.visible = true;
-  confirmReceiptUpload.visible = false;
-  Ti.App.fireEvent(evtUserLoggedIn, {securityWrapper: securityWrapper});
-  Ti.App.fireEvent(evtLoadDashboard);
-}
-
-function showConfirmReceiptUpload() {
-  viewContainer.animate({view:confirmReceiptUpload,transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
-  login.visible = false;
-  dashboard.visible = false;
-  confirmReceiptUpload.visible = true;
-}
-
-app.add(viewContainer);
-app.open({
+rootWin.add(viewContainer);
+rootWin.open({
 	transition:Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
 });
 
-showLogin();
+switchToView(VIEW.LOGIN);
 
 if (!Titanium.Network.online) {
   var a = Titanium.UI.createAlertDialog({ 

@@ -19,7 +19,6 @@ var greetingLabel = Titanium.UI.createLabel({
 
 dashboard.add(greetingLabel);
 
-
 var approvingDataLabel = Titanium.UI.createLabel({
   text: '0',
   textAlign:'Left',
@@ -174,7 +173,7 @@ var addReceiptButton = Titanium.UI.createButton({
 	width:250
 });
 
-addReceiptButton.addEventListener("click", function(e) {
+addReceiptButton.addEventListener('click', function(e) {
 	Ti.App.fireEvent(evtDisplayCamera);
 });
 

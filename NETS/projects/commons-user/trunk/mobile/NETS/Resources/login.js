@@ -5,8 +5,8 @@
 var IMG_LoginLock = {url:'assets/images/Icon_48_lock.png', width:48, height:48};
 var IMG_LoginGradient = {url:'assets/images/login_gradient.png', width:280, height:160};
 
-var usernameVal = Titanium.App.Properties.getString("un");
-var passwordVal = Titanium.App.Properties.getString("pw");
+var usernameVal = Titanium.App.Properties.getString(PROPERTY.USERNAME.name);
+var passwordVal = Titanium.App.Properties.getString(PROPERTY.PASSWORD.name);
 var rememberMeVal = (usernameVal != null && usernameVal != '') && (passwordVal != null && passwordVal != ''); 
 
 var login = Titanium.UI.createView({
@@ -178,7 +178,7 @@ var loginButton = Titanium.UI.createButton({
 });
 loginDialogView.add(loginButton);
 
-loginButton.addEventListener("click", function(e) {
+loginButton.addEventListener('click', function(e) {
 	Ti.App.fireEvent(evtLoginRequested, {username: usernameVal, password: passwordVal, rememberMe: rememberMeVal});
 });
 

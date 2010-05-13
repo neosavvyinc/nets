@@ -56,8 +56,8 @@ var cancelButton = Titanium.UI.createButton({
 });
 confirmReceiptUpload.add(cancelButton);
 
-cancelButton.addEventListener("click", function(e) {
-	showDashboard();
+cancelButton.addEventListener('click', function(e) {
+	switchToView(VIEW.DASHBOARD);
 });
 
 nameField.addEventListener('return', function() {
@@ -75,8 +75,8 @@ function onReceiptUploadFailure(e) {
 	});
 	
 	a.show();    
-	a.addEventListener("click", function() {
-	    showDashboard();
+	a.addEventListener('click', function() {
+	    switchToView(VIEW.DASHBOARD);
 	});
 }
 
@@ -94,8 +94,8 @@ function onReceiptUploaded(storageServiceFileRef) {
 	});
 	
 	a.show();    
-	a.addEventListener("click", function() {
-	    showDashboard();
+	a.addEventListener('click', function() {
+	    switchToView(VIEW.DASHBOARD);
 	});
 }
 
@@ -103,7 +103,7 @@ function onReceiptProgress(progress) {
 	uploadProgress.value = progress;
 }
 
-uploadButton.addEventListener("click", function(e) {
+uploadButton.addEventListener('click', function(e) {
     if (receiptNameVal == null || receiptNameVal.length == 0) {
     	alert('You must enter a receipt name.');
 	    return;
@@ -123,5 +123,5 @@ Ti.App.addEventListener(evtConfirmReceiptUpload, function(e) {
 	cancelButton.visible = true;
 	uploadButton.visible = true;
     uploadProgress.message = 'Waiting...';
-	showConfirmReceiptUpload();
+	switchToView(VIEW.CONFIRM_RECEIPT_UPLOAD);
 });
