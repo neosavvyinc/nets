@@ -8,11 +8,11 @@ function displayDashboardLoadError() {
 }
 
 function onDashboardLoadFailure(e) {
-	Ti.App.fireEvent('hideActivityIndicator');
+	Ti.App.fireEvent(evtHideActivityIndicator);
 }
 
 function onDashboardLoadComplete(data) {
-	Ti.App.fireEvent('hideActivityIndicator');
+	Ti.App.fireEvent(evtHideActivityIndicator);
 	  
 	if (data == null) {
 		displayDashboardLoadError();
@@ -23,13 +23,13 @@ function onDashboardLoadComplete(data) {
 }
 
 function loadDashboardData() {
-	Ti.App.fireEvent('displayActivityIndicator', {message: 'Loading dashboard...'});
+	Ti.App.fireEvent(evtDisplayActivityIndicator, {message: 'Loading dashboard...'});
 	serviceGetDashboardData(onDashboardLoadComplete, onDashboardLoadFailure);
 }
 
 function handleReceiptImageEvent(e) {
 	currentReceiptImage = e.media;
-    Ti.App.fireEvent("confirmReceiptUpload");     
+    Ti.App.fireEvent(evtConfirmReceiptUpload);     
 }
 
 function showCamera() {
@@ -67,7 +67,7 @@ function showCamera() {
 function uploadReceipt(e) {
 }
 
-Ti.App.addEventListener("loadDashboard", loadDashboardData);
-Ti.App.addEventListener("displayCamera", showCamera);
-Ti.App.addEventListener("uploadReceipt", uploadReceipt);
+Ti.App.addEventListener(evtLoadDashboard, loadDashboardData);
+Ti.App.addEventListener(evtDisplayCamera, showCamera);
+Ti.App.addEventListener(evtUploadReceipt, uploadReceipt);
 

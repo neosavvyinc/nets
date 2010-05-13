@@ -8,11 +8,12 @@ var securityWrapper = null;
 
 var app = Titanium.UI.createWindow({  
     title:'NETS',
-    backgroundColor:'#000'
+    //backgroundColor:'#000'
+	backgroundImage:'assets/images/NETS_bg.png'
 });
 
 var viewContainer = Titanium.UI.createView({
-  top:60,
+  //top:60,
   width:320,
   height:420
 });

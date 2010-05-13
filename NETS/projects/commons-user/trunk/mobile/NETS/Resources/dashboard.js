@@ -175,7 +175,7 @@ var addReceiptButton = Titanium.UI.createButton({
 });
 
 addReceiptButton.addEventListener("click", function(e) {
-	Ti.App.fireEvent("displayCamera");
+	Ti.App.fireEvent(evtDisplayCamera);
 });
 
 dashboard.add(addReceiptButton);
@@ -190,7 +190,7 @@ function updateDashboard(data) {
   reconciledDataLabel.text = dashboardData.numberExpenseReportsReconciled;
 }
 
-Ti.App.addEventListener("userLoggedIn", function(e) {
+Ti.App.addEventListener(evtUserLoggedIn, function(e) {
 	greetingLabel.text = 'Welcome ' + e.securityWrapper.name;
 });
 

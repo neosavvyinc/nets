@@ -1,5 +1,5 @@
 function onLoginFailure(e) {
-	Ti.App.fireEvent('hideActivityIndicator');
+	Ti.App.fireEvent(evtHideActivityIndicator);
     var a = Titanium.UI.createAlertDialog({ 
 	    title:'Oops...',
 	    message: "We weren't able to log you in at this time.  Please try again."
@@ -8,7 +8,7 @@ function onLoginFailure(e) {
 }
 
 function onLoginComplete(wrapper, username, password, rememberMe) {
-	Ti.App.fireEvent('hideActivityIndicator');
+	Ti.App.fireEvent(evtHideActivityIndicator);
 	var a = Titanium.UI.createAlertDialog({ 
 		title:'Oops...',
 		message: "The login or password were not correct.  Please try again."
@@ -34,8 +34,8 @@ function onLoginComplete(wrapper, username, password, rememberMe) {
 }
 
 function executeLogin(e) {
-	Ti.App.fireEvent('displayActivityIndicator', {message: 'Logging in...'});
+	Ti.App.fireEvent(evtDisplayActivityIndicator, {message: 'Logging in...'});
 	serviceLogin(e.username, e.password, function(wrapper) { onLoginComplete(wrapper, e.username, e.password, e.rememberMe); }, onLoginFailure);
 }
 
-Titanium.App.addEventListener("loginRequested", executeLogin);
+Titanium.App.addEventListener(evtLoginRequested, executeLogin);

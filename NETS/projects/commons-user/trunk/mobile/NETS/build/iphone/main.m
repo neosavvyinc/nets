@@ -19,7 +19,7 @@ NSString * const TI_APPLICATION_GUID = @"b8073cf1-feb4-428a-8aef-fa9e18cc13f2";
 BOOL const TI_APPLICATION_ANALYTICS = true;
 
 #ifdef DEBUG
-NSString * const TI_APPLICATION_RESOURCE_DIR = @"/Users/tommyodom/neosavvy/nets/mobile/NETS/build/iphone/build/Debug-iphonesimulator/NETS.app";
+NSString * const TI_APPLICATION_RESOURCE_DIR = @"/Users/crumpf/Development/NeoSavvy/commons-user/mobile/NETS/build/iphone/build/Debug-iphonesimulator/NETS.app";
 #endif
 
 int main(int argc, char *argv[]) {

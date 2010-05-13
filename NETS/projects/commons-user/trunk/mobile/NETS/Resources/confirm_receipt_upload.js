@@ -116,7 +116,7 @@ uploadButton.addEventListener("click", function(e) {
 });
 
 
-Ti.App.addEventListener("confirmReceiptUpload", function(e) {
+Ti.App.addEventListener(evtConfirmReceiptUpload, function(e) {
     uploadProgress.value = 0;
     nameField.value = '';
     receiptNameVal = null;

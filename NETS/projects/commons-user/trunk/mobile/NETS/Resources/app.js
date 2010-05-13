@@ -1,22 +1,34 @@
+/**
+NeoSavvy Expense Tracker
+@file app.js
+*/
+
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
 Titanium.UI.setBackgroundColor('#000');
 
 var httpClient = Titanium.Network.createHTTPClient();
+//var mobileServiceBaseUrl = 'http://nets.neosavvy.com:8080/nets/expense/services/mobile';
+//var storageServiceBaseUrl = 'http://nets.neosavvy.com:8080/nets/storage';
 var mobileServiceBaseUrl = 'http://localhost:8080/nets/expense/services/mobile';
 var storageServiceBaseUrl = 'http://localhost:8080/nets/storage';
 var securityWrapper = null;
 
+//Root Window & View
+
 var app = Titanium.UI.createWindow({  
     title:'NETS',
-    backgroundColor:'#000'
+    //backgroundColor:'#000'
+	backgroundImage:'assets/images/NETS_bg.png'
 });
 
 var viewContainer = Titanium.UI.createView({
-  top:60,
+  //top:60,
   width:320,
   height:420
 });
 
+//Includes
+Titanium.include('events.js'); //include this one first. all the uesr-events (should) live in here
 Titanium.include('service.js');
 Titanium.include('dashboard.js');
 Titanium.include('login.js');
@@ -41,8 +53,8 @@ function showDashboard() {
   login.visible = false;
   dashboard.visible = true;
   confirmReceiptUpload.visible = false;
-  Ti.App.fireEvent("userLoggedIn", {securityWrapper: securityWrapper});
-  Ti.App.fireEvent("loadDashboard");
+  Ti.App.fireEvent(evtUserLoggedIn, {securityWrapper: securityWrapper});
+  Ti.App.fireEvent(evtLoadDashboard);
 }
 
 function showConfirmReceiptUpload() {
