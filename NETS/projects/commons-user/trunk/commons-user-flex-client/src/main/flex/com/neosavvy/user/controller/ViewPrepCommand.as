@@ -1,7 +1,6 @@
 package com.neosavvy.user.controller {
     import com.neosavvy.user.ApplicationMediator;
-    import com.neosavvy.user.view.companyManagement.CompanyManagementMediator;
-    import com.neosavvy.user.view.login.ConfirmUserRegistrationMediator;
+    import com.neosavvy.user.view.companyManagement.SignupMediator;
     import com.neosavvy.user.view.secured.progress.ProgressBarMediator;
     import com.neosavvy.user.view.security.LoginMediator;
 
@@ -11,12 +10,11 @@ package com.neosavvy.user.controller {
     public class ViewPrepCommand extends SimpleCommand {
 
         override public function execute(notification:INotification):void {
-            var application:CommonsUser = notification.getBody() as CommonsUser;
+            var application:NETS = notification.getBody() as NETS;
             facade.registerMediator(new ApplicationMediator(application));
             facade.registerMediator(new ProgressBarMediator(null));
-            facade.registerMediator(new CompanyManagementMediator(application.companyManagement));
+            facade.registerMediator(new SignupMediator(application.signupContent));
             facade.registerMediator(new LoginMediator(application.login));
-            facade.registerMediator(new ConfirmUserRegistrationMediator(application.confirmUser));
         }
     }
 }

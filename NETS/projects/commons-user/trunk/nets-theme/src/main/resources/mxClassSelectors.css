@@ -249,7 +249,7 @@
 	first-button-style-name: "noGradientButton";
 	last-button-style-name: "noGradientButton";
 	vertical-gap: 3;
-	padding-top: 12;
+	/*padding-top: 12;*/
 }
 
 .noGradientButton {

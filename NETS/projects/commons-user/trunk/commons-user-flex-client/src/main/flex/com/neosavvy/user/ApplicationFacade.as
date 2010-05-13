@@ -141,7 +141,7 @@ package com.neosavvy.user {
          *
          * @param app a reference to the application component
          */
-        public function startup(app:CommonsUser):void
+        public function startup(app:NETS):void
         {
             sendNotification(STARTUP, app);
         }

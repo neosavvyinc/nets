@@ -43,7 +43,7 @@
                         be able to help your RemoteObjects find their destinations
                         -->
                     <contextRoot>commons-user-webapp</contextRoot>
-                    <sourceFile>./CommonsUser.mxml</sourceFile>
+                    <sourceFile>./NETS.mxml</sourceFile>
                 </configuration>
                 <dependencies>
                     <dependency>
