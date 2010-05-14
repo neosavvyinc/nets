@@ -29,81 +29,100 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(namespace = "urn:com:neosavvy:user:dto:mobile")
 public class DashboardData {
 
-    private Integer numberExpenseReportsAwaitingApproval;
+    //Open - when an expense report is created it is in an open state
+    private Integer numberOpenExpenses;
 
-    private Integer numberExpenseReportsApproved;
+    //Submitted - once a user submits it to the workflow it is submitted
+    private Integer numberSubmittedExpenses;
 
-    private Integer numberExpenseReportsDeclined;
+    //Declined - once any approver has found a problem it will be set to this state
+    private Integer numberDeclinedExpenses;
 
-    private Integer numberExpenseReportsOpened;
+    //Approving - once the first approver has touched the expense report it is in this state
+    private Integer numberApprovingExpenses;
 
-    private Integer numberExpenseReportsAwaitingReconciliation;
+    //Approved - once the last approver has agreed that the expense report is valid it is in this state
+    private Integer numberApprovedExpenses;
 
-    private Integer numberExpenseReportsReconciled;
+    //Reimbursement Sent - once the accounting personal has sent a check it is in this state
+    private Integer numberReimbursmentSentExpenses;
 
-    @XmlElement(required = true)
-    public Integer getNumberExpenseReportsApproved() {
-        return numberExpenseReportsApproved;
-    }
-
-    public void setNumberExpenseReportsApproved(Integer numberExpenseReportsApproved) {
-        this.numberExpenseReportsApproved = numberExpenseReportsApproved;
-    }
-
-    @XmlElement(required = true)
-    public Integer getNumberExpenseReportsAwaitingApproval() {
-        return numberExpenseReportsAwaitingApproval;
-    }
-
-    public void setNumberExpenseReportsAwaitingApproval(Integer numberExpenseReportsAwaitingApproval) {
-        this.numberExpenseReportsAwaitingApproval = numberExpenseReportsAwaitingApproval;
-    }
+    //REIMBURSEMENT_RECEIVED
+    private Integer numberReimbursedmentReceivedExpenses;
 
     @XmlElement(required = true)
-    public Integer getNumberExpenseReportsAwaitingReconciliation() {
-        return numberExpenseReportsAwaitingReconciliation;
+    public Integer getNumberApprovedExpenses() {
+        return numberApprovedExpenses;
     }
 
-    public void setNumberExpenseReportsAwaitingReconciliation(Integer numberExpenseReportsAwaitingReconciliation) {
-        this.numberExpenseReportsAwaitingReconciliation = numberExpenseReportsAwaitingReconciliation;
+    public void setNumberApprovedExpenses(Integer numberApprovedExpenses) {
+        this.numberApprovedExpenses = numberApprovedExpenses;
     }
 
     @XmlElement(required = true)
-    public Integer getNumberExpenseReportsDeclined() {
-        return numberExpenseReportsDeclined;
+    public Integer getNumberApprovingExpenses() {
+        return numberApprovingExpenses;
     }
 
-    public void setNumberExpenseReportsDeclined(Integer numberExpenseReportsDeclined) {
-        this.numberExpenseReportsDeclined = numberExpenseReportsDeclined;
-    }
-
-    @XmlElement(required = true)
-    public Integer getNumberExpenseReportsOpened() {
-        return numberExpenseReportsOpened;
-    }
-
-    public void setNumberExpenseReportsOpened(Integer numberExpenseReportsOpened) {
-        this.numberExpenseReportsOpened = numberExpenseReportsOpened;
+    public void setNumberApprovingExpenses(Integer numberApprovingExpenses) {
+        this.numberApprovingExpenses = numberApprovingExpenses;
     }
 
     @XmlElement(required = true)
-    public Integer getNumberExpenseReportsReconciled() {
-        return numberExpenseReportsReconciled;
+    public Integer getNumberDeclinedExpenses() {
+        return numberDeclinedExpenses;
     }
 
-    public void setNumberExpenseReportsReconciled(Integer numberExpenseReportsReconciled) {
-        this.numberExpenseReportsReconciled = numberExpenseReportsReconciled;
+    public void setNumberDeclinedExpenses(Integer numberDeclinedExpenses) {
+        this.numberDeclinedExpenses = numberDeclinedExpenses;
+    }
+
+    @XmlElement(required = true)
+    public Integer getNumberOpenExpenses() {
+        return numberOpenExpenses;
+    }
+
+    public void setNumberOpenExpenses(Integer numberOpenExpenses) {
+        this.numberOpenExpenses = numberOpenExpenses;
+    }
+
+    @XmlElement(required = true)
+    public Integer getNumberReimbursedmentReceivedExpenses() {
+        return numberReimbursedmentReceivedExpenses;
+    }
+
+    public void setNumberReimbursedmentReceivedExpenses(Integer numberReimbursedmentReceivedExpenses) {
+        this.numberReimbursedmentReceivedExpenses = numberReimbursedmentReceivedExpenses;
+    }
+
+    @XmlElement(required = true)
+    public Integer getNumberReimbursmentSentExpenses() {
+        return numberReimbursmentSentExpenses;
+    }
+
+    public void setNumberReimbursmentSentExpenses(Integer numberReimbursmentSentExpenses) {
+        this.numberReimbursmentSentExpenses = numberReimbursmentSentExpenses;
+    }
+
+    @XmlElement(required = true)
+    public Integer getNumberSubmittedExpenses() {
+        return numberSubmittedExpenses;
+    }
+
+    public void setNumberSubmittedExpenses(Integer numberSubmittedExpenses) {
+        this.numberSubmittedExpenses = numberSubmittedExpenses;
     }
 
     @Override
     public String toString() {
         return "DashboardData{" +
-                "numberExpenseReportsApproved=" + numberExpenseReportsApproved +
-                ", numberExpenseReportsAwaitingApproval=" + numberExpenseReportsAwaitingApproval +
-                ", numberExpenseReportsDeclined=" + numberExpenseReportsDeclined +
-                ", numberExpenseReportsOpened=" + numberExpenseReportsOpened +
-                ", numberExpenseReportsAwaitingReconciliation=" + numberExpenseReportsAwaitingReconciliation +
-                ", numberExpenseReportsReconciled=" + numberExpenseReportsReconciled +
+                "numberApprovedExpenses=" + numberApprovedExpenses +
+                ", numberOpenExpenses=" + numberOpenExpenses +
+                ", numberSubmittedExpenses=" + numberSubmittedExpenses +
+                ", numberDeclinedExpenses=" + numberDeclinedExpenses +
+                ", numberApprovingExpenses=" + numberApprovingExpenses +
+                ", numberReimbursmentSentExpenses=" + numberReimbursmentSentExpenses +
+                ", numberReimbursedmentReceivedExpenses=" + numberReimbursedmentReceivedExpenses +
                 '}';
     }
 }

@@ -69,7 +69,7 @@ public interface MobileService {
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("/statusDashboard/")
+    @Path("/statusDashboard/{status}")
     public List<StatusDashboardData> findStatusDashboardData(@PathParam("status") String status );
 
     

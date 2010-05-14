@@ -62,112 +62,20 @@ public class ExpenseServiceImpl implements ExpenseService {
 
         return report.getExpenseItems();
     }
-    
-    public List<ExpenseReport> findOpenExpenseReportsForUser(UserDTO user) {
+
+    public List<ExpenseReport> findExpenseReportsByStatus(UserDTO user, ExpenseReportStatus status) {
         if (user == null) {
+            return new ArrayList<ExpenseReport>();
+        }
+        if (status == null) {
             return new ArrayList<ExpenseReport>();
         }
 
         ExpenseReport filter = new ExpenseReport();
         filter.setOwner(user);
-        filter.setStatus(ExpenseReportStatus.OPEN);
-        List<ExpenseReport> openExpenseReportList = expenseDAO.findExpenseReports(filter);
-
-        filter.setStatus(ExpenseReportStatus.DECLINED);
-        List<ExpenseReport> declinedExpenseReportList = expenseDAO.findExpenseReports(filter);
-
-        openExpenseReportList.addAll(declinedExpenseReportList);
-        return openExpenseReportList;
-    }
-
-    public List<ExpenseReport> findSubmittedReportsForUser(UserDTO user) {
-        if (user == null) {
-            return new ArrayList<ExpenseReport>();
-        }
-
-        List<ExpenseReport> reports = new ArrayList<ExpenseReport>();
-
-        ExpenseReport filter = new ExpenseReport();
-        filter.setOwner(user);
-        filter.setStatus(ExpenseReportStatus.SUBMITTED);
-        reports.addAll(expenseDAO.findExpenseReports(filter));
-
-        filter.setStatus(ExpenseReportStatus.APPROVED);
-        reports.addAll(expenseDAO.findExpenseReports(filter));
-
-        filter.setStatus(ExpenseReportStatus.APPROVING);
-        reports.addAll(expenseDAO.findExpenseReports(filter));
-
-        filter.setStatus(ExpenseReportStatus.REIMBURSEMENT_SENT);
-        reports.addAll(expenseDAO.findExpenseReports(filter));
-
-        return reports;
-    }
-
-    public List<ExpenseReport> findReimbursedReportsForUser(UserDTO user) {
-        if (user == null) {
-            return new ArrayList<ExpenseReport>();
-        }
-
-        ExpenseReport filter = new ExpenseReport();
-        filter.setOwner(user);
-        filter.setStatus(ExpenseReportStatus.REIMBURSEMENT_RECEIVED);
+        filter.setStatus(status);
         return expenseDAO.findExpenseReports(filter);
-    }
 
-    public List<ExpenseReport> findExpenseReportsApproved(UserDTO user) {
-        if (user == null) {
-            return new ArrayList<ExpenseReport>();
-        }
-
-        ExpenseReport filter = new ExpenseReport();
-        filter.setStatus(ExpenseReportStatus.APPROVED);
-        List<ExpenseReport> approvedExpenseReports = expenseDAO.findExpenseReports(filter);
-
-        return approvedExpenseReports;
-    }
-
-    public List<ExpenseReport> findExpenseReportsAwaitingApproval(UserDTO user) {
-        if (user == null) {
-            return new ArrayList<ExpenseReport>();
-        }
-
-        ExpenseReport filter = new ExpenseReport();
-        filter.setStatus(ExpenseReportStatus.SUBMITTED);
-        List<ExpenseReport> expenseReportListSubmitted = expenseDAO.findExpenseReports(filter);
-
-        filter.setStatus(ExpenseReportStatus.APPROVING);
-        List<ExpenseReport> expenseReportListApproved = expenseDAO.findExpenseReports(filter);
-
-        List<ExpenseReport> submittedAndApproved = new ArrayList<ExpenseReport>();
-        submittedAndApproved.addAll(expenseReportListSubmitted);
-        submittedAndApproved.addAll(expenseReportListApproved);
-
-        return submittedAndApproved;
-    }
-
-    public List<ExpenseReport> findDeclinedExpenseReportsForUser(UserDTO user) {
-        if (user == null) {
-            return new ArrayList<ExpenseReport>();
-        }
-
-        ExpenseReport filter = new ExpenseReport();
-        filter.setStatus(ExpenseReportStatus.DECLINED);
-        List<ExpenseReport> declinedExpenseReports = expenseDAO.findExpenseReports(filter);
-
-        return declinedExpenseReports;
-    }
-
-    public List<ExpenseReport> findExpenseReportsReconciled(UserDTO user) {
-        if (user == null) {
-            return new ArrayList<ExpenseReport>();
-        }
-
-        ExpenseReport filter = new ExpenseReport();
-        filter.setStatus(ExpenseReportStatus.REIMBURSEMENT_RECEIVED);
-        List<ExpenseReport> reconciledExpenseReports = expenseDAO.findExpenseReports(filter);
-
-        return reconciledExpenseReports;
     }
 
     public List<PaymentMethod> findPaymentMethods() {

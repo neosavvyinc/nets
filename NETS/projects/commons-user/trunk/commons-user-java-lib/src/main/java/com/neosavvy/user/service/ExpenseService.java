@@ -56,25 +56,7 @@ public interface ExpenseService {
     public List<ProjectType> findProjectTypes();
 
     @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
-    public List<ExpenseReport> findOpenExpenseReportsForUser(UserDTO user);
-
-    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
-    public List<ExpenseReport> findSubmittedReportsForUser(UserDTO user);
-
-    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
-    public List<ExpenseReport> findReimbursedReportsForUser(UserDTO user);
-
-    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
-    public List<ExpenseReport> findExpenseReportsApproved(UserDTO user);
-
-    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
-    public List<ExpenseReport> findExpenseReportsAwaitingApproval(UserDTO user);
-
-    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
-    public List<ExpenseReport> findDeclinedExpenseReportsForUser(UserDTO user);
-
-    @Secured({"ROLE_EMPLOYEE", "AFTER_ACL_COLLECTION_READ"})
-    public List<ExpenseReport> findExpenseReportsReconciled(UserDTO user);
+    public List<ExpenseReport> findExpenseReportsByStatus(UserDTO user, ExpenseReportStatus status);
 
     @Secured({"ROLE_EMPLOYEE", "ACL_OBJECT_WRITE"})
     public ExpenseReport submitExpenseReportForApproval(ExpenseReport report, String comment);

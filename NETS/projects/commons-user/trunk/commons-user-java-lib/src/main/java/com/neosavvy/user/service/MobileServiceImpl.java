@@ -108,13 +108,14 @@ public class MobileServiceImpl implements MobileService {
         UserDTO user = new UserDTO();
         user.setUsername( userDetails.getUsername() );
 
-        dashboardData.setNumberExpenseReportsApproved( expenseService.findExpenseReportsApproved( user ).size() );
-        dashboardData.setNumberExpenseReportsAwaitingApproval( expenseService.findExpenseReportsAwaitingApproval( user ).size() );
-        dashboardData.setNumberExpenseReportsAwaitingReconciliation( expenseService.findReimbursedReportsForUser( user ).size() );
-        dashboardData.setNumberExpenseReportsDeclined( expenseService.findDeclinedExpenseReportsForUser( user ).size() );
-        dashboardData.setNumberExpenseReportsOpened( expenseService.findOpenExpenseReportsForUser( user ).size() );
-        dashboardData.setNumberExpenseReportsReconciled( expenseService.findExpenseReportsReconciled( user ).size() );
-
+        dashboardData.setNumberApprovedExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.APPROVED ).size() );
+        dashboardData.setNumberApprovingExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.APPROVING).size() );
+        dashboardData.setNumberDeclinedExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.DECLINED).size() );
+        dashboardData.setNumberOpenExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.OPEN).size() );
+        dashboardData.setNumberReimbursedmentReceivedExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.REIMBURSEMENT_RECEIVED).size() );
+        dashboardData.setNumberReimbursmentSentExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.REIMBURSEMENT_SENT).size() );
+        dashboardData.setNumberSubmittedExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.SUBMITTED).size() );
+        
         logger.debug(dashboardData.toString());
 
         return dashboardData;
