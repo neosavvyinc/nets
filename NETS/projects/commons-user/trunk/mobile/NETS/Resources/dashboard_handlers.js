@@ -78,4 +78,4 @@ function uploadReceipt(e) {
 Ti.App.addEventListener(evtLoadDashboard, loadDashboardData);
 Ti.App.addEventListener(evtDisplayCamera, showCamera);
 Ti.App.addEventListener(evtUploadReceipt, uploadReceipt);
-
+Ti.App.addEventListener(evtUpdateDateRange, updateRangeLabel);

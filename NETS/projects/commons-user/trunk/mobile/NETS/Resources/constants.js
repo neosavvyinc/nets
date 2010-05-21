@@ -19,22 +19,59 @@ if (1) {
 	}
 }
 
+//Enumerator for the different windows we use. It's conceivable that more than
+//one screen (view) could live in a window
+var WINDOW = {
+	ROOT		: {id:0, name:'rootWin'},
+	DASHBOARD 	: {id:1, name:'dashboardWin'},
+	STATUSDASH 	: {id:2, name:'statusDashboardWin'},
+	DATERANGE  	: {id:3, name:'dateRangeWin'},
+	HELP 		: {id:4, name:'helpWin'}
+};
+var TABGROUP = {
+	ROOT		: {id:100, name:'tabGroup'}
+};
 
 //Enumerator for the different screens we have in the app
+//A screen is more of a logical notion about what the user sees
+//For the most part, a screen will probably map to a View, but SCREEN
+//is used with our switchToScreen fn which might create a window or tab group
 var SCREEN = {
-	LOGIN 					: {id:0, name:'login'},
-	DASHBOARD 				: {id:1, name:'dashboard'},
-	CONFIRM_RECEIPT_UPLOAD 	: {id:2, name:'confirmReceiptUpload'},
-	STATUS_DASHBOARD		: {id:3, name:'statusDashboard'},
-	DATE_RANGE				: {id:4, name:'dateRange'}
+	LOGIN 					: {id:0, name:'login', parent:WINDOW.ROOT},
+	TABGROUP 				: {id:1, name:'dashboard', parent:TABGROUP.ROOT},
+	CONFIRM_RECEIPT_UPLOAD 	: {id:2, name:'confirmReceiptUpload', parent:WINDOW.ROOT},
+	STATUS_DASHBOARD		: {id:3, name:'statusDashboard', parent:WINDOW.STATUSDASH},
+	DATE_RANGE				: {id:4, name:'dateRange', parent:WINDOW.DATERANGE}
 };
 
 //App Properties
 var PROPERTY = {
-	USERNAME  : {id:0, name:'un'},
-	PASSWORD  : {id:1, name:'pw'},
-	DATERANGE : {id:2, name:'dr'}
+	USERNAME  : {id:0, name:'un', type:'string', value:Ti.App.Properties.getString('un')},
+	PASSWORD  : {id:1, name:'pw', type:'string', value:Ti.App.Properties.getString('pw')},
+	DATERANGE : {id:2, name:'dr', type:'string', value:Ti.App.Properties.getString('dr')},
+	START_D   : {id:3, name:'sd', type:'string', value:Ti.App.Properties.getString('sd')},
+	START_M   : {id:4, name:'sm', type:'string', value:Ti.App.Properties.getString('sm')},
+	START_Y   : {id:5, name:'sy', type:'string', value:Ti.App.Properties.getString('sy')},
+	START_S   : {id:6, name:'ss', type:'string', value:Ti.App.Properties.getString('ss')},
+	END_D     : {id:7, name:'ed', type:'string', value:Ti.App.Properties.getString('ed')},
+	END_M     : {id:8, name:'em', type:'string', value:Ti.App.Properties.getString('em')},
+	END_Y     : {id:9, name:'ey', type:'string', value:Ti.App.Properties.getString('ey')},
+	END_S     : {id:10,name:'es', type:'string', value:Ti.App.Properties.getString('es')}
 };
+/**
+Helper function to set Properties in Titanium to persist between applet instances
+@param p 	a PROPERTY as defined above
+@param val	a value to assign to the property
+*/
+function setProperty(p, val) {
+	p.value = val;
+	if (p.type == 'string') {
+		Ti.API.debug('Saving ' + p.value + ' to ' + p.name);
+		Titanium.App.Properties.setString(p.name, p.value);
+	} else {
+		Ti.API.error('Tried to set a ' + p.type + ' property.');
+	}
+}
 
 //Colors
 var NETS_COLOR = {
@@ -45,6 +82,12 @@ var NETS_COLOR = {
 	DIALOG_BG : '#fcf7e7',
 	DIALOG_BG_GRADIENT_DARK : '#fdedb9',
 	DARK_GRAY : '#222'
+};
+
+//String localization
+var STRING = {
+	ALL_REPORTS: 'All Reports',
+	CUSTOM: 'Custom'
 };
 
 /*

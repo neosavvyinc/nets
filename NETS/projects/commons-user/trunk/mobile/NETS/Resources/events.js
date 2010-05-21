@@ -15,4 +15,5 @@ var evtDisplayCamera = 'evtDisplayCamera';
 var evtUploadReceipt = 'evtUploadReceipt';
 var evtConfirmReceiptUpload = 'evtConfirmReceiptUpload';
 var evtLoadStatusDashboard = 'evtLoadStatusDashboard';
+var evtUpdateDateRange = 'evtUpdateDateRange';
 

@@ -57,7 +57,7 @@ var cancelButton = Titanium.UI.createButton({
 confirmReceiptUpload.add(cancelButton);
 
 cancelButton.addEventListener('click', function(e) {
-	switchToScreen(SCREEN.DASHBOARD);
+	switchToScreen(SCREEN.TABGROUP);
 });
 
 nameField.addEventListener('return', function() {
@@ -76,7 +76,7 @@ function onReceiptUploadFailure(e) {
 	
 	a.show();    
 	a.addEventListener('click', function() {
-	    switchToScreen(SCREEN.DASHBOARD);
+	    switchToScreen(SCREEN.TABGROUP);
 	});
 }
 
@@ -95,7 +95,7 @@ function onReceiptUploaded(storageServiceFileRef) {
 	
 	a.show();    
 	a.addEventListener('click', function() {
-	    switchToScreen(SCREEN.DASHBOARD);
+	    switchToScreen(SCREEN.TABGROUP);
 	});
 }
 

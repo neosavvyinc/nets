@@ -27,15 +27,15 @@ function onLoginComplete(wrapper, username, password, rememberMe) {
     securityWrapper = wrapper;
     
     if (rememberMe) {
-        Titanium.App.Properties.setString(PROPERTY.USERNAME.name, username);
-        Titanium.App.Properties.setString(PROPERTY.PASSWORD.name, password);
+		setProperty(PROPERTY.USERNAME, username);
+		setProperty(PROPERTY.PASSWORD, password);
     }
     else {
-        Titanium.App.Properties.setString(PROPERTY.USERNAME.name, null);
-        Titanium.App.Properties.setString(PROPERTY.PASSWORD.name, null);
+		setProperty(PROPERTY.USERNAME, null);
+		setProperty(PROPERTY.PASSWORD, null);
     }
     
-    switchToScreen(SCREEN.DASHBOARD);
+    switchToScreen(SCREEN.TABGROUP);
 	Ti.App.fireEvent(evtLoadDashboard);
 }
 

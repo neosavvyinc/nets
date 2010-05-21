@@ -12,6 +12,37 @@ var dashboard = Titanium.UI.createView({
     opacity: 1
 });
 
+//report date range info
+var rangeView = Ti.UI.createView({
+	top:0,
+	height:35,
+	backgroundColor:NETS_COLOR.BUTTON_GRADIENT_LIGHT
+});
+dashboard.add(rangeView);
+var rangeButton = Ti.UI.createButton({
+	image:'assets/images/Icon_calendar.png',
+	right:5
+});
+rangeButton.addEventListener('click', function(e) {
+	switchToScreen(SCREEN.DATE_RANGE);
+});
+rangeView.add(rangeButton);
+var rangeLabel = Ti.UI.createLabel({
+	text:STRING.ALL_REPORTS,
+	textAlign:'center'
+});
+rangeView.add(rangeLabel);
+
+function updateRangeLabel() {
+	Ti.API.info('updating Range Label');
+	if (PROPERTY.DATERANGE.value == null || PROPERTY.DATERANGE.value == 0) {
+		rangeLabel.text = STRING.ALL_REPORTS;
+	} else {
+		rangeLabel.text = PROPERTY.START_S.value + ' to ' + PROPERTY.END_S.value;
+	}
+}
+updateRangeLabel(); //initial update
+
 //set up the dashboard table
 var data = [];
 
@@ -192,7 +223,7 @@ var tableView = Ti.UI.createTableView({
 	data:data,
 	style:Ti.UI.iPhone.TableViewStyle.GROUPED,
 	backgroundColor:'transparent',
-	top:0
+	top:30
 });
 
 // create table view event listener
@@ -223,8 +254,7 @@ var addReceiptButton = Titanium.UI.createButton({
 
 addReceiptButton.addEventListener('click',
 function(e) {
-    //Ti.App.fireEvent(evtDisplayCamera);
-	switchToScreen(SCREEN.DATE_RANGE);
+    Ti.App.fireEvent(evtDisplayCamera);
 });
 
 dashboard.add(addReceiptButton);

@@ -9,30 +9,72 @@ Titanium.UI.setBackgroundColor('#000');
 var httpClient = Titanium.Network.createHTTPClient();
 var securityWrapper = null;
 
+
 //Includes
 Titanium.include('events.js'); //include this one first. all the uesr-events (should) live in here
 Titanium.include('constants.js'); //and this one second. important global app mojo in here
 Titanium.include('service.js'); //some views depend on services, so include it before we build views
 //views
+// 
+Titanium.include('dateRange.js');
 Titanium.include('progress.js');
 Titanium.include('statusDashboard.js');
 Titanium.include('dashboard.js');
 Titanium.include('login.js');
 Titanium.include('confirm_receipt_upload.js');
-Titanium.include('dateRange.js');
 //handlers
 Titanium.include('login_handlers.js');
 Titanium.include('dashboard_handlers.js');
 Titanium.include('statusDashboard_handlers.js');
 
+/**
+Handler for our window events
+*/
+function NETSEventHandler(e) {
+	Ti.API.debug('<<NETSEventHandler>> evt:' + e.type + ' name:' + e.source.type.name);
+	Ti.API.debug(e.source.type);
+	switch(e.source.type.id) {
+	case WINDOW.ROOT.id:
+		break;
+	case WINDOW.DASHBOARD.id:
+		break;
+	case WINDOW.STATUSDASH.id:
+		break;
+	case WINDOW.DATERANGE.id:
+		break;
+	case TABGROUP.ROOT.id:
+		break;
+	default:
+		Ti.API.debug('handle invalid window type');
+	}
+}
+
+/**
+A utility for creating windows
+@type   use a WINDOW member from constants.js (not a Titanium property)
+@title  Option. Window title.
+@return a Titanium.UI.Window object
+*/
+function NETSCreateWindow(type, title) {
+	//@todo validate type?
+	if (title==null) {
+		title = '';
+	}
+	var win = Titanium.UI.createWindow({  
+	    title:title,
+	    backgroundImage:'assets/images/NETS_bg.png',
+		type:type
+	});
+	win.addEventListener('blur', NETSEventHandler);
+	win.addEventListener('close', NETSEventHandler);
+	win.addEventListener('focus', NETSEventHandler);
+	win.addEventListener('open', NETSEventHandler);
+	return win;
+}
 
 //Tab Group
 //Windows in the tab group
-var dashboardWindow = Ti.UI.createWindow({
-	//url:'dashboard.js',
-	title:'Summary',
-	backgroundImage:'assets/images/NETS_bg.png'
-});
+var dashboardWin = NETSCreateWindow(WINDOW.DASHBOARD, 'Summary');
 var dashboardScrollView = Titanium.UI.createScrollView({
 	contentWidth:'auto',
 	contentHeight:'auto',
@@ -41,24 +83,25 @@ var dashboardScrollView = Titanium.UI.createScrollView({
 	showHorizontalScrollIndicator:true
 });
 dashboardScrollView.add(dashboard);
-dashboardWindow.add(dashboardScrollView);
+dashboardWin.add(dashboardScrollView);
 
-var helpWindow = Ti.UI.createWindow({
-	title:'Help',
-	backgroundImage:'assets/images/NETS_bg.png'
-});
+var helpWin = NETSCreateWindow(WINDOW.HELP, 'Help');
 
-var tabGroup = Titanium.UI.createTabGroup();
+var tabGroup = Titanium.UI.createTabGroup({type:TABGROUP.ROOT});
+tabGroup.addEventListener('blur', NETSEventHandler);
+tabGroup.addEventListener('close', NETSEventHandler);
+tabGroup.addEventListener('focus', NETSEventHandler);
+tabGroup.addEventListener('open', NETSEventHandler);
 
 var dashboardTab = Ti.UI.createTab({
 	icon:'',
 	title:'Dashboard',
-	window:dashboardWindow
+	window:dashboardWin
 });
 var helpTab = Ti.UI.createTab({
 	icon:'',
 	title:'Help',
-	window:helpWindow
+	window:helpWin
 });
 tabGroup.addTab(dashboardTab);
 tabGroup.addTab(helpTab);
@@ -72,22 +115,18 @@ function switchToScreen(v) {
 	switch(v) {
 	case SCREEN.LOGIN:
 		//Root Window & View
-		var loginWin = Titanium.UI.createWindow({  
-		    title:'NETS',
-		    backgroundImage:'assets/images/NETS_bg.png'
-		});
+		var loginWin = NETSCreateWindow(WINDOW.ROOT, 'NETS');
 		var viewContainer = Titanium.UI.createView({
 		  width:320,
 		  height:420
 		});
 		viewContainer.add(login);
-		//viewContainer.animate({view:login,transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 		loginWin.add(viewContainer);
 		loginWin.open({
 			transition:Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
 		});
 		break;
-	case SCREEN.DASHBOARD:
+	case SCREEN.TABGROUP:
 		Ti.API.debug('opening the tab group');
 		tabGroup.open({
 			transition:Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
@@ -98,19 +137,13 @@ function switchToScreen(v) {
 		confirmReceiptUpload.visible = true;
 		break;
 	case SCREEN.STATUS_DASHBOARD:
-		var statusWin = Titanium.UI.createWindow({
-			title:statusDashboard.title,
-			backgroundImage:'assets/images/NETS_bg.png'
-		});
+		var statusWin = NETSCreateWindow(WINDOW.STATUSDASH, statusDashboard.title);
 		statusWin.add(statusDashboard);
 		//tabGroup.activeTab.open(statusWin,{animated:true});
 		dashboardTab.open(statusWin,{animated:true});
 		break;
 	case SCREEN.DATE_RANGE:
-		var dateWin = Titanium.UI.createWindow( {
-			title:dateRange.title,
-			backgroundImage:'assets/images/NETS_bg.png'
-		});
+		var dateWin = NETSCreateWindow(WINDOW.DATERANGE, dateRange.title);
 		dateWin.add(dateRange);
 		//tabGroup.activeTab.open(dateWin,{animated:true}); //apparently android doesn't do well with this
 		dashboardTab.open(dateWin,{animated:true});
