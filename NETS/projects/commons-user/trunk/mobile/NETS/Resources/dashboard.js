@@ -1,3 +1,8 @@
+/**
+@file dashboard.js
+Establishes the dashboard view
+*/
+
 var dashboardData = null;
 
 var dashboard = Titanium.UI.createView({
@@ -7,181 +12,199 @@ var dashboard = Titanium.UI.createView({
     opacity: 1
 });
 
-var greetingLabel = Titanium.UI.createLabel({
-    text: 'Welcome',
-    textAlign: 'Left',
-    height: 'auto',
-    width: 'auto',
-    color: '#fff',
-    top: 0,
-    left: 30
-});
-
-dashboard.add(greetingLabel);
-
 //set up the dashboard table
-var tblBgClr = '#fcf7e8';
-var tblTxtClr = '#222';
 var data = [];
+
 var section = Ti.UI.createTableViewSection();
 data.push(section);
 
-//approving
-var approvingDataLabel = Titanium.UI.createLabel({
-    text: '-',
-    textAlign: 'Left',
-    height: 'auto',
-    width: 'auto',
-    color: tblTxtClr,
-    left: 10
-});
-var approvingLabel = Titanium.UI.createLabel({
-    text: 'Approving',
-    textAlign: 'Left',
-    height: 'auto',
-    width: 'auto',
-    color: tblTxtClr,
-    left: 50
-});
-var approvingRow = Ti.UI.createTableViewRow({
-    hasChild: true,
-	backgroundColor:tblBgClr
-});
-approvingRow.add(approvingDataLabel);
-approvingRow.add(approvingLabel);
-
-//approved
-var approvedDataLabel = Titanium.UI.createLabel({
-    text: '-',
-    textAlign: 'Left',
-    height: 'auto',
-    width: 'auto',
-    color: tblTxtClr,
-    left: 10
-});
-var approvedLabel = Titanium.UI.createLabel({
-    text: 'Approved',
-    textAlign: 'Left',
-    height: 'auto',
-    width: 'auto',
-    color: tblTxtClr,
-    left: 50
-});
-var approvedRow = Ti.UI.createTableViewRow({
-    hasChild: true,
-	backgroundColor:tblBgClr
-});
-approvedRow.add(approvedDataLabel);
-approvedRow.add(approvedLabel);
-
-//declined
-var declinedDataLabel = Titanium.UI.createLabel({
-    text: '-',
-    textAlign: 'Left',
-    height: 'auto',
-    width: 'auto',
-    color: tblTxtClr,
-    left: 10
-});
-var declinedLabel = Titanium.UI.createLabel({
-    text: 'Declined',
-    textAlign: 'Left',
-    height: 'auto',
-    width: 'auto',
-    color: tblTxtClr,
-    left: 50
-});
-var declinedRow = Ti.UI.createTableViewRow({
-    hasChild: true,
-	backgroundColor:tblBgClr
-});
-declinedRow.add(declinedDataLabel);
-declinedRow.add(declinedLabel);
-
-//open
+//Open
 var openDataLabel = Titanium.UI.createLabel({
     text: '-',
-    textAlign: 'Left',
     height: 'auto',
     width: 'auto',
-    color: tblTxtClr,
+    color: NETS_COLOR.DARK_GRAY,
     left: 10
 });
 var openLabel = Titanium.UI.createLabel({
-    text: 'Open',
-    textAlign: 'Left',
+    text: DASHBOARD_STATUS.OPEN.name,
     height: 'auto',
     width: 'auto',
-    color: tblTxtClr,
+    color: NETS_COLOR.DARK_GRAY,
     left: 50
 });
 var openRow = Ti.UI.createTableViewRow({
     hasChild: true,
-	backgroundColor:tblBgClr
+	backgroundColor:NETS_COLOR.DIALOG_BG,
+	dashStatus:DASHBOARD_STATUS.OPEN
 });
 openRow.add(openDataLabel);
 openRow.add(openLabel);
 
-//awaiting
-var awaitingDataLabel = Titanium.UI.createLabel({
+//Submitted
+var submittedDataLabel = Titanium.UI.createLabel({
     text: '-',
-    textAlign: 'Left',
     height: 'auto',
     width: 'auto',
-    color: tblTxtClr,
+    color: NETS_COLOR.DARK_GRAY,
     left: 10
 });
-var awaitingLabel = Titanium.UI.createLabel({
-    text: 'Awaiting Reconciliation',
-    textAlign: 'Left',
+var submittedLabel = Titanium.UI.createLabel({
+    text: DASHBOARD_STATUS.SUBMITTED.name,
     height: 'auto',
     width: 'auto',
-    color: tblTxtClr,
+    color: NETS_COLOR.DARK_GRAY,
     left: 50
 });
-var awaitingRow = Ti.UI.createTableViewRow({
+var submittedRow = Ti.UI.createTableViewRow({
     hasChild: true,
-	backgroundColor:tblBgClr
+	backgroundColor:NETS_COLOR.DIALOG_BG,
+	dashStatus:DASHBOARD_STATUS.SUBMITTED
 });
-awaitingRow.add(awaitingDataLabel);
-awaitingRow.add(awaitingLabel);
+submittedRow.add(submittedDataLabel);
+submittedRow.add(submittedLabel);
 
-//reconciled
-var reconciledDataLabel = Titanium.UI.createLabel({
+//Declined
+var declinedDataLabel = Titanium.UI.createLabel({
     text: '-',
-    textAlign: 'Left',
     height: 'auto',
     width: 'auto',
-    color: tblTxtClr,
+    color: NETS_COLOR.DARK_GRAY,
     left: 10
 });
-var reconciledLabel = Titanium.UI.createLabel({
-    text: 'Reconciled',
-    textAlign: 'Left',
+var declinedLabel = Titanium.UI.createLabel({
+    text: DASHBOARD_STATUS.DECLINED.name,
     height: 'auto',
     width: 'auto',
-    color: tblTxtClr,
+    color: NETS_COLOR.DARK_GRAY,
     left: 50
 });
-var reconciledRow = Ti.UI.createTableViewRow({
+var declinedRow = Ti.UI.createTableViewRow({
     hasChild: true,
-	backgroundColor:tblBgClr
+	backgroundColor:NETS_COLOR.DIALOG_BG,
+	dashStatus:DASHBOARD_STATUS.DECLINED
 });
-reconciledRow.add(reconciledDataLabel);
-reconciledRow.add(reconciledLabel);
+declinedRow.add(declinedDataLabel);
+declinedRow.add(declinedLabel);
 
+
+//Approving
+var approvingDataLabel = Titanium.UI.createLabel({
+    text: '-',
+    height: 'auto',
+    width: 'auto',
+    color: NETS_COLOR.DARK_GRAY,
+    left: 10
+});
+var approvingLabel = Titanium.UI.createLabel({
+    text: DASHBOARD_STATUS.APPROVING.name,
+    height: 'auto',
+    width: 'auto',
+    color: NETS_COLOR.DARK_GRAY,
+    left: 50
+});
+var approvingRow = Ti.UI.createTableViewRow({
+    hasChild: true,
+	backgroundColor:NETS_COLOR.DIALOG_BG,
+	dashStatus:DASHBOARD_STATUS.APPROVING
+});
+approvingRow.add(approvingDataLabel);
+approvingRow.add(approvingLabel);
+
+//Approved
+var approvedDataLabel = Titanium.UI.createLabel({
+    text: '-',
+    height: 'auto',
+    width: 'auto',
+    color: NETS_COLOR.DARK_GRAY,
+    left: 10
+});
+var approvedLabel = Titanium.UI.createLabel({
+    text: DASHBOARD_STATUS.APPROVED.name,
+    height: 'auto',
+    width: 'auto',
+    color: NETS_COLOR.DARK_GRAY,
+    left: 50
+});
+var approvedRow = Ti.UI.createTableViewRow({
+    hasChild: true,
+	backgroundColor:NETS_COLOR.DIALOG_BG,
+	dashStatus:DASHBOARD_STATUS.APPROVED
+});
+approvedRow.add(approvedDataLabel);
+approvedRow.add(approvedLabel);
+
+//Reimbursement Sent
+var sentDataLabel = Titanium.UI.createLabel({
+    text: '-',
+    height: 'auto',
+    width: 'auto',
+    color: NETS_COLOR.DARK_GRAY,
+    left: 10
+});
+var sentLabel = Titanium.UI.createLabel({
+    text: DASHBOARD_STATUS.REIMBURSEMENT_SENT.name,
+    height: 'auto',
+    width: 'auto',
+    color: NETS_COLOR.DARK_GRAY,
+    left: 50
+});
+var sentRow = Ti.UI.createTableViewRow({
+    hasChild: true,
+	backgroundColor:NETS_COLOR.DIALOG_BG,
+	dashStatus:DASHBOARD_STATUS.REIMBURSEMENT_SENT
+});
+sentRow.add(sentDataLabel);
+sentRow.add(sentLabel);
+
+//Reimbursement Received
+var receivedDataLabel = Titanium.UI.createLabel({
+    text: '-',
+    height: 'auto',
+    width: 'auto',
+    color: NETS_COLOR.DARK_GRAY,
+    left: 10
+});
+var receivedLabel = Titanium.UI.createLabel({
+    text: DASHBOARD_STATUS.REIMBURSEMENT_RECEIVED.name,
+    height: 'auto',
+    width: 'auto',
+    color: NETS_COLOR.DARK_GRAY,
+    left: 50
+});
+var receivedRow = Ti.UI.createTableViewRow({
+    hasChild: true,
+	backgroundColor:NETS_COLOR.DIALOG_BG,
+	dashStatus:DASHBOARD_STATUS.REIMBURSEMENT_RECEIVED
+});
+receivedRow.add(receivedDataLabel);
+receivedRow.add(receivedLabel);
+
+section.add(openRow);
+section.add(submittedRow);
+section.add(declinedRow);
 section.add(approvingRow);
 section.add(approvedRow);
-section.add(declinedRow);
-section.add(openRow);
-section.add(awaitingRow);
-section.add(reconciledRow);
+section.add(sentRow);
+section.add(receivedRow);
 
 var tableView = Ti.UI.createTableView({
 	data:data,
 	style:Ti.UI.iPhone.TableViewStyle.GROUPED,
 	backgroundColor:'transparent',
-	top:30
+	top:0
+});
+
+// create table view event listener
+tableView.addEventListener('click',
+function(e) {
+    // event data
+    var index = e.index;
+    var section = e.section;
+    var row = e.row;
+    var rowdata = e.rowData;
+    //Titanium.UI.createAlertDialog({title: 'Table View', message:'row ' + row + '\nindex ' + index + '\nsection ' + section + '\nrow data ' + rowdata}).show();
+	Ti.App.fireEvent(evtLoadStatusDashboard, {dstat:row.dashStatus});	
 });
 
 dashboard.add(tableView);
@@ -189,7 +212,7 @@ dashboard.add(tableView);
 //ADD
 var addReceiptButton = Titanium.UI.createButton({
     title: 'Add Receipt',
-    top: '80%',
+    top: dashboard.height * 0.9,
     //left: 30,
     height: 30,
     width: 250,
@@ -200,23 +223,29 @@ var addReceiptButton = Titanium.UI.createButton({
 
 addReceiptButton.addEventListener('click',
 function(e) {
-    Ti.App.fireEvent(evtDisplayCamera);
+    //Ti.App.fireEvent(evtDisplayCamera);
+	switchToScreen(SCREEN.DATE_RANGE);
 });
 
 dashboard.add(addReceiptButton);
 
+/**
+@param data object "{\"numberApprovedExpenses\":\"0\",\"numberApprovingExpenses\":\"0\",\"numberDeclinedExpenses\":\"0\",\"numberOpenExpenses\":\"0\",\"numberReimbursedmentReceivedExpenses\":\"0\",\"numberReimbursmentSentExpenses\":\"0\",\"numberSubmittedExpenses\":\"0\"}"
+*/
 function updateDashboard(data) {
     dashboardData = data;
-    approvingDataLabel.text = dashboardData.numberExpenseReportsAwaitingApproval;
-    approvedDataLabel.text = dashboardData.numberExpenseReportsApproved;
-    declinedDataLabel.text = dashboardData.numberExpenseReportsDeclined;
-    openDataLabel.text = dashboardData.numberExpenseReportsOpened;
-    awaitingDataLabel.text = dashboardData.numberExpenseReportsAwaitingReconciliation;
-    reconciledDataLabel.text = dashboardData.numberExpenseReportsReconciled;
+
+	openDataLabel.text = dashboardData.numberOpenExpenses;
+	submittedDataLabel.text = dashboardData.numberSubmittedExpenses;
+	declinedDataLabel.text = dashboardData.numberDeclinedExpenses;
+	approvingDataLabel.text = dashboardData.numberApprovingExpenses;
+    approvedDataLabel.text = dashboardData.numberApprovedExpenses;
+    sentDataLabel.text = dashboardData.numberReimbursmentSentExpenses;
+    receivedDataLabel.text = dashboardData.numberReimbursedmentReceivedExpenses;
 }
 
-Ti.App.addEventListener(evtUserLoggedIn,
-function(e) {
-    greetingLabel.text = 'Welcome ' + e.securityWrapper.name;
+
+Ti.App.addEventListener(evtUserLoggedIn, function(e) {
+    //greetingLabel.text = 'Welcome ' + e.securityWrapper.name;
 });
 

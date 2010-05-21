@@ -1,7 +1,11 @@
 function onLoginFailure(e) {
+	Ti.API.info('HTTP ERROR:' + e.error);
+	Ti.API.info('HTTP status:' + httpClient.status);
+	Ti.API.info('HTTP responseText:' + httpClient.responseText);
+	Ti.API.info('HTTP connected:' + httpClient.connected);
 	Ti.App.fireEvent(evtHideActivityIndicator);
     var a = Titanium.UI.createAlertDialog({ 
-	    title:'Oops...',
+	    title:'Error[' + e.error + ']',
 	    message: "We weren't able to log you in at this time.  Please try again."
 	  });
 	a.show();    
@@ -31,11 +35,12 @@ function onLoginComplete(wrapper, username, password, rememberMe) {
         Titanium.App.Properties.setString(PROPERTY.PASSWORD.name, null);
     }
     
-    switchToView(VIEW.DASHBOARD);
+    switchToScreen(SCREEN.DASHBOARD);
 	Ti.App.fireEvent(evtLoadDashboard);
 }
 
 function executeLogin(e) {
+	Ti.API.debug('doing executeLogin');
 	Ti.App.fireEvent(evtDisplayActivityIndicator, {message: 'Logging in...'});
 	serviceLogin(e.username, e.password, function(wrapper) { onLoginComplete(wrapper, e.username, e.password, e.rememberMe); }, onLoginFailure);
 }

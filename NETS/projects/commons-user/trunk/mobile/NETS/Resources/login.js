@@ -1,3 +1,8 @@
+/**
+@file login.js
+Establish the login view
+*/
+
 //let's craft up some objects to hold our image info, url, width, height
 //Ideally, I'd like to be able to pull an image into an ImageView, then toImage()
 //to get the blob and get the width/height from the image blob.
@@ -19,7 +24,8 @@ var login = Titanium.UI.createView({
 var loginDialogView = Titanium.UI.createView({
 	width:280,
 	height:250, //we'll set height for real at the end after we've stuffed everything in
-	backgroundColor:'#fcf7e8'
+	borderRadius:7,
+	backgroundColor:NETS_COLOR.DIALOG_BG
 });
 login.add(loginDialogView);
 
@@ -50,7 +56,7 @@ if (Titanium.Platform.name == 'iPhone OS') {
 var welcomeText = Titanium.UI.createLabel({
 	text:'Welcome to NETS',
 	textAlign:'left',
-	font:{fontSize:14, fontWeight:'bold'},
+	font:{fontSize:15, fontWeight:'bold'},
 	color:'#000',
 	backgroundColor:'transparent',
 	width:(loginDialogView.width - lockImage.width - 15),
@@ -93,6 +99,7 @@ loginDialogView.add(gradientImageView);
 //USERNAME TEXT FIELD
 var usernameField = Titanium.UI.createTextField({
 	hintText:'Enter Username',
+	font:{fontSize:14},
 	height:35,
 	top:(loginText.top + loginText.height + 5),
 	left:10,
@@ -116,6 +123,7 @@ loginDialogView.add(usernameField);
 //PASSWORD TEXT FIELD
 var passwordField = Titanium.UI.createTextField({
 	hintText:'Enter Password',
+	font:{fontSize:14},
 	height:35,
 	top:(usernameField.top + usernameField.height + 5),
 	left:10,
@@ -136,11 +144,26 @@ passwordField.addEventListener('change', function(e) {
 passwordField.value = passwordVal;
 loginDialogView.add(passwordField);
 
+//REMEMBER ME LABEL
+var rememberMeLabel = Ti.UI.createLabel({
+	text:'Remember Login',
+	font:{fontSize:15, fontWeight:'bold'},
+	backgroundColor:'transparent',
+	textAlign:'left',
+	height:35,
+	width:'auto',
+	color:'#333',
+	top:(passwordField.top + passwordField.height + 5),
+	left:12
+});
+
+loginDialogView.add(rememberMeLabel);
+
 //REMEMBER ME SWITCH
 var rememberMeField = Titanium.UI.createSwitch({
     value:false,
 	top:(passwordField.top + passwordField.height + 5),
-	left:10,
+	right:10,
 	height:'auto'
 });
 
@@ -151,38 +174,31 @@ rememberMeField.addEventListener('change', function(e) {
 rememberMeField.value = rememberMeVal;
 loginDialogView.add(rememberMeField);
 
-//REMEMBER ME LABEL
-var rememberMeLabel = Ti.UI.createLabel({
-	text:'Remember Login',
-	backgroundColor:'transparent',
-	textAlign:'left',
-	height:35,
-	width:'auto',
-	color:'#333',
-	top:(passwordField.top + passwordField.height + 5),
-	left:130
-});
-
-loginDialogView.add(rememberMeLabel);
-
 //LOGIN BUTTON
 var loginButton = Titanium.UI.createButton({
 	title:'Login',
-	top:(rememberMeLabel.top + rememberMeLabel.height + 5),
+	font:{fontSize:15, fontWeight:'bold'},
+	color:'#fff',
+	top:(rememberMeLabel.top + rememberMeLabel.height + 10),
 	left:10,
 	height:30,
 	width:(loginDialogView.width - 20),
     backgroundImage:'assets/images/orange_button_unsel.png',
-    backgroundSelectedImage:'assets/images/orange_button_sel.png',
-    backgroundDisabledImage:'assets/images/orange_button_unsel.png'
+	backgroundSelectedImage:'assets/images/orange_button_sel.png',
+	backgroundDisabledImage:'assets/images/orange_button_unsel.png'
 });
+
 loginDialogView.add(loginButton);
 
 loginButton.addEventListener('click', function(e) {
-	Ti.App.fireEvent(evtLoginRequested, {username: usernameVal, password: passwordVal, rememberMe: rememberMeVal});
+	Ti.API.debug('loginButton click:');
+	if (e.source.title == 'Login') {
+		Ti.API.debug('  clicked login button');
+		Ti.App.fireEvent(evtLoginRequested, {username: usernameVal, password: passwordVal, rememberMe: rememberMeVal});
+	} else {
+		Ti.API.debug('  not interested');
+	}
 });
 
 //set the height of the login dialog now that we've stuffed everything in
 loginDialogView.height = loginButton.top + loginButton.height + 15;
-
-Ti.API.info('height ' + (loginDialogView.height - usernameField.top));

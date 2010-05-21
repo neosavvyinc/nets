@@ -8,6 +8,12 @@ function displayDashboardLoadError() {
 }
 
 function onDashboardLoadFailure(e) {
+	Ti.API.info('HTTP ERROR:' + e.error);
+	Ti.API.info('HTTP status:' + httpClient.status);
+	Ti.API.info('HTTP responseText:' + httpClient.responseText);
+	Ti.API.info('HTTP connected:' + httpClient.connected);
+	
+	Ti.App.fireEvent(evtHideActivityIndicator);
 	displayDashboardLoadError();
 }
 
