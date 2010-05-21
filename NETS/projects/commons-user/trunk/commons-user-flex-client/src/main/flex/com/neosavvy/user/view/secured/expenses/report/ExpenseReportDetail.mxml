@@ -1,14 +1,13 @@
 <?xml version="1.0"?>
-<mx:Panel
+<mx:VBox
     xmlns:mx="http://www.adobe.com/2006/mxml"
     xmlns:report="com.neosavvy.user.view.secured.expenses.report.*"
     xmlns:neosavvy="com.neosavvy.grid.*"
     xmlns:flexlib="http://code.google.com/p/flexlib/"
     width="100%"
     height="100%"
-    
-    horizontalAlign="right"
-    title="Create/Edit Expense Report">
+    styleName="applicationView"
+    horizontalAlign="right">
 
     <mx:HBox width="100%" horizontalAlign="right">
         <mx:Form id="expenseReportSummaryForm" width="100%">
@@ -36,6 +35,7 @@
                             headerText="Date"
                             dataField="expenseDate"
                             autoFilterEnabled="true"
+                            leftAlignFilterButton="true"
                             enabledByDefault="true"
                             />
                     <neosavvy:AutoFilteringGridColumn
@@ -45,6 +45,7 @@
                             labelFunction="{expenseTypeLabelFunction}"
                             autoFilterEnabled="true"
                             enabledByDefault="true"
+                            leftAlignFilterButton="true"
                             />
                     <neosavvy:AutoFilteringGridColumn
                             id="paymentMethodColumn"
@@ -52,12 +53,14 @@
                             dataField="paymentMethod"
                             labelFunction="{paymentMethodLabelFunction}"
                             autoFilterEnabled="true"
+                            leftAlignFilterButton="true"
                             enabledByDefault="true"
                             />
                     <neosavvy:AutoFilteringGridColumn
                             id="projectTypeColumn"
                             headerText="Project Type"
                             dataField="projectType"
+                            leftAlignFilterButton="true"
                             labelFunction="{projectTypeLabelFunction}"
                             autoFilterEnabled="true"
                             enabledByDefault="true"
@@ -66,6 +69,7 @@
                             id="amountColumn"
                             headerText="Amount"
                             dataField="amountNumber"
+                            leftAlignFilterButton="true"
                             autoFilterEnabled="true"
                             enabledByDefault="true"
                             />
@@ -140,4 +144,4 @@
             return null;
         }
         ]]></mx:Script>
-</mx:Panel>
+</mx:VBox>

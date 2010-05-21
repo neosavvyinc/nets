@@ -46,7 +46,10 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.user.ResetUserPasswordCommand;
     import com.neosavvy.user.controller.user.SaveEmployeeToCompanyCommand;
     import com.neosavvy.user.controller.user.SaveUserCommand;
+    import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.SecurityProxy;
+
+    import com.neosavvy.user.model.UserServiceProxy;
 
     import org.puremvc.as3.multicore.patterns.facade.Facade;
 
@@ -146,10 +149,20 @@ package com.neosavvy.user {
             sendNotification(STARTUP, app);
         }
 
-        public static function getSecurityProxy(key:String):SecurityProxy {
+        public static const defaultApplicationKey:String = "NETS";
+
+        public static function getSecurityProxy(key:String = defaultApplicationKey):SecurityProxy {
             return ApplicationFacade.getInstance(key).retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
         }
 
+        public static function getCompanyProxy(key:String = defaultApplicationKey):CompanyServiceProxy {
+            return ApplicationFacade.getInstance(key).retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
+        }
+
+        public static function getUserProxy(key:String = defaultApplicationKey):UserServiceProxy {
+            return ApplicationFacade.getInstance(key).retrieveProxy(UserServiceProxy.NAME) as UserServiceProxy;
+        }
+        
         public static const STARTUP:String = 'startup';
 
 

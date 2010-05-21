@@ -1,11 +1,12 @@
 <?xml version="1.0"?>
-<mx:Panel
+<mx:VBox
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:flexlib="http://code.google.com/p/flexlib/"
         xmlns:controls="controls.*"
         xmlns:projects="com.neosavvy.user.view.secured.projectManagement.projects.*"
         xmlns:assignments="com.neosavvy.user.view.secured.projectManagement.assignments.*"
-        title="Project Management"  width="100%" height="100%">
+        width="100%" height="100%"
+        styleName="applicationView">
 
     <mx:TabNavigator
             id="projectManagementTabNavigator"
@@ -16,4 +17,4 @@
         <assignments:ManageAssignments id="manageAssignments" label="Manage Assignments"/>
     </mx:TabNavigator>
 
-</mx:Panel>
+</mx:VBox>

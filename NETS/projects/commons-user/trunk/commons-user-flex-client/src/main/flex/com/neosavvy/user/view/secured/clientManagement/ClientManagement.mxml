@@ -1,16 +1,14 @@
 <?xml version="1.0"?>
-<mx:Panel
+<mx:VBox
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:flexlib="http://code.google.com/p/flexlib/"
         xmlns:controls="controls.*"
         xmlns:neosavvy="com.neosavvy.grid.*"
         xmlns:validators="com.visualempathy.validators.*"
-        title="Client Management"
-
         width="100%"
         height="100%"
-        layout="vertical"
-        horizontalAlign="right">
+        horizontalAlign="right"
+        styleName="applicationView">
 
     <mx:Array id="companyFormValidators">
         <mx:StringValidator id="companyNameValidator" source="{this.companyName}" property="text" required="true"/>
@@ -106,6 +104,7 @@
                     headerText="Company Name"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
             <neosavvy:AutoFilteringGridColumn
                     id="clientPOCName"
@@ -113,6 +112,7 @@
                     headerText="Client Contact"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
             <neosavvy:AutoFilteringGridColumn
                     id="clientPhone"
@@ -120,6 +120,7 @@
                     headerText="Client Phone"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
             <neosavvy:AutoFilteringGridColumn
                     id="clientEmail"
@@ -127,8 +128,9 @@
                     headerText="Client Email"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
         </neosavvy:columns>
     </neosavvy:AutoFilteringGrid>
 
-</mx:Panel>
+</mx:VBox>

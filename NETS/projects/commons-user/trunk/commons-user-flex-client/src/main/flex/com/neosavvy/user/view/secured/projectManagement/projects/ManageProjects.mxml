@@ -81,6 +81,7 @@
                     headerText="Project Name"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
             <neosavvy:AutoFilteringGridColumn
                     id="projectCodeColumn"
@@ -88,6 +89,7 @@
                     headerText="Project Code"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
             <neosavvy:AutoFilteringGridColumn
                     id="startDateColumn"
@@ -95,6 +97,7 @@
                     headerText="Start Date"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
             <neosavvy:AutoFilteringGridColumn
                     id="endDateColumn"
@@ -102,6 +105,7 @@
                     headerText="End Date"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
             <neosavvy:AutoFilteringGridColumn
                     id="clientCompanyColumn"
@@ -109,6 +113,7 @@
                     headerText="Client Company"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
         </neosavvy:columns>
     </neosavvy:AutoFilteringGrid>

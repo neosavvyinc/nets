@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalAlign="center" horizontalScrollPolicy="off">
 
     <mx:Script>
         <![CDATA[
@@ -23,7 +23,7 @@
 
         ]]>
     </mx:Script>
-    <mx:Button id="viewBtn" label="View" toolTip="View Expense Report" click="{viewExpenseReportHandler()}"/>
-    <mx:Button id="approveBtn" label="Approve" toolTip="Approve Expense Report" click="{approveExpenseReportHandler()}"/>
-    <mx:Button id="declineBtn" label="Decline" toolTip="Decline Expense Report" click="{declineExpenseReportHandler()}"/>
+    <mx:LinkButton id="viewBtn" styleName="editLinkButton" toolTip="View Expense Report" click="{viewExpenseReportHandler()}"/>
+    <mx:LinkButton id="approveBtn" styleName="approveLinkButton" toolTip="Approve Expense Report" click="{approveExpenseReportHandler()}"/>
+    <mx:LinkButton id="declineBtn" styleName="deleteLinkButton" toolTip="Decline Expense Report" click="{declineExpenseReportHandler()}"/>
 </mx:HBox>

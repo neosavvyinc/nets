@@ -26,6 +26,8 @@
 
         ]]>
     </mx:Script>
-    <mx:Button id="deleteBtn" label="Delete" toolTip="Delete" click="{deleteHandler()}"/>
-    <mx:Button id="inviteBtn" label="Resend Invite" toolTip="Resend Invite" click="{resendInviteHandler()}"/>
+
+
+    <mx:Button id="deleteBtn" styleName="deleteLinkButton" toolTip="Delete" click="{deleteHandler()}"/>
+    <mx:Button id="inviteBtn" styleName="" label="Resend Invite" toolTip="Resend Invite" click="{resendInviteHandler()}"/>
 </mx:HBox>

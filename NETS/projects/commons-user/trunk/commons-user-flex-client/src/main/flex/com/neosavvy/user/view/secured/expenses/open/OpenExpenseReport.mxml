@@ -1,13 +1,12 @@
 <?xml version="1.0"?>
-<mx:Panel
+<mx:VBox
     xmlns:mx="http://www.adobe.com/2006/mxml"
     width="100%"
     height="100%"
     xmlns:flexlib="http://code.google.com/p/flexlib/"
-
+    styleName="applicationView"
     horizontalAlign="right"
-    xmlns:neosavvy="com.neosavvy.grid.*"
-    title="View Open Expense Reports">
+    xmlns:neosavvy="com.neosavvy.grid.*">
 
     <mx:HBox width="100%" horizontalAlign="right">
         <flexlib:PromptingTextInput id="searchTextInput" prompt="Search..."/>
@@ -23,32 +22,37 @@
                 headerText="Voucher Number"
                 dataField="id"
                 autoFilterEnabled="true"
+                leftAlignFilterButton="true"
                 enabledByDefault="true"/>
             <neosavvy:AutoFilteringGridColumn
                 id="amountNumberColumn"
                 headerText="Expense Amount"
                 dataField="totalExpenseAmount"
                 autoFilterEnabled="true"
+                leftAlignFilterButton="true"
                 enabledByDefault="true"/>
             <neosavvy:AutoFilteringGridColumn
                 id="amountToReimburseColumn"
                 headerText="Amount to Reimburse"
                 dataField="totalReimbursableExpenseAmount"
                 autoFilterEnabled="true"
+                leftAlignFilterButton="true"
                 enabledByDefault="true"/>
             <neosavvy:AutoFilteringGridColumn
                 id="statusColumn"
                 headerText="Status"
                 dataField="status"
                 autoFilterEnabled="true"
+                leftAlignFilterButton="true"
                 enabledByDefault="true"/>
             <neosavvy:AutoFilteringGridColumn
                 id="actionColumn"
                 headerText="Actions"
                 enabledByDefault="true"
                 autoFilterEnabled="false"
+                leftAlignFilterButton="true"
                 itemRenderer="com.neosavvy.user.view.secured.expenses.open.Actions"/>
         </neosavvy:columns>
     </neosavvy:AutoFilteringGrid>
 
-</mx:Panel>
+</mx:VBox>

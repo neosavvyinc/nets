@@ -1,8 +1,9 @@
 <?xml version="1.0" ?>
-<mx:Panel
+<mx:VBox
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:neosavvy="com.neosavvy.grid.*"
-        xmlns:flexlib="http://code.google.com/p/flexlib/" >
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        styleName="applicationView">
 
     <mx:HBox width="100%" horizontalAlign="right">
         <mx:ToggleButtonBar id="userStatusFilterButtonBar">
@@ -34,6 +35,7 @@
                         enabledByDefault="true"
                         dataField="firstName"
                         headerText="First Name"
+                        leftAlignFilterButton="true"
                         />
                 <neosavvy:AutoFilteringGridColumn
                         id="mNameCol"
@@ -41,6 +43,7 @@
                         enabledByDefault="true"
                         dataField="middleName"
                         headerText="Middle Name"
+                        leftAlignFilterButton="true"
                         />
                 <neosavvy:AutoFilteringGridColumn
                         id="lNameCol"
@@ -48,6 +51,7 @@
                         enabledByDefault="true"
                         dataField="lastName"
                         headerText="Last Name"
+                        leftAlignFilterButton="true"
                         />
                 <neosavvy:AutoFilteringGridColumn
                         id="usernameCol"
@@ -55,15 +59,17 @@
                         enabledByDefault="true"
                         dataField="username"
                         headerText="Username"
+                        leftAlignFilterButton="true"
                         />
                 <neosavvy:AutoFilteringGridColumn
                         id="actions"
                         autoFilterEnabled="false"
                         enabledByDefault="true"
+                        leftAlignFilterButton="true"
                         headerText="Actions"
                         itemRenderer="com.neosavvy.user.view.secured.userManagement.Actions"
                         />
             </neosavvy:columns>
         </neosavvy:PickFilterGrid>
     </mx:HBox>
-</mx:Panel>
+</mx:VBox>

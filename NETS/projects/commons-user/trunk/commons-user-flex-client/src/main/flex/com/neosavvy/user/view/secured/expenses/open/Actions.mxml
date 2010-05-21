@@ -17,6 +17,6 @@
 
         ]]>
     </mx:Script>
-    <mx:Button id="editBtn" label="Edit" toolTip="Edit Expense Report" click="{editExpenseHandler()}"/>
+    <mx:Button id="editBtn" styleName="editLinkButton"  label="Edit" toolTip="Edit Expense Report" click="{editExpenseHandler()}"/>
     <mx:Button id="submitBtn" label="Submit" toolTip="Submit Expense Report" click="{submitExpenseHandler()}"/>
 </mx:HBox>

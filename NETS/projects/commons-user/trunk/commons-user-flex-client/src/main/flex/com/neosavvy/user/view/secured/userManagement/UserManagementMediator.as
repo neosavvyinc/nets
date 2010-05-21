@@ -87,17 +87,14 @@ package com.neosavvy.user.view.secured.userManagement {
                 case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:
                     _userManagementMode = ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS;
                     grid.dataProvider = _companyProxy.activeUsersForCompany;
-                    userManagement.title = "Viewing All Active Employees (" + _companyProxy.activeCompany.companyName + ")";
                     break;
                 case ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS:
                     _userManagementMode = ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS;
                     grid.dataProvider = _companyProxy.inactiveUsersForCompany;
-                    userManagement.title = "Viewing All Inactive Employees (" + _companyProxy.activeCompany.companyName + ")";
                     break;
                 case ApplicationFacade.ALL_EMPLOYEES_SUCCESS:
                     _userManagementMode = ApplicationFacade.ALL_EMPLOYEES_SUCCESS;
                     grid.dataProvider = _companyProxy.allUsersForCompany;
-                    userManagement.title = "Viewing All Employees (" + _companyProxy.activeCompany.companyName + ")";
                     break;
                 case ApplicationFacade.SAVE_USER_SUCCESS:
                     refreshLastUserNotifcation();

@@ -108,6 +108,7 @@
 }
 
 .applicationView {
+    border-skin: ClassReference("com.neosavvy.nets.theme.skins.ApplicationViewBorderSkin");
 	padding-bottom: 25;
 	padding-left: 25;
 	padding-right: 25;
@@ -288,7 +289,7 @@
 	padding-bottom: 1;
 }
 
-.rejectLinkButton, .approveLinkButton, .deleteLinkButton, .editLinkButton, .redFlagLinkButton {
+.rejectLinkButton, .approveLinkButton, .deleteLinkButton, .editLinkButton, .redFlagLinkButton, .filterDropdownButton {
 	skin: ClassReference(null);
 }
 

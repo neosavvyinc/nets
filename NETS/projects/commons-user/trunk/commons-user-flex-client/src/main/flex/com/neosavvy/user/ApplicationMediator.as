@@ -1,6 +1,11 @@
 package com.neosavvy.user {
 
+    import com.neosavvy.user.dto.companyManagement.CompanyDTO;
+    import com.neosavvy.user.dto.companyManagement.UserDTO;
+    import com.neosavvy.user.model.CompanyServiceProxy;
+    import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.SecurityProxy;
+    import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.view.secured.SecuredContainer;
 
     import flash.events.MouseEvent;
@@ -94,6 +99,17 @@ package com.neosavvy.user {
         private function toggleSecuredHeader( toggleValue:Boolean ):void {
             this.secureHeaderBar.visible = toggleValue;
             this.secureHeaderBar.includeInLayout = toggleValue;
+            var cs:CompanyServiceProxy = ApplicationFacade.getCompanyProxy() as CompanyServiceProxy;
+            var comp:CompanyDTO = cs.activeCompany;
+            if(comp && comp.companyName){
+                this.app.companyNameHeader.text = comp.companyName.toUpperCase();
+            }
+
+            var us:UserServiceProxy = ApplicationFacade.getUserProxy() as UserServiceProxy;
+            var user:UserDTO = us.activeUser;
+            if(user) {
+                this.app.loggedInUser.text = user.fullName;
+            }
         }
 
         private function toggleHeader( toggleValue:Boolean ):void {

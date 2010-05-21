@@ -34,7 +34,7 @@
 
         private function isButtonEnabledForUser():Boolean {
 
-            var securityProxy:SecurityProxy = ApplicationFacade.getSecurityProxy(NETS.APPLICATION_NAME);
+            var securityProxy:SecurityProxy = ApplicationFacade.getSecurityProxy();
             if (data) {
                 if (securityProxy.user == ((data as PickFilterRow).wrappedObject as UserDTO).username) {
                     return false;

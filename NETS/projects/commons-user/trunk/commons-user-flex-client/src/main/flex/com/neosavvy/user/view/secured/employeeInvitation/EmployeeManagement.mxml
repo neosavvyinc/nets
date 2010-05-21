@@ -1,10 +1,11 @@
 <?xml version="1.0"?>
-<mx:Panel
+<mx:VBox
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:flexlib="http://code.google.com/p/flexlib/"
         xmlns:controls="controls.*"
         xmlns:neosavvy="com.neosavvy.grid.*"
-        title="Queue Employees to be invited here"  width="100%" height="100%">
+        styleName="applicationView"
+        width="100%" height="100%">
     <mx:VBox id="errorContainer"/>
     <mx:HBox width="100%">
         <flexlib:PromptingTextInput id="empFName" prompt="First Name" width="100%"/>
@@ -30,6 +31,7 @@
                     headerText="First Name"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
             <neosavvy:AutoFilteringGridColumn
                     id="lastNameCol"
@@ -37,6 +39,7 @@
                     headerText="Last Name"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
             <neosavvy:AutoFilteringGridColumn
                     id="emailCol"
@@ -44,13 +47,15 @@
                     headerText="Email"
                     autoFilterEnabled="true"
                     enabledByDefault="true"
+                    leftAlignFilterButton="true"
                     />
             <neosavvy:AutoFilteringGridColumn
                     id="actionsCol"
                     headerText="Actions"
                     enabledByDefault="true"
                     autoFilterEnabled="false"
+                    leftAlignFilterButton="true"
                     itemRenderer="com.neosavvy.user.view.secured.employeeInvitation.Actions"/>
         </neosavvy:columns>
     </neosavvy:AutoFilteringGrid>
-</mx:Panel>
+</mx:VBox>

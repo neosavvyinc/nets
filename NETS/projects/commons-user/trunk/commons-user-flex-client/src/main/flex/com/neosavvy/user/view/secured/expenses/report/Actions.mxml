@@ -16,6 +16,6 @@
         }
         ]]>
     </mx:Script>
-    <mx:Button id="editBtn" label="Edit" toolTip="Edit Expense Item" click="{editExpenseItemHandler()}"/>
-    <mx:Button id="deleteBtn" label="Delete" toolTip="Delete Expense Item" click="{deleteExpenseItemHandler()}"/>
+    <mx:Button id="editBtn" styleName="editLinkButton"  label="Edit" toolTip="Edit Expense Item" click="{editExpenseItemHandler()}"/>
+    <mx:Button id="deleteBtn" styleName="deleteLinkButton" label="Delete" toolTip="Delete Expense Item" click="{deleteExpenseItemHandler()}"/>
 </mx:HBox>
