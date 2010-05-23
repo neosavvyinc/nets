@@ -145,6 +145,7 @@ function switchToScreen(v) {
 	case SCREEN.DATE_RANGE:
 		var dateWin = NETSCreateWindow(WINDOW.DATERANGE, dateRange.title);
 		dateWin.add(dateRange);
+		dateRange_init();
 		//tabGroup.activeTab.open(dateWin,{animated:true}); //apparently android doesn't do well with this
 		dashboardTab.open(dateWin,{animated:true});
 		break;

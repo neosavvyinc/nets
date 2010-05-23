@@ -29,12 +29,13 @@ rangeButton.addEventListener('click', function(e) {
 rangeView.add(rangeButton);
 var rangeLabel = Ti.UI.createLabel({
 	text:STRING.ALL_REPORTS,
-	textAlign:'center'
+	textAlign:'center',
+	color:NETS_COLOR.DARK_GRAY,
+	highlightedColor:NETS_COLOR.DARK_GRAY
 });
 rangeView.add(rangeLabel);
 
 function updateRangeLabel() {
-	Ti.API.info('updating Range Label');
 	if (PROPERTY.DATERANGE.value == null || PROPERTY.DATERANGE.value == 0) {
 		rangeLabel.text = STRING.ALL_REPORTS;
 	} else {
