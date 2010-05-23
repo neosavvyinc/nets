@@ -26,13 +26,11 @@ function serviceLogin(aUsername, aPassword, successCallback, failureCallback) {
     httpClient.onerror = failureCallback;
     httpClient.onload = function() { successCallback(parseServiceResponse(this.responseText)); };
 	httpClient.open('POST', MOBILE_SERVICE_BASE_URL + '/dashboardlogin/');
-	httpClient.send('username=foo&password=password');
-	/*
+	//httpClient.send('username=foo&password=password');
 	httpClient.send({
         username:aUsername,
         password:aPassword
     });
-	*/
 }
 
 /**
