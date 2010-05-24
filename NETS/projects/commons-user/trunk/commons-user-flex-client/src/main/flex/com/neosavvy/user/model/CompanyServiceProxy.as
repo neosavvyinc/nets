@@ -43,10 +43,10 @@ package com.neosavvy.user.model {
                         var company:CompanyDTO = userCompanyRole.company;
                         data = company;
                     } else {
-                        throw new IllegalOperationError("Could not determine your active company");
+                        LOGGER.debug("Could not determine your active company");
                     }
                 } else {
-                    throw new IllegalOperationError("Could not determine your active user");
+                    LOGGER.debug("Could not determine your active user");
                 }
             }
 
