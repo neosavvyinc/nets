@@ -3,6 +3,7 @@ package com.neosavvy.user.model {
 
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.dto.project.ExpenseReport;
+    import com.neosavvy.user.dto.project.ExpenseReportStatus;
     import com.neosavvy.user.dto.project.Project;
 
     import mx.collections.ArrayCollection;
@@ -120,19 +121,19 @@ package com.neosavvy.user.model {
         public function findOpenExpenseReportsForUser( user : UserDTO , responder:IResponder ) : void {
             var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
             addCallbackHandler(service, responder);
-            service.findOpenExpenseReportsForUser( user );
+            service.findExpenseReportsByStatuses( user, [ExpenseReportStatus.OPEN, ExpenseReportStatus.DECLINED] );
         }
 
         public function findSubmittedReportsForUser( user : UserDTO , responder:IResponder ) : void {
             var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
             addCallbackHandler(service, responder);
-            service.findSubmittedReportsForUser( user );
+            service.findExpenseReportsByStatuses( user, [ExpenseReportStatus.SUBMITTED,ExpenseReportStatus.APPROVING,ExpenseReportStatus.APPROVED,ExpenseReportStatus.REIMBURSEMENT_SENT]);
         }
 
         public function findReimbursedReportsForUser( user : UserDTO , responder:IResponder ) : void {
             var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
             addCallbackHandler(service, responder);
-            service.findReimbursedReportsForUser( user );
+            service.findExpenseReportsByStatus( user, ExpenseReportStatus.REIMBURSEMENT_RECEIVED);
         }
 
         public function findPaymentMethods( responder:IResponder ) : void {
@@ -162,7 +163,7 @@ package com.neosavvy.user.model {
         public function findExpenseReportsAwaitingApproval(user:UserDTO, responder:IResponder):void {
             var service:RemoteObject = getService(ProxyConstants.expenseServiceDestination);
             addCallbackHandler(service, responder);
-            service.findExpenseReportsAwaitingApproval(user);
+            service.findExpenseReportsByStatuses( user, [ExpenseReportStatus.APPROVING, ExpenseReportStatus.SUBMITTED]);
         }
 
         public function submitExpenseReportForApproval( expenseReport:ExpenseReport, comment:String, responder:IResponder ) : void

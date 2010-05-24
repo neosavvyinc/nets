@@ -75,6 +75,17 @@ public class ExpenseServiceImpl implements ExpenseService {
         filter.setOwner(user);
         filter.setStatus(status);
         return expenseDAO.findExpenseReports(filter);
+    }
+
+    public List<ExpenseReport> findExpenseReportsByStatuses(UserDTO user, List<ExpenseReportStatus> statuses) {
+
+        List<ExpenseReport> expenseReports = new ArrayList<ExpenseReport>();
+
+        for (ExpenseReportStatus status : statuses) {
+            expenseReports.addAll( findExpenseReportsByStatus(user, status) );
+        }
+
+        return expenseReports;
 
     }
 
