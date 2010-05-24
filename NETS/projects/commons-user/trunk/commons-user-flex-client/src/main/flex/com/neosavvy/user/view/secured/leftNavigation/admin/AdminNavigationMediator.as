@@ -22,6 +22,8 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
 
         override public function onRegister():void {
             adminNavigation.toggleBar.addEventListener(ItemClickEvent.ITEM_CLICK, handleAdminNavigationChanged);
+            adminNavigation.toggleBarAdmin.addEventListener(ItemClickEvent.ITEM_CLICK, handleAdminNavigationChanged);
+            adminNavigation.toggleBarEmployee.addEventListener(ItemClickEvent.ITEM_CLICK, handleAdminNavigationChanged);
             
 //            welcomeButton.addEventListener(MouseEvent.CLICK, handleWelcomeButtonClicked);
 //            inviteEmployeesButton.addEventListener(MouseEvent.CLICK, handleInviteEmployeesButtonClicked);
@@ -33,37 +35,67 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
 //            approveExpenses.addEventListener(MouseEvent.CLICK, handleApproveExpensesButtonClicked);
         }
 
+        private function toggleBarFocus(index:Number):void{
+            adminNavigation.toggleBar.selectedIndex = index;
+            adminNavigation.toggleBarAdmin.selectedIndex = -1;
+            adminNavigation.toggleBarEmployee.selectedIndex = -1;
+        }
+
+
+        private function toggleBarAdminFocus(index:Number):void{
+            adminNavigation.toggleBarAdmin.selectedIndex = index;
+            adminNavigation.toggleBar.selectedIndex = -1;
+            adminNavigation.toggleBarEmployee.selectedIndex = -1;
+        }
+
+
+        private function toggleBarEmployeeFocus(index:Number):void{
+            adminNavigation.toggleBarEmployee.selectedIndex = index;
+            adminNavigation.toggleBarAdmin.selectedIndex = -1;
+            adminNavigation.toggleBar.selectedIndex = -1;
+        }
+
         private function handleAdminNavigationChanged(event:ItemClickEvent):void {
             switch (event.label) 
             {
                 case "Welcome":
+                    toggleBarFocus(0);
                     handleWelcomeButtonClicked();
                     break;
                 case "Invite Employees":
+                    toggleBarAdminFocus(0);
                     handleInviteEmployeesButtonClicked();
                     break;
                 case "View Employees":
+                    toggleBarAdminFocus(1);
                     handleViewAllEmployeesClicked();
                     break;
                 case "Manage Clients":
+                    toggleBarAdminFocus(2);
                     handleManageClientsButtonClicked();
                     break;
                 case "Manage Projects":
+                    toggleBarAdminFocus(3);
                     handleManageProjectsButtonClicked();
                     break;
                 case "Approve Expenses":
+                    toggleBarAdminFocus(4);
                     handleApproveExpensesButtonClicked();
                     break;
                 case "View Open Expenses":
+                    toggleBarEmployeeFocus(0);
                     handleViewOpenExpensesButtonClicked();
                     break;
                 case "Create Expense Report":
+                    toggleBarEmployeeFocus(1);
                     handleAddExpenseReportsButtonClicked();
                     break;
                 case "View Submitted Expenses":
+                    toggleBarEmployeeFocus(2);
                     handleViewSubmittedExpensesButtonClicked();
                     break;
                 case "Reconcile Expenses":
+                    toggleBarEmployeeFocus(3);
                     handleReconcileExpenseReportsButtonClicked();
                     break;
             }

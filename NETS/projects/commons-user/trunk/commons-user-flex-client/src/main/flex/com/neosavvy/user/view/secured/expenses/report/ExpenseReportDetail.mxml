@@ -81,8 +81,8 @@
                 <mx:Button id="editExpenseItemButton" label="Edit" enabled="false" />
                 <mx:Button id="deleteExpenseItemButton" label="Delete" enabled="false" />
                 <mx:Spacer width="100%" />
-                <mx:Label text="Total Expense Amount: " />
-                <mx:Label id="totalExpenseAmountLabel" text="$0.00" fontWeight="bold" />
+                <mx:Label text="Total Expense Amount: " styleName="contentLabel" />
+                <mx:Label id="totalExpenseAmountLabel" text="$0.00" styleName="contentLabelBold" />
             </mx:HBox>
         </mx:VBox>
 
