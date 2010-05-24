@@ -120,7 +120,7 @@ dateRange.add(drView);
 
 drData = [];
 var startingLabel = Ti.UI.createLabel({
-	text:'Starting:',
+	text: STRING.STARTING + ':',
 	font:{fontSize:15, fontWeight:'bold'},
 	color:NETS_COLOR.DARK_GRAY,
 	highlightedColor:NETS_COLOR.DARK_GRAY,
@@ -143,7 +143,7 @@ startRow.add(startDateLabel);
 drData.push(startRow);
 
 var endingLabel = Ti.UI.createLabel({
-	text:'Ending:',
+	text: STRING.ENDING + ':',
 	font:{fontSize:15, fontWeight:'bold'},
 	color:NETS_COLOR.DARK_GRAY,
 	highlightedColor:NETS_COLOR.DARK_GRAY,
@@ -168,8 +168,7 @@ drData.push(endRow);
 var drTable = Ti.UI.createTableView({
 	data:drData,
 	style:Ti.UI.iPhone.TableViewStyle.GROUPED,
-	backgroundColor:'transparent',
-	top:35
+	backgroundColor:'transparent'
 });
 
 drView.add(drTable);

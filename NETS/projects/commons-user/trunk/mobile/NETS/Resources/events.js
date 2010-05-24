@@ -4,6 +4,7 @@
 User-defined events that get slung around the app. Catalog them here for sanity.
 */
 
+var evtSwitchToScreen = 'evtSwitchToScreen';
 
 var evtHideActivityIndicator = 'evtHideActivityIndicator';
 var evtDisplayActivityIndicator = 'evtDisplayActivityIndicator';

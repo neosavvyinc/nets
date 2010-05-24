@@ -103,7 +103,7 @@ where <category> is one of:
 	REIMBURSEMENT_SENT
 	REIMBURSEMENT_RECEIVED
 
-REST call returns a list of:
+REST call returns an array named statusDashboardData which is a list of:
 	private String expenseReportName;
     private String expenseReportLocation;
     private Double expenseReportTotal;
@@ -112,6 +112,8 @@ REST call returns a list of:
     private Date expenseReportStartDate;
     private Date expenseReportEndDate;
     private Date expenseReportLastActivityDate;
+
+expected REST Dashboard Response="{\"statusDashboardData\":[{\"expenseReportEndDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLastActivityDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLocation\":\"Raleigh Fool!\",\"expenseReportName\":\"Drinkin' hard\",\"expenseReportStartDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportTotal\":\"500.0\"},{\"expenseReportEndDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLastActivityDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLocation\":\"Raleigh Fool!\",\"expenseReportName\":\"Makin' deals\",\"expenseReportStartDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportTotal\":\"500.0\"},{\"expenseReportEndDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLastActivityDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLocation\":\"Raleigh Fool!\",\"expenseReportName\":\"Hirin' Strippers\",\"expenseReportStartDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportTotal\":\"500.0\"}]}"
 
 @param aCategory string, <category> mentioned above
 */

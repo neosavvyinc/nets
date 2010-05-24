@@ -26,7 +26,8 @@ var WINDOW = {
 	DASHBOARD 	: {id:1, name:'dashboardWin'},
 	STATUSDASH 	: {id:2, name:'statusDashboardWin'},
 	DATERANGE  	: {id:3, name:'dateRangeWin'},
-	HELP 		: {id:4, name:'helpWin'}
+    REPORT      : {id:4, name:'reportWin'},
+	HELP 		: {id:5, name:'helpWin'}
 };
 var TABGROUP = {
 	ROOT		: {id:100, name:'tabGroup'}
@@ -41,7 +42,8 @@ var SCREEN = {
 	TABGROUP 				: {id:1, name:'dashboard', parent:TABGROUP.ROOT},
 	CONFIRM_RECEIPT_UPLOAD 	: {id:2, name:'confirmReceiptUpload', parent:WINDOW.ROOT},
 	STATUS_DASHBOARD		: {id:3, name:'statusDashboard', parent:WINDOW.STATUSDASH},
-	DATE_RANGE				: {id:4, name:'dateRange', parent:WINDOW.DATERANGE}
+	DATE_RANGE				: {id:4, name:'dateRange', parent:WINDOW.DATERANGE},
+    REPORT                  : {id:5, name:'report', parent:WINDOW.REPORT}
 };
 
 //App Properties
@@ -87,7 +89,12 @@ var NETS_COLOR = {
 //String localization
 var STRING = {
 	ALL_REPORTS: 'All Reports',
-	CUSTOM: 'Custom'
+	CUSTOM: 'Custom',
+	STARTING: 'Starting',
+	ENDING: 'Ending',
+	LOADING: 'Loading',
+	DASHBOARD: 'Dashboard',
+	REPORTS: 'Reports'
 };
 
 /*
@@ -100,24 +107,29 @@ public enum ExpenseReportStatus {
     ,REIMBURSEMENT_SENT         //Reimbursement Sent - once the accounting personal has sent a check it is in this state
     ,REIMBURSEMENT_RECEIVED     //Reimbursement Received - once the expense report user who created the expense has received reimbursement
 }
-
-Sample REST Dashboard Response = {
-	numberApprovedExpenses : 0 ,
-	numberApprovingExpenses : 0 ,
-	numberDeclinedExpenses : 0 ,
-	numberOpenExpenses : 0 ,
-	numberReimbursedmentReceivedExpenses : 0 ,
-	numberReimbursmentSentExpenses : 0 ,
-	numberSubmittedExpenses : 0
-	}
 */
 //Dashboard categories
 var DASHBOARD_STATUS = {
-	OPEN 					: {name:'Open', status:'OPEN'},
-	SUBMITTED				: {name:'Submitted', status:'SUBMITTED'},
-	DECLINED 				: {name:'Declined', status:'DECLINED'},
-	APPROVING 				: {name:'Approving', status:'APPROVING'},
-	APPROVED 		   		: {name:'Approved', status:'APPROVED'},	
-	REIMBURSEMENT_SENT 	   	: {name:'Reimbursement Sent', status:'REIMBURSEMENT_SENT'},
-	REIMBURSEMENT_RECEIVED 	: {name:'Reimbursement Received', status:'REIMBURSEMENT_RECEIVED'}
+	OPEN 					: {id:100, name:'Open', status:'OPEN'},
+	SUBMITTED				: {id:101, name:'Submitted', status:'SUBMITTED'},
+	DECLINED 				: {id:102, name:'Declined', status:'DECLINED'},
+	APPROVING 				: {id:103, name:'Approving', status:'APPROVING'},
+	APPROVED 		   		: {id:104, name:'Approved', status:'APPROVED'},	
+	REIMBURSEMENT_SENT 	   	: {id:105, name:'Reimbursement Sent', status:'REIMBURSEMENT_SENT'},
+	REIMBURSEMENT_RECEIVED 	: {id:106, name:'Reimbursement Received', status:'REIMBURSEMENT_RECEIVED'}
+};
+
+/*
+The fields in an expense report
+*/
+var REPORT = {
+    NAME            : {id:0, name:'Report Name'},
+    LOCATION        : {id:1, name:'Location'},
+    TOTAL           : {id:2, name:'Total'},
+    PROJECT         : {id:3, name:'Project'},
+    APPROVER        : {id:4, name:'Approver'},
+    START           : {id:5, name:'Start Date'},
+    END             : {id:6, name:'End Date'},
+    LAST_ACTIVITY   : {id:7, name:'Last Activity'},
+    MAX             : {id:8, name:''}
 };

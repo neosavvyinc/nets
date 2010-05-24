@@ -31,7 +31,7 @@ function onDashboardLoadComplete(data) {
 }
 
 function loadDashboardData() {
-	Ti.App.fireEvent(evtDisplayActivityIndicator, {message: 'Loading dashboard...'});
+	Ti.App.fireEvent(evtDisplayActivityIndicator, {message:STRING.LOADING + ' ' + STRING.DASHBOARD + '...'});
 	serviceGetDashboardData(onDashboardLoadComplete, onDashboardLoadFailure);
 }
 
@@ -78,4 +78,4 @@ function uploadReceipt(e) {
 Ti.App.addEventListener(evtLoadDashboard, loadDashboardData);
 Ti.App.addEventListener(evtDisplayCamera, showCamera);
 Ti.App.addEventListener(evtUploadReceipt, uploadReceipt);
-Ti.App.addEventListener(evtUpdateDateRange, updateRangeLabel);
+Ti.App.addEventListener(evtUpdateDateRange, function() {dashboardRange.update();});

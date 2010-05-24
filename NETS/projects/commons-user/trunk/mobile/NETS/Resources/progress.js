@@ -26,19 +26,27 @@ var progressActivity = Ti.UI.createActivityIndicator({
 });
 progressView.add(progressActivity);
 
-Ti.App.addEventListener(evtDisplayActivityIndicator, function(e) {
-	if (e.message!=null) {
-		progressLabel.text = e.message;
+function progress_show(message) {
+	if (message!=null) {
+		progressLabel.text = message;
 	} else {
 		progressLabel.text = '';
 	}
 
 	progressWin.open();
 	progressActivity.show();
+}
+
+function progress_hide() {
+	progressActivity.hide();
+	progressWin.close({opacity:0, duration:500});
+}
+
+Ti.App.addEventListener(evtDisplayActivityIndicator, function(e) {
+	progress_show(e.message);
 });
 
 Ti.App.addEventListener(evtHideActivityIndicator, function(e) {
-	progressActivity.hide();
-	progressWin.close({opacity:0, duration:500});
+	progress_hide();
 });
 

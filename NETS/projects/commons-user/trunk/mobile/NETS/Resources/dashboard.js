@@ -12,7 +12,14 @@ var dashboard = Titanium.UI.createView({
     opacity: 1
 });
 
+
+
 //report date range info
+var dashboardRange = new DateBanner();
+dashboardRange.update(); //initial update
+dashboard.add(dashboardRange.view);
+
+/*
 var rangeView = Ti.UI.createView({
 	top:0,
 	height:35,
@@ -43,6 +50,7 @@ function updateRangeLabel() {
 	}
 }
 updateRangeLabel(); //initial update
+*/
 
 //set up the dashboard table
 var data = [];
@@ -228,15 +236,14 @@ var tableView = Ti.UI.createTableView({
 });
 
 // create table view event listener
-tableView.addEventListener('click',
-function(e) {
+tableView.addEventListener('click', function(e) {
     // event data
     var index = e.index;
     var section = e.section;
     var row = e.row;
     var rowdata = e.rowData;
     //Titanium.UI.createAlertDialog({title: 'Table View', message:'row ' + row + '\nindex ' + index + '\nsection ' + section + '\nrow data ' + rowdata}).show();
-	Ti.App.fireEvent(evtLoadStatusDashboard, {dstat:row.dashStatus});	
+	Ti.App.fireEvent(evtLoadStatusDashboard, {dstat:row.dashStatus});
 });
 
 dashboard.add(tableView);

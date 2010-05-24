@@ -9,19 +9,20 @@ Titanium.UI.setBackgroundColor('#000');
 var httpClient = Titanium.Network.createHTTPClient();
 var securityWrapper = null;
 
-
 //Includes
 Titanium.include('events.js'); //include this one first. all the uesr-events (should) live in here
 Titanium.include('constants.js'); //and this one second. important global app mojo in here
 Titanium.include('service.js'); //some views depend on services, so include it before we build views
+//building blocks
+Titanium.include('dateBanner.js');
 //views
-// 
 Titanium.include('dateRange.js');
 Titanium.include('progress.js');
-Titanium.include('statusDashboard.js');
 Titanium.include('dashboard.js');
 Titanium.include('login.js');
 Titanium.include('confirm_receipt_upload.js');
+Titanium.include('statusDashboard.js');
+Titanium.include('report.js');
 //handlers
 Titanium.include('login_handlers.js');
 Titanium.include('dashboard_handlers.js');
@@ -42,6 +43,8 @@ function NETSEventHandler(e) {
 		break;
 	case WINDOW.DATERANGE.id:
 		break;
+    case WINDOW.REPORT.id:
+        break;
 	case TABGROUP.ROOT.id:
 		break;
 	default:
@@ -112,8 +115,8 @@ tabGroup.addTab(helpTab);
 function switchToScreen(v) {
 	Ti.API.debug('switchToScreen id:' + v.id + ' name:' + v.name);
 	
-	switch(v) {
-	case SCREEN.LOGIN:
+	switch(v.id) {
+	case SCREEN.LOGIN.id:
 		//Root Window & View
 		var loginWin = NETSCreateWindow(WINDOW.ROOT, 'NETS');
 		var viewContainer = Titanium.UI.createView({
@@ -126,34 +129,41 @@ function switchToScreen(v) {
 			transition:Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
 		});
 		break;
-	case SCREEN.TABGROUP:
+	case SCREEN.TABGROUP.id:
 		Ti.API.debug('opening the tab group');
 		tabGroup.open({
 			transition:Titanium.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT
 		});
 		break;
-	case SCREEN.CONFIRM_RECEIPT_UPLOAD:
+	case SCREEN.CONFIRM_RECEIPT_UPLOAD.id:
 		viewContainer.animate({view:confirmReceiptUpload,transition:Ti.UI.iPhone.AnimationStyle.FLIP_FROM_LEFT});
 		confirmReceiptUpload.visible = true;
 		break;
-	case SCREEN.STATUS_DASHBOARD:
+	case SCREEN.STATUS_DASHBOARD.id:
 		var statusWin = NETSCreateWindow(WINDOW.STATUSDASH, statusDashboard.title);
 		statusWin.add(statusDashboard);
 		//tabGroup.activeTab.open(statusWin,{animated:true});
 		dashboardTab.open(statusWin,{animated:true});
 		break;
-	case SCREEN.DATE_RANGE:
+	case SCREEN.DATE_RANGE.id:
 		var dateWin = NETSCreateWindow(WINDOW.DATERANGE, dateRange.title);
 		dateWin.add(dateRange);
 		dateRange_init();
 		//tabGroup.activeTab.open(dateWin,{animated:true}); //apparently android doesn't do well with this
 		dashboardTab.open(dateWin,{animated:true});
 		break;
+    case SCREEN.REPORT.id:
+        var reportWin = NETSCreateWindow(WINDOW.REPORT, report.title);
+        reportWin.add(report);
+        dashboardTab.open(reportWin,{animated:true});
+        break;
 	default:
 		Ti.API.error('switchToScreen error: invalid view arg');
 	}
 };
-
+Titanium.App.addEventListener(evtSwitchToScreen, function(e) {
+	switchToScreen(e.screen);
+});
 
 //start out by showing the login screen
 switchToScreen(SCREEN.LOGIN);
@@ -168,3 +178,7 @@ if (!Titanium.Network.online) {
 }
 
 
+/* just keeping this here b/c I copy/paste it now and again for quick debugging -csr
+try{
+} catch(e) { Titanium.UI.createAlertDialog({title:'FAIL',message:e}).show(); }
+*/
