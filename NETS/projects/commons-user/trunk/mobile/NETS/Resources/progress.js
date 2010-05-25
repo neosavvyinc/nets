@@ -1,3 +1,7 @@
+/**
+ * @file progress.js
+ * For throwing up a progress indicator.
+ */
 var progressWin = Ti.UI.createWindow({
 	height:250,
 	width:250
@@ -7,9 +11,11 @@ var progressView = Ti.UI.createView({
 	width:250,
 	backgroundColor:'#000',
 	opacity:0.75,
+    borderRadius:7,
 	touchEnabled:false
 });
 progressWin.add(progressView);
+
 var progressLabel = Ti.UI.createLabel({
 	text:'',
 	color:'#fff',

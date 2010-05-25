@@ -41,7 +41,7 @@ function onLoginComplete(wrapper, username, password, rememberMe) {
 
 function executeLogin(e) {
 	Ti.API.debug('doing executeLogin');
-	Ti.App.fireEvent(evtDisplayActivityIndicator, {message: 'Logging in...'});
+	Ti.App.fireEvent(evtDisplayActivityIndicator, {message: STRING.LOGGING_IN + '...'});
 	serviceLogin(e.username, e.password, function(wrapper) { onLoginComplete(wrapper, e.username, e.password, e.rememberMe); }, onLoginFailure);
 }
 

@@ -79,11 +79,20 @@ function setProperty(p, val) {
 var NETS_COLOR = {
 	BG_GRADIENT_DARK : '#9acab9',
 	BG_GRADIENT_LIGHT : '#e5f2ee',
-	BUTTON_GRADIENT_DARK : '#f18106',
-	BUTTON_GRADIENT_LIGHT : '#feac37',
-	DIALOG_BG : '#fcf7e7',
-	DIALOG_BG_GRADIENT_DARK : '#fdedb9',
-	DARK_GRAY : '#222'
+	BUTTON_ACTIVE_GRADIENT_DARK : '#0d6447', //'#f18106',
+	BUTTON_ACTIVE_GRADIENT_LIGHT : '#479e81', //'#feac37',
+    BUTTON_ACTIVE_FONT : '#fff',
+    BUTTON_INACTIVE_GRADIENT_DARK : '#c1c1c1',
+    BUTTON_INACTIVE_GRADIENT_LIGHT : '#ececec',
+    BUTTON_INACTIVE_FONT : '#000',
+	DIALOG_BG_LIGHT : '#fcf7e7',
+	DIALOG_BG_DARK : '#fdedb9',
+    FONT_DARK : '#000',
+    FONT_LIGHT : '#fff',
+    FONT_HIGHLIGHTED : '#2e7cb3',
+    BANNER : '#479e81',
+    TABLE_BG_LIGHT : '#fff',
+    TABLE_BG_DARK : '#f7f7f7'
 };
 
 //String localization
@@ -94,7 +103,15 @@ var STRING = {
 	ENDING: 'Ending',
 	LOADING: 'Loading',
 	DASHBOARD: 'Dashboard',
-	REPORTS: 'Reports'
+	REPORTS: 'Reports',
+    TO: 'to',
+    LOGIN_WELCOME: 'Welcome to NETS',
+    LOGIN_DESCRIPTION: 'Login with your username and password here',
+    ENTER_USERNAME: 'Enter Username',
+    ENTER_PASSWORD: 'Enter Password',
+    REMEMBER_LOGIN: 'Remember Login',
+    LOGIN: 'Login',
+    LOGGING_IN: 'Logging In'
 };
 
 /*

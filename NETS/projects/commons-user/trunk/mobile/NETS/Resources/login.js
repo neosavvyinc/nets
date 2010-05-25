@@ -25,7 +25,7 @@ var loginDialogView = Titanium.UI.createView({
 	width:280,
 	height:250, //we'll set height for real at the end after we've stuffed everything in
 	borderRadius:7,
-	backgroundColor:NETS_COLOR.DIALOG_BG
+	backgroundColor:NETS_COLOR.DIALOG_BG_LIGHT
 });
 login.add(loginDialogView);
 
@@ -54,7 +54,7 @@ if (Titanium.Platform.name == 'iPhone OS') {
 
 //WELCOME TEXT
 var welcomeText = Titanium.UI.createLabel({
-	text:'Welcome to NETS',
+	text:STRING.LOGIN_WELCOME,
 	textAlign:'left',
 	font:{fontSize:15, fontWeight:'bold'},
 	color:'#000',
@@ -71,7 +71,7 @@ loginDialogView.add(welcomeText);
 
 //LOGIN DESCRIPTIVE TEXT
 var loginText = Titanium.UI.createLabel({
-	text:'Login with your username and password here',
+	text:STRING.LOGIN_DESCRIPTION,
 	textAlign:'left',
 	font:{fontSize:14, fontWeight:'normal'},
 	color:'#333',
@@ -98,7 +98,7 @@ loginDialogView.add(gradientImageView);
 
 //USERNAME TEXT FIELD
 var usernameField = Titanium.UI.createTextField({
-	hintText:'Enter Username',
+	hintText:STRING.ENTER_USERNAME,
 	font:{fontSize:14},
 	height:35,
 	top:(loginText.top + loginText.height + 5),
@@ -122,7 +122,7 @@ loginDialogView.add(usernameField);
 
 //PASSWORD TEXT FIELD
 var passwordField = Titanium.UI.createTextField({
-	hintText:'Enter Password',
+	hintText:STRING.ENTER_PASSWORD,
 	font:{fontSize:14},
 	height:35,
 	top:(usernameField.top + usernameField.height + 5),
@@ -146,7 +146,7 @@ loginDialogView.add(passwordField);
 
 //REMEMBER ME LABEL
 var rememberMeLabel = Ti.UI.createLabel({
-	text:'Remember Login',
+	text:STRING.REMEMBER_LOGIN,
 	font:{fontSize:15, fontWeight:'bold'},
 	backgroundColor:'transparent',
 	textAlign:'left',
@@ -176,7 +176,7 @@ loginDialogView.add(rememberMeField);
 
 //LOGIN BUTTON
 var loginButton = Titanium.UI.createButton({
-	title:'Login',
+	title:STRING.LOGIN,
 	font:{fontSize:15, fontWeight:'bold'},
 	color:'#fff',
 	top:(rememberMeLabel.top + rememberMeLabel.height + 10),
@@ -191,13 +191,8 @@ var loginButton = Titanium.UI.createButton({
 loginDialogView.add(loginButton);
 
 loginButton.addEventListener('click', function(e) {
-	Ti.API.debug('loginButton click:');
-	if (e.source.title == 'Login') {
-		Ti.API.debug('  clicked login button');
-		Ti.App.fireEvent(evtLoginRequested, {username: usernameVal, password: passwordVal, rememberMe: rememberMeVal});
-	} else {
-		Ti.API.debug('  not interested');
-	}
+    Ti.API.debug('loginButton click:');
+    Ti.App.fireEvent(evtLoginRequested, {username: usernameVal, password: passwordVal, rememberMe: rememberMeVal});
 });
 
 //set the height of the login dialog now that we've stuffed everything in

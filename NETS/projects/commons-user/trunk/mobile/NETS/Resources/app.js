@@ -1,6 +1,8 @@
 /**
 NeoSavvy Expense Tracker
 @file app.js
+
+ This is the file where it all starts...
 */
 
 // this sets the background color of the master UIView (when there are no windows/tab groups on it)
@@ -10,7 +12,7 @@ var httpClient = Titanium.Network.createHTTPClient();
 var securityWrapper = null;
 
 //Includes
-Titanium.include('events.js'); //include this one first. all the uesr-events (should) live in here
+Titanium.include('events.js'); //include this one first. all the user-events (should) live in here
 Titanium.include('constants.js'); //and this one second. important global app mojo in here
 Titanium.include('service.js'); //some views depend on services, so include it before we build views
 //building blocks

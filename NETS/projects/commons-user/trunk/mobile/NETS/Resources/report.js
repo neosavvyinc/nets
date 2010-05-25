@@ -28,26 +28,29 @@ report.add(reportTableView);
  * row : Ti.UI.TableViewRow
  * nameLabel : Ti.UI.Label
  * valueLabel : Ti.UI.Label
+ *
+ * @param name a String for the name field
+ * @param value a String for the value field
  */
-function ReportRow(name, label) {
+function ReportRow(name, value) {
     this.row = Ti.UI.createTableViewRow({
-        backgroundColor:NETS_COLOR.DIALOG_BG,
+        backgroundColor:NETS_COLOR.TABLE_BG_DARK,
         hasChild:false
     });
     this.nameLabel = Ti.UI.createLabel({
         text:name,
         font:{fontSize:15, fontWeight:'bold'},
         textAlign:'left',
-        color:NETS_COLOR.DARK_GRAY,
-        highlightedColor:NETS_COLOR.DARK_GRAY,
+        color:NETS_COLOR.FONT_DARK,
+        highlightedColor:NETS_COLOR.FONT_DARK,
         left:5
     });
     this.valueLabel = Ti.UI.createLabel({
-        text:label,
+        text:value,
         font:{fontSize:15, fontWeight:'normal'},
         textAlign:'right',
-        color:NETS_COLOR.DARK_GRAY,
-        highlightedColor:NETS_COLOR.DARK_GRAY,
+        color:NETS_COLOR.FONT_DARK,
+        highlightedColor:NETS_COLOR.FONT_DARK,
         right:5
     });
 

@@ -14,43 +14,10 @@ var dashboard = Titanium.UI.createView({
 
 
 
-//report date range info
+//report banner showing the date range for the reports shown
 var dashboardRange = new DateBanner();
 dashboardRange.update(); //initial update
 dashboard.add(dashboardRange.view);
-
-/*
-var rangeView = Ti.UI.createView({
-	top:0,
-	height:35,
-	backgroundColor:NETS_COLOR.BUTTON_GRADIENT_LIGHT
-});
-dashboard.add(rangeView);
-var rangeButton = Ti.UI.createButton({
-	image:'assets/images/Icon_calendar.png',
-	right:5
-});
-rangeButton.addEventListener('click', function(e) {
-	switchToScreen(SCREEN.DATE_RANGE);
-});
-rangeView.add(rangeButton);
-var rangeLabel = Ti.UI.createLabel({
-	text:STRING.ALL_REPORTS,
-	textAlign:'center',
-	color:NETS_COLOR.DARK_GRAY,
-	highlightedColor:NETS_COLOR.DARK_GRAY
-});
-rangeView.add(rangeLabel);
-
-function updateRangeLabel() {
-	if (PROPERTY.DATERANGE.value == null || PROPERTY.DATERANGE.value == 0) {
-		rangeLabel.text = STRING.ALL_REPORTS;
-	} else {
-		rangeLabel.text = PROPERTY.START_S.value + ' to ' + PROPERTY.END_S.value;
-	}
-}
-updateRangeLabel(); //initial update
-*/
 
 //set up the dashboard table
 var data = [];
@@ -63,19 +30,19 @@ var openDataLabel = Titanium.UI.createLabel({
     text: '-',
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 10
 });
 var openLabel = Titanium.UI.createLabel({
     text: DASHBOARD_STATUS.OPEN.name,
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 50
 });
 var openRow = Ti.UI.createTableViewRow({
     hasChild: true,
-	backgroundColor:NETS_COLOR.DIALOG_BG,
+	backgroundColor:NETS_COLOR.TABLE_BG_DARK,
 	dashStatus:DASHBOARD_STATUS.OPEN
 });
 openRow.add(openDataLabel);
@@ -86,19 +53,19 @@ var submittedDataLabel = Titanium.UI.createLabel({
     text: '-',
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 10
 });
 var submittedLabel = Titanium.UI.createLabel({
     text: DASHBOARD_STATUS.SUBMITTED.name,
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 50
 });
 var submittedRow = Ti.UI.createTableViewRow({
     hasChild: true,
-	backgroundColor:NETS_COLOR.DIALOG_BG,
+	backgroundColor:NETS_COLOR.TABLE_BG_DARK,
 	dashStatus:DASHBOARD_STATUS.SUBMITTED
 });
 submittedRow.add(submittedDataLabel);
@@ -109,19 +76,19 @@ var declinedDataLabel = Titanium.UI.createLabel({
     text: '-',
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 10
 });
 var declinedLabel = Titanium.UI.createLabel({
     text: DASHBOARD_STATUS.DECLINED.name,
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 50
 });
 var declinedRow = Ti.UI.createTableViewRow({
     hasChild: true,
-	backgroundColor:NETS_COLOR.DIALOG_BG,
+	backgroundColor:NETS_COLOR.TABLE_BG_DARK,
 	dashStatus:DASHBOARD_STATUS.DECLINED
 });
 declinedRow.add(declinedDataLabel);
@@ -133,19 +100,19 @@ var approvingDataLabel = Titanium.UI.createLabel({
     text: '-',
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 10
 });
 var approvingLabel = Titanium.UI.createLabel({
     text: DASHBOARD_STATUS.APPROVING.name,
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 50
 });
 var approvingRow = Ti.UI.createTableViewRow({
     hasChild: true,
-	backgroundColor:NETS_COLOR.DIALOG_BG,
+	backgroundColor:NETS_COLOR.TABLE_BG_DARK,
 	dashStatus:DASHBOARD_STATUS.APPROVING
 });
 approvingRow.add(approvingDataLabel);
@@ -156,19 +123,19 @@ var approvedDataLabel = Titanium.UI.createLabel({
     text: '-',
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 10
 });
 var approvedLabel = Titanium.UI.createLabel({
     text: DASHBOARD_STATUS.APPROVED.name,
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 50
 });
 var approvedRow = Ti.UI.createTableViewRow({
     hasChild: true,
-	backgroundColor:NETS_COLOR.DIALOG_BG,
+	backgroundColor:NETS_COLOR.TABLE_BG_DARK,
 	dashStatus:DASHBOARD_STATUS.APPROVED
 });
 approvedRow.add(approvedDataLabel);
@@ -179,19 +146,19 @@ var sentDataLabel = Titanium.UI.createLabel({
     text: '-',
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 10
 });
 var sentLabel = Titanium.UI.createLabel({
     text: DASHBOARD_STATUS.REIMBURSEMENT_SENT.name,
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 50
 });
 var sentRow = Ti.UI.createTableViewRow({
     hasChild: true,
-	backgroundColor:NETS_COLOR.DIALOG_BG,
+	backgroundColor:NETS_COLOR.TABLE_BG_DARK,
 	dashStatus:DASHBOARD_STATUS.REIMBURSEMENT_SENT
 });
 sentRow.add(sentDataLabel);
@@ -202,19 +169,19 @@ var receivedDataLabel = Titanium.UI.createLabel({
     text: '-',
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 10
 });
 var receivedLabel = Titanium.UI.createLabel({
     text: DASHBOARD_STATUS.REIMBURSEMENT_RECEIVED.name,
     height: 'auto',
     width: 'auto',
-    color: NETS_COLOR.DARK_GRAY,
+    color: NETS_COLOR.FONT_DARK,
     left: 50
 });
 var receivedRow = Ti.UI.createTableViewRow({
     hasChild: true,
-	backgroundColor:NETS_COLOR.DIALOG_BG,
+	backgroundColor:NETS_COLOR.TABLE_BG_DARK,
 	dashStatus:DASHBOARD_STATUS.REIMBURSEMENT_RECEIVED
 });
 receivedRow.add(receivedDataLabel);

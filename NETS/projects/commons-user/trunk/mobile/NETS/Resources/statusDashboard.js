@@ -19,20 +19,22 @@ var statusDashboard = Titanium.UI.createView({
  * row : Ti.UI.TableViewRow
  * label : Ti.UI.Label
  * index : Number
+ *
+ * @param index a Number that is an index into the statusDashboardData global
  */
 function StatusDashboardRow(index) {
     var report = statusDashboardData.statusDashboardData[index];
 
     this.index = index;
 	this.row = Ti.UI.createTableViewRow({
-        backgroundColor:NETS_COLOR.DIALOG_BG,
+        backgroundColor:NETS_COLOR.TABLE_BG_DARK,
         hasChild:true
     });
     this.label = Ti.UI.createLabel({
         text:report.expenseReportName,
         textAlign:'center',
-        color:NETS_COLOR.DARK_GRAY,
-        highlightedColor:NETS_COLOR.DARK_GRAY
+        color:NETS_COLOR.FONT_DARK,
+        highlightedColor:NETS_COLOR.FONT_DARK
     });
 
     this.row.add(this.label);

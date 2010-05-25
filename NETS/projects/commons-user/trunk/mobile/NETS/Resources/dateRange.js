@@ -59,18 +59,18 @@ dateRange.add(dateRangeBar);
 */
 
 //instead of tabbed bar, try using two labels
-var colorSelected = NETS_COLOR.BUTTON_GRADIENT_LIGHT;
-var colorUnselected = NETS_COLOR.DIALOG_BG_GRADIENT_DARK;
+var colorSelected = NETS_COLOR.BUTTON_ACTIVE_GRADIENT_LIGHT;
+var colorUnselected = NETS_COLOR.BUTTON_INACTIVE_GRADIENT_LIGHT;
 //gradients don't work with android :(
 var gradientSelected = {
 	type:'linear',
-	colors:[NETS_COLOR.DIALOG_BG_GRADIENT_DARK,NETS_COLOR.BUTTON_GRADIENT_DARK],
+	colors:[NETS_COLOR.BUTTON_ACTIVE_GRADIENT_LIGHT, NETS_COLOR.BUTTON_ACTIVE_GRADIENT_DARK],
 	startPoint:{x:0,y:0},
 	endPoint:{x:0,y:30}
 };
 var gradientUnselected = {
 	type:'linear',
-	colors:[NETS_COLOR.DIALOG_BG,NETS_COLOR.DIALOG_BG_GRADIENT_DARK],
+	colors:[NETS_COLOR.BUTTON_INACTIVE_GRADIENT_LIGHT, NETS_COLOR.BUTTON_INACTIVE_GRADIENT_DARK],
 	startPoint:{x:0,y:0},
 	endPoint:{x:0,y:30}
 };
@@ -81,15 +81,15 @@ var dateLabel1 = Ti.UI.createLabel({
 	text:label1Text,
 	font:{fontSize:15, fontWeight:'bold'},
 	textAlign:'center',
-	color:NETS_COLOR.DARK_GRAY,
-	highlightedColor:NETS_COLOR.DARK_GRAY,
+	color:NETS_COLOR.BUTTON_ACTIVE_FONT,
+	highlightedColor:NETS_COLOR.BUTTON_ACTIVE_FONT,
 	top:5,
 	width:155,
 	height:30,
 	left:5,
 	borderRadius:0,
 	borderWidth:1,
-	borderColor:NETS_COLOR.BUTTON_GRADIENT_DARK,
+	borderColor:NETS_COLOR.BUTTON_INACTIVE_GRADIENT_DARK,
 	backgroundColor:colorSelected,
 	backgroundGradient:gradientSelected,
 	index:0
@@ -98,15 +98,15 @@ var dateLabel2 = Ti.UI.createLabel({
 	text:label2Text,
 	font:{fontSize:15, fontWeight:'bold'},
 	textAlign:'center',
-	color:NETS_COLOR.DARK_GRAY,
-	highlightedColor:NETS_COLOR.DARK_GRAY,
+	color:NETS_COLOR.BUTTON_INACTIVE_FONT,
+	highlightedColor:NETS_COLOR.BUTTON_INACTIVE_FONT,
 	top:5,
 	width:155,
 	height:30,
 	right:5,
 	borderRadius:0,
 	borderWidth:1,
-	borderColor:NETS_COLOR.BUTTON_GRADIENT_DARK,
+	borderColor:NETS_COLOR.BUTTON_INACTIVE_GRADIENT_DARK,
 	backgroundColor:colorUnselected,
 	backgroundGradient:gradientUnselected,
 	index:1
@@ -118,52 +118,71 @@ dateRange.add(dateLabel2);
 var drView = Titanium.UI.createView({top:35,height:375});
 dateRange.add(drView);
 
-drData = [];
-var startingLabel = Ti.UI.createLabel({
-	text: STRING.STARTING + ':',
-	font:{fontSize:15, fontWeight:'bold'},
-	color:NETS_COLOR.DARK_GRAY,
-	highlightedColor:NETS_COLOR.DARK_GRAY,
-	width:'auto',
-	left:5
-});
-var startDateLabel = Ti.UI.createLabel({
-	text:PROPERTY.START_S.value,
-	font:{fontSize:15, fontWeight:'normal'},
-	color:NETS_COLOR.BG_GRADIENT_DARK,
-	highlightedColor:NETS_COLOR.BG_GRADIENT_DARK,
-	width:'auto',
-	right:5
-});
-var startRow = Ti.UI.createTableViewRow({
-	backgroundColor:colorSelected
-});
-startRow.add(startingLabel);
-startRow.add(startDateLabel);
-drData.push(startRow);
+/**
+ * Row Constructor
+ * DateRangeRow properties:
+ * row : Ti.UI.TableViewRow
+ * nameLabel : Ti.UI.Label
+ * dateLabel : Ti.UI.Label
+ *
+ * @param name a String telling you what the date is for
+ * @param date a String for the date
+ */
+function DateRangeRow(name, date) {
+    this.nameLabel = Ti.UI.createLabel({
+        text: name,
+        font:{fontSize:15, fontWeight:'bold'},
+        color:NETS_COLOR.BUTTON_ACTIVE_FONT,
+        highlightedColor:NETS_COLOR.BUTTON_ACTIVE_FONT,
+        width:'auto',
+        left:5
+    });
+    this.dateLabel = Ti.UI.createLabel({
+        text:date,
+        font:{fontSize:15, fontWeight:'normal'},
+        color:NETS_COLOR.BUTTON_ACTIVE_FONT,
+        highlightedColor:NETS_COLOR.BUTTON_ACTIVE_FONT,
+        width:'auto',
+        right:5
+    });
+    this.row = Ti.UI.createTableViewRow({
+        backgroundColor:colorSelected
+    });
+    this.row.add(this.nameLabel);
+    this.row.add(this.dateLabel);
+}
+/**
+ * active()
+ * Sets the DateRangeRow to active colors
+ */
+DateRangeRow.prototype.active = function() {
+    this.nameLabel.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
+    this.nameLabel.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
+    this.dateLabel.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
+    this.dateLabel.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
+    this.row.backgroundColor = colorSelected;
+};
+/**
+ * inactive()
+ * Sets the DateRangeRow to inactive colors
+ */
+DateRangeRow.prototype.inactive = function() {
+    this.nameLabel.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
+    this.nameLabel.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
+    this.dateLabel.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
+    this.dateLabel.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
+    this.row.backgroundColor = colorUnselected;
+};
 
-var endingLabel = Ti.UI.createLabel({
-	text: STRING.ENDING + ':',
-	font:{fontSize:15, fontWeight:'bold'},
-	color:NETS_COLOR.DARK_GRAY,
-	highlightedColor:NETS_COLOR.DARK_GRAY,
-	width:'auto',
-	left:5
-});
-var endDateLabel = Ti.UI.createLabel({
-	text:PROPERTY.END_S.value,
-	font:{fontSize:15, fontWeight:'normal'},
-	color:NETS_COLOR.BG_GRADIENT_DARK,
-	highlightedColor:NETS_COLOR.BG_GRADIENT_DARK,
-	width:'auto',
-	right:5
-});
-var endRow = Ti.UI.createTableViewRow({
-	backgroundColor:colorUnselected
-});
-endRow.add(endingLabel);
-endRow.add(endDateLabel);
-drData.push(endRow);
+drData = [];
+
+var startRow = new DateRangeRow(STRING.STARTING + ':', PROPERTY.START_S.value);
+startRow.active();
+drData.push(startRow.row);
+
+var endRow = new DateRangeRow(STRING.ENDING + ':', PROPERTY.END_S.value);
+endRow.inactive();
+drData.push(endRow.row);
 
 var drTable = Ti.UI.createTableView({
 	data:drData,
@@ -219,12 +238,12 @@ datePicker.addEventListener('change', function(e) {
 drTable.addEventListener('click', function(e) {
 	drRowSelected = e.index;
 	if (drRowSelected == 0) {
-		startRow.backgroundColor = colorSelected;
-		endRow.backgroundColor = colorUnselected;
+        startRow.active();
+        endRow.inactive();
 		datePicker.value = startDate;
 	} else {
-		startRow.backgroundColor = colorUnselected;
-		endRow.backgroundColor = colorSelected;
+		startRow.inactive();
+		endRow.active();
 		datePicker.value = endDate;
 	}
 });
@@ -236,12 +255,12 @@ else
 drTable.addEventListener('click', function(e) {
 	drRowSelected = e.index;
 	if (drRowSelected == 0) {
-		startRow.backgroundColor = colorSelected;
-		endRow.backgroundColor = colorUnselected;
+		startRow.active();
+        endRow.inactive();
 		//datePicker.value = startDate;
 	} else {
-		startRow.backgroundColor = colorUnselected;
-		endRow.backgroundColor = colorSelected;
+		startRow.inactive();
+		endRow.active();
 		//datePicker.value = endDate;
 	}
 });
@@ -253,15 +272,19 @@ function dateRange_init() {
 	if (PROPERTY.DATERANGE.value == null || PROPERTY.DATERANGE.value == 0) {
 		drView.opacity = 0;
 		drView.visible = false;
-		
-		dateLabel2.backgroundColor = colorUnselected;
+
+        dateLabel2.backgroundColor = colorUnselected;
 		dateLabel2.backgroundGradient = gradientUnselected;
 		dateLabel2.text = '';
 		dateLabel2.text = label2Text;
+        dateLabel2.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
+	    dateLabel2.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
 		dateLabel1.backgroundColor = colorSelected;
 		dateLabel1.backgroundGradient = gradientSelected;
 		dateLabel1.text = '';
 		dateLabel1.text = label1Text;
+        dateLabel1.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
+	    dateLabel1.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
 	} else {
 		drView.opacity = 1;
 		drView.visible = true;
@@ -270,10 +293,14 @@ function dateRange_init() {
 		dateLabel1.backgroundGradient = gradientUnselected;
 		dateLabel1.text = '';
 		dateLabel1.text = label1Text;
+        dateLabel1.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
+	    dateLabel1.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
 		dateLabel2.backgroundColor = colorSelected;
 		dateLabel2.backgroundGradient = gradientSelected;
 		dateLabel2.text = '';
 		dateLabel2.text = label2Text;
+        dateLabel2.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
+	    dateLabel2.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
 	}
 }
 
@@ -313,10 +340,14 @@ function dateRange_setActive(index) {
 		dateLabel2.backgroundGradient = gradientUnselected;
 		dateLabel2.text = '';
 		dateLabel2.text = label2Text;
+        dateLabel2.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
+	    dateLabel2.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
 		dateLabel1.backgroundColor = colorSelected;
 		dateLabel1.backgroundGradient = gradientSelected;
 		dateLabel1.text = '';
 		dateLabel1.text = label1Text;
+        dateLabel1.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
+	    dateLabel1.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
 		
 		anim.opacity = 0;
 		anim.status = 'hiding';
@@ -328,10 +359,14 @@ function dateRange_setActive(index) {
 		dateLabel1.backgroundGradient = gradientUnselected;
 		dateLabel1.text = '';
 		dateLabel1.text = label1Text;
+        dateLabel1.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
+	    dateLabel1.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
 		dateLabel2.backgroundColor = colorSelected;
 		dateLabel2.backgroundGradient = gradientSelected;
 		dateLabel2.text = '';
 		dateLabel2.text = label2Text;
+        dateLabel2.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
+	    dateLabel2.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
 		
 		anim.opacity = 1;
 		anim.status = 'showing';
