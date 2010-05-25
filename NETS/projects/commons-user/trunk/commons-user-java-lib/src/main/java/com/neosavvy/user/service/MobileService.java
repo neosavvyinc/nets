@@ -45,9 +45,9 @@ public interface MobileService {
 
 
     @POST
-    @Consumes({MediaType.APPLICATION_FORM_URLENCODED})
+    @Consumes({MediaType.APPLICATION_FORM_URLENCODED,MediaType.MULTIPART_FORM_DATA})
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("/dashboardlogin/")
+    @Path("/dashboardlogin")
     public SecurityWrapperDTO login(@FormParam("username") String username, @FormParam("password") String password);
 
 
@@ -59,12 +59,12 @@ public interface MobileService {
     @POST
     @Consumes({MediaType.APPLICATION_JSON})
     @Produces({MediaType.TEXT_PLAIN})
-    @Path("/savereceipt/")
+    @Path("/savereceipt")
     public String associateReceiptUploadWithUser(StorageServiceFileRef fileRef);
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    @Path("/dashboard/")
+    @Path("/dashboard")
     public DashboardData findDashboardData();
 
     @GET

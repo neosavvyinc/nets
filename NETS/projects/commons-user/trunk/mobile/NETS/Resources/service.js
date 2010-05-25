@@ -25,9 +25,7 @@ function serviceLogin(aUsername, aPassword, successCallback, failureCallback) {
 	
     httpClient.onerror = failureCallback;
     httpClient.onload = function() { successCallback(parseServiceResponse(this.responseText)); };
-	httpClient.open('POST', MOBILE_SERVICE_BASE_URL + '/dashboardlogin/');
-	//httpClient.send('username=foo&password=password');
-	//return;
+	httpClient.open('POST', MOBILE_SERVICE_BASE_URL + '/dashboardlogin');
     httpClient.send({
         username:aUsername,
         password:aPassword
@@ -43,7 +41,7 @@ function serviceGetDashboardData(successCallback, failureCallback) {
 	
     httpClient.onerror = failureCallback;
     httpClient.onload = function() { successCallback(parseServiceResponse(this.responseText)); };
-	httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/dashboard/');
+	httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/dashboard');
     httpClient.send(null);    
 }
 
@@ -60,7 +58,7 @@ function serviceAddReceiptToUser(fileRef, successCallback, failureCallback) {
         }
     };
     httpClient.onsendstream = function(e) { progressCallback(e.progress); };
-	httpClient.open('POST', MOBILE_SERVICE_BASE_URL + '/savereceipt/');
+	httpClient.open('POST', MOBILE_SERVICE_BASE_URL + '/savereceipt');
 	httpClient.setRequestHeader('Content-Type', 'application/json');
 	try {
     	httpClient.send(JSON.stringify(fileRef));    
