@@ -108,6 +108,12 @@ public class MobileServiceImpl implements MobileService {
         UserDTO user = new UserDTO();
         user.setUsername( userDetails.getUsername() );
 
+        List<UserDTO> userDTOList = userService.findUsers(user);
+        if( userDTOList.size() == 1 )
+        {
+            user = userDTOList.get(0);
+        }
+
         dashboardData.setNumberApprovedExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.APPROVED ).size() );
         dashboardData.setNumberApprovingExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.APPROVING).size() );
         dashboardData.setNumberDeclinedExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.DECLINED).size() );
