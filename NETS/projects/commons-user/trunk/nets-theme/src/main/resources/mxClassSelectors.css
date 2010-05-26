@@ -14,7 +14,7 @@
 .companyNameHeading {
 	color: #085f41;
 	font-weight: bold;
-	font-size: 24;
+    font-size: 24;
 	left: 32;
 	top: 24;
 }
@@ -289,7 +289,16 @@
 	padding-bottom: 1;
 }
 
-.rejectLinkButton, .approveLinkButton, .deleteLinkButton, .editLinkButton, .redFlagLinkButton, .filterDropdownButton {
+.rejectLinkButton
+,.approveLinkButton
+,.deleteLinkButton
+,.editLinkButton
+,.redFlagLinkButton
+,.filterDropdownButton
+,.submitButton
+,.refreshButton
+,.deactivateUserButton
+,.sendInviteButton {
 	skin: ClassReference(null);
 }
 
@@ -326,6 +335,34 @@
 	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_redFlagUp.png');
 	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_redFlagUp.png');
 	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_redFlagDisabled.png');		
+}
+
+.deactivateUserButton {
+	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_key.png');
+	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_key.png');
+	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_key.png');
+	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_key.png');
+}
+
+.sendInviteButton {
+	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_mail.png');
+	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_mail.png');
+	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_mail.png');
+	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_mail.png');
+}
+
+.refreshButton {
+	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_refresh.png');
+	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_refresh.png');
+	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_refresh.png');
+	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_refresh.png');
+}
+
+.submitButton {
+	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_submit.png');
+	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_submit.png');
+	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_submit.png');
+	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_submit.png');		
 }
 
 .largeLinkButton {

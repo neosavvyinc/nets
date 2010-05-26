@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalAlign="center">
 
     <mx:Script>
         <![CDATA[
@@ -13,5 +13,5 @@
 
         ]]>
     </mx:Script>
-    <mx:Button id="submitBtn" label="Reopen" toolTip="Reopen Expense Report" click="{submitExpenseHandler()}"/>
+    <mx:Button id="submitBtn" styleName="refreshButton" toolTip="Reopen Expense Report" click="{submitExpenseHandler()}"/>
 </mx:HBox>

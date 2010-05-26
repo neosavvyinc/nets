@@ -22,6 +22,20 @@ global {
 	font-anti-alias-type: advanced;
 }
 
+/*@font-face {*/
+    /*src: url(com/neosavvy/nets/theme/fonts/OfficinaSans.swf);*/
+    /*font-family: "OfficinaSans-Bold";*/
+    /*font-weight: normal;*/
+    /*font-anti-alias-type: advanced;*/
+/*}*/
+
+/*@font-face {*/
+    /*src: url(com/neosavvy/nets/theme/fonts/OfficinaSans.swf);*/
+    /*font-family: "OfficinaSans-BookItalic";*/
+    /*font-style: normal;*/
+    /*font-anti-alias-type: advanced;*/
+/*}*/
+
 
 /*	=Alert
 -----------------------------------------------------------------------------*/
@@ -46,7 +60,7 @@ Alert {
 
 .panelTitleStyle {
 	color: #262a2e;
-	font-family: "OfficinaSans-Book";
+	font-family: "OfficinaSans-Bold";
 	font-weight: bold;
 	font-size: 16;
 }
@@ -305,6 +319,7 @@ SuperLabel {
 	color: #085f41;
 	font-weight: bold;
 	padding-bottom: 3;
+    padding-top: 3;
 }
 
 /*	=TabBar

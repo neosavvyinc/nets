@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalAlign="center">
 
 
     <mx:Script>
@@ -57,16 +57,16 @@
 
         private function setButtonLabelAndIcon(user:PickFilterRow):void {
             if (user && user.wrappedObject.active) {
-                activationButton.toolTip = activationButton.label = UserManagementEvent.ACTION_DEACTIVATE
+                activationButton.toolTip =  UserManagementEvent.ACTION_DEACTIVATE
                 //activationButton.setStyle("icon", CommonsUserAssetsManager.assets.images.bulletDelete);
             } else {
-                activationButton.toolTip = activationButton.label = UserManagementEvent.ACTION_ACTIVATE
+                activationButton.toolTip =  UserManagementEvent.ACTION_ACTIVATE
                 //activationButton.setStyle("icon", CommonsUserAssetsManager.assets.images.bulletAdd);
             }
         }]]></mx:Script>
 
-    <mx:Button id="activationButton"  click="{handleToggleActivationClicked()}"/>
-    <mx:Button id="resetPassword" label="Reset Password" toolTip="Reset Password" click="{handleResetPasswordClicked()}"/>
+    <mx:Button id="activationButton" styleName="deactivateUserButton" click="{handleToggleActivationClicked()}"/>
+    <mx:Button id="resetPassword" styleName="refreshButton" toolTip="Reset Password" click="{handleResetPasswordClicked()}"/>
 
 
 </mx:HBox>
