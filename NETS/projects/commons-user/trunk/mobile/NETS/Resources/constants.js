@@ -111,7 +111,8 @@ var STRING = {
     ENTER_PASSWORD: 'Enter Password',
     REMEMBER_LOGIN: 'Remember Login',
     LOGIN: 'Login',
-    LOGGING_IN: 'Logging In'
+    LOGGING_IN: 'Logging In',
+    DATE_RANGE: 'Date Range'
 };
 
 /*

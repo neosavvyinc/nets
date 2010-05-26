@@ -1,12 +1,13 @@
 /**
 @file dateRange.js
-view for the date range picker
+
+dateRange screen
 */
 
 var dateRange = Titanium.UI.createView({
     top: 0,
     opacity: 1,
-	title: 'Date Range'
+	title: STRING.DATE_RANGE
 });
 
 function saveStartDateProperties(startDate) {
@@ -223,19 +224,23 @@ datePicker.selectionIndicator = true;
 drView.add(datePicker);
 
 datePicker.addEventListener('change', function(e) {
+    Ti.API.debug('date now ' + e.source.value.toDateString() + ' row:' + drRowSelected);
+
 	if (drRowSelected == 0) {
-		startDate = e.value;
+		startDate = e.source.value;
 		saveStartDateProperties(startDate);
-		startDateLabel.text = PROPERTY.START_S.value;
+		startRow.dateLabel.text = PROPERTY.START_S.value;
 	} else {
-		endDate = e.value;
+		endDate = e.source.value;
 		saveEndDateProperties(endDate);
-		endDateLabel.text = PROPERTY.END_S.value;
+		endRow.dateLabel.text = PROPERTY.END_S.value;
 	}
-	Ti.App.fireEvent(evtUpdateDateRange);
+
+    Ti.App.fireEvent(evtUpdateDateRange);
 });
 
 drTable.addEventListener('click', function(e) {
+    Ti.API.debug('selected row ' + e.index);
 	drRowSelected = e.index;
 	if (drRowSelected == 0) {
         startRow.active();
@@ -267,7 +272,7 @@ drTable.addEventListener('click', function(e) {
 }
 
 function dateRange_init() {
-	drTable.setData(drData); //@todo this is a workaround for iphone b/c when a window is closed it seems that any tables in that window lose their data.
+    drTable.setData(drData); //@todo this is a workaround for iphone b/c when a window is closed it seems that any tables in that window lose their data.
 							 //      so we count on whoever's stuffing the dateRange view into a window to call this init to get things set up properly
 	if (PROPERTY.DATERANGE.value == null || PROPERTY.DATERANGE.value == 0) {
 		drView.opacity = 0;
@@ -303,6 +308,7 @@ function dateRange_init() {
 	    dateLabel2.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
 	}
 }
+dateRange_init();
 
 var isDrViewAnimating = false;
 var anim = Ti.UI.createAnimation(); //for fading our drView in/out

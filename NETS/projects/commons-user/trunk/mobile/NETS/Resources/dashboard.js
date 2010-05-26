@@ -15,9 +15,9 @@ var dashboard = Titanium.UI.createView({
 
 
 //report banner showing the date range for the reports shown
-var dashboardRange = new DateBanner();
-dashboardRange.update(); //initial update
-dashboard.add(dashboardRange.view);
+var dashboardBanner = new DateBanner();
+dashboardBanner.update(); //initial update
+dashboard.add(dashboardBanner.view);
 
 //set up the dashboard table
 var data = [];

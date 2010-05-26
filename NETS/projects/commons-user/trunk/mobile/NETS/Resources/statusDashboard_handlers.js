@@ -40,4 +40,6 @@ function loadStatusDashboardData(e) {
 }
 
 Ti.App.addEventListener(evtLoadStatusDashboard, loadStatusDashboardData);
-Ti.App.addEventListener(evtUpdateDateRange, function() {statusDashboardRange.update();});
+Ti.App.addEventListener(evtUpdateDateRange, function() {
+    statusDashboardBanner.update();
+});

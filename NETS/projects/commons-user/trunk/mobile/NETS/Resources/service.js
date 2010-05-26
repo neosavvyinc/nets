@@ -2,6 +2,10 @@
 Parse NETS server response into JSON
 @return JSON encapsulation for the responseText, or null if failed
 */
+
+//@todo remove this http fakeout and all blocks reference it once we get the server live
+var useFakeHttp = false;
+
 function parseServiceResponse(responseText) {
     if (responseText == null || responseText == '') {
 		return null;
@@ -22,7 +26,12 @@ expected REST Login Response="{\"authorities\":\"ROLE_ADMIN\",\"name\":\"foo\",\
 */
 function serviceLogin(aUsername, aPassword, successCallback, failureCallback) {
 	Ti.API.debug('serviceLogin> aUsername:' + aUsername + ' aPassword:' + aPassword);
-	
+
+    if (useFakeHttp == true) {
+        successCallback(parseServiceResponse("{\"authorities\":\"ROLE_ADMIN\",\"name\":\"foo\",\"sessionId\":\"CA798276-7C3D-4216-BCCD-43B11C6BCD11\",\"user\":{\"emailAddress\":\"chris@underculture.net\",\"firstName\":\"Foo\",\"lastName\":\"Foo\",\"middleName\":\"Foo\",\"active\":\"true\",\"confirmedRegistration\":\"true\",\"id\":\"1\",\"username\":\"foo\"}}"));
+        return;
+    }
+
     httpClient.onerror = failureCallback;
     httpClient.onload = function() { successCallback(parseServiceResponse(this.responseText)); };
 	httpClient.open('POST', MOBILE_SERVICE_BASE_URL + '/dashboardlogin');
@@ -38,7 +47,12 @@ expected REST Dashboard Response="{\"numberApprovedExpenses\":\"0\",\"numberAppr
 */
 function serviceGetDashboardData(successCallback, failureCallback) {
 	Ti.API.debug('serviceGetDashboardData>');
-	
+
+    if (useFakeHttp == true) {
+        successCallback(parseServiceResponse("{\"numberApprovedExpenses\":\"0\",\"numberApprovingExpenses\":\"0\",\"numberDeclinedExpenses\":\"0\",\"numberOpenExpenses\":\"0\",\"numberReimbursedmentReceivedExpenses\":\"0\",\"numberReimbursmentSentExpenses\":\"0\",\"numberSubmittedExpenses\":\"0\"}"));
+        return;
+    }
+
     httpClient.onerror = failureCallback;
     httpClient.onload = function() { successCallback(parseServiceResponse(this.responseText)); };
 	httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/dashboard');
@@ -118,6 +132,11 @@ expected REST Dashboard Response="{\"statusDashboardData\":[{\"expenseReportEndD
 */
 function serviceGetStatusDashboard(aCategory, successCallback, failureCallback) {
     Ti.API.debug('serviceGetStatusDashboard> aCategory:' + aCategory);
+
+    if (useFakeHttp == true) {
+        successCallback(parseServiceResponse("{\"statusDashboardData\":[{\"expenseReportEndDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLastActivityDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLocation\":\"Raleigh Fool!\",\"expenseReportName\":\"Drinkin' hard\",\"expenseReportStartDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportTotal\":\"500.0\"},{\"expenseReportEndDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLastActivityDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLocation\":\"Raleigh Fool!\",\"expenseReportName\":\"Makin' deals\",\"expenseReportStartDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportTotal\":\"500.0\"},{\"expenseReportEndDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLastActivityDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLocation\":\"Raleigh Fool!\",\"expenseReportName\":\"Hirin' Strippers\",\"expenseReportStartDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportTotal\":\"500.0\"}]}"));
+        return;
+    }
 
 	httpClient.onerror = failureCallback;
     httpClient.onload = function() { successCallback(parseServiceResponse(this.responseText)); };

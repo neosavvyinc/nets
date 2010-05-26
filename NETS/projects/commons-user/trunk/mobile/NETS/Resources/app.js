@@ -60,21 +60,27 @@ A utility for creating windows
 @title  Option. Window title.
 @return a Titanium.UI.Window object
 */
-function NETSCreateWindow(type, title) {
+function NETSCreateWindow(type, title, url) {
+    Ti.API.info('NETSCreateWindow ' + type.name + ' ' + title + ' ' + url);
+
 	//@todo validate type?
-	if (title==null) {
+	if (title == null) {
 		title = '';
 	}
-	var win = Titanium.UI.createWindow({  
-	    title:title,
-	    backgroundImage:'assets/images/NETS_bg.png',
-		type:type
-	});
+
+    var win = Titanium.UI.createWindow({
+        url:url,
+        title:title,
+        backgroundImage:'assets/images/NETS_bg.png',
+        type:type
+    });
+
 	win.addEventListener('blur', NETSEventHandler);
 	win.addEventListener('close', NETSEventHandler);
 	win.addEventListener('focus', NETSEventHandler);
 	win.addEventListener('open', NETSEventHandler);
-	return win;
+
+    return win;
 }
 
 //Tab Group

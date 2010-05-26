@@ -42,15 +42,15 @@ function StatusDashboardRow(index) {
 
 
 //report date range info
-var statusDashboardRange = new DateBanner();
-statusDashboardRange.update(); //initial update
-statusDashboard.add(statusDashboardRange.view);
+var statusDashboardBanner = new DateBanner();
+statusDashboardBanner.update(); //initial update
+statusDashboard.add(statusDashboardBanner.view);
 
 var statusTableView = Ti.UI.createTableView({
 	data:statusTableData,
 	style:Ti.UI.iPhone.TableViewStyle.GROUPED,
 	backgroundColor:'transparent',
-	top:statusDashboardRange.view.height + 5
+	top:statusDashboardBanner.view.height + 5
 });
 // create table view event listener
 statusTableView.addEventListener('click', function(e) {
