@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:TabBar xmlns:mx="http://www.adobe.com/2006/mxml" 
+				 creationComplete="creationComplete_handler()"
+				 >
+	<mx:Script>
+		<![CDATA[	
+			import mx.containers.ViewStack;
+			import mx.controls.tabBarClasses.Tab;
+			import mx.core.Container;
+
+			private function creationComplete_handler():void {
+				var tab:Tab;
+				var container:Container;
+				var idx:uint = 0;
+				var len:uint = this.numChildren;
+				
+				for each (var obj:Object in dataProvider) 
+				{
+					var viewStack:ViewStack = obj as ViewStack;
+					for each (var childObj:Object in viewStack.getChildren())
+					{
+						if (obj.hasOwnProperty("styleName"))
+						{
+							var childStyle:String = obj [ "styleName" ] as String; 
+							tab = this.getChildAt(idx) as Tab;
+							
+							tab.styleName = childStyle;
+						}						
+					}
+					/* tab = this.getChildAt(idx) as Tab;
+					container = this.getChildAt(idx) as Container;
+
+					tab.labelPlacement = "bottom"; */
+					
+					
+					//container.styleName = container.styleName
+				}
+			}
+		]]>
+	</mx:Script>
+</mx:TabBar>

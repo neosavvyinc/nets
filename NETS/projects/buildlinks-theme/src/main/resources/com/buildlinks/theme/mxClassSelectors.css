@@ -1,0 +1,106 @@
+/* 
+	Buildlinks Flex 3.5 Class Selectors
+	Serach "=ClassName" to navigate file
+*/
+
+/*	=Typography
+-----------------------------------------------------------------------------*/
+.applicationTitle {
+	color: #646464;
+	font-family: "Avenir-Heavy";
+	font-size: 16;
+	padding-top: 1;
+}
+
+.viewTitle {
+	color: #34342d;
+	font-family: "Avenir-Heavy";
+	font-size: 20;	
+}
+
+/*	=Box
+-----------------------------------------------------------------------------*/
+/* Replace "Base" with main view class name or use styleName="mainViewContainer" */
+.mainViewContainer, Base {
+	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ShadowBorderSkin' );
+}
+
+.stripedHeaderBox {
+	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.StripedBorderSkin' );
+	padding-bottom: 8;
+	padding-left: 8;
+	padding-right: 8;
+	padding-top: 8;
+}
+
+
+/*	=Buttons
+-----------------------------------------------------------------------------*/
+
+/*	=ButtonBars
+-----------------------------------------------------------------------------*/
+
+/*	=DataGrid
+-----------------------------------------------------------------------------*/
+
+/*	=LinkButton
+-----------------------------------------------------------------------------*/
+.userNameLinkButton, .logOutLinkButton {
+	color: #646464;
+	padding-top: 0;
+	padding-left: 0;
+	padding-right: 0;
+	padding-bottom: -3;
+}
+
+.userNameLinkButton {
+	icon: Embed( 'main/resources/com/buildlinks/theme/icons/Icon_16_prefsUp.png' );
+}
+
+.logOutLinkButton {
+	
+}
+
+/*	=TabNavigator 
+	@TODO: Move this style over to blTypeSelectors if custom TabNavigator is developed
+-----------------------------------------------------------------------------*/
+.applicationTabNavigator {
+	tab-style-name: "applicationTabStyle";
+	last-tab-style-name: "applicationTabStyle";
+	first-tab-style-name: "applicationTabStyle";
+	selected-tab-text-style-name: "applicationSelectedTabStyle";
+}
+
+.applicationSelectedTabStyle {
+	font-size: 12;
+	color: #177d2f;	
+}
+
+.defaultStyleTab, .customStyleTab {
+	corner-radius: 19;
+	vertical-gap: 0;	
+}
+
+/* The following two styles are specific to the style explorerer */
+.defaultStyleTab {
+	up-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_defaultStylesUp.png" );
+	over-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_defaultStylesOver.png" );
+	down-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_defaultStylesOver.png" );
+	selected-up-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_defaultStylesOver.png" );
+	selected-over-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_defaultStylesOver.png" );
+	selected-down-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_defaultStylesOver.png" );
+}
+
+.customStyleTab {
+	up-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_customStylesUp.png" );
+	over-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_customStylesOver.png" );
+	down-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_customStylesOver.png" );
+	selected-up-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_customStylesOver.png" );
+	selected-over-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_customStylesOver.png" );
+	selected-down-icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_customStylesOver.png" );
+}
+
+
+
+/*	=SuperLabel
+-----------------------------------------------------------------------------*/

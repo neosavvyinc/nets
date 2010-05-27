@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:cmp="styleLibrary.view.components.*"
+	xmlns:is="mil.af.gcss.incrementSelector.view.*"
+	width="100%" styleName="shadow12Box" >
+
+	<mx:Script>
+		<![CDATA[
+			[Bindable] 
+			private var tbbArr:Array = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]; 			
+		]]>
+	</mx:Script>
+
+	<mx:FormHeading label="SLIDER"/>
+<!--	<mx:FormItem direction="horizontal" label="ScrollingSlider" width="100%">
+		<cmp:DateRangeSelector width="100%"/>
+	</mx:FormItem>
+	<mx:FormItem direction="horizontal" label="ScrollingSliderButton">
+		<is:ScrollingSliderButton />
+	</mx:FormItem>	-->	
+</mx:Form>
