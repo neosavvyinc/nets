@@ -23,6 +23,7 @@
 						tab = this.getChildAt(idx) as Tab;
 						tab.styleName = childStyle;
 						tab.labelPlacement = "bottom";
+						idx++;
 					}						
 				}
 			}
