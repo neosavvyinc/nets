@@ -13,27 +13,17 @@
 				var container:Container;
 				var idx:uint = 0;
 				var len:uint = this.numChildren;
+				var viewStack:ViewStack = dataProvider as ViewStack;
 				
-				for each (var obj:Object in dataProvider) 
+				for each (var childObj:Object in viewStack.getChildren())
 				{
-					var viewStack:ViewStack = obj as ViewStack;
-					for each (var childObj:Object in viewStack.getChildren())
+					if (childObj.hasOwnProperty("styleName"))
 					{
-						if (obj.hasOwnProperty("styleName"))
-						{
-							var childStyle:String = obj [ "styleName" ] as String; 
-							tab = this.getChildAt(idx) as Tab;
-							
-							tab.styleName = childStyle;
-						}						
-					}
-					/* tab = this.getChildAt(idx) as Tab;
-					container = this.getChildAt(idx) as Container;
-
-					tab.labelPlacement = "bottom"; */
-					
-					
-					//container.styleName = container.styleName
+						var childStyle:String = childObj [ "styleName" ] as String; 
+						tab = this.getChildAt(idx) as Tab;
+						tab.styleName = childStyle;
+						tab.labelPlacement = "bottom";
+					}						
 				}
 			}
 		]]>
