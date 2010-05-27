@@ -42,28 +42,31 @@ package main.flex.com.buildlinks.theme.skins
 			var borderFillColors:Array = [ 0xffffff, 0xffffff ];
 			var borderFillAlphas:Array = [ 1, 1 ];
 			
-			var matrix:Matrix = new Matrix();
-			matrix.createGradientBox( uw, uh, Math.PI/2, 0, 0 );
-			
 			// Background Pattern Bitmap
 			var backgroundImage:Bitmap;
 			backgroundImage = new BackgroundImage();
+
+			var rotationMatrix:Matrix = new Matrix();
+			rotationMatrix.createGradientBox( uw, uh, Math.PI/2, 0, 0 );
+
+			var translationMatrix:Matrix = new Matrix();
+			translationMatrix.translate( 0, uh - backgroundImage.height -1 );
 			
 			var backgroundBitmapData:BitmapData;
 			backgroundBitmapData = new BitmapData( backgroundImage.width, backgroundImage.height, true, 0xffffff );
 			backgroundBitmapData.draw( backgroundImage ); 
 			
 			graphics.clear();
-			graphics.beginGradientFill( "linear", borderFillColors, borderFillAlphas, [ 0, 255 ], matrix );
+			graphics.beginGradientFill( "linear", borderFillColors, borderFillAlphas, [ 0, 255 ], rotationMatrix );
 			graphics.drawRect( 0, 0, uw, uh );
 			graphics.endFill();
 			
 			// Fill Pattern
-			graphics.beginBitmapFill( backgroundBitmapData );
-			graphics.drawRect( 0, uh - backgroundImage.height, uw, backgroundImage.height );
+			graphics.beginBitmapFill( backgroundBitmapData, translationMatrix, true, true );
+			graphics.drawRect( 0, uh - backgroundImage.height -1, uw, backgroundImage.height );
 			graphics.endFill();
 			
-/*			graphics.lineStyle( 1, 0x91918e, 1, true );
+			/*graphics.lineStyle( 1, 0x91918e, 1, true );
 			graphics.moveTo( 0, uh );
 			graphics.lineTo( uw, uh );*/
 		}

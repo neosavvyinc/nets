@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:TabBar xmlns:mx="http://www.adobe.com/2006/mxml" 
+<mx:TabBar xmlns:mx="http://www.adobe.com/2006/mxml"
 				 creationComplete="creationComplete_handler()"
 				 >
 	<mx:Script>
@@ -17,14 +17,15 @@
 				
 				for each (var childObj:Object in viewStack.getChildren())
 				{
-					if (childObj.hasOwnProperty("styleName"))
+					if (childObj.hasOwnProperty("tabStyleName"))
 					{
-						var childStyle:String = childObj [ "styleName" ] as String; 
+						var childStyle:String = childObj [ "tabStyleName" ] as String; 
 						tab = this.getChildAt(idx) as Tab;
 						tab.styleName = childStyle;
 						tab.labelPlacement = "bottom";
 						idx++;
-					}						
+						
+					}			
 				}
 			}
 		]]>

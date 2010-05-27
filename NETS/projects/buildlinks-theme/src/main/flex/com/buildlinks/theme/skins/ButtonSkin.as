@@ -1,10 +1,11 @@
 package main.flex.com.buildlinks.theme.skins
 {
-	import flash.filters.BevelFilter;
-	import flash.filters.DropShadowFilter;
+	import flash.display.Sprite;
 	import flash.geom.Matrix;
 	
+	import mx.core.UIComponent;
 	import mx.skins.ProgrammaticSkin;
+	import mx.states.AddChild;
 	
 	[Style(name="borderColors",type="Array",format="Color",inherit="yes")] 
 	[Style(name="topLeftRadius",type="Number",format="Radius",inherit="yes")] 
@@ -21,7 +22,6 @@ package main.flex.com.buildlinks.theme.skins
 	[Style(name="toggledDisabledFillColors",type="Array",format="Color",inherit="yes")] 
 	[Style(name="arrowColors",type="Array",format="Color",inherit="yes")] 
 	[Style(name="isDropDown",type="Boolean",format="Boolean",inherit="yes", enumeration="True, False")]
-	[Style(name="hasBevel",type="Boolean",format="Boolean",inherit="yes", enumeration="True, False")]
 	[Style(name="showSkinStates",type="Array",format="Boolean",inherit="no", enumeration="True, False")]
 	[Style(name="ratios",type="Array",format="Color",inherit="yes")] 
 	
@@ -89,8 +89,6 @@ package main.flex.com.buildlinks.theme.skins
 			super.updateDisplayList(w, h);
 			
 			// Deinfe style variables
-			var _isToggled:Boolean = false;
-			var hasBevel:Boolean = false;
 			var _showSkin:Boolean = true;
 			var _borderColor:uint;
 			var _fillColors:Array;		    
@@ -115,8 +113,6 @@ package main.flex.com.buildlinks.theme.skins
 			var toggledDisabledFillColors:Array = getStyle("toggledDisabledFillColors");
 			var arrowColors:Array = getStyle("arrowColors");
 			var ratios:Array = getStyle("ratios");
-			var bf:BevelFilter;
-			var dsf:DropShadowFilter;
 			
 			if (getStyle("topLeftRadius")) {
 				topLeftRadius = getStyle("topLeftRadius");
@@ -136,11 +132,7 @@ package main.flex.com.buildlinks.theme.skins
 			
 			if (getStyle("isDropDown")) {
 				isDropDown = getStyle("isDropDown");
-			}
-			
-			if (getStyle("hasBevel")) {
-				hasBevel = getStyle("hasBevel");
-			}                	        
+			}           	        
 			
 			graphics.clear();
 			
@@ -181,7 +173,6 @@ package main.flex.com.buildlinks.theme.skins
 					_borderColor = borderColors[4];
 					_arrowColor = arrowColors[4];
 					_showSkin = showSkinStates[4];
-					_isToggled = true;	            	                        
 					break;
 				
 				case "selectedOverSkin":
@@ -189,7 +180,6 @@ package main.flex.com.buildlinks.theme.skins
 					_borderColor = borderColors[4];
 					_arrowColor = arrowColors[4];
 					_showSkin = showSkinStates[4];
-					_isToggled = true;	            	                        
 					break;
 				
 				case "selectedDownSkin":
@@ -197,7 +187,6 @@ package main.flex.com.buildlinks.theme.skins
 					_borderColor = borderColors[4];
 					_arrowColor = arrowColors[4];
 					_showSkin = showSkinStates[4];
-					_isToggled = true;	            	                        
 					break;
 				
 				case "selectedDisabledSkin":
@@ -205,7 +194,6 @@ package main.flex.com.buildlinks.theme.skins
 					_borderColor = borderColors[4];
 					_arrowColor = arrowColors[4];
 					_showSkin = showSkinStates[4];
-					_isToggled = true;	            	                        
 					break;
 				
 				// Additional states for EditableComboBox
@@ -248,10 +236,7 @@ package main.flex.com.buildlinks.theme.skins
 			// Outer Fill - did this to get around a bug in graphics.lineStyle which renders the corners unevenly
 			if (_showSkin)
 			{
-				if (!hasBevel)
-				{
-					graphics.beginFill(_borderColor, 1);					
-				}
+				graphics.beginFill(_borderColor, 1);					
 			}
 			graphics.drawRoundRectComplex(0, 0, w, h, topLeftRadius, topRightRadius, bottomLeftRadius, bottomRightRadius);	        
 			graphics.endFill();
@@ -266,50 +251,22 @@ package main.flex.com.buildlinks.theme.skins
 			
 			if (isDropDown)
 			{
-				if (!_isToggled) 
-				{
-					graphics.beginFill(_arrowColor);
-					graphics.moveTo(w - 11.5, h / 2 + 2.5);
-					graphics.lineTo(w - 15.5, h / 2 - 1.5);
-					graphics.lineTo(w - 7, h / 2 - 1.5);
-					graphics.lineTo(w - 11.5, h / 2 + 2.5);
-					graphics.endFill(); 				
-				} 
-				else
-				{
-					graphics.beginFill(_arrowColor);
-					graphics.moveTo(w - 11.5, h / 2 - 1.5);
-					graphics.lineTo(w - 15.5, h / 2 + 2.5);
-					graphics.lineTo(w - 7, h / 2 + 2.5);
-					graphics.lineTo(w - 11.5, h / 2 - 1.5);
-					graphics.endFill();      		
-				}
-			}
-			
-			if (hasBevel)
-			{
-				//bf = new BevelFilter();
-				dsf = new DropShadowFilter();
 				
-				/*bf.angle = 90;
-				bf.highlightColor = 0xffffff;
-				bf.highlightAlpha = .55;
-				bf.shadowAlpha = 0;
-				bf.distance = 11;
-				bf.quality = 4;
-				bf.strength = 4;
-				bf.type = "inner";*/
+				graphics.beginFill(_arrowColor);
+				graphics.moveTo( w - 14, h / 2 - 1 );
+				graphics.lineTo( w - 8, h / 2 - 1 );
+				graphics.lineTo( w - 11, h / 2 - 4 );
+				graphics.lineTo( w - 14, h / 2 - 1 );
+				graphics.endFill();
+
+				graphics.beginFill(_arrowColor);
+				graphics.moveTo( w - 14, h / 2 + 1 );
+				graphics.lineTo( w - 8, h / 2 + 1 );
+				graphics.lineTo( w - 11, h / 2 + 4 );
+				graphics.lineTo( w - 14, h / 2 + 1 );
+				graphics.endFill();
 				
-				dsf.angle = 90;
-				dsf.blurX = 0;
-				dsf.blurY = 3;
-				dsf.alpha = .4;
-				dsf.color = 0x000000;
-				dsf.distance = 1;
-				dsf.quality = 3;
-				dsf.strength = 1;
 				
-				this.filters = [dsf]
 			}
 		}		
 	}

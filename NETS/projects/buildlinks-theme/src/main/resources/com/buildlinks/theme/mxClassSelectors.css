@@ -64,7 +64,7 @@
 /*	=TabNavigator 
 	@TODO: Move this style over to blTypeSelectors if custom TabNavigator is developed
 -----------------------------------------------------------------------------*/
-.applicationTabNavigator {
+ApplicationTabBar {
 	tab-style-name: "applicationTabStyle";
 	last-tab-style-name: "applicationTabStyle";
 	first-tab-style-name: "applicationTabStyle";
@@ -73,12 +73,26 @@
 
 .applicationSelectedTabStyle {
 	font-size: 12;
-	color: #177d2f;	
+	color: #177d2f;
+	vertical-gap: 1;
+}
+
+.tabStyle, .defaultStyleTab, .customStyleTab  {
+	font-family: "Avenir-Medium";
+	font-thickness: 100;
+	skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.TabSkin' );	
+	border-colors: #c8c8c8, #c8c8c8, #c8c8c8, #c8c8c8, #c8c8c8;
+	corner-radius: 19;
+	padding-bottom: 1;
+	padding-left: 22;
+	padding-right: 22;
+	padding-top: 7;
+	vertical-align: bottom;
 }
 
 .defaultStyleTab, .customStyleTab {
 	corner-radius: 19;
-	vertical-gap: 0;	
+	vertical-gap: 1;
 }
 
 /* The following two styles are specific to the style explorerer */

@@ -104,6 +104,11 @@ ButtonBar {
 
 /*	=ComboBox
 -----------------------------------------------------------------------------*/
+ComboBox {
+	is-drop-down: true;
+	padding-bottom: -3;
+	padding-top: -3;
+}
 
 /*	=ControlBar
 -----------------------------------------------------------------------------*/
@@ -154,19 +159,6 @@ TabNavigator, TabBar {
 	last-tab-style-name: "tabStyle";
 	first-tab-style-name: "tabStyle";
 	selected-tab-text-style-name: "selectedTabStyle";
-}
-
-.tabStyle {
-	font-family: "Avenir-Medium";
-	font-thickness: 100;
-	skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.TabSkin' );	
-	border-colors: #c8c8c8, #c8c8c8, #c8c8c8, #c8c8c8, #c8c8c8;
-	corner-radius: 19;
-	padding-bottom: 4;
-	padding-left: 22;
-	padding-right: 22;
-	padding-top: 7;
-	vertical-align: bottom;
 }
 
 .selectedTabStyle {

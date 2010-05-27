@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+<components:ViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
 		 width="100%" height="100%"
 		 xmlns:defaults="main.flex.com.buildlinks.explorer.view.defaults.*" xmlns:components="main.flex.com.buildlinks.explorer.components.*"
 		 >
@@ -17,4 +17,4 @@
         <defaults:Charting label="Charts" width="100%" height="100%" />
     </mx:ViewStack>
 	
-</mx:VBox>
+</components:ViewBase>

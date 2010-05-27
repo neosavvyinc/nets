@@ -11,18 +11,18 @@
 		Note: buildlinks-theme.swc must be included in libs directory
 		or added via project library path.
 	-->
-	<mx:Style source="main/resources/com/buildlinks/theme/mxTypeSelectors.css"/>
 	<mx:Style source="main/resources/com/buildlinks/theme/mxClassSelectors.css"/>
+	<mx:Style source="main/resources/com/buildlinks/theme/mxTypeSelectors.css"/>
 	<mx:Style source="main/resources/com/buildlinks/theme/blTypeSelector.css"/>
 	
 	<header:ApplicationHeader/>
 	
 	<mx:Canvas width="100%" height="100%">
-		<mx:ViewStack id="vs" width="100%" height="100%" top="60">
-			<defaults:Base label="DEFAULT STYLES" styleName="defaultStyleTab"/>
-			<custom:Base label="CUSTOM STYLES" styleName="customStyleTab"/>			
+		<mx:ViewStack id="vs" width="100%" height="100%" top="{appTabs.height}">
+			<defaults:Base label="DEFAULT STYLES" tabStyleName="defaultStyleTab"/>
+			<custom:Base label="CUSTOM STYLES" tabStyleName="customStyleTab"/>			
 		</mx:ViewStack>
-		<components:ApplicationTabBar dataProvider="{vs}"/>
+		<components:ApplicationTabBar id="appTabs" dataProvider="{vs}" left="-1"/>
 	</mx:Canvas>
 	
 </mx:Application>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
-		 width="100%" height="100%" xmlns:custom="main.flex.com.buildlinks.explorer.view.custom.*"
+<components:ViewBase xmlns:mx="http://www.adobe.com/2006/mxml"
+		 width="100%" height="100%" xmlns:custom="main.flex.com.buildlinks.explorer.view.custom.*" 
+		 xmlns:components="main.flex.com.buildlinks.explorer.components.*"
 		 >
 	
 	<mx:HBox width="100%" >
@@ -14,4 +15,5 @@
         <custom:Containers label="Containers" width="100%" />
     </mx:ViewStack>
 	
-</mx:VBox>
+	
+</components:ViewBase>
