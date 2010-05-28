@@ -38,7 +38,7 @@
 		<mx:LinkBar dataProvider="{arr}" enabled="{!disableBtn.selected}"/>		
 	</mx:FormItem>
 	<mx:HRule width="100%"/>
-	<mx:CheckBox id="disableBtn" styleName="switchCbx" label="Buttons Enabled"
+	<mx:CheckBox id="disableBtn" label="Buttons Enabled"
 		change="setLabel(event, 'Buttons Disabled', 'Buttons Enabled')"
-		toolTip="switchCbx"/>	
+		/>	
 </mx:Form>

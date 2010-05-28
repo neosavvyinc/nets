@@ -27,10 +27,11 @@
 
 .stripedHeaderBox {
 	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.StripedBorderSkin' );
-	padding-bottom: 8;
+	padding-bottom: 3;
 	padding-left: 8;
 	padding-right: 8;
-	padding-top: 8;
+	padding-top: 3;
+	vertical-align: middle;
 }
 
 
@@ -43,10 +44,13 @@
 /*	=DataGrid
 -----------------------------------------------------------------------------*/
 
+
+
 /*	=LinkButton
 -----------------------------------------------------------------------------*/
 .userNameLinkButton, .logOutLinkButton {
 	color: #646464;
+	text-roll-over-color: #177d2f;
 	padding-top: 0;
 	padding-left: 0;
 	padding-right: 0;
@@ -54,11 +58,10 @@
 }
 
 .userNameLinkButton {
-	icon: Embed( 'main/resources/com/buildlinks/theme/icons/Icon_16_prefsUp.png' );
-}
-
-.logOutLinkButton {
-	
+	up-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Icon_16_prefsUp.png' );
+	over-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Icon_16_prefsOver.png' );
+	down-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Icon_16_prefsOver.png' );
+	disabled-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Icon_16_prefsDisabled.png' );
 }
 
 /*	=TabNavigator 
@@ -88,6 +91,14 @@ ApplicationTabBar {
 	padding-right: 22;
 	padding-top: 7;
 	vertical-align: bottom;
+}
+
+.tabStyle {
+	corner-radius: 12;
+	padding-left: 8;
+	padding-right: 8;
+	padding-top: 1;
+	padding-bottom: 0;
 }
 
 .defaultStyleTab, .customStyleTab {

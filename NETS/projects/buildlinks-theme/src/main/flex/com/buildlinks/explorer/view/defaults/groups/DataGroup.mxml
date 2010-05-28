@@ -60,7 +60,13 @@
             <mx:columns>
                 <mx:DataGridColumn dataField="name" headerText="Name"/>
                 <mx:DataGridColumn dataField="phone" headerText="Phone"/>
-                <mx:DataGridColumn dataField="email" headerText="Email"/>
+                <mx:DataGridColumn dataField="email" headerText="Email">
+					<mx:itemRenderer>
+						<mx:Component>
+							<mx:LinkButton label="{data.email}"/>
+						</mx:Component>
+					</mx:itemRenderer>
+				</mx:DataGridColumn>
             </mx:columns>
         </mx:DataGrid>
 	</mx:FormItem>
