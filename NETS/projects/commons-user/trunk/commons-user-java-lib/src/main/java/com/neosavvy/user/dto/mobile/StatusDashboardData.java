@@ -2,6 +2,7 @@ package com.neosavvy.user.dto.mobile;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.math.BigDecimal;
 import java.util.Date;
 /*************************************************************************
  *
@@ -32,7 +33,7 @@ public class StatusDashboardData {
 
     private String expenseReportName;
     private String expenseReportLocation;
-    private Double expenseReportTotal;
+    private BigDecimal expenseReportTotal;
 
     private String projectName;
     private String projectApprover;
@@ -40,6 +41,7 @@ public class StatusDashboardData {
     private Date expenseReportStartDate;
     private Date expenseReportEndDate;
     private Date expenseReportLastActivityDate;
+    private Long expenseReportId;
 
     @XmlElement(required = true)
     public Date getExpenseReportEndDate() {
@@ -87,11 +89,11 @@ public class StatusDashboardData {
     }
 
     @XmlElement(required = true)
-    public Double getExpenseReportTotal() {
+    public BigDecimal getExpenseReportTotal() {
         return expenseReportTotal;
     }
 
-    public void setExpenseReportTotal(Double expenseReportTotal) {
+    public void setExpenseReportTotal(BigDecimal expenseReportTotal) {
         this.expenseReportTotal = expenseReportTotal;
     }
 
@@ -111,5 +113,14 @@ public class StatusDashboardData {
 
     public void setProjectName(String projectName) {
         this.projectName = projectName;
+    }
+
+    public void setExpenseReportId(Long id) {
+        this.expenseReportId = id;
+    }
+
+    @XmlElement(required = true)
+    public Long getExpenseReportId() {
+        return expenseReportId;
     }
 }
