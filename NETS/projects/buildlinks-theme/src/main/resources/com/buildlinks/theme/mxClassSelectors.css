@@ -23,6 +23,7 @@
 /* Replace "Base" with main view class name or use styleName="mainViewContainer" */
 .mainViewContainer, Base {
 	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ShadowBorderSkin' );
+	vertical-gap: 0;
 }
 
 .stripedHeaderBox {

@@ -3,9 +3,11 @@
 	
 	<mx:Script>
 		<![CDATA[
+			import main.flex.Main;
+			
+			import mx.controls.Alert;
 			import mx.core.Application;
-            import mx.controls.Alert;
-            import mx.managers.CursorManager;
+			import mx.managers.CursorManager;
 		
 			private function showAlert():void {
 				Alert.buttonWidth = 100;
@@ -13,7 +15,7 @@
                 Alert.noLabel = "No";
                 Alert.cancelLabel = "Maybe";
 				
-               //Alert.show("Are you absolutely sure you \nwant to be alerted?", "ALERT", 1|2|8, explorer(Application.application), null);     
+               Alert.show("Are you absolutely sure you \nwant to be alerted?", "ALERT", 1|2|8, Main(Application.application), null);     
            	}     	
 		]]>
 	</mx:Script>
@@ -26,5 +28,8 @@
 	</mx:FormItem>
 	<mx:FormItem label="Alert">
 		<mx:Button click="showAlert()" label="Alert Me" />
-	</mx:FormItem>		
+	</mx:FormItem>
+	<mx:FormItem label="ToolTip">
+		<mx:Label text="Show me a ToolTip" toolTip="This is a ToolTip"/>
+	</mx:FormItem>
 </mx:Form>

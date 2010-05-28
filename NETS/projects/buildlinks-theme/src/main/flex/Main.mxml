@@ -8,8 +8,11 @@
 	
 	<!-- 
 		Include these lines to implement the theme css 
-		Note: buildlinks-theme.swc must be included in libs directory
-		or added via project library path.
+		
+		Note: buildlinks-theme.swc must be included in libs 
+		directory or added via project library path. You   
+		may	also include using the -theme compiler arguement 
+		see: http://livedocs.adobe.com/flex/3/html/help.html?content=styles_12.html
 	-->
 	<mx:Style source="main/resources/com/buildlinks/theme/mxClassSelectors.css"/>
 	<mx:Style source="main/resources/com/buildlinks/theme/mxTypeSelectors.css"/>

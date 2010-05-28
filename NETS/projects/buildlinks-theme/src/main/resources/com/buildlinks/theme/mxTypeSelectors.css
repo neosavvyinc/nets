@@ -33,7 +33,7 @@ global {
 	font-family: "Avenir-Book";
 	color: #34342d;
 	font-size: 12;
-	theme-color: #085f41;	
+	theme-color: #44aa5c;	
 }
 
 /*	=Alert
@@ -231,6 +231,16 @@ TabNavigator, TabBar {
 
 /*	=TextInput
 -----------------------------------------------------------------------------*/
+TextInput, TextArea {
+	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ShadowBorderSkin' );
+	border-style: inset;
+	background-fill-colors: #ffffff, #ffffff;
+	padding-bottom: 0;
+	padding-top: 0;
+	padding-left: 4;
+	padding-right: 4;
+	leading: 0;
+}
 
 /*	=ToolTip
 -----------------------------------------------------------------------------*/

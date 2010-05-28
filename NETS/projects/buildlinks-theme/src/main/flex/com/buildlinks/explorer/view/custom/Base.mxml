@@ -16,5 +16,4 @@
         <custom:Containers label="Containers" width="100%" />
     </mx:ViewStack>
 	
-	
 </components:ViewBase>
