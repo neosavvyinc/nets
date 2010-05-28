@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="32">
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" height="32">
 
 	<mx:Script>
 		<![CDATA[
@@ -7,10 +7,14 @@
 		]]>
 	</mx:Script>
 	
-	<mx:Label text="{companyName.toUpperCase()}" styleName="applicationTitle"/>
-	<mx:Spacer width="100%"/>
-	<mx:LinkButton styleName="userNameLinkButton" label="Bill Henry"/>
-	<mx:VRule height="16"/>
-	<mx:LinkButton styleName="logOutLinkButton" label="Logout"/>
+	<mx:constraintRows>
+		<mx:ConstraintRow id="row1" />	
+	</mx:constraintRows>
 	
-</mx:HBox>
+	<mx:Label text="{companyName.toUpperCase()}" styleName="applicationTitle" baseline="row1:20" left="0"/>
+
+	<mx:LinkButton styleName="userNameLinkButton" label="Bill Henry"  baseline="row1:20" right="58"/>
+	<mx:VRule height="16" verticalCenter="0" right="50"/>
+	<mx:LinkButton styleName="logOutLinkButton" label="Logout"  baseline="row1:20" right="0"/>
+	
+</mx:Canvas>
