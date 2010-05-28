@@ -4,6 +4,8 @@ import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.mobile.DashboardData;
 import com.neosavvy.user.dto.mobile.StatusDashboardData;
+import com.neosavvy.user.dto.project.ExpenseItem;
+import com.neosavvy.user.dto.project.ExpenseReport;
 import com.neosavvy.user.dto.project.ExpenseReportStatus;
 import com.neosavvy.user.service.exception.MobileServiceException;
 import fineline.focal.common.http.HttpUtils;
@@ -101,18 +103,10 @@ public class MobileServiceImpl implements MobileService {
 
     public DashboardData findDashboardData() {
 
-        UserDetails userDetails = findUserDetailsOrThrowException();
-
-
         DashboardData dashboardData = new DashboardData();
-        UserDTO user = new UserDTO();
-        user.setUsername( userDetails.getUsername() );
 
-        List<UserDTO> userDTOList = userService.findUsers(user);
-        if( userDTOList.size() == 1 )
-        {
-            user = userDTOList.get(0);
-        }
+        UserDetails userDetails = findUserDetailsOrThrowException();
+        UserDTO user = findUserFromDetails(userDetails);
 
         dashboardData.setNumberApprovedExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.APPROVED ).size() );
         dashboardData.setNumberApprovingExpenses( expenseService.findExpenseReportsByStatus( user, ExpenseReportStatus.APPROVING).size() );
@@ -127,42 +121,49 @@ public class MobileServiceImpl implements MobileService {
         return dashboardData;
     }
 
+    private UserDTO findUserFromDetails(UserDetails userDetails) {
+        UserDTO user = new UserDTO();
+        user.setUsername( userDetails.getUsername() );
+
+        List<UserDTO> userDTOList = userService.findUsers(user);
+        if( userDTOList.size() == 1 )
+        {
+            user = userDTOList.get(0);
+        }
+        return user;
+    }
+
     public List<StatusDashboardData> findStatusDashboardData(String status) {
 
-        ExpenseReportStatus reportStatus = ExpenseReportStatus.valueOf(status);
+        UserDetails userDetails = findUserDetailsOrThrowException();
+        UserDTO user = findUserFromDetails(userDetails);
 
-        ArrayList<StatusDashboardData> statusInfo = new ArrayList<StatusDashboardData>();
+        List<ExpenseReport> reports = expenseService.findExpenseReportsByStatus(user, ExpenseReportStatus.valueOf(status));
+        List<StatusDashboardData> returnData = new ArrayList<StatusDashboardData>();
+        for (ExpenseReport report : reports) {
 
-        StatusDashboardData data1 = new StatusDashboardData();
-        data1.setExpenseReportEndDate(new Date());
-        data1.setExpenseReportStartDate(new Date());
-        data1.setExpenseReportLastActivityDate(new Date());
-        data1.setExpenseReportLocation("Raleigh Fool!");
-        data1.setExpenseReportName("Drinkin' hard");
-        data1.setExpenseReportTotal(500.00);
+            StatusDashboardData data = new StatusDashboardData();
+            data.setExpenseReportEndDate(report.getEndDate());
+            data.setExpenseReportStartDate(report.getStartDate());
+            data.setExpenseReportLastActivityDate(report.getStartDate());
+            data.setExpenseReportLocation(report.getLocation());
+            data.setExpenseReportName(report.getPurpose());
+            data.setExpenseReportTotal(report.getTotalExpenseAmount());
+            data.setExpenseReportId(report.getId());
+            data.setProjectName(report.getProject().getName());
+            returnData.add( data );
+        }
 
-        StatusDashboardData data2 = new StatusDashboardData();
-        data2.setExpenseReportEndDate(new Date());
-        data2.setExpenseReportStartDate(new Date());
-        data2.setExpenseReportLastActivityDate(new Date());
-        data2.setExpenseReportLocation("Raleigh Fool!");
-        data2.setExpenseReportName("Makin' deals");
-        data2.setExpenseReportTotal(500.00);
+        return returnData;
+    }
 
+    public List<ExpenseItem> findExpenseItemsForReportId(long id){
 
-        StatusDashboardData data3 = new StatusDashboardData();
-        data3.setExpenseReportEndDate(new Date());
-        data3.setExpenseReportStartDate(new Date());
-        data3.setExpenseReportLastActivityDate(new Date());
-        data3.setExpenseReportLocation("Raleigh Fool!");
-        data3.setExpenseReportName("Hirin' Strippers");
-        data3.setExpenseReportTotal(500.00);
+        SecurityWrapperDTO dto = login("adamparrish", "test");
+        UserDetails userDetails = findUserDetailsOrThrowException();
+        UserDTO user = findUserFromDetails(userDetails);
 
-        statusInfo.add(data1);
-        statusInfo.add(data2);
-        statusInfo.add(data3);
-
-        return statusInfo;
+        return expenseService.getExpenseItems(id);
     }
 
     private UserDetails findUserDetailsOrThrowException() {
@@ -179,6 +180,8 @@ public class MobileServiceImpl implements MobileService {
         }
         return userDetails;
     }
+
+    
 
     public ExpenseService getExpenseService() {
         return expenseService;

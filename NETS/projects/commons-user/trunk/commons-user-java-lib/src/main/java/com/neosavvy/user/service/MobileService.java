@@ -3,6 +3,7 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
 import com.neosavvy.user.dto.mobile.DashboardData;
 import com.neosavvy.user.dto.mobile.StatusDashboardData;
+import com.neosavvy.user.dto.project.ExpenseItem;
 import com.neosavvy.user.dto.project.ExpenseReportStatus;
 import fineline.focal.common.types.v1.StorageServiceFileRef;
 import org.springframework.context.annotation.Scope;
@@ -72,5 +73,9 @@ public interface MobileService {
     @Path("/statusDashboard/{status}")
     public List<StatusDashboardData> findStatusDashboardData(@PathParam("status") String status );
 
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    @Path("/expenseItemDrilldown/{expenseReportId}")
+    public List<ExpenseItem> findExpenseItemsForReportId(@PathParam("expenseReportId") long id);
     
 }

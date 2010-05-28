@@ -6,6 +6,8 @@ import fineline.focal.common.types.v1.EntityListenerManager;
 import fineline.focal.common.types.v1.FileRef;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
@@ -42,12 +44,14 @@ import java.util.Set;
     }
 )
 @EntityListeners(EntityListenerManager.class)
+@XmlRootElement(namespace = "urn:com:neosavvy:user:dto:mobile")
 public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_report_item_id_seq")
     @SequenceGenerator(name = "expense_report_item_id_seq", sequenceName = "expense_report_item_id_seq", allocationSize=1)
 	@Column(name="ID")
+    @XmlElement(required = true)
 	private Long id;
 
     /**
@@ -57,21 +61,26 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
      */
     @Column(name = "EXPENSE_DATE")
     @Temporal(TemporalType.DATE)
+    @XmlElement(required = true)
     private Date expenseDate;
 
     @Column(name = "AMOUNT")
+    @XmlElement(required = true)
     private BigDecimal amount;
 
     @ManyToOne
     @JoinColumn(name = "PAYMENT_METHOD_FK")
+//    @XmlElement(required = true)
     private PaymentMethod paymentMethod;
 
     @ManyToOne
     @JoinColumn(name = "PROJECT_TYPE_FK")
+//    @XmlElement(required = true)
     private ProjectType projectType;
 
     @ManyToOne
     @JoinColumn(name = "EXPENSE_ITEM_TYPE_FK")
+//    @XmlElement(required = true)
     private ExpenseItemType expenseItemType;
 
     @OneToMany(mappedBy="expenseItem", fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval=true)
@@ -79,9 +88,11 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
 
     @ManyToOne
     @JoinColumn(name="EXPENSE_REPORT_FK", nullable=false, updatable=false)
+    @XmlElement(required = true)
     private ExpenseReport expenseReport;
 
     @Column(name = "COMMENT")
+    @XmlElement(required = true)
     private String comment;
 
     @ManyToOne
