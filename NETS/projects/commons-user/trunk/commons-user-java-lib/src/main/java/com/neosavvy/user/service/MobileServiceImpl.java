@@ -158,12 +158,8 @@ public class MobileServiceImpl implements MobileService {
     }
 
     public List<ExpenseItem> findExpenseItemsForReportId(long id){
-
-        SecurityWrapperDTO dto = login("adamparrish", "test");
         UserDetails userDetails = findUserDetailsOrThrowException();
-        UserDTO user = findUserFromDetails(userDetails);
-
-        return expenseService.getExpenseItems(id);
+s        return expenseService.getExpenseItems(id);
     }
 
     private UserDetails findUserDetailsOrThrowException() {

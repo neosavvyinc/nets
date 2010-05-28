@@ -8,6 +8,7 @@ import fineline.focal.common.types.v1.FileRef;
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Set;
@@ -51,7 +52,6 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "expense_report_item_id_seq")
     @SequenceGenerator(name = "expense_report_item_id_seq", sequenceName = "expense_report_item_id_seq", allocationSize=1)
 	@Column(name="ID")
-    @XmlElement(required = true)
 	private Long id;
 
     /**
@@ -61,26 +61,21 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
      */
     @Column(name = "EXPENSE_DATE")
     @Temporal(TemporalType.DATE)
-    @XmlElement(required = true)
     private Date expenseDate;
 
     @Column(name = "AMOUNT")
-    @XmlElement(required = true)
     private BigDecimal amount;
 
     @ManyToOne
     @JoinColumn(name = "PAYMENT_METHOD_FK")
-//    @XmlElement(required = true)
     private PaymentMethod paymentMethod;
 
     @ManyToOne
     @JoinColumn(name = "PROJECT_TYPE_FK")
-//    @XmlElement(required = true)
     private ProjectType projectType;
 
     @ManyToOne
     @JoinColumn(name = "EXPENSE_ITEM_TYPE_FK")
-//    @XmlElement(required = true)
     private ExpenseItemType expenseItemType;
 
     @OneToMany(mappedBy="expenseItem", fetch=FetchType.EAGER, cascade=CascadeType.ALL, orphanRemoval=true)
@@ -88,17 +83,16 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
 
     @ManyToOne
     @JoinColumn(name="EXPENSE_REPORT_FK", nullable=false, updatable=false)
-    @XmlElement(required = true)
     private ExpenseReport expenseReport;
 
     @Column(name = "COMMENT")
-    @XmlElement(required = true)
     private String comment;
 
     @ManyToOne
     @JoinColumn(name="RECEIPT_FILE_REF_FK", nullable=true)
     private FileRef receiptFileRef;
 
+    @XmlElement(required = true)
     public BigDecimal getAmount() {
         return amount;
     }
@@ -107,6 +101,7 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
         this.amount = amount;
     }
 
+    @XmlElement(required = true)
     public String getComment() {
         return comment;
     }
@@ -115,6 +110,7 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
         this.comment = comment;
     }
 
+    @XmlElement(required = true)
     public Date getExpenseDate() {
         return expenseDate;
     }
@@ -123,6 +119,7 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
         this.expenseDate = expenseDate;
     }
 
+    @XmlTransient
     public ExpenseItemType getExpenseItemType() {
         return expenseItemType;
     }
@@ -131,6 +128,7 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
         this.expenseItemType = expenseItemType;
     }
 
+    @XmlTransient
     public Set<ExpenseItemValue> getExpenseItemValues() {
         return expenseItemValues;
     }
@@ -139,6 +137,7 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
         this.expenseItemValues = expenseItemValues;
     }
 
+    @XmlElement(required = true)
     public Long getId() {
         return id;
     }
@@ -147,6 +146,7 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
         this.id = id;
     }
 
+    @XmlTransient
     public PaymentMethod getPaymentMethod() {
         return paymentMethod;
     }
@@ -155,6 +155,7 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
         this.paymentMethod = paymentMethod;
     }
 
+    @XmlTransient
     public ProjectType getProjectType() {
         return projectType;
     }
@@ -163,6 +164,7 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
         this.projectType = projectType;
     }
 
+    @XmlTransient
     public ExpenseReport getExpenseReport() {
         return expenseReport;
     }
@@ -171,10 +173,12 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
         this.expenseReport = expenseReport;
     }
 
+    @XmlTransient
     public SecuredObject getAclParentObject() {
         return expenseReport;
     }
 
+    @XmlTransient
     public FileRef getReceiptFileRef() {
         return receiptFileRef;
     }
@@ -183,14 +187,17 @@ public class ExpenseItem extends BaseDTO implements SecuredObject<ExpenseItem> {
         this.receiptFileRef = receiptFileRef;
     }
 
+    @XmlTransient
     public Class getAclParentClass() {
         return ExpenseReport.class;
     }
 
+    @XmlTransient
     public Class<ExpenseItem> getAclClass() {
         return ExpenseItem.class;
     }
-    
+
+    @XmlTransient
     public String getOwnerUsername() {
         return null;
     }
