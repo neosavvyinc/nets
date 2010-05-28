@@ -69,7 +69,7 @@ function NETSCreateWindow(type, title, url) {
 	}
 
     var win = Titanium.UI.createWindow({
-        url:url,
+        //url:url,
         title:title,
         backgroundImage:'assets/images/NETS_bg.png',
         type:type
@@ -154,11 +154,10 @@ function switchToScreen(v) {
 		dashboardTab.open(statusWin,{animated:true});
 		break;
 	case SCREEN.DATE_RANGE.id:
-		var dateWin = NETSCreateWindow(WINDOW.DATERANGE, dateRange.title);
-		dateWin.add(dateRange);
-		dateRange_init();
+        dateRangeScreen = new DateRangeScreen();
+        dateRangeScreen.init();
 		//tabGroup.activeTab.open(dateWin,{animated:true}); //apparently android doesn't do well with this
-		dashboardTab.open(dateWin,{animated:true});
+		dashboardTab.open(dateRangeScreen.win,{animated:true});
 		break;
     case SCREEN.REPORT.id:
         var reportWin = NETSCreateWindow(WINDOW.REPORT, report.title);

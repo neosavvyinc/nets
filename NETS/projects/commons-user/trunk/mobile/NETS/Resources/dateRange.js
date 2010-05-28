@@ -3,12 +3,25 @@
 
 dateRange screen
 */
+var dateRangeScreen = null;
 
-var dateRange = Titanium.UI.createView({
-    top: 0,
-    opacity: 1,
-	title: STRING.DATE_RANGE
-});
+
+//instead of tabbed bar, try using two labels
+var colorSelected = NETS_COLOR.BUTTON_ACTIVE_GRADIENT_LIGHT;
+var colorUnselected = NETS_COLOR.BUTTON_INACTIVE_GRADIENT_LIGHT;
+//gradients don't work with android :(
+var gradientSelected = {
+	type:'linear',
+	colors:[NETS_COLOR.BUTTON_ACTIVE_GRADIENT_LIGHT, NETS_COLOR.BUTTON_ACTIVE_GRADIENT_DARK],
+	startPoint:{x:0,y:0},
+	endPoint:{x:0,y:30}
+};
+var gradientUnselected = {
+	type:'linear',
+	colors:[NETS_COLOR.BUTTON_INACTIVE_GRADIENT_LIGHT, NETS_COLOR.BUTTON_INACTIVE_GRADIENT_DARK],
+	startPoint:{x:0,y:0},
+	endPoint:{x:0,y:30}
+};
 
 function saveStartDateProperties(startDate) {
 	setProperty(PROPERTY.START_D, startDate.getDate());
@@ -46,78 +59,6 @@ if (PROPERTY.END_D.value==null || PROPERTY.END_D.value < 1 || PROPERTY.END_D.val
 	endDate.setMonth(PROPERTY.END_M.value);
 	endDate.setFullYear(PROPERTY.END_Y.value);
 }
-
-/** hmm, tabbed bar only exists for iPhone
-var dateRangeBar = Titanium.UI.createTabbedBar({
-	labels:['STRING.ALL_REPORTS', STRING.CUSTOM],
-	top:0,
-	style:Titanium.UI.iPhone.SystemButtonStyle.BAR,
-	height:30,
-	width:'93%',
-	index:0
-});
-dateRange.add(dateRangeBar);
-*/
-
-//instead of tabbed bar, try using two labels
-var colorSelected = NETS_COLOR.BUTTON_ACTIVE_GRADIENT_LIGHT;
-var colorUnselected = NETS_COLOR.BUTTON_INACTIVE_GRADIENT_LIGHT;
-//gradients don't work with android :(
-var gradientSelected = {
-	type:'linear',
-	colors:[NETS_COLOR.BUTTON_ACTIVE_GRADIENT_LIGHT, NETS_COLOR.BUTTON_ACTIVE_GRADIENT_DARK],
-	startPoint:{x:0,y:0},
-	endPoint:{x:0,y:30}
-};
-var gradientUnselected = {
-	type:'linear',
-	colors:[NETS_COLOR.BUTTON_INACTIVE_GRADIENT_LIGHT, NETS_COLOR.BUTTON_INACTIVE_GRADIENT_DARK],
-	startPoint:{x:0,y:0},
-	endPoint:{x:0,y:30}
-};
-var label1Text = STRING.ALL_REPORTS;
-var label2Text = STRING.CUSTOM;
-
-var dateLabel1 = Ti.UI.createLabel({
-	text:label1Text,
-	font:{fontSize:15, fontWeight:'bold'},
-	textAlign:'center',
-	color:NETS_COLOR.BUTTON_ACTIVE_FONT,
-	highlightedColor:NETS_COLOR.BUTTON_ACTIVE_FONT,
-	top:5,
-	width:155,
-	height:30,
-	left:5,
-	borderRadius:0,
-	borderWidth:1,
-	borderColor:NETS_COLOR.BUTTON_INACTIVE_GRADIENT_DARK,
-	backgroundColor:colorSelected,
-	backgroundGradient:gradientSelected,
-	index:0
-});
-var dateLabel2 = Ti.UI.createLabel({
-	text:label2Text,
-	font:{fontSize:15, fontWeight:'bold'},
-	textAlign:'center',
-	color:NETS_COLOR.BUTTON_INACTIVE_FONT,
-	highlightedColor:NETS_COLOR.BUTTON_INACTIVE_FONT,
-	top:5,
-	width:155,
-	height:30,
-	right:5,
-	borderRadius:0,
-	borderWidth:1,
-	borderColor:NETS_COLOR.BUTTON_INACTIVE_GRADIENT_DARK,
-	backgroundColor:colorUnselected,
-	backgroundGradient:gradientUnselected,
-	index:1
-});
-
-dateRange.add(dateLabel1);
-dateRange.add(dateLabel2);
-
-var drView = Titanium.UI.createView({top:35,height:375});
-dateRange.add(drView);
 
 /**
  * Row Constructor
@@ -175,140 +116,207 @@ DateRangeRow.prototype.inactive = function() {
     this.row.backgroundColor = colorUnselected;
 };
 
-drData = [];
+/**
+ * constructor
+ * this object has the properties
+ * win : Titanium.UI.Window
+ * view : Titanium.UI.View
+ * subView : Titanium.UI.View
+ * allLabel : Titanium.UI.Label
+ * customLabel : Titanium.UI.Label
+ * startRow : DateRangeRow
+ * endRow : DateRangeRow
+ * rowData : [] of Ti.UI.TableViewRow
+ * table : Ti.UI.Table
+ * activeRow : Number
+ * minDate : Date
+ * maxDate : Date
+ *
+ * iPhone Only
+ * datePicker : Ti.UI.Picker
+ */
+function DateRangeScreen() {
+    this.win = NETSCreateWindow(WINDOW.DATERANGE, STRING.DATE_RANGE);
+    this.view = Titanium.UI.createView({
+        top: 0,
+        opacity: 1,
+        title: STRING.DATE_RANGE
+    });
+    this.subView = Titanium.UI.createView({top:35,height:375});
 
-var startRow = new DateRangeRow(STRING.STARTING + ':', PROPERTY.START_S.value);
-startRow.active();
-drData.push(startRow.row);
+    this.allLabel = Ti.UI.createLabel({
+        text:STRING.ALL_REPORTS,
+        font:{fontSize:15, fontWeight:'bold'},
+        textAlign:'center',
+        color:NETS_COLOR.BUTTON_ACTIVE_FONT,
+        highlightedColor:NETS_COLOR.BUTTON_ACTIVE_FONT,
+        top:5,
+        width:155,
+        height:30,
+        left:5,
+        borderRadius:0,
+        borderWidth:1,
+        borderColor:NETS_COLOR.BUTTON_INACTIVE_GRADIENT_DARK,
+        backgroundColor:colorSelected,
+        backgroundGradient:gradientSelected,
+        index:0
+    });
+    this.customLabel = Ti.UI.createLabel({
+        text:STRING.CUSTOM,
+        font:{fontSize:15, fontWeight:'bold'},
+        textAlign:'center',
+        color:NETS_COLOR.BUTTON_INACTIVE_FONT,
+        highlightedColor:NETS_COLOR.BUTTON_INACTIVE_FONT,
+        top:5,
+        width:155,
+        height:30,
+        right:5,
+        borderRadius:0,
+        borderWidth:1,
+        borderColor:NETS_COLOR.BUTTON_INACTIVE_GRADIENT_DARK,
+        backgroundColor:colorUnselected,
+        backgroundGradient:gradientUnselected,
+        index:1
+    });
 
-var endRow = new DateRangeRow(STRING.ENDING + ':', PROPERTY.END_S.value);
-endRow.inactive();
-drData.push(endRow.row);
+    this.startRow = new DateRangeRow(STRING.STARTING + ':', PROPERTY.START_S.value);
+    this.startRow.active();
+    this.endRow = new DateRangeRow(STRING.ENDING + ':', PROPERTY.END_S.value);
+    this.endRow.inactive();
+    this.activeRow = 0;
 
-var drTable = Ti.UI.createTableView({
-	data:drData,
-	style:Ti.UI.iPhone.TableViewStyle.GROUPED,
-	backgroundColor:'transparent'
-});
+    this.rowData = [];
+    this.rowData.push(this.startRow.row);
+    this.rowData.push(this.endRow.row);
 
-drView.add(drTable);
+    this.table = Ti.UI.createTableView({
+        data:this.rowData,
+        style:Ti.UI.iPhone.TableViewStyle.GROUPED,
+        backgroundColor:'transparent'
+    });
 
-var drRowSelected = 0;
+    this.win.add(this.view);
+    this.view.add(this.allLabel);
+    this.view.add(this.customLabel);
+    this.view.add(this.subView);
+    this.subView.add(this.table);
 
-/* just for test purposes, just trying to see what, if anything, instantiates on android. nothing does
-Ti.API.info(Ti.UI.createPicker({type:Ti.UI.PICKER_TYPE_PLAIN}));
-Ti.API.info(Ti.UI.createPicker({type:Ti.UI.PICKER_TYPE_DATE_AND_TIME}));
-Ti.API.info(Ti.UI.createPicker({type:Ti.UI.PICKER_TYPE_DATE}));
-Ti.API.info(Ti.UI.createPicker({type:Ti.UI.PICKER_TYPE_TIME}));
-Ti.API.info(Ti.UI.createPicker({type:Ti.UI.PICKER_TYPE_COUNT_DOWN_TIMER}));
-*/
+    this.minDate = new Date();
+    this.minDate.setFullYear(2010);
+    this.minDate.setMonth(0);
+    this.minDate.setDate(1);
+    this.maxDate = new Date(); //maximum is right now
 
-if (Ti.Platform.name == 'iPhone OS') {
+    if (Ti.Platform.name == 'iPhone OS') {
 
-var minDate = new Date();
-minDate.setFullYear(2010);
-minDate.setMonth(0);
-minDate.setDate(1);
+        this.datePicker = Ti.UI.createPicker({
+            bottom:0,
+            type:Ti.UI.PICKER_TYPE_DATE,
+            minDate:this.minDate,
+            maxDate:this.maxDate,
+            value:startDate
+        });
+        this.datePicker.selectionIndicator = true;
 
-var maxDate = new Date(); //maximum is right now
+        this.subView.add(this.datePicker);
 
-var datePicker = Ti.UI.createPicker({
-	bottom:0,
-	type:Ti.UI.PICKER_TYPE_DATE,
-	minDate:minDate,
-	maxDate:maxDate,
-	value:startDate
-});
-datePicker.selectionIndicator = true;
+        this.datePicker.addEventListener('change', function(e) {
+            Ti.API.debug('date now ' + e.source.value.toDateString() + ' row:' + dateRangeScreen.activeRow);
 
-drView.add(datePicker);
+            if (dateRangeScreen.activeRow == 0) {
+                startDate = e.source.value;
+                saveStartDateProperties(startDate);
+                dateRangeScreen.startRow.dateLabel.text = PROPERTY.START_S.value;
+            } else {
+                endDate = e.source.value;
+                saveEndDateProperties(endDate);
+                dateRangeScreen.endRow.dateLabel.text = PROPERTY.END_S.value;
+            }
 
-datePicker.addEventListener('change', function(e) {
-    Ti.API.debug('date now ' + e.source.value.toDateString() + ' row:' + drRowSelected);
+            Ti.App.fireEvent(evtUpdateDateRange);
+        });
 
-	if (drRowSelected == 0) {
-		startDate = e.source.value;
-		saveStartDateProperties(startDate);
-		startRow.dateLabel.text = PROPERTY.START_S.value;
-	} else {
-		endDate = e.source.value;
-		saveEndDateProperties(endDate);
-		endRow.dateLabel.text = PROPERTY.END_S.value;
-	}
+        this.table.addEventListener('click', function(e) {
+            Ti.API.debug('selected row ' + e.index);
+            dateRangeScreen.activeRow = e.index;
+            if (e.index == 0) {
+                dateRangeScreen.startRow.active();
+                dateRangeScreen.endRow.inactive();
+                dateRangeScreen.datePicker.value = startDate;
+            } else {
+                dateRangeScreen.startRow.inactive();
+                dateRangeScreen.endRow.active();
+                dateRangeScreen.datePicker.value = endDate;
+            }
+        });
 
-    Ti.App.fireEvent(evtUpdateDateRange);
-});
+    }//iPhone OS
+    else
+    {
 
-drTable.addEventListener('click', function(e) {
-    Ti.API.debug('selected row ' + e.index);
-	drRowSelected = e.index;
-	if (drRowSelected == 0) {
-        startRow.active();
-        endRow.inactive();
-		datePicker.value = startDate;
-	} else {
-		startRow.inactive();
-		endRow.active();
-		datePicker.value = endDate;
-	}
-});
-
-}//iPhone OS
-else
-{
-	
-drTable.addEventListener('click', function(e) {
-	drRowSelected = e.index;
-	if (drRowSelected == 0) {
-		startRow.active();
-        endRow.inactive();
-		//datePicker.value = startDate;
-	} else {
-		startRow.inactive();
-		endRow.active();
-		//datePicker.value = endDate;
-	}
-});
+        this.table.addEventListener('click', function(e) {
+            dateRangeScreen.activeRow = e.index;
+            if (e.index == 0) {
+                dateRangeScreen.startRow.active();
+                dateRangeScreen.endRow.inactive();
+            } else {
+                dateRangeScreen.startRow.inactive();
+                dateRangeScreen.endRow.active();
+            }
+        });
+    }
 }
-
-function dateRange_init() {
-    drTable.setData(drData); //@todo this is a workaround for iphone b/c when a window is closed it seems that any tables in that window lose their data.
+/**
+ * init()
+ */
+DateRangeScreen.prototype.init = function() {
+    this.table.setData(this.rowData); //@todo this is a workaround for iphone b/c when a window is closed it seems that any tables in that window lose their data.
 							 //      so we count on whoever's stuffing the dateRange view into a window to call this init to get things set up properly
 	if (PROPERTY.DATERANGE.value == null || PROPERTY.DATERANGE.value == 0) {
-		drView.opacity = 0;
-		drView.visible = false;
+		this.subView.opacity = 0;
+		this.subView.visible = false;
 
-        dateLabel2.backgroundColor = colorUnselected;
-		dateLabel2.backgroundGradient = gradientUnselected;
-		dateLabel2.text = '';
-		dateLabel2.text = label2Text;
-        dateLabel2.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
-	    dateLabel2.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
-		dateLabel1.backgroundColor = colorSelected;
-		dateLabel1.backgroundGradient = gradientSelected;
-		dateLabel1.text = '';
-		dateLabel1.text = label1Text;
-        dateLabel1.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
-	    dateLabel1.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
+        this.customLabel.backgroundColor = colorUnselected;
+		this.customLabel.backgroundGradient = gradientUnselected;
+		this.customLabel.text = '';
+		this.customLabel.text = STRING.CUSTOM;
+        this.customLabel.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
+	    this.customLabel.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
+		this.allLabel.backgroundColor = colorSelected;
+		this.allLabel.backgroundGradient = gradientSelected;
+		this.allLabel.text = '';
+		this.allLabel.text = STRING.ALL_REPORTS;
+        this.allLabel.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
+	    this.allLabel.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
 	} else {
-		drView.opacity = 1;
-		drView.visible = true;
-		
-		dateLabel1.backgroundColor = colorUnselected;
-		dateLabel1.backgroundGradient = gradientUnselected;
-		dateLabel1.text = '';
-		dateLabel1.text = label1Text;
-        dateLabel1.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
-	    dateLabel1.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
-		dateLabel2.backgroundColor = colorSelected;
-		dateLabel2.backgroundGradient = gradientSelected;
-		dateLabel2.text = '';
-		dateLabel2.text = label2Text;
-        dateLabel2.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
-	    dateLabel2.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
+		this.subView.opacity = 1;
+		this.subView.visible = true;
+
+		this.allLabel.backgroundColor = colorUnselected;
+		this.allLabel.backgroundGradient = gradientUnselected;
+		this.allLabel.text = '';
+		this.allLabel.text = STRING.ALL_REPORTS;
+        this.allLabel.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
+	    this.allLabel.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
+		this.customLabel.backgroundColor = colorSelected;
+		this.customLabel.backgroundGradient = gradientSelected;
+		this.customLabel.text = '';
+		this.customLabel.text = STRING.CUSTOM;
+        this.customLabel.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
+	    this.customLabel.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
 	}
-}
-dateRange_init();
+
+    this.allLabel.addEventListener('click', function(e) {
+	    if (e.source.index == 0 && e.source.backgroundColor == colorUnselected) {
+		    dateRangeScreen.setActive(e.source.index);
+	    }
+    });
+    this.customLabel.addEventListener('click', function(e) {
+	    if (e.source.index == 1 && e.source.backgroundColor == colorUnselected) {
+		    dateRangeScreen.setActive(e.source.index);
+	    }
+    });
+};
 
 var isDrViewAnimating = false;
 var anim = Ti.UI.createAnimation(); //for fading our drView in/out
@@ -321,79 +329,72 @@ anim.addEventListener('complete', function(e) {
 	isDrViewAnimating = false;
 	if (e.source.status == 'hiding') {
 		Ti.API.debug('hide complete');
-		drView.visible = false;
+		dateRangeScreen.subView.visible = false;
 	} else if (e.source.status == 'showing') {
 		Ti.API.debug('show complete');
 	}
 });
-
-
 //@todo there's a problem on android mobilesdk 1.3.0 current where setting the backgroundcolor doesn't cause an invalidate
 //      the workaround right now is to tickle the text to get the label to redraw. remove that nonsense when appcelerator fixes it
-function dateRange_setActive(index) {
+DateRangeScreen.prototype.setActive = function(index) {
 	if (isDrViewAnimating==true) {
 		return;
 	}
-	
+
 	if (index==null) {
 		index = 0;
 	}
-	
+
 	if (index == 0) {
 		//all
 		Ti.API.debug('Activating All Reports');
-		dateLabel2.backgroundColor = colorUnselected;
-		dateLabel2.backgroundGradient = gradientUnselected;
-		dateLabel2.text = '';
-		dateLabel2.text = label2Text;
-        dateLabel2.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
-	    dateLabel2.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
-		dateLabel1.backgroundColor = colorSelected;
-		dateLabel1.backgroundGradient = gradientSelected;
-		dateLabel1.text = '';
-		dateLabel1.text = label1Text;
-        dateLabel1.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
-	    dateLabel1.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
-		
+		this.customLabel.backgroundColor = colorUnselected;
+		this.customLabel.backgroundGradient = gradientUnselected;
+		this.customLabel.text = '';
+		this.customLabel.text = STRING.CUSTOM;
+        this.customLabel.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
+	    this.customLabel.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
+		this.allLabel.backgroundColor = colorSelected;
+		this.allLabel.backgroundGradient = gradientSelected;
+		this.allLabel.text = '';
+		this.allLabel.text = STRING.ALL_REPORTS;
+        this.allLabel.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
+	    this.allLabel.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
+
 		anim.opacity = 0;
 		anim.status = 'hiding';
-		drView.animate(anim);
+		this.subView.animate(anim);
 	} else {
 		//custom
 		Ti.API.debug('Activating Custom');
-		dateLabel1.backgroundColor = colorUnselected;
-		dateLabel1.backgroundGradient = gradientUnselected;
-		dateLabel1.text = '';
-		dateLabel1.text = label1Text;
-        dateLabel1.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
-	    dateLabel1.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
-		dateLabel2.backgroundColor = colorSelected;
-		dateLabel2.backgroundGradient = gradientSelected;
-		dateLabel2.text = '';
-		dateLabel2.text = label2Text;
-        dateLabel2.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
-	    dateLabel2.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
-		
+		this.allLabel.backgroundColor = colorUnselected;
+		this.allLabel.backgroundGradient = gradientUnselected;
+		this.allLabel.text = '';
+		this.allLabel.text = STRING.ALL_REPORTS;
+        this.allLabel.color = NETS_COLOR.BUTTON_INACTIVE_FONT;
+	    this.allLabel.highlightedColor = NETS_COLOR.BUTTON_INACTIVE_FONT;
+		this.customLabel.backgroundColor = colorSelected;
+		this.customLabel.backgroundGradient = gradientSelected;
+		this.customLabel.text = '';
+		this.customLabel.text = STRING.CUSTOM;
+        this.customLabel.color = NETS_COLOR.BUTTON_ACTIVE_FONT;
+	    this.customLabel.highlightedColor = NETS_COLOR.BUTTON_ACTIVE_FONT;
+
 		anim.opacity = 1;
 		anim.status = 'showing';
-		drView.visible = true;
-		drView.opacity = 0;
-		drView.animate(anim);
+		this.subView.visible = true;
+		this.subView.opacity = 0;
+		this.subView.animate(anim);
 	}
-	
+
 	setProperty(PROPERTY.DATERANGE, index);
 	Ti.API.debug('date range index now ' + PROPERTY.DATERANGE.value);
-	
-	Ti.App.fireEvent(evtUpdateDateRange);
-}
 
-dateLabel1.addEventListener('click', function(e) {
-	if (e.source.index == 0 && dateLabel1.backgroundColor == colorUnselected) {
-		dateRange_setActive(e.source.index);
-	}
-});
-dateLabel2.addEventListener('click', function(e) {
-	if (e.source.index == 1 && dateLabel2.backgroundColor == colorUnselected) {
-		dateRange_setActive(e.source.index);
-	}
-});
+	Ti.App.fireEvent(evtUpdateDateRange);
+};
+
+
+
+
+
+
