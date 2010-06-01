@@ -18,6 +18,10 @@
 	font-size: 20;	
 }
 
+.filterText {
+	font-family: "Avenir-Heavy";
+}
+
 /*	=Box
 -----------------------------------------------------------------------------*/
 /* Replace "Base" with main view class name or use styleName="mainViewContainer" */
@@ -63,6 +67,15 @@
 	over-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Icon_16_prefsOver.png' );
 	down-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Icon_16_prefsOver.png' );
 	disabled-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Icon_16_prefsDisabled.png' );
+}
+
+.backLinkButton {
+	font-family: "Avenir-Heavy";
+	horizontal-gap: 4;
+	up-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Icon_backArrowUp.png' ); 
+	over-icon: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthOver.png' ); 
+	down-icon: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthOver.png' ); 
+	disabled-icon-icon: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthDisabled.png' ); 
 }
 
 /*	=TabNavigator 

@@ -1,8 +1,3 @@
-/* 
-	Buildlinks Flex 3.5 Type Selectors
-	Serach "=ClassName" to navigate file
-*/
-
 /*	=Embeded Fonts
 -----------------------------------------------------------------------------*/
 @font-face {
@@ -39,7 +34,7 @@ global {
 /*	=Alert
 -----------------------------------------------------------------------------*/
 
-/*	=Application
+/*	=Application 
 -----------------------------------------------------------------------------*/
 Application {
 	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ApplicationBorderSkin' );
@@ -50,9 +45,29 @@ Application {
 	padding-top: 0;
 }
 
+/*	=ApplicationControlBar
+-----------------------------------------------------------------------------*/
+/* @TODO figure out why the background colors is no longer appearing */
+ApplicationControlBar {
+	border-style: solid;
+	border-sides: "bottom";
+	border-color: #c3c3c3; 
+	corner-radius: 0;
+	drop-shadow-enabled: false;
+	fill-alphas: 1, 1;
+	fill-colors: #ffffff, #fcfcfc;
+	padding-top: 2;
+	padding-bottom: 2;
+	padding-left: 0;
+	padding-right: 2;
+	horizontal-gap: 4;
+	
+}
+
 /*	=Button
 -----------------------------------------------------------------------------*/
-Button, ComboBox, .buttonStyle, .firstButtonStyle, .lastButtonStyle, .sideBarButton, .alertButton {	
+Button, ComboBox, PopUpButton, PopUpMenuButton,
+.buttonStyle, .firstButtonStyle, .lastButtonStyle, .sideBarButton, .alertButton {	
 	color: #34342d;
 	arrow-colors: #464e55, #0a7e57, #0a7e57, #cccccc, #ffffff;
 	border-colors: #cdcdcd, #cdcdcd, #cdcdcd, #dddddd, #cdcdcd;
@@ -90,6 +105,8 @@ Button, ComboBox, .buttonStyle, .firstButtonStyle, .lastButtonStyle, .sideBarBut
 	text-selected-color: #ffffff;
 	text-roll-over-color: #ffffff;
 	leading: 5;
+	disabled-color: #ffffff;
+
 }
 
 /*	=ButtonBar
@@ -104,6 +121,21 @@ ButtonBar {
 
 /*	=CheckBox
 -----------------------------------------------------------------------------*/
+CheckBox, RadioButton {
+	icon: ClassReference( 'main.flex.com.buildlinks.theme.skins.CheckBoxIcon' );
+	border-colors: #cdcdcd, #cdcdcd, #cdcdcd, #dddddd, #cdcdcd;
+	horizontal-gap: 3;
+	text-roll-over-color: #085f41;
+	text-selected-color: #085f41;
+	up-fill-colors: #ffffff, #ffffff;
+	over-fill-colors: #f1fce1, #f1fce1;
+	disabled-fill-colors: #ffffff, #dadada;
+	down-fill-colors: #bedb97, #bedb97;
+	toggled-up-fill-colors: #ffffff, #ffffff;
+	toggled-over-fill-colors: #f1fce1, #f1fce1;
+	toggled-down-fill-colors: #bedb97, #bedb97;
+	toggled-disabled-fill-colors: #ffffff, #dadada;
+}
 
 /*	=ComboBox
 -----------------------------------------------------------------------------*/
@@ -115,10 +147,16 @@ ComboBox, ListBase {
 	roll-over-color: #ecfbd7;
 	selection-color: #177d2f;
 	text-selected-color: #ffffff;
+	theme-color: #44aa5c;
+	text-align: left;
+	padding-left: 6;
 }
 
 /*	=ControlBar
 -----------------------------------------------------------------------------*/
+ControlBar {
+
+}
 
 /*	=DataGrid
 -----------------------------------------------------------------------------*/
@@ -133,13 +171,62 @@ DataGrid {
 	header-separator-skin: Embed( 'main/resources/com/buildlinks/theme/graphicalSkins/BlankSkin.png' );
 }
 
-.headerStyle {
+.headerStyle, .dcHeaderStyle {
+	font-size: 12;
 	font-family: "Avenir-Heavy";
+	leading: 0;
 }
 
 /*	=DateChooser
 -----------------------------------------------------------------------------*/
+DateChooser {
+	font-size: 11;
+	font-family: "Avenir-Book";
+	corner-radius: 1;
+	color: #34342d;
+	background-color: #e6e6df;
+	border-colors: #cecec8;
+	header-colors: #e6e6de, #cfcfc8;
+	header-style-name: "dcHeaderStyle";
+	week-day-style-name: "weekDayStyle";
+	today-style-name: "todayStyle";
+	icon-color: #34342d;
+	selection-color: #f1fce1;
+	roll-over-color: #e0fcb8;
+	today-color: #e6e6df;
+	padding-bottom: 6;
+	padding-left: 1;
+	padding-right: 1;
+	padding-top: 5;
+	leading: 4;
+	vertical-align: middle;
+	today-indicator-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.DateChooserIndicator' ); 
+	next-month-up-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthUp.png' );
+	next-month-over-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthOver.png' );
+	next-month-down-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthOver.png' );
+	next-month-disabled-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthDisabled.png' );
+	prev-month-up-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthUp.png' );
+	prev-month-over-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthOver.png' );
+	prev-month-down-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthOver.png' );
+	prev-month-disabled-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthDisabled.png' );
+	prev-year-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.DateChooserYearArrowSkin' ); 
+	next-year-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.DateChooserYearArrowSkin' ); 
+	vertical-gap: -2;
+}
 
+.weekDayStyle {
+	color: #6b7274;
+}
+
+.todayStyle {
+	font-family: "Avenir-Heavy";	
+	color: #177d2f;
+}
+
+.dcHeaderStyle {
+	padding-left: 12;
+	padding-right: 12;
+}
 
 /*	=DateField
 -----------------------------------------------------------------------------*/
@@ -148,6 +235,19 @@ DateField {
 	over-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateField_calOver.png' );
 	down-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateField_calDown.png' );
 	disabled-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateField_calDisabled.png' );
+	date-chooser-style-name: "DateChooser";
+}
+
+/*	=DividedBox
+-----------------------------------------------------------------------------*/
+HDividedBox, VDividedBox {
+	divider-color: #177d2f;
+	divider-affordance: 6;
+	divider-thickness: 3;
+	divider-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.BoxDividerSkin' );
+	vertical-gap: 6;
+	horizontal-gap: 6;
+	
 }
 
 /*	=HRule
@@ -155,7 +255,6 @@ DateField {
 VRule {
 	stroke-color: #646464;
 }
-
 
 /*	=LinkBar
 -----------------------------------------------------------------------------*/
@@ -167,6 +266,7 @@ LinkButton {
 	skin: ClassReference(null);
 	text-align: left;
 	font-family: "Avenir-Book";
+	padding-right: 0;	
 }
 
 /*	=ListBase
@@ -184,12 +284,38 @@ ListBase {
 
 /*	=FormHeading
 -----------------------------------------------------------------------------*/
+FormHeading {
+	font-size: 14;
+	font-anti-alias-type: advanced;
+	font-family: "Avenir-Heavy";
+}
 
 /*	=FormItem
 -----------------------------------------------------------------------------*/
 
+/*	=NumericStepper
+-----------------------------------------------------------------------------*/
+NumericStepper {
+	down-arrow-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.NumericStepperDownSkin' );
+	up-arrow-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.NumericStepperUpSkin' );
+	corner-radius: 1;
+	arrow-colors: #2e3940, #177d2f, #177d2f, #969c9f;
+	border-colors: #7c7f81, #7c7f81, #7c7f81, #bdbfc0;
+	up-button-up-fill-colors: #ffffff, #ffffff;
+	up-button-over-fill-colors: #f1fce1, #f1fce1;
+	up-button-disabled-fill-colors: #ffffff, #ffffff;
+	up-button-down-fill-colors: #e0fcb8, #d7f3af;
+	down-button-up-fill-colors: #dcdcdc, #c1c1c1;
+	down-button-over-fill-colors: #c9d4b9, #b2bea3;
+	down-button-disabled-fill-colors: #ededed, #e0e0e0;
+	down-button-down-fill-colors: #bbd793, #a1be79;
+}
+
 /*	=RadioButton
 -----------------------------------------------------------------------------*/
+RadioButton {
+	icon: ClassReference( 'main.flex.com.buildlinks.theme.skins.RadioButtonIcon' );
+}
 
 /*	=SuperLabel -- Custom Label component see com.neosavvy.nets.explorer.components
 -----------------------------------------------------------------------------*/
@@ -242,6 +368,14 @@ TextInput, TextArea {
 	leading: 0;
 }
 
+/*	=Tree
+-----------------------------------------------------------------------------*/
+Tree {
+	default-leaf-icon: ClassReference( null );
+	folder-open-icon: ClassReference( null );
+	folder-closed-icon: ClassReference( null );
+}
+
 /*	=ToolTip
 -----------------------------------------------------------------------------*/
 ToolTip {
@@ -258,6 +392,29 @@ ToolTip {
 
 /*	=Panel
 -----------------------------------------------------------------------------*/
+Panel {
+	border-color: #9b9b97;
+	corner-radius: 0;
+	header-height: 28;
+	header-colors: #e7e7e0, #d2d2ca;
+	title-style-name: "headerStyle";
+	drop-shadow-enabled: false;
+	background-color: #e6e6df;
+	border-thickness-bottom: 0;
+	border-thickness-left: 1;
+	border-thickness-right: 1;
+	border-thickness-top: 1;
+	controlBarStyleName: "ControlBar";	
+}
+
+/*	=PopUpButton
+-----------------------------------------------------------------------------*/
+PopUpButton, PopUpMenuButton {
+	is-drop-down: true;
+	padding-left: 6;
+	text-align: left;
+}
+
 
 /*	=PieChart
 -----------------------------------------------------------------------------*/
