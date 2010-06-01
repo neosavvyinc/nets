@@ -39,6 +39,5 @@
 	</mx:FormItem>
 	<mx:HRule width="100%"/>
 	<mx:CheckBox id="disableBtn" label="Buttons Enabled"
-		change="setLabel(event, 'Buttons Disabled', 'Buttons Enabled')"
-		/>	
+		change="setLabel(event, 'Buttons Disabled', 'Buttons Enabled')"/>	
 </mx:Form>

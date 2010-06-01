@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" styleName="shadow12Box" 
-	xmlns:components="styleLibrary.view.components.*" xmlns:header="styleLibrary.view.components.header.*">
+	xmlns:components="styleLibrary.view.components.*" xmlns:header="styleLibrary.view.components.header.*" xmlns:controls="flexlib.controls.*">
 	
 	<mx:Script>
 		<![CDATA[
@@ -27,46 +27,47 @@
         minLength="4" maxLength="20"/>
 
 	<mx:FormHeading label="Form Elements"/>
-	<mx:FormItem label="CheckBox" >
-		<mx:CheckBox label="Option 1" enabled="{!disableBtn.selected}"/>
-		<mx:CheckBox label="Option 2" selected="true" enabled="{!disableBtn.selected}"/>
+	<mx:FormItem label="CheckBox" direction="horizontal" >
+		<mx:CheckBox label="Item 1" enabled="{!disableBtn.selected}"/>
+		<mx:CheckBox label="Item 2" selected="true" enabled="{!disableBtn.selected}"/>
 	</mx:FormItem>
 	<mx:FormItem label="ComboBox">
 		<mx:ComboBox prompt="Enabled" dataProvider="{arr}" enabled="{!disableBtn.selected}"/>
 		<mx:ComboBox styleName="editable" 
 			enabled="{!disableBtn.selected}" prompt="Editable" editable="true" dataProvider="{arr}"/>
 	</mx:FormItem>
-<!--	<mx:FormItem label="PopupButton">
+	<mx:FormItem label="PopupButton">
 		<mx:PopUpButton label="Click Me" enabled="{!disableBtn.selected}">
 		</mx:PopUpButton>
 	</mx:FormItem>
 	<mx:FormItem label="PopUpMenuButton">
 		<mx:PopUpMenuButton dataProvider="{arr}" enabled="{!disableBtn.selected}"/>
-	</mx:FormItem>	-->			
-	<mx:FormItem label="RadioButtons">
+	</mx:FormItem>				
+	<mx:FormItem label="RadioButtons" direction="horizontal">
 		<mx:RadioButtonGroup id="radiogroup1" />
-		<mx:RadioButton label="Option 1" enabled="{!disableBtn.selected}"/>
-		<mx:RadioButton label="Option 2" selected="true" enabled="{!disableBtn.selected}" />
+		<mx:RadioButton label="This" enabled="{!disableBtn.selected}"/>
+		<mx:RadioButton label="That" selected="true" enabled="{!disableBtn.selected}" />
 	</mx:FormItem>	
 	<mx:FormItem direction="horizontal" label="Text">
 		<mx:Label text="Label" />
 		<mx:Text text="Text" enabled="{!disableBtn.selected}"/>
 	</mx:FormItem>
-	<mx:FormItem direction="horizontal" label="TextInput" required="true">
-		<mx:TextInput id="ti" width="35" enabled="{!disableBtn.selected}"/>
-		<mx:DateField enabled="{!disableBtn.selected}"/>
-	</mx:FormItem>	
-	<mx:FormItem direction="horizontal" label="TextArea">
-		<mx:TextArea text="{text}" width="134" height="40" enabled="{!disableBtn.selected}"/>
+	<mx:FormItem direction="horizontal" label="PromptingTextInput" required="true">
+		<controls:PromptingTextInput id="ti" width="100%" enabled="{!disableBtn.selected}" prompt="Name"/>
 	</mx:FormItem>
-<!--	<mx:FormItem label="NumericStepper">
+	<mx:FormItem direction="horizontal" label="DateField" required="true" width="100%">
+		<mx:DateField enabled="{!disableBtn.selected}" yearNavigationEnabled="true" width="100%"/>
+	</mx:FormItem>
+	<mx:FormItem direction="horizontal" label="TextArea">
+		<mx:TextArea text="{text}" width="100%" height="40" enabled="{!disableBtn.selected}"/>
+	</mx:FormItem>
+	<mx:FormItem label="NumericStepper">
 		<mx:NumericStepper enabled="{!disableBtn.selected}"/>
-	</mx:FormItem>-->
+	</mx:FormItem>
 	<mx:FormItem label="ColorPicker">
 		<mx:ColorPicker enabled="{!disableBtn.selected}"/>
 	</mx:FormItem>
 	<mx:HRule width="100%"/>
 	<mx:CheckBox id="disableBtn" styleName="switchCbx" label="Form Elements Enabled"
-		change="setLabel(event, 'Form Elements Disabled', 'Form Elements Enabled')"
-		toolTip="switchCbx"/>							
+		change="setLabel(event, 'Form Elements Disabled', 'Form Elements Enabled')"/>							
 </mx:Form>
