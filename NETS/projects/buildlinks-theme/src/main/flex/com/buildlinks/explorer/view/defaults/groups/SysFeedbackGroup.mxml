@@ -5,8 +5,11 @@
 		<![CDATA[
 			import main.flex.Main;
 			
+			import mx.effects.easing.*;
+			
 			import mx.controls.Alert;
 			import mx.core.Application;
+			import mx.events.CloseEvent;
 			import mx.managers.CursorManager;
 		
 			private function showAlert():void {
@@ -15,8 +18,12 @@
                 Alert.noLabel = "No";
                 Alert.cancelLabel = "Maybe";
 				
-               Alert.show("Are you absolutely sure you \nwant to be alerted?", "ALERT", 1|2|8, Main(Application.application), null);     
-           	}     	
+                Alert.show("Are you absolutely sure you \nwant to be alerted?", "ALERT", 1|2|8, Main(Application.application), alertClickHandler, null, Alert.YES);
+           	}    
+			
+			private function alertClickHandler(event:CloseEvent):void {
+				//Do something
+			}
 		]]>
 	</mx:Script>
 	

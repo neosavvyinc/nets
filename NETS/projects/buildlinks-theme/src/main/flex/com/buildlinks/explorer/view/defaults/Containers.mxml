@@ -18,8 +18,8 @@
 		<mx:ConstraintRow id="row4" height="12"/>
 	</mx:constraintRows>
 	<groups:NavigatorGroup id="btnGp" left="col1:12" right="col3:0" top="row1:12"/>
-	<groups:PanelGroup left="col1:12" right="col2:0" top="row2:12"/>
-	<groups:LayoutContainers left="col3:12" right="col3:0" top="row2:12"/>
+	<groups:PanelGroup left="col1:12" right="col3:0" top="row2:12"/>
+	<groups:LayoutContainers left="col1:12" right="col3:0" top="row3:12"/>
 	<mx:Spacer top="row4:0" height="12"/>
 		
 </mx:Canvas>

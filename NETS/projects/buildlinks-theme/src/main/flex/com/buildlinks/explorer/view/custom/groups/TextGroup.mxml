@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" 
-	xmlns:cmp="view.components.*"
 	xmlns:fc="http://www.adobe.com/2006/fc"
 	width="100%" xmlns:containers="flexlib.containers.*">
 	
@@ -8,15 +7,8 @@
 		<![CDATA[
 			[Bindable]			
 			private var labelArr:Array = [
-				{ styleName: "numberedStepLabel", 	text: "1 2 3" },			
-				{ styleName: "contentLabel", 		text: "Total Expense Amount:" },				
-				{ styleName: "contentLabelBold", 	text: "$27.50" },				
-				{ styleName: "calloutTextBold", 	text: "Welcome to NETS" },				
-				{ styleName: "calloutText", 		text: "Complete the following..." },				
-				{ styleName: "companyNameHeading", 	text: "NEOSAVVY INC." },				
-				{ styleName: "secondaryTitle", 		text: "Welcome to NETS" },
-				{ styleName: "bodyText", 			text: "You have 2 expense..." },				
-				{ styleName: "descriptionText", 	text: "Select a step above to get started." }
+				{ styleName: "applicationTitle", 	text: "BuildLinks Portal Theme" },			
+				{ styleName: "viewTitle", 			text: "Page Title" }
 			];
 			
 			private function copyToClipBoard(event:Event):void

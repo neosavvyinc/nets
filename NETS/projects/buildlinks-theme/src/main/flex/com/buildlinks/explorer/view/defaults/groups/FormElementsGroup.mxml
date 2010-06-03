@@ -65,7 +65,7 @@
 		<mx:NumericStepper enabled="{!disableBtn.selected}"/>
 	</mx:FormItem>
 	<mx:FormItem label="ColorPicker">
-		<mx:ColorPicker enabled="{!disableBtn.selected}"/>
+		<mx:ColorPicker enabled="{!disableBtn.selected}" editable="true"/>
 	</mx:FormItem>
 	<mx:HRule width="100%"/>
 	<mx:CheckBox id="disableBtn" styleName="switchCbx" label="Form Elements Enabled"

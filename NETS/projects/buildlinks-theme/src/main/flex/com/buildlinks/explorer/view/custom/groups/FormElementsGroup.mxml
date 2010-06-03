@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" 
-	width="100%" xmlns:containers="flexlib.containers.*" xmlns:components="main.flex.com.buildlinks.explorer.components.*"
+	width="100%" xmlns:containers="flexlib.containers.*" 
+	xmlns:components="main.flex.com.buildlinks.explorer.components.*" xmlns:controls="flexlib.controls.*"
 	>
 
 	<mx:Script>
@@ -38,47 +39,14 @@
 		</employee>
 	</mx:XMLList>
 	
-	<mx:FormHeading label="Form Elements"/>
+	<mx:FormHeading label="Other Elements"/>
 	<mx:FormItem direction="horizontal" label="TextInput" width="100%" horizontalGap="-1">
-		<mx:TextInput styleName="roundedTextInput" 
-					  toolTip="Click to Copy styleName to clipboard" 
-					  click="copyToClipBoard(event)"/>
-	</mx:FormItem>
-	<mx:FormItem direction="vertical" label="SuperLabels" width="100%">
-		<mx:HBox width="100%" styleName="headingTitleBox">
-			<components:SuperLabel
-				styleName="alertsSuperLabel"
-				text="Alerts"
-				toolTip="Click to Copy styleName to clipboard" 
-				click="copyToClipBoard(event)"/>
-		</mx:HBox>
-		<mx:HBox width="100%" styleName="headingTitleBox">
-			<components:SuperLabel
-				styleName="budgetSuperLabel"
-				text="Project Expense Budgets"
-				toolTip="Click to Copy styleName to clipboard" 
-				click="copyToClipBoard(event)"/>
-		</mx:HBox>
-		<mx:HBox width="100%" styleName="headingTitleBox">
-			<components:SuperLabel
-				styleName="expensesSuperLabel"
-				text="Expenses Awaiting Approval"
-				toolTip="Click to Copy styleName to clipboard" 
-				click="copyToClipBoard(event)"/>
-		</mx:HBox>
-		<components:SuperLabel
-			styleName="tasksSuperLabel"
-			text="Tasks"
-			toolTip="Click to Copy styleName to clipboard" 
-			click="copyToClipBoard(event)"/>
-		<components:SuperLabel
-			styleName="manageSuperLabel"
-			text="Manage"
-			toolTip="Click to Copy styleName to clipboard" 
-			click="copyToClipBoard(event)"/>
+		<controls:PromptingTextInput styleName="searchTextInput"
+									 prompt="Search"
+					  				 toolTip="Click to Copy styleName to clipboard" 
+					  				 click="copyToClipBoard(event)"/>
 	</mx:FormItem>
 	
-	<!-- Yes, the HBox itemRenderer is evil, this is quick and dirty example -->
 	<mx:FormItem direction="horizontal" label="DataGrid" width="100%">
 		<mx:DataGrid id="dg" width="100%" height="100%" rowCount="3"
 					selectable="false"
@@ -87,18 +55,14 @@
 				<mx:DataGridColumn dataField="name" headerText="Name" width="140">
 					<mx:itemRenderer>
 						<mx:Component>
-							<mx:HBox horizontalScrollPolicy="off">
 								<mx:LinkButton label="{data.name}"/>
-							</mx:HBox>
 						</mx:Component>
 					</mx:itemRenderer>
 				</mx:DataGridColumn>
 				<mx:DataGridColumn dataField="expense" headerText="expense">
 					<mx:itemRenderer>
 						<mx:Component>
-							<mx:HBox horizontalScrollPolicy="off">
 								<mx:LinkButton label="{data.expense}"/>
-							</mx:HBox>
 						</mx:Component>
 					</mx:itemRenderer>
 				</mx:DataGridColumn>

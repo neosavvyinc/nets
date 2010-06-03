@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:TabBar xmlns:mx="http://www.adobe.com/2006/mxml"
-				 creationComplete="creationComplete_handler()"
-				 >
+		   labelFunction="labelFunc"
+		   creationComplete="creationComplete_handler()"
+		   >
 	<mx:Script>
 		<![CDATA[	
 			import mx.containers.ViewStack;
@@ -27,6 +28,10 @@
 						
 					}			
 				}
+			}
+			
+			private function labelFunc(item:Object):String {
+				return item[this.labelField].toUpperCase();
 			}
 		]]>
 	</mx:Script>

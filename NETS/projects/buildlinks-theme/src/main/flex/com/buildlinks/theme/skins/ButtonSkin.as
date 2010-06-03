@@ -242,7 +242,7 @@ package main.flex.com.buildlinks.theme.skins
 			// Inner Gradient
 			if (_showSkin)
 			{
-				graphics.beginGradientFill("linear", _fillColors, [1, 1, 1], ratios, verticalGradientMatrix(0, 0, w,h));				
+				graphics.beginGradientFill("linear", _fillColors, [1, 1, 1], ratios, verticalGradientMatrix( 0, 0, w, h ));				
 			}			
 			graphics.drawRoundRectComplex(1, 1, w - 2, h - 2, topLeftRadius - 1, topRightRadius - 1, bottomLeftRadius - 1, bottomRightRadius -1);
 			graphics.endFill();

@@ -15,7 +15,7 @@ package main.flex.com.buildlinks.theme.skins
 	[Style(name="selectedOverFillColors",type="Array",format="Color",inherit="yes")] 
 	[Style(name="selectedDownFillColors",type="Array",format="Color",inherit="yes")] 
 	[Style(name="selectedDisabledFillColors",type="Array",format="Color",inherit="yes")] 
-	
+
 	public class TabSkin extends ProgrammaticSkin
 	{	  		    
 		
@@ -89,14 +89,14 @@ package main.flex.com.buildlinks.theme.skins
 			// Hard coding the color values here as using the getStyle method 
 			// yeilds a runtime error in Flex SDK 3.5 -- @TODO fix bug
 			var upFillColors:Array = [0xffffff, 0xe9e9e9];
-			var overFillColors:Array = [0xe3efea, 0xa7cec0];
-			var downFillColors:Array = [0xffffff, 0xbbd2ca];
+			var overFillColors:Array = [0xf1fce1, 0xb2bea3];
+			var downFillColors:Array = [0xe0fcb8, 0xa1be79];
 			var disabledFillColors:Array = [0xffffff, 0xffffff];
 			var selectedUpFillColors:Array = [0xffffff, 0xffffff];
 			var selectedOverFillColors:Array = [0xffffff, 0xffffff];
 			var selectedDownFillColors:Array = [0xffffff, 0xffffff];
 			var selectedDisabledFillColors:Array = [0xffffff, 0xffffff];
-			
+
 			if (getStyle("topLeftRadius")) {
 				topLeftRadius = getStyle("topLeftRadius");
 			}    
@@ -154,18 +154,13 @@ package main.flex.com.buildlinks.theme.skins
 					break;
 			}
 			
-			var matrix:Matrix = new Matrix();
-			
-			matrix.createGradientBox( w, h, Math.PI/2, 0, 0 );
-			
 			// Outer Fill - did this to get around a bug in graphics.lineStyle which renders the corners unevenly
 			graphics.beginFill(_borderColor, 1);
 			graphics.drawRoundRectComplex(0, 0, w, h, topLeftRadius, topRightRadius, 0, 0);	        
 			graphics.endFill();
 			
-			trace(_fillColors);
 			// Inner Gradient
-			graphics.beginGradientFill("linear", _fillColors, [1, 1], [60, 255], matrix);
+			graphics.beginGradientFill("linear", _fillColors, [1, 1], [60, 255], verticalGradientMatrix( 0, 0, w, h ));
 			graphics.drawRoundRectComplex(1, 1, w - 2, h - 2, topLeftRadius - 1, topRightRadius - 1, 0, 0);
 			graphics.endFill();
 			

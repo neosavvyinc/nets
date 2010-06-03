@@ -1,4 +1,4 @@
-package com.neosavvy.nets.explorer.view.defaults.groups
+package main.flex.com.buildlinks.explorer.components
 {
 	import mx.core.UIComponent;
 

@@ -70,7 +70,7 @@
             </mx:columns>
         </mx:DataGrid>
 	</mx:FormItem>
-<!--	<mx:FormItem direction="horizontal" label="AdvancedDataGrid" width="100%">
+	<mx:FormItem direction="horizontal" label="AdvancedDataGrid" width="100%">
 		<mx:AdvancedDataGrid id="myADG" 
             width="100%" height="100%" sortExpertMode="true"
             initialize="gc.refresh();">        
@@ -92,5 +92,5 @@
                 <mx:AdvancedDataGridColumn dataField="Actual"/>
             </mx:columns>
        </mx:AdvancedDataGrid>
-	</mx:FormItem>		-->
+	</mx:FormItem>		
 </mx:Form>

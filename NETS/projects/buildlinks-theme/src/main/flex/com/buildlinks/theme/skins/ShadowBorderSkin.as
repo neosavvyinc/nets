@@ -1,9 +1,12 @@
 package main.flex.com.buildlinks.theme.skins
 {
+	import flash.display.Bitmap;
+	import flash.display.BitmapData;
 	import flash.filters.DropShadowFilter;
 	import flash.geom.Matrix;
 	
 	import mx.skins.Border;
+	import mx.states.AddChild;
 	
 	[Style(name="backgroundFillColors",type="Array",format="Color",inherit="yes")] 
 	[Style(name="backgroundFillAlphas",type="Array",format="Color",inherit="yes")] 
@@ -40,34 +43,39 @@ package main.flex.com.buildlinks.theme.skins
 		 */		
 		override protected function updateDisplayList( uw:Number, uh:Number ):void
 		{
-			var matrix:Matrix = new Matrix();
-			matrix.createGradientBox( uw, uh, Math.PI/2, 0, 0 );
-			
-			var backgroundFillColors:Array = [ 0xf3f3ee ,0xf3f3ee ];
-			var backgroundFillAlphas:Array = [ 1.0, 1.0 ];
+
+			var _backgroundFillColors:Array = [ 0xf3f3ee ,0xf3f3ee ];
+			var _backgroundFillAlphas:Array = [ 1.0, 1.0 ];
+			var Icon:Class = null;
 			var _borderStyle:String = "none";
 			
 			if (getStyle("backgroundFillColors")) {
-				backgroundFillColors = getStyle("backgroundFillColors");
+				_backgroundFillColors = getStyle("backgroundFillColors");
 			} 
 			
 			if (getStyle("backgroundFillAlphas")) {
-				backgroundFillColors = getStyle("backgroundFillAlphas");
+				_backgroundFillColors = getStyle("backgroundFillAlphas");
 			}
 			
 			if (getStyle("borderStyle")) {
 				_borderStyle = getStyle("borderStyle");
 			} 
 			
+			if (getStyle("icon"));
+			{
+				Icon = getStyle("icon");
+			}
+			
 			graphics.clear();
 			if (_borderStyle == "inset")
 			{
 				graphics.lineStyle( 1, 0x999d9f, .5 );
 			}
-			graphics.beginGradientFill("linear", backgroundFillColors, backgroundFillAlphas, [0, 255], matrix);
+			graphics.beginGradientFill("linear", _backgroundFillColors, _backgroundFillAlphas, [0, 255], verticalGradientMatrix( 0, 0, uw, uh ));
 			graphics.drawRoundRectComplex( 0, 0, uw, uh, 0, 0, 0, 0 );
 			graphics.endFill();
 			
+			// Draw shadow on inside or outside depending on usage
 			var ds:DropShadowFilter = new DropShadowFilter;
 			
 			if (_borderStyle == "inset")
@@ -93,6 +101,25 @@ package main.flex.com.buildlinks.theme.skins
 			}
 			
 			this.filters = [ds];
+			
+			// Include icon
+			if (Icon)
+			{ 
+				var iconImage:Bitmap;
+				iconImage = new Icon();
+				
+				var iconBitmapData:BitmapData;
+				iconBitmapData = new BitmapData( iconImage.width, iconImage.height, true, 0xffffff );
+				iconBitmapData.draw( iconImage );
+				
+				var translationMatrix:Matrix = new Matrix();
+				translationMatrix.translate( 6, 4 );
+				
+				graphics.lineStyle( 1, 0xffffff, 1, true );
+				graphics.beginBitmapFill( iconBitmapData, translationMatrix, true, true );
+				graphics.drawRect( 5, 3, iconImage.width + 1, iconImage.height + 1 );
+				graphics.endFill();	
+			}
 		}
 	}	
 }

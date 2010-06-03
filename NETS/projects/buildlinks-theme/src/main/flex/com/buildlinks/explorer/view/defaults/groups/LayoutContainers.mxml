@@ -7,17 +7,16 @@
 			[Bindable] private var apbString2:String = "Flooring: parlor base: fireplace surround tile";
 			[Bindable] private var arr1:Array = ["Item 1", "Item 2", "Item 3"];
 			[Bindable] private var arr2:Array = ["Sub Item A", "Sub Item B", "Sub Item C"];
-
 		]]>
 	</mx:Script>
 	
 	<mx:FormHeading label="Layout Containers"/>
 	<mx:FormItem label="DividedBox" width="100%" >
-		<mx:HDividedBox height="300" width="100%">
+		<mx:HDividedBox height="200" width="100%" liveDragging="true" toolTip="LiveDragging='true'">
 			<mx:List dataProvider="{arr1}" height="100%"/>
-			<mx:VDividedBox width="100%" height="100%">
+			<mx:VDividedBox width="100%" height="100%" toolTip="LiveDragging='false'">
 				<mx:List dataProvider="{arr2}" height="100%" width="100%"/>		
-				<mx:TextArea height="100%" width="100%"/>		
+				<mx:HBox height="100%" width="100%"/>		
 			</mx:VDividedBox>
 		</mx:HDividedBox>
 	</mx:FormItem>

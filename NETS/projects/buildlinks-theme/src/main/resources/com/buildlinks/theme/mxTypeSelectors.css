@@ -28,50 +28,131 @@ global {
 	font-family: "Avenir-Book";
 	color: #34342d;
 	font-size: 12;
-	theme-color: #44aa5c;	
+	theme-color: #44aa5c;
+	font-weight: normal;	
+}
+
+/*	=AccordionHeader
+-----------------------------------------------------------------------------*/
+AccordionHeader {
+	font-weight: normal;
+	font-family: "Avenir-Heavy";
+	font-size: 14;
+	skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.TabSkin' );	
+	border-colors: #c8c8c8, #c8c8c8, #c8c8c8, #c8c8c8, #c8c8c8;
+	corner-radius: 0;
+	padding-top: 2;
+	padding-left: 10;
+}
+
+/*	=AdvancedDataGrid
+-----------------------------------------------------------------------------*/
+AdvancedDataGrid {
+	icon-color: #34342d;
+	border-color: #91918e;
+	text-selected-color: #177d2f;
+	selection-color: #ecfbd7;
+	roll-over-color: #ecfbd7;
+	sort-font-family: "Avenir-Medium";
+	sort-font-weight: normal;
+	theme-color: #44aa5c;
+	text-align: left;
+	padding-left: 6;
+	padding-bottom: 3;
+	padding-top: 1;
+}
+
+/*	=AdvancedDataGridColumn
+-----------------------------------------------------------------------------*/
+AdvancedDataGridColumn {
+	headerStyleName: "headerStyle";
+	theme-color: #44aa5c;
+}
+
+/*	=AdvancedDataGridItemRenderer
+-----------------------------------------------------------------------------*/
+AdvancedDataGridItemRenderer {
+	font-family: "Avenir-Book";
+	font-weight: normal;
+	padding-bottom: 0;
+	vertical-align: middle;
+}
+
+/*	=AdvancedDataGridGroupItemRenderer
+-----------------------------------------------------------------------------*/
+AdvancedDataGridGroupItemRenderer {
+	vertical-align: middle;
+}
+
+/*	=AdvancedDataGridHeaderRenderer
+-----------------------------------------------------------------------------*/
+AdvancedDataGridHeaderRenderer {
+	color: #34342d;
+	font-size: 12;
+	font-family: "Avenir-Heavy";
+	leading: 0;
+	horizontal-align: left;
+	padding-left: 5;
+	theme-color: #44aa5c;
 }
 
 /*	=Alert
 -----------------------------------------------------------------------------*/
+Alert {
+	color: #3a3a36;
+	background-color: #f3f3ee;
+	drop-shadow-enabled: true;
+	shadow-distance: 1;
+	border-color: #f3f3ee;
+	message-style-name: "alertMessageStyle";
+	border-thickness-bottom: 16;
+}
+
+.alertMessageStyle {
+	font-size: 14;
+	leading: -2;
+}
 
 /*	=Application 
 -----------------------------------------------------------------------------*/
 Application {
+	modal-transparency-color: #e6e6df;
+	modal-transparency: .65;
+	modal-transparency-duration: 1000;
+	modal-transparency-blur: 50;
 	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ApplicationBorderSkin' );
 	vertical-gap: 27;
 	padding-left: 120;
 	padding-bottom: -1;
 	padding-right: 120;
 	padding-top: 0;
+	horizontal-align: center;
 }
 
 /*	=ApplicationControlBar
 -----------------------------------------------------------------------------*/
-/* @TODO figure out why the background colors is no longer appearing */
 ApplicationControlBar {
 	border-style: solid;
 	border-sides: "bottom";
-	border-color: #c3c3c3; 
+	backgroundColor: #ffffff;
 	corner-radius: 0;
 	drop-shadow-enabled: false;
 	fill-alphas: 1, 1;
-	fill-colors: #ffffff, #fcfcfc;
 	padding-top: 2;
 	padding-bottom: 2;
 	padding-left: 0;
 	padding-right: 2;
 	horizontal-gap: 4;
-	
 }
 
 /*	=Button
 -----------------------------------------------------------------------------*/
 Button, ComboBox, PopUpButton, PopUpMenuButton,
-.buttonStyle, .firstButtonStyle, .lastButtonStyle, .sideBarButton, .alertButton {	
+.buttonStyle, .firstButtonStyle, .lastButtonStyle, .sideBarButton, .alertButtonStyle,
+.carouselButtonStyle, .tileButtonStyle {	
 	color: #34342d;
 	arrow-colors: #464e55, #0a7e57, #0a7e57, #cccccc, #ffffff;
 	border-colors: #cdcdcd, #cdcdcd, #cdcdcd, #dddddd, #cdcdcd;
-	border-thickness: 1;
 	corner-radius: 1;
 	disabled-color: #999996;
 	font-anti-alias-type: advanced;
@@ -96,17 +177,17 @@ Button, ComboBox, PopUpButton, PopUpMenuButton,
 	selected-button-text-style-name: 'toggleSelectedTextStyle';
 	padding-left: 12;
 	padding-right: 12;
-	padding-top: 1;
-	padding-bottom: 0;
+	padding-top: 2;
+	padding-bottom: 2;
+	leading: 0;
 }
 
 .toggleSelectedTextStyle {
 	color: #ffffff;
 	text-selected-color: #ffffff;
 	text-roll-over-color: #ffffff;
-	leading: 5;
 	disabled-color: #ffffff;
-
+	font-weight: normal;
 }
 
 /*	=ButtonBar
@@ -143,7 +224,6 @@ ComboBox, ListBase {
 	is-drop-down: true;
 	padding-bottom: -3;
 	padding-top: -3;
-	theme-color: #085f41;
 	roll-over-color: #ecfbd7;
 	selection-color: #177d2f;
 	text-selected-color: #ffffff;
@@ -152,15 +232,31 @@ ComboBox, ListBase {
 	padding-left: 6;
 }
 
+/*	=ColorPicker
+-----------------------------------------------------------------------------*/
+ColorPicker {
+	swatch-panel-style-name: "colorPickerSwatchStyle";
+}
+
+.colorPickerSwatchStyle {
+	border-color: #d8d8d6;
+	preview-width: 150;
+}
+
 /*	=ControlBar
 -----------------------------------------------------------------------------*/
 ControlBar {
-
+	background-alpha: 1;
+	border-style: "applicationControlBar";
+	border-color: #c3c3c3; 
+	fill-colors: #ffffff, #ffffff;
+	border-thickness: 1;
+	fill-alphas: 1, 1;
 }
 
 /*	=DataGrid
 -----------------------------------------------------------------------------*/
-DataGrid {
+DataGrid, AdvancedDataGrid {
 	horizontal-grid-lines: true;
 	vertical-grid-lines: false;
 	horizontal-grid-line-color: #d8d8d6;
@@ -252,8 +348,8 @@ HDividedBox, VDividedBox {
 
 /*	=HRule
 -----------------------------------------------------------------------------*/
-VRule {
-	stroke-color: #646464;
+VRule, HRule {
+	stroke-color: #cecec8;
 }
 
 /*	=LinkBar
@@ -266,7 +362,8 @@ LinkButton {
 	skin: ClassReference(null);
 	text-align: left;
 	font-family: "Avenir-Book";
-	padding-right: 0;	
+	padding-right: 0;
+	vertical-align: middle;
 }
 
 /*	=ListBase
@@ -288,6 +385,7 @@ FormHeading {
 	font-size: 14;
 	font-anti-alias-type: advanced;
 	font-family: "Avenir-Heavy";
+	font-weight: normal;
 }
 
 /*	=FormItem
@@ -342,16 +440,15 @@ ScrollBar {
 /*	=TabNavigator
 -----------------------------------------------------------------------------*/
 TabNavigator, TabBar {
-	padding-top: 0;
 	border-color: #c8c8c8;
 	tab-style-name: "tabStyle";
 	last-tab-style-name: "tabStyle";
 	first-tab-style-name: "tabStyle";
-	selected-tab-text-style-name: "selectedTabStyle";
 }
 
-.selectedTabStyle {
+.activeTabStyle {
 	color: #177d2f;
+	font-weight: normal;
 }
 
 
@@ -370,10 +467,12 @@ TextInput, TextArea {
 
 /*	=Tree
 -----------------------------------------------------------------------------*/
-Tree {
+Tree, AdvancedDataGrid {
 	default-leaf-icon: ClassReference( null );
 	folder-open-icon: ClassReference( null );
 	folder-closed-icon: ClassReference( null );
+	disclosure-closed-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Tree_disclosureClosed.png' );
+	disclosure-open-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Tree_disclosureOpen.png' );	
 }
 
 /*	=ToolTip
@@ -390,6 +489,15 @@ ToolTip {
 	padding-right: 6;
 }
 
+.errorTip {
+	font-family: "Avenir-Heavy";
+	font-size: 14;
+	font-weight: normal;
+	background-fill-colors: #e60303, #c90101;
+	padding-bottom: 0;
+	padding-top: -1;
+}
+
 /*	=Panel
 -----------------------------------------------------------------------------*/
 Panel {
@@ -397,14 +505,25 @@ Panel {
 	corner-radius: 0;
 	header-height: 28;
 	header-colors: #e7e7e0, #d2d2ca;
-	title-style-name: "headerStyle";
+	title-style-name: "pandelTitleStyle";
 	drop-shadow-enabled: false;
 	background-color: #e6e6df;
 	border-thickness-bottom: 0;
 	border-thickness-left: 1;
 	border-thickness-right: 1;
 	border-thickness-top: 1;
-	controlBarStyleName: "ControlBar";	
+	control-bar-style-name: "panelControlBarStyle";
+}
+
+.pandelTitleStyle {
+	font-family: "Avenir-Heavy";
+	font-size: 14;
+}
+
+.panelControlBarStyle {
+	drop-shadow-enabled: true;
+	shadow-distance: 1;
+	shadow-color: #9b9b97;
 }
 
 /*	=PopUpButton
@@ -424,3 +543,25 @@ PopUpButton, PopUpMenuButton {
 
 /*	=ScrollBar
 -----------------------------------------------------------------------------*/
+
+/*	=Slider
+-----------------------------------------------------------------------------*/
+HSlider, VSlider {
+	border-color: #d8d8d6;
+	border-style: outset;
+	fill-alphas: 1, 1;
+	fill-colors: #ffffff, #ffffff;
+	track-colors: #f3f3ee, #f3f3ee;
+	show-track-highlight: true;
+	tick-offset: 0;
+	tick-length: 3;
+	tick-thickness: 2;
+	tick-color: #91918e;
+}
+
+/*	=TitleWindow
+-----------------------------------------------------------------------------*/
+TitleWindow {
+	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ShadowBorderSkin' );
+	background-fill-colors: #f3f3ee, #ffffff;
+}

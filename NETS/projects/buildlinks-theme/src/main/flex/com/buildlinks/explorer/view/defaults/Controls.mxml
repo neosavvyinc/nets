@@ -20,7 +20,9 @@
 	<groups:FormElementsGroup left="col2:12" right="col2:0" bottom="row1:0" top="row1:12"/>
 	<groups:ListGroup left="col3:12" right="col3:0" top="row1:12" bottom="row1:0"/>
 	<groups:SysFeedbackGroup left="col1:12" right="col1:0" top="row1:{btnGp.height + 25}" bottom="row1:0"/>
-	<groups:DataGroup left="col3:12" right="col3:0" bottom="row2:0"/>
+	<groups:DataGroup left="col2:12" right="col3:0" bottom="row2:0"/>
+	<groups:RTEGroup left="col1:12" right="col1:0" top="row2:0"/>
+	<groups:MiscGroup left="col1:12" right="col2:0" bottom="row3:0"/>
 	<mx:Spacer top="row4:0" height="12"/>
 		
 </mx:Canvas>

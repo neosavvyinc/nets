@@ -52,7 +52,7 @@ package main.flex.com.buildlinks.theme.skins
 		override public function get measuredHeight():Number
 		{
 			
-			return 4;
+			return 6;
 		}
 		
 		//--------------------------------------------------------------------------
@@ -79,11 +79,11 @@ package main.flex.com.buildlinks.theme.skins
 
 			if( skinParent == "HDividedBox" )
 			{
-				drawRoundRect( parent.parent.parent.height / 2 * -1 + 2, parent.width / 2 * -1 + 6, parent.parent.parent.height, h, 0 );
+				drawRoundRect( parent.parent.parent.height / 2 * -1 + 3, parent.width / 2 * -1 + 5, parent.parent.parent.height, h, 0 );
 			}
 			else
 			{
-				drawRoundRect( parent.parent.parent.width / 2 * -1 + 5, parent.height / 2 * -1 + 3, parent.parent.parent.width, h, 0 );
+				drawRoundRect( parent.parent.parent.width / 2 * -1 + 4.5, parent.height / 2 * -1 + 3, parent.parent.parent.width , h, 0 );
 			}
 			graphics.endFill();
 			
