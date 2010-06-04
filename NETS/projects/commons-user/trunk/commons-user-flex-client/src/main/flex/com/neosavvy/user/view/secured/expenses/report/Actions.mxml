@@ -4,16 +4,43 @@
     <mx:Script>
         <![CDATA[
 
+        import com.adobe.serialization.json.JSON;
         import com.neosavvy.user.ApplicationFacade;
+        import com.neosavvy.user.dto.project.ExpenseItem;
         import com.neosavvy.user.model.SecurityProxy;
 
+        import com.neosavvy.user.util.StringUtils;
+
+        import com.neosavvy.user.view.secured.expenses.report.popup.ReceiptView;
+
+        import fineline.focal.common.types.v1.StorageServiceFileRef;
+
+        import mx.containers.TitleWindow;
+        import mx.controls.Image;
+        import mx.core.Application;
+        import mx.core.IFlexDisplayObject;
+        import mx.events.CloseEvent;
+        import mx.managers.PopUpManager;
+        import mx.rpc.xml.SimpleXMLDecoder;
+
         var reference:FileReference;
+
+
+        protected override function commitProperties():void {
+            super.commitProperties();
+
+            if (data && data is ExpenseItem)
+            {
+                var expenseItem:ExpenseItem = data as ExpenseItem;
+                viewBtn.visible = expenseItem.receiptFileRef != null;
+            }
+        }
 
         protected function uploadReceiptToExpenseItem():void {
             reference = new FileReference();
             reference.addEventListener(Event.SELECT, selectHandler);
             //            reference.addEventListener(ProgressEvent.PROGRESS, fileRef_progress);
-            reference.addEventListener(Event.COMPLETE, completeHandler);
+            reference.addEventListener(DataEvent.UPLOAD_COMPLETE_DATA, completeHandler);
             reference.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
             reference.browse();
             //dispatchEvent(new ExpenseItemEvent(ExpenseItemEvent.ACTION_UPLOAD_RECEIPT, data as ExpenseItem));
@@ -27,22 +54,59 @@
         function selectHandler(event:Event):void
         {
             var instance:ApplicationFacade = ApplicationFacade.getInstance(ApplicationFacade.defaultApplicationKey);
-            var securityProxy:SecurityProxy = instance.retrieveProxy( SecurityProxy.NAME ) as SecurityProxy;
+            var securityProxy:SecurityProxy = instance.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
             var request:URLRequest = new URLRequest("http://localhost:8080/nets/storage/file/receipts/?rabbitHole=" + securityProxy.sessionId);
             request.method = URLRequestMethod.POST;
+            request.requestHeaders = [new URLRequestHeader("ACCEPT", "text/xml")];
+
             reference.upload(request);
         }
 
-        function completeHandler(event:Event):void
+        function completeHandler(event:DataEvent):void
         {
-            trace("uploaded");
+            var expenseItem:ExpenseItem = data as ExpenseItem;
+            var rawData:String = String(event.data);
+            expenseItem.receiptFileRef = createStorageServiceFileRef((JSON.decode(rawData)));
+            trace("raw");
         }
-        
-        
 
+        protected function parseResponse(responseXML:XMLDocument):StorageServiceFileRef {
+            return createStorageServiceFileRef(new SimpleXMLDecoder().decodeXML(responseXML.firstChild));
+        }
 
+        protected function createStorageServiceFileRef(parsedJsonObject:Object):StorageServiceFileRef {
+            var fileRef:StorageServiceFileRef = new StorageServiceFileRef();
+            fileRef.id = parsedJsonObject.id;
+            fileRef.bucket = parsedJsonObject.bucket;
+            fileRef.key = parsedJsonObject.key;
+            fileRef.fileName = parsedJsonObject.fileName;
+            fileRef.location = parsedJsonObject.location;
+            fileRef.fileSize = parsedJsonObject["@fileSize"];
+            fileRef.owner = parsedJsonObject.owner;
+            fileRef.lastModifiedDate = StringUtils.parseXmlDateTime(parsedJsonObject["@lastModifiedDate"]);
+
+            return fileRef;
+        }
+
+        var createPopUp:IFlexDisplayObject;
+        private function viewReceiptItem():void {
+
+            var fileRef:StorageServiceFileRef = (data as ExpenseItem).receiptFileRef as StorageServiceFileRef;
+            var instance:ApplicationFacade = ApplicationFacade.getInstance(ApplicationFacade.defaultApplicationKey);
+            var securityProxy:SecurityProxy = instance.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
+            var fileUrl:String = "http://localhost:8080/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "?noCache=" + (new Date().getMilliseconds());
+            trace( fileUrl );
+
+            var createPopUp = PopUpManager.createPopUp(Application.application as DisplayObject, ReceiptView, true);
+            PopUpManager.centerPopUp(createPopUp);
+            (createPopUp as ReceiptView).imageUrl = fileUrl;
+
+        }
         ]]>
     </mx:Script>
-    <mx:Button id="editBtn" styleName="editLinkButton" label="Upload Receipt" toolTip="Edit Expense Item"
+    <mx:Button id="editBtn" styleName="editLinkButton" toolTip="Add Receipt"
                click="{uploadReceiptToExpenseItem()}"/>
+    <mx:Button id="viewBtn" visible="false" styleName="submitButton" toolTip="View Receipt"
+                   click="{viewReceiptItem()}"/>
+
 </mx:HBox>
