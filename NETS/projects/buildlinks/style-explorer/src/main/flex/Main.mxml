@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
+				layout="vertical" minWidth="1240" minHeight="600" 
+				xmlns:defaults="main.flex.com.buildlinks.explorer.view.defaults.*" 
+				xmlns:custom="main.flex.com.buildlinks.explorer.view.custom.*" 
+				xmlns:header="main.flex.com.buildlinks.explorer.view.header.*" 
+				xmlns:components="main.flex.com.buildlinks.explorer.components.*">
+	
+	<!-- 
+		Include these lines to implement the theme css 
+		
+		Note: buildlinks-theme.swc must be included in libs 
+		directory or added via project library path. You   
+		may	also include using the -theme compiler arguement 
+		see: http://livedocs.adobe.com/flex/3/html/help.html?content=styles_12.html
+	-->
+	<mx:Style source="main/resources/com/buildlinks/theme/mxClassSelectors.css"/>
+	<mx:Style source="main/resources/com/buildlinks/theme/mxTypeSelectors.css"/>
+	<mx:Style source="main/resources/com/buildlinks/theme/blTypeSelector.css"/>
+	
+	<header:ApplicationHeader/>
+	
+	<mx:Canvas width="100%" height="100%">
+		<mx:ViewStack id="vs" width="100%" height="100%" top="{appTabs.height}">
+			<defaults:Base label="Default Styles" tabStyleName="defaultStyleTab"/>
+			<custom:Base label="Custom Styles" tabStyleName="customStyleTab"/>			
+		</mx:ViewStack>
+		<components:ApplicationTabBar id="appTabs" dataProvider="{vs}" left="-1"/>
+	</mx:Canvas>
+	
+</mx:Application>

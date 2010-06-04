@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" 
+	width="100%" xmlns:containers="flexlib.containers.*" 
+	xmlns:components="main.flex.com.buildlinks.explorer.components.*" xmlns:controls="flexlib.controls.*"
+	>
+
+	<mx:Script>
+		<![CDATA[
+			[Bindable] 
+			private var datesArr:Array = ["3/10/2010", "3/12/2010", "3/15/2010", "3/18/2010", "4/02/2010", "4/10/2010", "5/05/2010"]; 
+			
+			private function setLabel(e:Event, s1:String, s2:String):void {
+				if (e.currentTarget.selected) {
+					e.currentTarget.label = s1;
+				} else {
+					e.currentTarget.label = s2;
+				}
+			}
+			
+			private function copyToClipBoard(event:Event):void
+			{
+				System.setClipboard(event.currentTarget.styleName);
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:XMLList id="employees">
+		<employee>
+			<name>Christina Coenraets</name>
+			<expense>$3,800, Chicago to Denmark for client meeeting pre...</expense>
+		</employee>
+		<employee>
+			<name>Joanne Wall</name>
+			<expense>$342.29, Team building dinner</expense>
+		</employee>
+		<employee>
+			<name>Maurice Smith</name>
+			<expense>$50.00, Software license</expense>
+		</employee>
+	</mx:XMLList>
+	
+	<mx:FormHeading label="Other Elements"/>
+	<mx:FormItem direction="horizontal" label="TextInput" width="100%" horizontalGap="-1">
+		<controls:PromptingTextInput styleName="searchTextInput"
+									 prompt="Search"
+					  				 toolTip="Click to Copy styleName to clipboard" 
+					  				 click="copyToClipBoard(event)"/>
+	</mx:FormItem>
+	
+	<mx:FormItem direction="horizontal" label="DataGrid" width="100%">
+		<mx:DataGrid id="dg" width="100%" height="100%" rowCount="3"
+					selectable="false"
+					 dataProvider="{employees}" headerHeight="0" styleName="simpleDataGrid">
+			<mx:columns>
+				<mx:DataGridColumn dataField="name" headerText="Name" width="140">
+					<mx:itemRenderer>
+						<mx:Component>
+								<mx:LinkButton label="{data.name}"/>
+						</mx:Component>
+					</mx:itemRenderer>
+				</mx:DataGridColumn>
+				<mx:DataGridColumn dataField="expense" headerText="expense">
+					<mx:itemRenderer>
+						<mx:Component>
+								<mx:LinkButton label="{data.expense}"/>
+						</mx:Component>
+					</mx:itemRenderer>
+				</mx:DataGridColumn>
+			</mx:columns>
+		</mx:DataGrid>
+		<mx:Panel width="100%" height="100%" title="UPLOAD DATE" styleName="noPaddingBox">
+			<mx:List width="100%" height="100%" 
+					 styleName="sideBarList" itemRenderer="main.flex.com.buildlinks.theme.skins.SideBarListItemRenderer"
+					 dataProvider="{datesArr}" verticalScrollPolicy="on"/>
+		</mx:Panel>
+	</mx:FormItem>
+</mx:Form>

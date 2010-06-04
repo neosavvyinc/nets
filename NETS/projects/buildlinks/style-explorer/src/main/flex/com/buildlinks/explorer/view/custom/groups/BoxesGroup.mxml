@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" 
+	xmlns:fc="http://www.adobe.com/2006/fc"
+	width="100%" xmlns:containers="flexlib.containers.*">
+	
+	<mx:Script>
+		<![CDATA[
+			[Bindable]			
+			private var boxArr:Array = [
+				{ styleName: "formWindow" },				
+				{ styleName: "formSectionContainer" },
+				{ styleName: "altApplicationBackground" },
+				{ styleName: "dashboardBackground" },
+				{ styleName: "mainContainer" },				
+				{ styleName: "applicationViewContainer" },
+				{ styleName: "applicationView" },
+				{ styleName: "headingTitleBox" },
+				{ styleName: "callOutBox" },
+				{ styleName: "greenCrossHatchBox" },
+				{ styleName: "homeContentBackgroundBox" },				
+			];
+			
+			private function copyToClipBoard(event:Event):void
+			{
+				System.setClipboard(event.currentTarget.styleName);
+			}
+		]]>
+	</mx:Script>
+	
+	<mx:FormHeading label="Boxes"/>
+	<mx:FormItem direction="horizontal" label="Box" width="100%">
+		<containers:FlowContainer width="100%">
+			<mx:Repeater id="r" width="100%" height="100%" dataProvider="{boxArr}">
+				<mx:Box width="336" height="200" 
+						styleName="{r.currentItem.styleName}" 
+						toolTip="Click to Copy styleName to clipboard" 
+						click="copyToClipBoard(event)">
+					<mx:Text text="{r.currentItem.styleName}"/>
+				</mx:Box>
+			</mx:Repeater>	
+		</containers:FlowContainer>
+	</mx:FormItem>
+</mx:Form>

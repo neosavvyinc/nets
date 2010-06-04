@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:ToggleButtonBar xmlns:mx="http://www.adobe.com/2006/mxml" labelFunction="labelFunc">
+	<mx:Script>
+		<![CDATA[			
+			private function labelFunc(item:Object):String {
+				return item[this.labelField].toUpperCase();
+			}
+		]]>
+	</mx:Script>
+</mx:ToggleButtonBar>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" width="100%" styleName="shadow12Box">
+	
+	<mx:Script>
+		<![CDATA[
+			[Bindable] private var apbString1:String = "Browse / Search";
+			[Bindable] private var apbString2:String = "Flooring: parlor base: fireplace surround tile";
+			[Bindable] private var arr1:Array = ["Item 1", "Item 2", "Item 3"];
+			[Bindable] private var arr2:Array = ["Sub Item A", "Sub Item B", "Sub Item C"];
+		]]>
+	</mx:Script>
+	
+	<mx:FormHeading label="Layout Containers"/>
+	<mx:FormItem label="DividedBox" width="100%" >
+		<mx:HDividedBox height="200" width="100%" liveDragging="true" toolTip="LiveDragging='true'">
+			<mx:List dataProvider="{arr1}" height="100%"/>
+			<mx:VDividedBox width="100%" height="100%" toolTip="LiveDragging='false'">
+				<mx:List dataProvider="{arr2}" height="100%" width="100%"/>		
+				<mx:HBox height="100%" width="100%"/>		
+			</mx:VDividedBox>
+		</mx:HDividedBox>
+	</mx:FormItem>
+	<mx:FormItem label="ApplicationControlBar" width="100%">
+		<mx:ApplicationControlBar width="100%">
+			<mx:LinkButton label="{apbString1.toUpperCase()}" styleName="backLinkButton"/>
+			<mx:VRule height="12"/>
+			<mx:Text text="{apbString2.toUpperCase()}" styleName="headingGreyBold"/>
+		</mx:ApplicationControlBar>
+	</mx:FormItem>
+</mx:Form>

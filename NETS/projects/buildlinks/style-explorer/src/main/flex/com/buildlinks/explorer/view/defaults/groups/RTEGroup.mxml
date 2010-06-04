@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" 
+		 width="100%"
+		 >
+	
+	<mx:FormHeading label="Rich Text Editor"/>
+	<mx:FormItem width="100%">
+		<mx:RichTextEditor id="rte" width="100%" height="100%" title="Message"/>
+	</mx:FormItem>
+</mx:Form>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Form xmlns:mx="http://www.adobe.com/2006/mxml"
+		 width="100%"
+		 creationComplete="initCollections();" >
+	
+	<mx:Script>
+		<![CDATA[
+			import mx.events.MenuEvent;
+            import mx.controls.Alert;
+            import mx.collections.*;
+
+            [Bindable]
+            public var menuBarCollection:XMLListCollection;
+    
+            private var menubarXML:XMLList =
+                <>
+                    <menuitem label="Menu1" data="top">
+                        <menuitem label="MenuItem 1-A" data="1A"/>
+                        <menuitem label="MenuItem 1-B" data="1B"/>
+                    </menuitem>
+                    <menuitem label="Menu2" data="top">
+                        <menuitem label="MenuItem 2-A" type="check"  data="2A"/>
+                        <menuitem type="separator"/>
+                        <menuitem label="MenuItem 2-B" >
+                            <menuitem label="SubMenuItem 3-A" type="radio"
+                                groupName="one" data="3A"/>
+                            <menuitem label="SubMenuItem 3-B" type="radio"
+                                groupName="one" data="3B"/>
+                        </menuitem>
+                    </menuitem>
+                </>;
+
+            // Event handler to initialize the MenuBar control.
+            private function initCollections():void {
+                menuBarCollection = new XMLListCollection(menubarXML);
+            }	
+		]]>
+	</mx:Script>
+	
+	<mx:FormHeading label="MISC"/>
+	<mx:HBox width="100%" height="100%">
+		<mx:FormItem label="Sliders">
+			<mx:VSlider minimum="0" maximum="5" tickInterval="1" height="100" labels="[End, Start]" 
+				snapInterval="1"/>
+			<mx:HSlider minimum="0" maximum="5" tickInterval="1" height="50" labels="[End, Start]" 
+						snapInterval="1"/>
+		</mx:FormItem>
+		<mx:FormItem label="Rules">
+			<mx:HRule />
+			<mx:VRule />
+		</mx:FormItem>	
+		<mx:FormItem direction="horizontal" label="MenuBar">
+			<mx:MenuBar labelField="@label" dataProvider="{menuBarCollection}" />
+		</mx:FormItem>
+		<mx:FormItem direction="horizontal" label="DateChooser">
+			<mx:DateChooser allowDisjointSelection="true" allowMultipleSelection="true" yearNavigationEnabled="true"/>
+		</mx:FormItem>
+	</mx:HBox>
+</mx:Form>
