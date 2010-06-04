@@ -11,12 +11,9 @@ package com.neosavvy.user.view.secured.expenses.report {
     import com.neosavvy.user.dto.project.ProjectType;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
-
     import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.util.StringUtils;
     import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
-    import com.neosavvy.user.view.secured.expenses.report.event.ExpenseItemEvent;
-
     import com.neosavvy.user.view.secured.expenses.report.popup.DeleteConfirmationPanel;
 
     import flash.display.DisplayObject;
@@ -24,19 +21,15 @@ package com.neosavvy.user.view.secured.expenses.report {
     import flash.events.MouseEvent;
 
     import mx.collections.ArrayCollection;
-    import mx.collections.ArrayList;
     import mx.collections.ListCollectionView;
     import mx.collections.Sort;
-    import mx.collections.SortField;
     import mx.containers.Form;
     import mx.controls.AdvancedDataGrid;
     import mx.core.Application;
     import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
     import mx.logging.Log;
-
     import mx.managers.PopUpManager;
-
     import mx.utils.ObjectUtil;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

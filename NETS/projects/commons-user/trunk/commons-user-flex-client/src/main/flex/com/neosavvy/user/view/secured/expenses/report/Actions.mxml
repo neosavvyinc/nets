@@ -4,18 +4,45 @@
     <mx:Script>
         <![CDATA[
 
-        import com.neosavvy.user.dto.project.ExpenseItem;
-        import com.neosavvy.user.view.secured.expenses.report.event.ExpenseItemEvent;
+        import com.neosavvy.user.ApplicationFacade;
+        import com.neosavvy.user.model.SecurityProxy;
 
-        protected function editExpenseItemHandler():void {
-            dispatchEvent(new ExpenseItemEvent(ExpenseItemEvent.ACTION_EDIT, data as ExpenseItem));
+        var reference:FileReference;
+
+        protected function uploadReceiptToExpenseItem():void {
+            reference = new FileReference();
+            reference.addEventListener(Event.SELECT, selectHandler);
+            //            reference.addEventListener(ProgressEvent.PROGRESS, fileRef_progress);
+            reference.addEventListener(Event.COMPLETE, completeHandler);
+            reference.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
+            reference.browse();
+            //dispatchEvent(new ExpenseItemEvent(ExpenseItemEvent.ACTION_UPLOAD_RECEIPT, data as ExpenseItem));
         }
 
-        protected function deleteExpenseItemHandler():void {
-            dispatchEvent(new ExpenseItemEvent(ExpenseItemEvent.ACTION_DELETE, data as ExpenseItem));
+        private function ioErrorHandler(event:IOErrorEvent):void {
+            trace("io error");
         }
+
+
+        function selectHandler(event:Event):void
+        {
+            var instance:ApplicationFacade = ApplicationFacade.getInstance(ApplicationFacade.defaultApplicationKey);
+            var securityProxy:SecurityProxy = instance.retrieveProxy( SecurityProxy.NAME ) as SecurityProxy;
+            var request:URLRequest = new URLRequest("http://localhost:8080/nets/storage/file/receipts/?rabbitHole=" + securityProxy.sessionId);
+            request.method = URLRequestMethod.POST;
+            reference.upload(request);
+        }
+
+        function completeHandler(event:Event):void
+        {
+            trace("uploaded");
+        }
+        
+        
+
+
         ]]>
     </mx:Script>
-    <mx:Button id="editBtn" styleName="editLinkButton"  label="Edit" toolTip="Edit Expense Item" click="{editExpenseItemHandler()}"/>
-    <mx:Button id="deleteBtn" styleName="deleteLinkButton" label="Delete" toolTip="Delete Expense Item" click="{deleteExpenseItemHandler()}"/>
+    <mx:Button id="editBtn" styleName="editLinkButton" label="Upload Receipt" toolTip="Edit Expense Item"
+               click="{uploadReceiptToExpenseItem()}"/>
 </mx:HBox>

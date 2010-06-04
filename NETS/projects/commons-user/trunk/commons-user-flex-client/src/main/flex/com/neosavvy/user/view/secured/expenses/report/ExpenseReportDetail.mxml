@@ -70,8 +70,16 @@
                             headerText="Amount"
                             dataField="amountNumber"
                             leftAlignFilterButton="true"
-                            autoFilterEnabled="true"
+                            autoFilterEnabled="false"
                             enabledByDefault="true"
+                            />
+                    <neosavvy:AutoFilteringGridColumn
+                            id="actionColumn"
+                            headerText="Actions"
+                            leftAlignFilterButton="true"
+                            autoFilterEnabled="false"
+                            enabledByDefault="true"
+                            itemRenderer="com.neosavvy.user.view.secured.expenses.report.Actions"
                             />
 
                 </neosavvy:columns>

@@ -23,6 +23,16 @@ package com.neosavvy.user.model {
             super(NAME, null, ProxyConstants.expenseContextRoot);
         }
 
+        public function get sessionId():String {
+            if (data) {
+                return data.sessionId as String;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
         public function get user():String {
             if (data)
                 return data.name as String;

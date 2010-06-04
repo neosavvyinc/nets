@@ -16,6 +16,11 @@ import java.util.HashSet;
 public class TestUserDAO extends BaseSpringAwareDAOTestCase {
 
 
+    @Test
+    public void testFindUserSession() {
+        String mostCurrentSessionIdForUser = userDAO.findMostCurrentSessionIdForUser("adamparrish");
+        System.out.println(mostCurrentSessionIdForUser);
+    }
 
 	@Test
 	public void testSaveUser() {
