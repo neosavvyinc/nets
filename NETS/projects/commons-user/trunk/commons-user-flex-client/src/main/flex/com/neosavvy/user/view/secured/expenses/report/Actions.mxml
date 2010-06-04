@@ -1,5 +1,5 @@
 <?xml version="1.0" ?>
-<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalAlign="center" verticalAlign="middle">
 
     <mx:Script>
         <![CDATA[
@@ -15,13 +15,9 @@
 
         import fineline.focal.common.types.v1.StorageServiceFileRef;
 
-        import mx.containers.TitleWindow;
-        import mx.controls.Image;
         import mx.core.Application;
         import mx.core.IFlexDisplayObject;
-        import mx.events.CloseEvent;
         import mx.managers.PopUpManager;
-        import mx.rpc.xml.SimpleXMLDecoder;
 
         var reference:FileReference;
 
@@ -39,11 +35,9 @@
         protected function uploadReceiptToExpenseItem():void {
             reference = new FileReference();
             reference.addEventListener(Event.SELECT, selectHandler);
-            //            reference.addEventListener(ProgressEvent.PROGRESS, fileRef_progress);
             reference.addEventListener(DataEvent.UPLOAD_COMPLETE_DATA, completeHandler);
             reference.addEventListener(IOErrorEvent.IO_ERROR, ioErrorHandler);
             reference.browse();
-            //dispatchEvent(new ExpenseItemEvent(ExpenseItemEvent.ACTION_UPLOAD_RECEIPT, data as ExpenseItem));
         }
 
         private function ioErrorHandler(event:IOErrorEvent):void {
@@ -67,12 +61,7 @@
             var expenseItem:ExpenseItem = data as ExpenseItem;
             var rawData:String = String(event.data);
             expenseItem.receiptFileRef = createStorageServiceFileRef((JSON.decode(rawData)));
-            trace("raw");
             invalidateProperties();
-        }
-
-        protected function parseResponse(responseXML:XMLDocument):StorageServiceFileRef {
-            return createStorageServiceFileRef(new SimpleXMLDecoder().decodeXML(responseXML.firstChild));
         }
 
         protected function createStorageServiceFileRef(parsedJsonObject:Object):StorageServiceFileRef {
@@ -85,7 +74,6 @@
             fileRef.fileSize = parsedJsonObject["@fileSize"];
             fileRef.owner = parsedJsonObject.owner;
             fileRef.lastModifiedDate = StringUtils.parseXmlDateTime(parsedJsonObject["@lastModifiedDate"]);
-
             return fileRef;
         }
 
