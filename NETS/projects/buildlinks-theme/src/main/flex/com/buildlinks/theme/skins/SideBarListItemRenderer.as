@@ -46,10 +46,11 @@ package main.flex.com.buildlinks.theme.skins
 			}
 			
 			graphics.lineStyle( 1, 0xcecec8, 1 );
-			graphics.moveTo( -6, uh + 2);
-			graphics.lineTo( uw + 6, uh + 2);
+			graphics.moveTo( -6, uh + 2 );
+			graphics.lineTo( uw + 6, uh + 2 );
 			graphics.endFill();
-						
+				
+			
 			// Include icon
 			if (Icon)
 			{ 
@@ -66,7 +67,6 @@ package main.flex.com.buildlinks.theme.skins
 				
 				translationMatrix.translate( xPos, yPos );
 				
-				graphics.lineStyle( 1, 0xffffff, 1, true );
 				graphics.beginBitmapFill( iconBitmapData, translationMatrix, true, true );
 				graphics.drawRect(uw - xPos - 1, yPos - 1, iconImage.width, iconImage.height );
 				graphics.endFill();	
