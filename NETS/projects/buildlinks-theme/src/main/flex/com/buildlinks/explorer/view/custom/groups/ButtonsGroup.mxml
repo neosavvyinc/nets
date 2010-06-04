@@ -9,7 +9,7 @@
 			[Bindable]
 			private var lBtnArr:Array = [
 				{ styleName: "userNameLinkButton", 	isClickable: true, toggle: false, label: "User Name"  },				
-				{ styleName: "backLinkButton",		isClickable: true, toggle: false },
+				{ styleName: "backLinkButton",		isClickable: true, toggle: false, label:"BROWSE / SEARCH" },
 				{ styleName: "forwardLinkButton", 	isClickable: true, toggle: false }
 			];
 

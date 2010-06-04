@@ -113,11 +113,14 @@ package main.flex.com.buildlinks.theme.skins
 				iconBitmapData.draw( iconImage );
 				
 				var translationMatrix:Matrix = new Matrix();
-				translationMatrix.translate( 6, 4 );
+				var xPos:Number = 6;
+				var yPos:Number = 4;
+				
+				translationMatrix.translate( xPos, yPos );
 				
 				graphics.lineStyle( 1, 0xffffff, 1, true );
 				graphics.beginBitmapFill( iconBitmapData, translationMatrix, true, true );
-				graphics.drawRect( 5, 3, iconImage.width + 1, iconImage.height + 1 );
+				graphics.drawRect( xPos - 1, yPos - 1, iconImage.width + 1, iconImage.height + 1 );
 				graphics.endFill();	
 			}
 		}

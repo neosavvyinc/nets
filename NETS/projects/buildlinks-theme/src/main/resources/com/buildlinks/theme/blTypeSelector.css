@@ -1,14 +1,35 @@
 /* 
-	Buildlinks Flex Component Lib Type
- Selectors
+	Buildlinks Flex Component Lib Type Selectors
 	Serach "=ClassName" to navigate file
 */
 
-/* @TODO These styles will need to be tweaked to work with existing custom Buildlinks components */
+/* 
+	Note: The following styles are tied to custom component implementations
+*/
 
 /*	=Box
 -----------------------------------------------------------------------------*/
 ApplicationHeader {
 	vertical-align: middle;	
 	horizontal-gap: 8;
+}
+
+/*	=ItemRenderers
+-----------------------------------------------------------------------------*/
+SideBarListItemRenderer {
+/*	icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_listArrowUp.png" );*/
+}
+
+/*	=SuperLabel —> Label
+-----------------------------------------------------------------------------*/
+SuperLabel {
+	horizontal-gap: 2;
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+.lockSuperLabel {
+	font-size: 14;
+	font-family: "Avenir-Heavy";
+	icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_lockUp.png" );
 }

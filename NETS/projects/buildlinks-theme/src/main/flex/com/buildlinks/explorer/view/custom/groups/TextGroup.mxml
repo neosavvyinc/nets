@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:fc="http://www.adobe.com/2006/fc"
-	width="100%" xmlns:containers="flexlib.containers.*">
+	width="100%" xmlns:containers="flexlib.containers.*" xmlns:components="main.flex.com.buildlinks.explorer.components.*">
 	
 	<mx:Script>
 		<![CDATA[
 			[Bindable]			
 			private var labelArr:Array = [
 				{ styleName: "applicationTitle", 	text: "BuildLinks Portal Theme" },			
-				{ styleName: "viewTitle", 			text: "Page Title" }
+				{ styleName: "viewTitle", 			text: "Page Title" },
+				{ styleName: "headingBold", 		text: "Total:" },
+				{ styleName: "headingGreyBold", 	text: "Flooring: parlor base: fireplace surround tile" },
+				{ styleName: "headingRegular", 		text: "View:" },
+				{ styleName: "imageLabel", 			text: "Kitchen Pic 1" },
 			];
 			
 			private function copyToClipBoard(event:Event):void
@@ -32,4 +36,14 @@
 			</mx:Repeater>
 		</containers:FlowContainer>
 	</mx:FormItem>
+	<mx:FormItem label="SuperLabel" width="100%">
+		<components:SuperLabel
+			useHandCursor="true"
+			buttonMode="true"
+			text="Checked Out 0002:"
+			styleName="lockSuperLabel" 
+			toolTip="Click to copy styleName to clipboard"
+			click="copyToClipBoard(event)"/>
+	</mx:FormItem>
 </mx:Form>
+

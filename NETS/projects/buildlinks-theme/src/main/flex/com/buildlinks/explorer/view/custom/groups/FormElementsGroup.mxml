@@ -7,7 +7,7 @@
 	<mx:Script>
 		<![CDATA[
 			[Bindable] 
-			private var tbbArr:Array = ["Step 1", "Step 2", "Step 3", "Step 4", "Step 5"]; 
+			private var datesArr:Array = ["3/10/2010", "3/12/2010", "3/15/2010", "3/18/2010", "4/02/2010", "4/10/2010", "5/05/2010"]; 
 			
 			private function setLabel(e:Event, s1:String, s2:String):void {
 				if (e.currentTarget.selected) {
@@ -68,5 +68,10 @@
 				</mx:DataGridColumn>
 			</mx:columns>
 		</mx:DataGrid>
+		<mx:Panel width="100%" height="100%" title="UPLOAD DATE" styleName="noPaddingBox">
+			<mx:List width="100%" height="100%" 
+					 styleName="sideBarList" itemRenderer="main.flex.com.buildlinks.theme.skins.SideBarListItemRenderer"
+					 dataProvider="{datesArr}" verticalScrollPolicy="on"/>
+		</mx:Panel>
 	</mx:FormItem>
 </mx:Form>

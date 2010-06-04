@@ -5,11 +5,15 @@
 
 /*	=Typography
 -----------------------------------------------------------------------------*/
-.applicationTitle {
+.applicationTitle, .imageLabel {
 	color: #646464;
 	font-family: "Avenir-Heavy";
 	font-size: 16;
 	padding-top: 1;
+}
+
+.imageLabel {
+	color: #34342d;
 }
 
 .viewTitle {
@@ -18,9 +22,18 @@
 	font-size: 20;	
 }
 
-.filterText {
+.headingBold, .headingGreyBold {
 	font-family: "Avenir-Heavy";
 }
+
+.headingGreyBold {
+	color: #6b7274;
+}
+
+.headingRegular {
+	font-family: "Avenir-Book";
+}
+
 
 /*	=Box
 -----------------------------------------------------------------------------*/
@@ -37,6 +50,13 @@
 	padding-right: 8;
 	padding-top: 3;
 	vertical-align: middle;
+}
+
+.noPaddingBox {
+	padding-bottom: -1;
+	padding-left: -1;
+	padding-right: -1;
+	padding-top: -1;
 }
 
 
@@ -72,6 +92,12 @@
 /*	=DataGrid
 -----------------------------------------------------------------------------*/
 
+/*	=List
+-----------------------------------------------------------------------------*/
+.sideBarList {
+	background-alpha: 0;
+	border-color: #979794;
+}
 
 
 /*	=LinkButton
@@ -111,7 +137,6 @@
 }
 
 /*	=TabNavigator 
-	@TODO: Move this style over to blTypeSelectors if custom TabNavigator is developed
 -----------------------------------------------------------------------------*/
 ApplicationTabBar {
 	tab-style-name: "applicationTabStyle";
@@ -268,5 +293,5 @@ ApplicationTabBar {
 
 
 
-/*	=SuperLabel
+/*	=Panel
 -----------------------------------------------------------------------------*/

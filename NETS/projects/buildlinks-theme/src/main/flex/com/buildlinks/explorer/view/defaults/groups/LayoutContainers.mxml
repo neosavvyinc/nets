@@ -24,7 +24,7 @@
 		<mx:ApplicationControlBar width="100%">
 			<mx:LinkButton label="{apbString1.toUpperCase()}" styleName="backLinkButton"/>
 			<mx:VRule height="12"/>
-			<mx:Text text="{apbString2.toUpperCase()}" styleName="filterText"/>
+			<mx:Text text="{apbString2.toUpperCase()}" styleName="headingGreyBold"/>
 		</mx:ApplicationControlBar>
 	</mx:FormItem>
 </mx:Form>

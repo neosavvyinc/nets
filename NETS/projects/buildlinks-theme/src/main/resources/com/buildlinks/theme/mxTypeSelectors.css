@@ -115,6 +115,10 @@ Alert {
 
 /*	=Application 
 -----------------------------------------------------------------------------*/
+/* 
+	Note: Left and Right padding is setup for a minimum Application width of 1240.
+	If the minimum width changes, the padding must be adjusted accordingly.
+*/
 Application {
 	modal-transparency-color: #e6e6df;
 	modal-transparency: .65;
@@ -350,6 +354,13 @@ HDividedBox, VDividedBox {
 -----------------------------------------------------------------------------*/
 VRule, HRule {
 	stroke-color: #cecec8;
+}
+
+/*	=Label
+-----------------------------------------------------------------------------*/
+Label {
+	padding-bottom: 0;
+	padding-top: 0;
 }
 
 /*	=LinkBar
