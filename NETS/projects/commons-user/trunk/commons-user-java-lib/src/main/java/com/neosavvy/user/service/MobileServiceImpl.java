@@ -150,7 +150,7 @@ public class MobileServiceImpl implements MobileService {
             data.setExpenseReportName(report.getPurpose());
             data.setExpenseReportTotal(report.getTotalExpenseAmount());
             data.setExpenseReportId(report.getId());
-            //data.setProjectName(report.getProject().getName());
+            //@todo crashtastic. FIX!// data.setProjectName(report.getProject().getName());
             returnData.add( data );
         }
 
