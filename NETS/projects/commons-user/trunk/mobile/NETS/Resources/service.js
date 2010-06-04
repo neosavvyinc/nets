@@ -144,3 +144,14 @@ function serviceGetStatusDashboard(aCategory, successCallback, failureCallback) 
     httpClient.send(null);    
 }
 
+/**
+requests $MOBILE_SERVICE_BASE_URL/expenseItemDrilldown/{expenseReportId}
+ */
+function serviceGetExpenseItemDrilldown(reportId, successCallback, failureCallback) {
+    Ti.API.debug('serviceGetExpenseItemDrilldown> reportId:' + reportId);
+
+	httpClient.onerror = failureCallback;
+    httpClient.onload = function() { successCallback(parseServiceResponse(this.responseText)); };
+	httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/expenseItemDrilldown/' + reportId);
+    httpClient.send(null);
+}

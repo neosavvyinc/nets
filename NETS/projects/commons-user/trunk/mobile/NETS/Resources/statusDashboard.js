@@ -23,7 +23,12 @@ var statusDashboard = Titanium.UI.createView({
  * @param index a Number that is an index into the statusDashboardData global
  */
 function StatusDashboardRow(index) {
-    var report = statusDashboardData.statusDashboardData[index];
+    var report = null;
+    if(statusDashboardData.statusDashboardData.length == null || statusDashboardData.statusDashboardData.length == 0) {
+        report = statusDashboardData.statusDashboardData;
+    } else {
+        report = statusDashboardData.statusDashboardData[index];
+    }
 
     this.index = index;
 	this.row = Ti.UI.createTableViewRow({
@@ -55,10 +60,10 @@ var statusTableView = Ti.UI.createTableView({
 // create table view event listener
 statusTableView.addEventListener('click', function(e) {
     // event data
-    var index = e.index;
-    var section = e.section;
-    var row = e.row;
-    var rowdata = e.rowData;
+    //var index = e.index;
+    //var section = e.section;
+    //var row = e.row;
+    //var rowdata = e.rowData;
     //Titanium.UI.createAlertDialog({title: 'Table View', message:'row ' + row + '\nindex ' + index + '\nsection ' + section + '\nrow data ' + rowdata}).show();
 
     //open report
@@ -107,35 +112,62 @@ private Date expenseReportEndDate;
 private Date expenseReportLastActivityDate;
 */
 function updateStatusDashboard(data) {
-	if (data==null) {
+	if (data==null || data.statusDashboardData==null) {
 		Ti.API.error('updateStatusDashboard data is busted: data' + data);
-	} else {
-		Ti.API.debug('updateStatusDashboard');
+        statusDashboardData = null;
+        return;
 	}
-	
-	statusDashboardData = data;
-	
-	if(data.statusDashboardData.length > 0) {
-		var tabledata = [];
-        var reportx = 0;
-		for (reportx in data.statusDashboardData) {
-			Ti.API.info('expenseReportName:' + data.statusDashboardData[reportx].expenseReportName);
-			Ti.API.info('expenseReportLocation:' + data.statusDashboardData[reportx].expenseReportLocation);
-			Ti.API.info('expenseReportTotal:' + data.statusDashboardData[reportx].expenseReportTotal);
-			Ti.API.info('projectName:' + data.statusDashboardData[reportx].projectName);
-			Ti.API.info('projectApprover:' + data.statusDashboardData[reportx].projectApprover);
-			Ti.API.info('expenseReportStartDate:' + data.statusDashboardData[reportx].expenseReportStartDate);
-			Ti.API.info('expenseReportEndDate:' + data.statusDashboardData[reportx].expenseReportEndDate);
-			Ti.API.info('expenseReportLastActivityDate:' + data.statusDashboardData[reportx].expenseReportLastActivityDate);
-			Ti.API.info('---');
 
-            var sdr = new StatusDashboardRow(reportx);
+    Ti.API.debug('updateStatusDashboard');
+
+    statusDashboardData = null;
+    var tabledata = [];
+    var sdr = null;
+    //setup the global statusDashboardData, if we only have a single element, we construct an array of len 1
+    if(data.statusDashboardData.length == null || data.statusDashboardData.length == 0) {
+        //It's just a single obj
+        Ti.API.info('expenseReportName:' + data.statusDashboardData.expenseReportName);
+        Ti.API.info('expenseReportLocation:' + data.statusDashboardData.expenseReportLocation);
+        Ti.API.info('expenseReportTotal:' + data.statusDashboardData.expenseReportTotal);
+        Ti.API.info('projectName:' + data.statusDashboardData.projectName);
+        Ti.API.info('projectApprover:' + data.statusDashboardData.projectApprover);
+        Ti.API.info('expenseReportStartDate:' + data.statusDashboardData.expenseReportStartDate);
+        Ti.API.info('expenseReportEndDate:' + data.statusDashboardData.expenseReportEndDate);
+        Ti.API.info('expenseReportLastActivityDate:' + data.statusDashboardData.expenseReportLastActivityDate);
+        Ti.API.info('---');
+
+        var arr = [];
+        arr.push(data.statusDashboardData);
+        statusDashboardData = {};
+        statusDashboardData.statusDashboardData = arr;
+    } else {
+        statusDashboardData = data;
+    }
+
+    //@todo clean out statusDashboardRows here
+    //@todo clean out statusTableView here
+
+    Ti.API.debug('len:'+statusDashboardData.statusDashboardData.length);
+    if (statusDashboardData.statusDashboardData.length > 0) {
+        //It's an Array
+        var reportx = 0;
+        for (reportx in statusDashboardData.statusDashboardData) {
+            Ti.API.info('expenseReportName:' + statusDashboardData.statusDashboardData[reportx].expenseReportName);
+            Ti.API.info('expenseReportLocation:' + statusDashboardData.statusDashboardData[reportx].expenseReportLocation);
+            Ti.API.info('expenseReportTotal:' + statusDashboardData.statusDashboardData[reportx].expenseReportTotal);
+            Ti.API.info('projectName:' + statusDashboardData.statusDashboardData[reportx].projectName);
+            Ti.API.info('projectApprover:' + statusDashboardData.statusDashboardData[reportx].projectApprover);
+            Ti.API.info('expenseReportStartDate:' + statusDashboardData.statusDashboardData[reportx].expenseReportStartDate);
+            Ti.API.info('expenseReportEndDate:' + statusDashboardData.statusDashboardData[reportx].expenseReportEndDate);
+            Ti.API.info('expenseReportLastActivityDate:' + statusDashboardData.statusDashboardData[reportx].expenseReportLastActivityDate);
+            Ti.API.info('---');
+
+            sdr = new StatusDashboardRow(reportx);
             statusDashboardRows.push(sdr);
             tabledata.push(sdr.row);
-		}
-        //@todo cleanup old table data here?
+        }
         statusTableView.data = tabledata;
-	} else {
+    } else {
         Ti.API.error('no status data');
-	}
+    }
 }

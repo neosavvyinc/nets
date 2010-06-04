@@ -196,21 +196,33 @@ section.add(sentRow);
 section.add(receivedRow);
 
 var tableView = Ti.UI.createTableView({
-	data:data,
+    data:data,
 	style:Ti.UI.iPhone.TableViewStyle.GROUPED,
 	backgroundColor:'transparent',
 	top:30
 });
 
-// create table view event listener
+/**
+The tableView listener expects a row clicked, and that the row has been assigned a dashStatus property so that
+we know which row status data to fetch.
+*/
 tableView.addEventListener('click', function(e) {
-    // event data
-    var index = e.index;
-    var section = e.section;
-    var row = e.row;
-    var rowdata = e.rowData;
     //Titanium.UI.createAlertDialog({title: 'Table View', message:'row ' + row + '\nindex ' + index + '\nsection ' + section + '\nrow data ' + rowdata}).show();
-	Ti.App.fireEvent(evtLoadStatusDashboard, {dstat:row.dashStatus});
+	Ti.API.info(e);
+    if (e.row != null && e.row.dashStatus != null && e.row.hasChild == true) {
+        // example event data expected:
+        //detail = 0;
+        //index = 1;
+        //row = [object TiUITableViewRow];
+        //rowData = [object TiUITableViewRow];
+        //searchMode = 0;
+        //section = [object TiUITableViewSection];
+        //source = [object TiUILabel]; <-- this could be a Label or Row or somthing else, depending on where the user touched.
+        //type = click;
+        Ti.App.fireEvent(evtLoadStatusDashboard, {dstat:e.row.dashStatus});
+    } else {
+        Ti.API.debug('dashboard tableView not interested');
+    }
 });
 
 dashboard.add(tableView);
@@ -224,12 +236,14 @@ var addReceiptButton = Titanium.UI.createButton({
     width: 250,
 	backgroundImage:'assets/images/orange_button_unsel.png',
     backgroundSelectedImage:'assets/images/orange_button_sel.png',
-    backgroundDisabledImage:'assets/images/orange_button_unsel.png'
+    backgroundDisabledImage:'assets/images/orange_button_unsel.png',
+    who: 'addReceiptButton'
 });
 
-addReceiptButton.addEventListener('click',
-function(e) {
-    Ti.App.fireEvent(evtDisplayCamera);
+addReceiptButton.addEventListener('click', function(e) {
+    if (e.source.who != null &&  e.source.who == 'addReceiptButton') {
+        Ti.App.fireEvent(evtDisplayCamera);
+    }
 });
 
 dashboard.add(addReceiptButton);
@@ -240,13 +254,61 @@ dashboard.add(addReceiptButton);
 function updateDashboard(data) {
     dashboardData = data;
 
-	openDataLabel.text = dashboardData.numberOpenExpenses;
-	submittedDataLabel.text = dashboardData.numberSubmittedExpenses;
-	declinedDataLabel.text = dashboardData.numberDeclinedExpenses;
-	approvingDataLabel.text = dashboardData.numberApprovingExpenses;
-    approvedDataLabel.text = dashboardData.numberApprovedExpenses;
-    sentDataLabel.text = dashboardData.numberReimbursmentSentExpenses;
-    receivedDataLabel.text = dashboardData.numberReimbursedmentReceivedExpenses;
+    if (dashboardData.numberOpenExpenses > 0) {
+	    openDataLabel.text = dashboardData.numberOpenExpenses;
+        openRow.hasChild = true;
+    } else {
+        openDataLabel.text = 0;
+        openRow.hasChild = false;
+    }
+
+    if (dashboardData.numberSubmittedExpenses > 0) {
+        submittedDataLabel.text = dashboardData.numberSubmittedExpenses;
+        submittedRow.hasChild = true;
+    } else {
+        submittedDataLabel.text = 0;
+        submittedRow.hasChild = false;
+    }
+
+    if (dashboardData.numberDeclinedExpenses > 0) {
+        declinedDataLabel.text = dashboardData.numberDeclinedExpenses;
+        declinedRow.hasChild = true;
+    } else {
+        declinedDataLabel.text = 0;
+        declinedRow.hasChild = false;
+    }
+
+	if (dashboardData.numberApprovingExpenses > 0) {
+        approvingDataLabel.text = dashboardData.numberApprovingExpenses;
+        approvingRow.hasChild = true;
+    } else {
+        approvingDataLabel.text = 0;
+        approvingRow.hasChild = false;
+    }
+
+    if (dashboardData.numberApprovedExpenses > 0) {
+        approvedDataLabel.text = dashboardData.numberApprovedExpenses;
+        approvedRow.hasChild = true;
+    } else {
+        approvedDataLabel.text = 0;
+        approvedRow.hasChild = false;
+    }
+
+    if (dashboardData.numberReimbursmentSentExpenses > 0) {
+        sentDataLabel.text = dashboardData.numberReimbursmentSentExpenses;
+        sentRow.hasChild = true;
+    } else {
+        sentDataLabel.text = 0;
+        sentRow.hasChild = false;
+    }
+
+    if (dashboardData.numberReimbursedmentReceivedExpenses > 0) {
+        receivedDataLabel.text = dashboardData.numberReimbursedmentReceivedExpenses;
+        receivedRow.hasChild = true;
+    } else {
+        receivedDataLabel.text = 0;
+        receivedRow.hasChild = false;
+    }
 }
 
 

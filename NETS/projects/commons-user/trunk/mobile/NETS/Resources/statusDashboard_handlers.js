@@ -31,6 +31,10 @@ function onStatusDashboardLoadComplete(data) {
 	Ti.App.fireEvent(evtSwitchToScreen, {screen:SCREEN.STATUS_DASHBOARD}); //switchToScreen(SCREEN.STATUS_DASHBOARD);
 }
 
+/**
+expects the following properties on the event e:
+    dstat - a DASHBOARD_STATUS property (see constants.js)
+ */
 function loadStatusDashboardData(e) {
 	Ti.API.info('loadStatusDashboardData: ' + e.dstat.name + ' ' + e.dstat.status);
 	

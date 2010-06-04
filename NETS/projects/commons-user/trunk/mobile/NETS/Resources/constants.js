@@ -143,11 +143,11 @@ The fields in an expense report
 var REPORT = {
     NAME            : {id:0, name:'Report Name'},
     LOCATION        : {id:1, name:'Location'},
-    TOTAL           : {id:2, name:'Total'},
-    PROJECT         : {id:3, name:'Project'},
-    APPROVER        : {id:4, name:'Approver'},
-    START           : {id:5, name:'Start Date'},
-    END             : {id:6, name:'End Date'},
-    LAST_ACTIVITY   : {id:7, name:'Last Activity'},
+    PROJECT         : {id:2, name:'Project'},
+    APPROVER        : {id:3, name:'Approver'},
+    START           : {id:4, name:'Start Date'},
+    END             : {id:5, name:'End Date'},
+    LAST_ACTIVITY   : {id:6, name:'Last Activity'},
+    TOTAL           : {id:7, name:'Total'},    
     MAX             : {id:8, name:''}
 };
