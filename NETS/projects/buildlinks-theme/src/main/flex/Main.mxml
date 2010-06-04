@@ -21,7 +21,7 @@
 	<header:ApplicationHeader/>
 	
 	<mx:Canvas width="100%" height="100%">
-		<mx:ViewStack id="vs" width="100%" height="100%" top="{appTabs.height}" selectedIndex="1">
+		<mx:ViewStack id="vs" width="100%" height="100%" top="{appTabs.height}">
 			<defaults:Base label="Default Styles" tabStyleName="defaultStyleTab"/>
 			<custom:Base label="Custom Styles" tabStyleName="customStyleTab"/>			
 		</mx:ViewStack>
