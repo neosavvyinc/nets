@@ -63,4 +63,16 @@ public class UserDAOImpl extends BaseUserDAOImpl<UserDTO> implements UserDAO {
     protected Class<UserDTO> getTypeClass() {
         return UserDTO.class;
     }
+
+    public String findMostCurrentSessionIdForUser(String username)
+    {
+        Query nativeQuery = getEntityManager().createNativeQuery(
+                "select id from user_sessions " +
+                        "where username = ?  " +
+                        "and date(creation_date) = current_date " +
+                        "order by creation_date desc limit 1");
+        nativeQuery.setParameter(1, username);
+        String result = (String)nativeQuery.getSingleResult();
+        return result;
+    }
 }

@@ -125,6 +125,9 @@ public class UserServiceImpl implements UserService {
         search.setUsername(userName);
         List<UserDTO> results = userDao.findUsers(search);
 
+        String mostCurrentSessionIdForUser = userDao.findMostCurrentSessionIdForUser(userName);
+        security.setSessionId(mostCurrentSessionIdForUser);
+
         if (!results.isEmpty()) {
             security.setUser(results.get(0));
             return security;

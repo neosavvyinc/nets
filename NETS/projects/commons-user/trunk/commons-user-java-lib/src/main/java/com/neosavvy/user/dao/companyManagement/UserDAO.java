@@ -38,4 +38,6 @@ public interface UserDAO extends BaseUserDAO<UserDTO> {
 
     public List<UserDTO> findAvailableUsersForProject(Project project);
 
+    public String findMostCurrentSessionIdForUser(String username);
+
 }
