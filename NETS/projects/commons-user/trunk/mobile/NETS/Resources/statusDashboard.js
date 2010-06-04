@@ -111,21 +111,21 @@ private Date expenseReportStartDate;
 private Date expenseReportEndDate;
 private Date expenseReportLastActivityDate;
 */
-function updateStatusDashboard(data) {
+function statusDashboard_report(data) {
+    statusDashboardData = null;
 	if (data==null || data.statusDashboardData==null) {
-		Ti.API.error('updateStatusDashboard data is busted: data' + data);
-        statusDashboardData = null;
+		Ti.API.error('statusDashboard_report data is busted: data' + data);
         return;
 	}
 
-    Ti.API.debug('updateStatusDashboard');
+    Ti.API.debug('statusDashboard_report');
 
-    statusDashboardData = null;
     var tabledata = [];
     var sdr = null;
     //setup the global statusDashboardData, if we only have a single element, we construct an array of len 1
-    if(data.statusDashboardData.length == null || data.statusDashboardData.length == 0) {
+    if (!(data.statusDashboardData instanceof Array)) { //(data.statusDashboardData.length == null || data.statusDashboardData.length == 0) {
         //It's just a single obj
+        /*
         Ti.API.info('expenseReportName:' + data.statusDashboardData.expenseReportName);
         Ti.API.info('expenseReportLocation:' + data.statusDashboardData.expenseReportLocation);
         Ti.API.info('expenseReportTotal:' + data.statusDashboardData.expenseReportTotal);
@@ -135,11 +135,9 @@ function updateStatusDashboard(data) {
         Ti.API.info('expenseReportEndDate:' + data.statusDashboardData.expenseReportEndDate);
         Ti.API.info('expenseReportLastActivityDate:' + data.statusDashboardData.expenseReportLastActivityDate);
         Ti.API.info('---');
+        */
 
-        var arr = [];
-        arr.push(data.statusDashboardData);
-        statusDashboardData = {};
-        statusDashboardData.statusDashboardData = arr;
+        statusDashboardData = {statusDashboardData : [data.statusDashboardData]};
     } else {
         statusDashboardData = data;
     }

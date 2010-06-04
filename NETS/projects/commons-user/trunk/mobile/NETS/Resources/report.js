@@ -3,7 +3,7 @@
 */
 
 /*
-all these live in statusDashboard.js:
+all these vars live in statusDashboard.js:
 statusDashboardData
 statusTableData
 statusDashboardRows
@@ -28,7 +28,7 @@ report.add(reportTableView);
  * row : Ti.UI.TableViewRow
  * nameLabel : Ti.UI.Label
  * valueLabel : Ti.UI.Label
- * child : String of the child source file
+ * child : String of the child source file, if null, no child
  *
  * @param name a String for the name field
  * @param value a String for the value field
@@ -120,7 +120,7 @@ function report_update(index) {
                 reportId = r.expenseReportId;
             }
             rrow.row.addEventListener('click', function() {
-                serviceGetExpenseItemDrilldown(reportId, function(d){Ti.API.info(d);}, function(d){Ti.API.info(d);});
+                Ti.App.fireEvent(evtLoadExpenseItemDrilldown, {id:reportId});
             });
             break;
         default:

@@ -25,10 +25,12 @@ Titanium.include('login.js');
 Titanium.include('confirm_receipt_upload.js');
 Titanium.include('statusDashboard.js');
 Titanium.include('report.js');
+Titanium.include('reportDrilldown.js');
 //handlers
 Titanium.include('login_handlers.js');
 Titanium.include('dashboard_handlers.js');
 Titanium.include('statusDashboard_handlers.js');
+Titanium.include('report_handlers.js');
 
 /**
 Handler for our window events
@@ -46,6 +48,8 @@ function NETSEventHandler(e) {
 	case WINDOW.DATERANGE.id:
 		break;
     case WINDOW.REPORT.id:
+        break;
+    case WINDOW.REPORT_DRILLDOWN.id:
         break;
 	case TABGROUP.ROOT.id:
 		break;
@@ -163,6 +167,11 @@ function switchToScreen(v) {
         var reportWin = NETSCreateWindow(WINDOW.REPORT, report.title);
         reportWin.add(report);
         dashboardTab.open(reportWin,{animated:true});
+        break;
+    case SCREEN.REPORT_DRILLDOWN.id:
+        var reportDrilldownWin = NETSCreateWindow(WINDOW.REPORT_DRILLDOWN, reportDrilldown.title);
+        reportDrilldownWin.add(reportDrilldown);
+        dashboardTab.open(reportDrilldownWin,{animated:true});
         break;
 	default:
 		Ti.API.error('switchToScreen error: invalid view arg');

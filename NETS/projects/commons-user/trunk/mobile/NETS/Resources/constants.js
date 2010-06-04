@@ -22,12 +22,13 @@ if (1) {
 //Enumerator for the different windows we use. It's conceivable that more than
 //one screen (view) could live in a window
 var WINDOW = {
-	ROOT		: {id:0, name:'rootWin'},
-	DASHBOARD 	: {id:1, name:'dashboardWin'},
-	STATUSDASH 	: {id:2, name:'statusDashboardWin'},
-	DATERANGE  	: {id:3, name:'dateRangeWin'},
-    REPORT      : {id:4, name:'reportWin'},
-	HELP 		: {id:5, name:'helpWin'}
+	ROOT		     : {id:0, name:'rootWin'},
+	DASHBOARD 	     : {id:1, name:'dashboardWin'},
+	STATUSDASH 	     : {id:2, name:'statusDashboardWin'},
+	DATERANGE  	     : {id:3, name:'dateRangeWin'},
+    REPORT           : {id:4, name:'reportWin'},
+    REPORT_DRILLDOWN : {id:5, name:'reportDrilldownWin'},
+	HELP 		     : {id:6, name:'helpWin'}
 };
 var TABGROUP = {
 	ROOT		: {id:100, name:'tabGroup'}
@@ -43,7 +44,9 @@ var SCREEN = {
 	CONFIRM_RECEIPT_UPLOAD 	: {id:2, name:'confirmReceiptUpload', parent:WINDOW.ROOT},
 	STATUS_DASHBOARD		: {id:3, name:'statusDashboard', parent:WINDOW.STATUSDASH},
 	DATE_RANGE				: {id:4, name:'dateRange', parent:WINDOW.DATERANGE},
-    REPORT                  : {id:5, name:'report', parent:WINDOW.REPORT}
+    REPORT                  : {id:5, name:'report', parent:WINDOW.REPORT},
+    REPORT_DRILLDOWN        : {id:6, name:'reportDrilldown', parent:WINDOW.REPORT_DRILLDOWN},
+    MAX                     : {id:7, name:null, parent:null}
 };
 
 //App Properties
@@ -112,7 +115,8 @@ var STRING = {
     REMEMBER_LOGIN: 'Remember Login',
     LOGIN: 'Login',
     LOGGING_IN: 'Logging In',
-    DATE_RANGE: 'Date Range'
+    DATE_RANGE: 'Date Range',
+    REPORT_BREAKDOWN: 'Report Breakdown'
 };
 
 /*

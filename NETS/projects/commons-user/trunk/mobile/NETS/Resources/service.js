@@ -127,7 +127,8 @@ REST call returns an array named statusDashboardData which is a list of:
     private Date expenseReportLastActivityDate;
 
 expected REST Dashboard Response="{\"statusDashboardData\":[{\"expenseReportEndDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLastActivityDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLocation\":\"Raleigh Fool!\",\"expenseReportName\":\"Drinkin' hard\",\"expenseReportStartDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportTotal\":\"500.0\"},{\"expenseReportEndDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLastActivityDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLocation\":\"Raleigh Fool!\",\"expenseReportName\":\"Makin' deals\",\"expenseReportStartDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportTotal\":\"500.0\"},{\"expenseReportEndDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLastActivityDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportLocation\":\"Raleigh Fool!\",\"expenseReportName\":\"Hirin' Strippers\",\"expenseReportStartDate\":\"2010-05-24T14:54:26.786-04:00\",\"expenseReportTotal\":\"500.0\"}]}"
-
+note: response could be a single obj or an array
+ 
 @param aCategory string, <category> mentioned above
 */
 function serviceGetStatusDashboard(aCategory, successCallback, failureCallback) {
@@ -146,6 +147,11 @@ function serviceGetStatusDashboard(aCategory, successCallback, failureCallback) 
 
 /**
 requests $MOBILE_SERVICE_BASE_URL/expenseItemDrilldown/{expenseReportId}
+
+expected REST Response:
+   Single Response="{\"expenseItem\":{\"amount\":\"23.00\",\"expenseDate\":\"2010-06-01T00:00:00-04:00\",\"id\":\"5\"}}"
+or
+   Array  Response="{\"expenseItem\":[{\"amount\":\"55.00\",\"expenseDate\":\"2010-06-02T00:00:00-04:00\",\"id\":\"4\"},{\"amount\":\"372.32\",\"expenseDate\":\"2010-06-01T00:00:00-04:00\",\"id\":\"3\"}]}"
  */
 function serviceGetExpenseItemDrilldown(reportId, successCallback, failureCallback) {
     Ti.API.debug('serviceGetExpenseItemDrilldown> reportId:' + reportId);

@@ -27,7 +27,7 @@ function onStatusDashboardLoadComplete(data) {
 		return;
 	}
 
-	updateStatusDashboard(data);
+	statusDashboard_report(data);
 	Ti.App.fireEvent(evtSwitchToScreen, {screen:SCREEN.STATUS_DASHBOARD}); //switchToScreen(SCREEN.STATUS_DASHBOARD);
 }
 

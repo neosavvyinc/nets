@@ -17,4 +17,5 @@ var evtUploadReceipt = 'evtUploadReceipt';
 var evtConfirmReceiptUpload = 'evtConfirmReceiptUpload';
 var evtLoadStatusDashboard = 'evtLoadStatusDashboard';
 var evtUpdateDateRange = 'evtUpdateDateRange';
+var evtLoadExpenseItemDrilldown = 'evtLoadExpenseItemDrilldown';
 
