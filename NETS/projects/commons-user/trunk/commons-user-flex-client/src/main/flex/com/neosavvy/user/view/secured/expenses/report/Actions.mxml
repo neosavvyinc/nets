@@ -68,6 +68,7 @@
             var rawData:String = String(event.data);
             expenseItem.receiptFileRef = createStorageServiceFileRef((JSON.decode(rawData)));
             trace("raw");
+            invalidateProperties();
         }
 
         protected function parseResponse(responseXML:XMLDocument):StorageServiceFileRef {
