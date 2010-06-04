@@ -55,7 +55,11 @@ function serviceGetDashboardData(successCallback, failureCallback) {
 
     httpClient.onerror = failureCallback;
     httpClient.onload = function() { successCallback(parseServiceResponse(this.responseText)); };
-	httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/dashboard');
+    if (Titanium.Platform.name == 'android') {
+        httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/dashboard' + '/?rabbitHole=' + securityWrapper.sessionId);
+    } else {
+        httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/dashboard');
+    }
     httpClient.send(null);    
 }
 
@@ -141,7 +145,11 @@ function serviceGetStatusDashboard(aCategory, successCallback, failureCallback) 
 
 	httpClient.onerror = failureCallback;
     httpClient.onload = function() { successCallback(parseServiceResponse(this.responseText)); };
-	httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/statusDashboard/' + aCategory);
+    if (Titanium.Platform.name == 'android') {
+	    httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/statusDashboard/' + aCategory + '/?rabbitHole=' + securityWrapper.sessionId);
+    } else {
+        httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/statusDashboard/' + aCategory);
+    }
     httpClient.send(null);    
 }
 
@@ -158,6 +166,10 @@ function serviceGetExpenseItemDrilldown(reportId, successCallback, failureCallba
 
 	httpClient.onerror = failureCallback;
     httpClient.onload = function() { successCallback(parseServiceResponse(this.responseText)); };
-	httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/expenseItemDrilldown/' + reportId);
+    if (Titanium.Platform.name == 'android') {
+	    httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/expenseItemDrilldown/' + reportId + '/?rabbitHole=' + securityWrapper.sessionId);
+    } else {
+        httpClient.open('GET', MOBILE_SERVICE_BASE_URL + '/expenseItemDrilldown/' + reportId);
+    }
     httpClient.send(null);
 }
