@@ -1,4 +1,4 @@
-package main.flex.com.buildlinks.theme.skins
+package com.buildlinks.theme.skins
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -8,7 +8,7 @@ package main.flex.com.buildlinks.theme.skins
 	
 	public class ApplicationBorderSkin extends Border
 	{
-		[Embed(source='main/resources/com/buildlinks/theme/images/Swatch_brushedAluminum.png')]
+		[Embed(source='/com/buildlinks/theme/images/Swatch_brushedAluminum.png')]
 		private var BackgroundImage:Class;
 		
 		//--------------------------------------------------------------------------

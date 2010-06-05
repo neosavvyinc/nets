@@ -1,7 +1,7 @@
 /*	=Embeded Fonts
 -----------------------------------------------------------------------------*/
 @font-face {
-	src: url( "main/resources/com/buildlinks/theme/fonts/avenir.swf" );
+	src: url( "com/buildlinks/theme/fonts/avenir.swf" );
 	font-family: "Avenir-Book";
 	font-weight: normal;
 	font-style: normal;
@@ -9,7 +9,7 @@
 }
 
 @font-face {
-	src: url( "main/resources/com/buildlinks/theme/fonts/avenir.swf" );
+	src: url( "com/buildlinks/theme/fonts/avenir.swf" );
 	font-family: "Avenir-Medium";
 	font-weight: normal;
 	font-style: normal;
@@ -17,7 +17,7 @@
 }
 
 @font-face {
-	src: url( "main/resources/com/buildlinks/theme/fonts/avenir.swf" );
+	src: url( "com/buildlinks/theme/fonts/avenir.swf" );
 	font-family: "Avenir-Heavy";
 	font-weight: normal;
 	font-style: normal;
@@ -38,7 +38,7 @@ AccordionHeader {
 	font-weight: normal;
 	font-family: "Avenir-Heavy";
 	font-size: 14;
-	skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.TabSkin' );	
+	skin: ClassReference( 'com.buildlinks.theme.skins.TabSkin' );	
 	border-colors: #c8c8c8, #c8c8c8, #c8c8c8, #c8c8c8, #c8c8c8;
 	corner-radius: 0;
 	padding-top: 2;
@@ -124,7 +124,7 @@ Application {
 	modal-transparency: .65;
 	modal-transparency-duration: 1000;
 	modal-transparency-blur: 50;
-	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ApplicationBorderSkin' );
+	border-skin: ClassReference( 'com.buildlinks.theme.skins.ApplicationBorderSkin' );
 	vertical-gap: 27;
 	padding-left: 120;
 	padding-bottom: -1;
@@ -177,7 +177,7 @@ Button, ComboBox, PopUpButton, PopUpMenuButton,
 	toggled-over-fill-colors: #44aa5c, #208638, #066c1e;
 	toggled-down-fill-colors: #44aa5c, #208638, #066c1e;
 	toggled-disabled-fill-colors: #a0d3ac, #8cbf98, #7db089;
-	skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ButtonSkin' );
+	skin: ClassReference( 'com.buildlinks.theme.skins.ButtonSkin' );
 	selected-button-text-style-name: 'toggleSelectedTextStyle';
 	padding-left: 12;
 	padding-right: 12;
@@ -207,7 +207,7 @@ ButtonBar {
 /*	=CheckBox
 -----------------------------------------------------------------------------*/
 CheckBox, RadioButton {
-	icon: ClassReference( 'main.flex.com.buildlinks.theme.skins.CheckBoxIcon' );
+	icon: ClassReference( 'com.buildlinks.theme.skins.CheckBoxIcon' );
 	border-colors: #cdcdcd, #cdcdcd, #cdcdcd, #dddddd, #cdcdcd;
 	horizontal-gap: 3;
 	text-roll-over-color: #085f41;
@@ -268,7 +268,7 @@ DataGrid, AdvancedDataGrid {
 	header-colors: #ffffff, #ffffff;
 	header-style-name: "headerStyle";
 	/* using ClassRefernece:(null) produces a runtime error	*/
-	header-separator-skin: Embed( 'main/resources/com/buildlinks/theme/graphicalSkins/BlankSkin.png' );
+	header-separator-skin: Embed( 'com/buildlinks/theme/graphicalSkins/BlankSkin.png' );
 }
 
 .headerStyle, .dcHeaderStyle {
@@ -300,17 +300,17 @@ DateChooser {
 	padding-top: 5;
 	leading: 4;
 	vertical-align: middle;
-	today-indicator-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.DateChooserIndicator' ); 
-	next-month-up-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthUp.png' );
-	next-month-over-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthOver.png' );
-	next-month-down-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthOver.png' );
-	next-month-disabled-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthDisabled.png' );
-	prev-month-up-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthUp.png' );
-	prev-month-over-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthOver.png' );
-	prev-month-down-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthOver.png' );
-	prev-month-disabled-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthDisabled.png' );
-	prev-year-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.DateChooserYearArrowSkin' ); 
-	next-year-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.DateChooserYearArrowSkin' ); 
+	today-indicator-skin: ClassReference( 'com.buildlinks.theme.skins.DateChooserIndicator' ); 
+	next-month-up-skin: Embed( 'com/buildlinks/theme/icons/DateChooser_nextMonthUp.png' );
+	next-month-over-skin: Embed( 'com/buildlinks/theme/icons/DateChooser_nextMonthOver.png' );
+	next-month-down-skin: Embed( 'com/buildlinks/theme/icons/DateChooser_nextMonthOver.png' );
+	next-month-disabled-skin: Embed( 'com/buildlinks/theme/icons/DateChooser_nextMonthDisabled.png' );
+	prev-month-up-skin: Embed( 'com/buildlinks/theme/icons/DateChooser_prevMonthUp.png' );
+	prev-month-over-skin: Embed( 'com/buildlinks/theme/icons/DateChooser_prevMonthOver.png' );
+	prev-month-down-skin: Embed( 'com/buildlinks/theme/icons/DateChooser_prevMonthOver.png' );
+	prev-month-disabled-skin: Embed( 'com/buildlinks/theme/icons/DateChooser_prevMonthDisabled.png' );
+	prev-year-skin: ClassReference( 'com.buildlinks.theme.skins.DateChooserYearArrowSkin' ); 
+	next-year-skin: ClassReference( 'com.buildlinks.theme.skins.DateChooserYearArrowSkin' ); 
 	vertical-gap: -2;
 }
 
@@ -331,10 +331,10 @@ DateChooser {
 /*	=DateField
 -----------------------------------------------------------------------------*/
 DateField {
-	up-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateField_calUp.png' );
-	over-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateField_calOver.png' );
-	down-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateField_calDown.png' );
-	disabled-skin: Embed( 'main/resources/com/buildlinks/theme/icons/DateField_calDisabled.png' );
+	up-skin: Embed( 'com/buildlinks/theme/icons/DateField_calUp.png' );
+	over-skin: Embed( 'com/buildlinks/theme/icons/DateField_calOver.png' );
+	down-skin: Embed( 'com/buildlinks/theme/icons/DateField_calDown.png' );
+	disabled-skin: Embed( 'com/buildlinks/theme/icons/DateField_calDisabled.png' );
 	date-chooser-style-name: "DateChooser";
 }
 
@@ -344,7 +344,7 @@ HDividedBox, VDividedBox {
 	divider-color: #177d2f;
 	divider-affordance: 6;
 	divider-thickness: 3;
-	divider-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.BoxDividerSkin' );
+	divider-skin: ClassReference( 'com.buildlinks.theme.skins.BoxDividerSkin' );
 	vertical-gap: 6;
 	horizontal-gap: 6;
 	
@@ -405,8 +405,8 @@ FormHeading {
 /*	=NumericStepper
 -----------------------------------------------------------------------------*/
 NumericStepper {
-	down-arrow-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.NumericStepperDownSkin' );
-	up-arrow-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.NumericStepperUpSkin' );
+	down-arrow-skin: ClassReference( 'com.buildlinks.theme.skins.NumericStepperDownSkin' );
+	up-arrow-skin: ClassReference( 'com.buildlinks.theme.skins.NumericStepperUpSkin' );
 	corner-radius: 1;
 	arrow-colors: #2e3940, #177d2f, #177d2f, #969c9f;
 	border-colors: #7c7f81, #7c7f81, #7c7f81, #bdbfc0;
@@ -423,7 +423,7 @@ NumericStepper {
 /*	=RadioButton
 -----------------------------------------------------------------------------*/
 RadioButton {
-	icon: ClassReference( 'main.flex.com.buildlinks.theme.skins.RadioButtonIcon' );
+	icon: ClassReference( 'com.buildlinks.theme.skins.RadioButtonIcon' );
 }
 
 /*	=SuperLabel -- Custom Label component see com.neosavvy.nets.explorer.components
@@ -434,11 +434,11 @@ RadioButton {
 ScrollBar {
 	down-arrow-skin: ClassReference( null );
 	up-arrow-skin: ClassReference( null );
-	track-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ScrollTrackSkin' );
+	track-skin: ClassReference( 'com.buildlinks.theme.skins.ScrollTrackSkin' );
 	track-colors: #ffffff, #ffffff;
 	border-color: #9b9b97;
-	thumb-icon: Embed( 'main/resources/com/buildlinks/theme/icons/ScrollBar_thumbIcon.png' );
-	thumb-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ScrollThumbSkin' );
+	thumb-icon: Embed( 'com/buildlinks/theme/icons/ScrollBar_thumbIcon.png' );
+	thumb-skin: ClassReference( 'com.buildlinks.theme.skins.ScrollThumbSkin' );
 	up-fill-colors: #ffffff, #cdcdcd;
 	over-fill-colors: #f1fce1, #b2bea3;
 	disabled-fill-colors: #ffffff, #dadada;
@@ -466,7 +466,7 @@ TabNavigator, TabBar {
 /*	=TextInput
 -----------------------------------------------------------------------------*/
 TextInput, TextArea {
-	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ShadowBorderSkin' );
+	border-skin: ClassReference( 'com.buildlinks.theme.skins.ShadowBorderSkin' );
 	border-style: inset;
 	background-fill-colors: #ffffff, #ffffff;
 	padding-bottom: 0;
@@ -482,8 +482,8 @@ Tree, AdvancedDataGrid {
 	default-leaf-icon: ClassReference( null );
 	folder-open-icon: ClassReference( null );
 	folder-closed-icon: ClassReference( null );
-	disclosure-closed-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Tree_disclosureClosed.png' );
-	disclosure-open-icon: Embed( 'main/resources/com/buildlinks/theme/icons/Tree_disclosureOpen.png' );	
+	disclosure-closed-icon: Embed( 'com/buildlinks/theme/icons/Tree_disclosureClosed.png' );
+	disclosure-open-icon: Embed( 'com/buildlinks/theme/icons/Tree_disclosureOpen.png' );	
 }
 
 /*	=ToolTip
@@ -493,7 +493,7 @@ ToolTip {
 	font-size: 12;
 	font-family: "Avenir-Medium";
 	background-fill-colors: #54544e, #54544e;
-	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ShadowBorderSkin' );
+	border-skin: ClassReference( 'com.buildlinks.theme.skins.ShadowBorderSkin' );
 	padding-top: 2;
 	padding-bottom: 2;
 	padding-left: 6;
@@ -573,6 +573,6 @@ HSlider, VSlider {
 /*	=TitleWindow
 -----------------------------------------------------------------------------*/
 TitleWindow {
-	border-skin: ClassReference( 'main.flex.com.buildlinks.theme.skins.ShadowBorderSkin' );
+	border-skin: ClassReference( 'com.buildlinks.theme.skins.ShadowBorderSkin' );
 	background-fill-colors: #f3f3ee, #ffffff;
 }

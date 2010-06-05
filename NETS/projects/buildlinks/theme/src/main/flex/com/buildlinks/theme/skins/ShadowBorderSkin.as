@@ -1,4 +1,4 @@
-package main.flex.com.buildlinks.theme.skins
+package com.buildlinks.theme.skins
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;

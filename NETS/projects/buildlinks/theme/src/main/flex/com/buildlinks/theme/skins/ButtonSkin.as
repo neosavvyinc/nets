@@ -1,4 +1,4 @@
-package main.flex.com.buildlinks.theme.skins
+package com.buildlinks.theme.skins
 {
 	import flash.display.Sprite;
 	import flash.geom.Matrix;

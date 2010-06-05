@@ -1,4 +1,4 @@
-package main.flex.com.buildlinks.theme.skins
+package com.buildlinks.theme.skins
 {
 	import flash.display.Graphics;
 	import flash.filters.DropShadowFilter;

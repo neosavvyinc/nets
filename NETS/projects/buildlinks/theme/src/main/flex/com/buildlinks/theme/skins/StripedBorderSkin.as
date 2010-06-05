@@ -1,4 +1,4 @@
-package main.flex.com.buildlinks.theme.skins
+package com.buildlinks.theme.skins
 {
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
@@ -8,7 +8,7 @@ package main.flex.com.buildlinks.theme.skins
 	
 	public class StripedBorderSkin extends Border
 	{
-		[Embed(source='main/resources/com/buildlinks/theme/images/Swatch_stripes.png')]
+		[Embed(source='/com/buildlinks/theme/images/Swatch_stripes.png')]
 		private var BackgroundImage:Class;
 		
 		//--------------------------------------------------------------------------

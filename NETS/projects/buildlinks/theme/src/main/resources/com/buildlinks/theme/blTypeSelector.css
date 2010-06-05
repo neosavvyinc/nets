@@ -17,7 +17,7 @@ ApplicationHeader {
 /*	=ItemRenderers
 -----------------------------------------------------------------------------*/
 SideBarListItemRenderer {
-/*	icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_listArrowUp.png" );*/
+/*	icon: Embed( "com/buildlinks/theme/icons/Icon_listArrowUp.png" );*/
 }
 
 /*	=SuperLabel —> Label
@@ -31,5 +31,5 @@ SuperLabel {
 .lockSuperLabel {
 	font-size: 14;
 	font-family: "Avenir-Heavy";
-	icon: Embed( "main/resources/com/buildlinks/theme/icons/Icon_lockUp.png" );
+	icon: Embed( "com/buildlinks/theme/icons/Icon_lockUp.png" );
 }
