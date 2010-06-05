@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+    <parent>
+        <groupId>com.buildlinks</groupId>
+        <artifactId>buildlinks-flex-parent</artifactId>
+        <version>6.0.0.012-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.buildlinks</groupId>
+    <artifactId>buildlinks-theme</artifactId>
+    <packaging>swc</packaging>
+    <name>BuildLinks 6.X BuildLinks Theme</name>
+
+    <dependencies>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flex.mojos.version}</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <configurationReport>true</configurationReport>
+                    <incremental>true</incremental>
+                    <sourcePaths>
+                        <path>${basedir}/src/main/flex</path>
+                        <path>${basedir}/src/main/resources</path>
+                    </sourcePaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

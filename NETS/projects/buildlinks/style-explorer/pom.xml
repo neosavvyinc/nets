@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+
+    <parent>
+        <groupId>com.buildlinks</groupId>
+        <artifactId>buildlinks-flex-parent</artifactId>
+        <version>6.0.0.012-SNAPSHOT</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.buildlinks</groupId>
+    <artifactId>buildlinks-style-explorer</artifactId>
+    <packaging>swf</packaging>
+    <name>BuildLinks 6.X Style Explorer</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.buildlinks</groupId>
+            <artifactId>buildlinks-theme</artifactId>
+            <version>${project.version}</version>
+            <type>swc</type>
+        </dependency>
+        <dependency>
+            <groupId>com.degrafa.beta</groupId>
+            <artifactId>degrafa</artifactId>
+            <version>3.1</version>
+            <type>swc</type>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flex.mojos.version}</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wrapper</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configurationReport>true</configurationReport>
+                    <debug>true</debug>
+                    <incremental>true</incremental>
+                    <contextRoot>/</contextRoot>
+                    <sourceFile>./Main.mxml</sourceFile>
+                    <showWarnings>false</showWarnings>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
