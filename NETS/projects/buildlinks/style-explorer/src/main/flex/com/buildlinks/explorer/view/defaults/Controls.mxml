@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Canvas 
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
-	width="100%" height="100%" xmlns:groups="main.flex.com.buildlinks.explorer.view.defaults.groups.*" 
+	width="100%" height="100%" xmlns:groups="com.buildlinks.explorer.view.defaults.groups.*" 
 	>
 	
 	<mx:constraintColumns>

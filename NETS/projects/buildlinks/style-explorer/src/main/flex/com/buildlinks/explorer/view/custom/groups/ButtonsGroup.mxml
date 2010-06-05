@@ -2,7 +2,7 @@
 <mx:Form xmlns:mx="http://www.adobe.com/2006/mxml" 
 	xmlns:cmp="view.components.*"
 	xmlns:fc="http://www.adobe.com/2006/fc"
-	width="100%" xmlns:containers="flexlib.containers.*" xmlns:components="main.flex.com.buildlinks.explorer.components.*">
+	width="100%" xmlns:containers="flexlib.containers.*" xmlns:components="com.buildlinks.explorer.components.*">
 	
 	<mx:Script>
 		<![CDATA[

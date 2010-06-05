@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <mx:Application xmlns:mx="http://www.adobe.com/2006/mxml" 
 				layout="vertical" minWidth="1240" minHeight="600" 
-				xmlns:defaults="main.flex.com.buildlinks.explorer.view.defaults.*" 
-				xmlns:custom="main.flex.com.buildlinks.explorer.view.custom.*" 
-				xmlns:header="main.flex.com.buildlinks.explorer.view.header.*" 
-				xmlns:components="main.flex.com.buildlinks.explorer.components.*">
+				xmlns:defaults="com.buildlinks.explorer.view.defaults.*" 
+				xmlns:custom="com.buildlinks.explorer.view.custom.*" 
+				xmlns:header="com.buildlinks.explorer.view.header.*" 
+				xmlns:components="com.buildlinks.explorer.components.*">
 	
 	<!-- 
 		Include these lines to implement the theme css 
@@ -14,9 +14,9 @@
 		may	also include using the -theme compiler arguement 
 		see: http://livedocs.adobe.com/flex/3/html/help.html?content=styles_12.html
 	-->
-	<mx:Style source="main/resources/com/buildlinks/theme/mxClassSelectors.css"/>
-	<mx:Style source="main/resources/com/buildlinks/theme/mxTypeSelectors.css"/>
-	<mx:Style source="main/resources/com/buildlinks/theme/blTypeSelector.css"/>
+	<mx:Style source="com/buildlinks/theme/mxClassSelectors.css"/>
+	<mx:Style source="com/buildlinks/theme/mxTypeSelectors.css"/>
+	<mx:Style source="com/buildlinks/theme/blTypeSelector.css"/>
 	
 	<header:ApplicationHeader/>
 	

@@ -3,7 +3,7 @@
 	
 	<mx:Script>
 		<![CDATA[
-			import main.flex.Main;
+			import Main;
 			
 			import mx.effects.easing.*;
 			

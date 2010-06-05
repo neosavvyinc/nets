@@ -1,4 +1,4 @@
-package main.flex.com.buildlinks.explorer.components
+package com.buildlinks.explorer.components
 {
   import flash.display.DisplayObject;
   import flash.events.Event;

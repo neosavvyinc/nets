@@ -2,7 +2,7 @@
 <mx:Canvas 
 	xmlns:mx="http://www.adobe.com/2006/mxml" 
 	width="100%" height="100%" 
-	xmlns:groups="main.flex.com.buildlinks.explorer.view.custom.groups.*">
+	xmlns:groups="com.buildlinks.explorer.view.custom.groups.*">
 	
 	<mx:constraintColumns>
 		<mx:ConstraintColumn id="col1" width="312"/>
