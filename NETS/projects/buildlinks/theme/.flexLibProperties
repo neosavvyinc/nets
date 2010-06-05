@@ -1,93 +1,93 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<flexLibProperties version="3">
+<flexLibProperties version="1">
   <includeClasses>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.ApplicationBorderSkin"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.BoxDividerSkin"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.ButtonSkin"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.CheckBoxIcon"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.DateChooserIndicator"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.DateChooserYearArrowSkin"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.NumericStepperDownSkin"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.NumericStepperUpSkin"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.RadioButtonIcon"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.ScrollThumbSkin"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.ScrollTrackSkin"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.ShadowBorderSkin"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.SideBarListItemRenderer"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.StripedBorderSkin"/>
-    <classEntry path="main.flex.com.buildlinks.theme.skins.TabSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.ApplicationBorderSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.BoxDividerSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.ButtonSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.CheckBoxIcon"/>
+    <classEntry path="com.buildlinks.theme.skins.DateChooserIndicator"/>
+    <classEntry path="com.buildlinks.theme.skins.DateChooserYearArrowSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.NumericStepperDownSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.NumericStepperUpSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.RadioButtonIcon"/>
+    <classEntry path="com.buildlinks.theme.skins.ScrollThumbSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.ScrollTrackSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.ShadowBorderSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.SideBarListItemRenderer"/>
+    <classEntry path="com.buildlinks.theme.skins.StripedBorderSkin"/>
+    <classEntry path="com.buildlinks.theme.skins.TabSkin"/>
   </includeClasses>
   <includeResources>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_photoTabUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_photoTabUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_addCommentUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_addCommentUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/DateField_calUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/DateField_calUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/images/Swatch_stripes.png" sourcePath="main/resources/com/buildlinks/theme/images/Swatch_stripes.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_addCommentOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_addCommentOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_calendarTabUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_calendarTabUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_filesTabDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_filesTabDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_printOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_printOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_addCommentDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_addCommentDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/fonts/Avenir-Heavy-mod.otf" sourcePath="main/resources/com/buildlinks/theme/fonts/Avenir-Heavy-mod.otf"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Tree_disclosureOpen.png" sourcePath="main/resources/com/buildlinks/theme/icons/Tree_disclosureOpen.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/mxClassSelectors.css" sourcePath="main/resources/com/buildlinks/theme/mxClassSelectors.css"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_addUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_addUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_photoTabOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_photoTabOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_addDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_addDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_tileSelectedUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_tileSelectedUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/ScrollBar_thumbIcon.png" sourcePath="main/resources/com/buildlinks/theme/icons/ScrollBar_thumbIcon.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_photoTabDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_photoTabDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_filesTabUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_filesTabUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/DateField_calDown.png" sourcePath="main/resources/com/buildlinks/theme/icons/DateField_calDown.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_chatTabUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_chatTabUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_tileDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_tileDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/graphicalSkins/BlankSkin.png" sourcePath="main/resources/com/buildlinks/theme/graphicalSkins/BlankSkin.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/fonts/Avenir-Book-Mod.otf" sourcePath="main/resources/com/buildlinks/theme/fonts/Avenir-Book-Mod.otf"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_calendarTabOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_calendarTabOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_minimizeUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_minimizeUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_tileUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_tileUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/fonts/avenir.fla" sourcePath="main/resources/com/buildlinks/theme/fonts/avenir.fla"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_carouselDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_carouselDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_carouselUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_carouselUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/DateField_calDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/DateField_calDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_chatTabOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_chatTabOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_filesTabOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_filesTabOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/blTypeSelector.css" sourcePath="main/resources/com/buildlinks/theme/blTypeSelector.css"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/DateChooser_prevMonthOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_forwardArrowUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_forwardArrowUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_magnifyingGlass.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_magnifyingGlass.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_calendarTabDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_calendarTabDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_defaultStylesOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_defaultStylesOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_cartTabUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_cartTabUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_customStylesUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_customStylesUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/DateField_calOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/DateField_calOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_printDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_printDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_16_prefsOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_16_prefsOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_backArrowUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_backArrowUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/mxTypeSelectors.css" sourcePath="main/resources/com/buildlinks/theme/mxTypeSelectors.css"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_cartTabDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_cartTabDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_cartTabOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_cartTabOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Tree_disclosureClosed.png" sourcePath="main/resources/com/buildlinks/theme/icons/Tree_disclosureClosed.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_printUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_printUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_carouselOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_carouselOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_lockUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_lockUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/fonts/Avenir-Medium-mod.otf" sourcePath="main/resources/com/buildlinks/theme/fonts/Avenir-Medium-mod.otf"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_carouselSelectedUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_carouselSelectedUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_listArrowUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_listArrowUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_maximizeUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_maximizeUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_16_prefsDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_16_prefsDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_tileOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_tileOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/fonts/avenir.swf" sourcePath="main/resources/com/buildlinks/theme/fonts/avenir.swf"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_customStylesOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_customStylesOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_addOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_addOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_16_prefsUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_16_prefsUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthOver.png" sourcePath="main/resources/com/buildlinks/theme/icons/DateChooser_nextMonthOver.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_chatTabDisabled.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_chatTabDisabled.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/icons/Icon_defaultStylesUp.png" sourcePath="main/resources/com/buildlinks/theme/icons/Icon_defaultStylesUp.png"/>
-    <resourceEntry destPath="main/resources/com/buildlinks/theme/images/Swatch_brushedAluminum.png" sourcePath="main/resources/com/buildlinks/theme/images/Swatch_brushedAluminum.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/DateChooser_prevMonthOver.png" sourcePath="com/buildlinks/theme/icons/DateChooser_prevMonthOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/DateField_calUp.png" sourcePath="com/buildlinks/theme/icons/DateField_calUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/DateField_calDisabled.png" sourcePath="com/buildlinks/theme/icons/DateField_calDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_addOver.png" sourcePath="com/buildlinks/theme/icons/Icon_addOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_cartTabUp.png" sourcePath="com/buildlinks/theme/icons/Icon_cartTabUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_maximizeUp.png" sourcePath="com/buildlinks/theme/icons/Icon_maximizeUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_minimizeUp.png" sourcePath="com/buildlinks/theme/icons/Icon_minimizeUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_chatTabUp.png" sourcePath="com/buildlinks/theme/icons/Icon_chatTabUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_printOver.png" sourcePath="com/buildlinks/theme/icons/Icon_printOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/DateChooser_nextMonthUp.png" sourcePath="com/buildlinks/theme/icons/DateChooser_nextMonthUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_printDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_printDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/graphicalSkins/BlankSkin.png" sourcePath="com/buildlinks/theme/graphicalSkins/BlankSkin.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_carouselSelectedUp.png" sourcePath="com/buildlinks/theme/icons/Icon_carouselSelectedUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_addCommentOver.png" sourcePath="com/buildlinks/theme/icons/Icon_addCommentOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_magnifyingGlass.png" sourcePath="com/buildlinks/theme/icons/Icon_magnifyingGlass.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/ScrollBar_thumbIcon.png" sourcePath="com/buildlinks/theme/icons/ScrollBar_thumbIcon.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/images/Swatch_brushedAluminum.png" sourcePath="com/buildlinks/theme/images/Swatch_brushedAluminum.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_customStylesUp.png" sourcePath="com/buildlinks/theme/icons/Icon_customStylesUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/mxTypeSelectors.css" sourcePath="com/buildlinks/theme/mxTypeSelectors.css"/>
+    <resourceEntry destPath="com/buildlinks/theme/fonts/avenir.swf" sourcePath="com/buildlinks/theme/fonts/avenir.swf"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_defaultStylesUp.png" sourcePath="com/buildlinks/theme/icons/Icon_defaultStylesUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_tileDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_tileDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_calendarTabDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_calendarTabDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_cartTabDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_cartTabDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_calendarTabOver.png" sourcePath="com/buildlinks/theme/icons/Icon_calendarTabOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/DateChooser_prevMonthUp.png" sourcePath="com/buildlinks/theme/icons/DateChooser_prevMonthUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_carouselUp.png" sourcePath="com/buildlinks/theme/icons/Icon_carouselUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_16_prefsUp.png" sourcePath="com/buildlinks/theme/icons/Icon_16_prefsUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_16_prefsDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_16_prefsDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_addUp.png" sourcePath="com/buildlinks/theme/icons/Icon_addUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_filesTabUp.png" sourcePath="com/buildlinks/theme/icons/Icon_filesTabUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_printUp.png" sourcePath="com/buildlinks/theme/icons/Icon_printUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_addCommentUp.png" sourcePath="com/buildlinks/theme/icons/Icon_addCommentUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_tileSelectedUp.png" sourcePath="com/buildlinks/theme/icons/Icon_tileSelectedUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_carouselDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_carouselDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Tree_disclosureOpen.png" sourcePath="com/buildlinks/theme/icons/Tree_disclosureOpen.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/DateField_calOver.png" sourcePath="com/buildlinks/theme/icons/DateField_calOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/fonts/Avenir-Heavy-mod.otf" sourcePath="com/buildlinks/theme/fonts/Avenir-Heavy-mod.otf"/>
+    <resourceEntry destPath="com/buildlinks/theme/mxClassSelectors.css" sourcePath="com/buildlinks/theme/mxClassSelectors.css"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_chatTabDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_chatTabDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_chatTabOver.png" sourcePath="com/buildlinks/theme/icons/Icon_chatTabOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_calendarTabUp.png" sourcePath="com/buildlinks/theme/icons/Icon_calendarTabUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_filesTabDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_filesTabDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_defaultStylesOver.png" sourcePath="com/buildlinks/theme/icons/Icon_defaultStylesOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_carouselOver.png" sourcePath="com/buildlinks/theme/icons/Icon_carouselOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_customStylesOver.png" sourcePath="com/buildlinks/theme/icons/Icon_customStylesOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Tree_disclosureClosed.png" sourcePath="com/buildlinks/theme/icons/Tree_disclosureClosed.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_forwardArrowUp.png" sourcePath="com/buildlinks/theme/icons/Icon_forwardArrowUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/fonts/avenir.fla" sourcePath="com/buildlinks/theme/fonts/avenir.fla"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_listArrowUp.png" sourcePath="com/buildlinks/theme/icons/Icon_listArrowUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_16_prefsOver.png" sourcePath="com/buildlinks/theme/icons/Icon_16_prefsOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_filesTabOver.png" sourcePath="com/buildlinks/theme/icons/Icon_filesTabOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_addCommentDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_addCommentDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/DateChooser_nextMonthDisabled.png" sourcePath="com/buildlinks/theme/icons/DateChooser_nextMonthDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_photoTabOver.png" sourcePath="com/buildlinks/theme/icons/Icon_photoTabOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_lockUp.png" sourcePath="com/buildlinks/theme/icons/Icon_lockUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/DateChooser_nextMonthOver.png" sourcePath="com/buildlinks/theme/icons/DateChooser_nextMonthOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/DateField_calDown.png" sourcePath="com/buildlinks/theme/icons/DateField_calDown.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_cartTabOver.png" sourcePath="com/buildlinks/theme/icons/Icon_cartTabOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_tileOver.png" sourcePath="com/buildlinks/theme/icons/Icon_tileOver.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_photoTabUp.png" sourcePath="com/buildlinks/theme/icons/Icon_photoTabUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/images/Swatch_stripes.png" sourcePath="com/buildlinks/theme/images/Swatch_stripes.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_addDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_addDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/DateChooser_prevMonthDisabled.png" sourcePath="com/buildlinks/theme/icons/DateChooser_prevMonthDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/fonts/Avenir-Book-Mod.otf" sourcePath="com/buildlinks/theme/fonts/Avenir-Book-Mod.otf"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_photoTabDisabled.png" sourcePath="com/buildlinks/theme/icons/Icon_photoTabDisabled.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/fonts/Avenir-Medium-mod.otf" sourcePath="com/buildlinks/theme/fonts/Avenir-Medium-mod.otf"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_tileUp.png" sourcePath="com/buildlinks/theme/icons/Icon_tileUp.png"/>
+    <resourceEntry destPath="com/buildlinks/theme/blTypeSelector.css" sourcePath="com/buildlinks/theme/blTypeSelector.css"/>
+    <resourceEntry destPath="com/buildlinks/theme/icons/Icon_backArrowUp.png" sourcePath="com/buildlinks/theme/icons/Icon_backArrowUp.png"/>
   </includeResources>
   <namespaceManifests/>
 </flexLibProperties>

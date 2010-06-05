@@ -1,21 +1,312 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<actionScriptProperties mainApplicationPath="main/flex/Main.mxml" version="3">
-  <compiler additionalCompilerArguments="-locale en_US -default-background-color #e2e0c8" copyDependentFiles="true" enableModuleDebug="false" flexSDK="Flex 3.4" generateAccessible="false" htmlExpressInstall="true" htmlGenerate="true" htmlHistoryManagement="true" htmlPlayerVersion="9.0.124" htmlPlayerVersionCheck="true" outputFolderPath="bin-debug" sourceFolderPath="src" strict="true" useApolloConfig="false" verifyDigests="true" warn="true">
-    <compilerSourcePath/>
-    <libraryPath defaultLinkType="1">
-      <libraryPathEntry kind="4" path="">
-        <excludedEntries>
-          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/flex.swc" useDefaultLinkType="false"/>
-        </excludedEntries>
-      </libraryPathEntry>
-      <libraryPathEntry kind="1" linkType="1" path="libs"/>
-      <libraryPathEntry kind="3" linkType="1" path="/buildlinks-theme/bin/buildlinks-theme.swc" useDefaultLinkType="false"/>
-    </libraryPath>
-    <sourceAttachmentPath/>
-  </compiler>
-  <applications>
-    <application path="main/flex/Main.mxml"/>
-  </applications>
-  <modules/>
-  <buildCSSFiles/>
+<actionScriptProperties 
+        mainApplicationPath="Main.mxml" 
+        version="3"
+        >
+
+    <compiler 
+            additionalCompilerArguments=" -locale en_US --incremental  -context-root /" 
+            copyDependentFiles="true" 
+            enableModuleDebug="true" 
+            generateAccessible="false" 
+            htmlExpressInstall="true" 
+            htmlGenerate="false" 
+            htmlHistoryManagement="true" 
+            htmlPlayerVersion="9.0.0" 
+            htmlPlayerVersionCheck="true" 
+            outputFolderPath="bin-debug" 
+            sourceFolderPath="src/main/flex" 
+            strict="true" 
+            useApolloConfig="false" 
+            verifyDigests="true" 
+            warn="false"
+            targetPlayerVersion="9.0.0"
+            >
+
+        <compilerSourcePath>
+            <compilerSourcePathEntry 
+                    kind="1" 
+                    linkType="1" 
+                    path="src/main/flex"
+                    />
+            <compilerSourcePathEntry 
+                    kind="1" 
+                    linkType="1" 
+                    path="src/main/resources"
+                    />
+        </compilerSourcePath>
+
+        <libraryPath
+                defaultLinkType="1">
+
+			<!-- artifact: com.adobe.flex.framework:automation:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/automation/3.4.0.9271/automation-3.4.0.9271.swc"
+                    sourcepath="${PROJECT_FRAMEWORKS}/projects/automation/src"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:automation_agent:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/automation_agent/3.4.0.9271/automation_agent-3.4.0.9271.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:automation_agent_rb:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/automation_agent_rb/3.4.0.9271/automation_agent_rb-3.4.0.9271.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:automation_dmv:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/automation_dmv/3.4.0.9271/automation_dmv-3.4.0.9271.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:automation_rb:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/automation_rb/3.4.0.9271/automation_rb-3.4.0.9271.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:flex:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/flex/3.4.0.9271/flex-3.4.0.9271.swc"
+                    sourcepath="${PROJECT_FRAMEWORKS}/projects/flex/src"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:framework:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/framework/3.4.0.9271/framework-3.4.0.9271.swc"
+                    sourcepath="${PROJECT_FRAMEWORKS}/projects/framework/src"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:rpc:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/rpc/3.4.0.9271/rpc-3.4.0.9271.swc"
+                    sourcepath="${PROJECT_FRAMEWORKS}/projects/rpc/src"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:utilities:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/utilities/3.4.0.9271/utilities-3.4.0.9271.swc"
+                    sourcepath="${PROJECT_FRAMEWORKS}/projects/utilities/src"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:qtp:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/qtp/3.4.0.9271/qtp-3.4.0.9271.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.sdk:datavisualization:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/sdk/datavisualization/3.4.0.9271/datavisualization-3.4.0.9271-en_US.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.sdk:datavisualization:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/sdk/datavisualization/3.4.0.9271/datavisualization-3.4.0.9271.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flexunit:flexunit:4.0-beta-2 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flexunit/flexunit/4.0-beta-2/flexunit-4.0-beta-2.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.buildlinks:Utilities:1.0 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/buildlinks/Utilities/1.0/Utilities-1.0.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.buildlinks:buildlinks-theme:6.0.0.012-SNAPSHOT -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/buildlinks/buildlinks-theme/6.0.0.012-SNAPSHOT/buildlinks-theme-6.0.0.012-SNAPSHOT.swc"
+                    sourcepath="/Users/adamparrish/.m2/repository/com/buildlinks/buildlinks-theme/6.0.0.012-SNAPSHOT/buildlinks-theme-6.0.0.012-SNAPSHOT-sources.jar"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.neosavvy.grid:auto-filtering-grid:1.3.14.14 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/neosavvy/grid/auto-filtering-grid/1.3.14.14/auto-filtering-grid-1.3.14.14.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.ibm:ilog-elixir:1.0.0 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/ibm/ilog-elixir/1.0.0/ilog-elixir-1.0.0.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.ibm:ilog-elixir-rb:1.0.0 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/ibm/ilog-elixir-rb/1.0.0/ilog-elixir-rb-1.0.0.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.buildlinks:degrafa:1.0.0 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/buildlinks/degrafa/1.0.0/degrafa-1.0.0.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.digitalprimates:dpHibernate:1.0.1 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/digitalprimates/dpHibernate/1.0.1/dpHibernate-1.0.1.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.google:flexlib:1.0.0 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/google/flexlib/1.0.0/flexlib-1.0.0.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.buildlinks:libRaVis:1.0.0 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/buildlinks/libRaVis/1.0.0/libRaVis-1.0.0.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: org.puremvc:puremvc:1.0.4 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/org/puremvc/puremvc/1.0.4/puremvc-1.0.4.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.buildlinks:coverflow:1.0.0 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/buildlinks/coverflow/1.0.0/coverflow-1.0.0.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.degrafa.beta:degrafa:3.1 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/degrafa/beta/degrafa/3.1/degrafa-3.1.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.flexmonkey:automation_monkey:3.4.1 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/flexmonkey/automation_monkey/3.4.1/automation_monkey-3.4.1.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:framework:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/framework/3.4.0.9271/framework-3.4.0.9271-en_US.rb.swc"
+                    useDefaultLinkType="false"
+                    />
+
+			<!-- artifact: com.adobe.flex.framework:rpc:3.4.0.9271 -->
+            <libraryPathEntry 
+                    kind="3" 
+                    linkType="1" 
+                    path="/Users/adamparrish/.m2/repository/com/adobe/flex/framework/rpc/3.4.0.9271/rpc-3.4.0.9271-en_US.rb.swc"
+                    useDefaultLinkType="false"
+                    />
+
+
+	      <libraryPathEntry kind="4" path="">
+	        <excludedEntries>
+	          <libraryPathEntry kind="1" linkType="1" path="${PROJECT_FRAMEWORKS}/locale/{locale}"/>
+	          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/flex.swc" useDefaultLinkType="false"/>
+	          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/qtp.swc" useDefaultLinkType="false"/>
+	          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/rpc.swc" useDefaultLinkType="false"/>
+	          <libraryPathEntry kind="3" linkType="4" path="${PROJECT_FRAMEWORKS}/libs/framework.swc" useDefaultLinkType="true">
+	            <crossDomainRsls>
+	              <crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="framework_3.1.0.2710.swz"/>
+	              <crossDomainRslEntry autoExtract="true" policyFileUrl="" rslUrl="framework_3.1.0.2710.swf"/>
+	            </crossDomainRsls>
+	          </libraryPathEntry>
+	          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/datavisualization.swc" useDefaultLinkType="false"/>
+	          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation.swc" useDefaultLinkType="false"/>
+	          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_dmv.swc" useDefaultLinkType="false"/>
+	          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_flashflexkit.swc" useDefaultLinkType="false"/>
+	          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/utilities.swc" useDefaultLinkType="false"/>
+	          <libraryPathEntry kind="3" linkType="1" path="${PROJECT_FRAMEWORKS}/libs/automation_agent.swc" useDefaultLinkType="false"/>
+	        </excludedEntries>
+	      </libraryPathEntry>
+
+        </libraryPath>
+
+        <sourceAttachmentPath/>
+
+    </compiler>
+
+    <applications>
+        <application 
+                path="Main.mxml"
+                />
+    </applications>
+
+    <modules>
+    </modules>
+
+    <buildCSSFiles>
+    </buildCSSFiles>
+
 </actionScriptProperties>
