@@ -2,6 +2,25 @@
 <mx:Object
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:service="com.neosavvy.user.service.*"
+        xmlns:parsley="http://www.spicefactory.org/parsley" xmlns:controller="com.neosavvy.user.controller.*"
         >
-    <service:UserService/>       
+
+    <service:UserService/>
+    <parsley:DynamicCommand type="com.neosavvy.user.controller.GetUsersCommand" selector="get"/>
+
+    <mx:RemoteObject
+            id="userService"
+            destination="userService"
+            showBusyCursor="true">
+        <mx:channelSet>
+            <mx:ChannelSet>
+                <mx:channels>
+                    <mx:AMFChannel
+                        url="http://localhost:8080/commons-user-webapp/messagebroker/amf"/>
+                </mx:channels>
+            </mx:ChannelSet>
+        </mx:channelSet>
+    </mx:RemoteObject>
+
+    
 </mx:Object>

@@ -14,8 +14,6 @@ import mx.rpc.events.ResultEvent;
 import mx.rpc.remoting.RemoteObject;
 
 public class UserService {
-        public function UserService() {
-        }
 
         public function addUser( user:UserDTO ):void {
             var userService:RemoteObject = new RemoteObject();
@@ -66,7 +64,7 @@ public class UserService {
 
         protected function deleteresultHandler( resultEvent:ResultEvent ):void {
 				var data:Array = resultEvent.result as Array;
-				main(Application.application).initializeService();
+				main(Application.application).mainView.initializeService();
         }
 
         protected var userService:RemoteObject;
