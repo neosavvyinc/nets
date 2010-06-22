@@ -45,7 +45,7 @@
 	</modules>
 
 	<properties>
-		<flex.version>4.0.0.10485</flex.version>
+		<flex.version>3.5.0.12683</flex.version>
         <property.org.graniteds.version>1.2.0</property.org.graniteds.version>
         <carol.version>2.0.5</carol.version>
         <container-spec.version>1.0.1</container-spec.version>
@@ -54,7 +54,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <cargo.container.id>tomcat6x</cargo.container.id>
-        <cargo.download.url>http://www.ibiblio.org/pub/mirrors/apache/tomcat/tomcat-6/v6.0.20/bin/apache-tomcat-6.0.20.zip</cargo.download.url>
+        <cargo.download.url>http://mirrors.ibiblio.org/pub/mirrors/apache/tomcat/tomcat-6/v6.0.26/bin/apache-tomcat-6.0.26.zip</cargo.download.url>
         <cargo.install.dir>${java.io.tmpdir}/cargo/installs</cargo.install.dir>
         <cargo.servlet.port>8080</cargo.servlet.port>
     </properties>
@@ -85,7 +85,7 @@
 						</dependency>
 						<dependency>
 							<groupId>com.adobe.flex.license</groupId>
-							<artifactId>license-flashbuilder</artifactId>
+							<artifactId>license-flexbuilder-pro</artifactId>
 							<version>${flex.version}</version>
 						</dependency>
 					</dependencies>

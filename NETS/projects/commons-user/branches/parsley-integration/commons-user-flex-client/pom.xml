@@ -51,10 +51,10 @@
 						<type>pom</type>
 					</dependency>
 					<dependency>
-						<groupId>com.adobe.flex.license</groupId>
-						<artifactId>license-flashbuilder</artifactId>
-						<version>${flex.version}</version>
-					</dependency>
+                        <groupId>com.adobe.flex.license</groupId>
+                        <artifactId>license-flexbuilder-pro</artifactId>
+                        <version>${flex.version}</version>
+                    </dependency>
 				</dependencies>
 			</plugin>
 			<plugin>
@@ -129,7 +129,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.adobe.flex.license</groupId>
-			<artifactId>license-flashbuilder</artifactId>
+			<artifactId>license-flexbuilder-pro</artifactId>
 			<version>${flex.version}</version>
 		</dependency>
 		<dependency>
