@@ -90,6 +90,20 @@
 	</build>
 
 	<dependencies>
+
+        <dependency>
+            <groupId>org.spicefactory</groupId>
+            <artifactId>parsley-flex3</artifactId>
+            <version>2.2.2</version>
+            <type>swc</type>
+        </dependency>
+        <dependency>
+            <groupId>org.spicefactory</groupId>
+            <artifactId>spicelib-flex</artifactId>
+            <version>2.2.2</version>
+            <type>swc</type>
+        </dependency>
+
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>commons-user-flex-model-lib</artifactId>

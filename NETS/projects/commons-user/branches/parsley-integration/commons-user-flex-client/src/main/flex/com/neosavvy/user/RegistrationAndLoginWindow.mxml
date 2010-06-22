@@ -6,11 +6,15 @@
         layout="horizontal"
         title="Commons User Registration / Login"
         initialize="{init()}"
+        showCloseButton="true"
+        close="{PopUpManager.removePopUp(this)}"
         >
 
     <mx:Script>
         <![CDATA[
         import com.neosavvy.user.registration.event.RegistrationFailedEvent;
+
+        import mx.managers.PopUpManager;
 
         protected function init():void {
                 addEventListener("newUser", newUserEvent);
