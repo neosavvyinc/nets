@@ -8,27 +8,39 @@
     <mx:Script>
         <![CDATA[
 
+        import mx.logging.Log;
+        import mx.logging.LogEventLevel;
+        import mx.logging.targets.TraceTarget;
+
+        import org.spicefactory.parsley.core.factory.impl.GlobalFactoryRegistry;
+        import org.spicefactory.parsley.core.messaging.ErrorPolicy;
+
         [Init]
-        public function initFunction():void
-        {
-            trace("initialization crap");
+        private function initLogging():void {
+            GlobalFactoryRegistry.instance.messageRouter.unhandledError = ErrorPolicy.RETHROW;
+
+            // Create a target.
+            var logTarget:TraceTarget = new TraceTarget();
+
+            // Log only messages for the classes in the mx.rpc.* and
+            // mx.messaging packages.
+            logTarget.filters=["mx.rpc.*","mx.messaging.*", "org.spicefactory.*"];
+
+            // Log all log levels.
+            logTarget.level = LogEventLevel.ALL;
+
+            // Add date, time, category, and log level to the output.
+            logTarget.includeDate = true;
+            logTarget.includeTime = true;
+            logTarget.includeCategory = true;
+            logTarget.includeLevel = true;
+
+            // Begin logging.
+            Log.addTarget(logTarget);
         }
 
         ]]>
     </mx:Script>
-
-    <mx:TraceTarget id="logTarget"
-                    includeTime="true"
-                    includeCategory="true"
-                    includeLevel="true"
-            >
-        <mx:filters>
-            <mx:Array>
-                <mx:String>org.spicefactory.*</mx:String>
-            </mx:Array>
-        </mx:filters>
-        <mx:level>0</mx:level>
-    </mx:TraceTarget>
 
     <parsley:ContextBuilder config="{ApplicationContext}"/>
     <parsley:Configure/>

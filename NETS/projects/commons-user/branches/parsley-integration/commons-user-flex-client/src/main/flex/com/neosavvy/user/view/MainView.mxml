@@ -14,26 +14,14 @@
         <![CDATA[
 
         import com.neosavvy.user.model.UserModel;
-        import com.neosavvy.user.view.RegistrationAndLoginWindow;
         import com.neosavvy.user.dto.UserDTO;
 
         import com.neosavvy.user.event.UserEvent;
 
         import mx.core.IFlexDisplayObject;
-        import mx.logging.Log;
-        import mx.logging.LogEventLevel;
-        import mx.logging.targets.TraceTarget;
         import mx.managers.PopUpManager;
 
         import org.spicefactory.parsley.core.context.Context;
-        import org.spicefactory.parsley.core.factory.impl.GlobalFactoryRegistry;
-        import org.spicefactory.parsley.core.messaging.ErrorPolicy;
-
-        [Init]
-        public function initFunction():void
-        {
-            initializeService();
-        }
 
         [Inject]
         public var context:Context;
@@ -66,38 +54,10 @@
             PopUpManager.centerPopUp(regAndLoginWindow);
         }
 
-        private function refreshGridClicked():void {
-            initializeService();
-        }
-
-        public function initializeService():void {
-            //userService.getUsers();
-            GlobalFactoryRegistry.instance.messageRouter.unhandledError = ErrorPolicy.RETHROW;
-            initLogging();
+        [Init]
+        public function refreshGridHandler():void {
             dispatchEvent(new UserEvent(UserEvent.TYPE_GET, true, true));
         }
-
-        private function initLogging():void {
-            // Create a target.
-            var logTarget:TraceTarget = new TraceTarget();
-
-            // Log only messages for the classes in the mx.rpc.* and
-            // mx.messaging packages.
-            logTarget.filters=["mx.rpc.*","mx.messaging.*"];
-
-            // Log all log levels.
-            logTarget.level = LogEventLevel.ALL;
-
-            // Add date, time, category, and log level to the output.
-            logTarget.includeDate = true;
-            logTarget.includeTime = true;
-            logTarget.includeCategory = true;
-            logTarget.includeLevel = true;
-
-            // Begin logging.
-            Log.addTarget(logTarget);
-        }
-
 
         ]]>
     </mx:Script>
@@ -105,7 +65,7 @@
     <mx:HBox>
         <mx:Button id="showRegistrationLoginWindowBtn" click="{showRegistrationLoginWindow()}"
                    label="Show Register/Login"/>
-        <mx:Button id="refreshGrid" click="{refreshGridClicked()}" label="Refresh Grid"/>
+        <mx:Button id="refreshGrid" click="{refreshGridHandler()}" label="Refresh Grid"/>
     </mx:HBox>
 
     <mx:HBox width="100%" height="100%">
