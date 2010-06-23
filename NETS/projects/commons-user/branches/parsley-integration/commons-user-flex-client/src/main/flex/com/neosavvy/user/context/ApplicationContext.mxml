@@ -2,11 +2,17 @@
 <mx:Object
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:service="com.neosavvy.user.service.*"
-        xmlns:parsley="http://www.spicefactory.org/parsley" xmlns:controller="com.neosavvy.user.controller.*"
+        xmlns:parsley="http://www.spicefactory.org/parsley"
+        xmlns:controller="com.neosavvy.user.controller.*"
+        xmlns:model="com.neosavvy.user.model.*"
         >
 
     <service:UserService/>
+    <model:UserModel/>
+
     <parsley:DynamicCommand type="com.neosavvy.user.controller.GetUsersCommand" selector="get"/>
+    <parsley:DynamicCommand type="com.neosavvy.user.controller.SaveUserCommand" selector="save"/>
+    <parsley:DynamicCommand type="com.neosavvy.user.controller.DeleteUserCommand" selector="delete"/>
 
     <mx:RemoteObject
             id="userService"
@@ -16,11 +22,11 @@
             <mx:ChannelSet>
                 <mx:channels>
                     <mx:AMFChannel
-                        url="http://localhost:8080/commons-user-webapp/messagebroker/amf"/>
+                            url="http://localhost:8080/commons-user-webapp/messagebroker/amf"/>
                 </mx:channels>
             </mx:ChannelSet>
         </mx:channelSet>
     </mx:RemoteObject>
 
-    
+
 </mx:Object>

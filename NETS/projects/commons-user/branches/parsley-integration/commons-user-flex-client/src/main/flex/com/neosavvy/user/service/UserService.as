@@ -1,7 +1,7 @@
 package com.neosavvy.user.service {
 import com.neosavvy.user.dto.UserDTO;
 
-import com.neosavvy.user.registration.event.RegistrationFailedEvent;
+import com.neosavvy.user.view.registration.event.RegistrationFailedEvent;
 
 import flash.events.Event;
 

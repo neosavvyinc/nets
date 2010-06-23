@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml"
+         xmlns:sf="http://www.spicefactory.org/parsley">
+
+    <mx:Metadata>
+        [Event(name="delete",type="com.neosavvy.user.event.UserEvent")]
+        [ManagedEvents("delete")]
+    </mx:Metadata>
+
+    <sf:Configure/>
+
+    <mx:Button id="deleteBtn" label="Delete" click="{sendDeleteUserMessage();}"/>
+    <mx:Script>
+    <![CDATA[
+        import com.neosavvy.user.dto.UserDTO;
+        import com.neosavvy.user.event.UserEvent;
+
+        private function sendDeleteUserMessage():void {
+            var deleteEvent:UserEvent = new UserEvent(UserEvent.TYPE_DELETE, true, true);
+            deleteEvent.user = data as UserDTO;
+            dispatchEvent(deleteEvent);
+        }
+    ]]>
+    </mx:Script>
+</mx:HBox>

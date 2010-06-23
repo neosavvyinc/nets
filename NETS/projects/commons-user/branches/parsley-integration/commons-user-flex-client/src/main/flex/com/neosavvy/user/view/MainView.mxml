@@ -4,7 +4,8 @@
 
     <mx:Metadata>
         [Event(name="get",type="com.neosavvy.user.event.UserEvent")]
-        [ManagedEvents("get")]
+        [Event(name="userModelChanged",type="com.neosavvy.user.event.UserEvent")]
+        [ManagedEvents("get,userModelChanged")]
     </mx:Metadata>
 
     <parsley:Configure/>
@@ -12,14 +13,16 @@
     <mx:Script>
         <![CDATA[
 
-        import com.neosavvy.user.RegistrationAndLoginWindow;
+        import com.neosavvy.user.model.UserModel;
+        import com.neosavvy.user.view.RegistrationAndLoginWindow;
         import com.neosavvy.user.dto.UserDTO;
 
         import com.neosavvy.user.event.UserEvent;
 
-        import com.neosavvy.user.service.UserService;
-
         import mx.core.IFlexDisplayObject;
+        import mx.logging.Log;
+        import mx.logging.LogEventLevel;
+        import mx.logging.targets.TraceTarget;
         import mx.managers.PopUpManager;
 
         import org.spicefactory.parsley.core.context.Context;
@@ -37,7 +40,14 @@
 
         [Bindable]
         [Inject]
-        private var userService:UserService;
+        public var userModel:UserModel;
+
+        [MessageHandler(selector="userModelChanged")]
+        public function handleUserModelChanged( userEvent:UserEvent ):void
+        {
+            this.grid.dataProvider = userModel.users;
+        }
+
 
         private function handleItemClick():void {
             var selectedItem:UserDTO = grid.selectedItem as UserDTO;
@@ -63,10 +73,31 @@
         public function initializeService():void {
             //userService.getUsers();
             GlobalFactoryRegistry.instance.messageRouter.unhandledError = ErrorPolicy.RETHROW;
-
-
+            initLogging();
             dispatchEvent(new UserEvent(UserEvent.TYPE_GET, true, true));
         }
+
+        private function initLogging():void {
+            // Create a target.
+            var logTarget:TraceTarget = new TraceTarget();
+
+            // Log only messages for the classes in the mx.rpc.* and
+            // mx.messaging packages.
+            logTarget.filters=["mx.rpc.*","mx.messaging.*"];
+
+            // Log all log levels.
+            logTarget.level = LogEventLevel.ALL;
+
+            // Add date, time, category, and log level to the output.
+            logTarget.includeDate = true;
+            logTarget.includeTime = true;
+            logTarget.includeCategory = true;
+            logTarget.includeLevel = true;
+
+            // Begin logging.
+            Log.addTarget(logTarget);
+        }
+
 
         ]]>
     </mx:Script>
@@ -116,7 +147,7 @@
                 <mx:AdvancedDataGridColumn
                         id="actions"
                         headerText="Actions"
-                        itemRenderer="com.neosavvy.user.Actions"
+                        itemRenderer="com.neosavvy.user.view.Actions"
                         />
             </mx:columns>
         </mx:AdvancedDataGrid>
