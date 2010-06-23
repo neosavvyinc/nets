@@ -50,8 +50,6 @@
             userConfirmed.visible = false;
             userFailed.visible = true;
         }
-
-
         ]]>
     </mx:Script>
 
@@ -61,7 +59,5 @@
         <registration:UserConfirmed visible="false" id="userConfirmed" width="185"/>
         <registration:UserFailed visible="false" id="userFailed" width="185"/>
     </mx:Canvas>
-    <mx:VRule height="95%"/>
-    <login:Login/>
 
 </mx:TitleWindow>
