@@ -7,7 +7,6 @@
         xmlns:model="com.neosavvy.user.model.*"
         >
 
-    <service:UserService/>
     <model:UserModel/>
 
     <parsley:DynamicCommand type="com.neosavvy.user.controller.GetUsersCommand" selector="get"/>

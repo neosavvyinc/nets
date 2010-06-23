@@ -5,28 +5,15 @@
         xmlns:sf="http://www.spicefactory.org/parsley"
         >
 
+    <mx:Metadata>
+        [Event(name="save",type="com.neosavvy.user.event.UserEvent")]
+        [ManagedEvents("save")]
+    </mx:Metadata>
+
     <mx:Script><![CDATA[
         import com.neosavvy.user.dto.UserDTO;
-        import com.neosavvy.user.registration.event.RegistrationFailedEvent;
-        import com.neosavvy.user.service.UserService;
+        import com.neosavvy.user.event.UserEvent;
 
-        import mx.messaging.ChannelSet;
-        import mx.messaging.channels.AMFChannel;
-        import mx.rpc.events.FaultEvent;
-        import mx.rpc.events.ResultEvent;
-        import mx.rpc.remoting.RemoteObject;
-
-        [Inject]
-        [Bindable]
-        public var _userService:UserService;
-
-        public function get userService():UserService {
-            return _userService;
-        }
-
-        public function set userService(value:UserService):void {
-            _userService = value;
-        }
 
         protected function handleCreate():void {
             addUser()
@@ -59,7 +46,9 @@
         }
 
         protected function addUser():void {
-            userService.addUser(getUserFromTextInput());
+            var userEvent:UserEvent = new UserEvent(UserEvent.TYPE_SAVE, true, true);
+            userEvent.user = getUserFromTextInput();
+            dispatchEvent(userEvent);
         }
         ]]></mx:Script>
 
