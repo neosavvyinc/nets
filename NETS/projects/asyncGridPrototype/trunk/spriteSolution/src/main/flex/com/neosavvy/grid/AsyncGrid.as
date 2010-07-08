@@ -47,6 +47,12 @@ package com.neosavvy.grid {
             super.updateDisplayList(unscaledWidth, unscaledHeight);
 
             drawAsyncOverlays();
+
+            if ( horizontalScrollBar )
+            {
+                horizontalScrollBar.width = this.width - lockedColumnWidth;
+                horizontalScrollBar.move( lockedColumnWidth, horizontalScrollBar.y );   
+            }
         }
 
         public function get lockedColumnWidth() {
