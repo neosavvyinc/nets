@@ -3,6 +3,8 @@ package com.neosavvy.grid{
         public function AsyncDataDTO() {
         }
 
+        private var _requestingAsync:Boolean = false;
+
         private var _asyncRespColumn1:String = "data1";
         private var _asyncRespColumn2:String = "data2";
         private var _asyncRespColumn3:String = "data3";
@@ -14,6 +16,14 @@ package com.neosavvy.grid{
         private var _asyncRespColumn9:String = "data9";
 
         private var _asyncTrigger:String = "Click here to trigger";
+
+        public function get requestingAsync():Boolean {
+            return _requestingAsync;
+        }
+
+        public function set requestingAsync(value:Boolean):void {
+            _requestingAsync = value;
+        }
 
         public function get asyncRespColumn1():String {
             return _asyncRespColumn1;

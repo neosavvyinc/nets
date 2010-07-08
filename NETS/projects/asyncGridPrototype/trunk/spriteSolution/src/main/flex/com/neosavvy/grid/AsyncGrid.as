@@ -4,6 +4,8 @@ package com.neosavvy.grid {
     import flash.display.Shape;
     import flash.display.Sprite;
 
+    import mx.collections.ArrayCollection;
+    import mx.collections.ListCollectionView;
     import mx.controls.DataGrid;
     import mx.controls.advancedDataGridClasses.AdvancedDataGridColumn;
     import mx.controls.dataGridClasses.DataGridColumn;
@@ -15,8 +17,6 @@ package com.neosavvy.grid {
 
     public class AsyncGrid extends DataGrid {
 
-        private var rowIndicesMap:Object = new Object();
-
         protected override function createChildren():void {
             super.createChildren();
             addEventListener(AsyncRowEvent.TYPE, handleAsyncTriggerClicked);
@@ -25,31 +25,10 @@ package com.neosavvy.grid {
 
         private function handleScrollEvent(event:ScrollEvent):void {
 
-            trace("handling scroll event");
-
-            var change:int = event.delta;
-            var direction:String = event.direction;
-
-            trace("change: " + change);
-            trace("direction: " + direction);
-
-            dumpRowIndicesMap();
             if( event.direction == "vertical")
             {
-
-                var newRowIndicesMap:Object = new Object();
-                for ( var key:Object in rowIndicesMap )
-                {
-                    var keyNum:int = key as int;
-                    keyNum = (keyNum - event.delta);
-                    newRowIndicesMap[ keyNum ] = rowIndicesMap[ key ];
-
-                }
-                rowIndicesMap = newRowIndicesMap;
                 invalidateDisplayList();
-
             }
-            dumpRowIndicesMap();
 
         }
 
@@ -57,14 +36,7 @@ package com.neosavvy.grid {
 
             trace("clicking async trigger");
 
-            if( rowIndicesMap.hasOwnProperty(event.listData.rowIndex ) )
-            {
-                delete rowIndicesMap[ event.listData.rowIndex ];
-            }
-            else
-            {
-                rowIndicesMap[ event.listData.rowIndex ] = event;
-            }
+            (event.data as AsyncDataDTO).requestingAsync = !(event.data as AsyncDataDTO).requestingAsync;
 
             invalidateDisplayList();
 
@@ -126,19 +98,39 @@ package com.neosavvy.grid {
             var actualRow:int = verticalScrollPosition;
             var n:int = contentHolder.listItems.length;
 
-            dumpRowIndicesMap();
-            while (curRow < n)
+            trace("actualRow:"+ actualRow);
+
+            var dataProviderCollection:ListCollectionView = dataProvider as ListCollectionView;
+            while (curRow < n && dataProviderCollection && dataProviderCollection.length >= n)
             {
-                if( rowIndicesMap.hasOwnProperty(curRow) )
+
+                var index:Number = curRow + verticalScrollPosition;
+                if( index < 0 )
                 {
-                    drawAsyncOverlay(asyncOverlays, i++, contentHolder.rowInfo[curRow].y, contentHolder.rowInfo[curRow].height,
-                            colors[actualRow % colors.length], actualRow);
+                    //the user scrolled this item off the screen so remove the overlay if it exists
+                    removeAsyncOverlay(asyncOverlays, i++, contentHolder.rowInfo[curRow].y, contentHolder.rowInfo[curRow].height,
+                            actualRow);
                 }
-//                else
-//                {
-//                    removeAsyncOverlay(asyncOverlays, i++, contentHolder.rowInfo[curRow].y, contentHolder.rowInfo[curRow].height,
-//                            actualRow);
-//                }
+                else if ( index >= dataProviderCollection.length ) {
+                    //the user scrolled this item off the bottom of the screen so remove the overlay
+                    removeAsyncOverlay(asyncOverlays, i++, contentHolder.rowInfo[curRow].y, contentHolder.rowInfo[curRow].height,
+                            actualRow);
+                }
+                else
+                {
+                    var itemAt:Object = dataProviderCollection.getItemAt( index );
+                    var asyncObjectAt:AsyncDataDTO = itemAt as AsyncDataDTO;
+                    if( asyncObjectAt.requestingAsync )
+                    {
+                        drawAsyncOverlay(asyncOverlays, i++, contentHolder.rowInfo[curRow].y, contentHolder.rowInfo[curRow].height,
+                                colors[actualRow % colors.length], actualRow);
+                    }
+                    else
+                    {
+                        removeAsyncOverlay(asyncOverlays, i++, contentHolder.rowInfo[curRow].y, contentHolder.rowInfo[curRow].height,
+                                actualRow);
+                    }
+                }
                 curRow++;
                 actualRow++;
             }
@@ -149,12 +141,6 @@ package com.neosavvy.grid {
             }
         }
 
-        private function dumpRowIndicesMap():void {
-            for (var key:Object in rowIndicesMap)
-            {
-                trace("key: " + key);
-            }
-        }
 
         private function removeAsyncOverlay(asyncOverlays:Sprite, rowIndex:int, y:Number, height:Number, dataIndex:int):void
         {
