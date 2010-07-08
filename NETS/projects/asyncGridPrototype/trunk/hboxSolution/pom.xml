@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonatype.flexmojos</groupId>
+        <artifactId>flexmojos-flex-super-pom</artifactId>
+        <version>3.5.0</version>
+    </parent>
+
+    <groupId>com.neosavvy.asyncGridPrototype</groupId>
+    <artifactId>hbox-solution</artifactId>
+    <version>1.0</version>
+    <name>hbox-solution</name>
+    <packaging>swf</packaging>
+
+    <properties>
+        <flex.version>3.5.0.12683</flex.version>
+        <flex.mojos.maven.version>3.5.0</flex.mojos.maven.version>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.sonatype.flexmojos</groupId>
+                <artifactId>flexmojos-maven-plugin</artifactId>
+                <version>${flex.mojos.maven.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>wrapper</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <configurationReport>true</configurationReport>
+                    <debug>true</debug>
+                    <parameters>
+                        <bgcolor>a4cfc1</bgcolor>
+                    </parameters>
+                    <locales>
+                        <param>en_US</param>
+                    </locales>
+                    <sourceFile>./Main.mxml</sourceFile>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.adobe.flex</groupId>
+                        <artifactId>compiler</artifactId>
+                        <version>${flex.version}</version>
+                        <type>pom</type>
+                    </dependency>
+                    <dependency>
+                        <groupId>com.adobe.flex.license</groupId>
+                        <artifactId>license-flexbuilder-pro</artifactId>
+                        <version>${flex.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>flex-framework</artifactId>
+            <version>${flex.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.flex.sdk</groupId>
+            <artifactId>datavisualization</artifactId>
+            <version>${flex.version}</version>
+            <type>swc</type>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.flex.sdk</groupId>
+            <artifactId>datavisualization</artifactId>
+            <classifier>en_US</classifier>
+            <version>${flex.version}</version>
+            <type>swc</type>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.flex.license</groupId>
+            <artifactId>license-flexbuilder-pro</artifactId>
+            <version>${flex.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>playerglobal</artifactId>
+            <version>${flex.version}</version>
+            <classifier>10</classifier>
+            <type>swc</type>
+        </dependency>
+    </dependencies>
+
+</project>

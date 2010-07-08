@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<mx:Application
+        xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:grid="com.neosavvy.grid.*"
+        backgroundColor="0x000000"
+        layout="absolute"
+        creationComplete="{onCreationComplete()}"
+        >
+
+    <mx:Style>
+        AsyncGrid {
+            verticalLockedSeparatorSkin: ClassReference(null);
+            verticalSeparatorSkin: ClassReference(null);
+            horizontalSeparatorSkin: ClassReference(null);
+            horizontalLockedSeparatorSkin: ClassReference(null);
+        }
+    </mx:Style>
+
+    <mx:Script>
+        <![CDATA[
+
+        import com.neosavvy.grid.AsyncRowEvent;
+
+
+        protected function onCreationComplete():void
+        {
+            AsyncGridDataModel.getInstance().populateFakeData();
+        }
+
+        ]]>
+    </mx:Script>
+
+    <grid:AsyncGrid
+            id="asyncGrid"
+            width="100%"
+            height="100%"
+            lockedColumnCount="1"
+            dataProvider="{AsyncGridDataModel.getInstance().gridData}"
+            horizontalScrollPolicy="on"
+            editable="true"
+            >
+        <grid:columns>
+            <mx:DataGridColumn
+                id="asyncTriggerColumn"
+                headerText="Async Trigger"
+                width="300"
+                dataField="asyncTrigger"
+                editable="true"
+                >
+
+                <mx:itemEditor>
+                    <mx:Component>
+                        <mx:ComboBox alpha=".5" change="{dispatchAsyncClickedEvent()}">
+                            <mx:dataProvider>
+                                <mx:Array>
+                                    <mx:String>Item 1</mx:String>
+                                    <mx:String>Item 2</mx:String>
+                                    <mx:String>Item 3</mx:String>
+                                </mx:Array>
+                            </mx:dataProvider>
+                            <mx:Script><![CDATA[
+                                import com.neosavvy.grid.AsyncRowEvent;
+
+                                import mx.controls.dataGridClasses.DataGridListData;
+
+
+                                private function dispatchAsyncClickedEvent() {
+
+                                    var dataRow:Object = data;
+                                    var rowListData:DataGridListData = this.listData as DataGridListData;
+                                    var asyncRowEvent:AsyncRowEvent = new AsyncRowEvent(dataRow, rowListData);
+
+                                    dispatchEvent(asyncRowEvent);
+
+                                }
+                                ]]></mx:Script>
+                        </mx:ComboBox>
+                    </mx:Component>
+                </mx:itemEditor>
+            </mx:DataGridColumn>
+
+            <mx:DataGridColumn
+                id="asyncRespColumn1"
+                width="250"
+                headerText="Async Response 1"
+                dataField="asyncRespColumn1"/>
+
+            <mx:DataGridColumn
+                id="asyncRespColumn2"
+                headerText="Async Response 2"
+                width="250"
+                dataField="asyncRespColumn2"/>
+
+            <mx:DataGridColumn
+                id="asyncRespColumn3"
+                headerText="Async Response 3"
+                width="250"
+                dataField="asyncRespColumn3"/>
+
+            <mx:DataGridColumn
+                id="asyncRespColumn4"
+                headerText="Async Response 4"
+                width="250"
+                dataField="asyncRespColumn4"/>
+
+            <mx:DataGridColumn
+                id="asyncRespColumn5"
+                headerText="Async Response 5"
+                width="250"
+                dataField="asyncRespColumn5"/>
+
+            <mx:DataGridColumn
+                id="asyncRespColumn6"
+                headerText="Async Response 6"
+                width="250"
+                dataField="asyncRespColumn6"/>
+
+            <mx:DataGridColumn
+                id="asyncRespColumn7"
+                headerText="Async Response 7"
+                width="250"
+                dataField="asyncRespColumn7"/>
+
+            <mx:DataGridColumn
+                id="asyncRespColumn8"
+                headerText="Async Response 8"
+                width="250"
+                dataField="asyncRespColumn8"/>
+
+            <mx:DataGridColumn
+                id="asyncRespColumn9"
+                headerText="Async Response 9"
+                width="250"
+                dataField="asyncRespColumn9"/>
+        </grid:columns>
+    </grid:AsyncGrid>
+
+    <mx:Script><![CDATA[
+        import com.neosavvy.grid.AsyncGridDataModel;
+        ]]></mx:Script>
+</mx:Application>
