@@ -2,7 +2,7 @@
 <mx:Application
         xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:grid="com.neosavvy.grid.*"
         backgroundColor="0x000000"
-        layout="absolute"
+        layout="vertical"
         creationComplete="{onCreationComplete()}"
         >
 
@@ -28,6 +28,7 @@
 
         ]]>
     </mx:Script>
+    <mx:Button click="{asyncGrid.toggleRefreshingOverlay()}" label="Toggle Full Refresh"/>
 
     <grid:AsyncGrid
             id="asyncGrid"

@@ -17,6 +17,8 @@ package com.neosavvy.grid {
 
     public class AsyncGrid extends DataGrid {
 
+        private var refreshing:Boolean = false;
+
         protected override function createChildren():void {
             super.createChildren();
             addEventListener(AsyncRowEvent.TYPE, handleAsyncTriggerClicked);
@@ -48,11 +50,24 @@ package com.neosavvy.grid {
 
             drawAsyncOverlays();
 
-            if ( horizontalScrollBar )
+            if ( horizontalScrollBar && verticalScrollBar )
             {
-                horizontalScrollBar.width = this.width - lockedColumnWidth;
-                horizontalScrollBar.move( lockedColumnWidth, horizontalScrollBar.y );   
+                horizontalScrollBar.width = this.width - lockedColumnWidth - verticalScrollBar.width;
+                horizontalScrollBar.move( lockedColumnWidth, horizontalScrollBar.y );
             }
+
+        }
+
+        public function toggleRefreshingOverlay():void
+        {
+            if ( !refreshing ) {
+                drawRefreshingGridOverlay( listContent, 0x000000 );
+            }
+            else
+            {
+                removeRefreshingGridOverlay( listContent );
+            }
+            refreshing = !refreshing;
         }
 
         public function get lockedColumnWidth() {
@@ -186,6 +201,37 @@ package com.neosavvy.grid {
             g.clear();
             g.beginFill(color, getStyle("backgroundAlpha"));
             g.drawRect(0, 0, contentHolder.width, height);
+            g.endFill();
+        }
+
+        protected function removeRefreshingGridOverlay(s:Sprite):void
+        {
+            var background:Shape = getChildByName("refreshingBackground") as Shape;
+            removeChild( background );
+            background = null;
+        }
+
+        protected function drawRefreshingGridOverlay(s:Sprite, color:uint):void
+        {
+            if( !horizontalScrollBar )
+                return;
+
+            var contentHolder:ListBaseContentHolder = ListBaseContentHolder(s);
+
+            var background:Shape = getChildByName("refreshingBackground") as Shape;
+            if ( !background ) {
+                background = new FlexShape();
+                background.name = "refreshingBackground";
+                addChild(background);
+                setChildIndex(background, numChildren - 1)
+            }
+
+            background.y = 0;
+
+            var g:Graphics = background.graphics;
+            g.clear();
+            g.beginFill(color, .5);
+            g.drawRect(lockedColumnWidth + 1, headerHeight, contentHolder.width, height - headerHeight - horizontalScrollBar.height - 1);
             g.endFill();
         }
     }
