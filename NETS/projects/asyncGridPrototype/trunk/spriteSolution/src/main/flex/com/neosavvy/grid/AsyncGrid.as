@@ -4,6 +4,8 @@ package com.neosavvy.grid {
     import flash.display.Shape;
     import flash.display.Sprite;
 
+    import flash.geom.Point;
+
     import mx.collections.ArrayCollection;
     import mx.collections.ListCollectionView;
     import mx.controls.DataGrid;
@@ -19,19 +21,11 @@ package com.neosavvy.grid {
 
         private var refreshing:Boolean = false;
 
+        private var asyncOverlayShapes:Array = new Array();
+
         protected override function createChildren():void {
             super.createChildren();
             addEventListener(AsyncRowEvent.TYPE, handleAsyncTriggerClicked);
-            addEventListener(ScrollEvent.SCROLL, handleScrollEvent);
-        }
-
-        private function handleScrollEvent(event:ScrollEvent):void {
-
-            if( event.direction == "vertical")
-            {
-                invalidateDisplayList();
-            }
-
         }
 
         private function handleAsyncTriggerClicked(event:AsyncRowEvent):void {
@@ -121,45 +115,37 @@ package com.neosavvy.grid {
 
             trace("actualRow:"+ actualRow);
 
+            var newAsyncOverlays:Array = new Array();
+
             var dataProviderCollection:ListCollectionView = dataProvider as ListCollectionView;
-            while (curRow < n && dataProviderCollection && dataProviderCollection.length >= n)
+            while (curRow < n && dataProviderCollection && curRow + verticalScrollPosition < dataProviderCollection.length)
             {
 
-                var index:Number = curRow + verticalScrollPosition;
-                if( index < 0 )
+                var itemAt:Object = dataProviderCollection.getItemAt( curRow + verticalScrollPosition );
+                var asyncObjectAt:AsyncDataDTO = itemAt as AsyncDataDTO;
+                if( asyncObjectAt.requestingAsync )
                 {
-                    //the user scrolled this item off the screen so remove the overlay if it exists
-                    removeAsyncOverlay(asyncOverlays, i++, contentHolder.rowInfo[curRow].y, contentHolder.rowInfo[curRow].height,
-                            actualRow);
+                    drawAsyncOverlay(
+                            asyncOverlays
+                            , i++
+                            , curRow * contentHolder.rowInfo[curRow].height
+                            , contentHolder.rowInfo[curRow].height
+                            , colors[actualRow % colors.length]
+                            , actualRow
+                            , asyncOverlayShapes
+                            , newAsyncOverlays);
                 }
-                else if ( index >= dataProviderCollection.length ) {
-                    //the user scrolled this item off the bottom of the screen so remove the overlay
-                    removeAsyncOverlay(asyncOverlays, i++, contentHolder.rowInfo[curRow].y, contentHolder.rowInfo[curRow].height,
-                            actualRow);
-                }
-                else
-                {
-                    var itemAt:Object = dataProviderCollection.getItemAt( index );
-                    var asyncObjectAt:AsyncDataDTO = itemAt as AsyncDataDTO;
-                    if( asyncObjectAt.requestingAsync )
-                    {
-                        drawAsyncOverlay(asyncOverlays, i++, contentHolder.rowInfo[curRow].y, contentHolder.rowInfo[curRow].height,
-                                colors[actualRow % colors.length], actualRow);
-                    }
-                    else
-                    {
-                        removeAsyncOverlay(asyncOverlays, i++, contentHolder.rowInfo[curRow].y, contentHolder.rowInfo[curRow].height,
-                                actualRow);
-                    }
-                }
+
                 curRow++;
                 actualRow++;
             }
 
-            while (asyncOverlays.numChildren > i)
+            for each ( var s:Shape in asyncOverlayShapes )
             {
-                asyncOverlays.removeChildAt(asyncOverlays.numChildren - 1);
+                s.visible = false;
+                newAsyncOverlays.push( s );
             }
+            asyncOverlayShapes = newAsyncOverlays;
         }
 
 
@@ -173,35 +159,36 @@ package com.neosavvy.grid {
 
 
         protected function drawAsyncOverlay(s:Sprite, rowIndex:int,
-                                             y:Number, height:Number, color:uint, dataIndex:int):void
+                                             y:Number, height:Number, color:uint, dataIndex:int, asyncOverlays:Array, newAsyncOverlays:Array):void
         {
             var contentHolder:ListBaseContentHolder = ListBaseContentHolder(s.parent);
 
             var background:Shape;
-            if (rowIndex < s.numChildren)
+            if ( asyncOverlays.length > 0)
             {
-                background = Shape(s.getChildAt(rowIndex));
+                background = Shape( asyncOverlays.pop() );
+                background.y = y;
+                background.visible = true;
             }
             else
             {
                 background = new FlexShape();
-                background.name = "background";
+                background.name = "background" + rowIndex;
                 s.addChild(background);
+
+                background.y = y;
+                var height:Number = Math.min(height, contentHolder.height - y);
+
+                var g:Graphics = background.graphics;
+                g.clear();
+                g.beginFill(color, getStyle("backgroundAlpha"));
+                g.drawRect(0, 0, contentHolder.width, height);
+                g.endFill();
             }
 
-            background.y = y;
+            newAsyncOverlays.push( background );
 
-            // Height is usually as tall is the items in the row, but not if
-            // it would extend below the bottom of listContent
-            var height:Number = Math.min(height,
-                    contentHolder.height -
-                            y);
 
-            var g:Graphics = background.graphics;
-            g.clear();
-            g.beginFill(color, getStyle("backgroundAlpha"));
-            g.drawRect(0, 0, contentHolder.width, height);
-            g.endFill();
         }
 
         protected function removeRefreshingGridOverlay(s:Sprite):void
@@ -233,6 +220,15 @@ package com.neosavvy.grid {
             g.beginFill(color, .5);
             g.drawRect(lockedColumnWidth + 1, headerHeight, contentHolder.width, height - headerHeight - horizontalScrollBar.height - 1);
             g.endFill();
+        }
+
+
+        protected override function makeRowsAndColumns(left:Number, top:Number, right:Number, bottom:Number, firstCol:int, firstRow:int, byCount:Boolean = false, rowsNeeded:uint = 0):Point {
+            var returnValue:Point = super.makeRowsAndColumns(left, top, right, bottom, firstCol, firstRow, byCount, rowsNeeded);
+
+            drawAsyncOverlays();
+
+            return returnValue;
         }
     }
 }
