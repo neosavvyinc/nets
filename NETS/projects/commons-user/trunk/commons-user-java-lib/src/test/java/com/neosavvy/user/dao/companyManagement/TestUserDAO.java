@@ -8,6 +8,7 @@ import com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO;
 import com.neosavvy.user.util.ProjectTestUtil;
 import org.junit.Assert;
 import org.junit.Test;
+import org.junit.Ignore;
 
 import javax.persistence.PersistenceException;
 import java.util.List;
@@ -17,6 +18,7 @@ public class TestUserDAO extends BaseSpringAwareDAOTestCase {
 
 
     @Test
+    @Ignore
     public void testFindUserSession() {
         String mostCurrentSessionIdForUser = userDAO.findMostCurrentSessionIdForUser("adamparrish");
         System.out.println(mostCurrentSessionIdForUser);

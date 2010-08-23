@@ -1,6 +1,7 @@
 package com.neosavvy.user.controller {
     import com.neosavvy.user.ApplicationMediator;
     import com.neosavvy.user.view.companyManagement.SignupMediator;
+    import com.neosavvy.user.view.newUserManagement.ConfirmUserRegistrationMediator;
     import com.neosavvy.user.view.secured.progress.ProgressBarMediator;
     import com.neosavvy.user.view.security.LoginMediator;
 
@@ -15,6 +16,7 @@ package com.neosavvy.user.controller {
             facade.registerMediator(new ProgressBarMediator(null));
             facade.registerMediator(new SignupMediator(application.signupContent));
             facade.registerMediator(new LoginMediator(application.login));
+            facade.registerMediator(new ConfirmUserRegistrationMediator(application.signupContent.confirmUserRegistration));
         }
     }
 }

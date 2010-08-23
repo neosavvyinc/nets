@@ -24,8 +24,8 @@ package com.neosavvy.user.view.companyManagement {
 
         public static const REGISTRATION_INDEX:Number = 0;
         public static const CONFIRMATION_INDEX:Number = 1;
-        public static const CONFIRMATION_SUCCESS_INDEX:Number = 2;
-        public static const CONFIRMATION_FAILED_INDEX:Number = 3;
+        public static const CONFIRMATION_SUCCESS_INDEX:Number = 3;
+        public static const CONFIRMATION_FAILED_INDEX:Number = 4;
 
         private var userName:String = null;
 
@@ -44,7 +44,7 @@ package com.neosavvy.user.view.companyManagement {
         }
 
         public function get signupButton():Button {
-            return signup.signupButton;
+            return signup.signupPanel.signupButton;
         }
 
         public function get signupViewStack():ViewStack {
@@ -52,11 +52,11 @@ package com.neosavvy.user.view.companyManagement {
         }
 
         public function get confirmAccountButton():Button {
-            return signup.confirmAccountButton;
+            return signup.confirmAccountPanel.confirmAccountButton;
         }
 
         public function get confirmedLoginButton():Button {
-            return signup.confirmedLoginButton;
+            return signup.successPanel.confirmedLoginButton;
         }
 
         override public function listNotificationInterests():Array {
@@ -73,9 +73,9 @@ package com.neosavvy.user.view.companyManagement {
                 case ApplicationFacade.SAVE_COMPANY_SUCCESS:
                     LOGGER.debug("Save company succeeded");
                     signupViewStack.selectedIndex = CONFIRMATION_INDEX;
-                    signup.usernameConfirmation.text = userName;
+                    signup.confirmAccountPanel.usernameConfirmation.text = userName;
                     if (userName != null && userName.length > 0) {
-                        signup.usernameConfirmation.editable = signup.usernameConfirmation.enabled = false;
+                        signup.confirmAccountPanel.usernameConfirmation.editable = signup.confirmAccountPanel.usernameConfirmation.enabled = false;
                     }
                     break;
                 case ApplicationFacade.SAVE_COMPANY_FAILED:
@@ -95,27 +95,27 @@ package com.neosavvy.user.view.companyManagement {
         private function signupCompanyClicked(event:MouseEvent):void {
             if (isEmployeeFormValid()) {
                 var company:CompanyDTO = new CompanyDTO();
-                company.addressOne = signup.addressOne.text;
-                company.addressTwo = signup.addressTwo.text;
-                company.city = signup.city.text;
-                company.companyName = signup.companyName.text;
-                company.country = signup.country.selectedItem as String;
-                company.postalCode = signup.postalCode.text;
+                company.addressOne = signup.signupPanel.addressOne.text;
+                company.addressTwo = signup.signupPanel.addressTwo.text;
+                company.city = signup.signupPanel.city.text;
+                company.companyName = signup.signupPanel.companyName.text;
+                company.country = signup.signupPanel.country.selectedItem as String;
+                company.postalCode = signup.signupPanel.postalCode.text;
 
                 var user:UserDTO = new UserDTO();
-                userName = user.username = signup.administrativeUser.text;
-                user.password = signup.administrativePassword.text;
-                user.emailAddress = signup.administrativeEmail.text;
-                user.firstName = signup.administrativeFirstName.text;
-                user.middleName = signup.administrativeMiddleName.text;
-                user.lastName = signup.administrativeLastName.text;
+                userName = user.username = signup.signupPanel.administrativeUser.text;
+                user.password = signup.signupPanel.administrativePassword.text;
+                user.emailAddress = signup.signupPanel.administrativeEmail.text;
+                user.firstName = signup.signupPanel.administrativeFirstName.text;
+                user.middleName = signup.signupPanel.administrativeMiddleName.text;
+                user.lastName = signup.signupPanel.administrativeLastName.text;
                 sendNotification(ApplicationFacade.SAVE_COMPANY_REQUEST, [company,user]);
             }
         }
 
         private function confirmAccountButtonClickHandler(event:MouseEvent):void {
-            var hashCode:String = signup.confirmationToken.text;
-            userName = this.signup.usernameConfirmation.text;
+            var hashCode:String = signup.confirmAccountPanel.confirmationToken.text;
+            userName = this.signup.confirmAccountPanel.usernameConfirmation.text;
             sendNotification(ApplicationFacade.CONFIRM_ACCOUNT_REQUEST, [userName, hashCode]);
         }
 
@@ -125,15 +125,15 @@ package com.neosavvy.user.view.companyManagement {
 
         private function isEmployeeFormValid():Boolean {
             var validators:Array = new Array();
-            validators.push(signup.companyNameValidator);
-            validators.push(signup.addressOneValidator);
-            validators.push(signup.cityValidator);
-            validators.push(signup.stateValidator);
-            validators.push(signup.zipValidator);
-            validators.push(signup.adminUserValidator);
-            validators.push(signup.adminFirstNameValidator);
-            validators.push(signup.adminLastNameValidator);
-            validators.push(signup.adminEmailValidator);
+            validators.push(signup.signupPanel.companyNameValidator);
+            validators.push(signup.signupPanel.addressOneValidator);
+            validators.push(signup.signupPanel.cityValidator);
+            validators.push(signup.signupPanel.stateValidator);
+            validators.push(signup.signupPanel.zipValidator);
+            validators.push(signup.signupPanel.adminUserValidator);
+            validators.push(signup.signupPanel.adminFirstNameValidator);
+            validators.push(signup.signupPanel.adminLastNameValidator);
+            validators.push(signup.signupPanel.adminEmailValidator);
             var validationResults:Array = Validator.validateAll(validators);
 
             for each (var result:Object in validationResults) {

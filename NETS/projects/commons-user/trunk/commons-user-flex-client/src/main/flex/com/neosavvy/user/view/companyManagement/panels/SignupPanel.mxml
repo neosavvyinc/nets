@@ -1,0 +1,226 @@
+<?xml version="1.0"?>
+<mx:VBox
+        styleName="grayToWhiteViewContainer"
+        paddingTop="30"
+        paddingBottom="30"
+        paddingLeft="30"
+        paddingRight="30"
+        horizontalAlign="center"
+        verticalAlign="middle"
+        width="100%"
+        height="100%"
+        horizontalScrollPolicy="off"
+        verticalScrollPolicy="off"
+        xmlns:mx="http://www.adobe.com/2006/mxml"        
+        xmlns:flexlib="http://code.google.com/p/flexlib/">
+
+    <mx:Script>
+        <![CDATA[
+
+        private var unitedStates:Array = [
+            "Alabama"
+            ,"Alaska"
+            ,"American Samoa"
+            ,"Arizona"
+            ,"Arkansas"
+            ,"California"
+            ,"Colorado"
+            ,"Connecticut"
+            ,"Delaware"
+            ,"District of Columbia"
+            ,"Florida"
+            ,"Georgia"
+            ,"Guam"
+            ,"Hawaii"
+            ,"Idaho"
+            ,"Illinois"
+            ,"Indiana"
+            ,"Iowa"
+            ,"Kansas"
+            ,"Kentucky"
+            ,"Louisiana"
+            ,"Maine"
+            ,"Maryland"
+            ,"Massachusetts"
+            ,"Michigan"
+            ,"Minnesota"
+            ,"Mississippi"
+            ,"Missouri"
+            ,"Montana"
+            ,"Nebraska"
+            ,"Nevada"
+            ,"New Hampshire"
+            ,"New Jersey"
+            ,"New Mexico"
+            ,"New York"
+            ,"North Carolina"
+            ,"North Dakota"
+            ,"Northern Marianas Islands"
+            ,"Ohio"
+            ,"Oklahoma"
+            ,"Oregon"
+            ,"Pennsylvania"
+            ,"Puerto Rico"
+            ,"Rhode Island"
+            ,"South Carolina"
+            ,"South Dakota"
+            ,"Tennessee"
+            ,"Texas"
+            ,"Utah"
+            ,"Vermont"
+            ,"Virginia"
+            ,"Virgin Islands"
+            ,"Washington"
+            ,"West Virginia"
+            ,"Wisconsin"
+            ,"Wyoming"
+        ]
+        ]]>
+    </mx:Script>
+
+    <mx:StringValidator id="companyNameValidator" source="{companyName}" property="text" minLength="0" maxLength="255"/>
+    <mx:StringValidator id="addressOneValidator" source="{addressOne}" property="text" minLength="0" maxLength="255"/>
+    <mx:StringValidator id="cityValidator" source="{city}" property="text" minLength="0" maxLength="255"/>
+    <mx:StringValidator id="stateValidator" source="{state}" property="text" minLength="0" maxLength="255"/>
+    <mx:ZipCodeValidator id="zipValidator" source="{postalCode}" property="text" domain="US or Canada"/>
+    <mx:StringValidator id="adminUserValidator" source="{administrativeUser}" property="text" minLength="0"
+                        maxLength="255"/>
+    <mx:StringValidator id="adminFirstNameValidator" source="{administrativeFirstName}" property="text" minLength="0"
+                        maxLength="255"/>
+    <mx:StringValidator id="adminLastNameValidator" source="{administrativeLastName}" property="text" minLength="0"
+                        maxLength="255"/>
+    <mx:EmailValidator id="adminEmailValidator" source="{administrativeEmail}" property="text"/>
+
+
+    <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalGap="15">
+        <mx:VBox width="33%" height="100%"
+                 styleName="formSectionContainer" 
+                 horizontalScrollPolicy="off"
+                 verticalScrollPolicy="off">
+            <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                <mx:Label text="1" styleName="numberedStepLabel"/>
+                <mx:Label text="Company Information" styleName="contentLargeLabelBold"/>
+            </mx:HBox>
+            <mx:Form id="companyForm" width="100%" height="100%" paddingLeft="0">
+                <mx:FormItem label="Company Name:" width="100%" required="true">
+                    <flexlib:PromptingTextInput id="companyName" prompt="Company Name" width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="Address" width="100%" required="true">
+                    <flexlib:PromptingTextInput id="addressOne" prompt="Mailing Address" width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="Apt/Suite/Floor" width="100%">
+                    <flexlib:PromptingTextInput id="addressTwo" prompt="Additional Mailing Address "
+                                                width="100%"/>
+                </mx:FormItem>
+                <mx:HBox width="100%" horizontalGap="5">
+                    <mx:FormItem label="City" width="60%" required="true">
+                        <flexlib:PromptingTextInput id="city" prompt="City" width="100%"/>
+                    </mx:FormItem>
+                    <mx:FormItem label="State" width="40%" required="true">
+                        <mx:ComboBox id="state" text="Select..." width="100%" dataProvider="{unitedStates}"/>
+                    </mx:FormItem>
+                </mx:HBox>
+                <mx:HBox width="100%" horizontalGap="5">
+                    <mx:FormItem label="Zip" width="70%" required="true">
+                        <flexlib:PromptingTextInput id="postalCode" prompt="Postal Code" width="100%"/>
+                    </mx:FormItem>
+                    <mx:FormItem label="Country" width="30%" required="true">
+                        <mx:ComboBox id="country" dataProvider="{['USA']}" selectedIndex="0" width="100%"/>
+                    </mx:FormItem>
+                </mx:HBox>
+            </mx:Form>
+        </mx:VBox>
+        <mx:VBox width="33%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
+                 verticalScrollPolicy="off">
+            <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                <mx:Label text="2" styleName="numberedStepLabel"/>
+                <mx:Label text="Administrator Information" styleName="contentLargeLabelBold"/>
+            </mx:HBox>
+            <mx:Form id="userForm" width="100%" height="100%" paddingLeft="0">
+                <mx:FormItem label="Username" width="100%" required="true">
+                    <flexlib:PromptingTextInput
+                            id="administrativeUser"
+                            prompt="Admin User Name"
+                            width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="First Name" width="100%" required="true">
+                    <flexlib:PromptingTextInput
+                            id="administrativeFirstName"
+                            prompt="First Name"
+                            width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="Middle Name" width="100%" required="false">
+                    <flexlib:PromptingTextInput
+                            id="administrativeMiddleName"
+                            prompt="Middle Name"
+                            width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="Last Name" width="100%" required="true">
+                    <flexlib:PromptingTextInput
+                            id="administrativeLastName"
+                            prompt="Last Name"
+                            width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="Email" width="100%" required="true">
+                    <flexlib:PromptingTextInput
+                            id="administrativeEmail"
+                            prompt="Email Address"
+                            width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="Password" width="100%" required="true">
+                    <flexlib:PromptingTextInput
+                            id="administrativePassword"
+                            prompt="Password"
+                            displayAsPassword="true"
+                            width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="Confirm Password" width="100%" required="true">
+                    <flexlib:PromptingTextInput
+                            id="administrativeConfirmPassword"
+                            prompt="Confirm Password"
+                            displayAsPassword="true"
+                            width="100%"/>
+                </mx:FormItem>
+            </mx:Form>
+        </mx:VBox>
+        <mx:VBox width="33%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
+                 verticalScrollPolicy="off">
+            <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                <mx:Label text="3" styleName="numberedStepLabel"/>
+                <mx:Label text="Payment Information" styleName="contentLargeLabelBold"/>
+            </mx:HBox>
+            <mx:Form id="paymentInfoForm" width="100%" height="100%" paddingLeft="0">
+                <mx:FormItem label="Name" width="100%" required="true">
+                    <flexlib:PromptingTextInput
+                            id="nameOnCard"
+                            prompt="Name as it appears on card"
+                            width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="Card Type:" width="30%" required="true">
+                    <mx:ComboBox id="cardType" dataProvider="{['AMEX','VISA','MasterCard','Discover']}"
+                                 selectedIndex="0" width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="Card Number" width="100%" required="true">
+                    <flexlib:PromptingTextInput
+                            id="cardNumber"
+                            prompt="Card Number"
+                            width="100%"/>
+                </mx:FormItem>
+                <mx:FormItem label="Expiration" width="100%" required="true">
+                    <mx:HBox>
+                        <mx:ComboBox id="monthChooser"
+                                     dataProvider="{['1','2','3','4','5','6','7','8','9','10','11','12']}"/>
+                        <mx:ComboBox id="yearChooser"
+                                     dataProvider="{['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020']}"/>
+                    </mx:HBox>
+                </mx:FormItem>
+            </mx:Form>
+        </mx:VBox>
+    </mx:HBox>
+
+    <mx:HBox paddingTop="50" horizontalGap="-1">
+        <mx:CheckBox id="termsAndConditions" label="I have read the"/>
+        <mx:LinkButton id="termsAndConditionsLink" label="Terms and Conditions"/>
+    </mx:HBox>
+    <mx:Button id="signupButton" styleName="orangeLargeButton" label="Register (Free for 30 Days) >"/>
+</mx:VBox>
