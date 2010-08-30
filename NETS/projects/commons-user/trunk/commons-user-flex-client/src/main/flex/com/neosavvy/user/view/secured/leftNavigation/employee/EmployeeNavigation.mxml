@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<mx:VBox
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:components="com.components.*"
+    verticalScrollPolicy="off"
+    horizontalScrollPolicy="off">
+
+
+    <mx:ToggleButtonBar
+            id="toggleBar"
+            direction="vertical"
+            width="100%"
+            styleName="sideBarNavigationToggleButtonBar">
+        <mx:dataProvider>
+            <mx:Array>
+                <mx:String>Welcome</mx:String>
+            </mx:Array>
+        </mx:dataProvider>
+    </mx:ToggleButtonBar>
+
+    <components:SuperLabel paddingLeft="16" styleName="tasksSuperLabel" text="Task"/>
+
+    <mx:ToggleButtonBar
+            id="toggleBarEmployee"
+            direction="vertical"
+            selectedIndex="-1"
+            width="100%"
+            paddingTop="0"
+            styleName="sideBarNavigationToggleButtonBar">
+        <mx:dataProvider>
+            <mx:Array>
+                <mx:String>View Open Expenses</mx:String>
+                <mx:String>Create Expense Report</mx:String>
+                <mx:String>View Submitted Expenses</mx:String>
+                <mx:String>Reconcile Expenses</mx:String>
+            </mx:Array>
+        </mx:dataProvider>
+    </mx:ToggleButtonBar>
+
+</mx:VBox>

@@ -1,4 +1,14 @@
 <?xml version="1.0"?>
-<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:admin="com.neosavvy.user.view.secured.leftNavigation.admin.*">
-    <admin:AdminNavigation id="adminNavigation" width="100%"/>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:admin="com.neosavvy.user.view.secured.leftNavigation.admin.*"
+         xmlns:employee="com.neosavvy.user.view.secured.leftNavigation.employee.*">
+    <admin:AdminNavigation
+        id="adminNavigation"
+        width="100%"
+        visible="false"
+        includeInLayout="false"/>
+    <employee:EmployeeNavigation
+        id="employeeNavigation"
+        width="100%"
+        visible="false"
+        includeInLayout="false"/>
 </mx:VBox>

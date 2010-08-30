@@ -13,6 +13,8 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.expenses.report.ExpenseReportDetailMediator;
     import com.neosavvy.user.view.secured.leftNavigation.LeftNavigationMediator;
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigationMediator;
+    import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigation;
+    import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigationMediator;
     import com.neosavvy.user.view.secured.projectManagement.ProjectManagementMediator;
     import com.neosavvy.user.view.secured.projectManagement.assignments.ManageAssignmentsMediator;
     import com.neosavvy.user.view.secured.projectManagement.projects.ManageProjectsMediator;
@@ -66,6 +68,11 @@ package com.neosavvy.user.controller.secured {
                     facade.registerMediator(new ExpenseReportApprovalPopupMediator(securedContainer.expenseReportAwaitingApproval));
 
 
+            }
+
+            if (securityProxy.isActiveUserEmployee()) {
+                if (!facade.hasMediator(EmployeeNavigationMediator.NAME))
+                    facade.registerMediator(new EmployeeNavigationMediator(securedContainer.leftNavigation.employeeNavigation));
             }
 
 

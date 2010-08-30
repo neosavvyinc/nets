@@ -3,6 +3,8 @@ package com.neosavvy.user.view.secured.leftNavigation {
     import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigation;
 
+    import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigation;
+
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -29,6 +31,9 @@ package com.neosavvy.user.view.secured.leftNavigation {
             return leftNavigation.adminNavigation;
         }
 
+        public function get employeeNavigation():EmployeeNavigation {
+            return leftNavigation.employeeNavigation;
+        }
 
         override public function listNotificationInterests():Array {
             return [
@@ -47,13 +52,19 @@ package com.neosavvy.user.view.secured.leftNavigation {
                 case ApplicationFacade.USER_LOGGED_IN:
                 case ApplicationFacade.POST_SECURE_VIEW_PREP:
                     var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
-                    if (securityProxy.isActiveUserAdmin()) {
-                        if (removedAdminNavigation) {
-                            leftNavigation.addChildAt(removedAdminNavigation, 0);
-                        }
-                    } else {
-                        if ( leftNavigation.contains(adminNavigation) )
-                            removedAdminNavigation = leftNavigation.removeChild(adminNavigation) as AdminNavigation;
+                    if (securityProxy.isActiveUserAdmin())
+                    {
+                        employeeNavigation.includeInLayout = false;
+                        employeeNavigation.visible = false
+                        adminNavigation.includeInLayout = true;
+                        adminNavigation.visible = true;
+                    }
+                    else
+                    {
+                        employeeNavigation.includeInLayout = true;
+                        employeeNavigation.visible = true;
+                        adminNavigation.includeInLayout = false;
+                        adminNavigation.visible = false;
                     }
                     break;
                 case ApplicationFacade.REQUEST_LOGOUT:
