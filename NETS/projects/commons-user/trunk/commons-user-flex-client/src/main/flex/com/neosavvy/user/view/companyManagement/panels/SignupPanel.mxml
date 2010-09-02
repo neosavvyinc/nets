@@ -6,7 +6,7 @@
         paddingLeft="30"
         paddingRight="30"
         horizontalAlign="center"
-        verticalAlign="middle"
+        verticalAlign="top"
         width="100%"
         height="100%"
         horizontalScrollPolicy="off"
@@ -20,14 +20,13 @@
         private var unitedStates:Array = [
             "Alabama"
             ,"Alaska"
-            ,"American Samoa"
             ,"Arizona"
             ,"Arkansas"
             ,"California"
             ,"Colorado"
             ,"Connecticut"
             ,"Delaware"
-            ,"District of Columbia"
+            ,"DC"
             ,"Florida"
             ,"Georgia"
             ,"Guam"
@@ -55,7 +54,6 @@
             ,"New York"
             ,"North Carolina"
             ,"North Dakota"
-            ,"Northern Marianas Islands"
             ,"Ohio"
             ,"Oklahoma"
             ,"Oregon"
@@ -93,13 +91,13 @@
 
 
     <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalGap="15">
-        <mx:VBox width="33%" height="100%"
+        <mx:VBox width="31%" height="100%"
                  styleName="formSectionContainer" 
                  horizontalScrollPolicy="off"
                  verticalScrollPolicy="off">
             <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
                 <mx:Label text="1" styleName="numberedStepLabel"/>
-                <mx:Label text="Company Information" styleName="contentLargeLabelBold"/>
+                <mx:Label text="Company Information" styleName="contentLabelBold"/>
             </mx:HBox>
             <mx:Form id="companyForm" width="100%" height="100%" paddingLeft="0">
                 <mx:FormItem label="Company Name:" width="100%" required="true">
@@ -130,11 +128,11 @@
                 </mx:HBox>
             </mx:Form>
         </mx:VBox>
-        <mx:VBox width="33%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
+        <mx:VBox width="31%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
                  verticalScrollPolicy="off">
             <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
                 <mx:Label text="2" styleName="numberedStepLabel"/>
-                <mx:Label text="Administrator Information" styleName="contentLargeLabelBold"/>
+                <mx:Label text="Administrator Information" styleName="contentLabelBold"/>
             </mx:HBox>
             <mx:Form id="userForm" width="100%" height="100%" paddingLeft="0">
                 <mx:FormItem label="Username" width="100%" required="true">
@@ -183,17 +181,17 @@
                 </mx:FormItem>
             </mx:Form>
         </mx:VBox>
-        <mx:VBox width="33%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
+        <mx:VBox width="31%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
                  verticalScrollPolicy="off">
             <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
                 <mx:Label text="3" styleName="numberedStepLabel"/>
-                <mx:Label text="Payment Information" styleName="contentLargeLabelBold"/>
+                <mx:Label text="Payment Information" styleName="contentLabelBold"/>
             </mx:HBox>
             <mx:Form id="paymentInfoForm" width="100%" height="100%" paddingLeft="0">
                 <mx:FormItem label="Name" width="100%" required="true">
                     <flexlib:PromptingTextInput
                             id="nameOnCard"
-                            prompt="Name as it appears on card"
+                            prompt="Name "
                             width="100%"/>
                 </mx:FormItem>
                 <mx:FormItem label="Card Type:" width="30%" required="true">

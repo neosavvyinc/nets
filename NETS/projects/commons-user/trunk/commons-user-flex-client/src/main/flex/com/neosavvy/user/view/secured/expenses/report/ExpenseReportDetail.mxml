@@ -1,13 +1,14 @@
 <?xml version="1.0"?>
 <mx:VBox
-    xmlns:mx="http://www.adobe.com/2006/mxml"
-    xmlns:report="com.neosavvy.user.view.secured.expenses.report.*"
-    xmlns:neosavvy="com.neosavvy.grid.*"
-    xmlns:flexlib="http://code.google.com/p/flexlib/"
-    width="100%"
-    height="100%"
-    styleName="applicationView"
-    horizontalAlign="right">
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:report="com.neosavvy.user.view.secured.expenses.report.*"
+        xmlns:neosavvy="com.neosavvy.grid.*"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        xmlns:datagridclasses="mx.controls.dataGridClasses.*"
+        width="100%"
+        height="100%"
+        styleName="applicationView"
+        horizontalAlign="right">
 
     <mx:HBox width="100%" horizontalAlign="right">
         <mx:Form id="expenseReportSummaryForm" width="100%">
@@ -23,74 +24,58 @@
         </mx:Form>
         <mx:Button id="saveButton" label="Save"/>
         <mx:Button id="deleteButton" label="Delete"/>
-        <mx:Button id="refreshButton" label="Refresh" />
+        <mx:Button id="refreshButton" label="Refresh"/>
     </mx:HBox>
     <mx:VDividedBox width="100%" height="100%">
         <mx:VBox width="100%" height="50%">
-            <neosavvy:AutoFilteringGrid id="expenseReportGrid" width="100%" height="100%"
-            autoResizeColumnHeaders="true">
-                <neosavvy:columns>
-                    <neosavvy:AutoFilteringGridColumn
+            <mx:DataGrid
+                    id="expenseReportGrid"
+                    width="100%"
+                    height="100%">
+                <mx:columns>
+                    <datagridclasses:DataGridColumn
                             id="dateColumn"
                             headerText="Date"
                             dataField="expenseDate"
-                            autoFilterEnabled="true"
-                            leftAlignFilterButton="true"
-                            enabledByDefault="true"
                             />
-                    <neosavvy:AutoFilteringGridColumn
+                    <datagridclasses:DataGridColumn
                             id="expenseTypeColumn"
                             headerText="Expense Type"
                             dataField="expenseItemType"
                             labelFunction="{expenseTypeLabelFunction}"
-                            autoFilterEnabled="true"
-                            enabledByDefault="true"
-                            leftAlignFilterButton="true"
                             />
-                    <neosavvy:AutoFilteringGridColumn
+                    <datagridclasses:DataGridColumn
                             id="paymentMethodColumn"
                             headerText="Payment Method"
                             dataField="paymentMethod"
                             labelFunction="{paymentMethodLabelFunction}"
-                            autoFilterEnabled="true"
-                            leftAlignFilterButton="true"
-                            enabledByDefault="true"
                             />
-                    <neosavvy:AutoFilteringGridColumn
+                    <datagridclasses:DataGridColumn
                             id="projectTypeColumn"
                             headerText="Project Type"
                             dataField="projectType"
-                            leftAlignFilterButton="true"
                             labelFunction="{projectTypeLabelFunction}"
-                            autoFilterEnabled="true"
-                            enabledByDefault="true"
                             />
-                    <neosavvy:AutoFilteringGridColumn
+                    <datagridclasses:DataGridColumn
                             id="amountColumn"
                             headerText="Amount"
                             dataField="amountNumber"
-                            leftAlignFilterButton="true"
-                            autoFilterEnabled="false"
-                            enabledByDefault="true"
                             />
-                    <neosavvy:AutoFilteringGridColumn
+                    <datagridclasses:DataGridColumn
                             id="actionColumn"
                             headerText="Actions"
-                            leftAlignFilterButton="true"
-                            autoFilterEnabled="false"
-                            enabledByDefault="true"
                             itemRenderer="com.neosavvy.user.view.secured.expenses.report.Actions"
                             />
 
-                </neosavvy:columns>
-            </neosavvy:AutoFilteringGrid>
+                </mx:columns>
+            </mx:DataGrid>
             <mx:HBox width="100%">
-                <mx:Button id="newExpenseItemButton" label="New" />
-                <mx:Button id="editExpenseItemButton" label="Edit" enabled="false" />
-                <mx:Button id="deleteExpenseItemButton" label="Delete" enabled="false" />
-                <mx:Spacer width="100%" />
-                <mx:Label text="Total Expense Amount: " styleName="contentLabel" />
-                <mx:Label id="totalExpenseAmountLabel" text="$0.00" styleName="contentLabelBold" />
+                <mx:Button id="newExpenseItemButton" label="New"/>
+                <mx:Button id="editExpenseItemButton" label="Edit" enabled="false"/>
+                <mx:Button id="deleteExpenseItemButton" label="Delete" enabled="false"/>
+                <mx:Spacer width="100%"/>
+                <mx:Label text="Total Expense Amount: " styleName="contentLabel"/>
+                <mx:Label id="totalExpenseAmountLabel" text="$0.00" styleName="contentLabelBold"/>
             </mx:HBox>
         </mx:VBox>
 
@@ -112,15 +97,17 @@
                     <mx:ComboBox id="projectTypeCmb" labelField="type" prompt="Select Project Type..."/>
                 </mx:FormItem>
                 <mx:HBox width="100%" horizontalAlign="right">
-                    <mx:Button id="saveExpenseItemButton" label="Save" enabled="false" />
-                    <mx:Button id="cancelExpenseItemButton" label="Cancel" enabled="false" />                    
+                    <mx:Button id="saveExpenseItemButton" label="Save" enabled="false"/>
+                    <mx:Button id="cancelExpenseItemButton" label="Cancel" enabled="false"/>
                 </mx:HBox>
             </mx:Form>
             <mx:VBox height="100%" width="100%">
                 <mx:Form id="expenseItemValuesForm" width="100%" height="100%">
                     <mx:Repeater id="expenseItemValuesRepeater">
-                        <mx:FormItem id="expenseItemValue" label="{expenseItemValuesRepeater.currentItem.descriptor.name}">
-                            <report:AttributeField id="expenseItemAttribute" attribute="{expenseItemValuesRepeater.currentItem}" />
+                        <mx:FormItem id="expenseItemValue"
+                                     label="{expenseItemValuesRepeater.currentItem.descriptor.name}">
+                            <report:AttributeField id="expenseItemAttribute"
+                                                   attribute="{expenseItemValuesRepeater.currentItem}"/>
                         </mx:FormItem>
                     </mx:Repeater>
                 </mx:Form>
@@ -131,22 +118,22 @@
     <mx:Script><![CDATA[
         import com.neosavvy.user.dto.project.ExpenseItem;
 
-        private function projectTypeLabelFunction(data:Object,column:AutoFilteringGridColumn):String {
-            if( data is ExpenseItem && (data as ExpenseItem).projectType) {
+        private function projectTypeLabelFunction(data:Object, column:DataGridColumn):String {
+            if (data is ExpenseItem && (data as ExpenseItem).projectType) {
                 return (data as ExpenseItem).projectType.type;
             }
             return null;
         }
 
-        private function paymentMethodLabelFunction(data:Object,column:AutoFilteringGridColumn):String {
-            if( data is ExpenseItem && (data as ExpenseItem).paymentMethod) {
+        private function paymentMethodLabelFunction(data:Object, column:DataGridColumn):String {
+            if (data is ExpenseItem && (data as ExpenseItem).paymentMethod) {
                 return (data as ExpenseItem).paymentMethod.name;
             }
             return null;
         }
 
-        private function expenseTypeLabelFunction(data:Object,column:AutoFilteringGridColumn):String {
-            if( data is ExpenseItem && (data as ExpenseItem).expenseItemType) {
+        private function expenseTypeLabelFunction(data:Object, column:DataGridColumn):String {
+            if (data is ExpenseItem && (data as ExpenseItem).expenseItemType) {
                 return (data as ExpenseItem).expenseItemType.name;
             }
             return null;

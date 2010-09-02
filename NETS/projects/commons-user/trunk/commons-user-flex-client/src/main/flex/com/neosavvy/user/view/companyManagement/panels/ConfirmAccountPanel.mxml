@@ -14,8 +14,12 @@
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:flexlib="http://code.google.com/p/flexlib/">
 
-    <mx:VBox width="33%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
+    <mx:VBox width="33%"
+             height="100%"
+             styleName="formSectionContainer"
+             horizontalScrollPolicy="off"
              verticalScrollPolicy="off">
+        
         <mx:Label text="Thanks for registering!!!" styleName="contentLargeLabelBold"/>
         <mx:Spacer height="40"/>
         <mx:Text width="100%"
@@ -32,6 +36,9 @@
         <mx:HBox width="100%">
             <flexlib:PromptingTextInput id="confirmationToken" prompt="Enter confirmation token" width="100%"/>
         </mx:HBox>
+        <mx:HBox width="100%" horizontalAlign="center">
+            <mx:Button id="confirmAccountButton" styleName="orangeLargeButton" label="Confirm Account >"/>
+        </mx:HBox>
     </mx:VBox>
-    <mx:Button id="confirmAccountButton" styleName="orangeLargeButton" label="Confirm Account >"/>
+
 </mx:VBox>

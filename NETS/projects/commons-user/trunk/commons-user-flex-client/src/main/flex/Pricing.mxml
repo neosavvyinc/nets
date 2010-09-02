@@ -50,7 +50,7 @@
 
         <mx:Button id="tryNowBtn" x="{( bodyBox.width / 2 ) - ( tryNowBtn.width / 2 ) }" y="{pricingBox.y + pricingBox.height + tryNowBtn.height + 10}" styleName="orangeLargeButton" label="Try NETS Free for 30 Days >"/>
 
-        <mx:VBox id="moreInfoBox" y="{bodyBox.height - moreInfoBox.height - 30}" x="{30}">
+        <mx:VBox id="moreInfoBox" y="306" x="{30}">
             <mx:Label text="Need More?"/>
             <mx:Label text="Alternatively, if your company is considering the need for a Large Company installation maybe a"/>
             <mx:Label text="more attractive option would be to evaluate the system as a product and contact us about a private"/>

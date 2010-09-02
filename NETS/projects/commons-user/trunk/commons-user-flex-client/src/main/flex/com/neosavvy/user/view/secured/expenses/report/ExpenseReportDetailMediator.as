@@ -25,6 +25,7 @@ package com.neosavvy.user.view.secured.expenses.report {
     import mx.collections.Sort;
     import mx.containers.Form;
     import mx.controls.AdvancedDataGrid;
+    import mx.controls.DataGrid;
     import mx.core.Application;
     import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
@@ -84,7 +85,7 @@ package com.neosavvy.user.view.secured.expenses.report {
             return expenseReportDetail.expenseReportSummaryForm;
         }
 
-        public function get expenseItemGrid():AdvancedDataGrid {
+        public function get expenseItemGrid():DataGrid {
             return expenseReportDetail.expenseReportGrid;
         }
 
