@@ -28,6 +28,7 @@ package com.neosavvy.user.view.secured.expenses.report {
     import mx.controls.DataGrid;
     import mx.core.Application;
     import mx.core.IFlexDisplayObject;
+    import mx.formatters.CurrencyFormatter;
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.managers.PopUpManager;
@@ -126,6 +127,7 @@ package com.neosavvy.user.view.secured.expenses.report {
                     expenseReportDetail.locationTextInput.text = _expenseReportProxy.activeExpenseReport.location;
                     expenseReportDetail.purposeTextInput.text = _expenseReportProxy.activeExpenseReport.purpose;
                     expenseItemGrid.dataProvider = _expenseItems = _expenseReportProxy.activeExpenseReport.expenseItems as ArrayCollection;
+                    recalculateTotal();    
                     break;
                 case ApplicationFacade.FIND_PAYMENT_METHODS_SUCCESS:
                     expenseReportDetail.paymentMethodCmb.dataProvider = _expenseReportProxy.paymentMethods;
@@ -144,6 +146,7 @@ package com.neosavvy.user.view.secured.expenses.report {
                     break;
                 case ApplicationFacade.GET_EXPENSE_ITEMS_SUCCESS:
                     setExpenseReportItems(_expenseReportProxy.activeExpenseReportItems);
+                    recalculateTotal();
                     break;
             }
         }
@@ -228,6 +231,16 @@ package com.neosavvy.user.view.secured.expenses.report {
             }
         }
 
+        private function recalculateTotal():void
+        {
+            var total : Number = 0;
+            for each ( var item : ExpenseItem in _expenseItems)
+            {
+                total = total + item.amountNumber;
+            }
+            expenseReportDetail.totalExpenseAmountLabel.text = (new CurrencyFormatter()).format( total );
+        }
+
         private function handleNewExpenseItemButtonClicked(event:MouseEvent):void {
             _activeExpenseItem = new ExpenseItem();
             resetExpenseItemForm();
@@ -265,6 +278,7 @@ package com.neosavvy.user.view.secured.expenses.report {
             var idx:int = _expenseItems.getItemIndex(selectedExpenseItem);
             _expenseItems.removeItemAt(idx);
             expenseReportDetail.expenseReportGrid.dataProvider.refresh();
+            recalculateTotal();
         }
 
         private function updateExpenseItem(item:ExpenseItem):void {
@@ -281,6 +295,7 @@ package com.neosavvy.user.view.secured.expenses.report {
                     break;
                 }
             }
+            recalculateTotal();
         }
 
         private function setExpenseItemValues():void {
@@ -313,6 +328,7 @@ package com.neosavvy.user.view.secured.expenses.report {
 
             _activeExpenseItem = null;
             resetExpenseItemForm();
+            recalculateTotal();
         }
 
         private function handleCancelExpenseItemButtonClicked(event:MouseEvent):void {
