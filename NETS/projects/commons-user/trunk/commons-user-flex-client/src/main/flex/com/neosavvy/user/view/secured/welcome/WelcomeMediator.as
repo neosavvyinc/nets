@@ -4,6 +4,8 @@ package com.neosavvy.user.view.secured.welcome {
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.CompanyServiceProxy;
 
+    import flash.events.MouseEvent;
+
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -19,9 +21,17 @@ package com.neosavvy.user.view.secured.welcome {
             super(NAME, viewComponent);
         }
 
-
-
         override public function onRegister():void {
+            welcome.inviteEmployeesBtn.addEventListener( MouseEvent.CLICK, handleInviteEmployeesButtonClicked );
+            welcome.setupClientsBtn.addEventListener( MouseEvent.CLICK, handleManageClientsButtonClicked );
+            welcome.setupProjectsBtn.addEventListener( MouseEvent.CLICK, handleManageProjectsButtonClicked );
+        }
+
+
+        override public function onRemove():void {
+            welcome.inviteEmployeesBtn.removeEventListener( MouseEvent.CLICK, handleInviteEmployeesButtonClicked );
+            welcome.setupClientsBtn.removeEventListener( MouseEvent.CLICK, handleManageClientsButtonClicked );
+            welcome.setupProjectsBtn.removeEventListener( MouseEvent.CLICK, handleManageProjectsButtonClicked );
         }
 
         public function get welcome():Welcome {
@@ -37,19 +47,26 @@ package com.neosavvy.user.view.secured.welcome {
             ];
         }
 
-//        private function setTitle():void {
-//            var companyProxy:CompanyServiceProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
-//            welcome.title = "Welcome to " + companyProxy.activeCompany.companyName + "'s expense tracking system";
-//        }
 
         override public function handleNotification(notification:INotification):void {
             switch (notification.getName()) {
                 case ApplicationFacade.USER_LOGIN_STARTUP_COMPLETE:
-                    //setTitle();
                     break;
                 case ApplicationFacade.NAVIGATE_TO_WELCOME:
                     break;
             }
+        }
+
+        private function handleInviteEmployeesButtonClicked( event : MouseEvent ):void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES, ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES);
+        }
+
+        private function handleManageClientsButtonClicked( event : MouseEvent ):void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT);
+        }
+
+        private function handleManageProjectsButtonClicked( event : MouseEvent ):void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT);
         }
 
     }

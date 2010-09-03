@@ -146,10 +146,28 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
         }
 
         override public function listNotificationInterests():Array {
-            return super.listNotificationInterests();
+            return [
+                ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES
+                ,ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT
+                ,ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT
+            ];
         }
 
         override public function handleNotification(notification:INotification):void {
+
+            switch ( notification.getName() )
+            {
+                case ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES:
+                    toggleBarAdminFocus(0);
+                    break;
+                case ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT:
+                    toggleBarAdminFocus(2);
+                    break;
+                case ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT:
+                    toggleBarAdminFocus(3);
+                    break;
+            }
+
         }
 
     }
