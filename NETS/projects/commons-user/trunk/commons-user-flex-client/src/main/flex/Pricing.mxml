@@ -1,6 +1,22 @@
 <?xml version="1.0"?>
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalScrollPolicy="off" verticalScrollPolicy="off">
 
+
+    <mx:Metadata>
+        [Event(name="getStartedClicked", type="flash.events.Event")]
+    </mx:Metadata>
+
+    <mx:Script>
+        <![CDATA[
+        private function contactUsClicked():void
+        {
+            var u:URLRequest = new URLRequest("mailto:aparrish@neosavvy.com");
+            navigateToURL(u,"_self");
+        }
+
+        ]]>
+    </mx:Script>
+
     <mx:VBox id="pricingBody" verticalAlign="middle" styleName="greenCrossHatchBox" width="100%" height="150" horizontalScrollPolicy="off" verticalScrollPolicy="off">
         <mx:Label text="How Much Does It Cost? NETS is priced on a tiered basis" styleName="whiteText"/>
         <mx:Label text="depending on the number of employees your company has." styleName="whiteText"/>
@@ -48,14 +64,19 @@
 
         </mx:HBox>
 
-        <mx:Button id="tryNowBtn" x="{( bodyBox.width / 2 ) - ( tryNowBtn.width / 2 ) }" y="{pricingBox.y + pricingBox.height + tryNowBtn.height + 10}" styleName="orangeLargeButton" label="Try NETS Free for 30 Days >"/>
+        <mx:Button id="tryNowBtn"
+           x="{( bodyBox.width / 2 ) - ( tryNowBtn.width / 2 ) }"
+           y="{pricingBox.y + pricingBox.height + tryNowBtn.height + 10}"
+           styleName="orangeLargeButton"
+           label="Try NETS Free for 30 Days >"
+           click="dispatchEvent(new Event('getStartedClicked', true))"/>
 
         <mx:VBox id="moreInfoBox" y="306" x="{30}">
             <mx:Label text="Need More?"/>
             <mx:Label text="Alternatively, if your company is considering the need for a Large Company installation maybe a"/>
             <mx:Label text="more attractive option would be to evaluate the system as a product and contact us about a private"/>
             <mx:Label text="installation on a separate Cloud Server"/>
-            <mx:LinkButton label="Contact us >"/>
+            <mx:LinkButton label="Contact us >" click="contactUsClicked()"/>
         </mx:VBox>
 
     </mx:Canvas>

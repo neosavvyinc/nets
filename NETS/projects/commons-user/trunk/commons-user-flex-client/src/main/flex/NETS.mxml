@@ -41,6 +41,19 @@
             navigationViewStack.selectedIndex = event.index;
         }
 
+        protected function handleHomeButtonClicked():void
+        {
+            navigationViewStack.selectedIndex = 2;
+            navigationToggleBar.selectedIndex = 2;
+        }
+
+        private function needHelpClicked():void
+        {
+            var u:URLRequest = new URLRequest("mailto:aparrish@neosavvy.com");
+            navigateToURL(u,"_self");
+        }
+
+
 
         ]]>
     </mx:Script>
@@ -54,8 +67,12 @@
             horizontalScrollPolicy="off"
             verticalScrollPolicy="off"
             includeInLayout="true">
-        <mx:ToggleButtonBar buttonWidth="89" buttonHeight="73" styleName="noGradientHomeNavigation"
-                            itemClick="{handleNavigationChange(event)}">
+        <mx:ToggleButtonBar
+                id="navigationToggleBar"
+                buttonWidth="89"
+                buttonHeight="73"
+                styleName="noGradientHomeNavigation"
+                itemClick="{handleNavigationChange(event)}">
             <mx:dataProvider>
                 <mx:Array>
                     <mx:String>HOME</mx:String>
@@ -65,7 +82,7 @@
             </mx:dataProvider>
         </mx:ToggleButtonBar>
         <mx:VBox horizontalAlign="right" width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
-            <mx:LinkButton id="havingTrouble" label="Having Trouble?" styleName="greenLinkButton"/>
+            <mx:LinkButton id="havingTrouble" label="Having Trouble?" styleName="greenLinkButton" click="needHelpClicked()"/>
             <mx:HBox styleName="grayToGrayViewContainer" width="100%" horizontalAlign="right"
                      horizontalScrollPolicy="off" verticalScrollPolicy="off">
                 <mx:Label text="Already Registered?" styleName="greenLinkButton"/>
@@ -98,8 +115,8 @@
             height="100%"
             minHeight="600"
             selectedIndex="0">
-        <local:Home id="homeContent" height="100%" width="100%" verticalGap="-1"/>
-        <local:Pricing id="pricingContent" height="100%" width="100%" verticalGap="-1"/>
+        <local:Home id="homeContent" height="100%" width="100%" verticalGap="-1" getStartedClicked="handleHomeButtonClicked()"/>
+        <local:Pricing id="pricingContent" height="100%" width="100%" verticalGap="-1" getStartedClicked="handleHomeButtonClicked()"/>
         <companyManagement:Signup id="signupContent" height="100%" width="100%" verticalGap="-1"/>
         <security:Login id="login" width="100%" height="100%"/>
         <secured:SecuredContainer id="securedContainer" width="100%" height="100%"/>

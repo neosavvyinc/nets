@@ -26,19 +26,19 @@
                 <mx:VBox horizontalAlign="center">
                     <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_48_addUserUp.png')"/>
                     <mx:LinkButton id="inviteEmployeesBtn" label="Invite Employees"/>
-                    <mx:Label text="1" styleName="numberedStepLabel"/>
+                    <mx:Label paddingLeft="48" text="1" styleName="numberedStepLabel"/>
                 </mx:VBox>
 
                 <mx:VBox horizontalAlign="center">
                     <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_48_clientUp.png')"/>
                     <mx:LinkButton id="setupClientsBtn" label="Setup Clients"/>
-                    <mx:Label text="2" styleName="numberedStepLabel"/>
+                    <mx:Label paddingLeft="48" text="2" styleName="numberedStepLabel"/>
                 </mx:VBox>
 
                 <mx:VBox horizontalAlign="center">
                     <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_48_customizeUp.png')"/>
                     <mx:LinkButton id="setupProjectsBtn" label="Setup Projects"/>
-                    <mx:Label text="3" styleName="numberedStepLabel"/>
+                    <mx:Label paddingLeft="48" text="3" styleName="numberedStepLabel"/>
                 </mx:VBox>
 
             </mx:HBox>
