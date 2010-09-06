@@ -47,7 +47,7 @@
 
         <mx:Image
                 x="{dashboardBox.x + dashboardBox.width + 150}"
-                source="@Embed(source='/mobile/nets_iphone_screenshot_small.png')"/>
+                source="@Embed(source='/mobile/clipped_iPhone.png')"/>
 
         <mx:Button
                 id="getStartedButton"

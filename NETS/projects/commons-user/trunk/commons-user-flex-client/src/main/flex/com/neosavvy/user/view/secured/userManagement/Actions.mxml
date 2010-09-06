@@ -5,15 +5,14 @@
     <mx:Script>
             <![CDATA[
 
-        import com.neosavvy.grid.PickFilterRow;
         import com.neosavvy.user.ApplicationFacade;
         import com.neosavvy.user.dto.companyManagement.UserDTO;
         import com.neosavvy.user.model.SecurityProxy;
         import com.neosavvy.user.view.secured.userManagement.event.UserManagementEvent;
 
         override public function set data(value:Object):void {
-            if (value is PickFilterRow )  {
-                setButtonLabelAndIcon((value as PickFilterRow));
+            if (value is UserDTO )  {
+                setButtonLabelAndIcon((value as UserDTO));
             }
 
             super.data = value;
@@ -22,21 +21,21 @@
         }
 
         protected function handleToggleActivationClicked():void {
-            var row:PickFilterRow = data as PickFilterRow;
-            dispatchEvent(new UserManagementEvent(activationButton.toolTip, row.wrappedObject as UserDTO));
+            var row:UserDTO = data as UserDTO;
+            dispatchEvent(new UserManagementEvent(activationButton.toolTip, row));
         }
 
 
         protected function handleResetPasswordClicked():void {
-            var row:PickFilterRow = data as PickFilterRow;
-            dispatchEvent(new UserManagementEvent(UserManagementEvent.ACTION_RESET_PASSWORD, row.wrappedObject as UserDTO));
+            var row:UserDTO = data as UserDTO;
+            dispatchEvent(new UserManagementEvent(UserManagementEvent.ACTION_RESET_PASSWORD, row as UserDTO));
         }
 
         private function isButtonEnabledForUser():Boolean {
 
             var securityProxy:SecurityProxy = ApplicationFacade.getSecurityProxy();
             if (data) {
-                if (securityProxy.user == ((data as PickFilterRow).wrappedObject as UserDTO).username) {
+                if (securityProxy.user == (data as UserDTO).username) {
                     return false;
                 }
             }
@@ -51,12 +50,12 @@
             //resetPassword.setStyle("icon", CommonsUserAssetsManager.assets.images.sampleIcon);
 
             if ( data )
-                setButtonLabelAndIcon(data as PickFilterRow);
+                setButtonLabelAndIcon(data as UserDTO);
         }
 
 
-        private function setButtonLabelAndIcon(user:PickFilterRow):void {
-            if (user && user.wrappedObject.active) {
+        private function setButtonLabelAndIcon(user:UserDTO):void {
+            if (user && user.active) {
                 activationButton.toolTip =  UserManagementEvent.ACTION_DEACTIVATE
                 //activationButton.setStyle("icon", CommonsUserAssetsManager.assets.images.bulletDelete);
             } else {

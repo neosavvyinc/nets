@@ -10,6 +10,7 @@ package com.neosavvy.user.view.secured.userManagement {
     import mx.collections.ArrayCollection;
     import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
+    import mx.controls.DataGrid;
     import mx.controls.ToggleButtonBar;
     import mx.events.ItemClickEvent;
     import mx.logging.ILogger;
@@ -37,8 +38,8 @@ package com.neosavvy.user.view.secured.userManagement {
             grid.addEventListener(UserManagementEvent.TYPE, userManagementEventHandler);
             userStatusFilterButtonBar.addEventListener(ItemClickEvent.ITEM_CLICK, handleStatusFilterChanged);
 
-            deactivateAllSelected.addEventListener(MouseEvent.CLICK, handleDeactivateAllSelected);
-            activateAllSelected.addEventListener(MouseEvent.CLICK, handleActivateAllSelected);
+//            deactivateAllSelected.addEventListener(MouseEvent.CLICK, handleDeactivateAllSelected);
+//            activateAllSelected.addEventListener(MouseEvent.CLICK, handleActivateAllSelected);
             _companyProxy = facade.retrieveProxy(CompanyServiceProxy.NAME) as CompanyServiceProxy;
         }
 
@@ -52,7 +53,7 @@ package com.neosavvy.user.view.secured.userManagement {
             return viewComponent as UserManagement;
         }
 
-        public function get grid():PickFilterGrid {
+        public function get grid():DataGrid {
             return userManagement.grid;
         }
 
@@ -61,15 +62,15 @@ package com.neosavvy.user.view.secured.userManagement {
             return userManagement.userStatusFilterButtonBar;
         }
 
-        public function get deactivateAllSelected():Button
-        {
-            return userManagement.deactivateAllSelected;
-        }
-
-        public function get activateAllSelected():Button
-        {
-            return userManagement.activateAllSelected;
-        }
+//        public function get deactivateAllSelected():Button
+//        {
+//            return userManagement.deactivateAllSelected;
+//        }
+//
+//        public function get activateAllSelected():Button
+//        {
+//            return userManagement.activateAllSelected;
+//        }
 
         override public function listNotificationInterests():Array {
             return [
@@ -156,7 +157,7 @@ package com.neosavvy.user.view.secured.userManagement {
 
         private function handleActivateAllSelected(event:MouseEvent):void {
 
-            var selectedItems:ArrayCollection = grid.selectedNonProxiedItems;
+            var selectedItems:ArrayCollection = grid.dataProvider as ArrayCollection;
             for each ( var item:UserDTO in selectedItems )
             {
                 item.active = true;
@@ -167,7 +168,7 @@ package com.neosavvy.user.view.secured.userManagement {
 
         private function handleDeactivateAllSelected(event:MouseEvent):void {
 
-            var selectedItems:ArrayCollection = grid.selectedNonProxiedItems;
+            var selectedItems:ArrayCollection = grid.dataProvider as ArrayCollection;
             for each ( var item:UserDTO in selectedItems )
             {
                 item.active = false;

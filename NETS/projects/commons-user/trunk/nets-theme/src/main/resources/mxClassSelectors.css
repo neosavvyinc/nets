@@ -115,6 +115,14 @@
 	padding-top: 15;
 }
 
+.applicationSubView {
+    border-skin: ClassReference(null);
+	padding-bottom: 25;
+	padding-left: 25;
+	padding-right: 25;
+	padding-top: 15;
+}
+
 .altApplicationBackground {
 	border-skin: Embed(source="com/neosavvy/nets/theme/skins/Background_borderSkins.swf", symbol="Application_altBorderSkin");
 }

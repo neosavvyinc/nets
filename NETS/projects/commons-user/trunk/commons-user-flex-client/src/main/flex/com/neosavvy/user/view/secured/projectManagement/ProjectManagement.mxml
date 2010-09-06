@@ -6,6 +6,8 @@
         xmlns:projects="com.neosavvy.user.view.secured.projectManagement.projects.*"
         xmlns:assignments="com.neosavvy.user.view.secured.projectManagement.assignments.*"
         width="100%" height="100%"
+        verticalScrollPolicy="off"
+        horizontalScrollPolicy="off"
         styleName="applicationView">
 
     <mx:TabNavigator

@@ -16,6 +16,7 @@ package com.neosavvy.user.view.secured.expenses.open {
 
     import mx.collections.ArrayCollection;
     import mx.controls.AdvancedDataGrid;
+    import mx.controls.DataGrid;
     import mx.core.Application;
     import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
@@ -57,7 +58,7 @@ package com.neosavvy.user.view.secured.expenses.open {
             return viewComponent as OpenExpenseReport;
         }
 
-        public function get openExpenseGrid():AdvancedDataGrid {
+        public function get openExpenseGrid():DataGrid {
             return openExpenseReport.openExpenseGrid;
         }
         

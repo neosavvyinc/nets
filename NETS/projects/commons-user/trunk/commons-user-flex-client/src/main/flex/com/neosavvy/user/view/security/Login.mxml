@@ -5,6 +5,10 @@
         verticalAlign="middle"
         horizontalAlign="center">
 
+    <mx:Metadata>
+        [Event(name="goHomeClicked", type="flash.events.Event")]
+    </mx:Metadata>
+
     <mx:Panel id="loginPanel"
               width="330"
               verticalGap="0"
@@ -38,4 +42,6 @@
         </mx:VBox>
 
     </mx:Panel>
+    <mx:LinkButton label="Close Login Screen" click="{dispatchEvent(new Event('goHomeClicked',true))}"/>
+
 </mx:VBox>

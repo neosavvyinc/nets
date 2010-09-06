@@ -8,6 +8,9 @@ package com.neosavvy.user {
     import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.view.secured.SecuredContainer;
 
+    import com.neosavvy.user.view.security.Login;
+
+    import flash.events.Event;
     import flash.events.MouseEvent;
 
     import mx.containers.Box;
@@ -43,6 +46,8 @@ package com.neosavvy.user {
             super(NAME, viewComponent);
         }
 
+
+
         public function get app():NETS
         {
             return viewComponent as NETS;
@@ -50,6 +55,11 @@ package com.neosavvy.user {
 
         public function get navigationViewStack():ViewStack {
             return app.navigationViewStack;
+        }
+
+        public function get login():Login
+        {
+            return app.login;
         }
 
         public function get loginButton():Button {
@@ -76,6 +86,7 @@ package com.neosavvy.user {
         {
             this.loginButton.addEventListener(MouseEvent.CLICK, loginButtonClickedHandler);
             this.logoutButton.addEventListener(MouseEvent.CLICK, logoutButtonClickedHandler)
+            this.login.addEventListener("goHomeClicked",goHomeClickHandler);
         }
 
 
@@ -94,6 +105,14 @@ package com.neosavvy.user {
             toggleHeader(false);
             toggleSecuredHeader(false);
             sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
+        }
+
+        public function hideLogin():void
+        {
+            this.navigationViewStack.selectedIndex = LANDING_NAVIGATION_INDEX;
+            toggleHeader(true);
+            toggleSecuredHeader(false);
+            sendNotification(ApplicationFacade.INITIALIZE_SECURED_VIEW);
         }
 
         private function toggleSecuredHeader( toggleValue:Boolean ):void {
@@ -141,6 +160,10 @@ package com.neosavvy.user {
         private function logoutButtonClickedHandler(event:MouseEvent):void {
             sendNotification(ApplicationFacade.REQUEST_LOGOUT);
             displayLogin();
+        }
+
+        private function goHomeClickHandler(event:Event):void {
+            hideLogin();
         }
 
     }

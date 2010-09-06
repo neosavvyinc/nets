@@ -10,6 +10,7 @@ package com.neosavvy.user.view.secured.clientManagement {
 
     import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
+    import mx.controls.DataGrid;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -47,7 +48,7 @@ package com.neosavvy.user.view.secured.clientManagement {
             return viewComponent as ClientManagement;
         }
 
-        public function get clientManagementGrid():AdvancedDataGrid {
+        public function get clientManagementGrid():DataGrid {
             return clientManagement.clientManagementGrid;
         }
 

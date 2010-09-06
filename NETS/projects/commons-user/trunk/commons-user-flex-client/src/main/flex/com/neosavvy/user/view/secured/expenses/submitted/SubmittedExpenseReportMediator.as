@@ -20,6 +20,7 @@ package com.neosavvy.user.view.secured.expenses.submitted {
     import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
     import mx.controls.ComboBox;
+    import mx.controls.DataGrid;
     import mx.controls.List;
     import mx.core.Application;
     import mx.core.IFlexDisplayObject;
@@ -62,7 +63,7 @@ package com.neosavvy.user.view.secured.expenses.submitted {
             return viewComponent as SubmittedExpenseReport;
         }
 
-        public function get submittedExpenseReportGrid():AdvancedDataGrid {
+        public function get submittedExpenseReportGrid():DataGrid {
             return submittedExpenseReport.submittedExpenseGrid;
         }
 

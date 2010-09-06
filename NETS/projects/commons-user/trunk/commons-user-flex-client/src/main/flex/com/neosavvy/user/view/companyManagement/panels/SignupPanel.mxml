@@ -91,7 +91,7 @@
 
 
     <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off" horizontalGap="15">
-        <mx:VBox width="31%" height="100%"
+        <mx:VBox width="29%" height="100%"
                  styleName="formSectionContainer" 
                  horizontalScrollPolicy="off"
                  verticalScrollPolicy="off">
@@ -128,7 +128,7 @@
                 </mx:HBox>
             </mx:Form>
         </mx:VBox>
-        <mx:VBox width="31%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
+        <mx:VBox width="29%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
                  verticalScrollPolicy="off">
             <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
                 <mx:Label text="2" styleName="numberedStepLabel"/>
@@ -181,7 +181,7 @@
                 </mx:FormItem>
             </mx:Form>
         </mx:VBox>
-        <mx:VBox width="31%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
+        <mx:VBox width="29%" height="100%" styleName="formSectionContainer" horizontalScrollPolicy="off"
                  verticalScrollPolicy="off">
             <mx:HBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
                 <mx:Label text="3" styleName="numberedStepLabel"/>

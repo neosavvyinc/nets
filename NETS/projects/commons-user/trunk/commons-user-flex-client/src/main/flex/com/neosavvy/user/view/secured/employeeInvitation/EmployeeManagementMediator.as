@@ -11,6 +11,7 @@ package com.neosavvy.user.view.secured.employeeInvitation {
     import mx.containers.VBox;
     import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
+    import mx.controls.DataGrid;
     import mx.controls.Label;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -83,7 +84,7 @@ package com.neosavvy.user.view.secured.employeeInvitation {
             return employeeManagement.addUserButton;
         }
 
-        public function get grid():AdvancedDataGrid {
+        public function get grid():DataGrid {
             return employeeManagement.employeesQueuedToInvite;
         }
 

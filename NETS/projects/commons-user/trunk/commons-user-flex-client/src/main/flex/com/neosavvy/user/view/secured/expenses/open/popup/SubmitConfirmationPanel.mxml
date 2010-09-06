@@ -5,6 +5,7 @@
         showCloseButton="true"
         title="Submit Expense Report For Approval"
         width="400"
+        paddingTop="40"
         >
 
     <mx:Script>

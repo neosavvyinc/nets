@@ -1,62 +1,51 @@
 <?xml version="1.0"?>
 <mx:VBox
-    xmlns:mx="http://www.adobe.com/2006/mxml"
-    xmlns:neosavvy="com.neosavvy.grid.*"
-    width="100%"
-    height="100%" 
-    styleName="applicationView"
-    horizontalAlign="right"
-    xmlns:flexlib="http://code.google.com/p/flexlib/">
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:neosavvy="com.neosavvy.grid.*" xmlns:datagridclasses="mx.controls.dataGridClasses.*"
+        width="100%"
+        height="100%"
+        styleName="applicationView"
+        horizontalAlign="right"
+        verticalScrollPolicy="off"
+        horizontalScrollPolicy="off"
+        xmlns:flexlib="http://code.google.com/p/flexlib/">
 
-    <mx:HBox width="100%" horizontalAlign="right">
-        <flexlib:PromptingTextInput id="searchTextInput" prompt="Search..."/>
-        <mx:Button id="resetFilters" label="Reset Filters" click="submittedExpenseGrid.resetFilters()"/>
+    <mx:HBox width="100%" horizontalAlign="right" styleName="headingTitleBox">
+        <mx:Label text="View Submitted Expense Reports"/>
     </mx:HBox>
 
-    <neosavvy:AutoFilteringGrid id="submittedExpenseGrid" width="100%" height="100%" searchTextControl="{searchTextInput}"
-            autoResizeColumnHeaders="true">
-        <neosavvy:columns>
-            <neosavvy:AutoFilteringGridColumn
-                id="voucherNumberColumn"
-                headerText="Voucher Number"
-                dataField="id"
-                leftAlignFilterButton="true"
-                autoFilterEnabled="true"
-                enabledByDefault="true"
-                />
-            <neosavvy:AutoFilteringGridColumn
-                id="amountNumberColumn"
-                headerText="Expense Amount"
-                dataField="totalExpenseAmount"
-                autoFilterEnabled="true"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"
-                />
-            <neosavvy:AutoFilteringGridColumn
-                id="amountToReimburseColumn"
-                headerText="Amount to Reimburse"
-                dataField="totalReimbursableExpenseAmount"
-                autoFilterEnabled="true"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"
-                />
-            <neosavvy:AutoFilteringGridColumn
-                id="statusColumn"
-                headerText="Status"
-                dataField="status"
-                autoFilterEnabled="true"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"
-                />
-            <neosavvy:AutoFilteringGridColumn
-                id="actionColumn"
-                enabledByDefault="true"
-                autoFilterEnabled="false"
-                headerText="Actions"
-                leftAlignFilterButton="true"
-                itemRenderer="com.neosavvy.user.view.secured.expenses.submitted.Actions"
-                />
-        </neosavvy:columns>
-    </neosavvy:AutoFilteringGrid>
-    
+    <mx:DataGrid
+            id="submittedExpenseGrid"
+            width="100%"
+            height="100%"
+            >
+        <mx:columns>
+            <datagridclasses:DataGridColumn
+                    id="voucherNumberColumn"
+                    headerText="Voucher Number"
+                    dataField="id"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="amountNumberColumn"
+                    headerText="Expense Amount"
+                    dataField="totalExpenseAmount"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="amountToReimburseColumn"
+                    headerText="Amount to Reimburse"
+                    dataField="totalReimbursableExpenseAmount"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="statusColumn"
+                    headerText="Status"
+                    dataField="status"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="actionColumn"
+                    headerText="Actions"
+                    itemRenderer="com.neosavvy.user.view.secured.expenses.submitted.Actions"
+                    />
+        </mx:columns>
+    </mx:DataGrid>
+
 </mx:VBox>

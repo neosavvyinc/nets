@@ -5,7 +5,7 @@ package com.neosavvy.user.view.secured.expenses.approving {
 
     import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
 
-    import mx.controls.AdvancedDataGrid;
+    import mx.controls.DataGrid;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -32,7 +32,6 @@ package com.neosavvy.user.view.secured.expenses.approving {
         }
 
 
-
         override public function onRemove():void {
             _userServiceProxy = null;
             _expenseServiceProxy = null;
@@ -45,7 +44,7 @@ package com.neosavvy.user.view.secured.expenses.approving {
             return viewComponent as ExpenseReportAwaitingApproval;
         }
 
-        public function get expenseReportAwaitingApprovalGrid():AdvancedDataGrid
+        public function get expenseReportAwaitingApprovalGrid():DataGrid
         {
             return expenseReportAwaitingApproval.awaitingApprovalExpenseGrid;
         }

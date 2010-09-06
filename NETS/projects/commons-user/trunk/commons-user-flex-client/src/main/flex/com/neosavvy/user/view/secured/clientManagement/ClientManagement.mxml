@@ -8,7 +8,9 @@
         width="100%"
         height="100%"
         horizontalAlign="right"
-        styleName="applicationView">
+        styleName="applicationView"
+        horizontalScrollPolicy="off"
+        verticalScrollPolicy="off">
 
     <mx:Array id="companyFormValidators">
         <mx:StringValidator id="companyNameValidator" source="{this.companyName}" property="text" required="true"/>
@@ -31,6 +33,9 @@
     </mx:Array>
     <validators:FormValidator id="clientFormValidator" validators="{this.clientFormValidators}"/>
 
+    <mx:HBox width="100%" horizontalAlign="right" styleName="headingTitleBox">
+        <mx:Label text="Add and Remove Clients"/>
+    </mx:HBox>
 
     <mx:HBox width="100%">
 
@@ -82,55 +87,37 @@
                 <flexlib:PromptingTextInput id="phone" prompt="Client Contact Phone"
                                             change="this.clientFormValidator.validateForm(event);"/>
             </mx:FormItem>
+            <mx:Button id="saveButton" label="Save Client"/>
         </mx:Form>
 
     </mx:HBox>
-    <mx:HBox width="100%" horizontalAlign="right">
-        <mx:Button id="saveButton" label="Save Client"/>
-        <flexlib:PromptingTextInput id="filterResultSearch" prompt="Search..."/>
-        <mx:Button id="resetFilters" label="Reset Filters" click="{clientManagementGrid.resetFilters()}"/>
-    </mx:HBox>
-    <neosavvy:AutoFilteringGrid
+    <mx:DataGrid
             id="clientManagementGrid"
             width="100%"
             height="100%"
-            autoResizeColumnHeaders="true"
-            searchTextControl="{filterResultSearch}"
             >
-        <neosavvy:columns>
-            <neosavvy:AutoFilteringGridColumn
+        <mx:columns>
+            <mx:DataGridColumn
                     id="companyNameColumn"
                     dataField="companyName"
                     headerText="Company Name"
-                    autoFilterEnabled="true"
-                    enabledByDefault="true"
-                    leftAlignFilterButton="true"
                     />
-            <neosavvy:AutoFilteringGridColumn
+            <mx:DataGridColumn
                     id="clientPOCName"
                     dataField="clientPointOfContact"
                     headerText="Client Contact"
-                    autoFilterEnabled="true"
-                    enabledByDefault="true"
-                    leftAlignFilterButton="true"
                     />
-            <neosavvy:AutoFilteringGridColumn
+            <mx:DataGridColumn
                     id="clientPhone"
                     dataField="clientPhone"
                     headerText="Client Phone"
-                    autoFilterEnabled="true"
-                    enabledByDefault="true"
-                    leftAlignFilterButton="true"
                     />
-            <neosavvy:AutoFilteringGridColumn
+            <mx:DataGridColumn
                     id="clientEmail"
                     dataField="clientEmail"
                     headerText="Client Email"
-                    autoFilterEnabled="true"
-                    enabledByDefault="true"
-                    leftAlignFilterButton="true"
                     />
-        </neosavvy:columns>
-    </neosavvy:AutoFilteringGrid>
+        </mx:columns>
+    </mx:DataGrid>
 
 </mx:VBox>

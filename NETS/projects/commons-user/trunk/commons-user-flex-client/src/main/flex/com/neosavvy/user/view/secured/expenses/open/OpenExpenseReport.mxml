@@ -6,53 +6,45 @@
     xmlns:flexlib="http://code.google.com/p/flexlib/"
     styleName="applicationView"
     horizontalAlign="right"
+    verticalScrollPolicy="off"
+    horizontalScrollPolicy="off"
     xmlns:neosavvy="com.neosavvy.grid.*">
 
-    <mx:HBox width="100%" horizontalAlign="right">
-        <flexlib:PromptingTextInput id="searchTextInput" prompt="Search..."/>
-        <mx:Button id="resetFilters" label="Reset Filters" click="openExpenseGrid.resetFilters()"/>
+    <mx:HBox width="100%" horizontalAlign="right" styleName="headingTitleBox">
+        <mx:Label text="View Open Expense Reports"/>
     </mx:HBox>
 
-    <neosavvy:AutoFilteringGrid id="openExpenseGrid" width="100%" height="100%"
-            autoResizeColumnHeaders="true"
-            searchTextControl="{searchTextInput}">
-        <neosavvy:columns>
-            <neosavvy:AutoFilteringGridColumn
+    <mx:DataGrid
+            id="openExpenseGrid"
+            width="100%"
+            height="100%"
+            >
+        <mx:columns>
+            <mx:DataGridColumn
                 id="voucherNumberColumn"
                 headerText="Voucher Number"
                 dataField="id"
-                autoFilterEnabled="true"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"/>
-            <neosavvy:AutoFilteringGridColumn
+                />
+            <mx:DataGridColumn
                 id="amountNumberColumn"
                 headerText="Expense Amount"
                 dataField="totalExpenseAmount"
-                autoFilterEnabled="true"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"/>
-            <neosavvy:AutoFilteringGridColumn
+                />
+            <mx:DataGridColumn
                 id="amountToReimburseColumn"
                 headerText="Amount to Reimburse"
                 dataField="totalReimbursableExpenseAmount"
-                autoFilterEnabled="true"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"/>
-            <neosavvy:AutoFilteringGridColumn
+                />
+            <mx:DataGridColumn
                 id="statusColumn"
                 headerText="Status"
                 dataField="status"
-                autoFilterEnabled="true"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"/>
-            <neosavvy:AutoFilteringGridColumn
+                />
+            <mx:DataGridColumn
                 id="actionColumn"
                 headerText="Actions"
-                enabledByDefault="true"
-                autoFilterEnabled="false"
-                leftAlignFilterButton="true"
                 itemRenderer="com.neosavvy.user.view.secured.expenses.open.Actions"/>
-        </neosavvy:columns>
-    </neosavvy:AutoFilteringGrid>
+        </mx:columns>
+    </mx:DataGrid>
 
 </mx:VBox>

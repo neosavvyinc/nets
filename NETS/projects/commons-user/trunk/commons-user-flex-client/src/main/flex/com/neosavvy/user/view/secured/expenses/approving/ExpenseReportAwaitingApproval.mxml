@@ -1,18 +1,19 @@
 <?xml version="1.0"?>
 <mx:VBox
-    xmlns:mx="http://www.adobe.com/2006/mxml"
-    width="100%"
-    height="100%"
-    horizontalAlign="right"
-    xmlns:flexlib="http://code.google.com/p/flexlib/"
-    xmlns:neosavvy="com.neosavvy.grid.*"
-    paddingLeft="20"
-    paddingBottom="20"
-    paddingRight="20"
-    paddingTop="20"
-    horizontalScrollPolicy="off"
-    styleName="applicationView"
-    >
+        xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:datagridclasses="mx.controls.dataGridClasses.*"
+        width="100%"
+        height="100%"
+        horizontalAlign="right"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        xmlns:neosavvy="com.neosavvy.grid.*"
+        paddingLeft="20"
+        paddingBottom="20"
+        paddingRight="20"
+        paddingTop="20"
+        horizontalScrollPolicy="off"
+        verticalScrollPolicy="off"
+        styleName="applicationView"
+        >
 
     <mx:Script>
         <![CDATA[
@@ -20,11 +21,10 @@
         import com.neosavvy.user.dto.companyManagement.UserDTO;
         import com.neosavvy.user.dto.project.ExpenseReport;
 
-        private function ownerLabel(item:Object, column:AutoFilteringGridColumn):String
-        {
+        private function ownerLabel(item:Object, column:DataGridColumn):String {
             var expenseReport:ExpenseReport = item as ExpenseReport;
             var userDTO:UserDTO = expenseReport.owner;
-            if( userDTO )
+            if (userDTO)
                 return (userDTO).fullName;
             else
                 return "";
@@ -36,62 +36,38 @@
 
     <mx:HBox width="100%" horizontalAlign="right" styleName="headingTitleBox">
         <mx:Label text="View Expense Reports Awaiting Approval"/>
-        <mx:Spacer width="100%"/>
-        <flexlib:PromptingTextInput id="searchTextInput" prompt="Search..."/>
-        <mx:Button id="resetFilters" label="Reset Filters" click="awaitingApprovalExpenseGrid.resetFilters()"/>
     </mx:HBox>
 
-    <neosavvy:AutoFilteringGrid
-            id="awaitingApprovalExpenseGrid" 
-            autoResizeColumnHeaders="true"
-            searchTextControl="{searchTextInput}"
+    <mx:DataGrid
+            id="awaitingApprovalExpenseGrid"
             width="100%"
             height="100%">
-        <neosavvy:columns>
-            <!--<neosavvy:AutoFilteringGridColumn-->
-                <!--id="ownerColumn"-->
-                <!--headerText="Owner Name"-->
-                <!--labelFunction="{ownerLabel}"-->
-                <!--autoFilterEnabled="false"-->
-                <!--leftAlignFilterButton="true"-->
-                <!--enabledByDefault="true"/>-->
-            <neosavvy:AutoFilteringGridColumn
-                id="voucherNumberColumn"
-                headerText="Voucher Number"
-                dataField="id"
-                autoFilterEnabled="false"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"/>
-            <neosavvy:AutoFilteringGridColumn
-                id="amountNumberColumn"
-                headerText="Expense Amount"
-                dataField="totalExpenseAmount"
-                autoFilterEnabled="false"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"/>
-            <neosavvy:AutoFilteringGridColumn
-                id="amountToReimburseColumn"
-                headerText="Amount to Reimburse"
-                dataField="totalReimbursableExpenseAmount"
-                autoFilterEnabled="false"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"/>
-            <neosavvy:AutoFilteringGridColumn
-                id="statusColumn"
-                headerText="Status"
-                dataField="status"
-                autoFilterEnabled="false"
-                leftAlignFilterButton="true"
-                enabledByDefault="true"/>
-            <neosavvy:AutoFilteringGridColumn
-                id="actionColumn"
-                itemRenderer="com.neosavvy.user.view.secured.expenses.approving.Actions"
-                headerText="Actions"
-                enabledByDefault="true"
-                leftAlignFilterButton="true"
-                autoFilterEnabled="false"
-                width="270"/>
-        </neosavvy:columns>
-    </neosavvy:AutoFilteringGrid>
+        <mx:columns>
+            <datagridclasses:DataGridColumn
+                    id="voucherNumberColumn"
+                    headerText="Voucher Number"
+                    dataField="id"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="amountNumberColumn"
+                    headerText="Expense Amount"
+                    dataField="totalExpenseAmount"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="amountToReimburseColumn"
+                    headerText="Amount to Reimburse"
+                    dataField="totalReimbursableExpenseAmount"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="statusColumn"
+                    headerText="Status"
+                    dataField="status"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="actionColumn"
+                    itemRenderer="com.neosavvy.user.view.secured.expenses.approving.Actions"
+                    headerText="Actions"/>
+        </mx:columns>
+    </mx:DataGrid>
 
 </mx:VBox>

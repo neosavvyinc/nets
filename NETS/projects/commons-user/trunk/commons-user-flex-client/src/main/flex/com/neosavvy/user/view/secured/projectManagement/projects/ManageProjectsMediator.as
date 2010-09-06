@@ -13,6 +13,7 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
     import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
     import mx.controls.ComboBox;
+    import mx.controls.DataGrid;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -57,7 +58,7 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
             return manageProjects.clientSelectorDropdown;
         }
 
-        public function get projectmanagementGrid():AdvancedDataGrid {
+        public function get projectmanagementGrid():DataGrid {
             return manageProjects.projectManagementGrid;
         }
 

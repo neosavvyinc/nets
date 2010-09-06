@@ -4,7 +4,9 @@
     width="100%"
     height="100%"
     styleName="applicationView"
-    horizontalAlign="right">
+    horizontalAlign="right"
+    verticalScrollPolicy="off"
+    horizontalScrollPolicy="off">
 
 
 </mx:VBox>
