@@ -100,7 +100,7 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
 
         override public function listNotificationInterests():Array {
             return [
-                ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT
+                ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS
                 ,ApplicationFacade.INITIALIZE_MANAGE_PROJECTS_VIEW_COMPLETE
                 ,ApplicationFacade.GET_PROJECTS_FOR_COMPANY_SUCCESS
                 ,ApplicationFacade.SAVE_PROJECT_SUCCESS
@@ -111,7 +111,7 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
         override public function handleNotification(notification:INotification):void {
 
             switch (notification.getName()) {
-                case ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT:
+                case ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS:
                     sendNotification(ApplicationFacade.INITIALIZE_MANAGE_PROJECTS_VIEW);
                     break;
                 case ApplicationFacade.INITIALIZE_MANAGE_PROJECTS_VIEW_COMPLETE:

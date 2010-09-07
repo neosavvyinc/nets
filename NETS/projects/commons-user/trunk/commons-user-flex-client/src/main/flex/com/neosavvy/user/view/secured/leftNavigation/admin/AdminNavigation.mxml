@@ -53,6 +53,7 @@
                 <mx:String>Manage Clients</mx:String>
                 <mx:String>Manage Projects</mx:String>
                 <mx:String>Approve Expenses</mx:String>
+                <mx:String>Manage Assignments</mx:String>
             </mx:Array>
         </mx:dataProvider>
     </mx:ToggleButtonBar>

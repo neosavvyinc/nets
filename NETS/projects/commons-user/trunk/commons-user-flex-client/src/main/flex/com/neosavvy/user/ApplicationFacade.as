@@ -224,7 +224,6 @@ package com.neosavvy.user {
 
         public static const NAVIGATE_TO_INVITE_EMPLOYEES:String = "navigateToInviteEmployees";
         public static const NAVIGATE_TO_COMPANY_REGISTRATION:String = "navigateToCompanyRegistration";
-        public static const NAVIGATE_TO_PROJECT_MANAGEMENT:String = "navigateToProjectManagement";
         public static const NAVIGATE_TO_CLIENT_MANAGEMENT:String = "navigateToClientManagement";
 
         public static const NAVIGATE_TO_CREATE_EXPENSE_REPORT:String = "navigateToCreateExpenseReport";

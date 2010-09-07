@@ -14,7 +14,9 @@
         xmlns:open="com.neosavvy.user.view.secured.expenses.open.*"
         xmlns:approved="com.neosavvy.user.view.secured.expenses.submitted.*"
         xmlns:reconcile="com.neosavvy.user.view.secured.expenses.reconcile.*"
-        xmlns:approving="com.neosavvy.user.view.secured.expenses.approving.*">
+        xmlns:approving="com.neosavvy.user.view.secured.expenses.approving.*"
+        xmlns:projects="com.neosavvy.user.view.secured.projectManagement.projects.*"
+        xmlns:assignments="com.neosavvy.user.view.secured.projectManagement.assignments.*">
 
     <mx:HBox styleName="mainContainer" width="100%" height="100%"
             >
@@ -35,7 +37,9 @@
             <employeeInvitation:EmployeeManagement id="employeeInvitationManagement" width="100%" height="100%"/>
             <userManagement:UserManagement id="userManagement" width="100%" height="100%"/>
             <clientManagement:ClientManagement id="clientManagement" width="100%" height="100%"/>
-            <projectManagement:ProjectManagement id="projectManagement" width="100%" height="100%"/>
+
+            <projects:ManageProjects id="manageProjectsTab" label="Manage Projects"/>
+            <assignments:ManageAssignments id="manageAssignments" label="Manage Assignments"/>
 
             <report:ExpenseReportDetail id="expenseReportDetail" width="100%" height="100%"/>
             <open:OpenExpenseReport id="openExpenseReportDetail" width="100%" height="100%"/>

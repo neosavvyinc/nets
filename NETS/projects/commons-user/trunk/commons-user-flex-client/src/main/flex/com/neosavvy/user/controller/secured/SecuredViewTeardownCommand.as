@@ -11,7 +11,6 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.expenses.approving.ExpenseReportAwaitingApprovalMediator;
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigationMediator;
     import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigationMediator;
-    import com.neosavvy.user.view.secured.projectManagement.ProjectManagementMediator;
     import com.neosavvy.user.view.secured.projectManagement.assignments.ManageAssignmentsMediator;
     import com.neosavvy.user.view.secured.projectManagement.projects.ManageProjectsMediator;
 
@@ -40,9 +39,6 @@ package com.neosavvy.user.controller.secured {
 
             if (facade.hasMediator(ClientManagementMediator.NAME))
                 facade.removeMediator(ClientManagementMediator.NAME);
-
-            if (facade.hasMediator(ProjectManagementMediator.NAME))
-                facade.removeMediator(ProjectManagementMediator.NAME);
 
             if (facade.hasMediator(ManageProjectsMediator.NAME))
                 facade.removeMediator(ManageProjectsMediator.NAME);

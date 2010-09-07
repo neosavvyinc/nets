@@ -82,6 +82,10 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
                     toggleBarAdminFocus(4);
                     handleApproveExpensesButtonClicked();
                     break;
+                case "Manage Assignments":
+                    toggleBarAdminFocus(5);
+                    handleManageAssignmentsButtonClicked();
+                    break;
                 case "View Open Expenses":
                     toggleBarEmployeeFocus(0);
                     handleViewOpenExpensesButtonClicked();
@@ -101,12 +105,16 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
             }
         }
 
+        private function handleManageAssignmentsButtonClicked():void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_ASSIGNMENTS);
+        }
+
         private function handleApproveExpensesButtonClicked():void {
             sendNotification(ApplicationFacade.NAVIGATE_TO_VIEW_AWAITING_EXPENSE_REPORTS);
         }
 
         private function handleManageProjectsButtonClicked():void {
-            sendNotification(ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT);
+            sendNotification(ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS);
         }
 
         private function handleManageClientsButtonClicked():void {
@@ -149,7 +157,7 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
             return [
                 ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES
                 ,ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT
-                ,ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT
+                ,ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS
             ];
         }
 
@@ -163,7 +171,7 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
                 case ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT:
                     toggleBarAdminFocus(2);
                     break;
-                case ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT:
+                case ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS:
                     toggleBarAdminFocus(3);
                     break;
             }

@@ -22,13 +22,14 @@ package com.neosavvy.user.view.secured {
         public static const NAV_INDEX_USER_MANAGEMENT:Number        = 2;
         public static const NAV_INDEX_CLIENT_MANAGEMENT:Number      = 3;
         public static const NAV_INDEX_PROJECT_MANAGEMENT:Number     = 4;
+        public static const NAV_INDEX_ASSIGNMENTS_MANAGEMENT:Number     = 5;
 
-        public static const NAV_INDEX_CREATE_EXPENSE_REPORT:Number  = 5;
-        public static const NAV_INDEX_VIEW_OPEN_EXPENSES:Number     = 6;
-        public static const NAV_INDEX_VIEW_APPROVED_EXPENSES:Number = 7;
-        public static const NAV_INDEX_RECONCILE_EXPENSES:Number     = 8;
+        public static const NAV_INDEX_CREATE_EXPENSE_REPORT:Number  = 6;
+        public static const NAV_INDEX_VIEW_OPEN_EXPENSES:Number     = 7;
+        public static const NAV_INDEX_VIEW_APPROVED_EXPENSES:Number = 8;
+        public static const NAV_INDEX_RECONCILE_EXPENSES:Number     = 9;
 
-        public static const NAV_INDEX_APPROVE_EXPENSES:Number       = 9;
+        public static const NAV_INDEX_APPROVE_EXPENSES:Number       = 10;
 
         override public function onRegister():void {
         }
@@ -46,7 +47,8 @@ package com.neosavvy.user.view.secured {
                 ApplicationFacade.NAVIGATE_TO_WELCOME
                 ,ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES
                 ,ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT
-                ,ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT
+                ,ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS
+                ,ApplicationFacade.NAVIGATE_TO_ASSIGNMENTS
 
                 ,ApplicationFacade.ALL_EMPLOYEES_FAILED
                 ,ApplicationFacade.ALL_EMPLOYEES_SUCCESS
@@ -76,8 +78,11 @@ package com.neosavvy.user.view.secured {
                 case ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT:
                     navigationViewStack.selectedIndex = NAV_INDEX_CLIENT_MANAGEMENT;
                     break;
-                case ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT:
+                case ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS:
                     navigationViewStack.selectedIndex = NAV_INDEX_PROJECT_MANAGEMENT;
+                    break;
+                case ApplicationFacade.NAVIGATE_TO_ASSIGNMENTS:
+                    navigationViewStack.selectedIndex = NAV_INDEX_ASSIGNMENTS_MANAGEMENT;
                     break;
                 case ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT:
                 case ApplicationFacade.NAVIGATE_TO_EDIT_EXPENSE_REPORT:

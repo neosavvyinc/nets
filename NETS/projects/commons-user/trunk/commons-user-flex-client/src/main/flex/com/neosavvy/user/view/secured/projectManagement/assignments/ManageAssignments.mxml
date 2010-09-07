@@ -22,12 +22,6 @@
             <mx:Label text="Available Employees for Assignment:"/>
             <mx:List id="availableEmployees" allowMultipleSelection="true" allowDragSelection="true" dragEnabled="true" dropEnabled="true" dragMoveEnabled="true" width="100%" height="100%" itemRenderer="com.neosavvy.user.view.secured.projectManagement.assignments.renderers.UserRenderer"/>
         </mx:VBox>
-        <!--<mx:VBox width="10%" height="100%" verticalAlign="middle" horizontalAlign="center">-->
-            <!--<mx:Button id="addSelectedToLeft" label="&lt;&lt;"/>-->
-            <!--<mx:Button id="addAllToLeft" label="&lt;"/>-->
-            <!--<mx:Button id="addAllToRight" label="&gt;"/>-->
-            <!--<mx:Button id="addSelectedToRight" label="&gt;&gt;"/>-->
-        <!--</mx:VBox>-->
         <mx:VBox width="45%" height="100%">
             <mx:Label text="Assigned Employees for This Project:"/>
             <mx:List id="assignedEmployees" allowMultipleSelection="true" allowDragSelection="true" dragEnabled="true" dropEnabled="true" dragMoveEnabled="true" width="100%" height="100%" itemRenderer="com.neosavvy.user.view.secured.projectManagement.assignments.renderers.UserRenderer"/>

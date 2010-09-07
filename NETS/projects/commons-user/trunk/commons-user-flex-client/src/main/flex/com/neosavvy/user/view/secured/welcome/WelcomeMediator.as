@@ -66,7 +66,7 @@ package com.neosavvy.user.view.secured.welcome {
         }
 
         private function handleManageProjectsButtonClicked( event : MouseEvent ):void {
-            sendNotification(ApplicationFacade.NAVIGATE_TO_PROJECT_MANAGEMENT);
+            sendNotification(ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS);
         }
 
     }

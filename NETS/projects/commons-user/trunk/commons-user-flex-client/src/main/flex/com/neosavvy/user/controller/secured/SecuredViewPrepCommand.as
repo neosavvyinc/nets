@@ -13,9 +13,7 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.expenses.report.ExpenseReportDetailMediator;
     import com.neosavvy.user.view.secured.leftNavigation.LeftNavigationMediator;
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigationMediator;
-    import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigation;
     import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigationMediator;
-    import com.neosavvy.user.view.secured.projectManagement.ProjectManagementMediator;
     import com.neosavvy.user.view.secured.projectManagement.assignments.ManageAssignmentsMediator;
     import com.neosavvy.user.view.secured.projectManagement.projects.ManageProjectsMediator;
     import com.neosavvy.user.view.secured.userManagement.UserManagementMediator;
@@ -52,14 +50,11 @@ package com.neosavvy.user.controller.secured {
                 if (!facade.hasMediator(ClientManagementMediator.NAME))
                     facade.registerMediator(new ClientManagementMediator(securedContainer.clientManagement));
 
-                if (!facade.hasMediator(ProjectManagementMediator.NAME))
-                    facade.registerMediator(new ProjectManagementMediator(securedContainer.projectManagement));
-
                 if (!facade.hasMediator(ManageProjectsMediator.NAME))
-                    facade.registerMediator(new ManageProjectsMediator(securedContainer.projectManagement.manageProjectsTab));
+                    facade.registerMediator(new ManageProjectsMediator(securedContainer.manageProjectsTab));
 
                 if (!facade.hasMediator(ManageAssignmentsMediator.NAME))
-                    facade.registerMediator(new ManageAssignmentsMediator(securedContainer.projectManagement.manageAssignments));
+                    facade.registerMediator(new ManageAssignmentsMediator(securedContainer.manageAssignments));
 
                 if (!facade.hasMediator(ExpenseReportAwaitingApprovalMediator.NAME))
                     facade.registerMediator(new ExpenseReportAwaitingApprovalMediator(securedContainer.expenseReportAwaitingApproval));
