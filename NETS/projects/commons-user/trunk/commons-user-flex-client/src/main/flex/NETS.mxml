@@ -35,11 +35,6 @@
             navigationViewStack.selectedIndex = 2;
             navigationToggleBar.selectedIndex = 2;
         }
-
-        private function needHelpClicked():void {
-            var u:URLRequest = new URLRequest("mailto:aparrish@neosavvy.com");
-            navigateToURL(u, "_self");
-        }
         ]]>
     </mx:Script>
 
@@ -67,7 +62,7 @@
             </mx:dataProvider>
         </mx:ToggleButtonBar>
         <mx:VBox horizontalAlign="right" width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
-            <mx:LinkButton id="havingTrouble" label="Having Trouble?" styleName="greenLinkButton" click="needHelpClicked()"/>
+            <mx:LinkButton id="havingTrouble" label="Having Trouble?" styleName="greenLinkButton"/>
             <mx:HBox styleName="grayToGrayViewContainer" width="100%" horizontalAlign="right"
                      horizontalScrollPolicy="off" verticalScrollPolicy="off">
                 <mx:Label text="Already Registered?" styleName="greenLinkButton"/>

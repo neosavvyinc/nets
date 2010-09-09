@@ -30,6 +30,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.expenses.report.workflow.DeclineExpenseReport;
     import com.neosavvy.user.controller.expenses.report.workflow.ReopenExpenseReport;
     import com.neosavvy.user.controller.expenses.report.workflow.SubmitExpenseReport;
+    import com.neosavvy.user.controller.mail.SendSystemMail;
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
     import com.neosavvy.user.controller.project.GetAvailableUsersForProject;
     import com.neosavvy.user.controller.project.GetProjectsForCompany;
@@ -103,6 +104,7 @@ package com.neosavvy.user {
             registerCommand(ALL_EMPLOYEES_REQUEST, GetAllUsersForCompany);
 
             registerCommand(FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST, GetClientsForCompany);
+            registerCommand(SEND_SYSTEM_MAIL, SendSystemMail);
             registerCommand(SAVE_CLIENT_COMPANY_REQUEST, SaveClientCompany);
             registerCommand(INITIALIZE_MANAGE_PROJECTS_VIEW, InitializeManageProjects);
             registerCommand(INITIALIZE_MANAGE_ASSIGNMENTS_VIEW, InitializeManageAssignments);
@@ -256,6 +258,8 @@ package com.neosavvy.user {
         public static const FIND_CLIENTS_FOR_PARENT_COMPANY_REQUEST:String = "findClientsForParentCompanyRequest";
         public static const FIND_CLIENTS_FOR_PARENT_COMPANY_FAILED:String = "findClientsForParentCompanyFailed";
         public static const FIND_CLIENTS_FOR_PARENT_COMPANY_SUCCESS:String = "findClientsForParentCompanySuccess";
+
+        public static const SEND_SYSTEM_MAIL : String = "sendSystemMail";
 
         public static const SAVE_CLIENT_COMPANY_REQUEST:String = "saveClientCompanyRequest";
         public static const SAVE_CLIENT_COMPANY_SUCCESS:String = "saveClientCompanySuccess";

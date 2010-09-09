@@ -7,7 +7,7 @@ package com.neosavvy.user.controller.base {
     public class DisplayErrorCommand extends SimpleCommand {
 
         override public function execute(notification:INotification):void {
-            Alert.show("An unexpected error occurred.  Please try again or contact support@neosavvy.com for assistance.", 'Oops!');
+            Alert.show("An unexpected error occurred.  Please try again or contact nets@neosavvy.com for assistance.", 'Oops!');
         }
     }
 }

@@ -1,11 +1,13 @@
 package com.neosavvy.user {
-
+    import com.neosavvy.user.controller.mail.SendSystemMail;
     import com.neosavvy.user.dto.companyManagement.CompanyDTO;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.model.UserServiceProxy;
+    import com.neosavvy.user.view.mail.MailMessageEvent;
+    import com.neosavvy.user.view.mail.SystemMailMessageView;
     import com.neosavvy.user.view.secured.SecuredContainer;
 
     import com.neosavvy.user.view.security.Login;
@@ -18,6 +20,11 @@ package com.neosavvy.user {
     import mx.containers.ViewStack;
     import mx.controls.Button;
     import mx.controls.Label;
+
+    import mx.controls.LinkButton;
+
+    import mx.core.IFlexDisplayObject;
+    import mx.managers.PopUpManager;
 
     import org.puremvc.as3.multicore.interfaces.IMediator;
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -82,12 +89,24 @@ package com.neosavvy.user {
             return app.logoutButton;
         }
 
+        public function get havingTroubleButton():LinkButton {
+            return app.havingTrouble;
+        }
+
+        public function get contactUsButton():LinkButton {
+            return app.pricingContent.contactUsButton;
+        }
+
         override public function onRegister():void
         {
             this.loginButton.addEventListener(MouseEvent.CLICK, loginButtonClickedHandler);
             this.logoutButton.addEventListener(MouseEvent.CLICK, logoutButtonClickedHandler)
             this.login.addEventListener("goHomeClicked",goHomeClickHandler);
+            this.havingTroubleButton.addEventListener(MouseEvent.CLICK, havingTroubleButtonClickedHandler);
+            this.contactUsButton.addEventListener(MouseEvent.CLICK,contactUsButtonClickedHandler);
         }
+
+
 
 
         override public function listNotificationInterests():Array {
@@ -164,6 +183,42 @@ package com.neosavvy.user {
 
         private function goHomeClickHandler(event:Event):void {
             hideLogin();
+        }
+
+        var mailMessageView:IFlexDisplayObject;
+
+        private function havingTroubleButtonClickedHandler(event:MouseEvent):void {
+            mailMessageView = PopUpManager.createPopUp(this.app, SystemMailMessageView, true);
+            PopUpManager.centerPopUp( mailMessageView );
+            (mailMessageView as SystemMailMessageView).titleString = "Having Trouble";
+
+            mailMessageView.addEventListener(MailMessageEvent.TYPE, handleMailMessageEvent);
+
+            
+        }
+
+        private function handleMailMessageEvent(event:MailMessageEvent):void {
+
+            sendNotification(ApplicationFacade.SEND_SYSTEM_MAIL, event.message);
+
+        }
+
+        var contactUs:IFlexDisplayObject;
+
+        private function contactUsButtonClickedHandler(event:MouseEvent):void {
+            mailMessageView = PopUpManager.createPopUp(this.app, SystemMailMessageView, true);
+            PopUpManager.centerPopUp( mailMessageView );
+            (mailMessageView as SystemMailMessageView).titleString = "Contact Us!";
+
+            mailMessageView.addEventListener(MailMessageEvent.TYPE, handleContactUsMailMessage);
+
+
+        }
+
+        private function handleContactUsMailMessage(event:MailMessageEvent):void {
+
+            sendNotification(ApplicationFacade.SEND_SYSTEM_MAIL, event.message);
+
         }
 
     }

@@ -3,6 +3,7 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
+import com.neosavvy.user.dto.mail.MailMessageDTO;
 import com.neosavvy.user.service.exception.MailServiceException;
 import com.neosavvy.user.service.exception.UserServiceException;
 import com.neosavvy.user.service.mail.DocumentGenerationException;
@@ -52,6 +53,8 @@ public class MailServiceImpl implements MailService {
     private Resource newUserConfirmationTokenEmail;
     private Resource sendInvite;
     private Resource newUserConfirmationEmail;
+    private Resource systemMailTemplate;
+    private Resource systemConfirmationMailTemplate;
 
     private String serverFromAddress = "nets@neosavvy.com";
 
@@ -173,6 +176,61 @@ public class MailServiceImpl implements MailService {
         }
     }
 
+    public void sendSystemMail(MailMessageDTO message) {
+        SimpleMailMessage msg = new SimpleMailMessage();
+        msg.setFrom(serverFromAddress);
+        msg.setTo(serverFromAddress);
+        msg.setSubject(message.getSubject());
+
+        sendSystemMailMessage(message, msg);
+
+
+        try {
+            SimpleMailMessage confirmationMessage = new SimpleMailMessage();
+            confirmationMessage.setFrom(serverFromAddress);
+            confirmationMessage.setTo(message.getFrom());
+            confirmationMessage.setSubject("Thanks for reaching out to us!");
+            confirmationMessage.setText( docGenerator.processTemplate(systemConfirmationMailTemplate.getURL(),new HashMap()));
+            mailSender.send(confirmationMessage);
+        }
+        catch (IOException e) {
+            logger.error("The email template could not be found", e);
+            throw new MailServiceException("The email template could not be found", e);
+        }
+        catch (DocumentGenerationException e) {
+            logger.error("Unable to create system message - the message was not sent", e);
+            throw new MailServiceException("An error occurred generating the quote summary message body", e);
+        }
+        catch ( MailException ex ) {
+            logger.error(ex.getMessage());
+        }
+
+
+    }
+
+    private void sendSystemMailMessage(MailMessageDTO message, SimpleMailMessage msg) {
+        try {
+            Map<String, Object> bindings = new HashMap<String, Object>();
+            bindings.put("fromEmail", message.getFrom());
+            bindings.put("message", message.getMessage());
+            msg.setText( docGenerator.processTemplate(systemMailTemplate.getURL(), bindings));
+        } catch (IOException e) {
+            logger.error("The email template could not be found", e);
+            throw new MailServiceException("The email template could not be found", e);
+        }
+        catch (DocumentGenerationException e) {
+            logger.error("Unable to create system message - the message was not sent", e);
+            throw new MailServiceException("An error occurred generating the quote summary message body", e);
+        }
+
+        try {
+            mailSender.send(msg);
+        }
+        catch ( MailException ex ) {
+            logger.error(ex.getMessage());
+        }
+    }
+
     public void setDocGenerator(DocumentGenerator docGenerator) {
         this.docGenerator = docGenerator;
     }
@@ -219,5 +277,21 @@ public class MailServiceImpl implements MailService {
 
     public void setServerFromAddress(String serverFromAddress) {
         this.serverFromAddress = serverFromAddress;
+    }
+
+    public Resource getSystemMailTemplate() {
+        return systemMailTemplate;
+    }
+
+    public void setSystemMailTemplate(Resource systemMailTemplate) {
+        this.systemMailTemplate = systemMailTemplate;
+    }
+
+    public Resource getSystemConfirmationMailTemplate() {
+        return systemConfirmationMailTemplate;
+    }
+
+    public void setSystemConfirmationMailTemplate(Resource systemConfirmationMailTemplate) {
+        this.systemConfirmationMailTemplate = systemConfirmationMailTemplate;
     }
 }

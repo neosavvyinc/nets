@@ -76,6 +76,8 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
         <property name="newUserConfirmationTokenEmail" value="${templatesRoot}/newUserConfirmationTokenEmail.gsp" />
         <property name="sendInvite" value="${templatesRoot}/sendInvite.gsp" />
         <property name="newUserConfirmationEmail" value="${templatesRoot}/newUserConfirmationEmail.gsp" />
+        <property name="systemMailTemplate" value="${templatesRoot}/systemMailTemplateEmail.gsp" />
+        <property name="systemConfirmationMailTemplate" value="${templatesRoot}/systemConfirmationEmail.gsp" />
     </bean>
     <bean id="focalJavaMailSender" class="com.neosavvy.user.service.mail.FocalMailSender">
         <property name="test" value="false"/>

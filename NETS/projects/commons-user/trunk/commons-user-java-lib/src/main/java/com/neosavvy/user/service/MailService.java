@@ -3,6 +3,7 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.CompanyDTO;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
+import com.neosavvy.user.dto.mail.MailMessageDTO;
 /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
@@ -36,5 +37,7 @@ public interface MailService {
     public void sendInvite(UserInviteDTO userInvite);
 
     public void newUserConfirmationEmail(UserDTO user, CompanyDTO company);
+
+    public void sendSystemMail( MailMessageDTO message );
     
 }

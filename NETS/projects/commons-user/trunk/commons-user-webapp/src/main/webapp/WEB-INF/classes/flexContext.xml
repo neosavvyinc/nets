@@ -21,5 +21,6 @@ http://www.springframework.org/schema/flex http://www.springframework.org/schema
     <flex:remoting-destination ref="clientService" />
     <flex:remoting-destination ref="projectService" />
     <flex:remoting-destination ref="expenseReportService" />
+    <flex:remoting-destination ref="mailService" />
 
 </beans>
