@@ -50,7 +50,7 @@
         {
             var instance:ApplicationFacade = ApplicationFacade.getInstance(ApplicationFacade.defaultApplicationKey);
             var securityProxy:SecurityProxy = instance.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
-            var request:URLRequest = new URLRequest("http://localhost:8080/nets/storage/file/receipts/?rabbitHole=" + securityProxy.sessionId);
+            var request:URLRequest = new URLRequest(ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/receipts/?rabbitHole=" + securityProxy.sessionId);
             request.method = URLRequestMethod.POST;
             request.requestHeaders = [new URLRequestHeader("ACCEPT", "text/xml")];
 
