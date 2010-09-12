@@ -32,7 +32,7 @@
                 <mx:String>View Open Expenses</mx:String>
                 <mx:String>Create Expense Report</mx:String>
                 <mx:String>View Submitted Expenses</mx:String>
-                <mx:String>Reconcile Expenses</mx:String>
+                <!--<mx:String>Reconcile Expenses</mx:String>-->
             </mx:Array>
         </mx:dataProvider>
     </mx:ToggleButtonBar>

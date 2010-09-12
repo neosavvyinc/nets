@@ -35,13 +35,7 @@ import flash.errors.IllegalOperationError;
             var channel:AMFChannel = new AMFChannel(ProxyConstants.channelName);
             var channelSet:ChannelSet = new ChannelSet();
             try {
-                var url:String = '';
-
-                if (HTTPUtil.getUrl().substring(0, 4) == 'http') {
-                    var url:String = HTTPUtil.getProtocol() + '//' + HTTPUtil.getHostName() + ':' + (StringUtils.isEmpty(HTTPUtil.getPort()) ? '80' : HTTPUtil.getPort());
-                } else if(HTTPUtil.getUrl().substring(0, 4) == 'file') {
-                    var url:String = ProxyConstants.url;
-                }
+                var url:String = ProxyConstants.getUrlForEnvironment();
                 channel.url = url + contextRoot + "/messagebroker/amf";
 			}
             catch (e:Error) {
@@ -51,6 +45,8 @@ import flash.errors.IllegalOperationError;
             channelSet.addChannel(channel);
             return channelSet;
         }
+
+        
 
         protected function getService(destinationName:String):RemoteObject {
             var userService:RemoteObject = new RemoteObject();
@@ -65,7 +61,9 @@ import flash.errors.IllegalOperationError;
         }
 
         public function clearCachedValues():void {
-            throw new IllegalOperationError("Must implement AbstractRemoteObjectProxy::clearCachedValues() to ensure data is properly removed when logging out"); 
+            throw new IllegalOperationError(
+                    "Must implement AbstractRemoteObjectProxy::clearCachedValues() " +
+                            "to ensure data is properly removed when logging out"); 
         }
     }
 }

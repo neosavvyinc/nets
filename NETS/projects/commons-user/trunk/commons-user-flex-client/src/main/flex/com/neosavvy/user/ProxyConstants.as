@@ -1,4 +1,7 @@
 package com.neosavvy.user {
+    import com.flexpasta.utils.HTTPUtil;
+    import com.neosavvy.user.util.StringUtils;
+
     public class ProxyConstants {
 
 
@@ -15,7 +18,7 @@ package com.neosavvy.user {
         public static var url:String = LOCAL;
         public static var expenseContextRoot:String = CONTEXT_ROOT_GLASSFISH;
 
-        /**
+        /**'
          * Potential URLs for runtime environments
          */
         public static var CONTEXT_ROOT_TOMCAT:String = "/commons-user-webapp";
@@ -40,5 +43,17 @@ package com.neosavvy.user {
         public static const mailServiceDestiation:String = "mailService";
         public static const projectServiceDestiation:String = "projectService";
         public static const expenseServiceDestination:String = "expenseReportService";
+
+        public static function getUrlForEnvironment():String {
+            var url : String = '';
+            if (HTTPUtil.getUrl().substring(0, 4) == 'http') {
+                url = HTTPUtil.getProtocol() + '//'
+                        + HTTPUtil.getHostName() + ':'
+                        + (StringUtils.isEmpty(HTTPUtil.getPort()) ? '80' : HTTPUtil.getPort());
+            } else if (HTTPUtil.getUrl().substring(0, 4) == 'file') {
+                url = ProxyConstants.url;
+            }
+            return url;
+        }
     }
 }
