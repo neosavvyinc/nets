@@ -5,10 +5,10 @@ Application constants cataloged here.
 */
 
 var MOBILE_SERVICE_BASE_URL = 'http://nets.neosavvy.com:8080/nets/expense/services/mobile';
-var STORAGE_SERVICE_BASE_URL = 'http://nets.neosavvy.com:8080/nets/storage';
-if (1) {
+var STORAGE_SERVICE_BASE_URL = 'http://nets.neosavvy.com:8080/nets/storage/file/receipts/?rabbitHole=';
+if (0) {
 	MOBILE_SERVICE_BASE_URL = 'http://localhost:8080/nets/expense/services/mobile';
-	STORAGE_SERVICE_BASE_URL = 'http://localhost:8080/nets/storage';
+	STORAGE_SERVICE_BASE_URL = 'http://localhost:8080/nets/storage/file/receipts/?rabbitHole=';
 	if (Titanium.Platform.name == 'android') {
 		//localhost and 127.0.0.1 don't work for the local host on android, instead 10.0.2.2
 		//see http://developer.android.com/guide/developing/tools/emulator.html#networkaddresses
@@ -28,6 +28,7 @@ var WINDOW = {
 	DATERANGE  	     : {id:3, name:'dateRangeWin'},
     REPORT           : {id:4, name:'reportWin'},
     REPORT_DRILLDOWN : {id:5, name:'reportDrilldownWin'},
+    RECEIPT_CAPTURE  : {id:7, name:'receiptCaptureWin'},
 	HELP 		     : {id:6, name:'helpWin'}
 };
 var TABGROUP = {
@@ -46,6 +47,7 @@ var SCREEN = {
 	DATE_RANGE				: {id:4, name:'dateRange', parent:WINDOW.DATERANGE},
     REPORT                  : {id:5, name:'report', parent:WINDOW.REPORT},
     REPORT_DRILLDOWN        : {id:6, name:'reportDrilldown', parent:WINDOW.REPORT_DRILLDOWN},
+    RECEIPT_CAPTURE         : {id:8, name:'receiptCapture', parent:WINDOW.RECEIPT_CAPTURE},
     MAX                     : {id:7, name:null, parent:null}
 };
 

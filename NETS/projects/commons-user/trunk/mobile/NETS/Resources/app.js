@@ -11,6 +11,9 @@ Titanium.UI.setBackgroundColor('#000');
 var httpClient = Titanium.Network.createHTTPClient();
 var securityWrapper = null;
 
+var theImage = null;
+var theThumbnail = null;
+
 //Includes
 Titanium.include('events.js'); //include this one first. all the user-events (should) live in here
 Titanium.include('constants.js'); //and this one second. important global app mojo in here
@@ -26,7 +29,9 @@ Titanium.include('confirm_receipt_upload.js');
 Titanium.include('statusDashboard.js');
 Titanium.include('report.js');
 Titanium.include('reportDrilldown.js');
+Titanium.include('reportDrillDownReceipt.js');
 //handlers
+Titanium.include('result.js');
 Titanium.include('login_handlers.js');
 Titanium.include('dashboard_handlers.js');
 Titanium.include('statusDashboard_handlers.js');
@@ -172,6 +177,11 @@ function switchToScreen(v) {
         var reportDrilldownWin = NETSCreateWindow(WINDOW.REPORT_DRILLDOWN, reportDrilldown.title);
         reportDrilldownWin.add(reportDrilldown);
         dashboardTab.open(reportDrilldownWin,{animated:true});
+        break;
+    case SCREEN.RECEIPT_CAPTURE.id:
+        var receiptCaptureWin = NETSCreateWindow(WINDOW.RECEIPT_CAPTURE, receiptDrillDown.title);
+        receiptCaptureWin.add(receiptDrillDown);
+        dashboardTab.open(receiptCaptureWin,{animated:true});
         break;
 	default:
 		Ti.API.error('switchToScreen error: invalid view arg');

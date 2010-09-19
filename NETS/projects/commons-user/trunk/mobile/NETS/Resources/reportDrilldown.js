@@ -2,6 +2,7 @@
  * @file reportDrilldown.js
  */
 
+
 var reportDrilldown = Titanium.UI.createView({
     top: 0,
     width: 320,
@@ -10,11 +11,14 @@ var reportDrilldown = Titanium.UI.createView({
     title: ''
 });
 
+
+
 var reportDrilldownTableView = Ti.UI.createTableView({
 	backgroundColor:'transparent'
 });
 
 reportDrilldown.add(reportDrilldownTableView);
+
 
 /**
  * properties:
@@ -24,6 +28,11 @@ function ReportDrilldownSection() {
 }
 
 var reportDrilldownData;
+
+
+function onRowClick( event ) {
+    Ti.App.fireEvent(evtSwitchToScreen, {screen:SCREEN.RECEIPT_CAPTURE});
+}
 
 /**
  * @param data server expenseItemDrilldown response
@@ -63,6 +72,8 @@ function reportDrilldown_update(data) {
             tabledata[item].add(row.row);
             row = new ReportRow('Amount', reportDrilldownData.expenseItem[item].amount, null);
             tabledata[item].add(row.row);
+
+            row.row.addEventListener('click',onRowClick);
 
             //sdr = new StatusDashboardRow(reportx);
             //statusDashboardRows.push(sdr);
