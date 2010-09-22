@@ -19,6 +19,71 @@ var dashboardBanner = new DateBanner();
 dashboardBanner.update(); //initial update
 dashboard.add(dashboardBanner.view);
 
+var addReceiptButton = Titanium.UI.createButton({
+    title: 'Add Receipt',
+    top: 50,
+    //left: 30,
+    height: 30,
+    width: 250,
+	backgroundImage:'assets/images/orange_button_unsel.png',
+    backgroundSelectedImage:'assets/images/orange_button_sel.png',
+    backgroundDisabledImage:'assets/images/orange_button_unsel.png',
+    who: 'addReceiptButton'
+});
+
+
+function handleImageEvent(event) {
+  theImage = event.media;
+  theThumbnail = event.thumbnail;
+  Titanium.App.fireEvent("photoChosen");
+  Titanium.App.fireEvent("postClicked", {
+    message: 'Yay posted a message'
+  });
+}
+
+function handleShowPhotoGallery() {
+    Titanium.Media.openPhotoGallery({
+        success:function(event) {
+          handleImageEvent(event);
+        },
+        cancel:function() {},
+        error:function(error){
+          var a = Titanium.UI.createAlertDialog({
+            title:'Uh Oh...',
+            message: 'We had a problem reading from your photo gallery - please try again'
+          });
+            a.show();
+        },
+        allowImageEditing:true
+      });
+}
+
+addReceiptButton.addEventListener('click', function(e) {
+    if (e.source.who != null &&  e.source.who == 'addReceiptButton') {
+
+        Titanium.Media.showCamera({
+        success:function(event) {
+            handleImageEvent(event);
+        },
+        cancel:function() { },
+        error:function(error) {
+           if (error.code == Titanium.Media.NO_CAMERA) {
+                handleShowPhotoGallery();
+           }
+           else {
+            var a = Titanium.UI.createAlertDialog({ title:'Oops...'});
+            a.setMessage('Unexpected error: ' + error.code);
+            a.show();
+           }
+        },
+        allowImageEditing:true
+      });
+
+    }
+});
+
+dashboard.add(addReceiptButton);
+
 //set up the dashboard table
 var data = [];
 
@@ -193,13 +258,13 @@ section.add(declinedRow);
 section.add(approvingRow);
 section.add(approvedRow);
 section.add(sentRow);
-section.add(receivedRow);
+//section.add(receivedRow);
 
 var tableView = Ti.UI.createTableView({
     data:data,
 	style:Ti.UI.iPhone.TableViewStyle.GROUPED,
 	backgroundColor:'transparent',
-	top:30
+	top:80
 });
 
 /**
@@ -227,26 +292,6 @@ tableView.addEventListener('click', function(e) {
 
 dashboard.add(tableView);
 
-//ADD
-var addReceiptButton = Titanium.UI.createButton({
-    title: 'Add Receipt',
-    top: dashboard.height * 0.9,
-    //left: 30,
-    height: 30,
-    width: 250,
-	backgroundImage:'assets/images/orange_button_unsel.png',
-    backgroundSelectedImage:'assets/images/orange_button_sel.png',
-    backgroundDisabledImage:'assets/images/orange_button_unsel.png',
-    who: 'addReceiptButton'
-});
-
-addReceiptButton.addEventListener('click', function(e) {
-    if (e.source.who != null &&  e.source.who == 'addReceiptButton') {
-        Ti.App.fireEvent(evtDisplayCamera);
-    }
-});
-
-dashboard.add(addReceiptButton);
 
 /**
 @param data object "{\"numberApprovedExpenses\":\"0\",\"numberApprovingExpenses\":\"0\",\"numberDeclinedExpenses\":\"0\",\"numberOpenExpenses\":\"0\",\"numberReimbursedmentReceivedExpenses\":\"0\",\"numberReimbursmentSentExpenses\":\"0\",\"numberSubmittedExpenses\":\"0\"}"

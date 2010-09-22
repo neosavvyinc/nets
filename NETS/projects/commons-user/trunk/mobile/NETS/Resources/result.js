@@ -62,10 +62,12 @@ Titanium.App.addEventListener("postClicked", function(e) {
 	  if (doc) {
 	    var a = Titanium.UI.createAlertDialog({
             title:'Upload Complete!',
-            message: 'Well done...your money is counted'
+            message: 'Receipt Uploaded...'
         });
         a.show();
   	    yay.play();
+        Ti.API.info('Changing to receipt confirmation...');
+//        switchToScreen(SCREEN.RECEIPT_DRILLDOWN_META);
 	  }
 	  
 	  ind.value = 0;

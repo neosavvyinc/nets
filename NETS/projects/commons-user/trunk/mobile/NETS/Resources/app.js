@@ -30,6 +30,7 @@ Titanium.include('statusDashboard.js');
 Titanium.include('report.js');
 Titanium.include('reportDrilldown.js');
 Titanium.include('reportDrillDownReceipt.js');
+Titanium.include('reportDrillDownReceiptMetadata.js');
 //handlers
 Titanium.include('result.js');
 Titanium.include('login_handlers.js');
@@ -182,6 +183,11 @@ function switchToScreen(v) {
         var receiptCaptureWin = NETSCreateWindow(WINDOW.RECEIPT_CAPTURE, receiptDrillDown.title);
         receiptCaptureWin.add(receiptDrillDown);
         dashboardTab.open(receiptCaptureWin,{animated:true});
+        break;
+    case SCREEN.RECEIPT_DRILLDOWN_META.id:
+        var receiptMetaDataWin = NETSCreateWindow(WINDOW.RECEIPT_METADATA, reportDrillReceiptMetadata.title);
+        receiptMetaDataWin.add(reportDrillReceiptMetadata);
+        dashboardTab.open(receiptMetaDataWin,{animated:true});
         break;
 	default:
 		Ti.API.error('switchToScreen error: invalid view arg');

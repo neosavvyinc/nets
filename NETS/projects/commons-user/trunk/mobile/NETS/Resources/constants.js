@@ -29,7 +29,8 @@ var WINDOW = {
     REPORT           : {id:4, name:'reportWin'},
     REPORT_DRILLDOWN : {id:5, name:'reportDrilldownWin'},
     RECEIPT_CAPTURE  : {id:7, name:'receiptCaptureWin'},
-	HELP 		     : {id:6, name:'helpWin'}
+	HELP 		     : {id:6, name:'helpWin'},
+    RECEIPT_METADATA : {id:8, name:'reportDrillReceiptMetadata'}
 };
 var TABGROUP = {
 	ROOT		: {id:100, name:'tabGroup'}
@@ -48,7 +49,8 @@ var SCREEN = {
     REPORT                  : {id:5, name:'report', parent:WINDOW.REPORT},
     REPORT_DRILLDOWN        : {id:6, name:'reportDrilldown', parent:WINDOW.REPORT_DRILLDOWN},
     RECEIPT_CAPTURE         : {id:8, name:'receiptCapture', parent:WINDOW.RECEIPT_CAPTURE},
-    MAX                     : {id:7, name:null, parent:null}
+    MAX                     : {id:7, name:null, parent:null},
+    RECEIPT_DRILLDOWN_META  : {id:9, name:'reportDrillReceiptMetadata', parent:WINDOW.REPORT_DRILLDOWN}
 };
 
 //App Properties
