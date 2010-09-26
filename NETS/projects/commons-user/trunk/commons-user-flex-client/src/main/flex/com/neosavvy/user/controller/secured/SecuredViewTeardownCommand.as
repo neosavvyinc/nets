@@ -14,6 +14,7 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.projectManagement.assignments.ManageAssignmentsMediator;
     import com.neosavvy.user.view.secured.projectManagement.projects.ManageProjectsMediator;
 
+    import com.neosavvy.user.view.secured.receipts.ReceiptManagerMediator;
     import com.neosavvy.user.view.secured.welcome.WelcomeMediator;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -51,6 +52,9 @@ package com.neosavvy.user.controller.secured {
 
             if (facade.hasMediator(ExpenseReportApprovalPopupMediator.NAME))
                 facade.removeMediator(ExpenseReportApprovalPopupMediator.NAME);
+
+            if (facade.hasMediator(ReceiptManagerMediator.NAME))
+                facade.removeMediator(ReceiptManagerMediator.NAME);
         }
 
         protected function cleanupProxies():void {

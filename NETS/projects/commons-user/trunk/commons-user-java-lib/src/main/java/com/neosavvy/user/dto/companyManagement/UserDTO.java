@@ -181,8 +181,6 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
         super();
     }
 
-    @XmlTransient
-    @FlexField(fieldType = FlexField.FlexFieldType.Excluded)
     public List<StorageServiceFileRef> getUncategorizedReceipts() {
         return uncategorizedReceipts;
     }

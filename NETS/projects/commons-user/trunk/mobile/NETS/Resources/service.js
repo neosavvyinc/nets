@@ -63,28 +63,27 @@ function serviceGetDashboardData(successCallback, failureCallback) {
     httpClient.send(null);    
 }
 
-function serviceAddReceiptToUser(fileRef, successCallback, failureCallback) {
-    Ti.API.debug('serviceAddReceiptToUser>');
-
-	httpClient.onerror = failureCallback;
-    httpClient.onload = function() { 
+function serviceAddReceiptToUser(fileReference, successCallback, failureCallback) {
+    httpClient.onerror = failureCallback;
+    httpClient.onload = function() {
         if (this.responseText == 'true') {
-        	successCallback(fileRef);
+        	successCallback(fileReference);
         }
         else {
         	failureCallback(this.responseText);
         }
     };
-    httpClient.onsendstream = function(e) { progressCallback(e.progress); };
-	httpClient.open('POST', MOBILE_SERVICE_BASE_URL + '/savereceipt');
-	httpClient.setRequestHeader('Content-Type', 'application/json');
+    httpClient.onsendstream = function(e) {  };
+	httpClient.open('POST', MOBILE_SERVICE_BASE_URL + '/savereceipt/?rabbitHole=' + securityWrapper.sessionId);
+    httpClient.setRequestHeader('Content-Type', 'application/json');
 	try {
-    	httpClient.send(JSON.stringify(fileRef));    
+    	httpClient.send( fileReference );
     }
     catch (err) {
     	alert(err);
     }
 }
+
 
 function serviceUploadReceipt(fileName, image, successCallback, failureCallback, progressCallback) {
     Ti.API.debug('serviceUploadReceipt>');

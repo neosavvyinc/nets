@@ -234,6 +234,7 @@ package com.neosavvy.user {
         public static const NAVIGATE_TO_VIEW_AWAITING_EXPENSE_REPORTS:String = "navigateToViewAwaitingExpenses";
         public static const NAVIGATE_TO_VIEW_SUBMITTED_EXPENSE_REPORTS:String = "navigateToViewSubmittedExpenseReports";
         public static const NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS:String = "navigateToReconcileExpenseReports";
+        public static const NAVIGATE_TO_MANAGE_RECEIPTS:String = "navigateToManageReceipts";
 
         public static const GET_INVITED_USERS_REQUEST:String = "getInvitedUsersRequest";
         public static const GET_INVITED_USERS_FAILED:String = "getInvitedUsersFailed";

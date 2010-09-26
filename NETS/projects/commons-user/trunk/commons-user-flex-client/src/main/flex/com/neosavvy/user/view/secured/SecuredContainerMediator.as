@@ -31,6 +31,8 @@ package com.neosavvy.user.view.secured {
 
         public static const NAV_INDEX_APPROVE_EXPENSES:Number       = 10;
 
+        public static const NAV_INDEX_MANAGE_RECEIPTS:Number        = 11;
+
         override public function onRegister():void {
         }
 
@@ -62,6 +64,7 @@ package com.neosavvy.user.view.secured {
                 ,ApplicationFacade.NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS
 
                 ,ApplicationFacade.NAVIGATE_TO_VIEW_AWAITING_EXPENSE_REPORTS
+                ,ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS
 
                 ,ApplicationFacade.REQUEST_LOGOUT
             ];
@@ -112,9 +115,9 @@ package com.neosavvy.user.view.secured {
                     navigationViewStack.selectedIndex = NAV_INDEX_WELCOME;
                     break;
 
-
-
-
+                case ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS:
+                    navigationViewStack.selectedIndex = NAV_INDEX_MANAGE_RECEIPTS;
+                    break;
             }
         }
 

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        xmlns:controls="controls.*"
+        xmlns:neosavvy="com.neosavvy.grid.*"
+        xmlns:validators="com.visualempathy.validators.*"
+        verticalScrollPolicy="off"
+        horizontalScrollPolicy="off"
+        styleName="applicationSubView"
+        width="100%"
+        height="100%">
+
+    <mx:TileList
+        id="receiptViewer"
+        height="100%"
+        width="100%"
+        rowHeight="300"
+        maxColumns="2"
+        horizontalScrollPolicy="off"
+        verticalScrollPolicy="on"        
+        itemRenderer="com.neosavvy.user.view.secured.receipts.ReceiptRenderer"
+        columnWidth="230"/>
+
+
+</mx:VBox>

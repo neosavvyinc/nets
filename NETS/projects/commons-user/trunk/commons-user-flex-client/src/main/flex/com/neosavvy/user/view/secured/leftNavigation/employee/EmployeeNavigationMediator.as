@@ -56,9 +56,13 @@ package com.neosavvy.user.view.secured.leftNavigation.employee {
                     toggleBarEmployeeFocus(2);
                     handleViewSubmittedExpensesButtonClicked();
                     break;
-                case "Reconcile Expenses":
+//                case "Reconcile Expenses":
+//                    toggleBarEmployeeFocus(3);
+//                    handleReconcileExpenseReportsButtonClicked();
+//                    break;
+                case "Manage Receipts":
                     toggleBarEmployeeFocus(3);
-                    handleReconcileExpenseReportsButtonClicked();
+                    handleManageReceipts();
                     break;
             }
         }
@@ -78,6 +82,10 @@ package com.neosavvy.user.view.secured.leftNavigation.employee {
 
         private function handleReconcileExpenseReportsButtonClicked():void {
             sendNotification(ApplicationFacade.NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS);
+        }
+
+        private function handleManageReceipts():void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS);
         }
 
         private function handleAddExpenseReportsButtonClicked():void {

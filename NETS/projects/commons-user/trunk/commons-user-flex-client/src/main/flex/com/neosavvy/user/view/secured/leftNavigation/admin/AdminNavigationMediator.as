@@ -98,9 +98,13 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
                     toggleBarEmployeeFocus(2);
                     handleViewSubmittedExpensesButtonClicked();
                     break;
-                case "Reconcile Expenses":
+//                case "Reconcile Expenses":
+//                    toggleBarEmployeeFocus(3);
+//                    handleReconcileExpenseReportsButtonClicked();
+//                    break;
+                case "Manage Receipts":
                     toggleBarEmployeeFocus(3);
-                    handleReconcileExpenseReportsButtonClicked();
+                    handleManageReceipts();
                     break;
             }
         }
@@ -147,6 +151,10 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
 
         private function handleAddExpenseReportsButtonClicked():void {
             sendNotification(ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT);
+        }
+
+        private function handleManageReceipts():void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS);
         }
 
         public function get adminNavigation():AdminNavigation {

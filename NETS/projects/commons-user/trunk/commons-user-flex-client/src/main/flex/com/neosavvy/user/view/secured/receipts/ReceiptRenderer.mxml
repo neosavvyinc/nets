@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<mx:VBox
+    horizontalAlign="center"
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    mouseOver="onMouseOver()"
+    mouseOut="onMouseOut()"
+    >
+
+    <mx:Script>
+        <![CDATA[
+
+        import com.neosavvy.user.ApplicationFacade;
+        import com.neosavvy.user.ProxyConstants;
+
+        import fineline.focal.common.types.v1.StorageServiceFileRef;
+
+
+        protected override function commitProperties():void {
+            super.commitProperties();
+
+            if( data )
+            {
+                var fileRef : StorageServiceFileRef = data as StorageServiceFileRef;
+                var instance:ApplicationFacade = ApplicationFacade.getInstance(ApplicationFacade.defaultApplicationKey);
+                var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "?noCache=" + (new Date().getMilliseconds());
+                trace(fileUrl);
+                _imageUrl = fileUrl;
+            }
+        }
+
+        [Bindable]
+        private var _imageUrl:String;
+
+
+        public function get imageUrl():String {
+            return _imageUrl;
+        }
+
+        public function set imageUrl(value:String):void {
+            receiptImg.addEventListener(Event.COMPLETE, handleImageComplete);
+            _imageUrl = value;
+        }
+
+        private function handleImageComplete(event:Event):void {
+            if (receiptImg.bytesLoaded == receiptImg.bytesTotal) {
+                receiptImg.removeEventListener(Event.COMPLETE, handleImageComplete);
+            }
+        }
+
+        private function onMouseOver():void {
+            viewReceipt.visible = true;
+            deleteReceipt.visible = true;
+        }
+
+        private function handleViewReceiptClicked(event:MouseEvent):void {
+            trace("view receipt");
+        }
+
+        private function handleDeleteReceiptClicked(event:MouseEvent):void {
+            trace("delete receipt");
+        }
+
+        private function onMouseOut():void {
+            viewReceipt.visible = false;
+            deleteReceipt.visible = false;
+        }
+        ]]></mx:Script>
+
+    <mx:Image id="receiptImg" source="{_imageUrl}" width="95%" height="100%"/>
+
+    <mx:HBox horizontalAlign="center" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+        <mx:Button id="viewReceipt" label="View Receipt" visible="false" click="handleViewReceiptClicked(event)"/>
+        <mx:Button id="deleteReceipt" label="Delete Receipt" visible="false" click="handleDeleteReceiptClicked(event)"/>
+    </mx:HBox>
+
+</mx:VBox>

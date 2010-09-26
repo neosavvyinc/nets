@@ -40,6 +40,14 @@ var ind = Titanium.UI.createProgressBar({
 result.add(ind);
 ind.show();
 
+function saveReceiptToUserFailed( e ) {
+    Titanium.API.error( e );
+}
+
+function saveReceiptToUserSuccess() {
+    Titanium.API.info( "Saved receipt to uncategorized list");
+};
+
 //Listen for post event
 Titanium.App.addEventListener("postClicked", function(e) {
     Ti.API.info('Handling a post clicked event');
@@ -47,7 +55,7 @@ Titanium.App.addEventListener("postClicked", function(e) {
 	var xhr = Titanium.Network.createHTTPClient();
 	xhr.onerror = function(e) {
 	  ind.hide();
-	  var a = Titanium.UI.createAlertDialog({ 
+	  var a = Titanium.UI.createAlertDialog({
 	    title:'Well, this is awkward...',
 	    message: 'We had a problem posting your image - please try again'
 	  });
@@ -58,7 +66,9 @@ Titanium.App.addEventListener("postClicked", function(e) {
 	  ind.hide();
 	  var doc = this.responseText;
       Ti.API.info(doc);
-	  
+
+      serviceAddReceiptToUser( doc , saveReceiptToUserSuccess, saveReceiptToUserFailed );
+
 	  if (doc) {
 	    var a = Titanium.UI.createAlertDialog({
             title:'Upload Complete!',
@@ -66,10 +76,9 @@ Titanium.App.addEventListener("postClicked", function(e) {
         });
         a.show();
   	    yay.play();
-        Ti.API.info('Changing to receipt confirmation...');
 //        switchToScreen(SCREEN.RECEIPT_DRILLDOWN_META);
 	  }
-	  
+
 	  ind.value = 0;
     setTimeout(function() {
       resultLabel.text = 'Magically beaming image...';

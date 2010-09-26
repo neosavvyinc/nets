@@ -16,6 +16,7 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigationMediator;
     import com.neosavvy.user.view.secured.projectManagement.assignments.ManageAssignmentsMediator;
     import com.neosavvy.user.view.secured.projectManagement.projects.ManageProjectsMediator;
+    import com.neosavvy.user.view.secured.receipts.ReceiptManagerMediator;
     import com.neosavvy.user.view.secured.userManagement.UserManagementMediator;
 
     import com.neosavvy.user.view.secured.welcome.WelcomeMediator;
@@ -87,6 +88,9 @@ package com.neosavvy.user.controller.secured {
                                 
                 if (!facade.hasMediator(ExpenseReportDetailMediator.NAME))
                     facade.registerMediator(new ExpenseReportDetailMediator(securedContainer.expenseReportDetail));
+
+                if (!facade.hasMediator(ReceiptManagerMediator.NAME))
+                    facade.registerMediator(new ReceiptManagerMediator(securedContainer.receiptManager));
             }
 
 
