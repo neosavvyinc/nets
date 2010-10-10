@@ -4,10 +4,13 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.util.RemoteObjectUtils;
 
+    import fineline.focal.common.types.v1.StorageServiceFileRef;
+
     import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.rpc.IResponder;
+    import mx.rpc.Responder;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
     import mx.rpc.remoting.mxml.RemoteObject;
@@ -67,6 +70,14 @@ package com.neosavvy.user.model {
             var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
             addCallbackHandler(userService, responder);
             userService.resetPassword(user);
+        }
+
+        public function disassociateReceiptUploadWithUser( user:UserDTO ,  fileRef:StorageServiceFileRef, responder:Responder ):void
+        {
+            var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
+            userService.addEventListener(ResultEvent.RESULT, responder.result);
+            userService.addEventListener(FaultEvent.FAULT, responder.fault);
+            userService.disassociateReceiptUploadWithUser(user, fileRef);
         }
 
         private function get securityProxy():SecurityProxy {

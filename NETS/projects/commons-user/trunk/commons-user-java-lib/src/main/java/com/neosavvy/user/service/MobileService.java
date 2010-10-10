@@ -63,6 +63,7 @@ public interface MobileService {
     @Path("/savereceipt")
     public String associateReceiptUploadWithUser(StorageServiceFileRef fileRef);
 
+
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     @Path("/dashboard")

@@ -154,6 +154,26 @@ public class UserServiceImpl implements UserService {
 
     }
 
+    public void disassociateReceiptUploadWithUser(UserDTO user, StorageServiceFileRef fileRef) {
+
+        List<UserDTO> users = findUsers(user);
+        if (users.isEmpty()) {
+            return;
+        }
+        UserDTO persistentUser = users.get(0);
+        List<StorageServiceFileRef> serviceFileRefList = persistentUser.getUncategorizedReceipts();
+        if ( serviceFileRefList == null )
+        {
+            serviceFileRefList = new ArrayList<StorageServiceFileRef>();
+        }
+        if(serviceFileRefList.remove( fileRef ))
+        {
+            System.out.println("Did it work");
+        }
+        persistentUser.setUncategorizedReceipts( serviceFileRefList );
+        userDao.saveUser( persistentUser );
+
+    }
 
     public void resetPassword(UserDTO user) {
         try {

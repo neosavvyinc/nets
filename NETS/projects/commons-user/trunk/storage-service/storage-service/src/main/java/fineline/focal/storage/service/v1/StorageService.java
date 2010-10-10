@@ -40,8 +40,8 @@ public interface StorageService
     @Secured("ROLE_EMPLOYEE")
     public StorageServiceFileRef uploadFile(@Context Request request, @PathParam("bucket")String bucket, @PathParam("key")String key) throws Exception;
 
-    @DELETE
-    @Path(value="/file/{bucket:.*?}/{key:.*}")
+    @GET
+    @Path(value="/delete/{bucket:.*?}/{key:.*}")
     @Encoded
     public String deleteFile(@PathParam("bucket")String bucket, @PathParam("key")String key) throws Exception;
 

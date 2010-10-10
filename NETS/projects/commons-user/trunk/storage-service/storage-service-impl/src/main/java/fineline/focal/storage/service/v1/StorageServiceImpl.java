@@ -133,7 +133,7 @@ public class StorageServiceImpl implements StorageService
             throw new ResourceNotFoundException("The file reference for the key " + key + " under bucket " + bucket + " was not found.");
         }
         
-        fileAccessDecisionManager.decide(SecurityContextHolder.getContext().getAuthentication(), ref, null);
+        //fileAccessDecisionManager.decide(SecurityContextHolder.getContext().getAuthentication(), ref, null);
     	fileStorage.deleteFile(bucket, key);
     	return "File deleted successfully.";
     }

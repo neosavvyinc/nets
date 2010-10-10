@@ -10,10 +10,16 @@
         <![CDATA[
 
         import com.neosavvy.user.ApplicationFacade;
+
         import com.neosavvy.user.ProxyConstants;
+
+        import com.neosavvy.user.dto.companyManagement.UserDTO;
 
         import fineline.focal.common.types.v1.StorageServiceFileRef;
 
+        import mx.rpc.Responder;
+        import mx.rpc.events.FaultEvent;
+        import mx.rpc.events.ResultEvent;
 
         protected override function commitProperties():void {
             super.commitProperties();
@@ -57,7 +63,43 @@
         }
 
         private function handleDeleteReceiptClicked(event:MouseEvent):void {
-            trace("delete receipt");
+
+            if( data )
+            {
+                var fileRef : StorageServiceFileRef = data as StorageServiceFileRef;
+
+                var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/delete/" + fileRef.bucket + "/" + fileRef.key + "?rabbitHole=" + ApplicationFacade.getSecurityProxy().sessionId;
+
+                trace(fileUrl);
+                _imageUrl = fileUrl;
+
+                var user:UserDTO = ApplicationFacade.getSecurityProxy().activeUser;
+                ApplicationFacade.getUserProxy().disassociateReceiptUploadWithUser( user,fileRef, new mx.rpc.Responder(
+                            function ( result : ResultEvent ) : void
+                            {
+                                trace("called dis-associate success");
+
+                                dispatchEvent(new Event("reloadReceiptData",true));
+                            },
+                            function ( fault : FaultEvent ) : void
+                            {
+                                trace("failed dis-association");
+                            }
+                        ));
+
+            }
+
+
+        }
+
+
+
+        private function onDeleteResult(event:ResultEvent):void {
+            trace("result for delete");
+        }
+
+        private function onDeleteFault(event:FaultEvent):void {
+            trace("fault for delete");            
         }
 
         private function onMouseOut():void {

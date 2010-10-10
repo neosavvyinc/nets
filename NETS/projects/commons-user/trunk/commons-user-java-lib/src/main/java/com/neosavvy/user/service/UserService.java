@@ -68,6 +68,9 @@ public interface UserService {
     @Secured({"ROLE_EMPLOYEE", "OBJECT_ACL_WRITE"})
     public void associateReceiptUploadWithUser(UserDTO user, StorageServiceFileRef fileRef);
 
+    @Secured({"ROLE_EMPLOYEE", "OBJECT_ACL_WRITE"})
+    public void disassociateReceiptUploadWithUser(UserDTO user, StorageServiceFileRef fileRef);
+
 
 
 

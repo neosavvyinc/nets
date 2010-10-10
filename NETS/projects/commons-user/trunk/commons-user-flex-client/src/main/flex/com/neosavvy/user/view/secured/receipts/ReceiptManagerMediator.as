@@ -4,6 +4,8 @@ package com.neosavvy.user.view.secured.receipts {
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.SecurityProxy;
 
+    import flash.events.Event;
+
     import mx.controls.TileList;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -45,6 +47,14 @@ package com.neosavvy.user.view.secured.receipts {
             super.onRegister();
 
             securityProxy = ApplicationFacade.getSecurityProxy();
+
+            receiptViewer.addEventListener( "reloadReceiptData", handleReloadReceiptData )
+        }
+
+        private function handleReloadReceiptData( event : Event ):void {
+
+            sendNotification( ApplicationFacade.CHECK_USER_LOGGED_IN );
+
         }
 
         override public function onRemove():void {
@@ -56,6 +66,7 @@ package com.neosavvy.user.view.secured.receipts {
         override public function handleNotification(notification:INotification):void {
             switch( notification.getName() )
             {
+                case ApplicationFacade.USER_LOGGED_IN:
                 case ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS:
                     var activeUser : UserDTO = securityProxy.activeUser;
                     receiptViewer.dataProvider = activeUser.uncategorizedReceipts;
