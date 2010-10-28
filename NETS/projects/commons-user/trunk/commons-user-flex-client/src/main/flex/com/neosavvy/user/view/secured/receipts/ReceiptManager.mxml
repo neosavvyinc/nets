@@ -10,6 +10,10 @@
         width="100%"
         height="100%">
 
+    <mx:HBox width="100%" horizontalAlign="right">
+        <mx:Button id="refreshReceipts" label="Refresh"/>
+    </mx:HBox>
+
     <mx:TileList
         id="receiptViewer"
         height="100%"
