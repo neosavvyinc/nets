@@ -3,6 +3,7 @@ package com.neosavvy.user.service;
 import com.neosavvy.user.dto.companyManagement.UserDTO;
 import com.neosavvy.user.dto.project.*;
 import com.neosavvy.user.service.exception.ExpenseServiceException;
+import fineline.focal.common.types.v1.StorageServiceFileRef;
 import org.eclipse.persistence.annotations.Cache;
 import org.springframework.security.access.annotation.Secured;
 
@@ -33,6 +34,9 @@ import java.util.List;
  * Time: 9:55:58 AM
  */
 public interface ExpenseService {
+
+    @Secured({"ROLE_EMPLOYEE", "ACL_OBJECT_WRITE", "AFTER_ACL_READ"})
+    public ExpenseReport saveReceiptToExpenseReport( ExpenseReport report, StorageServiceFileRef fileRef ) throws ExpenseServiceException;
     
     @Secured({"ROLE_EMPLOYEE", "ACL_OBJECT_WRITE", "AFTER_ACL_READ"})
     public ExpenseReport saveExpenseReport(ExpenseReport report, List<ExpenseItem> expenseItems) throws ExpenseServiceException;

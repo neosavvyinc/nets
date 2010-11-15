@@ -1,9 +1,5 @@
 <?xml version="1.0"?>
 <mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
-        xmlns:flexlib="http://code.google.com/p/flexlib/"
-        xmlns:controls="controls.*"
-        xmlns:neosavvy="com.neosavvy.grid.*"
-        xmlns:validators="com.visualempathy.validators.*"
         verticalScrollPolicy="off"
         horizontalScrollPolicy="off"
         styleName="applicationSubView"
@@ -26,4 +22,12 @@
         columnWidth="230"/>
 
 
+    <mx:Script><![CDATA[
+        import mx.collections.ArrayCollection;
+
+        [Bindable]
+        public var openExenseReports:ArrayCollection;
+
+
+        ]]></mx:Script>
 </mx:VBox>

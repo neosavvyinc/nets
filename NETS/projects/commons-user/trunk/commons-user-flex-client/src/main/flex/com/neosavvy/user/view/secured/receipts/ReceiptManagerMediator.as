@@ -1,22 +1,19 @@
 package com.neosavvy.user.view.secured.receipts {
     import com.neosavvy.user.ApplicationFacade;
-
     import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
+    import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.SecurityProxy;
 
     import flash.events.Event;
-
     import flash.events.MouseEvent;
 
     import mx.controls.Button;
     import mx.controls.TileList;
     import mx.logging.ILogger;
     import mx.logging.Log;
-
     import mx.rpc.Responder;
     import mx.rpc.events.FaultEvent;
-
     import mx.rpc.events.ResultEvent;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
@@ -29,6 +26,7 @@ package com.neosavvy.user.view.secured.receipts {
         public static const NAME:String = "receiptManagerMediator";
 
         private var securityProxy : SecurityProxy
+        private var _expenseReportProxy:ExpenseReportServiceProxy
 
 
         public function ReceiptManagerMediator( viewComponent : Object ) {
@@ -40,6 +38,8 @@ package com.neosavvy.user.view.secured.receipts {
             return [
                 ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS
                 ,"receiptsRefreshed"
+                ,ApplicationFacade.FIND_OPEN_EXPENSE_REPORTS_FOR_USER_SUCCESS
+                ,ApplicationFacade.ADD_RECEIPT_TO_EXPENSE_REPORT_SUCCESS
             ];
         }
 
@@ -62,9 +62,18 @@ package com.neosavvy.user.view.secured.receipts {
             super.onRegister();
 
             securityProxy = ApplicationFacade.getSecurityProxy();
+            _expenseReportProxy = facade.retrieveProxy(ExpenseReportServiceProxy.NAME) as ExpenseReportServiceProxy;
 
             receiptViewer.addEventListener( "reloadReceiptData", handleReloadReceiptData );
             refreshButton.addEventListener( MouseEvent.CLICK, handleReceiptRefresh );
+
+            receiptViewer.addEventListener( AddReceiptToExpenseReportEvent.TYPE, onAddReceiptToExpenseReportEvent );
+        }
+
+        private function onAddReceiptToExpenseReportEvent(event:AddReceiptToExpenseReportEvent):void {
+
+            sendNotification( ApplicationFacade.ADD_RECEIPT_TO_EXPENSE_REPORT_REQUEST, event );
+
         }
 
         private function handleReceiptRefresh(event:MouseEvent):void
@@ -101,10 +110,19 @@ package com.neosavvy.user.view.secured.receipts {
         override public function handleNotification(notification:INotification):void {
             switch( notification.getName() )
             {
+                case ApplicationFacade.ADD_RECEIPT_TO_EXPENSE_REPORT_SUCCESS:
+                    refreshReceipts();
+                    break;
                 case "receiptsRefreshed":
                 case ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS:
                     var activeUser : UserDTO = securityProxy.activeUser;
                     receiptViewer.dataProvider = activeUser.uncategorizedReceipts;
+                    sendNotification(ApplicationFacade.FIND_OPEN_EXPENSE_REPORTS_FOR_USER_REQUEST, activeUser);
+                    break;
+                case ApplicationFacade.FIND_OPEN_EXPENSE_REPORTS_FOR_USER_SUCCESS:
+                    trace("success");
+                    receiptManager.openExenseReports = _expenseReportProxy.openExpenseReports;
+                    receiptManager.receiptViewer.invalidateProperties();
                     break;
             }
         }

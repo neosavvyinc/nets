@@ -14,5 +14,21 @@ package com.neosavvy.user.dto.project {
             super();
         }
 
+        public function get displayString():String
+        {
+            if( project && project.name)
+            {
+                return "(" + idNumber + ")" + project.name;
+            }
+            else if ( project && project.name && location)
+            {
+                return "(" + idNumber + ")" + project.name + " " + location;
+            }
+            else
+            {
+                return "(" + idNumber + ")";
+            }
+        }
+
     }
 }

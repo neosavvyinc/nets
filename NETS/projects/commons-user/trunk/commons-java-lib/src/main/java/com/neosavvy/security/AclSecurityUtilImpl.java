@@ -102,7 +102,7 @@ public class AclSecurityUtilImpl implements AclSecurityUtil {
         }
     }
 
-    protected String getUsername() {
+    public String getUsername() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         if (auth.getPrincipal() instanceof UserDetails) {

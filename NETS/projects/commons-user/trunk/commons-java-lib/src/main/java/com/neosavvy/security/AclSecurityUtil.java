@@ -17,4 +17,5 @@ public interface AclSecurityUtil {
     public void addPermission(SecuredObject securedObject, Permission permission, Class clazz);
     public void addPermission(SecuredObject securedObject, Sid recipient, Permission permission, Class clazz);
     public void deletePermission(SecuredObject securedObject, Sid recipient, Permission permission, Class clazz);
+    public String getUsername();
 }

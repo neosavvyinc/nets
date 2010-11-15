@@ -26,6 +26,8 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.expenses.report.save.DeleteExpenseReport;
     import com.neosavvy.user.controller.expenses.report.save.FindExpenseReport;
     import com.neosavvy.user.controller.expenses.report.save.SaveExpenseReport;
+    import com.neosavvy.user.controller.expenses.report.view.FindOpenExpenseReportsForUser;
+    import com.neosavvy.user.controller.expenses.report.workflow.AddReceiptToExpenseReport;
     import com.neosavvy.user.controller.expenses.report.workflow.ApproveExpenseReport;
     import com.neosavvy.user.controller.expenses.report.workflow.DeclineExpenseReport;
     import com.neosavvy.user.controller.expenses.report.workflow.ReopenExpenseReport;
@@ -56,7 +58,6 @@ package com.neosavvy.user {
 
     public class ApplicationFacade extends Facade
     {
-
         public function ApplicationFacade(key:String)
         {
             super(key);
@@ -124,6 +125,8 @@ package com.neosavvy.user {
             registerCommand(FIND_EXPENSE_ITEM_TYPES_REQUEST, FindExpenseTypes);
             registerCommand(FIND_PAYMENT_METHODS_REQUEST, FindPaymentMethods);
             registerCommand(FIND_PROJECT_TYPES_REQUEST, FindProjectTypes);
+            registerCommand(FIND_OPEN_EXPENSE_REPORTS_FOR_USER_REQUEST, FindOpenExpenseReportsForUser);
+            registerCommand(ADD_RECEIPT_TO_EXPENSE_REPORT_REQUEST, AddReceiptToExpenseReport);
 
             registerCommand(APPROVE_EXPENSE_REPORT_REQUEST, ApproveExpenseReport);
             registerCommand(DECLINE_EXPENSE_REPORT_REQUEST, DeclineExpenseReport);
@@ -138,7 +141,6 @@ package com.neosavvy.user {
 
             registerCommand(INITIALIZE_VIEW_SUBMITTED_EXPENSE_REPORTS_VIEW, InitializeViewSubmittedExpenseReportView);
             registerCommand(INITIALIZE_AWAITING_EXPENSE_REPORT_VIEW, InitializeViewAwaitingApprovalExpenseReportView);
-
         }
 
         /**
@@ -393,5 +395,9 @@ package com.neosavvy.user {
         public static const SHOW_DECLINE_DIALOG:String = "showDeclineExpenseReportDialog";
         public static const SHOW_APPROVE_DIALOG:String = "showApproveExpenseReportDialog";
         public static const SHOW_VIEW_DIALOG:String = "showViewExpenseReportDialog";
+
+        public static const ADD_RECEIPT_TO_EXPENSE_REPORT_REQUEST:String = "addReceiptToExpenseReportRequest";
+        public static const ADD_RECEIPT_TO_EXPENSE_REPORT_SUCCESS:String = "addReceiptToExpenseReportSuccess";
+        public static const ADD_RECEIPT_TO_EXPENSE_REPORT_FAILED:String = "addReceiptToExpenseReportFailed";
     }
 }

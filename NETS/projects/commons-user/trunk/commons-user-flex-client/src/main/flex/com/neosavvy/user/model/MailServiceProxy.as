@@ -1,11 +1,7 @@
 package com.neosavvy.user.model {
     import com.neosavvy.user.ProxyConstants;
-    import com.neosavvy.user.dto.companyManagement.CompanyDTO;
     import com.neosavvy.user.dto.mail.MailMessageDTO;
-    import com.neosavvy.user.dto.project.ClientCompany;
-    import com.neosavvy.user.dto.project.ClientUserContact;
 
-    import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.rpc.IResponder;

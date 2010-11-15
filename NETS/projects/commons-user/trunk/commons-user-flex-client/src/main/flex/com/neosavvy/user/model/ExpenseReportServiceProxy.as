@@ -6,6 +6,8 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.dto.project.ExpenseReportStatus;
     import com.neosavvy.user.dto.project.Project;
 
+    import fineline.focal.common.types.v1.StorageServiceFileRef;
+
     import mx.collections.ArrayCollection;
     import mx.collections.ListCollectionView;
     import mx.logging.ILogger;
@@ -97,6 +99,13 @@ package com.neosavvy.user.model {
 
         public function set awaitingExpenseReportItems(value:ArrayCollection):void {
             _awaitingExpenseReportItems = value;
+        }
+
+        public function saveReceiptToExpenseReport( report : ExpenseReport, fileRef : StorageServiceFileRef, responder : IResponder ) : void
+        {
+            var service : RemoteObject = getService(ProxyConstants.expenseServiceDestination);
+            addCallbackHandler(service, responder);
+            service.saveReceiptToExpenseReport( report, fileRef );
         }
 
         public function saveExpenseReport(p:Project, report:ExpenseReport , expenseItems:ArrayCollection, responder:IResponder):void {
