@@ -40,7 +40,17 @@ public class ExpenseServiceImpl implements ExpenseService {
 
     public ExpenseReport saveReceiptToExpenseReport( ExpenseReport report, StorageServiceFileRef fileRef ) throws ExpenseServiceException {
 
-        report = findExpenseReportById( report.getId() );
+        if( report.getId() == null )
+        {
+            report.setOwner(getActiveUser());
+            report.setStatus(ExpenseReportStatus.OPEN);
+            saveExpenseReport( report, new ArrayList<ExpenseItem>() );
+        }
+        else
+        {
+            report = findExpenseReportById( report.getId() );
+        }
+
         List<ExpenseItem> expenseItems = getExpenseItems(report.getId());
 
         ExpenseItem itemToAdd = new ExpenseItem();

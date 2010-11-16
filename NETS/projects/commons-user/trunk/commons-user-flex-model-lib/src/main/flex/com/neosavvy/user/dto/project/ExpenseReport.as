@@ -14,9 +14,15 @@ package com.neosavvy.user.dto.project {
             super();
         }
 
+        public var displayStringOverride : String;
+
         public function get displayString():String
         {
-            if( project && project.name)
+            if( displayStringOverride )
+            {
+                return displayStringOverride;
+            }
+            else if( project && project.name)
             {
                 return "(" + idNumber + ")" + project.name;
             }

@@ -36,6 +36,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.project.GetAssignedUsersForProject;
     import com.neosavvy.user.controller.project.GetAvailableUsersForProject;
     import com.neosavvy.user.controller.project.GetProjectsForCompany;
+    import com.neosavvy.user.controller.project.GetProjectsForUser;
     import com.neosavvy.user.controller.project.SaveAssignmentsForProjectChain;
     import com.neosavvy.user.controller.project.SaveProject;
     import com.neosavvy.user.controller.project.SaveProjectAssignments;
@@ -115,6 +116,7 @@ package com.neosavvy.user {
             registerCommand(INITIALIZE_ASSIGNMENTS_FOR_PROJECT, InitializeAssignmentsForProject);
             registerCommand(GET_ASSIGNED_USERS_FOR_PROJECT_REQUEST, GetAssignedUsersForProject);
             registerCommand(GET_AVAILABLE_USERS_FOR_PROJECT_REQUEST, GetAvailableUsersForProject);
+            registerCommand(GET_PROJECTS_FOR_USER_REQUEST, GetProjectsForUser);
 
             registerCommand(SAVE_PROJECT_ASSIGNMENTS_REQUEST, SaveProjectAssignments);
             registerCommand(SAVE_PROJECT_ASSIGNMENTS_CHAIN_START, SaveAssignmentsForProjectChain);

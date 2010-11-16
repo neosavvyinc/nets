@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<mx:TitleWindow
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:code="http://code.google.com/p/flexlib/"
+        layout="vertical"
+        showCloseButton="true"
+        close="handleClose(event)">
+
+    <mx:Form id="expenseReportSummaryForm" width="100%">
+        <mx:FormItem id="projectFormItem" label="Project:">
+            <mx:ComboBox id="availableProjectsCmb" prompt="Select Project..." labelField="name" dataProvider="{projects}"/>
+        </mx:FormItem>
+        <mx:FormItem id="purposeFormItem" label="Purpose:">
+            <code:PromptingTextInput prompt="Enter Purpose Here..." id="purposeTextInput"/>
+        </mx:FormItem>
+        <mx:FormItem id="locationFormItem" label="Location:">
+            <code:PromptingTextInput prompt="Enter Location Here..." id="locationTextInput"/>
+        </mx:FormItem>
+    </mx:Form>
+
+    <mx:ControlBar width="100%" horizontalAlign="right">
+        <mx:Button id="createExpenseReport" label="Finish" click="handleFinish(event)"/>
+    </mx:ControlBar>
+
+
+    <mx:Script><![CDATA[
+        import com.neosavvy.user.dto.project.ExpenseReport;
+
+        import com.neosavvy.user.dto.project.Project;
+
+        import fineline.focal.common.types.v1.StorageServiceFileRef;
+
+        import mx.collections.ArrayCollection;
+        import mx.managers.PopUpManager;
+
+        [Bindable]
+        public var expenseReport : ExpenseReport;
+
+        [Bindable]
+        public var fileRef : StorageServiceFileRef;
+
+        [Bindable]
+        public var projects : ArrayCollection;
+
+        private function handleClose(event:CloseEvent):void {
+            PopUpManager.removePopUp(this);
+        }
+        import mx.events.CloseEvent;
+
+        private function handleFinish(event:MouseEvent):void {
+
+            expenseReport.location = locationTextInput.text;
+            expenseReport.purpose = purposeTextInput.text;
+            expenseReport.project = availableProjectsCmb.selectedItem as Project;
+
+            dispatchEvent(new AddReceiptToExpenseReportEvent( expenseReport, fileRef ));
+            handleClose(null);
+        }
+        ]]></mx:Script>
+</mx:TitleWindow>

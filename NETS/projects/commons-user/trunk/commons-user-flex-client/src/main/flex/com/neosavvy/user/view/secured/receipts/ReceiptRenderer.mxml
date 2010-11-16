@@ -10,6 +10,9 @@
     <mx:Metadata>
         [Event(name="addReceiptToExpenseReportEvent"
                 ,type="com.neosavvy.user.view.secured.receipts.AddReceiptToExpenseReportEvent")]
+
+        [Event(name="createExpenseReportAndAddReceiptEvent"
+                ,type="com.neosavvy.user.view.secured.receipts.CreateExpenseReportAndAddRecentEvent")]
     </mx:Metadata>
 
     <mx:Script>
@@ -45,7 +48,6 @@
 
             if (data) {
                 var fileRef:StorageServiceFileRef = data as StorageServiceFileRef;
-                var instance:ApplicationFacade = ApplicationFacade.getInstance(ApplicationFacade.defaultApplicationKey);
                 var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "?noCache=" + (new Date().getMilliseconds());
                 trace(fileUrl);
                 _imageUrl = fileUrl;
@@ -131,16 +133,15 @@
 
         private function onAddReceipt(event:MouseEvent):void {
 
-            if( expenseReportSelector.selectedIndex >= 0 )
-            {
-                trace("user selected an expense report that exists");
-                var selectedExpenseReport : ExpenseReport = expenseReportSelector.selectedItem as ExpenseReport;
-                var selectedFileRef : StorageServiceFileRef = data as StorageServiceFileRef;
+            var selectedExpenseReport : ExpenseReport = expenseReportSelector.selectedItem as ExpenseReport;
+            var selectedFileRef : StorageServiceFileRef = data as StorageServiceFileRef;
+            if( expenseReportSelector.selectedIndex >= 1 )
+            {   
                 dispatchEvent( new AddReceiptToExpenseReportEvent( selectedExpenseReport , selectedFileRef) );
             }
             else
             {
-                trace("user selected add new expense report");
+                dispatchEvent( new CreateExpenseReportAndAddRecentEvent( selectedExpenseReport, selectedFileRef) );
             }
 
         }
@@ -153,7 +154,6 @@
                 id="expenseReportSelector"
                 width="100%"
                 dataProvider="{_openExpenseReports}"
-                prompt="Add to new..."
                 visible="false"
                 labelField="displayString"
                 />
