@@ -14,6 +14,9 @@ import fineline.focal.common.types.v1.StorageServiceFileRef;
 import org.apache.commons.lang.time.FastDateFormat;
 import org.eclipse.persistence.config.HintValues;
 import org.eclipse.persistence.config.QueryHints;
+import org.im4java.core.ConvertCmd;
+import org.im4java.core.IM4JavaException;
+import org.im4java.core.IMOperation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -44,12 +47,17 @@ public class LocalFileStorage implements FileStorage {
         return getFile(ref);
 	}
 
-    @Transactional(readOnly = true)
     public File getFile(StorageServiceFileRef ref) throws ResourceNotFoundException {
+        return getFile(ref, null);
+    }
+
+
+    @Transactional(readOnly = true)
+    public File getFile(StorageServiceFileRef ref, String size) throws ResourceNotFoundException {
     	String bucket = ref.getBucket();
     	String key = ref.getKey();
-    	
-    	File file = lookupFilePath(ref);
+
+    	File file = lookupFilePath(ref, size);
         if (!file.exists()) {
             throw new ResourceNotFoundException("The key " + key + " was not found under bucket " + bucket);
         }
@@ -120,8 +128,11 @@ public class LocalFileStorage implements FileStorage {
         }
                 
         FileUtils.writeFile(data, file);
-                
-    	ref.setContentType(contentType);
+
+        writeViewableImage(ref, parentDir);
+        writeThumbnailImage(ref, parentDir);
+
+        ref.setContentType(contentType);
         ref.setFileSize(file.length());
         ref.setOwner(owner);
         ref.setLastModifiedDate(new Date());        
@@ -130,7 +141,55 @@ public class LocalFileStorage implements FileStorage {
         
     	return ref;
     }
-    
+
+    private void writeThumbnailImage(StorageServiceFileRef ref, File parentDir) {
+        String imPath="/opt/local/bin:/usr/bin";
+        ConvertCmd cmd = new ConvertCmd();
+        cmd.setSearchPath(imPath);
+
+        // create the operation, add images and operators/options
+        IMOperation op = new IMOperation();
+        String sourceImage = parentDir.getAbsolutePath() + "/" + ref.getKey();
+        String destinationImage = sourceImage.replaceFirst(".jpg", "-thumb.jpg");
+        op.addImage(sourceImage);
+        op.resize(100,100);
+        op.addImage(destinationImage);
+
+        try {
+            cmd.run(op);
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IM4JavaException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
+    private void writeViewableImage(StorageServiceFileRef ref, File parentDir) {
+        String imPath="/opt/local/bin:/usr/bin";
+        ConvertCmd cmd = new ConvertCmd();
+        cmd.setSearchPath(imPath);
+
+        // create the operation, add images and operators/options
+        IMOperation op = new IMOperation();
+        String sourceImage = parentDir.getAbsolutePath() + "/" + ref.getKey();
+        String destinationImage = sourceImage.replaceFirst(".jpg", "-viewable.jpg");
+        op.addImage(sourceImage);
+        op.resize(640,480);
+        op.addImage(destinationImage);
+
+        try {
+            cmd.run(op);
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (InterruptedException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        } catch (IM4JavaException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+    }
+
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor={ResourceNotFoundException.class, IOException.class})
     public void deleteFile(String bucket, String key) throws ResourceNotFoundException, IOException {
         StorageServiceFileRef ref = findFileRef(bucket, key);
@@ -175,8 +234,12 @@ public class LocalFileStorage implements FileStorage {
         
         return bucket.getDirectory();
     }
-    
+
     private File lookupFilePath(StorageServiceFileRef ref) throws ResourceNotFoundException {
+        return lookupFilePath( ref, null );
+    }
+
+    private File lookupFilePath(StorageServiceFileRef ref, String size) throws ResourceNotFoundException {
     	File parentDir = lookupBucketDirectory(ref.getBucket());
     	
         if (ref.getLocation() != null) {
@@ -185,6 +248,16 @@ public class LocalFileStorage implements FileStorage {
         	if (!parentDir.exists()) {
                 throw new ResourceNotFoundException("The location of the file reference could not be found.");        		
         	}
+        }
+
+        String fileName = ref.getKey();
+        if( "thumb".equals(size) )
+        {
+            fileName = fileName.replace(".", "-thumb.");
+        }
+        else if ( "viewable".equals(size) )
+        {
+            fileName = fileName.replace(".", "-viewable.");
         }
         
         return new File(parentDir, ref.getKey());

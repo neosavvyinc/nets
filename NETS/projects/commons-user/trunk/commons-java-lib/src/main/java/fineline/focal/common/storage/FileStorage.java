@@ -14,7 +14,8 @@ import fineline.focal.common.types.v1.StorageServiceFileRef;
 public interface FileStorage {
     StorageBucket getBucket(String name);
 	File getFile(String bucket, String key) throws ResourceNotFoundException;
-	File getFile(StorageServiceFileRef ref) throws ResourceNotFoundException;
+    File getFile(StorageServiceFileRef ref) throws ResourceNotFoundException;
+	File getFile(StorageServiceFileRef ref, String size) throws ResourceNotFoundException;
 	StorageServiceFileRef findFileRef(String bucket, String key);
 	StorageServiceFileRef saveFile(String bucket, String key, String fileName, String contentType, InputStream data, String owner) 
 	    throws ResourceNotFoundException, IOException;

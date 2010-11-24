@@ -65,6 +65,7 @@
 				var sessionState : SessionState = new SessionState();
 				sessionState.user = userDTO;
 				sessionState.securityWrapper = securityWrapper;
+				
 				this.data = sessionState;
 				
 				navigator.pushView( DashboardView, sessionState );

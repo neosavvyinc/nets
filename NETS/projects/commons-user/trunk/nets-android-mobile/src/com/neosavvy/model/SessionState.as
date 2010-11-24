@@ -3,6 +3,7 @@ package com.neosavvy.model
 	import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
 	import com.neosavvy.user.dto.companyManagement.UserDTO;
 
+	[Bindable]
 	public class SessionState
 	{
 		private var _user : UserDTO;

@@ -27,10 +27,10 @@ import org.springframework.stereotype.Component;
 public interface StorageService
 {
     @GET
-    @Path(value="/file/{bucket:.*?}/{key:.*}") 
+    @Path(value="/file/{bucket:.*?}/{key:.*}/{size:.*}") 
     @Encoded
     @Secured("ROLE_EMPLOYEE")
-    public Response downloadFile(@PathParam("bucket")String bucket, @PathParam("key")String key) throws Exception;
+    public Response downloadFile(@PathParam("bucket")String bucket, @PathParam("key")String key, @PathParam("size")String size) throws Exception;
     
     @POST
     @Path(value="/file/{bucket:.*?}/{key:.*}")

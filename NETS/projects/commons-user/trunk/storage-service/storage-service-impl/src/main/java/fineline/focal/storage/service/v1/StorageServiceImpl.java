@@ -48,7 +48,7 @@ public class StorageServiceImpl implements StorageService
         return ref;
     }
     
-    public Response downloadFile(String bucket, String key) throws Exception {
+    public Response downloadFile(String bucket, String key, String size) throws Exception {
         StorageServiceFileRef ref = fileStorage.findFileRef(bucket, key);
         if (ref == null) {
             throw new ResourceNotFoundException("The file reference for the key " + key + " under bucket " + bucket + " was not found.");
@@ -60,7 +60,7 @@ public class StorageServiceImpl implements StorageService
             throw new ResourceNotFoundException("The file reference for the key " + key + " under bucket " + bucket + " has been marked deleted.");
         }
     	
-    	File file = fileStorage.getFile(ref);
+    	File file = fileStorage.getFile(ref, size);
     	if (!file.exists()) {
     	    throw new ResourceNotFoundException("The file referenced by key " + key + " under bucket " + bucket + " does not exist.");
     	}

@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
-		xmlns:s="library://ns.adobe.com/flex/spark" title="DashboardView">
-	<s:layout>
+<views:BaseNETSView 
+	xmlns:fx="http://ns.adobe.com/mxml/2009" 
+	xmlns:s="library://ns.adobe.com/flex/spark" 
+	xmlns:views="com.neosavvy.views.*"
+	title="DashboardView" >
+	<views:layout>
 		<s:VerticalLayout/>
-	</s:layout>
+	</views:layout>
 
 
 	<fx:Script>
@@ -31,6 +34,7 @@
 			
 			private var reference : File;
 			private var uploadProgressManager : UploadProgressManager;
+			
 			protected function imageComplete( event : MediaEvent ) : void
 			{
 				var media : MediaPromise = event.data;
@@ -55,7 +59,7 @@
 			
 			protected function upCompleteHandler(event:DataEvent):void
 			{
-				trace("upload success");
+				trace("Successfully uploaded the file...");
 				var xmlData : XML = XML(event.data as String);
 				var storageFileRef : StorageServiceFileRef  = createStorageServiceFileRef( xmlData );
 				
@@ -74,17 +78,33 @@
 				
 			} 
 			
+			protected function upIoErrorHandler(event:Event):void
+			{
+				trace("upload failed");
+			}
+			
+			
+			private function progressHandler(event:ProgressEvent):void
+			{
+				trace("Progress", event.bytesLoaded, event.bytesTotal);
+				uploadProgressManager.updateProgress( event.bytesLoaded, event.bytesTotal );
+			}
+			
+			private function uploadCompleteHandler(event:Event):void
+			{
+				trace("complete");
+			} 
+			
 			protected function handleAssociationComplete(event:ResultEvent):void
 			{
-				// TODO Auto-generated method stub
-				trace("ass success");
+				trace("Associated the receipt with a user...");
 				uploadProgressManager.progressComplete();
 			}
 			
 			
 			protected function handleAssociationFault(event:FaultEvent):void
 			{
-				trace("ass failed");
+				trace("Failed to associate the receipt with a user...");
 			}
 			
 			protected function createStorageServiceFileRef(xml:XML):StorageServiceFileRef {
@@ -140,22 +160,6 @@
 				} 
 			}
 			
-			protected function upIoErrorHandler(event:Event):void
-			{
-				trace("upload failed");
-			}
-			
-			
-			private function progressHandler(event:ProgressEvent):void
-			{
-				trace("Progress", event.bytesLoaded, event.bytesTotal);
-				uploadProgressManager.updateProgress( event.bytesLoaded, event.bytesTotal );
-			}
-			
-			private function uploadCompleteHandler(event:Event):void
-			{
-				trace("complete");
-			} 
 		]]>
 	</fx:Script>
 
@@ -164,4 +168,4 @@
 	</fx:Declarations>
 	
 	<s:Button width="100%" label="Capture Receipt" click="captureReceiptClicked(event)"/>
-</s:View>
+</views:BaseNETSView>
