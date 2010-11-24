@@ -260,7 +260,7 @@ public class LocalFileStorage implements FileStorage {
             fileName = fileName.replace(".", "-viewable.");
         }
         
-        return new File(parentDir, ref.getKey());
+        return new File(parentDir, fileName);
     }
         
     public StorageBucket getBucket(String name) {
