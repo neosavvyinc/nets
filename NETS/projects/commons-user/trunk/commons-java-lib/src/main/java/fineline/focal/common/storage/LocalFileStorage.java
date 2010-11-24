@@ -152,7 +152,7 @@ public class LocalFileStorage implements FileStorage {
         String sourceImage = parentDir.getAbsolutePath() + "/" + ref.getKey();
         String destinationImage = sourceImage.replaceFirst(".jpg", "-thumb.jpg");
         op.addImage(sourceImage);
-        op.resize(100,100);
+        op.resize(200,300);
         op.addImage(destinationImage);
 
         try {
