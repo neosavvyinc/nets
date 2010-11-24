@@ -6,6 +6,7 @@
  */
 
 package fineline.focal.common.types.v1 {
+    import com.neosavvy.user.ProxyConstants;
 
     [Bindable]
     [RemoteClass(alias="fineline.focal.common.types.v1.StorageServiceFileRef")]
@@ -13,6 +14,18 @@ package fineline.focal.common.types.v1 {
         public function StorageServiceFileRef() {
             super();
         }
+
+        public function get source():String
+        {
+            var returnValue : String = ProxyConstants.getUrlForEnvironment() +
+                        "/nets/storage/file/" +
+                        bucket + "/" +
+                        key +
+                        "?noCache=" + (new Date().getMilliseconds());
+
+            return returnValue;
+        }
+
 
     }
 }
