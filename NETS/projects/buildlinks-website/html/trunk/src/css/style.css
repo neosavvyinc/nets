@@ -224,10 +224,46 @@ button {  width: auto; overflow: visible; }
     Author: 
  */
 
+/*****
+*
+* Navigation Related Styles
+*
+******/
+div#navTabLeft {
+    background-image:  url(../images/nav/Tab_upLeft.png);
+    background-repeat: no-repeat;
+    height: 37px;
+    width: 15px;
+    float: left;
+}
 
+div#navTabBody {
+    background-image:  url(../images/nav/Tab_upMiddle.png);
+    background-repeat: repeat;
+    height: 37px;
+    width: auto;
+    float: left;
+    text-align:center;
+    vertical-align: middle;
+    position: relative;
+    line-height: 37px;
+    font-family:
+}
 
+div#navCenteredText {
+    position:absolute;
+    top:50%;
+    height:10em;
+    margin-top:-5em
+}
 
-
+div#navTabRight {
+    background-image:  url(../images/nav/Tab_upRight.png);
+    background-repeat: no-repeat;
+    height: 37px;
+    width: 15px;
+    float: left;
+}
 
 
 
