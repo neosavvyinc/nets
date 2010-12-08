@@ -64,8 +64,83 @@ public class LocalFileStorage implements FileStorage {
 
         return file;    	
     }
-    
-    @Transactional(readOnly = true)    
+
+    public Boolean rotateFile(StorageServiceFileRef ref, String direction) {
+
+        try {
+            File thumb = lookupFilePath(ref,"thumb");
+            File viewable = lookupFilePath(ref,"viewable");
+            File fullSize = lookupFilePath(ref);
+
+            if( direction.equals("right") )
+            {
+                rotateFileRight( thumb );
+                rotateFileRight( viewable );
+                rotateFileRight( fullSize );
+                return true;
+            }
+            else if( direction.equals("left") )
+            {
+
+                rotateFileLeft( thumb );
+                rotateFileLeft( viewable );
+                rotateFileLeft( fullSize );
+                return true;
+            }
+        }
+        catch (ResourceNotFoundException e)
+        {
+            return false;
+        }
+
+        return false;
+    }
+
+    private void rotateFileRight( File file ) {
+        String imPath="/opt/local/bin:/usr/bin";
+        ConvertCmd cmd = new ConvertCmd();
+        cmd.setSearchPath(imPath);
+
+        // create the operation, add images and operators/options
+        IMOperation op = new IMOperation();
+        op.addImage(file.getAbsolutePath());
+        op.rotate(90d);
+        op.addImage(file.getAbsolutePath());
+
+        try {
+            cmd.run(op);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IM4JavaException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void rotateFileLeft( File file ) {
+        String imPath="/opt/local/bin:/usr/bin";
+        ConvertCmd cmd = new ConvertCmd();
+        cmd.setSearchPath(imPath);
+
+        // create the operation, add images and operators/options
+        IMOperation op = new IMOperation();
+        op.addImage(file.getAbsolutePath());
+        op.rotate(-90d);
+        op.addImage(file.getAbsolutePath());
+
+        try {
+            cmd.run(op);
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (IM4JavaException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Transactional(readOnly = true)
     public StorageServiceFileRef findFileRef(String bucket, String key) {
         // we intentionally don't filter on status active here to allow us to operate on deleted files
     	Query query = entityManager.createQuery("SELECT s FROM StorageServiceFileRef s WHERE s.bucket = :bucket AND s.key = :key");

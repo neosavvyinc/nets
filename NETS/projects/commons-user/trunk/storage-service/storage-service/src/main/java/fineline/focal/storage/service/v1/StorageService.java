@@ -50,5 +50,11 @@ public interface StorageService
     @Encoded
     @Produces(MediaType.TEXT_XML)
     public StorageServiceFileRef findFileRef(@PathParam("bucket")String bucket, @PathParam("key")String key) throws Exception;
+
+    @GET
+    @Path(value="/rotate/{bucket:.*?}/{key:.*}/{direction:.*}")
+    @Encoded
+    @Secured("ROLE_EMPLOYEE")
+    public Boolean rotateImage(@PathParam("bucket")String bucket, @PathParam("key")String key, @PathParam("direction")String direction) throws Exception;
     
 }

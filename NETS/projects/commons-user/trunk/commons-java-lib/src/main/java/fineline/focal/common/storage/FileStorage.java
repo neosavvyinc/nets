@@ -21,4 +21,6 @@ public interface FileStorage {
 	    throws ResourceNotFoundException, IOException;
 	void deleteFile(String bucket, String key) throws ResourceNotFoundException, IOException;
 	void updateOwnership(String oldOwner, String newOwner);
+
+    Boolean rotateFile(StorageServiceFileRef ref, String direction);
 }

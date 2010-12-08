@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.mail.internet.ContentDisposition;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -90,7 +91,22 @@ public class StorageServiceImpl implements StorageService
         
         return builder.build();
     }
-    
+
+    public Boolean rotateImage(String bucket, String key, String direction) throws Exception {
+        StorageServiceFileRef ref = fileStorage.findFileRef(bucket, key);
+        if (ref == null) {
+            throw new ResourceNotFoundException("The file reference for the key " + key + " under bucket " + bucket + " was not found.");
+        }
+
+        fileAccessDecisionManager.decide(SecurityContextHolder.getContext().getAuthentication(), ref, SecurityConfig.createList("OBJECT_ACL_READ"));
+
+        if (ref.isStatusDeleted()) {
+            throw new ResourceNotFoundException("The file reference for the key " + key + " under bucket " + bucket + " has been marked deleted.");
+        }
+
+    	return fileStorage.rotateFile(ref, direction);
+    }
+
     public StorageServiceFileRef uploadFile(Request request, String bucket, String key) throws Exception {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
