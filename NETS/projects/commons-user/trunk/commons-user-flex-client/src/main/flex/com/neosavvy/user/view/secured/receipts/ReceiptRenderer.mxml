@@ -47,10 +47,7 @@
 
 
             if (data) {
-                var fileRef:StorageServiceFileRef = data as StorageServiceFileRef;
-                var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "/viewable";
-                trace(fileUrl);
-                _imageUrl = fileUrl;
+                loadImage();
             }
         }
 
@@ -59,6 +56,7 @@
 
         [Bindable]
         private var _openExpenseReports:ArrayCollection;
+        private var cacheKey:Number = 0;
 
         private function onMouseOver():void {
             _openExpenseReports = (parentDocument as ReceiptManager).openExenseReports;
@@ -129,8 +127,7 @@
         }
 
         private function rotateLeft(event:MouseEvent):void {
-            if( data )
-            {
+            if (data) {
                 var fileRef:StorageServiceFileRef = data as StorageServiceFileRef;
                 var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/rotate/" + fileRef.bucket + "/" + fileRef.key + "/left?rabbitHole=" + ApplicationFacade.getSecurityProxy().sessionId;
 
@@ -138,12 +135,12 @@
                 var request:URLRequest = new URLRequest(fileUrl);
                 request.method = URLRequestMethod.GET;
                 urlLoader.load(request);
+                urlLoader.addEventListener(IOErrorEvent.IO_ERROR, handleIoError);
             }
         }
 
         private function rotateRight(event:MouseEvent):void {
-            if( data )
-            {
+            if (data) {
                 var fileRef:StorageServiceFileRef = data as StorageServiceFileRef;
                 var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/rotate/" + fileRef.bucket + "/" + fileRef.key + "/right?rabbitHole=" + ApplicationFacade.getSecurityProxy().sessionId;
 
@@ -151,7 +148,33 @@
                 var request:URLRequest = new URLRequest(fileUrl);
                 request.method = URLRequestMethod.GET;
                 urlLoader.load(request);
+                urlLoader.addEventListener(IOErrorEvent.IO_ERROR, handleIoError);
             }
+        }
+
+        /***
+         * This is a bug in that it receives an error but it did successfully
+         * handle the rotating of the image.
+         *
+         * This needs to be fixed.
+         * 
+         * @param event
+         */
+        private function handleIoError(event:IOErrorEvent):void {
+            trace("Error: " + event.toString());
+            loadImage(true);
+        }
+
+        private function loadImage( incrementCacheKey : Boolean = false ):void {
+
+            if( incrementCacheKey )
+            {
+                cacheKey = cacheKey+1;
+            }
+            var fileRef:StorageServiceFileRef = data as StorageServiceFileRef;
+            var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "/viewable?cacheKey="+cacheKey;
+            trace(fileUrl);
+            _imageUrl = fileUrl;
         }
         ]]></mx:Script>
 
