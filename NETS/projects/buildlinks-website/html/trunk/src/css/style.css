@@ -366,7 +366,7 @@ ul {
 ul#navigation {
     height: 36px;
     padding: 20px 0px 0 0px;
-    width: 904px;
+    width: 960px;
     margin: 0 auto;
     position: relative;
     overflow: hidden;
@@ -453,9 +453,10 @@ ul#navigation li.selected a:link, ul#navigation li.selected a:visited {
 ul#featureNavigation {
     height: 25px;
     padding: 20px 0px 0px 0px;
-    min-width: 904px;
+    min-width: 960px;
     margin: 0 auto;
     position: relative;
+    top: 300px;
 }
 
 ul#featureNavigation li {
@@ -506,7 +507,7 @@ div#container {
 div#main {
     position: relative;
     background-color: #ffffff;
-    width: 904px;
+    width: 960px;
     min-height: 784px;
     height: 100%;
     margin-left: auto;
