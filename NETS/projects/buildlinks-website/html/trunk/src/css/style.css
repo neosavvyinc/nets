@@ -456,7 +456,7 @@ ul#featureNavigation {
     min-width: 960px;
     margin: 0 auto;
     position: relative;
-    top: 300px;
+    top: 280px;
 }
 
 ul#featureNavigation li {
@@ -533,7 +533,39 @@ div#featureHeader img {
     visibility: hidden;
 }
 
+div#mainContent {
+    top: 380px;
+    left: 10px;
+    position: absolute;
+}
 
+div#mainContentLeft
+,div#subcontractorBlock
+,div#builderBlock
+,div#homeBuyerBlock
+,div#mainContentRight {
+    float: left;
+    padding-left: 10px;
+}
+
+div#subcontractorBlock
+,div#builderBlock
+,div#homeBuyerBlock
+{
+    max-width: 170px;
+}
+
+div#mainContentRight {
+    max-width: 320px;
+    padding-left: 20px;
+}
+
+div#subcontractorBlock
+,div#builderBlock
+,div#homeBuyerBlock
+{
+    padding-top: 15px;
+}
 
 /*
 * Media queries for responsive design
