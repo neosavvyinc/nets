@@ -115,8 +115,12 @@ input, select {
    * we normalize monospace styles ourselves
    * table font-size is reset in the HTML5 reset above so there is no need to repeat
 */
+html, body {
+	height: 100%;
+}
 body {
-    font: 13px/1.231 sans-serif;
+	color: #34342d;
+    font: 13px/1.231 'Avenir55Roman', sans-serif;
     *font-size: small;
 }
 
@@ -146,7 +150,25 @@ body, select, input, textarea {
 /* Headers (h1,h2,etc) have no default font-size or margin,
    you'll want to define those yourself. */
 h1, h2, h3, h4, h5, h6 {
-    font-weight: bold;
+    font-weight: normal;
+    font-style: normal;
+    line-height: normal;
+    font-family: 'Avenir85Heavy', sans-serif;
+}
+
+h1 {
+	font-size: 26px;
+	color: #0d4a9b;
+}
+
+h2 {
+	font-size: 18px;
+	color: #34342d;
+}
+
+p {
+	line-height: 24px;
+	font-size: 14px;
 }
 
 /* always force a scrollbar in non-IE */
@@ -355,6 +377,15 @@ www.webaim.org/techniques/css/invisiblecontent/  &  j.mp/visuallyhidden  */
 */
 
 /*****
+* header
+*****/
+header {
+	width: 960px;
+	margin: 0 auto;
+	padding-top: 30px;
+}
+
+/*****
 *
 * Navigation Related Styles
 *
@@ -377,7 +408,7 @@ ul#navigation li {
     -moz-border-radius: 10px;
     border-radius: 10px;
     float: left; /*width: 168px;*/
-    margin: 0 0px 0 0;
+    margin: 0;
     background-color: #cacac4;
     border: solid 1px #b6b6b1;
     position: relative;
@@ -446,8 +477,9 @@ ul#navigation li.selected a:link, ul#navigation li.selected a:visited {
     background-color: #e9e9e9;
 }
 
+
 /*****
-* Sub Navigation
+* Feature Navigation
 *****/
 
 ul#featureNavigation {
@@ -499,23 +531,59 @@ ul#featureNavigation li a:hover {
 }
 
 
-div#container {
-  background-color: #e2e2db;
+/*****
+* Sub Navigation
+*****/
+ul#subnavigation {
+	font-family: 'Avenir55Roman';
+	padding: 10px 0px 1px;
+	width: 185px;
+	margin: 0;
+	top: 10px;
+	position: relative;
+	background: url('../images/subnav_gradient.png') repeat-y right 11px;
 }
 
+ul#subnavigation a {
+	color: #6b6b6b;	
+	text-decoration: none;
+}
+
+li.subnav, li.subnavSelected {
+	padding: 20px 10px 15px;
+}
+
+li.subnavSelected {
+	background: url('../images/subnav_gradient_selected.png') repeat-y right;
+	color: #34342d;
+}
+
+
 /*** content ***/
+div#container {
+	background-color: #e2e2db;
+	height:100%;
+}
+
 div#main {
-    position: relative;
     background-color: #ffffff;
     width: 960px;
-    min-height: 784px;
     height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 10px;
-    -webkit-box-shadow: #111 0 -2px 6px;
-    -moz-box-shadow: #111 0 -2px 6px;
-    box-shadow: #111 0 -2px 6px;
+	display: table;
+    margin: 0 auto;
+	-moz-box-shadow: 0px 0px 10px 0px #7e7e7e;
+	-webkit-box-shadow: 0px 0px 10px 0px #7e7e7e;
+	box-shadow: 0px 0px 10px 0px #7e7e7e;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=0, Color='#7e7e7e')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=0, Color='#7e7e7e');
+}
+
+div#content {
+	display: table-cell;
+	width: 100%;
+	padding: 10px;
 }
 
 div#featureHeader img {
@@ -565,6 +633,26 @@ div#subcontractorBlock
 ,div#homeBuyerBlock
 {
     padding-top: 15px;
+}
+
+/* section header banners */
+.builderbanner {
+	height: 215px;
+	background: url('../images/banner_builder_solutions.png') no-repeat right;
+
+}
+
+#contentblock {
+	border-bottom: #d8d8d6 solid 1px;
+	height: 199px;
+}
+
+#contentblock img{
+	float: left;
+	padding-right: 10px;
+}
+#contentblock p  {
+	float: left;
 }
 
 /*
