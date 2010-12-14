@@ -292,20 +292,20 @@ input:invalid, textarea:invalid {
 No text-shadow: twitter.com/miketaylr/status/12228805301
 Also: hot pink. */
 ::-moz-selection {
-    background: #FF5E99;
+    background: #5595eb;
     color: #fff;
     text-shadow: none;
 }
 
 ::selection {
-    background: #FF5E99;
+    background: #5595eb;
     color: #fff;
     text-shadow: none;
 }
 
 /*  j.mp/webkit-tap-highlight-color */
 a:link {
-    -webkit-tap-highlight-color: #FF5E99;
+    -webkit-tap-highlight-color: #5595eb;
 }
 
 /* make buttons play nice in IE:    
@@ -656,7 +656,8 @@ div#subcontractorBlock
 }
 
 footer {
-    clear: left;
+    clear: none;
+    left: 0px;
 }
 
 /*
