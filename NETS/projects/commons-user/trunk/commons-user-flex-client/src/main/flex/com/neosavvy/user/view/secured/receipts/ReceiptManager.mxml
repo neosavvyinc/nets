@@ -19,7 +19,7 @@
         horizontalScrollPolicy="off"
         verticalScrollPolicy="on"        
         itemRenderer="com.neosavvy.user.view.secured.receipts.ReceiptRenderer"
-        columnWidth="{this.width / 2}"/>
+        columnWidth="{(this.width / 2 )- 50}"/>
 
 
     <mx:Script><![CDATA[
