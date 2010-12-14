@@ -560,7 +560,7 @@ li.subnavSelected {
 
 
 /*** content ***/
-div#container {
+body {
 	background-color: #e2e2db;
 	height:100%;
 }
@@ -602,9 +602,9 @@ div#featureHeader img {
 }
 
 div#mainContent {
-    top: 380px;
+    top: 300px;
     left: 10px;
-    position: absolute;
+    position: relative;
 }
 
 div#mainContentLeft
@@ -653,6 +653,10 @@ div#subcontractorBlock
 }
 #contentblock p  {
 	display: table-cell;
+}
+
+footer {
+    clear: left;
 }
 
 /*
