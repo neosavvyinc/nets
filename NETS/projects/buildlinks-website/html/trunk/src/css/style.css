@@ -171,6 +171,7 @@ p {
 	font-size: 14px;
 }
 
+
 /* always force a scrollbar in non-IE */
 html {
     overflow-y: scroll;
@@ -642,18 +643,23 @@ div#subcontractorBlock
 
 }
 
-#contentblock {
+.contentblock {
 	border-bottom: #d8d8d6 solid 1px;
-	height: 199px;
-	display: table;
+	margin-bottom: 20px;
+  display: table;	
 }
 
-#contentblock img{
-	display: table-cell;
+.contentblock img{
+  display: table-cell;
 }
-#contentblock p  {
-	display: table-cell;
+
+.contentblock p  {
+    display: table-cell;
+    padding: 0px 10px 10px 10px;
+    margin: 0px;
+    vertical-align:top;
 }
+
 
 footer {
     clear: none;
