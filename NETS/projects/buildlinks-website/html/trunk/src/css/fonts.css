@@ -6,7 +6,7 @@
 ;
     src: url('avenir-heavy-webfont.eot')
 ;
-    src: local('☺'), url('../fonts/avenir-heavy-webfont.woff') format('woff'), url('avenir-heavy-webfont.ttf') format('truetype'), url('avenir-heavy-webfont.svg#webfontIAd34b9F') format('svg')
+    src: local('☺'), url('../fonts/avenir-heavy-webfont.woff') format('woff'), url('../fonts/avenir-heavy-webfont.ttf') format('truetype'), url('../fonts/avenir-heavy-webfont.svg#webfontIAd34b9F') format('svg')
 ;
     font-weight: normal
 ;
@@ -20,7 +20,7 @@
 ;
     src: url('avenir-medium-webfont.eot')
 ;
-    src: local('☺'), url('../fonts/avenir-medium-webfont.woff') format('woff'), url('avenir-medium-webfont.ttf') format('truetype'), url('avenir-medium-webfont.svg#webfont0bcRZERL') format('svg')
+    src: local('☺'), url('../fonts/avenir-medium-webfont.woff') format('woff'), url('../fonts/avenir-medium-webfont.ttf') format('truetype'), url('../fonts/avenir-medium-webfont.svg#webfont0bcRZERL') format('svg')
 ;
     font-weight: normal
 ;
@@ -34,7 +34,7 @@
 ;
     src: url('avenir-roman-webfont.eot')
 ;
-    src: local('☺'), url('../fonts/avenir-roman-webfont.woff') format('woff'), url('avenir-roman-webfont.ttf') format('truetype'), url('avenir-roman-webfont.svg#webfontgW4PabjD') format('svg')
+    src: local('☺'), url('../fonts/avenir-roman-webfont.woff') format('woff'), url('../fonts/avenir-roman-webfont.ttf') format('truetype'), url('../fonts/avenir-roman-webfont.svg#webfontgW4PabjD') format('svg')
 ;
     font-weight: normal
 ;
