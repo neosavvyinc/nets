@@ -116,7 +116,6 @@ input, select {
 */
 html, body {
 	height: 100%;
-	
 }
 body {
 	color: #34342d;
@@ -159,6 +158,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
 	font-size: 26px;
 	color: #0d4a9b;
+	padding-bottom: 5px;
 }
 
 h2 {
@@ -169,7 +169,10 @@ h2 {
 p {
 	line-height: 24px;
 	font-size: 14px;
+	padding-bottom: 15px;
 }
+
+
 
 
 /* always force a scrollbar in non-IE */
@@ -563,7 +566,6 @@ li.subnavSelected {
 /*** content ***/
 body {
 	background-color: #e2e2db;
-	height:100%;
 }
 
 div#main {
@@ -585,6 +587,11 @@ div#content {
 	display: table-cell;
 	width: 100%;
 	padding: 10px;
+}
+
+/* use foe setting one col layout*/
+.narrow {
+	width: 550px;
 }
 
 div#featureHeader img {
@@ -637,27 +644,51 @@ div#subcontractorBlock
 }
 
 /* section header banners */
+
+#sectionbanner {
+	display: block;
+}
+
+#sectionbanner div {
+	display: inline-block;
+	width: 170px;
+	padding: 10px 0px 66px;
+}
+
+#sectionbanner div p {
+	font-size: 12px;
+	line-height: 20px;
+}
+
 .builderbanner {
 	height: 215px;
 	background: url('../images/banner_builder_solutions.png') no-repeat right;
 
 }
 
-.contentblock {
-	border-bottom: #d8d8d6 solid 1px;
-	margin-bottom: 20px;
-  display: table;	
+.separatorbanner {
+	background: url('../images/separatorbanner.png') no-repeat 0 230px;
 }
 
-.contentblock img{
+.contentblock  {
+	border-bottom: #d8d8d6 solid 1px;
+	margin-bottom: 20px;
+  	display: table;	
+}
+
+.contentblock div {
+  	display: table;	
+}
+
+.contentblock div img{
   display: table-cell;
 }
 
-.contentblock p  {
+.contentblock div .contentitem  {
     display: table-cell;
     padding: 0px 10px 10px 10px;
     margin: 0px;
-    vertical-align:top;
+    vertical-align: middle;
 }
 
 
