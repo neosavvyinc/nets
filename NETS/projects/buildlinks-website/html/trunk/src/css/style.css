@@ -548,6 +548,17 @@ ul#subnavigation {
 	background: url('../images/subnav_gradient.png') repeat-y right 11px;
 }
 
+ul#subnavigationSingle {
+	font-family: 'Avenir55Roman';
+	padding: 10px 0px 10px;
+	width: 185px;
+	margin: 0;
+	top: 10px;
+	position: relative;
+	background: url('../images/subnav_gradient.png') repeat-y right 11px;
+}
+
+
 ul#subnavigation a {
 	color: #6b6b6b;	
 	text-decoration: none;
@@ -557,7 +568,11 @@ li.subnav, li.subnavSelected {
 	padding: 20px 10px 15px;
 }
 
-li.subnavSelected {
+li.subnav, li.subnavSelectedSingle {
+	padding: 1px 10px 2px;
+}
+
+li.subnavSelected, li.subnavSelectedSingle{
 	background: url('../images/subnav_gradient_selected.png') repeat-y right;
 	color: #34342d;
 }
@@ -691,12 +706,52 @@ div#subcontractorBlock
     vertical-align: middle;
 }
 
-
 footer {
     clear: none;
     left: 0px;
 }
 
+
+fieldset
+{
+  padding: 0 20px 20px;
+  margin: 0 0 20px;
+
+}
+
+label
+{
+  display: block;
+  float: left;
+  clear: left;
+  text-align: right;
+  width: 200px;
+  padding-top: 0.25em;
+  margin: 1em 5px 0 0;
+}
+
+input, select
+{
+  width: 250px;
+  padding-top: 0.25em;
+  margin: 1em 5px 0 0;
+  background: transparent no-repeat 0 0;
+}
+
+select {
+    width: 255px;
+}
+
+.submitFormButton, .clearFormButton
+{
+    width: 100px;
+}
+
+.contactUsButtons
+{
+    float: right;
+    padding-right: 270px;
+}
 /*
 * Media queries for responsive design
 * These follow after primary styles so they will successfully override.
