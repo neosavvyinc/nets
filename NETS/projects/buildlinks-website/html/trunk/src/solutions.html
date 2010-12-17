@@ -48,14 +48,14 @@
         </header>
         <div id="main">
             <ul id="subnavigation">
-                <li class="subnavSelected">
-                    <a href="#">Builders</a>
+                <li id="builder" class="subnavSelected">
+                    <a href="#" onclick="subNavBuilderClick()">Builders</a>
                 </li>
-                <li class="subnav">
-                    <a href="#">Subcontractors</a>
+                <li id="subcontractor" class="subnav">
+                    <a href="#" onclick="subNavSubContractorClick()">Subcontractors</a>
                 </li>
-                <li class="subnav">
-                    <a href="#">Home Buyers</a>
+                <li id="homeBuyer" class="subnav">
+                    <a href="#" onclick="subNavHomeBuyerClick()">Home Buyers</a>
                 </li>
             </ul>
             <div id="content">
@@ -142,6 +142,40 @@
 //                    return false;
 //                });
 //            });
+
+            function subNavBuilderClick() {
+                $("div#main ul#subnavigation li#builder").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#homeBuyer").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#subcontractor").removeClass("subnavSelected");
+
+                $("div#main ul#subnavigation li#homeBuyer").addClass("subnav");
+                $("div#main ul#subnavigation li#subcontractor").addClass("subnav");
+                
+                $("div#main ul#subnavigation li#builder").addClass("subnavSelected");
+            }
+
+            function subNavHomeBuyerClick() {
+                $("div#main ul#subnavigation li#builder").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#homeBuyer").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#subcontractor").removeClass("subnavSelected");
+
+
+                $("div#main ul#subnavigation li#builder").addClass("subnav");
+                $("div#main ul#subnavigation li#subcontractor").addClass("subnav");
+
+                $("div#main ul#subnavigation li#homeBuyer").addClass("subnavSelected");
+            }
+
+            function subNavSubContractorClick() {
+                $("div#main ul#subnavigation li#builder").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#homeBuyer").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#subcontractor").removeClass("subnavSelected");
+
+                $("div#main ul#subnavigation li#builder").addClass("subnav");
+                $("div#main ul#subnavigation li#homeBuyer").addClass("subnav");
+                
+                $("div#main ul#subnavigation li#subcontractor").addClass("subnavSelected");
+            }
         </script>
     </body>
 </html>
