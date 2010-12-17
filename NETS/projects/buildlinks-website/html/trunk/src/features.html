@@ -48,14 +48,14 @@
         </header>
         <div id="main">
             <ul id="subnavigation">
-                <li class="subnavSelected">
-                    <a href="#">Overview</a>
+                <li id="overview" class="subnavSelected">
+                    <a href="#" onclick="subNavOverviewClicked()">Overview</a>
                 </li>
-                <li class="subnav">
-                    <a href="#">Competitor Comparison</a>
+                <li id="competitor" class="subnav">
+                    <a href="#" onclick="subNavCompetitorClicked()">Competitor Comparison</a>
                 </li>
-                <li class="subnav">
-                    <a href="#">Product Advisory Council</a>
+                <li id="advisory" class="subnav">
+                    <a href="#" onclick="subNavAdvisoryClicked()">Product Advisory Council</a>
                 </li>
             </ul>
             <!-- aside here -->
@@ -175,6 +175,44 @@
 //                    return false;
 //                });
 //            });
+
+
+
+
+
+
+            function subNavOverviewClicked() {
+                $("div#main ul#subnavigation li#overview").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#competitor").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#advisory").removeClass("subnavSelected");
+
+                $("div#main ul#subnavigation li#competitor").addClass("subnav");
+                $("div#main ul#subnavigation li#advisory").addClass("subnav");
+
+                $("div#main ul#subnavigation li#overview").addClass("subnavSelected");
+            }
+
+            function subNavCompetitorClicked() {
+                $("div#main ul#subnavigation li#overview").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#competitor").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#advisory").removeClass("subnavSelected");
+
+                $("div#main ul#subnavigation li#overview").addClass("subnav");
+                $("div#main ul#subnavigation li#advisory").addClass("subnav");
+
+                $("div#main ul#subnavigation li#competitor").addClass("subnavSelected");
+            }
+
+            function subNavAdvisoryClicked() {
+                $("div#main ul#subnavigation li#overview").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#competitor").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#advisory").removeClass("subnavSelected");
+
+                $("div#main ul#subnavigation li#overview").addClass("subnav");
+                $("div#main ul#subnavigation li#competitor").addClass("subnav");
+
+                $("div#main ul#subnavigation li#advisory").addClass("subnavSelected");
+            }
         </script>
     </body>
 </html>
