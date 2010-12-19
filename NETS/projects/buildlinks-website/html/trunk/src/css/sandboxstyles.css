@@ -1,0 +1,325 @@
+/*
+ HTML5 ✰ Boilerplate
+ 
+ style.css contains a reset, font normalization and some base styles.
+ 
+ credit is left where credit is due.
+ much inspiration was taken from these projects:
+ yui.yahooapis.com/2.8.1/build/base/base.css
+ camendesign.com/design/
+ praegnanz.de/weblog/htmlcssjs-kickstart
+ */
+/*
+ html5doctor.com Reset Stylesheet (Eric Meyer's Reset Reloaded + HTML5 baseline)
+ v1.4 2009-07-27 | Authors: Eric Meyer & Richard Clark
+ html5doctor.com/html-5-reset-stylesheet/
+ */
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+article, aside, details, figcaption, figure, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+nav ul {
+    list-style: none;
+}
+
+blockquote, q {
+    quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+    content: '';
+    content: none;
+}
+
+a {
+    margin: 0;
+    padding: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+    background: transparent;
+}
+
+ins {
+    background-color: #ff9;
+    color: #000;
+    text-decoration: none;
+}
+
+mark {
+    background-color: #ff9;
+    color: #000;
+    font-style: italic;
+    font-weight: bold;
+}
+
+del {
+    text-decoration: line-through;
+}
+
+abbr[title], dfn[title] {
+    border-bottom: 1px dotted;
+    cursor: help;
+}
+
+/* tables still need cellspacing="0" in the markup */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+input, select {
+    vertical-align: middle;
+}
+
+/* END RESET CSS */
+/* fonts.css from the YUI Library: developer.yahoo.com/yui/
+ Refer to developer.yahoo.com/yui/3/cssfonts/ for font sizing percentages
+ 
+
+
+
+/* =Start Primary Styles
+ ------------------------------------*/
+header {
+    width: 970px;	
+	padding: 20px 0px 0 0px;
+	background: url(../images/headerbackground.png) no-repeat;
+    margin: 0 auto;
+}
+
+
+header img {
+    padding: 0 0 16px 5px;
+}
+
+footer {
+	width: 920px;
+	position: absolute;
+	bottom: 0;
+	padding: 10px 20px 10px 20px;
+	font: 11px "Avenir65Medium";
+	color: #646464;
+	margin: 0 10px 0 10px;
+    background: url(../images/footer_background.png) repeat-x;
+}
+
+footer a {
+	text-decoration: none;
+	margin-left: 10px;
+	font: 11px "Avenir65Medium";
+	color: #646464;
+}
+
+/* =Navigation
+ ------------------------------------*/
+#navigation {
+    margin: 0 0 0 -1px;
+    padding: 0 0 0 5px;
+    overflow: hidden;
+    width: 72em;
+    list-style: none;
+    text-transform: uppercase;
+}
+
+#navigation li, #navigation #navselected {
+    float: left;
+    background: url(../images/tab-right.png) no-repeat top right;
+}
+
+#navigation #navselected {
+    background: url(../images/tab-right-selected.png) no-repeat top right;
+}
+
+#navigation li a, #navigation #navselected a {
+    padding: 2px 16px 0 16px;
+    margin: 0;
+    line-height: 2.5em;
+    background: url(../images/tab-left.png) no-repeat top left;
+    text-decoration: none;
+    font-family: "Avenir65Medium";
+    font-size: 14px;
+    color: #6b6b6b;
+    float: left;
+    display: block;
+}
+
+#navigation #navselected a {
+    background: url(../images/tab-left-selected.png) no-repeat top left;
+}
+
+#navigation li a:hover {
+    color: #0d4a9b;
+}
+
+/* =Type Styles
+ ------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-style: normal;
+    line-height: normal;
+    font-family: 'Avenir85Heavy', sans-serif;
+    color: #34342d;	
+}
+
+h1 {
+    font-size: 26px;
+    color: #0d4a9b;
+    padding-bottom: 5px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h4 {
+    font-size: 12px;
+}
+
+p {
+    line-height: 24px;
+    font-size: 14px;
+    padding-bottom: 15px;
+}
+
+a {
+	color: #4676b5;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/* =Content Layout
+ ------------------------------------*/ 
+html, body {
+    height: 100%;
+}
+
+body {
+    color: #34342d;
+    font: 13px / 1.231 'Avenir55Roman', sans-serif;
+    background-color: #e2e2db;
+}
+
+div#main {
+	height: 100%;
+    margin: 0 auto;
+    width: 970px;
+	display: table;
+	background: url(../images/main_content_background.png) repeat-y top;
+}
+
+div#content {
+    width: 960px;	
+	height: 100%;
+	padding: 10px;
+}
+
+
+
+/*
+* Media queries for responsive design
+* These follow after primary styles so they will successfully override.
+*/
+
+@media all and (orientation:portrait) {
+/* Style adjustments for portrait mode goes here */
+
+}
+
+@media all and (orientation:landscape) {
+/* Style adjustments for landscape mode goes here */
+
+}
+
+/* Grade-A Mobile Browsers (Opera Mobile, iPhone Safari, Android Chrome)  
+   Consider this: www.cloudfour.com/css-media-query-for-mobile-is-fools-gold/ */
+@media screen and (max-device-width: 480px) {
+
+    /* Uncomment if you don't want iOS and WinMobile to mobile-optimize the text for you
+  j.mp/textsizeadjust
+html { -webkit-text-size-adjust:none; -ms-text-size-adjust:none; } */
+}
+
+/* 
+ * print styles
+ * inlined to avoid required HTTP connection www.phpied.com/delay-loading-your-print-css/ 
+ */
+@media print {
+    * {
+        background: transparent !important;
+        color: #444 !important;
+        text-shadow: none !important;
+    }
+
+    a, a:visited {
+        color: #444 !important;
+        text-decoration: underline;
+    }
+
+    a:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr:after {
+        content: " (" attr(title) ")";
+    }
+
+    .ir a:after {
+        content: "";
+    }
+
+/* Don't show links for images */
+    pre, blockquote {
+        border: 1px solid #999;
+        page-break-inside: avoid;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+/* css-discuss.incutio.com/wiki/Printing_Tables */
+    tr, img {
+        page-break-inside: avoid;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+    }
+
+    h2, h3 {
+        page-break-after: avoid;
+    }
+}
+

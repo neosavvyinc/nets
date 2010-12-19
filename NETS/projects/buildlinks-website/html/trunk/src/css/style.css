@@ -592,6 +592,7 @@ div#main {
 	-moz-box-shadow: 0px 0px 10px 0px #7e7e7e;
 	-webkit-box-shadow: 0px 0px 10px 0px #7e7e7e;
 	box-shadow: 0px 0px 10px 0px #7e7e7e;
+	
 	/* For IE 8 */
 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=0, Color='#7e7e7e')";
 	/* For IE 5.5 - 7 */
