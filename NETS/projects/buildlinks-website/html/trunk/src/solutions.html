@@ -59,44 +59,52 @@
                 </li>
             </ul>
             <div id="content">
-                <div id="sectionbanner" class="builderbanner">
-                    <h1>Nihitatur, consequo debis sitibea volore,
-                        <br/>
-                        voluptatus dolor aut gentem haribus.
-                    </h1>
-                </div>
-                <div class="contentblock">
-                    <div>
-                        <img src="images/benefit1.png">
-                        <div class="contentitem">
-                            <h2>Benefit 1</h2>
-                            <p>
-                                Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
-                            </p>
+                <div id="cmsContent1"  style="position: absolute; width: 760px;">
+                    <div id="sectionbanner" class="builderbanner" >
+                        <h1>Nihitatur, consequo debis sitibea volore,
+                            <br/>
+                            voluptatus dolor aut gentem haribus.
+                        </h1>
+                    </div>
+                    <div class="contentblock">
+                        <div>
+                            <img src="images/benefit1.png">
+                            <div class="contentitem">
+                                <h2>Benefit 1</h2>
+                                <p>
+                                    Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contentblock">
+                        <div>
+                            <div class="contentitem">
+                                <h2>Benefit 2</h2>
+                                <p>
+                                    Nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
+                                </p>
+                            </div>
+                            <img src="images/benefit2.png">
+                        </div>
+                    </div>
+                    <div class="contentblock">
+                        <div>
+                            <img src="images/benefit1.png">
+                            <div class="contentitem">
+                                <h2>Benefit 3</h2>
+                                <p>
+                                    Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="contentblock">
-                    <div>
-                        <div class="contentitem">
-                            <h2>Benefit 2</h2>
-                            <p>
-                                Nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
-                            </p>
-                        </div>
-                        <img src="images/benefit2.png">
-                    </div>
+                <div id="cmsContent2" class="hiddenDiv" style="position: absolute; width: 760px;">
+                    content 2
                 </div>
-                <div class="contentblock">
-                    <div>
-                        <img src="images/benefit1.png">
-                        <div class="contentitem">
-                            <h2>Benefit 3</h2>
-                            <p>
-                                Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
-                            </p>
-                        </div>
-                    </div>
+                <div id="cmsContent3" class="hiddenDiv" style="position: absolute; width: 760px;">
+                    content 3
                 </div>
             </div>
         </div>
@@ -152,6 +160,10 @@
                 $("div#main ul#subnavigation li#subcontractor").addClass("subnav");
                 
                 $("div#main ul#subnavigation li#builder").addClass("subnavSelected");
+
+                $("div#main div#content div#cmsContent2").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent3").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent1").removeClass("hiddenDiv");
             }
 
             function subNavHomeBuyerClick() {
@@ -164,6 +176,10 @@
                 $("div#main ul#subnavigation li#subcontractor").addClass("subnav");
 
                 $("div#main ul#subnavigation li#homeBuyer").addClass("subnavSelected");
+
+                $("div#main div#content div#cmsContent1").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent2").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent3").removeClass("hiddenDiv");
             }
 
             function subNavSubContractorClick() {
@@ -175,6 +191,10 @@
                 $("div#main ul#subnavigation li#homeBuyer").addClass("subnav");
                 
                 $("div#main ul#subnavigation li#subcontractor").addClass("subnavSelected");
+
+                $("div#main div#content div#cmsContent1").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent3").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent2").removeClass("hiddenDiv");
             }
         </script>
     </body>
