@@ -16,8 +16,9 @@
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- CSS : implied media="all" -->
-        <link rel="stylesheet" href="css/style.css?v=4">
+        <link rel="stylesheet" href="css/resets.css" type="text/css" charset="utf-8">
         <link rel="stylesheet" href="css/fonts.css" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="css/styles2.css?v=4">
         <!-- Uncomment if you are specifically targeting less enabled mobile browsers
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  --><!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
         <script src="js/libs/modernizr-1.6.min.js">
@@ -33,107 +34,119 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js">
         </script>
     </head>
+
     <body>
-        <header>
-            <img src="images/bl_logo.png">
-             <ul id="navigation">
-                <li class="one"><a href="./index.html">HOME</a></li>
-                <li class="two"><a href="./solutions.html">SOLUTIONS</a></li>
-                <li class="three selected"><a href="./features.html">FEATURES</a></li>
-                <li class="four"><a href="./support.html">SUPPORT</a></li>
-                <li class="five"><a href="./about.html">ABOUT US</a></li>
-                <li class="six"><a href="./get.html">GET BUILDLINKS 6.0</a></li>
-                <li class="shadow"></li>
-            </ul>
-        </header>
         <div id="main">
-            <ul id="subnavigation">
-                <li id="overview" class="subnavSelected">
-                    <a href="#" onclick="subNavOverviewClicked()">Overview</a>
-                </li>
-                <li id="competitor" class="subnav">
-                    <a href="#" onclick="subNavCompetitorClicked()">Competitor Comparison</a>
-                </li>
-                <li id="advisory" class="subnav">
-                    <a href="#" onclick="subNavAdvisoryClicked()">Product Advisory Council</a>
-                </li>
-            </ul>
-            <!-- aside here -->
-            <div id="content">
-                <div id="sectionbanner" class="separatorbanner">
-                    <h1>Consequo perspiciatis omnis sitibea gentem voluptatem.</h1>
-                    <div>
-                        <img src="images/featuregroup1.png"><h3>Feature Group A</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-                    </div>
-                    <div>
-                        <img src="images/featuregroup2.png"><h3>Feature Group B</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-                    </div>
-                    <div>
-                        <img src="images/featuregroup3.png"><h3>Feature Group C</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-                    </div>
-                    <div>
-                        <img src="images/featuregroup4.png"><h3>Feature Group D</h3>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-                    </div>
-                </div>
-                <!-- Start Feature Group 1-->
-                <div class="contentblock">
-                    <h2>Feature Group A</h2>
-                    <div>
-                        <img src="images/feature1.png">
-                        <div class="contentitem">
-                            <h3>Feature 1</h3>
-                            <p>
-                                Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="contentitem">
-                            <h3>Feature 1</h3>
-                            <p>
-                                Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
-                            </p>
-                        </div>
-                        <img src="images/feature2.png">
-                    </div>
-                </div><!-- End Feature Group 1 -->
-                <!-- Start Feature Group 2-->
-                <div class="contentblock">
-                    <h2>Feature Group B</h2>
-                    <div>
-                        <img src="images/benefit1.png">
-                        <div class="contentitem">
-                            <h3>Feature 1</h3>
-                            <p>
-                                Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
-                            </p>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="contentitem">
-                            <h3>Feature 1</h3>
-                            <p>
-                                Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
-                            </p>
-                        </div>
-                        <img src="images/benefit1.png">
-                    </div>
-                </div><!-- End Feature Group 2 -->				
+			<header>
+	            <img src="images/bl_logo.png">
+	             <ul id="navigation">
+	                <li><a href="./index.html">HOME</a></li>
+	                <li><a href="./solutions.html">SOLUTIONS</a></li>
+	                <li id="navselected"><a href="./features.html">FEATURES</a></li>
+	                <li><a href="./support.html">SUPPORT</a></li>
+	                <li><a href="./about.html">ABOUT US</a></li>
+	                <li><a href="./get.html">GET BUILDLINKS 6.0</a></li>
+	            </ul>
+	        </header>
+
+            <div id="content">     	
+	            <ul id="subnavigation">
+	                <li id="overview" class="subnavSelected">
+	                    <a href="#" onclick="subNavOverviewClicked()">Overview</a>
+	                </li>
+	                <li id="competitor" class="subnav">
+	                    <a href="#" onclick="subNavCompetitorClicked()">Competitor Comparison</a>
+	                </li>
+	                <li id="advisory" class="subnav">
+	                    <a href="#" onclick="subNavAdvisoryClicked()">Product Advisory Council</a>
+	                </li>
+	            </ul>
+				
+	            <!-- Content -->
+				<div id="cmsContent1" class="eightcolumnblock">
+					<div id="sectionbanner" class="separatorbanner">
+	                    <h1>Consequo perspiciatis omnis sitibea gentem voluptatem.</h1>
+	                   
+					    <div class="onecolumnblock">
+	                        <img src="images/featuregroup1.png">
+							<h4>Feature Group A</h4>
+	                        <p>
+	                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+	                        </p>
+	                    </div>
+	                    <div class="onecolumnblock">
+	                        <img src="images/featuregroup2.png"><h4>Feature Group B</h4>
+	                        <p>
+	                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+	                        </p>
+	                    </div>
+	                    <div class="onecolumnblock">
+	                        <img src="images/featuregroup3.png"><h4>Feature Group C</h4>
+	                        <p>
+	                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+	                        </p>
+	                    </div>
+	                    <div class="onecolumnblock">
+	                        <img src="images/featuregroup4.png"><h4>Feature Group D</h4>
+	                        <p>
+	                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+	                        </p>
+	                    </div>
+	                </div>
+	                <!-- Start Feature Group 1-->
+	                <div class="contentblock">
+	                    <h2>Feature Group A</h2>
+	                    <div>
+	                        <img src="images/feature1.png">
+	                        <div class="contentitem">
+	                            <h3>Feature 1</h3>
+	                            <p>
+	                                Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
+	                            </p>
+	                        </div>
+	                    </div>
+	                    <div>
+	                        <div class="contentitem">
+	                            <h3>Feature 1</h3>
+	                            <p>
+	                                Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
+	                            </p>
+	                        </div>
+	                        <img src="images/feature2.png">
+	                    </div>
+	                </div><!-- End Feature Group 1 -->
+	                <!-- Start Feature Group 2-->
+	                <div class="contentblock">
+	                    <h2>Feature Group B</h2>
+	                    <div>
+	                        <img src="images/benefit1.png">
+	                        <div class="contentitem">
+	                            <h3>Feature 1</h3>
+	                            <p>
+	                                Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
+	                            </p>
+	                        </div>
+	                    </div>
+	                    <div>
+	                        <div class="contentitem">
+	                            <h3>Feature 1</h3>
+	                            <p>
+	                                Nequia si dolorenda nis aut quam, quo com-nimi, verchicti consedita doluptae sundipsapis aut ipid es sit, quas volo il idel maximi, aut qui non est pla nestion sequas.
+	                            </p>
+	                        </div>
+	                        <img src="images/benefit1.png">
+	                    </div>
+	                </div><!-- End Feature Group 2 -->
+				
+				</div>
+					
             </div>
+			<footer>
+				Copyright &#169: 2010 BuildLinks Inc. All Rights Reserved. <a href="#">Privacy</a> <a href="#">Terms of Use</a> <a href="#">Site Map</a>       
+			</footer>
         </div>
-        </div><!-- Javascript at the bottom for fast page loading -->
+				
+        <!-- Javascript at the bottom for fast page loading -->
         <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js">
         </script>
@@ -166,53 +179,6 @@
                 g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                 s.parentNode.insertBefore(g, s);
             })(document, 'script');
-        </script>
-        <script type="text/javascript">
-//            $(document).ready(function(){
-//                $("ul#navigation li a").click(function(){
-//                    $("ul#navigation li").removeClass("selected");
-//                    $(this).parents().addClass("selected");
-//                    return false;
-//                });
-//            });
-
-
-
-
-
-
-            function subNavOverviewClicked() {
-                $("div#main ul#subnavigation li#overview").removeClass("subnavSelected");
-                $("div#main ul#subnavigation li#competitor").removeClass("subnavSelected");
-                $("div#main ul#subnavigation li#advisory").removeClass("subnavSelected");
-
-                $("div#main ul#subnavigation li#competitor").addClass("subnav");
-                $("div#main ul#subnavigation li#advisory").addClass("subnav");
-
-                $("div#main ul#subnavigation li#overview").addClass("subnavSelected");
-            }
-
-            function subNavCompetitorClicked() {
-                $("div#main ul#subnavigation li#overview").removeClass("subnavSelected");
-                $("div#main ul#subnavigation li#competitor").removeClass("subnavSelected");
-                $("div#main ul#subnavigation li#advisory").removeClass("subnavSelected");
-
-                $("div#main ul#subnavigation li#overview").addClass("subnav");
-                $("div#main ul#subnavigation li#advisory").addClass("subnav");
-
-                $("div#main ul#subnavigation li#competitor").addClass("subnavSelected");
-            }
-
-            function subNavAdvisoryClicked() {
-                $("div#main ul#subnavigation li#overview").removeClass("subnavSelected");
-                $("div#main ul#subnavigation li#competitor").removeClass("subnavSelected");
-                $("div#main ul#subnavigation li#advisory").removeClass("subnavSelected");
-
-                $("div#main ul#subnavigation li#overview").addClass("subnav");
-                $("div#main ul#subnavigation li#competitor").addClass("subnav");
-
-                $("div#main ul#subnavigation li#advisory").addClass("subnavSelected");
-            }
         </script>
     </body>
 </html>

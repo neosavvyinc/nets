@@ -16,9 +16,8 @@
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- CSS : implied media="all" -->
-        <link rel="stylesheet" href="css/resets.css" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="css/style.css?v=4">
         <link rel="stylesheet" href="css/fonts.css" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="css/styles2.css?v=4">
         <!-- Uncomment if you are specifically targeting less enabled mobile browsers
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  --><!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
         <script src="js/libs/modernizr-1.6.min.js">
@@ -34,35 +33,55 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js">
         </script>
     </head>
-
     <body>
+        <header>
+            <img src="images/bl_logo.png">
+             <ul id="navigation">
+                <li class="one"><a href="./index.html">HOME</a></li>
+                <li class="two"><a href="./solutions.html">SOLUTIONS</a></li>
+                <li class="three"><a href="./features.html">FEATURES</a></li>
+                <li class="four"><a href="./support.html">SUPPORT</a></li>
+                <li class="five selected"><a href="./about.html">ABOUT US</a></li>
+                <li class="six"><a href="./get.html">GET BUILDLINKS 6.0</a></li>
+                <li class="shadow"></li>
+            </ul>
+        </header>
         <div id="main">
-			<header>
-	            <img src="images/bl_logo.png">
-	             <ul id="navigation">
-	                <li id="navselected"><a href="./index.html">HOME</a></li>
-	                <li><a href="./solutions.html">SOLUTIONS</a></li>
-	                <li><a href="./features.html">FEATURES</a></li>
-	                <li><a href="./support.html">SUPPORT</a></li>
-	                <li><a href="./about.html">ABOUT US</a></li>
-	                <li><a href="./get.html">GET BUILDLINKS 6.0</a></li>
-	            </ul>
-	        </header>
-
+            <ul id="subnavigation">
+                <li class="subnavSelected">
+                    <a href="#">Company Information</a>
+                </li>
+                <li class="subnav">
+                    <a href="#">Leadership</a>
+                </li>
+                <li class="subnav">
+                    <a href="#">Careers</a>
+                </li>
+                <li class="subnav">
+                    <a href="#">Contact Us</a>
+                </li>
+            </ul>
             <!-- Content -->
-            <div id="content">     	
-				<h1>H1 Nihitatur, consequo debis sitibea volore</h1>
-				<h2>H2 Benefit 1</h2>
-				<h3>H3 BuildLinks 6.0 Buzz</h3>
-				<h4>H4 Subcontractors</h4>
-				<a>Learn More</a>
-
+            <div id="content">
+                <div class="narrow">
+                    <h1>
+                    	Leading the Industry with Web-based ProjectManagement Construction Software
+                    </h1>
+                    <p>
+                        At BuildLinks we are dedicated to developing a comprehensive, construction management Enterprise Platform for home builders that takes advantage of the world's rapid advances in technology. We take our mission seriously, striving every day to help home builders maximize their customer relationships in order to drive sales, increase profits, reduce costs, and improve homebuyer satisfaction.
+                    </p>
+                    <p>
+                        BuildLinks, Inc. was founded in 2000 when a builder and a homebuyer in the IT industry experienced an expensive miscommunication that led to a scheduling delay. Together they saw the potential that Internet technology had to offer in solving a common, unwelcome problem. Over the course of nine years working with builders like you, we have seen that there is substantial inefficiency in the home building process. Poor quality and quantity of process data makes it extremely difficult to make educated decisions. Much of this is a function of the complexity of the home building supply chain and the homebuilding process.
+                    </p>
+                    <p>
+                        BuildLinks has spent the last two years designing and developing a new comprehensive suite of offerings for the market. The next generation of product provides an enterprise wide information platform that coordinates resources, information, and activities required in the residential construction process. The comprehensive software-as-a-service platform facilitates data driven decisions for operational efficiency and maximizing profitability.
+                    </p>
+                    <p>
+                        If you are interested in learning more about our innovative, next generation platform, call us today at 1-888-700-9470
+                    </p>
+                </div>
             </div>
-			<footer>
-				Copyright &#169: 2010 BuildLinks Inc. All Rights Reserved. <a href="#">Privacy</a> <a href="#">Terms of Use</a> <a href="#">Site Map</a>       
-			</footer>
         </div>
-				
         <!-- Javascript at the bottom for fast page loading -->
         <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js">
@@ -96,6 +115,15 @@
                 g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                 s.parentNode.insertBefore(g, s);
             })(document, 'script');
+        </script>
+        <script type="text/javascript">
+//            $(document).ready(function(){
+//                $("ul#navigation li a").click(function(){
+//                    $("ul#navigation li").removeClass("selected");
+//                    $(this).parents().addClass("selected");
+//                    return false;
+//                });
+//            });
         </script>
     </body>
 </html>

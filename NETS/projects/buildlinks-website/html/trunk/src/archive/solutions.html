@@ -16,9 +16,8 @@
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- CSS : implied media="all" -->
-        <link rel="stylesheet" href="css/resets.css" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="css/style.css?v=4">
         <link rel="stylesheet" href="css/fonts.css" type="text/css" charset="utf-8">
-        <link rel="stylesheet" href="css/styles2.css?v=4">
         <!-- Uncomment if you are specifically targeting less enabled mobile browsers
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  --><!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
         <script src="js/libs/modernizr-1.6.min.js">
@@ -34,36 +33,33 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js">
         </script>
     </head>
-
     <body>
+        <header>
+            <img src="images/bl_logo.png">
+             <ul id="navigation">
+                <li class="one"><a href="./index.html">HOME</a></li>
+                <li class="two selected"><a href="./solutions.html">SOLUTIONS</a></li>
+                <li class="three"><a href="./features.html">FEATURES</a></li>
+                <li class="four"><a href="./support.html">SUPPORT</a></li>
+                <li class="five"><a href="./about.html">ABOUT US</a></li>
+                <li class="six"><a href="./get.html">GET BUILDLINKS 6.0</a></li>
+                <li class="shadow"></li>
+            </ul>
+        </header>
         <div id="main">
-			<header>
-	            <img src="images/bl_logo.png">
-	             <ul id="navigation">
-	                <li><a href="./index.html">HOME</a></li>
-	                <li id="navselected"><a href="./solutions.html">SOLUTIONS</a></li>
-	                <li><a href="./features.html">FEATURES</a></li>
-	                <li><a href="./support.html">SUPPORT</a></li>
-	                <li><a href="./about.html">ABOUT US</a></li>
-	                <li><a href="./get.html">GET BUILDLINKS 6.0</a></li>
-	            </ul>
-	        </header>
-
-            <!-- Content -->
-            <div id="content">     	
-	            <ul id="subnavigation">
-	                <li id="builder" class="subnavSelected">
-	                    <a href="#" onclick="subNavBuilderClick()">Builders</a>
-	                </li>
-	                <li id="subcontractor" class="subnav">
-	                    <a href="#" onclick="subNavSubContractorClick()">Subcontractors</a>
-	                </li>
-	                <li id="homeBuyer" class="subnav">
-	                    <a href="#" onclick="subNavHomeBuyerClick()">Home Buyers</a>
-	                </li>
-	            </ul>
-				
-				<div id="cmsContent1" class="eightcolumnblock">
+            <ul id="subnavigation">
+                <li id="builder" class="subnavSelected">
+                    <a href="#" onclick="subNavBuilderClick()">Builders</a>
+                </li>
+                <li id="subcontractor" class="subnav">
+                    <a href="#" onclick="subNavSubContractorClick()">Subcontractors</a>
+                </li>
+                <li id="homeBuyer" class="subnav">
+                    <a href="#" onclick="subNavHomeBuyerClick()">Home Buyers</a>
+                </li>
+            </ul>
+            <div id="content">
+                <div id="cmsContent1"  style="position: absolute; width: 760px;">
                     <div id="sectionbanner" class="builderbanner" >
                         <h1>Nihitatur, consequo debis sitibea volore,
                             <br/>
@@ -104,12 +100,14 @@
                         </div>
                     </div>
                 </div>
+                <div id="cmsContent2" class="hiddenDiv" style="position: absolute; width: 760px;">
+                    content 2
+                </div>
+                <div id="cmsContent3" class="hiddenDiv" style="position: absolute; width: 760px;">
+                    content 3
+                </div>
             </div>
-			<footer>
-				Copyright &#169: 2010 BuildLinks Inc. All Rights Reserved. <a href="#">Privacy</a> <a href="#">Terms of Use</a> <a href="#">Site Map</a>       
-			</footer>
         </div>
-				
         <!-- Javascript at the bottom for fast page loading -->
         <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js">
@@ -143,6 +141,61 @@
                 g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                 s.parentNode.insertBefore(g, s);
             })(document, 'script');
+        </script>
+        <script type="text/javascript">
+//            $(document).ready(function(){
+//                $("ul#navigation li a").click(function(){
+//                    $("ul#navigation li").removeClass("selected");
+//                    $(this).parents().addClass("selected");
+//                    return false;
+//                });
+//            });
+
+            function subNavBuilderClick() {
+                $("div#main ul#subnavigation li#builder").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#homeBuyer").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#subcontractor").removeClass("subnavSelected");
+
+                $("div#main ul#subnavigation li#homeBuyer").addClass("subnav");
+                $("div#main ul#subnavigation li#subcontractor").addClass("subnav");
+                
+                $("div#main ul#subnavigation li#builder").addClass("subnavSelected");
+
+                $("div#main div#content div#cmsContent2").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent3").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent1").removeClass("hiddenDiv");
+            }
+
+            function subNavHomeBuyerClick() {
+                $("div#main ul#subnavigation li#builder").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#homeBuyer").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#subcontractor").removeClass("subnavSelected");
+
+
+                $("div#main ul#subnavigation li#builder").addClass("subnav");
+                $("div#main ul#subnavigation li#subcontractor").addClass("subnav");
+
+                $("div#main ul#subnavigation li#homeBuyer").addClass("subnavSelected");
+
+                $("div#main div#content div#cmsContent1").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent2").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent3").removeClass("hiddenDiv");
+            }
+
+            function subNavSubContractorClick() {
+                $("div#main ul#subnavigation li#builder").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#homeBuyer").removeClass("subnavSelected");
+                $("div#main ul#subnavigation li#subcontractor").removeClass("subnavSelected");
+
+                $("div#main ul#subnavigation li#builder").addClass("subnav");
+                $("div#main ul#subnavigation li#homeBuyer").addClass("subnav");
+                
+                $("div#main ul#subnavigation li#subcontractor").addClass("subnavSelected");
+
+                $("div#main div#content div#cmsContent1").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent3").addClass("hiddenDiv");
+                $("div#main div#content div#cmsContent2").removeClass("hiddenDiv");
+            }
         </script>
     </body>
 </html>

@@ -1,0 +1,356 @@
+/* =Elements
+ ------------------------------------*/
+header {
+    width: 970px;	
+	padding: 20px 0px 0 0px;
+	background: url(../images/headerbackground.png) no-repeat;
+    margin: 0 auto;
+}
+
+
+header img {
+    padding: 0 0 16px 5px;
+}
+
+/* @TODO: Figure out the footer layout issue */
+footer {
+	bottom: 0;
+	padding: 10px 20px 10px 20px;
+	font: 11px "Avenir65Medium";
+	color: #646464;
+	margin: 0;
+	display: none;
+    background: url(../images/footer_background.png) repeat-x top;
+}
+
+footer a {
+	text-decoration: none;
+	margin-left: 10px;
+	font: 11px "Avenir65Medium";
+	color: #646464;
+}
+
+form div {
+	width: 260px;
+	padding: 10px;
+
+}
+
+form div input, form div select  {
+	width: 150px;
+	float: right;	
+}
+
+label {
+		vertical-align: middle;
+}
+
+
+/* =Navigation
+ ------------------------------------*/
+#navigation {
+    margin: 0 0 0 -1px;
+    padding: 0 0 0 5px;
+    overflow: hidden;
+    width: 72em;
+    list-style: none;
+    text-transform: uppercase;
+}
+
+#navigation li, #navigation #navselected {
+    float: left;
+    background: url(../images/tab-right.png) no-repeat top right;
+}
+
+#navigation #navselected {
+    background: url(../images/tab-right-selected.png) no-repeat top right;
+}
+
+#navigation li a, #navigation #navselected a {
+    padding: 2px 16px 0 16px;
+    margin: 0;
+    line-height: 2.5em;
+    background: url(../images/tab-left.png) no-repeat top left;
+    text-decoration: none;
+    font-family: "Avenir65Medium";
+    font-size: 14px;
+    color: #6b6b6b;
+    float: left;
+    display: block;
+}
+
+#navigation #navselected a {
+    background: url(../images/tab-left-selected.png) no-repeat top left;
+}
+
+#navigation li a:hover {
+    color: #0d4a9b;
+}
+
+/* =Sub Navigation
+ ------------------------------------*/
+ul#subnavigation, ul#subnavigationSingle {
+	font-family: 'Avenir55Roman';
+	padding: 10px 0px 1px;
+	width: 185px;
+	margin: 0;
+	float: left;
+	background: url('../images/subnav_gradient.png') repeat-y right 11px;
+	list-style: none;
+}
+
+ul#subnavigationSingle {
+	background: url('../images/subnav_gradient_tall.png') repeat-y right 11px;
+}
+
+ul#subnavigation a {
+	color: #6b6b6b;	
+	text-decoration: none;
+}
+
+li.subnav, li.subnavSelected {
+	padding: 25px 10px 15px;
+}
+
+li.subnavSingle, li.subnavSelectedSingle {
+	padding: 20px 10px 10px;
+	line-height: 20px;
+}
+
+li.subnavSelected {
+	background: url('../images/subnav_gradient_selected.png') repeat-y right;
+	color: #34342d;
+}
+
+li.subnavSelectedSingle{
+	background: url('../images/subnav_gradient_selected_tall.png') repeat-y right;
+	color: #34342d;
+}
+
+
+/* =Type Styles
+ ------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
+    font-style: normal;
+    line-height: normal;
+    font-family: 'Avenir85Heavy', sans-serif;
+    color: #34342d;	
+}
+
+h1 {
+    font-size: 26px;
+    color: #0d4a9b;
+    padding-bottom: 5px;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+h3 {
+    font-size: 16px;
+}
+
+h4 {
+	padding-top: 10px;
+    font-size: 12px;
+}
+
+p {
+    line-height: 24px;
+    font-size: 14px;
+    padding-bottom: 15px;
+}
+
+a {
+	color: #4676b5;
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+/* =Content / Layout
+ ------------------------------------*/ 
+html, body {
+    height: 100%;
+}
+
+body {
+    color: #34342d;
+    font: 13px / 1.231 'Avenir55Roman', sans-serif;
+    background-color: #e2e2db;
+}
+
+div#main {
+    margin: 0 auto;
+    height: 100%;
+    width: 970px;
+	display: table;
+	background: url(../images/main_content_background.png) repeat-y top;
+}
+
+div#content {
+    width: 960px;
+	padding: 10px;
+	display: table;	
+	line-height: 10px;
+}
+
+/* REMOVE: Used for comparing layout*/
+.pinkBox {
+	border: #ff00ee solid;
+}
+
+.visibleFeature
+{
+    display: block;
+}
+
+.invisibleFeature
+{
+    display: none;
+}
+
+.onecolumnblock {
+    float: left;
+	width: 170px;
+	padding: 10px 20px 0 0;	
+}
+
+.twocolumnblock {
+	float: left;
+	width: 340px;
+	padding: 5px 20px 0 0;
+}
+
+.onecolumnblock p,  .twocolumnblock p{
+	font-size: 12px;
+	line-height: 20px;
+}
+
+.sixcolumnblock {
+	width: 590px;
+	float: left;
+	padding: 20px 15px 0 15px;	
+}
+
+.eightcolumnblock {
+	width: 720px;
+	float: left;
+	padding: 20px 15px 0 15px;	
+}
+
+
+/* section header banners */
+#sectionbanner {
+	display: block;
+}
+
+#sectionbanner div {
+	display: inline-block;
+	width: 170px;
+	padding: 10px 0px 66px;
+}
+
+#sectionbanner div p {
+	font-size: 12px;
+	line-height: 20px;
+}
+
+.builderbanner {
+	height: 215px;
+	background: url('../images/banner_builder_solutions.png') no-repeat right;
+
+}
+
+.separatorbanner {
+	background: url('../images/separatorbanner.png') no-repeat 0 230px;
+}
+
+.contentblock  {
+	border-bottom: #d8d8d6 solid 1px;
+	margin-bottom: 20px;
+	
+  	display: table;	
+}
+
+.contentblock div {
+  	display: table;	
+}
+
+.contentblock div img{
+  display: table-cell;
+}
+
+.contentblock div .contentitem  {
+    display: table-cell;
+    padding: 20px;
+    margin: 0px;
+    vertical-align: middle;
+}
+
+.controlbar {
+	padding: 20px 0 0 165px;	
+}
+
+
+
+/* =Home Specific Styles
+ ------------------------------------*/
+#mainContentLeft {
+	padding: 60px 15px 0 15px;	
+}
+
+div#featureHeader {
+	height: 290px;
+}
+
+ul#featureNavigation {
+    padding: 0;
+    min-width: 960px;
+    margin: 0 auto;
+	list-style: none;
+}
+
+ul#featureNavigation li {
+    float: left; /*width: 168px;*/
+    margin: 0 0px 0 0;
+    background-color: #cacac4;
+    border: solid 1px #b6b6b1;
+    position: relative;
+    z-index: 1;
+}
+
+ul#featureNavigation li a:link
+, ul#featureNavigation li a:visited {
+    display: block;
+    text-align: center; /*width: 168px;*/
+    padding: 3px 15px 0 15px;
+    height: 25px;
+    line-height: 25px;
+    font-family: 'Avenir65Medium';
+    src: url('avenir-medium-webfont.eot');
+    src: local('☺'), url('../fonts/avenir-medium-webfont.woff') format('woff'), url('avenir-medium-webfont.ttf') format('truetype'), url('avenir-medium-webfont.svg#webfont0bcRZERL') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 1px;
+    color: #5d5d57;
+    outline: none;
+    float: left;
+    background: -moz-linear-gradient(top center, #e9e9e9, #e9e9e9 80%) repeat scroll 0 0 #ffffff;
+    background: -webkit-gradient(linear, left bottom, left top, color-stop(.2, #e9e9e9), color-stop(.8, #ffffff));
+    -webkit-transition: background-color 0.3s linear;
+    -moz-transition: background-color 0.3s linear;
+    -o-transition: background-color 0.3s linear;
+}
+
+ul#featureNavigation li a:hover {
+    background-color: #e9e9e9;
+    clear: left;
+}

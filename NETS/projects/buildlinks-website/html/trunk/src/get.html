@@ -16,8 +16,9 @@
         <link rel="shortcut icon" href="/favicon.ico">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
         <!-- CSS : implied media="all" -->
-        <link rel="stylesheet" href="css/style.css?v=4">
+        <link rel="stylesheet" href="css/resets.css" type="text/css" charset="utf-8">
         <link rel="stylesheet" href="css/fonts.css" type="text/css" charset="utf-8">
+        <link rel="stylesheet" href="css/styles2.css?v=4">
         <!-- Uncomment if you are specifically targeting less enabled mobile browsers
         <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  --><!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
         <script src="js/libs/modernizr-1.6.min.js">
@@ -33,93 +34,101 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js">
         </script>
     </head>
-    <body>
-        <header>
-            <img src="images/bl_logo.png">
-             <ul id="navigation">
-                <li class="one"><a href="./index.html">HOME</a></li>
-                <li class="two"><a href="./solutions.html">SOLUTIONS</a></li>
-                <li class="three"><a href="./features.html">FEATURES</a></li>
-                <li class="four"><a href="./support.html">SUPPORT</a></li>
-                <li class="five"><a href="./about.html">ABOUT US</a></li>
-                <li class="six selected"><a href="./get.html">GET BUILDLINKS 6.0</a></li>
-                <li class="shadow"></li>
-            </ul>
-        </header>
-        <div id="main">
-            <ul id="subnavigationSingle">
-                <li class="subnavSelectedSingle">
-                    Call(888)700-9470
-                    email name@buildlinks.com
-                    for more information.
-                </li>
-            </ul>
-            <!-- Content -->
-            <div id="content">
-                <div class="narrow">
-                    <h1>
-                    	  Contact us today to schedule a demo of BuildLinks 6.0
-                    </h1>
-                </div>
-                <form class="contactUsForm">
-                    <fieldset>
-                    <div >
-                        <label>First Name:</label>
-                        <input >
-                    </div>
-                    <div >
-                        <label>Last Name:</label>
-                        <input>
-                    </div>
-                    <div >
-                        <label>Company:</label>
-                        <input class="contactUsInput">
-                    </div>
-                    <div >
-                        <label>Title:</label>
-                        <input class="contactUsInput">
-                    </div>
-                    <div >
-                        <label>Builder Type:</label>
-                        <select class="contactUsSelect">
-                            <option>One</option>
-                            <option>Two</option>
-                            <option>Three</option>
-                        </select>
-                    </div>
-                    <div >
-                        <label>E-mail:</label>
-                        <input class="contactUsInput">
-                    </div>
-                    <div >
-                        <label>Phone:</label>
-                        <input class="contactUsInput">
-                    </div>
-                    <div >
-                        <label>State/Province:</label>
-                        <select class="contactUsSelect">
-                            <option>One</option>
-                            <option>Two</option>
-                            <option>Three</option>
-                        </select><br/>
-                    </div>
-                    <div >
-                        <label>City:</label>
-                        <select class="contactUsSelect">
-                            <option>One</option>
-                            <option>Two</option>
-                            <option>Three</option>
-                        </select><br/>
-                    </div>
-                    </fieldset>
 
-                    <div class="contactUsButtons">
-                        <input type="submit" class="submitFormButton" value="Submit"/>
-                        <input type="submit" class="clearFormButton" value="Clear Form"/>
-                    </div>
-                </form>
+    <body>
+        <div id="main">
+			<header>
+	            <img src="images/bl_logo.png">
+	             <ul id="navigation">
+	                <li><a href="./index.html">HOME</a></li>
+	                <li><a href="./solutions.html">SOLUTIONS</a></li>
+	                <li><a href="./features.html">FEATURES</a></li>
+	                <li><a href="./support.html">SUPPORT</a></li>
+	                <li><a href="./about.html">ABOUT US</a></li>
+	                <li id="navselected"><a href="./get.html">GET BUILDLINKS 6.0</a></li>
+	            </ul>
+	        </header>
+
+            <!-- Content -->
+            <div id="content">     	
+
+				
+	            <ul id="subnavigationSingle">
+	                <li class="subnavSelectedSingle">
+	                    Call (888)700-9470
+	                    email <a>name@buildlinks.com</a>
+	                    for more information.
+	                </li>
+	            </ul>
+				
+				<div id="cmsContent1" class="sixcolumnblock">
+					<h1>
+						Contact us today to schedule a demo <br/> of BuildLinks 6.0.
+                    </h1>
+	 				<form>
+	                    <div>
+	                        <label>First Name:</label>
+	                        <input >
+	                    </div>
+						<div>
+	                        <label>Last Name:</label>
+	                        <input>							
+						</div>
+						<div>
+	                        <label>Company:</label>
+	                        <input class="contactUsInput">
+						</div>
+						<div>
+	                  		<label>Title:</label>
+	                        <input class="contactUsInput">
+					  	</div>
+						<div>
+	                        <label>Builder Type:</label>
+	                        <select class="contactUsSelect">
+	                            <option>Value One</option>
+	                            <option>Value Two</option>
+	                            <option>Value Three</option>
+	                        </select>
+					  	</div>
+						<div>
+	                        <label>E-mail:</label>
+	                        <input class="contactUsInput">
+						</div>
+						<div>
+	                        <label>Phone:</label>
+	                        <input class="contactUsInput">
+						</div>
+						<div>
+	                        <label>State/Province:</label>
+	                        <select class="contactUsSelect">
+	                            <option>Value One</option>
+	                            <option>Value Two</option>
+	                            <option>Value Three</option>
+	                        </select><br/>
+						</div>
+						<div>
+	                        <label>City:</label>
+	                        <select class="contactUsSelect">
+	                            <option>Value One</option>
+	                            <option>Value Two</option>
+	                            <option>Value Three</option>
+	                        </select><br/>
+						</div>
+											
+	
+	                    <div class="controlbar">
+	                        <button>Submit</button>
+	                        <button>Clear</button>
+	                    </div>
+	                </form>
+				</div>
+                    
             </div>
+			<footer>
+				Copyright &#169: 2010 BuildLinks Inc. All Rights Reserved. <a href="#">Privacy</a> <a href="#">Terms of Use</a> <a href="#">Site Map</a>       
+			</footer>
         </div>
+				
         <!-- Javascript at the bottom for fast page loading -->
         <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js">
@@ -153,15 +162,6 @@
                 g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
                 s.parentNode.insertBefore(g, s);
             })(document, 'script');
-        </script>
-        <script type="text/javascript">
-//            $(document).ready(function(){
-//                $("ul#navigation li a").click(function(){
-//                    $("ul#navigation li").removeClass("selected");
-//                    $(this).parents().addClass("selected");
-//                    return false;
-//                });
-//            });
         </script>
     </body>
 </html>
