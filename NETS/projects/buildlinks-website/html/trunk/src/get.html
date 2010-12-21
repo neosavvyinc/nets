@@ -50,76 +50,80 @@
 	        </header>
 
             <!-- Content -->
-            <div id="content">     	
-
-				
+            <div id="content">     					
 	            <ul id="subnavigationSingle">
 	                <li class="subnavSelectedSingle">
-	                    Call (888)700-9470
+	                    Call (888) 700-9470 or
 	                    email <a>name@buildlinks.com</a>
 	                    for more information.
 	                </li>
 	            </ul>
 				
-				<div id="cmsContent1" class="sixcolumnblock">
+				<div id="cmsContent1" class="fourcolumnblock">
 					<h1>
 						Contact us today to schedule a demo <br/> of BuildLinks 6.0.
                     </h1>
-	 				<form>
-	                    <div>
-	                        <label>First Name:</label>
-	                        <input >
-	                    </div>
-						<div>
-	                        <label>Last Name:</label>
-	                        <input>							
-						</div>
-						<div>
-	                        <label>Company:</label>
-	                        <input class="contactUsInput">
-						</div>
-						<div>
-	                  		<label>Title:</label>
-	                        <input class="contactUsInput">
-					  	</div>
-						<div>
-	                        <label>Builder Type:</label>
-	                        <select class="contactUsSelect">
-	                            <option>Value One</option>
-	                            <option>Value Two</option>
-	                            <option>Value Three</option>
-	                        </select>
-					  	</div>
-						<div>
-	                        <label>E-mail:</label>
-	                        <input class="contactUsInput">
-						</div>
-						<div>
-	                        <label>Phone:</label>
-	                        <input class="contactUsInput">
-						</div>
-						<div>
-	                        <label>State/Province:</label>
-	                        <select class="contactUsSelect">
-	                            <option>Value One</option>
-	                            <option>Value Two</option>
-	                            <option>Value Three</option>
-	                        </select><br/>
-						</div>
-						<div>
-	                        <label>City:</label>
-	                        <select class="contactUsSelect">
-	                            <option>Value One</option>
-	                            <option>Value Two</option>
-	                            <option>Value Three</option>
-	                        </select><br/>
-						</div>
-											
+	 				<form id="contact">
+						<fieldset>
+							<ol>
+								<li>
+			                        <label for="fname">First Name:</label>
+			                        <input id="fname" name="first name" >
+								</li>
+								<li>
+			                        <label for="lname">Last Name:</label>
+			                        <input id="lname" name="last name" >
+								</li>
+								<li>
+			                        <label for="company">Company:</label>
+			                        <input id="company" name="company" >
+								</li>
+								<li>
+			                        <label for="title">Title:</label>
+			                        <input id="title" name="title" >
+								</li>
+								<li>
+			                        <label for="btype">Builder Type:</label>
+			                        <select id="btype">
+			                            <option>Residential</option>
+			                            <option>Commercial</option>
+			                            <option>Remodeler</option>
+			                            <option>Not a Builder</option>
+			                        </select>								
+								</li>
+								<li>
+			                        <label for="email">E-mail:</label>
+			                        <input id="email" name="email" >
+								</li>
+								<li>
+			                        <label for="phone">Phone:</label>
+			                        <input id="phone" name="phone" >
+								</li>
+								<li>
+			                        <label for="state">State/Province:</label>
+			                        <select id="state">
+			                            <option>State</option>
+			                            <option>State</option>
+			                            <option>State</option>
+			                            <option>State</option>
+			                        </select>								
+								</li>
+								<li>
+			                        <label for="city">City:</label>
+			                        <select id="city">
+			                            <option>City 1</option>
+			                            <option>City 2</option>
+			                            <option>City 3</option>
+			                            <option>City 4</option>
+			                        </select>								
+								</li>
+							</ol>																													
+						</fieldset>		
 	
-	                    <div class="controlbar">
-	                        <button>Submit</button>
-	                        <button>Clear</button>
-	                    </div>
+	                    <fieldset class="controlbar">
+	                        <button class="submitBtn">Submit</button>
+	                        <button class="greyBtn">Clear Form</button>
+	                    </fieldset>
 	                </form>
 				</div>
                     

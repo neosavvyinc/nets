@@ -30,21 +30,90 @@ footer a {
 	color: #646464;
 }
 
-form div {
+
+/* =Form Styles
+ ------------------------------------*/
+form .controlbar {
+	float: left;
+	padding-left: 115px;
+}
+
+form#contact fieldset {
+	border: none;
+	margin-bottom: 10px;
+	width: 400px;
+}
+
+form#contact ol li {
+	border-width: 2px;
+	border-radius: 5px;
+	line-height: 20px;
+	list-style: none;
+	padding: 5px 10px;
+	margin-bottom: 2px;
+}
+
+form#contact input,
+form#contact textarea,
+form#contact select {
+	outline: none;
+	float: right;
 	width: 260px;
-	padding: 10px;
-
 }
 
-form div input, form div select  {
-	width: 150px;
-	float: right;	
+/* =Button
+ ------------------------------------*/
+.submitBtn, .greyBtn {
+	color: #fff;
+	width: 123px;
+	font-family: "Avenir55Roman";
+	height: 26px;
+	font-size: 14px;
+	padding-bottom: 2px;
+    background: url(../images/button_submitbg.png) no-repeat;
+	border: none;
+	margin: 10px;
+	cursor: pointer;
 }
 
-label {
-		vertical-align: middle;
+.submitBtn:hover {
+    background: url(../images/button_submitbg_over.png) repeat-x;	
 }
 
+.greyBtn {
+	color: #34342d;
+	border: #bfbfbf solid 1px;
+    background: url(../images/button_greybg.png) repeat-x;	
+}
+
+.greyBtn:hover {
+    background: url(../images/button_greybg_over.png) repeat-x;	
+}
+
+/* Social Network Badges */
+.linkedinBadge, .facebookBadge, .twitterBadge {
+	border: none;
+	margin-right: 10px;	
+	cursor: pointer;
+}
+
+.linkedinBadge {
+	height: 32px;
+	width: 32px;
+    background: url(../images/button_linkedin.png) repeat-x;		
+}
+
+.facebookBadge {
+	height: 32px;
+	width: 32px;
+    background: url(../images/button_facebook.png) repeat-x;		
+}
+
+.twitterBadge {
+	height: 32px;
+	width: 32px;
+    background: url(../images/button_twitter.png) repeat-x;		
+}
 
 /* =Navigation
  ------------------------------------*/
@@ -227,9 +296,15 @@ div#content {
 	padding: 5px 20px 0 0;
 }
 
-.onecolumnblock p,  .twocolumnblock p{
+.onecolumnblock p, .twocolumnblock p {
 	font-size: 12px;
 	line-height: 20px;
+}
+
+.fourcolumnblock {
+	width: 495px;
+	float: left;
+	padding: 20px 15px 0 15px;	
 }
 
 .sixcolumnblock {
@@ -292,12 +367,6 @@ div#content {
     margin: 0px;
     vertical-align: middle;
 }
-
-.controlbar {
-	padding: 20px 0 0 165px;	
-}
-
-
 
 /* =Home Specific Styles
  ------------------------------------*/
