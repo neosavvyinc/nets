@@ -17,13 +17,7 @@ package com.neosavvy.views
 		private var progressGauge : ProgressGauge;
 		
 		public function startProgress( parentObject : DisplayObject ):void
-		{
-			/*progressBar = new ProgressBar();
-			progressBar.minimum = 0;
-			progressBar.maximum = 100;
-			progressBar.mode = ProgressBarMode.MANUAL;*/
-			
-			
+		{			
 			progressGauge = new ProgressGauge();
 			progressGauge.setStyle("skinClass", StoplightingProgressGauge );
 			PopUpManager.addPopUp( progressGauge, parentObject );
