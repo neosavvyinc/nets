@@ -11,8 +11,8 @@
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
 			
-			import spark.effects.SlideViewTransition;
-			import spark.effects.ViewTransition;
+			import spark.transitions.SlideViewTransition;
+			
 			protected function logout_clickHandler(event:MouseEvent):void
 			{
 				

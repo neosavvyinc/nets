@@ -1,18 +1,20 @@
 package com.neosavvy.views
 {
+	import com.neosavvy.nets.mobile.ProgressGauge;
+	import com.neosavvy.nets.mobile.StoplightingProgressGauge;
+	
 	import flash.display.DisplayObject;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	
-	import mx.controls.ProgressBar;
-	import mx.controls.ProgressBarMode;
 	import mx.managers.PopUpManager;
 	
 	import spark.components.Label;
 
 	public class UploadProgressManager extends EventDispatcher
 	{
-		private var progressBar : Label;
+		
+		private var progressGauge : ProgressGauge;
 		
 		public function startProgress( parentObject : DisplayObject ):void
 		{
@@ -22,14 +24,15 @@ package com.neosavvy.views
 			progressBar.mode = ProgressBarMode.MANUAL;*/
 			
 			
-			progressBar = new Label();
-			PopUpManager.addPopUp( progressBar, parentObject );
-			PopUpManager.centerPopUp( progressBar );
+			progressGauge = new ProgressGauge();
+			progressGauge.setStyle("skinClass", StoplightingProgressGauge );
+			PopUpManager.addPopUp( progressGauge, parentObject );
+			PopUpManager.centerPopUp( progressGauge );
 		}
 		
 		public function progressComplete():void
 		{
-			PopUpManager.removePopUp( progressBar );	
+			PopUpManager.removePopUp( progressGauge );	
 		}
 		
 		public function updateProgress( currentValue : Number, total : Number ):void
@@ -37,7 +40,7 @@ package com.neosavvy.views
 			
 			var currentPercent : Number = Math.round((currentValue / total) * 100);
 			
-			progressBar.text = "Upload " + currentPercent + "% complete...";
+			progressGauge.currentPercentage = currentPercent;
 			
 			if( currentValue == total )
 			{

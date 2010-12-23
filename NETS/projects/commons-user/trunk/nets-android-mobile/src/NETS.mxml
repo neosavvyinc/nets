@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<s:MobileApplication 
-	xmlns:fx="http://ns.adobe.com/mxml/2009" 
-	xmlns:s="library://ns.adobe.com/flex/spark" 
-	firstView="com.neosavvy.views.LoginView">
+<s:ViewNavigatorApplication xmlns:fx="http://ns.adobe.com/mxml/2009" 
+							xmlns:s="library://ns.adobe.com/flex/spark" 
+							firstView="com.neosavvy.views.LoginView">
 	<fx:Script>
 		<![CDATA[
 			import com.neosavvy.views.BaseNETSView;
@@ -11,4 +10,43 @@
 	<fx:Declarations>
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
-</s:MobileApplication>
+	<fx:Style>
+		@namespace s "library://ns.adobe.com/flex/spark";
+		
+		s|ViewNavigatorApplication {
+			border-skin: Embed(source="com/neosavvy/nets/theme/skins/Background_borderSkins.swf", symbol="Application_borderSkin");
+		}
+		
+		s|Button {	
+			arrow-colors: #464e55, #0a7e57, #0a7e57, #cccccc, #ffffff;
+			border-colors: #bfbfbf, #92b3a8, #92b3a8, #cccccc, #84b0a1;
+			border-thickness: 1;
+			disabled-color: #8b8d8f;
+			font-anti-alias-type: advanced;
+			font-family: Arial;
+			font-size: 12;
+			font-weight: normal;
+			kerning: true;
+			horizontal-gap: 3;
+			text-roll-over-color: #085f41;
+			text-selected-color: #085f41;
+			show-skin-states: true, true, true, true, true;
+			up-fill-colors: #ececec, #d0d0d0, #bebebe;
+			over-fill-colors: #e3efea, #c2ddd3, #a7cec0;
+			disabled-fill-colors: #f0f0f0, #d9d9d9, #cbcbcb;
+			down-fill-colors: #a6cdbf, #e3efea, #e3efea;
+			ratios: 110, 140, 255;
+			toggled-up-fill-colors: #0b6144, #257c5f, #449b7e;
+			toggled-over-fill-colors: #0b6144, #257c5f, #449b7e;
+			toggled-down-fill-colors: #0b6144, #257c5f, #449b7e;
+			toggled-disabled-fill-colors: #0b6144, #257c5f, #449b7e;
+			skin: ClassReference("com.neosavvy.nets.theme.skins.ButtonSkin");
+			selected-button-text-style-name: 'toggleSelectedTextStyle';
+			padding-left: 8;
+			padding-right: 8;
+			padding-top: 3;
+			padding-bottom: 0;
+		}
+		
+	</fx:Style>
+</s:ViewNavigatorApplication>
