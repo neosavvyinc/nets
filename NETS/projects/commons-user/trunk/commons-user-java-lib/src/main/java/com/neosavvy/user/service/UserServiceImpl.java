@@ -7,6 +7,7 @@ import com.neosavvy.user.dto.companyManagement.UserDTO;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import com.neosavvy.user.service.exception.UserServiceException;
@@ -188,6 +189,30 @@ public class UserServiceImpl implements UserService {
         mailService.resetPasswordForUserEmail(user);
     }
 
+    public void resetPasswordForUser( String username ) {
+        System.out.println("user="+username);
+        UserDTO user = new UserDTO();
+        user.setUsername( username );
+        List<UserDTO> users = findUsers(user);
+
+        if( users != null && users.size() == 1)
+        {
+            user = users.get(0);
+            try {
+                String newPassword = StringUtil.getHash32((new Date().toString()));
+                user.setPassword(newPassword);
+                mailService.resetPasswordForUserEmail(user);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+                throw new UserServiceException("Problem generating new password");
+            }
+        }
+        else
+        {
+            throw new UserServiceException("User was not found, so password could not be reset");
+        }
+    }
+
 
     public AuthenticationManager getAuthManager() {
         return authManager;
@@ -203,5 +228,13 @@ public class UserServiceImpl implements UserService {
 
     public void setSessionManager(UserSessionManager sessionManager) {
         this.sessionManager = sessionManager;
+    }
+
+    public void setMailService(MailService mailService) {
+        this.mailService = mailService;
+    }
+
+    public MailService getMailService() {
+        return mailService;
     }
 }

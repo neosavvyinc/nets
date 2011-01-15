@@ -102,5 +102,11 @@ package com.neosavvy.user.model {
             channelSet.addEventListener(FaultEvent.FAULT, responder.fault);
             sendNotification(ApplicationFacade.USER_NOT_LOGGED_IN);
         }
+
+        public function resetUserPassword(user:UserDTO, responder:IResponder):void {
+            var userService:RemoteObject = getService(ProxyConstants.userServiceDestination);
+            addCallbackHandler(userService, responder);
+            userService.resetPasswordForUser(user.username);
+        }
     }
 }

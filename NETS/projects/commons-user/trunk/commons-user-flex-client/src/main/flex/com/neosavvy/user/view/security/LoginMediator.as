@@ -2,11 +2,22 @@ package com.neosavvy.user.view.security {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
 
+    import com.neosavvy.user.view.security.popup.ForgotPasswordFailedPopup;
+    import com.neosavvy.user.view.security.popup.ForgotPasswordPopup;
+    import com.neosavvy.user.view.security.popup.ForgotPasswordPopup;
+
+    import com.neosavvy.user.view.security.popup.ForgotPasswordSuccessPopup;
+
+    import flash.events.Event;
     import flash.events.MouseEvent;
 
     import mx.controls.Button;
+    import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
     import mx.logging.Log;
+
+    import mx.managers.PopUpManager;
+    import mx.managers.PopUpManager;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.mediator.Mediator;
@@ -22,6 +33,13 @@ package com.neosavvy.user.view.security {
 
         override public function onRegister():void {
             login.loginButton.addEventListener(MouseEvent.CLICK, handleLoginClickedEvent);
+            login.forgotPasswordPopup.addEventListener("userSelected", onForgotPasswordUserSelected);
+        }
+
+        private function onForgotPasswordUserSelected(event:Event):void {
+            var user:UserDTO = new UserDTO();
+            user.username = login.forgotPasswordPopup.userNameString;
+            sendNotification(ApplicationFacade.FORGOT_PASSWORD_REQUEST, user);
         }
 
         public function get login():Login {
@@ -47,6 +65,8 @@ package com.neosavvy.user.view.security {
             return [
                 ApplicationFacade.USER_LOGIN_SUCCESS
                 ,ApplicationFacade.USER_LOGIN_FAILED
+                ,ApplicationFacade.FORGOT_PASSWORD_FAULT
+                ,ApplicationFacade.FORGOT_PASSWORD_SUCCESS
             ];
         }
 
@@ -58,7 +78,35 @@ package com.neosavvy.user.view.security {
                 case ApplicationFacade.USER_LOGIN_FAILED:
                     login.errorLbl.text = "Username or Password were not valid";
                     break;
+                case ApplicationFacade.FORGOT_PASSWORD_SUCCESS:
+                    handleForgotPasswordSuccess( notification );
+                    break;
+                case ApplicationFacade.FORGOT_PASSWORD_FAULT:
+                    handleForgotPasswordFault( notification );
+                    break;
             }
+        }
+
+        private function handleForgotPasswordFault(notification:INotification):void {
+            login.stack.toggle();
+            login.stack.addEventListener("endFlip", onFlipFinishedFault);
+
+        }
+
+        private function onFlipFinishedFault(event:Event):void {
+            PopUpManager.centerPopUp(PopUpManager.createPopUp(login, ForgotPasswordFailedPopup, true));
+            login.stack.removeEventListener("endFlip", onFlipFinishedFault);
+        }
+
+        private function handleForgotPasswordSuccess(notification:INotification):void {
+            login.stack.toggle();
+            login.stack.addEventListener("endFlip", onFlipFinishedSuccess);
+        }
+
+
+        private function onFlipFinishedSuccess(event:Event):void {
+            PopUpManager.centerPopUp(PopUpManager.createPopUp(login, ForgotPasswordSuccessPopup, true));
+            login.stack.removeEventListener("endFlip", onFlipFinishedSuccess);
         }
     }
 }

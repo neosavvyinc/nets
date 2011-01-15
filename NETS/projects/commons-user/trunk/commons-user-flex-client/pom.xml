@@ -225,6 +225,13 @@
             <type>swc</type>
         </dependency>
 
+        <dependency>
+            <groupId>com.adobe</groupId>
+            <artifactId>distortionEffects</artifactId>
+            <version>1.0</version>
+            <type>swc</type>
+        </dependency>
+
 
     </dependencies>
 

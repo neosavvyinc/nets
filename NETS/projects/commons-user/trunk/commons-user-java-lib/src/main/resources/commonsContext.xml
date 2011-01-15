@@ -38,6 +38,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
         <property name="userDao" ref="userDAO"/>
         <property name="authManager" ref="org.springframework.security.authenticationManager" />
+        <property name="mailService" ref="mailService"/>
     </bean>
 
     <bean id="companyService" class="com.neosavvy.user.service.CompanyServiceImpl">

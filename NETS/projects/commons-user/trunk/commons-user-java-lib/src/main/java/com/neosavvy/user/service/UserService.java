@@ -61,6 +61,8 @@ public interface UserService {
 
     @Secured({"ROLE_ADMIN", "OBJECT_ACL_WRITE"})
     public void resetPassword(UserDTO user);
+
+    public void resetPasswordForUser(String username);
     
     public boolean confirmUser(String userName, String hashCode);
     public SecurityWrapperDTO getUserDetails();

@@ -43,6 +43,7 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.secured.SecuredViewTeardownCommand;
     import com.neosavvy.user.controller.secured.UserLoggedInStartupCommand;
     import com.neosavvy.user.controller.security.CheckLoggedIn;
+    import com.neosavvy.user.controller.security.ForgotPasswordCommand;
     import com.neosavvy.user.controller.security.LoginCommand;
     import com.neosavvy.user.controller.security.LogoutCommand;
     import com.neosavvy.user.controller.user.ConfirmAccountCommand;
@@ -59,6 +60,7 @@ package com.neosavvy.user {
 
     public class ApplicationFacade extends Facade
     {
+
         public function ApplicationFacade(key:String)
         {
             super(key);
@@ -85,6 +87,7 @@ package com.neosavvy.user {
             registerCommand(CHECK_USER_LOGGED_IN, CheckLoggedIn)
             registerCommand(REQUEST_USER_LOGIN, LoginCommand);
             registerCommand(REQUEST_LOGOUT, LogoutCommand);
+            registerCommand(FORGOT_PASSWORD_REQUEST, ForgotPasswordCommand);
             registerCommand(GET_USERS_REQUEST, GetUsersCommand);
             registerCommand(SAVE_USER_REQUEST, SaveUserCommand);
             registerCommand(SAVE_COMPANY_REQUEST, SaveCompanyCommand);
@@ -143,6 +146,8 @@ package com.neosavvy.user {
 
             registerCommand(INITIALIZE_VIEW_SUBMITTED_EXPENSE_REPORTS_VIEW, InitializeViewSubmittedExpenseReportView);
             registerCommand(INITIALIZE_AWAITING_EXPENSE_REPORT_VIEW, InitializeViewAwaitingApprovalExpenseReportView);
+
+
         }
 
         /**
@@ -401,5 +406,9 @@ package com.neosavvy.user {
         public static const ADD_RECEIPT_TO_EXPENSE_REPORT_REQUEST:String = "addReceiptToExpenseReportRequest";
         public static const ADD_RECEIPT_TO_EXPENSE_REPORT_SUCCESS:String = "addReceiptToExpenseReportSuccess";
         public static const ADD_RECEIPT_TO_EXPENSE_REPORT_FAILED:String = "addReceiptToExpenseReportFailed";
+
+        public static const FORGOT_PASSWORD_REQUEST:String = "forgotPasswordRequest";
+        public static const FORGOT_PASSWORD_FAULT:String = "forgotPasswordFault";
+        public static const FORGOT_PASSWORD_SUCCESS:String = "forgotPasswordSuccess";
     }
 }
