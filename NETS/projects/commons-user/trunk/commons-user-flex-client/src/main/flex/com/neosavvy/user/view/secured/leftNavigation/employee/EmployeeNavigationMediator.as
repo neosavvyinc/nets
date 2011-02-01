@@ -1,4 +1,5 @@
 package com.neosavvy.user.view.secured.leftNavigation.employee {
+    import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.view.secured.leftNavigation.admin.*;
     import com.neosavvy.user.ApplicationFacade;
 
@@ -97,10 +98,23 @@ package com.neosavvy.user.view.secured.leftNavigation.employee {
         }
 
         override public function listNotificationInterests():Array {
-            return super.listNotificationInterests();
+            return [
+                ApplicationFacade.USER_LOGIN_SUCCESS
+                ,ApplicationFacade.USER_LOGGED_IN
+                ,ApplicationFacade.POST_SECURE_VIEW_PREP
+            ];
         }
 
         override public function handleNotification(notification:INotification):void {
+            switch ( notification.getName() )
+            {
+                case ApplicationFacade.USER_LOGIN_SUCCESS:
+                case ApplicationFacade.USER_LOGGED_IN:
+                case ApplicationFacade.POST_SECURE_VIEW_PREP:
+                    toggleBarFocus(0);
+                    handleWelcomeButtonClicked();
+                    break;
+            }
         }
 
     }

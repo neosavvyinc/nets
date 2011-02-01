@@ -1,6 +1,8 @@
 package com.neosavvy.user.view.secured.leftNavigation.admin {
     import com.neosavvy.user.ApplicationFacade;
 
+    import com.neosavvy.user.model.SecurityProxy;
+
     import flash.events.MouseEvent;
 
     import mx.controls.LinkButton;
@@ -166,11 +168,14 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
                 ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES
                 ,ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT
                 ,ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS
+                ,ApplicationFacade.USER_LOGIN_SUCCESS
+                ,ApplicationFacade.USER_LOGGED_IN
+                ,ApplicationFacade.POST_SECURE_VIEW_PREP
             ];
         }
 
         override public function handleNotification(notification:INotification):void {
-
+            var securityProxy:SecurityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
             switch ( notification.getName() )
             {
                 case ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES:
@@ -181,6 +186,12 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
                     break;
                 case ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS:
                     toggleBarAdminFocus(3);
+                    break;
+                case ApplicationFacade.USER_LOGIN_SUCCESS:
+                case ApplicationFacade.USER_LOGGED_IN:
+                case ApplicationFacade.POST_SECURE_VIEW_PREP:
+                    toggleBarFocus(0);
+                    handleWelcomeButtonClicked();
                     break;
             }
 
