@@ -93,8 +93,8 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
             manageProjects.projectName.errorString = null;
             manageProjects.projectCode.text = null;
             manageProjects.projectCode.errorString = null;
-            manageProjects.ongoingProject.selected = false;
-            manageProjects.ongoingProject.errorString = null;
+//            manageProjects.ongoingProject.selected = false;
+//            manageProjects.ongoingProject.errorString = null;
             clientSelectorDropdown.selectedIndex = 0;
         }
 

@@ -32,8 +32,9 @@
         <mx:Button id="deleteButton" label="Delete"/>
         <mx:Button id="refreshButton" label="Refresh"/>
     </mx:HBox>
+    <mx:DateFormatter id="dateFormat" formatString="MM-DD-YYYY"/>
     <mx:VDividedBox width="100%" height="100%">
-        <mx:VBox width="100%" height="50%">
+        <mx:VBox width="100%" height="50%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
             <mx:DataGrid
                     id="expenseReportGrid"
                     width="100%"
@@ -43,6 +44,7 @@
                             id="dateColumn"
                             headerText="Date"
                             dataField="expenseDate"
+                            labelFunction="formatDate"
                             />
                     <datagridclasses:DataGridColumn
                             id="expenseTypeColumn"
@@ -66,7 +68,18 @@
                             id="amountColumn"
                             headerText="Amount"
                             dataField="amountNumber"
-                            />
+                            >
+                        <datagridclasses:itemRenderer>
+                            <mx:Component>
+                                <mx:HBox horizontalAlign="right" paddingRight="5">
+                                    <mx:Label text="{StringUtils.formatCurrency( data.amount )}"/>
+                                    <mx:Script><![CDATA[
+                                        import com.neosavvy.user.util.StringUtils;
+                                        ]]></mx:Script>
+                                </mx:HBox>
+                            </mx:Component>
+                        </datagridclasses:itemRenderer>
+                    </datagridclasses:DataGridColumn>
                     <datagridclasses:DataGridColumn
                             id="actionColumn"
                             headerText="Actions"
@@ -80,8 +93,16 @@
                 <mx:Button id="editExpenseItemButton" label="Edit" enabled="false"/>
                 <mx:Button id="deleteExpenseItemButton" label="Delete" enabled="false"/>
                 <mx:Spacer width="100%"/>
-                <mx:Label text="Total Expense Amount: " styleName="contentLabel"/>
-                <mx:Label id="totalExpenseAmountLabel" text="$0.00" styleName="contentLabelBold"/>
+                <mx:VBox width="100%">
+                    <mx:HBox width="100%" horizontalAlign="right">
+                        <mx:Label text="Total Reimbursed Amount: " styleName="contentLabel"/>
+                        <mx:Label id="totalReimburseAmount" text="$0.00" styleName="contentLabelBold"/>
+                    </mx:HBox>
+                    <mx:HBox width="100%" horizontalAlign="right">
+                        <mx:Label text="Total Expense Amount: " styleName="contentLabel"/>
+                        <mx:Label id="totalExpenseAmountLabel" text="$0.00" styleName="contentLabelBold"/>
+                    </mx:HBox>
+                </mx:VBox>
             </mx:HBox>
         </mx:VBox>
 
@@ -143,6 +164,10 @@
                 return (data as ExpenseItem).expenseItemType.name;
             }
             return null;
+        }
+
+        private function formatDate(item:Object, column:DataGridColumn):String {
+            return dateFormat.format( ExpenseItem(item).expenseDate );
         }
         ]]></mx:Script>
 </mx:VBox>

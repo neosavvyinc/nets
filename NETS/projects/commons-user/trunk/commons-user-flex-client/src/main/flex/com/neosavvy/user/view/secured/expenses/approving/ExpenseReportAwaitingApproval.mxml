@@ -4,8 +4,6 @@
         width="100%"
         height="100%"
         horizontalAlign="right"
-        xmlns:flexlib="http://code.google.com/p/flexlib/"
-        xmlns:neosavvy="com.neosavvy.grid.*"
         paddingLeft="20"
         paddingBottom="20"
         paddingRight="20"

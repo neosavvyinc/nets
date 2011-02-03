@@ -1,5 +1,6 @@
 package com.neosavvy.user.util {
-     import mx.utils.StringUtil;
+    import mx.formatters.CurrencyFormatter;
+    import mx.utils.StringUtil;
 
     public class StringUtils {
 
@@ -132,6 +133,14 @@ package com.neosavvy.user.util {
             {
                 return new Date(val);
             }
+        }
+
+        private static var _currencyFormat : CurrencyFormatter = new CurrencyFormatter();
+
+        public static function formatCurrency( number : Number ) : String
+        {
+            _currencyFormat.precision = 2;
+            return _currencyFormat.format( number );
         }
 
     }

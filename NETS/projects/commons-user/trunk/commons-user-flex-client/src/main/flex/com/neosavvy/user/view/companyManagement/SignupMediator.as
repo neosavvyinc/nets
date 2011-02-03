@@ -107,7 +107,7 @@ package com.neosavvy.user.view.companyManagement {
                 user.password = signup.signupPanel.administrativePassword.text;
                 user.emailAddress = signup.signupPanel.administrativeEmail.text;
                 user.firstName = signup.signupPanel.administrativeFirstName.text;
-                user.middleName = signup.signupPanel.administrativeMiddleName.text;
+//                user.middleName = signup.signupPanel.administrativeMiddleName.text;
                 user.lastName = signup.signupPanel.administrativeLastName.text;
                 sendNotification(ApplicationFacade.SAVE_COMPANY_REQUEST, [company,user]);
             }

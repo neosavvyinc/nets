@@ -234,11 +234,17 @@ package com.neosavvy.user.view.secured.expenses.report {
         private function recalculateTotal():void
         {
             var total : Number = 0;
+            var totalToReimburse : Number = 0;
             for each ( var item : ExpenseItem in _expenseItems)
             {
                 total = total + item.amountNumber;
+                if( item.paymentMethod && item.paymentMethod.name == "Employee Paid" )
+                {
+                    totalToReimburse = totalToReimburse + item.amountNumber;
+                }
             }
-            expenseReportDetail.totalExpenseAmountLabel.text = (new CurrencyFormatter()).format( total );
+            expenseReportDetail.totalExpenseAmountLabel.text = StringUtils.formatCurrency( total );
+            expenseReportDetail.totalReimburseAmount.text = StringUtils.formatCurrency( totalToReimburse );
         }
 
         private function handleNewExpenseItemButtonClicked(event:MouseEvent):void {

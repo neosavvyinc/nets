@@ -9,7 +9,10 @@ package com.neosavvy.user.view.security {
     import com.neosavvy.user.view.security.popup.ForgotPasswordSuccessPopup;
 
     import flash.events.Event;
+    import flash.events.KeyboardEvent;
     import flash.events.MouseEvent;
+
+    import flash.ui.Keyboard;
 
     import mx.controls.Button;
     import mx.core.IFlexDisplayObject;
@@ -32,8 +35,21 @@ package com.neosavvy.user.view.security {
         }
 
         override public function onRegister():void {
+            login.username.addEventListener(KeyboardEvent.KEY_DOWN, onEnter);
+            login.password.addEventListener(KeyboardEvent.KEY_DOWN, onEnter);
+            login.loginButton.addEventListener(KeyboardEvent.KEY_DOWN, onEnter);
+
+
             login.loginButton.addEventListener(MouseEvent.CLICK, handleLoginClickedEvent);
             login.forgotPasswordPopup.addEventListener("userSelected", onForgotPasswordUserSelected);
+        }
+
+        private function onEnter( event : KeyboardEvent ) : void
+        {
+            if( event.keyCode == Keyboard.ENTER )
+            {
+                loginUser();        
+            }
         }
 
         private function onForgotPasswordUserSelected(event:Event):void {
@@ -53,6 +69,10 @@ package com.neosavvy.user.view.security {
         }
 
         private function handleLoginClickedEvent(event:MouseEvent):void {
+            loginUser();
+        }
+
+        private function loginUser():void {
             var user:UserDTO = new UserDTO();
             user.username = login.username.text;
             user.password = login.password.text;

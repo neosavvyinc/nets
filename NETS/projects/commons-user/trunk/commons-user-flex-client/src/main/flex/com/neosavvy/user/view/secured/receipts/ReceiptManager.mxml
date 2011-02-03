@@ -6,8 +6,10 @@
         width="100%"
         height="100%">
 
-    <mx:HBox width="100%" horizontalAlign="right">
+    <mx:HBox width="100%" horizontalAlign="right" styleName="headingTitleBox">
         <mx:Button id="refreshReceipts" label="Refresh"/>
+        <mx:Spacer width="100%"/>
+        <mx:Label text="Manage Your Uncategorized Receipts"/>
     </mx:HBox>
 
     <mx:TileList

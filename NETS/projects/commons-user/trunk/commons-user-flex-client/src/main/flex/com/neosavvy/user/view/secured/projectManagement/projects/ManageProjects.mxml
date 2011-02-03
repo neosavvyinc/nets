@@ -12,6 +12,7 @@
 
     <mx:Script>
         <![CDATA[
+        import com.neosavvy.user.dto.project.Project;
 
         import mx.collections.ArrayCollection;
         import mx.events.CollectionEvent;
@@ -28,6 +29,9 @@
             dispatchEvent(new CollectionEvent(CollectionEvent.COLLECTION_CHANGE));
         }
 
+        private function formatDate(item:Object, column:DataGridColumn):String {
+            return dateFormat.format( Project(item)[column.dataField] );
+        }
 
 
         ]]>
@@ -38,6 +42,10 @@
         <mx:StringValidator id="projectCodeValidator" source="{this.projectCode}" property="text" required="true"/>
     </mx:Array>
     <validators:FormValidator id="projectFormValidator" validators="{this.projectFormValidators}"/>
+    <mx:DateFormatter id="dateFormat" formatString="MM-DD-YYYY"/>
+    <mx:HBox width="100%" horizontalAlign="right" styleName="headingTitleBox">
+        <mx:Label text="Manage Projects"/>
+    </mx:HBox>
 
     <mx:HBox width="100%">
         <mx:Form id="projectEntryForm" width="50%">
@@ -46,7 +54,7 @@
                                             change="this.projectFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="Project Code:" width="100%" required="true">
-                <flexlib:PromptingTextInput id="projectCode" prompt="Three Letter Code"
+                <flexlib:PromptingTextInput id="projectCode" prompt="Code"
                                             change="this.projectFormValidator.validateForm(event);"/>
             </mx:FormItem>
             <mx:FormItem label="State Date:" width="100%" required="true">
@@ -55,9 +63,9 @@
             <mx:FormItem label="End Date:" width="100%" required="false">
                 <mx:DateField id="endDate"/>
             </mx:FormItem>
-            <mx:FormItem>
-                <mx:CheckBox id="ongoingProject" label="No End Date (This Project is on-going)"/>
-            </mx:FormItem>
+            <!--<mx:FormItem>-->
+                <!--<mx:CheckBox id="ongoingProject" label="No End Date (This Project is on-going)"/>-->
+            <!--</mx:FormItem>-->
         </mx:Form>
         <mx:VBox width="50%" height="{projectEntryForm.height}">
             <mx:ComboBox id="clientSelectorDropdown" labelField="companyName" width="60%"
@@ -89,11 +97,13 @@
                     id="startDateColumn"
                     dataField="startDate"
                     headerText="Start Date"
+                    labelFunction="formatDate"
                     />
             <mx:DataGridColumn
                     id="endDateColumn"
                     dataField="endDate"
                     headerText="End Date"
+                    labelFunction="formatDate"
                     />
             <mx:DataGridColumn
                     id="clientCompanyColumn"
