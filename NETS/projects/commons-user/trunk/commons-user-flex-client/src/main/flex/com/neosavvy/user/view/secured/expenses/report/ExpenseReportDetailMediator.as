@@ -203,6 +203,7 @@ package com.neosavvy.user.view.secured.expenses.report {
             params[1] = getExpenseReport();
             params[2] = getExpenseReportItems();
             sendNotification(ApplicationFacade.SAVE_EXPENSE_REPORT_REQUEST, params);
+            sortExpenseItems();
         }
 
         private function handleExpenseItemSelectionChanged(event:Event):void {
@@ -429,7 +430,19 @@ package com.neosavvy.user.view.secured.expenses.report {
 
         private function setExpenseReportItems(expenseItems:ListCollectionView):void {
             _expenseItems = expenseItems as ArrayCollection;
+            sortExpenseItems();
             expenseReportDetail.expenseReportGrid.dataProvider = _expenseItems;
+        }
+
+        private function sortExpenseItems( ): void
+        {
+            var dateBasedSort : Sort = new Sort();
+            dateBasedSort.compareFunction = function compareDates(a:Object, b:Object, fields:Array = null):int
+            {
+                return ObjectUtil.dateCompare( ExpenseItem(a).expenseDate, ExpenseItem(b).expenseDate );
+            }
+            _expenseItems.sort = dateBasedSort;
+            _expenseItems.refresh();
         }
 
         private function getExpenseReportItems():ArrayCollection {
