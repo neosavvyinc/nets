@@ -66,6 +66,8 @@ package com.neosavvy.user.view.security {
            login.username.text = null;
            login.password.text = null;
            login.errorLbl.text = null;
+           login.errorLbl.includeInLayout = false;
+           login.errorLbl.visible = false;
         }
 
         private function handleLoginClickedEvent(event:MouseEvent):void {
@@ -97,6 +99,8 @@ package com.neosavvy.user.view.security {
                     break;
                 case ApplicationFacade.USER_LOGIN_FAILED:
                     login.errorLbl.text = "Username or Password were not valid";
+                    login.errorLbl.includeInLayout = true;
+                    login.errorLbl.visible = true;
                     break;
                 case ApplicationFacade.FORGOT_PASSWORD_SUCCESS:
                     handleForgotPasswordSuccess( notification );
