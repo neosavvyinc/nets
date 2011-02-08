@@ -1,21 +1,21 @@
 package qs.controls
 {
-	import mx.core.UIComponent;
-	import flash.display.DisplayObject;
-	import flash.display.Bitmap;
-	import flash.display.BitmapData;
-	import flash.system.ApplicationDomain;
-	import flash.display.Loader;
-	import mx.rpc.soap.LoadEvent;
-	import flash.events.Event;
-	import flash.events.IOErrorEvent;
-	import flash.net.URLRequest;
-	import mx.skins.RectangularBorder;
-	import mx.core.EdgeMetrics;
-	import qs.caching.ContentCache;
-	
+    import flash.display.Bitmap;
+    import flash.display.BitmapData;
+    import flash.display.DisplayObject;
+    import flash.display.Loader;
+    import flash.events.Event;
+    import flash.events.IOErrorEvent;
+    import flash.net.URLRequest;
+    import flash.system.ApplicationDomain;
 
-[Style(name="backgroundAlpha", type="Number", inherit="no")]
+    import mx.core.EdgeMetrics;
+    import mx.core.UIComponent;
+    import mx.skins.RectangularBorder;
+
+    import qs.caching.ContentCache;
+
+    [Style(name="backgroundAlpha", type="Number", inherit="no")]
 [Style(name="backgroundColor", type="uint", format="Color", inherit="no")]
 [Style(name="borderColor", type="uint", format="Color", inherit="no")]
 [Style(name="borderSides", type="String", inherit="no")]

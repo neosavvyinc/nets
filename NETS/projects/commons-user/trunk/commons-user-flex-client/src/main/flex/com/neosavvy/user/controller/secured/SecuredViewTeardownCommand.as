@@ -13,7 +13,6 @@ package com.neosavvy.user.controller.secured {
     import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigationMediator;
     import com.neosavvy.user.view.secured.projectManagement.assignments.ManageAssignmentsMediator;
     import com.neosavvy.user.view.secured.projectManagement.projects.ManageProjectsMediator;
-
     import com.neosavvy.user.view.secured.receipts.ReceiptManagerMediator;
     import com.neosavvy.user.view.secured.welcome.WelcomeMediator;
 

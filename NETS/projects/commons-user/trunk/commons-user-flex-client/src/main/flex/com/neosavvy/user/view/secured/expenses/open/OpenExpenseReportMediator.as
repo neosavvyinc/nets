@@ -1,27 +1,18 @@
 package com.neosavvy.user.view.secured.expenses.open {
+    import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.project.ExpenseReport;
-    import com.neosavvy.user.dto.project.ExpenseReportStatus;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.UserServiceProxy;
-    import com.neosavvy.user.ApplicationFacade;
-
     import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
-
     import com.neosavvy.user.view.secured.expenses.open.popup.SubmitConfirmationPanel;
-    import com.neosavvy.user.view.secured.expenses.report.popup.DeleteConfirmationPanel;
 
     import flash.display.DisplayObject;
 
-    import flash.events.MouseEvent;
-
-    import mx.collections.ArrayCollection;
-    import mx.controls.AdvancedDataGrid;
     import mx.controls.DataGrid;
     import mx.core.Application;
     import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
     import mx.logging.Log;
-
     import mx.managers.PopUpManager;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

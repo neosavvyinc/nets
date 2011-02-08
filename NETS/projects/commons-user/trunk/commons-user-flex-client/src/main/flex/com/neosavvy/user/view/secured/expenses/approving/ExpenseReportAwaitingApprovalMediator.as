@@ -2,7 +2,6 @@ package com.neosavvy.user.view.secured.expenses.approving {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.UserServiceProxy;
-
     import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
 
     import mx.controls.DataGrid;

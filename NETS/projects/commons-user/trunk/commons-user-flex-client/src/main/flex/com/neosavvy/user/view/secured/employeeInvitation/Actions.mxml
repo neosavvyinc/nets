@@ -23,7 +23,6 @@
 
             super.updateDisplayList(unscaledWidth, unscaledHeight);
         }
-
         ]]>
     </mx:Script>
 

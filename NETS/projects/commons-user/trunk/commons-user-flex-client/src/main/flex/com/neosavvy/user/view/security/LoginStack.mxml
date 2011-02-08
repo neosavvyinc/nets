@@ -6,7 +6,6 @@
         import com.adobe.ac.mxeffects.DistortionConstants;
         import com.adobe.ac.mxeffects.Flip;
 
-        import mx.effects.Effect;
         import mx.effects.easing.Circular;
         import mx.events.EffectEvent;
 
@@ -16,7 +15,7 @@
 
             if (numChildren != 2) return;
             isFlipping = true;
-            var flip:Flip = new Flip( getChildAt(0) );
+            var flip:Flip = new Flip(getChildAt(0));
             flip.siblings = [getChildAt(1)];
             flip.direction = DistortionConstants.RIGHT;
             flip.duration = 500;
@@ -25,16 +24,15 @@
             flip.easingFunction = Circular.easeInOut;
             flip.addEventListener(
                     EffectEvent.EFFECT_END, flipEnd
-                    );
+            );
             flip.play();
 
         }
 
-        private function flipForward():void
-        {
+        private function flipForward():void {
             if (numChildren != 2) return;
             isFlipping = true;
-            var flip:Flip = new Flip( getChildAt(1));
+            var flip:Flip = new Flip(getChildAt(1));
             flip.siblings = [getChildAt(0)];
             flip.direction = DistortionConstants.LEFT;
             flip.duration = 500;
@@ -43,30 +41,25 @@
             flip.easingFunction = Circular.easeInOut;
             flip.addEventListener(
                     EffectEvent.EFFECT_END, flipEnd
-                    );
+            );
             flip.play();
 
         }
 
-        private function flipEnd(event:EffectEvent):void
-        {
-            if( numChildren == 2)
-            {
+        private function flipEnd(event:EffectEvent):void {
+            if (numChildren == 2) {
                 selectedIndex = selectedIndex == 0 ? 1 : 0;
             }
             isFlipping = false;
-            dispatchEvent( new Event("endFlip"));
+            dispatchEvent(new Event("endFlip"));
 
         }
 
-        public function toggle():void
-        {
-            if( selectedChild == getChildAt(0) )
-            {
+        public function toggle():void {
+            if (selectedChild == getChildAt(0)) {
                 flipBackwards();
             }
-            else
-            {
+            else {
                 flipForward();
             }
         }

@@ -143,10 +143,17 @@ package com.neosavvy.user.view.secured.receipts {
                     break;
                 case ApplicationFacade.FIND_OPEN_EXPENSE_REPORTS_FOR_USER_SUCCESS:
                     var openExpenseReports:ArrayCollection = _expenseReportProxy.openExpenseReports;
+                    var cloneOfOpenExpenseReport:ArrayCollection = new ArrayCollection();
+
+                    for each ( var oer : ExpenseReport in openExpenseReports )
+                    {
+                        cloneOfOpenExpenseReport.addItem(oer);
+                    }
+
                     var newExpenseReport : ExpenseReport = new ExpenseReport();
                     newExpenseReport.displayStringOverride = "Add To New...";
-                    openExpenseReports.addItemAt(newExpenseReport,0);
-                    receiptManager.openExenseReports = openExpenseReports;
+                    cloneOfOpenExpenseReport.addItemAt(newExpenseReport,0);
+                    receiptManager.openExenseReports = cloneOfOpenExpenseReport;
                     receiptManager.receiptViewer.invalidateProperties();
                     break;
                 case ApplicationFacade.GET_PROJECTS_FOR_USER_SUCCESS:

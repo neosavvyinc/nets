@@ -1,15 +1,15 @@
 package com.components.fileupload
 {
-	import flash.events.MouseEvent;
-	import flash.geom.Point;
-	
-	import mx.containers.TitleWindow;
-	import mx.controls.Button;
-	import mx.core.Application;
+    import flash.events.MouseEvent;
+    import flash.geom.Point;
+
+    import mx.containers.TitleWindow;
+    import mx.controls.Button;
+    import mx.core.Application;
     import mx.core.UIComponent;
     import mx.events.FlexEvent;
-	import mx.managers.CursorManager;
-	import mx.managers.CursorManagerPriority;
+    import mx.managers.CursorManager;
+    import mx.managers.CursorManagerPriority;
     import mx.managers.PopUpManager;
 
     [Event(name="closeWindow", type="mx.events.FlexEvent")]

@@ -8,7 +8,6 @@ package com.neosavvy.user.view.secured.clientManagement {
 
     import flash.events.MouseEvent;
 
-    import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
     import mx.controls.DataGrid;
     import mx.logging.ILogger;

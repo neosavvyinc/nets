@@ -1,9 +1,6 @@
 package com.neosavvy.user.view.secured.welcome {
     import com.neosavvy.user.ApplicationFacade;
 
-    import com.neosavvy.user.model.CompanyServiceProxy;
-    import com.neosavvy.user.model.CompanyServiceProxy;
-
     import flash.events.MouseEvent;
 
     import mx.logging.ILogger;

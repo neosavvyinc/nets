@@ -1,11 +1,7 @@
 package com.neosavvy.user.view.secured.leftNavigation.admin {
     import com.neosavvy.user.ApplicationFacade;
-
     import com.neosavvy.user.model.SecurityProxy;
 
-    import flash.events.MouseEvent;
-
-    import mx.controls.LinkButton;
     import mx.events.ItemClickEvent;
     import mx.logging.ILogger;
     import mx.logging.Log;

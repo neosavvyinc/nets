@@ -1,5 +1,4 @@
 package com.neosavvy.user.view.secured.userManagement {
-    import com.neosavvy.grid.PickFilterGrid;
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
@@ -8,8 +7,6 @@ package com.neosavvy.user.view.secured.userManagement {
     import flash.events.MouseEvent;
 
     import mx.collections.ArrayCollection;
-    import mx.controls.AdvancedDataGrid;
-    import mx.controls.Button;
     import mx.controls.DataGrid;
     import mx.controls.ToggleButtonBar;
     import mx.events.ItemClickEvent;

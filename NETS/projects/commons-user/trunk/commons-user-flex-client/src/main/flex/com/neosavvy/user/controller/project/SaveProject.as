@@ -13,7 +13,6 @@ package com.neosavvy.user.controller.project {
     import mx.logging.Log;
     import mx.rpc.IResponder;
     import mx.rpc.events.FaultEvent;
-
     import mx.rpc.events.ResultEvent;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

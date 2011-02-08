@@ -1,19 +1,15 @@
 package com.neosavvy.user.controller.expenses.report.save {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
-
-    import com.neosavvy.user.controller.progress.ShowProgressBarCommand;
     import com.neosavvy.user.dto.project.ExpenseReport;
     import com.neosavvy.user.dto.project.Project;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
-
     import com.neosavvy.user.util.RemoteObjectUtils;
 
     import flash.errors.IllegalOperationError;
 
     import mx.collections.ArrayCollection;
     import mx.rpc.events.FaultEvent;
-
     import mx.rpc.events.ResultEvent;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

@@ -1,32 +1,18 @@
 package com.neosavvy.user.view.secured.expenses.submitted {
+    import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.project.ExpenseReport;
-    import com.neosavvy.user.dto.project.ExpenseReportStatus;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
-    import com.neosavvy.user.view.secured.expenses.open.popup.SubmitConfirmationPanel;
     import com.neosavvy.user.view.secured.expenses.submitted.popup.ReopenConfirmationPanel;
-    import com.neosavvy.user.view.secured.projectManagement.assignments.*;
-    import com.neosavvy.user.ApplicationFacade;
-    import com.neosavvy.user.dto.project.Project;
-    import com.neosavvy.user.model.CompanyServiceProxy;
-    import com.neosavvy.user.model.ProjectServiceProxy;
-    import com.neosavvy.user.view.secured.projectManagement.*;
 
     import flash.display.DisplayObject;
-    import flash.events.MouseEvent;
 
-    import mx.collections.ArrayCollection;
-    import mx.controls.AdvancedDataGrid;
-    import mx.controls.Button;
-    import mx.controls.ComboBox;
     import mx.controls.DataGrid;
-    import mx.controls.List;
     import mx.core.Application;
     import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
     import mx.logging.Log;
-
     import mx.managers.PopUpManager;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

@@ -91,9 +91,9 @@
                     fromAddress.text
                     , message.text
                     , subject.text
-                    );
+            );
 
-            dispatchEvent(new MailMessageEvent( parameterObject ) );
+            dispatchEvent(new MailMessageEvent(parameterObject));
 
             close();
 

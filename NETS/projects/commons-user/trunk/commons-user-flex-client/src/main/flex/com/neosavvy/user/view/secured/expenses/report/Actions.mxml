@@ -3,15 +3,12 @@
 
     <mx:Script>
         <![CDATA[
-
         import com.adobe.serialization.json.JSON;
         import com.neosavvy.user.ApplicationFacade;
         import com.neosavvy.user.ProxyConstants;
         import com.neosavvy.user.dto.project.ExpenseItem;
         import com.neosavvy.user.model.SecurityProxy;
-
         import com.neosavvy.user.util.StringUtils;
-
         import com.neosavvy.user.view.secured.expenses.report.popup.ReceiptView;
 
         import fineline.focal.common.types.v1.StorageServiceFileRef;

@@ -18,11 +18,8 @@
     <mx:Script>
         <![CDATA[
         import com.neosavvy.user.ApplicationFacade;
-
         import com.neosavvy.user.ProxyConstants;
-
         import com.neosavvy.user.dto.companyManagement.UserDTO;
-
         import com.neosavvy.user.dto.project.ExpenseReport;
 
         import fineline.focal.common.types.v1.StorageServiceFileRef;
@@ -32,8 +29,6 @@
         import mx.rpc.Responder;
         import mx.rpc.events.FaultEvent;
         import mx.rpc.events.ResultEvent;
-        import mx.rpc.http.mxml.HTTPService;
-
 
         protected override function createChildren():void {
             super.createChildren();
@@ -82,15 +77,15 @@
 
                 var user:UserDTO = ApplicationFacade.getSecurityProxy().activeUser;
                 ApplicationFacade.getUserProxy().disassociateReceiptUploadWithUser(user, fileRef, new mx.rpc.Responder(
-                                                                                                                      function (result:ResultEvent):void {
-                                                                                                                          trace("called dis-associate success");
+                        function (result:ResultEvent):void {
+                            trace("called dis-associate success");
 
-                                                                                                                          dispatchEvent(new Event("reloadReceiptData", true));
-                                                                                                                      },
-                                                                                                                      function (fault:FaultEvent):void {
-                                                                                                                          trace("failed dis-association");
-                                                                                                                      }
-                        ));
+                            dispatchEvent(new Event("reloadReceiptData", true));
+                        },
+                        function (fault:FaultEvent):void {
+                            trace("failed dis-association");
+                        }
+                ));
 
             }
 
@@ -157,7 +152,7 @@
          * handle the rotating of the image.
          *
          * This needs to be fixed.
-         * 
+         *
          * @param event
          */
         private function handleIoError(event:IOErrorEvent):void {
@@ -165,14 +160,13 @@
             loadImage(true);
         }
 
-        private function loadImage( incrementCacheKey : Boolean = false ):void {
+        private function loadImage(incrementCacheKey:Boolean = false):void {
 
-            if( incrementCacheKey )
-            {
-                cacheKey = cacheKey+1;
+            if (incrementCacheKey) {
+                cacheKey = cacheKey + 1;
             }
             var fileRef:StorageServiceFileRef = data as StorageServiceFileRef;
-            var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "/viewable?cacheKey="+cacheKey;
+            var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "/viewable?cacheKey=" + cacheKey;
             trace(fileUrl);
             _imageUrl = fileUrl;
         }

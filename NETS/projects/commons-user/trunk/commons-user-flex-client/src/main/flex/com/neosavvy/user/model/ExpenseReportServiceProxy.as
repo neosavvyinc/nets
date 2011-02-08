@@ -1,6 +1,5 @@
 package com.neosavvy.user.model {
     import com.neosavvy.user.ProxyConstants;
-
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.dto.project.ExpenseReport;
     import com.neosavvy.user.dto.project.ExpenseReportStatus;
@@ -11,11 +10,8 @@ package com.neosavvy.user.model {
     import mx.collections.ArrayCollection;
     import mx.collections.ListCollectionView;
     import mx.logging.ILogger;
-
     import mx.logging.Log;
-
     import mx.rpc.IResponder;
-
     import mx.rpc.remoting.mxml.RemoteObject;
 
     public class ExpenseReportServiceProxy extends AbstractRemoteObjectProxy {

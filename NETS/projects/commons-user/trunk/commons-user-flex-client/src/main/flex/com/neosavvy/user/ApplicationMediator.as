@@ -1,28 +1,20 @@
 package com.neosavvy.user {
-    import com.neosavvy.user.controller.mail.SendSystemMail;
     import com.neosavvy.user.dto.companyManagement.CompanyDTO;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.CompanyServiceProxy;
-    import com.neosavvy.user.model.CompanyServiceProxy;
-    import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.view.mail.MailMessageEvent;
     import com.neosavvy.user.view.mail.SystemMailMessageView;
     import com.neosavvy.user.view.secured.SecuredContainer;
-
     import com.neosavvy.user.view.security.Login;
 
     import flash.events.Event;
     import flash.events.MouseEvent;
 
     import mx.containers.Box;
-    import mx.containers.VBox;
     import mx.containers.ViewStack;
     import mx.controls.Button;
-    import mx.controls.Label;
-
     import mx.controls.LinkButton;
-
     import mx.core.IFlexDisplayObject;
     import mx.managers.PopUpManager;
 

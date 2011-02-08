@@ -168,7 +168,7 @@
         }
 
         private function formatDate(item:Object, column:DataGridColumn):String {
-            return dateFormat.format( ExpenseItem(item).expenseDate );
+            return dateFormat.format(ExpenseItem(item).expenseDate);
         }
         ]]></mx:Script>
 </mx:VBox>

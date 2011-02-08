@@ -24,11 +24,9 @@ package com.neosavvy.user.view.secured.expenses.report {
     import mx.collections.ListCollectionView;
     import mx.collections.Sort;
     import mx.containers.Form;
-    import mx.controls.AdvancedDataGrid;
     import mx.controls.DataGrid;
     import mx.core.Application;
     import mx.core.IFlexDisplayObject;
-    import mx.formatters.CurrencyFormatter;
     import mx.logging.ILogger;
     import mx.logging.Log;
     import mx.managers.PopUpManager;

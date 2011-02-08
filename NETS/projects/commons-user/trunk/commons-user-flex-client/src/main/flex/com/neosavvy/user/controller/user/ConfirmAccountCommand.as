@@ -2,7 +2,6 @@ package com.neosavvy.user.controller.user {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.model.UserServiceProxy;
-
     import com.neosavvy.user.util.RemoteObjectUtils;
 
     import mx.logging.ILogger;

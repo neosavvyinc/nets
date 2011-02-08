@@ -1,8 +1,6 @@
 package com.neosavvy.user.controller.project {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
-    import com.neosavvy.user.dto.companyManagement.UserDTO;
-    import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
     import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
@@ -10,7 +8,6 @@ package com.neosavvy.user.controller.project {
     import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
-    import mx.rpc.IResponder;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
 

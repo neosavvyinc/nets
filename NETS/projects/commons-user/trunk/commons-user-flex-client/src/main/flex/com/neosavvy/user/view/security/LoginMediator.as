@@ -1,25 +1,16 @@
 package com.neosavvy.user.view.security {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
-
     import com.neosavvy.user.view.security.popup.ForgotPasswordFailedPopup;
-    import com.neosavvy.user.view.security.popup.ForgotPasswordPopup;
-    import com.neosavvy.user.view.security.popup.ForgotPasswordPopup;
-
     import com.neosavvy.user.view.security.popup.ForgotPasswordSuccessPopup;
 
     import flash.events.Event;
     import flash.events.KeyboardEvent;
     import flash.events.MouseEvent;
-
     import flash.ui.Keyboard;
 
-    import mx.controls.Button;
-    import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
     import mx.logging.Log;
-
-    import mx.managers.PopUpManager;
     import mx.managers.PopUpManager;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

@@ -94,5 +94,6 @@
             enumInput.height = unscaledHeight;
             booleanInput.width = unscaledWidth;
             booleanInput.height = unscaledHeight;
-        }]]></mx:Script>
+        }
+        ]]></mx:Script>
 </mx:Canvas>

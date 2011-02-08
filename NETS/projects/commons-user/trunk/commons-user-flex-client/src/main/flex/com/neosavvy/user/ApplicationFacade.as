@@ -53,7 +53,6 @@ package com.neosavvy.user {
     import com.neosavvy.user.controller.user.SaveUserCommand;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.SecurityProxy;
-
     import com.neosavvy.user.model.UserServiceProxy;
 
     import org.puremvc.as3.multicore.patterns.facade.Facade;

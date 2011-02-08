@@ -9,8 +9,6 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
 
     import flash.events.MouseEvent;
 
-    import mx.collections.ArrayCollection;
-    import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
     import mx.controls.ComboBox;
     import mx.controls.DataGrid;

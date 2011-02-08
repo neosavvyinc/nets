@@ -2,7 +2,6 @@ package com.neosavvy.user.view.secured.leftNavigation {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.view.secured.leftNavigation.admin.AdminNavigation;
-
     import com.neosavvy.user.view.secured.leftNavigation.employee.EmployeeNavigation;
 
     import mx.logging.ILogger;

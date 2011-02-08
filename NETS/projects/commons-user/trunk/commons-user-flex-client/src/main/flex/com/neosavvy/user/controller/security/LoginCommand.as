@@ -7,8 +7,6 @@ package com.neosavvy.user.controller.security {
 
     import mx.logging.ILogger;
     import mx.logging.Log;
-    import mx.rpc.IResponder;
-
     import mx.rpc.Responder;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;

@@ -1,18 +1,14 @@
 package qs
 {
-import flash.utils.Dictionary;
-import flash.net.URLRequest;
-import flash.display.Loader;
-import flash.display.DisplayObject;
-import flash.display.Bitmap;
-import qs.utils.DLinkedListNode;
-import qs.utils.DLinkedList;
-import mx.controls.Image;
-	
+    import flash.display.Bitmap;
+    import flash.display.DisplayObject;
+    import flash.display.Loader;
+    import flash.net.URLRequest;
+    import flash.utils.Dictionary;
 
+    import qs.utils.DLinkedList;
 
-
-public class ContentCache
+    public class ContentCache
 {
 	static private var caches:Dictionary;
 	static private var defaultCache:ContentCache;
@@ -289,7 +285,6 @@ public class ContentCache
 }
 
 import qs.utils.DLinkedListNode;
-	
 
 class ContentCacheNode extends DLinkedListNode
 {

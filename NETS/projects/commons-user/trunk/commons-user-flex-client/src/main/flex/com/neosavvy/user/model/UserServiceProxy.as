@@ -1,8 +1,6 @@
 package com.neosavvy.user.model {
-    import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.ProxyConstants;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
-    import com.neosavvy.user.util.RemoteObjectUtils;
 
     import fineline.focal.common.types.v1.StorageServiceFileRef;
 

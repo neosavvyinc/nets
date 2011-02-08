@@ -1,15 +1,12 @@
 package com.neosavvy.user.controller.expenses.report.view {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
-
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
-
     import com.neosavvy.user.util.RemoteObjectUtils;
 
     import mx.collections.ArrayCollection;
     import mx.rpc.events.FaultEvent;
-
     import mx.rpc.events.ResultEvent;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

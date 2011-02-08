@@ -3,11 +3,8 @@
 
     <mx:Script>
         <![CDATA[
-
-        import com.neosavvy.user.dto.project.ExpenseItem;
         import com.neosavvy.user.dto.project.ExpenseReport;
         import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
-        import com.neosavvy.user.view.secured.expenses.report.event.ExpenseItemEvent;
 
         protected function approveExpenseReportHandler():void {
             dispatchEvent(new ExpenseReportApproveEvent(ExpenseReportApproveEvent.ACTION_APPROVE_REQUEST, data as ExpenseReport));
@@ -20,7 +17,6 @@
         protected function viewExpenseReportHandler():void {
             dispatchEvent(new ExpenseReportApproveEvent(ExpenseReportApproveEvent.ACTION_VIEW, data as ExpenseReport));
         }
-
         ]]>
     </mx:Script>
     <mx:LinkButton id="viewBtn" styleName="editLinkButton" toolTip="View Expense Report" click="{viewExpenseReportHandler()}"/>

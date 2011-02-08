@@ -25,7 +25,6 @@ package com.neosavvy.user.controller.expenses.report.workflow {
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
-
     import com.neosavvy.user.view.secured.receipts.AddReceiptToExpenseReportEvent;
 
     import mx.rpc.events.FaultEvent;

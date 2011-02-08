@@ -1,15 +1,11 @@
 package com.neosavvy.user.controller.security {
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
     import com.neosavvy.user.model.SecurityProxy;
-
     import com.neosavvy.user.util.RemoteObjectUtils;
 
     import mx.logging.ILogger;
     import mx.logging.Log;
-    import mx.rpc.IResponder;
-
     import mx.rpc.events.FaultEvent;
-
     import mx.rpc.events.ResultEvent;
 
     import org.puremvc.as3.multicore.interfaces.INotification;

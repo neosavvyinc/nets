@@ -29,7 +29,5 @@
 
         [Bindable]
         public var openExenseReports:ArrayCollection;
-
-
         ]]></mx:Script>
 </mx:VBox>

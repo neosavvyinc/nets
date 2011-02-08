@@ -1,19 +1,14 @@
 package com.neosavvy.user.view.secured.expenses.approving {
+    import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.project.ExpenseReport;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
     import com.neosavvy.user.view.secured.expenses.approving.popup.ConfirmExpenseReportApproved;
     import com.neosavvy.user.view.secured.expenses.approving.popup.ConfirmExpenseReportDeclined;
     import com.neosavvy.user.view.secured.expenses.approving.popup.ViewSubmittedExpenseReport;
-    import com.neosavvy.user.view.secured.progress.*;
-    import com.neosavvy.user.ApplicationFacade;
 
     import flash.display.DisplayObject;
 
-    import mx.controls.Alert;
-    import mx.controls.ProgressBar;
-    import mx.controls.ProgressBarMode;
-    import mx.core.Application;
     import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
     import mx.logging.Log;

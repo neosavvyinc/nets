@@ -9,7 +9,6 @@ package com.neosavvy.user.view.secured.employeeInvitation {
     import flash.events.MouseEvent;
 
     import mx.containers.VBox;
-    import mx.controls.AdvancedDataGrid;
     import mx.controls.Button;
     import mx.controls.DataGrid;
     import mx.controls.Label;

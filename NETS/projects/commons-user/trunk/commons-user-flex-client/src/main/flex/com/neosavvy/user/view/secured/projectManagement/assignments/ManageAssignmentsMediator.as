@@ -3,7 +3,6 @@ package com.neosavvy.user.view.secured.projectManagement.assignments {
     import com.neosavvy.user.dto.project.Project;
     import com.neosavvy.user.model.CompanyServiceProxy;
     import com.neosavvy.user.model.ProjectServiceProxy;
-    import com.neosavvy.user.view.secured.projectManagement.*;
 
     import flash.events.MouseEvent;
 

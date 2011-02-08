@@ -15,7 +15,6 @@
 
     <mx:Script>
         <![CDATA[
-
         import com.neosavvy.user.dto.companyManagement.UserDTO;
         import com.neosavvy.user.dto.project.ExpenseReport;
 
@@ -27,7 +26,6 @@
             else
                 return "";
         }
-
         ]]>
     </mx:Script>
 

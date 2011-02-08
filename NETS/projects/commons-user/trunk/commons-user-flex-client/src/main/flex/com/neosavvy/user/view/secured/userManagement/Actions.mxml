@@ -4,14 +4,13 @@
 
     <mx:Script>
             <![CDATA[
-
         import com.neosavvy.user.ApplicationFacade;
         import com.neosavvy.user.dto.companyManagement.UserDTO;
         import com.neosavvy.user.model.SecurityProxy;
         import com.neosavvy.user.view.secured.userManagement.event.UserManagementEvent;
 
         override public function set data(value:Object):void {
-            if (value is UserDTO )  {
+            if (value is UserDTO) {
                 setButtonLabelAndIcon((value as UserDTO));
             }
 
@@ -49,20 +48,21 @@
 
             //resetPassword.setStyle("icon", CommonsUserAssetsManager.assets.images.sampleIcon);
 
-            if ( data )
+            if (data)
                 setButtonLabelAndIcon(data as UserDTO);
         }
 
 
         private function setButtonLabelAndIcon(user:UserDTO):void {
             if (user && user.active) {
-                activationButton.toolTip =  UserManagementEvent.ACTION_DEACTIVATE
+                activationButton.toolTip = UserManagementEvent.ACTION_DEACTIVATE
                 //activationButton.setStyle("icon", CommonsUserAssetsManager.assets.images.bulletDelete);
             } else {
-                activationButton.toolTip =  UserManagementEvent.ACTION_ACTIVATE
+                activationButton.toolTip = UserManagementEvent.ACTION_ACTIVATE
                 //activationButton.setStyle("icon", CommonsUserAssetsManager.assets.images.bulletAdd);
             }
-        }]]></mx:Script>
+        }
+        ]]></mx:Script>
 
     <mx:Button id="activationButton" styleName="deactivateUserButton" click="{handleToggleActivationClicked()}"/>
     <mx:Button id="resetPassword" styleName="refreshButton" toolTip="Reset Password" click="{handleResetPasswordClicked()}"/>

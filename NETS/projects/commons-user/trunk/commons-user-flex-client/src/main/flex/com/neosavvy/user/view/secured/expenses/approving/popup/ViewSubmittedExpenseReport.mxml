@@ -11,12 +11,9 @@
         >
     <mx:Script><![CDATA[
         import com.neosavvy.user.dto.project.ExpenseItem;
-
         import com.neosavvy.user.dto.project.ExpenseReport;
-
         import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
 
-        import mx.collections.ArrayCollection;
         import mx.collections.ListCollectionView;
         import mx.managers.PopUpManager;
 
@@ -30,7 +27,7 @@
                     ExpenseReportApproveEvent.ACTION_APPROVE_CONFIRM
                     , _expenseReport
                     , commentText.text
-                    ))
+            ))
 
             close();
         }
@@ -41,7 +38,7 @@
                     ExpenseReportApproveEvent.ACTION_DECLINE_CONFIRM
                     , _expenseReport
                     , commentText.text
-                    ))
+            ))
 
             close();
         }

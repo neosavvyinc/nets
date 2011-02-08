@@ -1,6 +1,4 @@
 package com.neosavvy.user.view.secured.expenses.approving.event {
-    import com.neosavvy.user.dto.project.ExpenseItem;
-
     import com.neosavvy.user.dto.project.ExpenseReport;
 
     import flash.events.Event;

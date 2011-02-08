@@ -1,7 +1,6 @@
 package com.neosavvy.user.controller.expenses.report.view {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
-    import com.neosavvy.user.dto.project.ExpenseReport;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.util.RemoteObjectUtils;
 

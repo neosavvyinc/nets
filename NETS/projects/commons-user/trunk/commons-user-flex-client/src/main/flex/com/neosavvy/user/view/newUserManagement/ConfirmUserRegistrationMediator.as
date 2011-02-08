@@ -2,10 +2,8 @@ package com.neosavvy.user.view.newUserManagement {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.dto.companyManagement.UserDTO;
 
-    import flash.display.DisplayObject;
     import flash.events.MouseEvent;
 
-    import mx.containers.ViewStack;
     import mx.controls.Button;
     import mx.core.UIComponent;
     import mx.logging.ILogger;

@@ -34,7 +34,7 @@
                     ExpenseReportApproveEvent.ACTION_APPROVE_CONFIRM
                     , _expenseReport
                     , approveCommentText.text
-                    ))
+            ))
 
             close();
         }

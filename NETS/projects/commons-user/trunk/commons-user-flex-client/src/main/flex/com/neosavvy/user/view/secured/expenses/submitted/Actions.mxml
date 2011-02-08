@@ -3,14 +3,12 @@
 
     <mx:Script>
         <![CDATA[
-
         import com.neosavvy.user.dto.project.ExpenseReport;
         import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
 
         private function submitExpenseHandler():void {
             dispatchEvent(new ExpenseReportEvent(ExpenseReportEvent.ACTION_REOPEN, data as ExpenseReport));
         }
-
         ]]>
     </mx:Script>
     <mx:Button id="submitBtn" styleName="refreshButton" toolTip="Reopen Expense Report" click="{submitExpenseHandler()}"/>

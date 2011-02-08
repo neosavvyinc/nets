@@ -1,12 +1,7 @@
 package com.neosavvy.user.model {
-import com.flexpasta.utils.HTTPUtil;
-import com.neosavvy.user.ProxyConstants;
+    import com.neosavvy.user.ProxyConstants;
 
-import com.neosavvy.user.util.StringUtils;
-
-import flash.errors.IllegalOperationError;
-
-    import flash.external.ExternalInterface;
+    import flash.errors.IllegalOperationError;
 
     import mx.logging.ILogger;
     import mx.logging.Log;

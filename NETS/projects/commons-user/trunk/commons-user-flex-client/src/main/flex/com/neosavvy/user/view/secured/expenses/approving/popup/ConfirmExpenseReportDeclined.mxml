@@ -32,7 +32,7 @@
                     ExpenseReportApproveEvent.ACTION_DECLINE_CONFIRM
                     , _expenseReport
                     , declineCommentText.text
-                    ))
+            ))
 
             close();
         }

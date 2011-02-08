@@ -5,8 +5,6 @@ package com.neosavvy.user.model {
     import com.neosavvy.user.dto.companyManagement.UserDTO;
     import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
 
-    import flash.errors.IllegalOperationError;
-
     import mx.collections.ArrayCollection;
     import mx.collections.ListCollectionView;
     import mx.logging.ILogger;

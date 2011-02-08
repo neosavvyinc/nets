@@ -25,35 +25,33 @@
 
     <mx:Script><![CDATA[
         import com.neosavvy.user.dto.project.ExpenseReport;
-
         import com.neosavvy.user.dto.project.Project;
 
         import fineline.focal.common.types.v1.StorageServiceFileRef;
 
         import mx.collections.ArrayCollection;
+        import mx.events.CloseEvent;
         import mx.managers.PopUpManager;
 
         [Bindable]
-        public var expenseReport : ExpenseReport;
+        public var expenseReport:ExpenseReport;
 
         [Bindable]
-        public var fileRef : StorageServiceFileRef;
+        public var fileRef:StorageServiceFileRef;
 
         [Bindable]
-        public var projects : ArrayCollection;
+        public var projects:ArrayCollection;
 
         private function handleClose(event:CloseEvent):void {
             PopUpManager.removePopUp(this);
         }
-        import mx.events.CloseEvent;
-
         private function handleFinish(event:MouseEvent):void {
 
             expenseReport.location = locationTextInput.text;
             expenseReport.purpose = purposeTextInput.text;
             expenseReport.project = availableProjectsCmb.selectedItem as Project;
 
-            dispatchEvent(new AddReceiptToExpenseReportEvent( expenseReport, fileRef ));
+            dispatchEvent(new AddReceiptToExpenseReportEvent(expenseReport, fileRef));
             handleClose(null);
         }
         ]]></mx:Script>

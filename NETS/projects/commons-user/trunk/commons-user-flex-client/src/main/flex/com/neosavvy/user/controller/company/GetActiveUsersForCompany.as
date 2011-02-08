@@ -7,7 +7,6 @@ package com.neosavvy.user.controller.company {
     import mx.collections.ArrayCollection;
     import mx.logging.ILogger;
     import mx.logging.Log;
-    import mx.rpc.IResponder;
     import mx.rpc.events.FaultEvent;
     import mx.rpc.events.ResultEvent;
 

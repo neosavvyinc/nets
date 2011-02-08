@@ -1,6 +1,5 @@
 package com.neosavvy.user.controller.mail {
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
-
     import com.neosavvy.user.dto.mail.MailMessageDTO;
     import com.neosavvy.user.model.MailServiceProxy;
 

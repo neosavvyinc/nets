@@ -1,16 +1,16 @@
 package com.components
 {
-  import flash.display.DisplayObject;
-  import flash.events.Event;
-  import flash.geom.Rectangle;
-  import flash.text.TextLineMetrics;
-  
-  import mx.controls.ButtonLabelPlacement;
-  import mx.controls.Label;
-  import mx.core.UITextField;
-  import mx.core.mx_internal;
+    import flash.display.DisplayObject;
+    import flash.events.Event;
+    import flash.geom.Rectangle;
+    import flash.text.TextLineMetrics;
 
-  use namespace mx_internal;
+    import mx.controls.ButtonLabelPlacement;
+    import mx.controls.Label;
+    import mx.core.UITextField;
+    import mx.core.mx_internal;
+
+    use namespace mx_internal;
 
   //---------------------------------
   // Styles

@@ -1,6 +1,5 @@
 package com.components.fileupload
 {
-
     import flash.external.ExternalInterface;
 
     /**

@@ -30,8 +30,7 @@
 
         private function handleImageComplete(event:Event):void {
 
-            if (receiptImg.bytesLoaded == receiptImg.bytesTotal)
-            {
+            if (receiptImg.bytesLoaded == receiptImg.bytesTotal) {
                 callLater(PopUpManager.centerPopUp, [this as IFlexDisplayObject]);
                 receiptImg.removeEventListener(Event.COMPLETE, handleImageComplete);
             }

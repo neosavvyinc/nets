@@ -1,7 +1,8 @@
 package qs
 {
     import qs.utils.*;
-	public class DLinkedList
+
+    public class DLinkedList
 	{
 		private var _head:DLinkedListNode;
 		private var _tail:DLinkedListNode;

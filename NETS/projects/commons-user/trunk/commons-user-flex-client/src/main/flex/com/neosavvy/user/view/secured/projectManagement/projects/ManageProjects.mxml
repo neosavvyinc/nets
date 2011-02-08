@@ -30,10 +30,8 @@
         }
 
         private function formatDate(item:Object, column:DataGridColumn):String {
-            return dateFormat.format( Project(item)[column.dataField] );
+            return dateFormat.format(Project(item)[column.dataField]);
         }
-
-
         ]]>
     </mx:Script>
 

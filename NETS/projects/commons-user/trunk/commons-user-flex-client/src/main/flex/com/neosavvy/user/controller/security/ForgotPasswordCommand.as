@@ -26,9 +26,7 @@
 package com.neosavvy.user.controller.security {
     import com.neosavvy.user.ApplicationFacade;
     import com.neosavvy.user.controller.base.ResponderAsyncCommand;
-
     import com.neosavvy.user.dto.companyManagement.UserDTO;
-
     import com.neosavvy.user.model.SecurityProxy;
 
     import mx.rpc.events.FaultEvent;

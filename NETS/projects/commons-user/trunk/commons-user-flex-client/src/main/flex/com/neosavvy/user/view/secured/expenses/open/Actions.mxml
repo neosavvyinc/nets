@@ -3,7 +3,6 @@
 
     <mx:Script>
         <![CDATA[
-
         import com.neosavvy.user.dto.project.ExpenseReport;
         import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
 
@@ -14,7 +13,6 @@
         protected function editExpenseHandler():void {
             dispatchEvent(new ExpenseReportEvent(ExpenseReportEvent.ACTION_EDIT, data as ExpenseReport));
         }
-
         ]]>
     </mx:Script>
     <mx:Button id="editBtn" styleName="editLinkButton" toolTip="Edit Expense Report" click="{editExpenseHandler()}"/>
