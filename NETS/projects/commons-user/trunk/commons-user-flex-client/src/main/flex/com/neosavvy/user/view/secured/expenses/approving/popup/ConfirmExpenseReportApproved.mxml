@@ -1,14 +1,20 @@
 <?xml version="1.0"?>
-<mx:TitleWindow
-        showCloseButton="true"
+<mx:Panel
         xmlns:mx="http://www.adobe.com/2006/mxml"
-        title="Approve Expense Report"
-        close="{close()}"
-        width="400"
+        styleName="grayToGrayViewContainer"
+        layout="vertical"
+        width="800"
+        verticalGap="0"
+        paddingLeft="0"
+        paddingRight="0"
+        paddingTop="0"
+        paddingBottom="0"
+        horizontalScrollPolicy="off"
+        verticalScrollPolicy="off"
         >
 
 
-    <mx:Script><![CDATA[
+<mx:Script><![CDATA[
         import com.neosavvy.user.dto.project.ExpenseReport;
         import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
 
@@ -40,16 +46,35 @@
         }
         ]]></mx:Script>
 
-    <mx:Text width="100%">
-        <mx:text>
-            Approving this expense report will notify accounting that it should be
-            reimbursed to the owner of this report.
-        </mx:text>
-    </mx:Text>
-    <mx:TextArea id="approveCommentText" width="100%" height="300"/>
-    <mx:ControlBar>
-        <mx:Button label="Approve" click="confirmApprove()"/>
-        <mx:Spacer width="100%"/>
-        <mx:Button label="No" click="close()"/>
-    </mx:ControlBar>
-</mx:TitleWindow>
+
+    <mx:HBox
+            width="100%"
+            paddingLeft="10"
+            paddingRight="10"
+            paddingTop="10"
+            paddingBottom="10"
+            styleName="formWindow"
+            horizontalScrollPolicy="off"
+            verticalScrollPolicy="off">
+        <mx:VBox horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+            <mx:Label styleName="secondaryTitle" text="Approve Expense Report"/>
+
+            <mx:Text width="100%">
+                <mx:text>
+                    Approving this expense report will notify accounting that it should be
+                    reimbursed to the owner of this report.
+                </mx:text>
+            </mx:Text>
+            <mx:TextArea id="approveCommentText" width="100%" height="300"/>
+        </mx:VBox>
+    </mx:HBox>
+
+    <mx:VBox
+            styleName="formSectionContainer"
+            horizontalAlign="right"
+            width="100%">
+        <mx:Button label="Approve" click="confirmApprove()" width="100%" styleName="orangeLargeButton"/>
+        <mx:Button label="No" click="close()" width="100%" styleName="orangeLargeButton"/>
+    </mx:VBox>
+
+</mx:Panel>

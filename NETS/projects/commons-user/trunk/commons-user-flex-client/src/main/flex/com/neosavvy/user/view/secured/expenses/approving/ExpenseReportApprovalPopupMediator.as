@@ -8,7 +8,9 @@ package com.neosavvy.user.view.secured.expenses.approving {
     import com.neosavvy.user.view.secured.expenses.approving.popup.ViewSubmittedExpenseReport;
 
     import flash.display.DisplayObject;
+    import flash.display.DisplayObject;
 
+    import mx.core.Application;
     import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
     import mx.logging.Log;
@@ -57,7 +59,7 @@ package com.neosavvy.user.view.secured.expenses.approving {
         }
 
         private function handleApproval( selectedReport:ExpenseReport ):void {
-            approvalPopup = PopUpManager.createPopUp(viewComponent as DisplayObject, ConfirmExpenseReportApproved, true);
+            approvalPopup = PopUpManager.createPopUp(DisplayObject(Application.application), ConfirmExpenseReportApproved, true);
             approvalPopup.addEventListener(ExpenseReportApproveEvent.TYPE, handleApprovalEvent);
             (approvalPopup as ConfirmExpenseReportApproved).expenseReport = selectedReport;
             PopUpManager.centerPopUp(approvalPopup);
@@ -76,7 +78,7 @@ package com.neosavvy.user.view.secured.expenses.approving {
         }
 
         private function handleDecline( selectedReport:ExpenseReport ):void {
-            declinePopup = PopUpManager.createPopUp(viewComponent as DisplayObject, ConfirmExpenseReportDeclined, true);
+            declinePopup = PopUpManager.createPopUp(DisplayObject(Application.application), ConfirmExpenseReportDeclined, true);
             declinePopup.addEventListener(ExpenseReportApproveEvent.TYPE, handleDeclineEvent);
             (declinePopup as ConfirmExpenseReportDeclined).expenseReport = selectedReport;
             PopUpManager.centerPopUp(declinePopup);
@@ -113,7 +115,7 @@ package com.neosavvy.user.view.secured.expenses.approving {
         }
 
         private function handleView( selectedReport:ExpenseReport ):void {
-            viewExpenseReportPopup = PopUpManager.createPopUp(viewComponent as DisplayObject, ViewSubmittedExpenseReport, true);
+            viewExpenseReportPopup = PopUpManager.createPopUp(DisplayObject(Application.application), ViewSubmittedExpenseReport, true);
             (viewExpenseReportPopup as ViewSubmittedExpenseReport).expenseReport = selectedReport;
             viewExpenseReportPopup.addEventListener(ExpenseReportApproveEvent.TYPE, handleViewEvent);
             PopUpManager.centerPopUp(viewExpenseReportPopup);

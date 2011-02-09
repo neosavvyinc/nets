@@ -1,14 +1,19 @@
 <?xml version="1.0"?>
-<mx:TitleWindow
-        showCloseButton="true"
+<mx:Panel
         xmlns:mx="http://www.adobe.com/2006/mxml"
-        title="Viewing Submitted Expense Report"
-        close="{close()}"
-        width="800"
-        height="600"
+        styleName="grayToGrayViewContainer"
         layout="vertical"
-
+        width="800"
+        verticalGap="0"
+        paddingLeft="0"
+        paddingRight="0"
+        paddingTop="0"
+        paddingBottom="0"
+        horizontalScrollPolicy="off"
+        verticalScrollPolicy="off"
         >
+
+
     <mx:Script><![CDATA[
         import com.neosavvy.user.dto.project.ExpenseItem;
         import com.neosavvy.user.dto.project.ExpenseReport;
@@ -91,58 +96,74 @@
         }
         ]]></mx:Script>
 
-    <mx:Form id="expenseReportSummaryForm" width="100%">
-        <mx:FormItem id="projectFormItem" label="Project:">
-            <mx:Label id="projectNameLabel"/>
-        </mx:FormItem>
-        <mx:FormItem id="purposeFormItem" label="Purpose:">
-            <mx:Label id="purposeLabel"/>
-        </mx:FormItem>
-        <mx:FormItem id="locationFormItem" label="Location:">
-            <mx:Label id="locationLabel"/>
-        </mx:FormItem>
-    </mx:Form>
+    <mx:HBox
+            width="100%"
+            paddingLeft="10"
+            paddingRight="10"
+            paddingTop="10"
+            paddingBottom="10"
+            styleName="formWindow"
+            horizontalScrollPolicy="off"
+            verticalScrollPolicy="off">
+        <mx:VBox horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+            <mx:Label styleName="secondaryTitle" text="Viewing Submitted Expense Report"/>
 
-    <mx:AdvancedDataGrid id="expenseReportGrid" width="100%" height="100%">
-        <mx:columns>
-            <mx:AdvancedDataGridColumn
-                    id="dateColumn"
-                    headerText="Date"
-                    dataField="expenseDate"
-                    />
-            <mx:AdvancedDataGridColumn
-                    id="expenseTypeColumn"
-                    headerText="Expense Type"
-                    dataField="expenseItemType"
-                    labelFunction="{expenseTypeLabelFunction}"
-                    />
-            <mx:AdvancedDataGridColumn
-                    id="paymentMethodColumn"
-                    headerText="Payment Method"
-                    dataField="paymentMethod"
-                    labelFunction="{paymentMethodLabelFunction}"
-                    />
-            <mx:AdvancedDataGridColumn
-                    id="projectTypeColumn"
-                    headerText="Project Type"
-                    dataField="projectType"
-                    labelFunction="{projectTypeLabelFunction}"
-                    />
-            <mx:AdvancedDataGridColumn
-                    id="amountColumn"
-                    headerText="Amount"
-                    dataField="amountNumber"
-                    />
+            <mx:Form id="expenseReportSummaryForm" width="100%">
+                <mx:FormItem id="projectFormItem" label="Project:">
+                    <mx:Label id="projectNameLabel"/>
+                </mx:FormItem>
+                <mx:FormItem id="purposeFormItem" label="Purpose:">
+                    <mx:Label id="purposeLabel"/>
+                </mx:FormItem>
+                <mx:FormItem id="locationFormItem" label="Location:">
+                    <mx:Label id="locationLabel"/>
+                </mx:FormItem>
+            </mx:Form>
 
-        </mx:columns>
-    </mx:AdvancedDataGrid>
+            <mx:AdvancedDataGrid id="expenseReportGrid" width="100%" height="100%">
+                <mx:columns>
+                    <mx:AdvancedDataGridColumn
+                            id="dateColumn"
+                            headerText="Date"
+                            dataField="expenseDate"
+                            />
+                    <mx:AdvancedDataGridColumn
+                            id="expenseTypeColumn"
+                            headerText="Expense Type"
+                            dataField="expenseItemType"
+                            labelFunction="{expenseTypeLabelFunction}"
+                            />
+                    <mx:AdvancedDataGridColumn
+                            id="paymentMethodColumn"
+                            headerText="Payment Method"
+                            dataField="paymentMethod"
+                            labelFunction="{paymentMethodLabelFunction}"
+                            />
+                    <mx:AdvancedDataGridColumn
+                            id="projectTypeColumn"
+                            headerText="Project Type"
+                            dataField="projectType"
+                            labelFunction="{projectTypeLabelFunction}"
+                            />
+                    <mx:AdvancedDataGridColumn
+                            id="amountColumn"
+                            headerText="Amount"
+                            dataField="amountNumber"
+                            />
 
-    <mx:Label text="Approve/Decline Comment:"/>
-    <mx:TextArea id="commentText" width="100%" height="150"/>
+                </mx:columns>
+            </mx:AdvancedDataGrid>
+            <mx:Label text="Approve/Decline Comment:"/>
+            <mx:TextArea id="commentText" width="100%" height="150"/>
+        </mx:VBox>
+    </mx:HBox>
 
-    <mx:ControlBar>
-        <mx:Button label="Approve" click="confirmApprove()"/>
-        <mx:Spacer width="100%"/>
-        <mx:Button label="Decline" click="confirmDecline()"/>
-    </mx:ControlBar>
-</mx:TitleWindow>
+    <mx:VBox
+            styleName="formSectionContainer"
+            horizontalAlign="right"
+            width="100%">
+        <mx:Button width="100%" styleName="orangeLargeButton" label="Approve" click="confirmApprove()"/>
+        <mx:Button width="100%" styleName="orangeLargeButton" label="Decline" click="confirmDecline()"/>
+    </mx:VBox>
+
+</mx:Panel>
