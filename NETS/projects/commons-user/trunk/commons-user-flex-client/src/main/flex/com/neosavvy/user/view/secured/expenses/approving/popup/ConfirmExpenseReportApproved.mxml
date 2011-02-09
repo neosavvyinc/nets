@@ -69,12 +69,13 @@
         </mx:VBox>
     </mx:HBox>
 
-    <mx:VBox
+    <mx:HBox
             styleName="formSectionContainer"
             horizontalAlign="right"
             width="100%">
-        <mx:Button label="Approve" click="confirmApprove()" width="100%" styleName="orangeLargeButton"/>
-        <mx:Button label="No" click="close()" width="100%" styleName="orangeLargeButton"/>
-    </mx:VBox>
+        <mx:Button label="Approve" click="confirmApprove()" styleName="orangeLargeButton"/>
+        <mx:Spacer width="100%"/>
+        <mx:Button label="Close" click="close()" styleName="orangeLargeButton"/>
+    </mx:HBox>
 
 </mx:Panel>

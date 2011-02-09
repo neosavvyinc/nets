@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <mx:Panel
-        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:datagridclasses="mx.controls.dataGridClasses.*"
         styleName="grayToGrayViewContainer"
         layout="vertical"
         width="800"
@@ -74,28 +74,31 @@
             expenseReportGrid.dataProvider = value;
         }
 
-        private function projectTypeLabelFunction(data:Object, column:AdvancedDataGridColumn):String {
+        private function projectTypeLabelFunction(data:Object, column:DataGridColumn):String {
             if (data is ExpenseItem && (data as ExpenseItem).projectType) {
                 return (data as ExpenseItem).projectType.type;
             }
             return null;
         }
 
-        private function paymentMethodLabelFunction(data:Object, column:AdvancedDataGridColumn):String {
+        private function paymentMethodLabelFunction(data:Object, column:DataGridColumn):String {
             if (data is ExpenseItem && (data as ExpenseItem).paymentMethod) {
                 return (data as ExpenseItem).paymentMethod.name;
             }
             return null;
         }
 
-        private function expenseTypeLabelFunction(data:Object, column:AdvancedDataGridColumn):String {
+        private function expenseTypeLabelFunction(data:Object, column:DataGridColumn):String {
             if (data is ExpenseItem && (data as ExpenseItem).expenseItemType) {
                 return (data as ExpenseItem).expenseItemType.name;
             }
             return null;
         }
+        private function formatDate(item:Object, column:DataGridColumn):String {
+            return dateFormat.format(ExpenseItem(item).expenseDate);
+        }
         ]]></mx:Script>
-
+    <mx:DateFormatter id="dateFormat" formatString="MM-DD-YYYY"/>
     <mx:HBox
             width="100%"
             paddingLeft="10"
@@ -120,50 +123,69 @@
                 </mx:FormItem>
             </mx:Form>
 
-            <mx:AdvancedDataGrid id="expenseReportGrid" width="100%" height="100%">
+            <mx:DataGrid
+                    sortableColumns="false"
+                    id="expenseReportGrid"
+                    width="100%"
+                    height="100%">
                 <mx:columns>
-                    <mx:AdvancedDataGridColumn
+                    <datagridclasses:DataGridColumn
                             id="dateColumn"
                             headerText="Date"
                             dataField="expenseDate"
+                            labelFunction="formatDate"
                             />
-                    <mx:AdvancedDataGridColumn
+                    <datagridclasses:DataGridColumn
                             id="expenseTypeColumn"
                             headerText="Expense Type"
                             dataField="expenseItemType"
                             labelFunction="{expenseTypeLabelFunction}"
                             />
-                    <mx:AdvancedDataGridColumn
+                    <datagridclasses:DataGridColumn
                             id="paymentMethodColumn"
                             headerText="Payment Method"
                             dataField="paymentMethod"
                             labelFunction="{paymentMethodLabelFunction}"
                             />
-                    <mx:AdvancedDataGridColumn
+                    <datagridclasses:DataGridColumn
                             id="projectTypeColumn"
                             headerText="Project Type"
                             dataField="projectType"
                             labelFunction="{projectTypeLabelFunction}"
                             />
-                    <mx:AdvancedDataGridColumn
+                    <datagridclasses:DataGridColumn
                             id="amountColumn"
                             headerText="Amount"
                             dataField="amountNumber"
-                            />
-
+                            >
+                        <datagridclasses:itemRenderer>
+                            <mx:Component>
+                                <mx:HBox horizontalAlign="right" paddingRight="5">
+                                    <mx:Label text="{StringUtils.formatCurrency( data.amount )}"/>
+                                    <mx:Script><![CDATA[
+                                        import com.neosavvy.user.util.StringUtils;
+                                        ]]></mx:Script>
+                                </mx:HBox>
+                            </mx:Component>
+                        </datagridclasses:itemRenderer>
+                    </datagridclasses:DataGridColumn>
                 </mx:columns>
-            </mx:AdvancedDataGrid>
+            </mx:DataGrid>
             <mx:Label text="Approve/Decline Comment:"/>
             <mx:TextArea id="commentText" width="100%" height="150"/>
         </mx:VBox>
     </mx:HBox>
 
-    <mx:VBox
+    <mx:HBox
             styleName="formSectionContainer"
             horizontalAlign="right"
             width="100%">
-        <mx:Button width="100%" styleName="orangeLargeButton" label="Approve" click="confirmApprove()"/>
-        <mx:Button width="100%" styleName="orangeLargeButton" label="Decline" click="confirmDecline()"/>
-    </mx:VBox>
+        <mx:Button styleName="orangeLargeButton" label="Approve" click="confirmApprove()"/>
+        <mx:Spacer width="100%"/>
+        <mx:Button styleName="orangeLargeButton" label="Close" click="close()"/>
+        <mx:Button styleName="orangeLargeButton" label="Decline" click="confirmDecline()"/>
+    </mx:HBox>
 
 </mx:Panel>
+
+
