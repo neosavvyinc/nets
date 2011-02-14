@@ -139,6 +139,15 @@ package com.neosavvy.user.view.companyManagement {
                 LOGGER.debug(result.message);
             }
 
+
+            if( signup.signupPanel.administrativePassword.text != signup.signupPanel.administrativeConfirmPassword.text )
+            {
+                signup.signupPanel.administrativePassword.errorString = "Passwords don't match";
+                signup.signupPanel.administrativePassword.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
+                return false;
+            }
+
+
             return validationResults.length == 0 ? true : false;
         }
     }

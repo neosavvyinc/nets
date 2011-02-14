@@ -178,6 +178,7 @@ public class UserServiceImpl implements UserService {
 
     public void resetPassword(UserDTO user) {
         try {
+            user.setPasswordReset(true);
             user.setPassword(StringUtil.getHash64(user.toString() + System.currentTimeMillis() + ""));
         } catch (UnsupportedEncodingException e) {
             logger.error(e.toString());
@@ -201,6 +202,8 @@ public class UserServiceImpl implements UserService {
             try {
                 String newPassword = StringUtil.getHash32((new Date().toString()));
                 user.setPassword(newPassword);
+                user.setPasswordReset(true);
+                updateUser(user);
                 mailService.resetPasswordForUserEmail(user);
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();

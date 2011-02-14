@@ -135,6 +135,7 @@ package com.neosavvy.user.view.secured.userInfo {
 
             var activeUser : UserDTO = _securityProxy.activeUser;
             activeUser.password = newPassword.text;
+            activeUser.passwordReset = false;
 
             sendNotification(ApplicationFacade.SAVE_USER_REQUEST, activeUser);
         }
@@ -144,6 +145,7 @@ package com.neosavvy.user.view.secured.userInfo {
             return [
                 ApplicationFacade.SAVE_USER_FAILED
                 ,ApplicationFacade.SAVE_USER_SUCCESS
+                ,ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION
             ];
         }
 
@@ -157,12 +159,20 @@ package com.neosavvy.user.view.secured.userInfo {
                 case ApplicationFacade.SAVE_USER_SUCCESS:
                     onSaveUserSuccess();
                     break;
+                case ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION:
+                    resetErrors();
+                    resetChangePasswordForm();
+                    break;
             }
         }
 
         private function onSaveUserSuccess():void {
             resetErrors();
 
+            resetChangePasswordForm();
+        }
+
+        private function resetChangePasswordForm():void {
             changePasswordButton.visible = true;
 
             currentPassword.visible = false;
@@ -174,7 +184,6 @@ package com.neosavvy.user.view.secured.userInfo {
 
             changePasswordConfirmed.visible = false;
             changePasswordConfirmed.includeInLayout = false;
-
         }
 
         private function onSaveUserFailed():void {

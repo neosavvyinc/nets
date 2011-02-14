@@ -1,9 +1,22 @@
 package com.neosavvy.user.view.secured {
     import com.neosavvy.user.ApplicationFacade;
 
+    import com.neosavvy.user.model.SecurityProxy;
+
+    import com.neosavvy.user.view.secured.userInfo.popup.PasswordChangedReminder;
+
+    import flash.display.DisplayObject;
+
+    import flash.events.Event;
+
     import mx.containers.ViewStack;
+    import mx.controls.Alert;
+    import mx.core.Application;
+    import mx.core.IFlexDisplayObject;
     import mx.logging.ILogger;
     import mx.logging.Log;
+
+    import mx.managers.PopUpManager;
 
     import org.puremvc.as3.multicore.interfaces.INotification;
     import org.puremvc.as3.multicore.patterns.mediator.Mediator;
@@ -34,7 +47,10 @@ package com.neosavvy.user.view.secured {
         public static const NAV_INDEX_MANAGE_RECEIPTS:Number        = 11;
         public static const NAV_INDEX_YOUR_INFORMATION:Number       = 12;
 
+        private var _securityProxy:SecurityProxy;
+
         override public function onRegister():void {
+            _securityProxy = facade.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
         }
 
         public function get securedContainer():SecuredContainer {
@@ -70,6 +86,7 @@ package com.neosavvy.user.view.secured {
                 ,ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION
 
                 ,ApplicationFacade.REQUEST_LOGOUT
+                ,ApplicationFacade.USER_LOGIN_STARTUP_COMPLETE
             ];
         }
 
@@ -124,7 +141,21 @@ package com.neosavvy.user.view.secured {
                 case ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION:
                     navigationViewStack.selectedIndex = NAV_INDEX_YOUR_INFORMATION;
                     break;
+
+                case ApplicationFacade.USER_LOGIN_STARTUP_COMPLETE:
+                    if( _securityProxy.activeUser && _securityProxy.activeUser.passwordReset )
+                    {
+                        var passwordChangedReminder : IFlexDisplayObject =
+                                PopUpManager.createPopUp(Application.application as DisplayObject,PasswordChangedReminder);
+                        PopUpManager.centerPopUp( passwordChangedReminder );
+                        passwordChangedReminder.addEventListener( "changePasswordNow", onChangePassword);
+                    }
+                    break;
             }
+        }
+
+        private function onChangePassword(event:Event):void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION);
         }
 
     }

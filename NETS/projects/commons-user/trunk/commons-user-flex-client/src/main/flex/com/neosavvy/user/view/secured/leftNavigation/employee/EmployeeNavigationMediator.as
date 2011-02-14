@@ -106,6 +106,7 @@ package com.neosavvy.user.view.secured.leftNavigation.employee {
                 ApplicationFacade.USER_LOGIN_SUCCESS
                 ,ApplicationFacade.USER_LOGGED_IN
                 ,ApplicationFacade.POST_SECURE_VIEW_PREP
+                ,ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION
             ];
         }
 
@@ -117,6 +118,9 @@ package com.neosavvy.user.view.secured.leftNavigation.employee {
                 case ApplicationFacade.POST_SECURE_VIEW_PREP:
                     toggleBarFocus(0);
                     handleWelcomeButtonClicked();
+                    break;
+                case ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION:
+                    toggleBarEmployeeFocus(4);
                     break;
             }
         }

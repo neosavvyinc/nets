@@ -50,6 +50,9 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
     @Column(name="CONFIRMED_REGISTRATION")
     private Boolean confirmedRegistration = true;
 
+    @Column(name="PASSWORD_RESET")
+    private Boolean passwordReset;
+
     @OneToMany(mappedBy="user", fetch=FetchType.EAGER)
     private Set<UserCompanyRoleDTO> userCompanyRoles;
 
@@ -128,6 +131,15 @@ public class UserDTO extends BaseUserDTO implements IAnnotatedProxy, SecuredObje
 
     public void setConfirmedRegistration(Boolean confirmedRegistration) {
         this.confirmedRegistration = confirmedRegistration;
+    }
+
+    @XmlElement(required = true)
+    public Boolean getPasswordReset() {
+        return passwordReset;
+    }
+
+    public void setPasswordReset(Boolean passwordReset) {
+        this.passwordReset = passwordReset;
     }
 
     @XmlTransient

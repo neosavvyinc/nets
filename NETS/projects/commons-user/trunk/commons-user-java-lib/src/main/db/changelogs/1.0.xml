@@ -153,4 +153,12 @@
             referencedTableName="file_refs" referencedColumnNames="id" />
     </changeSet>
 
+    <changeSet id="8" author="adam">
+        <addColumn tableName="users">
+            <column name="password_reset" type="BOOLEAN" defaultValueBoolean="false">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+
 </databaseChangeLog>
