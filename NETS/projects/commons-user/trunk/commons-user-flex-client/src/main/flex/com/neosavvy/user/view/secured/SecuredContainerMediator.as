@@ -22,7 +22,7 @@ package com.neosavvy.user.view.secured {
         public static const NAV_INDEX_USER_MANAGEMENT:Number        = 2;
         public static const NAV_INDEX_CLIENT_MANAGEMENT:Number      = 3;
         public static const NAV_INDEX_PROJECT_MANAGEMENT:Number     = 4;
-        public static const NAV_INDEX_ASSIGNMENTS_MANAGEMENT:Number     = 5;
+        public static const NAV_INDEX_ASSIGNMENTS_MANAGEMENT:Number = 5;
 
         public static const NAV_INDEX_CREATE_EXPENSE_REPORT:Number  = 6;
         public static const NAV_INDEX_VIEW_OPEN_EXPENSES:Number     = 7;
@@ -32,6 +32,7 @@ package com.neosavvy.user.view.secured {
         public static const NAV_INDEX_APPROVE_EXPENSES:Number       = 10;
 
         public static const NAV_INDEX_MANAGE_RECEIPTS:Number        = 11;
+        public static const NAV_INDEX_YOUR_INFORMATION:Number       = 12;
 
         override public function onRegister():void {
         }
@@ -65,6 +66,8 @@ package com.neosavvy.user.view.secured {
 
                 ,ApplicationFacade.NAVIGATE_TO_VIEW_AWAITING_EXPENSE_REPORTS
                 ,ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS
+
+                ,ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION
 
                 ,ApplicationFacade.REQUEST_LOGOUT
             ];
@@ -117,6 +120,9 @@ package com.neosavvy.user.view.secured {
 
                 case ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS:
                     navigationViewStack.selectedIndex = NAV_INDEX_MANAGE_RECEIPTS;
+                    break;
+                case ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION:
+                    navigationViewStack.selectedIndex = NAV_INDEX_YOUR_INFORMATION;
                     break;
             }
         }

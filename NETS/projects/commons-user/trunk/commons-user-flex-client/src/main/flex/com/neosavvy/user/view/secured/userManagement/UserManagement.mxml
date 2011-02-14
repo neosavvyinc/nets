@@ -1,8 +1,7 @@
 <?xml version="1.0" ?>
 <mx:VBox
         xmlns:mx="http://www.adobe.com/2006/mxml"
-        xmlns:neosavvy="com.neosavvy.grid.*"
-        xmlns:flexlib="http://code.google.com/p/flexlib/" xmlns:datagridclasses="mx.controls.dataGridClasses.*"
+        xmlns:datagridclasses="mx.controls.dataGridClasses.*"
         styleName="applicationView"
         verticalScrollPolicy="off"
         horizontalScrollPolicy="off">

@@ -60,6 +60,10 @@ package com.neosavvy.user.view.secured.leftNavigation.employee {
                     toggleBarEmployeeFocus(3);
                     handleManageReceipts();
                     break;
+                case "Your Information":
+                    toggleBarEmployeeFocus(4);
+                    handleYourInformation();
+                    break;
             }
         }
 
@@ -86,6 +90,11 @@ package com.neosavvy.user.view.secured.leftNavigation.employee {
 
         private function handleAddExpenseReportsButtonClicked():void {
             sendNotification(ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT);
+        }
+
+        private function handleYourInformation():void
+        {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION);
         }
 
         public function get adminNavigation():EmployeeNavigation {

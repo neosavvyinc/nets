@@ -17,7 +17,8 @@
         xmlns:approving="com.neosavvy.user.view.secured.expenses.approving.*"
         xmlns:projects="com.neosavvy.user.view.secured.projectManagement.projects.*"
         xmlns:assignments="com.neosavvy.user.view.secured.projectManagement.assignments.*"
-        xmlns:receipts="com.neosavvy.user.view.secured.receipts.*">
+        xmlns:receipts="com.neosavvy.user.view.secured.receipts.*"
+        xmlns:userinfo="com.neosavvy.user.view.secured.userInfo.*">
 
     <mx:HBox styleName="mainContainer" width="100%" height="100%"
             >
@@ -48,6 +49,7 @@
             <reconcile:ReconcileExpenseReport id="reconcileExpenseReports" width="100%" height="100%"/>
             <approving:ExpenseReportAwaitingApproval id="expenseReportAwaitingApproval" width="100%" height="100%"/>
             <receipts:ReceiptManager id="receiptManager" width="100%" height="100%"/>
+            <userinfo:YourInformation id="yourInformation" width="100%" height="100%"/>
         </mx:ViewStack>
 
     </mx:HBox>

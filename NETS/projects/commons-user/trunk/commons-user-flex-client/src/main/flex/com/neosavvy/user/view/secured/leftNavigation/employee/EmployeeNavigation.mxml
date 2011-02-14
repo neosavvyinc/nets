@@ -34,6 +34,7 @@
                 <mx:String>View Submitted Expenses</mx:String>
                 <!--<mx:String>Reconcile Expenses</mx:String>-->
                 <mx:String>Manage Receipts</mx:String>
+                <mx:String>Your Information</mx:String>
             </mx:Array>
         </mx:dataProvider>
     </mx:ToggleButtonBar>

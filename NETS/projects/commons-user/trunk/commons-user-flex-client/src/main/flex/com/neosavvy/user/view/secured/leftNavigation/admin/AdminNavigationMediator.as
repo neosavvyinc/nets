@@ -104,6 +104,10 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
                     toggleBarEmployeeFocus(3);
                     handleManageReceipts();
                     break;
+                case "Your Information":
+                    toggleBarEmployeeFocus(4);
+                    handleYourInformation();
+                    break;
             }
         }
 
@@ -153,6 +157,10 @@ package com.neosavvy.user.view.secured.leftNavigation.admin {
 
         private function handleManageReceipts():void {
             sendNotification(ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS);
+        }
+
+        private function handleYourInformation():void {
+            sendNotification(ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION);
         }
 
         public function get adminNavigation():AdminNavigation {

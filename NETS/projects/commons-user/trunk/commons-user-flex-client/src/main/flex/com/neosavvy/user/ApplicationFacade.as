@@ -237,6 +237,7 @@ package com.neosavvy.user {
         public static const NAVIGATE_TO_CLIENT_MANAGEMENT:String = "navigateToClientManagement";
 
         public static const NAVIGATE_TO_CREATE_EXPENSE_REPORT:String = "navigateToCreateExpenseReport";
+        public static const NAVIGATE_TO_YOUR_INFORMATION:String ="navigateToYourInformation";
         public static const NAVIGATE_TO_EDIT_EXPENSE_REPORT:String = "navigateToEditExpenseReport";
         public static const NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS:String = "navigateToViewOpenExpenses";
         public static const NAVIGATE_TO_VIEW_AWAITING_EXPENSE_REPORTS:String = "navigateToViewAwaitingExpenses";

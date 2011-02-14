@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <mx:Panel
         xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:datagridclasses="mx.controls.dataGridClasses.*"
+        xmlns:drawer="com.components.drawer.*"
         styleName="grayToGrayViewContainer"
         layout="vertical"
         width="800"
@@ -185,6 +186,12 @@
         <mx:Button styleName="orangeLargeButton" label="Close" click="close()"/>
         <mx:Button styleName="orangeLargeButton" label="Decline" click="confirmDecline()"/>
     </mx:HBox>
+
+    <drawer:DrawerOpener
+        id="drawer"
+        alignment="right"
+        open="true"
+        drawer="com.neosavvy.user.view.secured.expenses.approving.popup.ConfirmExpenseReportDeclined"/>
 
 </mx:Panel>
 
