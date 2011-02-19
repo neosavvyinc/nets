@@ -21,6 +21,7 @@ import fineline.focal.common.types.v1.EntityListenerManager;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by IntelliJ IDEA.
@@ -55,6 +56,9 @@ public class ReviewDTO {
     @ManyToOne
     @JoinColumn(name="TRIP_ID")
     private TripDTO trip;
+
+    @OneToMany(mappedBy="review", fetch= FetchType.LAZY)
+    private Set<SegmentDTO> segments;
 
     @Column(name="NUM_STOPS")
     private Integer numberStops;
@@ -116,5 +120,13 @@ public class ReviewDTO {
 
     public void setTrip(TripDTO trip) {
         this.trip = trip;
+    }
+
+    public Set<SegmentDTO> getSegments() {
+        return segments;
+    }
+
+    public void setSegments(Set<SegmentDTO> segments) {
+        this.segments = segments;
     }
 }

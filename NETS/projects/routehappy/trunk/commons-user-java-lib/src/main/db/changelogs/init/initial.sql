@@ -118,17 +118,17 @@ CREATE TABLE RH_TRIP_TYPE
 CREATE TABLE RH_REVIEW_SEGMENT
 (
   REVIEW_ID            NUMERIC(10)               NOT NULL,
-  AIRLINE_ID           NUMERIC(10)               NOT NULL,
-  AIRPORT_ORIG         VARCHAR(3)         NOT NULL,
-  AIRPORT_DEST         VARCHAR(3)         NOT NULL,
+--   AIRLINE_ID           NUMERIC(10)               NOT NULL,
+--   AIRPORT_ORIG         VARCHAR(3)         NOT NULL,
+--   AIRPORT_DEST         VARCHAR(3)         NOT NULL,
   CABIN                CHAR(1)         NOT NULL,
   TRIP_DATE            DATE                     NOT NULL,
   RATING               CHAR(1)         NOT NULL,
   RATING_AIRPORT_ORIG  CHAR(1)         NOT NULL,
   RATING_AIRPORT_DEST  CHAR(1)         NOT NULL,
   ID                   NUMERIC(10)               NOT NULL,
-  SEGMENT              NUMERIC(1),
-  ROUTE_ID             NUMERIC(10)               NOT NULL
+  SEGMENT              NUMERIC(1)
+--   ROUTE_ID             NUMERIC(10)               NOT NULL
 );
 
 

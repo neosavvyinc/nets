@@ -19,6 +19,7 @@ package com.routehappy.review; /************************************************
 
 import com.routehappy.dao.ReviewDAO;
 import com.routehappy.dto.ReviewDTO;
+import com.routehappy.dto.SegmentDTO;
 import com.routehappy.dto.TripDTO;
 import org.apache.batik.dom.util.TriplyIndexedTable;
 import org.junit.Assert;
@@ -54,7 +55,6 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
     }
 
     @Test
-    @Rollback(false)
     public void testSave()
     {
 
@@ -65,6 +65,14 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
         trip.setPartyCode('p');
         trip.setReason('r');
 
+        SegmentDTO segmentDTO = new SegmentDTO();
+        segmentDTO.setCabinCode(1);
+        segmentDTO.setId(1);
+        segmentDTO.setRating('a');
+        segmentDTO.setRatingAirportDest('A');
+        segmentDTO.setRatingAirportOrig('4');
+        segmentDTO.setSegment(1);
+        segmentDTO.setTripDate(new Date());
 
         ReviewDTO testReview = new ReviewDTO();
         testReview.setCreationDate(new Date());
@@ -75,8 +83,12 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
         testReview.setTrip(trip);
 
         HashSet<ReviewDTO> reviewDTOs = new HashSet<ReviewDTO>();
+        HashSet<SegmentDTO> segmentDTOs = new HashSet<SegmentDTO>();
         reviewDTOs.add(testReview);
+        segmentDTOs.add(segmentDTO);
         trip.setReviews(reviewDTOs);
+        testReview.setSegments(segmentDTOs);
+        segmentDTO.setReview( testReview );
 
         dao.saveReview( testReview );
 
@@ -85,6 +97,9 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
 
         int numRowsTripSaved = countRowsInTable("RH_TRIP");
         Assert.assertEquals("Should be one row in the table", numRowsTripSaved, 1);
+
+        int numRowsSegmentSaved = countRowsInTable("RH_REVIEW_SEGMENT");
+        Assert.assertEquals("Should be one row in the table", numRowsSegmentSaved, 1);
     }
 
 
