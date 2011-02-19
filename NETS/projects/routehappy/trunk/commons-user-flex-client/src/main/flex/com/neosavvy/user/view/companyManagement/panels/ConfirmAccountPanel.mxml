@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<mx:VBox
+        styleName="grayToWhiteViewContainer"
+        paddingTop="30"
+        paddingBottom="30"
+        paddingLeft="30"
+        paddingRight="30"
+        horizontalAlign="center"
+        verticalAlign="middle"
+        width="100%"
+        height="100%"
+        horizontalScrollPolicy="off"
+        verticalScrollPolicy="off"
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/">
+
+    <mx:VBox width="33%"
+             height="100%"
+             styleName="formSectionContainer"
+             horizontalScrollPolicy="off"
+             verticalScrollPolicy="off">
+        
+        <mx:Label text="Thanks for registering!!!" styleName="contentLargeLabelBold"/>
+        <mx:Spacer height="40"/>
+        <mx:Text width="100%"
+                 styleName="bodyText"
+                 text="Thank you for registering your company. You should receive an email that must be used to confirm your admin account. Please follow the link to confirm your account and then login to begin adding users."/>
+        <mx:Spacer height="40"/>
+        <mx:Text width="100%"
+                 styleName="bodyText"
+                 text="Alternatively if you have the token sent via email please type it here and click confirm to confirm your account"/>
+        <mx:HBox width="100%">
+            <flexlib:PromptingTextInput id="usernameConfirmation" prompt="Enter Your Username Here"
+                                        width="100%"/>
+        </mx:HBox>
+        <mx:HBox width="100%">
+            <flexlib:PromptingTextInput id="confirmationToken" prompt="Enter confirmation token" width="100%"/>
+        </mx:HBox>
+        <mx:HBox width="100%" horizontalAlign="center">
+            <mx:Button id="confirmAccountButton" styleName="orangeLargeButton" label="Confirm Account >"/>
+        </mx:HBox>
+    </mx:VBox>
+
+</mx:VBox>

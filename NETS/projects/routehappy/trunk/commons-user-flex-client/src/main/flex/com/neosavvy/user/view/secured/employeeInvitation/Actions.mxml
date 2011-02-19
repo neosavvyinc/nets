@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalAlign="center">
+
+    <mx:Script>
+        <![CDATA[
+        import com.neosavvy.user.dto.companyManagement.UserInviteDTO;
+        import com.neosavvy.user.view.secured.employeeInvitation.event.UserCompanyInviteEvent;
+
+        protected function deleteHandler():void {
+            var userInvite:UserInviteDTO = data as UserInviteDTO;
+            dispatchEvent(new UserCompanyInviteEvent(UserCompanyInviteEvent.ACTION_DELETE, userInvite));
+        }
+
+        protected function resendInviteHandler():void {
+            var userInvite:UserInviteDTO = data as UserInviteDTO;
+            dispatchEvent(new UserCompanyInviteEvent(UserCompanyInviteEvent.ACTION_INVITE, userInvite));
+        }
+
+        protected override function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+
+//            deleteBtn.setStyle("icon",CommonsUserAssetsManager.assets.images.bulletDelete);
+//            inviteBtn.setStyle("icon",CommonsUserAssetsManager.assets.images.bulletAdd);
+
+            super.updateDisplayList(unscaledWidth, unscaledHeight);
+        }
+        ]]>
+    </mx:Script>
+
+
+    <mx:Button id="deleteBtn" styleName="deleteLinkButton" toolTip="Delete" click="{deleteHandler()}"/>
+    <mx:Button id="inviteBtn" styleName="sendInviteButton" toolTip="Resend Invite" click="{resendInviteHandler()}"/>
+</mx:HBox>

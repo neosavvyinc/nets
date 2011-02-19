@@ -1,0 +1,90 @@
+<?xml version="1.0" ?>
+<mx:VBox
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        xmlns:sf="http://www.spicefactory.org/parsley"
+        >
+
+    <mx:Metadata>
+        [Event(name="save",type="com.neosavvy.user.event.UserEvent")]
+        [ManagedEvents("save")]
+    </mx:Metadata>
+
+    <mx:Script><![CDATA[
+        import com.neosavvy.user.dto.UserDTO;
+        import com.neosavvy.user.event.UserEvent;
+
+
+        protected function handleCreate():void {
+            addUser()
+            dispatchEvent(new Event("createClicked", true));
+        }
+
+        protected function handleCancel():void {
+            clearFields();
+            dispatchEvent(new Event("cancelClicked", true));
+        }
+
+        protected function clearFields():void {
+            firstName.text = null;
+            middleName.text = null;
+            lastName.text = null;
+            username.text = null;
+            password.text = null;
+            confirmPassword.text = null;
+            errorBox.text = null;
+        }
+
+        protected function getUserFromTextInput():UserDTO {
+            var userFromTextInputs:UserDTO = new UserDTO();
+            userFromTextInputs.firstName = firstName.text;
+            userFromTextInputs.middleName = middleName.text;
+            userFromTextInputs.lastName = lastName.text;
+            userFromTextInputs.username = username.text;
+            userFromTextInputs.password = password.text;
+            return userFromTextInputs;
+        }
+
+        protected function addUser():void {
+            var userEvent:UserEvent = new UserEvent(UserEvent.TYPE_SAVE, true, true);
+            userEvent.user = getUserFromTextInput();
+            dispatchEvent(userEvent);
+        }
+        ]]></mx:Script>
+
+    <sf:Configure/>
+
+    <flexlib:PromptingTextInput
+            id="username"
+            prompt="Username"
+            />
+    <flexlib:PromptingTextInput
+            id="firstName"
+            prompt="First Name"
+            />
+    <flexlib:PromptingTextInput
+            id="middleName"
+            prompt="Middle Name"
+            />
+    <flexlib:PromptingTextInput
+            id="lastName"
+            prompt="Last Name"
+            />
+    <flexlib:PromptingTextInput
+            id="password"
+            prompt="Password"
+            displayAsPassword="true"
+            />
+    <flexlib:PromptingTextInput
+            id="confirmPassword"
+            prompt="Confirm Password"
+            displayAsPassword="true"
+            />
+
+    <mx:Text id="errorBox" width="{confirmPassword.width}"/>
+
+    <mx:HBox width="100%">
+        <mx:Button id="cancelButton" label="Cancel" click="{handleCancel()}"/>
+        <mx:Button id="createButton" label="Create" click="{handleCreate()}"/>
+    </mx:HBox>
+</mx:VBox>

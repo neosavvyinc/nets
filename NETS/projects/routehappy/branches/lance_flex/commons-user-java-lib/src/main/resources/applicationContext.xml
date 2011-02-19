@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.neosavvy.user.rest"/>
+    <context:annotation-config/>
+    <!--import resource="classpath:springmvc-resteasy.xml"/-->
+
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/commonsuser"/>
+        <property name="username" value="commonsuser"/>
+        <property name="password" value="commonsuser"/>
+        <property name="initialSize" value="5"/>
+        <property name="maxActive" value="10"/>
+    </bean>
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>com.neosavvy.user.dto.UserDTO</value>
+                <value>com.neosavvy.user.dto.CompanyDTO</value>
+                <value>com.neosavvy.user.dto.RoleDTO</value>
+                <value>com.neosavvy.user.dto.NumEmployeesRangeDTO</value>
+                <value>com.neosavvy.user.dto.UserCompanyRoleDTO</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+
+    <tx:annotation-driven/>
+
+    <bean id="jotm" class="org.springframework.transaction.jta.JotmFactoryBean"/>
+
+    <bean id="transactionManager" class="org.springframework.transaction.jta.JtaTransactionManager">
+        <property name="userTransaction" ref="jotm"/>
+    </bean>
+
+    <bean id="userCompanyRoleDAO" class="com.neosavvy.user.dao.UserCompanyRoleDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="userDAO" class="com.neosavvy.user.dao.UserDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="companyDAO" class="com.neosavvy.user.dao.CompanyDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="roleDAO" class="com.neosavvy.user.dao.RoleDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="numEmployeesRangeDAO" class="com.neosavvy.user.dao.NumEmployeesRangeDAOImpl">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
+
+    <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
+        <property name="userDao" ref="userDAO"/>
+        <property name="templateMessage" ref="templateMessage"/>
+        <property name="mailSender" ref="mailSender"/>
+        <property name="hostName" value="www.neosavvy.com:8080"/>
+    </bean>
+
+    <bean id="companyService" class="com.neosavvy.user.service.CompanyServiceImpl">
+        <property name="companyDao" ref="companyDAO"/>
+        <property name="userDao" ref="userDAO"/>
+        <property name="roleDao" ref="roleDAO"/>
+        <property name="userCompanyRoleDao" ref="userCompanyRoleDAO"/>
+    </bean>
+
+    <bean id="roleService" class="com.neosavvy.user.service.RoleServiceImpl">
+        <property name="roleDao" ref="roleDAO"/>
+    </bean>
+
+    <bean id="numEmployeesRangeService" class="com.neosavvy.user.service.NumEmployeesRangeServiceImpl">
+        <property name="numEmployeesRangeDao" ref="numEmployeesRangeDAO"/>
+    </bean>
+
+    <bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+      <property name="host" value="localhost"/>
+    </bean>
+
+    <bean id="templateMessage" class="org.springframework.mail.SimpleMailMessage">
+      <property name="from" value="customerservice@mycompany.com"/>
+      <property name="subject" value="Thanks for registering a user with commons-user"/>
+    </bean>
+
+    <bean id="viewResolver"
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
+        <property name="prefix" value="/WEB-INF/" />
+        <property name="suffix" value=".jsp" />
+    </bean>
+
+
+    <!--<bean id="userRestResource" class="com.neosavvy.user.rest.UserResource">-->
+        <!--<property name="userService" ref="userService"/>-->
+    <!--</bean>-->
+</beans>

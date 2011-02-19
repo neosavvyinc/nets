@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+    <persistence-unit name="NetsPU" transaction-type="JTA">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>jdbc/CommonsUserDS</jta-data-source>
+        
+        <class>com.neosavvy.user.dto.base.BaseUserDTO</class>
+        <class>com.neosavvy.user.dto.companyManagement.AbstractCompany</class>
+        <class>com.neosavvy.user.dto.companyManagement.UserInviteDTO</class>
+        <class>com.neosavvy.user.dto.companyManagement.UserDTO</class>
+        <class>com.neosavvy.user.dto.companyManagement.CompanyDTO</class>
+        <class>com.neosavvy.user.dto.companyManagement.RoleDTO</class>
+        <class>com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO</class>
+        <class>com.neosavvy.user.dto.project.ClientCompany</class>
+        <class>com.neosavvy.user.dto.project.ClientUserContact</class>
+        <class>com.neosavvy.user.dto.project.CompanyPaymentMethod</class>
+        <class>com.neosavvy.user.dto.project.ExpenseItem</class>
+        <class>com.neosavvy.user.dto.project.ExpenseReportAuditHistory</class>
+        <class>com.neosavvy.user.dto.project.ExpenseReport</class>
+        <class>com.neosavvy.user.dto.project.PaymentMethod</class>
+        <class>com.neosavvy.user.dto.project.Project</class>
+        <class>com.neosavvy.user.dto.project.ProjectPaymentMethod</class>
+        <class>com.neosavvy.user.dto.project.ProjectType</class>
+        <class>com.neosavvy.user.dto.project.StandardPaymentMethod</class>
+        <class>com.neosavvy.user.dto.project.CompanyExpenseItemType</class>
+        <class>com.neosavvy.user.dto.project.ExpenseItemType</class>
+        <class>com.neosavvy.user.dto.project.ExpenseItemValue</class>
+        <class>com.neosavvy.user.dto.project.StandardExpenseItemType</class>
+        <class>com.neosavvy.user.dto.project.ExpenseItemDescriptor</class>
+        <class>com.neosavvy.user.dto.base.Attribute</class>
+        <class>com.neosavvy.user.dto.base.AttributeDescriptor</class>
+        <class>com.neosavvy.user.dto.base.AttributeType</class>
+        <class>com.neosavvy.user.dto.base.AttributeEnumValue</class>
+        <class>com.neosavvy.user.dto.acl.AclClass</class>
+        <class>com.neosavvy.user.dto.acl.AclSid</class>
+        <class>com.neosavvy.user.dto.acl.AclObjectIdentity</class>
+        <class>com.neosavvy.user.dto.acl.AclEntry</class>
+        <class>fineline.focal.common.types.v1.UserSession</class>
+        <class>fineline.focal.common.types.v1.FileRef</class>
+        <class>fineline.focal.common.types.v1.StorageServiceFileRef</class>
+        <class>fineline.focal.common.types.v1.UrlFileRef</class>
+
+        <properties>
+            <property name="eclipselink.logging.level" value="INFO"/>
+            <property name="eclipselink.ddl-generation" value="none" />
+            <property name="eclipselink.weaving" value="static" />
+            <property name="eclipselink.session.customizer" value="fineline.focal.common.model.UUIDSequence"/>
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="TestNetsPU" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+
+        <class>com.neosavvy.user.dto.base.BaseUserDTO</class>
+        <class>com.neosavvy.user.dto.companyManagement.AbstractCompany</class>
+        <class>com.neosavvy.user.dto.companyManagement.UserInviteDTO</class>
+        <class>com.neosavvy.user.dto.companyManagement.UserDTO</class>
+        <class>com.neosavvy.user.dto.companyManagement.CompanyDTO</class>
+        <class>com.neosavvy.user.dto.companyManagement.RoleDTO</class>
+        <class>com.neosavvy.user.dto.companyManagement.UserCompanyRoleDTO</class>
+        <class>com.neosavvy.user.dto.project.ClientCompany</class>
+        <class>com.neosavvy.user.dto.project.ClientUserContact</class>
+        <class>com.neosavvy.user.dto.project.CompanyPaymentMethod</class>
+        <class>com.neosavvy.user.dto.project.ExpenseItem</class>
+        <class>com.neosavvy.user.dto.project.ExpenseReportAuditHistory</class>
+        <class>com.neosavvy.user.dto.project.ExpenseReport</class>
+        <class>com.neosavvy.user.dto.project.PaymentMethod</class>
+        <class>com.neosavvy.user.dto.project.Project</class>
+        <class>com.neosavvy.user.dto.project.ProjectPaymentMethod</class>
+        <class>com.neosavvy.user.dto.project.ProjectType</class>
+        <class>com.neosavvy.user.dto.project.StandardPaymentMethod</class>
+        <class>com.neosavvy.user.dto.project.CompanyExpenseItemType</class>
+        <class>com.neosavvy.user.dto.project.ExpenseItemType</class>
+        <class>com.neosavvy.user.dto.project.ExpenseItemValue</class>
+        <class>com.neosavvy.user.dto.project.StandardExpenseItemType</class>
+        <class>com.neosavvy.user.dto.project.ExpenseItemDescriptor</class>
+        <class>com.neosavvy.user.dto.base.Attribute</class>
+        <class>com.neosavvy.user.dto.base.AttributeDescriptor</class>
+        <class>com.neosavvy.user.dto.base.AttributeType</class>
+        <class>com.neosavvy.user.dto.base.AttributeEnumValue</class>
+        <class>com.neosavvy.user.dto.acl.AclClass</class>
+        <class>com.neosavvy.user.dto.acl.AclSid</class>
+        <class>com.neosavvy.user.dto.acl.AclObjectIdentity</class>
+        <class>com.neosavvy.user.dto.acl.AclEntry</class>
+        <class>fineline.focal.common.types.v1.FileRef</class>
+        <class>fineline.focal.common.types.v1.StorageServiceFileRef</class>
+        <class>fineline.focal.common.types.v1.UrlFileRef</class>
+
+    </persistence-unit>
+</persistence>

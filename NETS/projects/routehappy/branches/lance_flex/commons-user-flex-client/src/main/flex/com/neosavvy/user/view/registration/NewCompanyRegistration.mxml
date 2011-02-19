@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml">
+
+    <mx:Script><![CDATA[
+        protected function newCompanyClick():void {
+            dispatchEvent(new Event("newCompany", true));
+        }
+]]></mx:Script>
+
+    <mx:Button
+        label="Click here to sign up!" click="{newCompanyClick()}"/>
+
+</mx:VBox>

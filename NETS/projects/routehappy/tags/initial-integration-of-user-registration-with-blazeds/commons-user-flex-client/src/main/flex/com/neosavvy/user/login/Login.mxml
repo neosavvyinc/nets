@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<mx:VBox
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:flexlib="http://code.google.com/p/flexlib/">
+
+    <flexlib:PromptingTextInput prompt="Username"/>
+    <flexlib:PromptingTextInput prompt="Password"/>
+
+    <mx:Button id="loginButton" label="Login"/>
+
+    <mx:LinkButton id="forgotUsername" label="Forgot Username"/>
+    <mx:LinkButton id="forgotPassword" label="Forgot Password"/>
+
+</mx:VBox>

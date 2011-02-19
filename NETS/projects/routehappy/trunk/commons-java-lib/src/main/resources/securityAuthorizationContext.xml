@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:security="http://www.springframework.org/schema/security"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+
+    <!-- ~~~~~~~~~~~~~~~~~~ "BEFORE INVOCATION" AUTHORIZATION DEFINITIONS ~~~~~~~~~~~~~~~~ -->
+
+    <!-- ACL permission masks used by this application -->
+    <bean id="administrationPermission"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField" value="org.springframework.security.acls.domain.BasePermission.ADMINISTRATION"/>
+    </bean>
+    <bean id="readPermission"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField" value="org.springframework.security.acls.domain.BasePermission.READ"/>
+    </bean>
+    <bean id="writePermission"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField" value="org.springframework.security.acls.domain.BasePermission.WRITE"/>
+    </bean>
+    <bean id="deletePermission"
+          class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean">
+        <property name="staticField" value="org.springframework.security.acls.domain.BasePermission.DELETE"/>
+    </bean>
+
+
+    <!-- An access decision voter that reads ROLE_* configuration settings -->
+    <bean id="roleVoter" class="org.springframework.security.access.vote.RoleHierarchyVoter">
+        <constructor-arg ref="roleHierarchy" />
+    </bean>
+
+    <bean id="roleHierarchy" class="org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl">
+        <property name="hierarchy">
+            <value>
+                ROLE_ADMIN > ROLE_MANAGER >
+                ROLE_MANAGER > ROLE_EMPLOYEE
+            </value>
+        </property>
+    </bean>
+
+    <!-- An access decision voter that reads ACL_OBJECT_READ configuration settings -->
+    <bean id="aclObjectReadVoter" class="com.neosavvy.security.CustomAclEntryVoter">
+        <constructor-arg ref="aclService"/>
+        <constructor-arg value="ACL_OBJECT_READ"/>
+        <constructor-arg>
+            <list>
+                <ref local="administrationPermission"/>
+                <ref local="readPermission"/>
+            </list>
+        </constructor-arg>
+        <property name="processDomainObjectClass" value="com.neosavvy.security.SecuredObject"/>
+    </bean>
+
+    <!-- An access decision voter that reads ACL_OBJECT_WRITE configuration settings -->
+    <bean id="aclObjectWriteVoter" class="com.neosavvy.security.CustomAclEntryVoter">
+        <constructor-arg ref="aclService"/>
+        <constructor-arg value="ACL_OBJECT_WRITE"/>
+        <constructor-arg>
+            <list>
+                <ref local="administrationPermission"/>
+                <ref local="writePermission"/>
+            </list>
+        </constructor-arg>
+        <property name="processDomainObjectClass" value="com.neosavvy.security.SecuredObject"/>
+    </bean>
+
+    <!-- An access decision voter that reads ACL_CONTACT_DELETE configuration settings -->
+    <bean id="aclObjectDeleteVoter" class="com.neosavvy.security.CustomAclEntryVoter">
+        <constructor-arg ref="aclService"/>
+        <constructor-arg value="ACL_OBJECT_DELETE"/>
+        <constructor-arg>
+            <list>
+                <ref local="administrationPermission"/>
+                <ref local="deletePermission"/>
+            </list>
+        </constructor-arg>
+        <property name="processDomainObjectClass" value="com.neosavvy.security.SecuredObject"/>
+    </bean>
+
+    <!-- An access decision voter that reads ACL_CONTACT_ADMIN configuration settings -->
+    <bean id="aclObjectAdminVoter" class="com.neosavvy.security.CustomAclEntryVoter">
+        <constructor-arg ref="aclService"/>
+        <constructor-arg value="ACL_OBJECT_ADMIN"/>
+        <constructor-arg>
+            <list>
+                <ref local="administrationPermission"/>
+            </list>
+        </constructor-arg>
+        <property name="processDomainObjectClass" value="com.neosavvy.security.SecuredObject"/>
+    </bean>
+
+    <!-- An access decision manager used by the business objects -->
+    <bean id="businessAccessDecisionManager" class="org.springframework.security.access.vote.UnanimousBased">
+        <property name="allowIfAllAbstainDecisions" value="true"/>
+        <property name="decisionVoters">
+            <list>
+                <ref local="roleVoter"/>
+                <ref local="aclObjectReadVoter"/>
+                <ref local="aclObjectWriteVoter"/>
+                <ref local="aclObjectDeleteVoter"/>
+                <ref local="aclObjectAdminVoter"/>
+            </list>
+        </property>
+
+    </bean>
+
+
+    <!-- ========= ACCESS CONTROL LIST LOOKUP MANAGER DEFINITIONS ========= -->
+
+    <bean id="lookupStrategy" class="org.springframework.security.acls.jdbc.BasicLookupStrategy">
+        <constructor-arg ref="dataSource"/>
+        <constructor-arg ref="aclCache"/>
+        <constructor-arg ref="aclAuthorizationStrategy"/>
+        <constructor-arg>
+            <bean class="org.springframework.security.acls.domain.ConsoleAuditLogger"/>
+        </constructor-arg>
+    </bean>
+
+    <bean id="aclCache" class="org.springframework.security.acls.domain.EhCacheBasedAclCache">
+        <constructor-arg>
+            <bean class="org.springframework.cache.ehcache.EhCacheFactoryBean">
+                <property name="cacheManager">
+                    <bean class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
+                </property>
+                <property name="cacheName" value="aclCache"/>
+            </bean>
+        </constructor-arg>
+    </bean>
+
+    <bean id="aclAuthorizationStrategy" class="org.springframework.security.acls.domain.AclAuthorizationStrategyImpl">
+        <constructor-arg>
+            <list>
+                <!-- authority needed to change ownership -->
+                <bean class="org.springframework.security.core.authority.GrantedAuthorityImpl">
+                    <constructor-arg value="ROLE_RUN_AS_ADMINISTRATOR"/>
+                </bean>
+                <!-- authority needed to modify auditing details -->
+                <bean class="org.springframework.security.core.authority.GrantedAuthorityImpl">
+                    <constructor-arg value="ROLE_RUN_AS_ADMINISTRATOR"/>
+                </bean>
+                <!-- authority needed to change other ACL and ACE details -->
+                <bean class="org.springframework.security.core.authority.GrantedAuthorityImpl">
+                    <constructor-arg value="ROLE_RUN_AS_ADMINISTRATOR"/>
+                </bean>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <bean id="aclService" class="org.springframework.security.acls.jdbc.JdbcMutableAclService">
+        <constructor-arg ref="dataSource"/>
+        <constructor-arg ref="lookupStrategy"/>
+        <constructor-arg ref="aclCache"/>
+        <property name="sidIdentityQuery" value="SELECT currval('acl_sid_id_seq')" />
+        <property name="classIdentityQuery" value="SELECT currval('acl_class_id_seq')" />
+    </bean>
+
+
+    <!-- ============== "AFTER INTERCEPTION" AUTHORIZATION DEFINITIONS =========== -->
+
+    <!-- Processes AFTER_ACL_COLLECTION_READ configuration settings -->
+    <bean id="afterAclCollectionRead"
+          class="org.springframework.security.acls.afterinvocation.AclEntryAfterInvocationCollectionFilteringProvider">
+        <constructor-arg ref="aclService"/>
+        <constructor-arg>
+            <list>
+                <ref local="administrationPermission"/>
+                <ref local="readPermission"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+    <!-- Processes AFTER_ACL_READ configuration settings -->
+    <!--<bean id="afterAclRead" class="org.springframework.security.afterinvocation.AclEntryAfterInvocationProvider">-->
+    <bean id="afterAclRead" class="com.neosavvy.security.CustomAclEntryAfterInvocationProvider">
+        <constructor-arg ref="aclService"/>
+        <constructor-arg>
+            <list>
+                <ref local="administrationPermission"/>
+                <ref local="readPermission"/>
+            </list>
+        </constructor-arg>
+    </bean>
+
+
+    <bean id="aclSecurityUtil" class="com.neosavvy.security.AclSecurityUtilImpl">
+        <property name="mutableAclService" ref="aclService" />
+    </bean>
+
+</beans>

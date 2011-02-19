@@ -1,0 +1,5 @@
+<project>
+  <targetSWF url="file:///Users/adamparrish/NEOSAVVY/commons-user/commons-user-flex-client/target/commons-user-flex-client-1.0-SNAPSHOT.swf" width="1024" height="768" commMode="targetSWFWindow" useFlashVars="false"/>
+  <flashVars/>
+  <generatedCode url="file:///Users/adamparrish/NEOSAVVY/commons-user/flex-monkey-tests/src/main/test" suitesPackageName="com.neosavvy.commons.user.flexmonkey.tests"/>
+</project>

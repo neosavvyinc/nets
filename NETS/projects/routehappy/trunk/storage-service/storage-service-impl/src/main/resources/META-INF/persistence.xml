@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+    <persistence-unit name="StoragePU">
+        <description>Storage Persistence Unit</description>
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <jta-data-source>jdbc/CommonsUserDS</jta-data-source>
+        
+        <class>fineline.focal.common.types.v1.UserSession</class>
+
+        <class>fineline.focal.common.types.v1.FileRef</class>
+        <class>fineline.focal.common.types.v1.UrlFileRef</class>
+        <class>fineline.focal.common.types.v1.StorageServiceFileRef</class>
+        <properties>
+            <property name="eclipselink.target-server" value="SunAS9"/> 
+        </properties>
+    </persistence-unit>
+</persistence>
+

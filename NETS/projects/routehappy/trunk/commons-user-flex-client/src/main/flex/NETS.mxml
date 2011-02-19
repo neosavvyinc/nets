@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<mx:Application
+        paddingTop="50"
+        paddingLeft="30"
+        paddingRight="30"
+        paddingBottom="30"
+        verticalGap="-1"
+        horizontalAlign="center"
+        creationComplete="{facade.startup(this)}"
+        styleName="altApplicationBackground"
+        height="100%"
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        xmlns:local="*"
+        xmlns:companyManagement="com.neosavvy.user.view.companyManagement.*"
+        xmlns:security="com.neosavvy.user.view.security.*"
+        xmlns:secured="com.neosavvy.user.view.secured.*">
+
+    <mx:Style source="/commonsUser.css"/>
+    <mx:Style source="mxTypeSelectors.css"/>
+    <mx:Style source="mxClassSelectors.css"/>
+
+    <mx:Script>
+        <![CDATA[
+        import com.neosavvy.user.ApplicationFacade;
+
+        import mx.events.ItemClickEvent;
+
+        private var facade:ApplicationFacade = ApplicationFacade.getInstance(ApplicationFacade.defaultApplicationKey);
+
+        protected function handleNavigationChange(event:ItemClickEvent):void {
+            navigationViewStack.selectedIndex = event.index;
+        }
+
+        protected function handleGettingStartedClicked():void {
+            navigationViewStack.selectedIndex = 2;
+            navigationToggleBar.selectedIndex = 2;
+        }
+        ]]>
+    </mx:Script>
+
+
+    <mx:HBox
+            id="headerBar"
+            width="960"
+            horizontalGap="0"
+            verticalAlign="bottom"
+            horizontalScrollPolicy="off"
+            verticalScrollPolicy="off"
+            includeInLayout="true">
+        <mx:ToggleButtonBar
+                id="navigationToggleBar"
+                buttonWidth="89"
+                buttonHeight="73"
+                styleName="noGradientHomeNavigation"
+                itemClick="{handleNavigationChange(event)}">
+            <mx:dataProvider>
+                <mx:Array>
+                    <mx:String>HOME</mx:String>
+                    <mx:String>PRICING</mx:String>
+                    <mx:String>SIGN-UP</mx:String>
+                </mx:Array>
+            </mx:dataProvider>
+        </mx:ToggleButtonBar>
+        <mx:VBox horizontalAlign="right" width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+            <mx:LinkButton id="havingTrouble" label="Having Trouble?" styleName="greenLinkButton"/>
+            <mx:HBox styleName="grayToGrayViewContainer" width="100%" horizontalAlign="right"
+                     horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                <mx:Label text="Already Registered?" styleName="greenLinkButton"/>
+                <!--<flexlib:PromptingTextInput visible="false" prompt="User name" id="userName"/>-->
+                <!--<flexlib:PromptingTextInput visible="false" prompt="Password" id="password" displayAsPassword="true"/>-->
+                <mx:Button label="Log In" id="loginButton"/>
+            </mx:HBox>
+        </mx:VBox>
+    </mx:HBox>
+    <mx:HBox
+            id="secureHeaderBar"
+            width="960"
+            horizontalGap="0"
+            verticalAlign="middle"
+            horizontalScrollPolicy="off"
+            verticalScrollPolicy="off"
+            includeInLayout="false"
+            visible="false">
+        <mx:Label id="companyNameHeader" styleName="calloutTextBold"/>
+        <mx:Spacer width="100%"/>
+        <mx:Label id="welcomeLabel" text="Welcome "/>
+        <mx:Label id="loggedInUser"/>
+        <mx:Button label="Log Out" id="logoutButton"/>
+    </mx:HBox>
+
+    <mx:ViewStack
+            creationPolicy="all"
+            id="navigationViewStack"
+            width="960"
+            height="100%"
+            minHeight="600"
+            selectedIndex="0">
+        <local:Home id="homeContent" height="100%" width="100%" verticalGap="-1" getStartedClicked="handleGettingStartedClicked()"/>
+        <local:Pricing id="pricingContent" height="100%" width="100%" verticalGap="-1" getStartedClicked="handleGettingStartedClicked()"/>
+        <companyManagement:Signup id="signupContent" height="100%" width="100%" verticalGap="-1"/>
+        <security:Login id="login" width="100%" height="100%"/>
+        <secured:SecuredContainer id="securedContainer" width="100%" height="100%"/>
+    </mx:ViewStack>
+
+
+</mx:Application>

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        layout="vertical"
+        creationComplete="{initializeService(),initCollections()}">
+	
+	
+	<mx:Script>
+		<![CDATA[
+        import com.neosavvy.user.dto.UserDTO;
+
+        import com.neosavvy.user.view.RegistrationAndLoginWindow;
+
+        import mx.collections.ArrayCollection;
+		import mx.collections.XMLListCollection;	
+        import mx.core.IFlexDisplayObject;
+        import mx.events.ItemClickEvent;
+        import mx.events.ListEvent;
+        import mx.managers.PopUpManager;
+        import mx.messaging.ChannelSet;
+        import mx.messaging.channels.AMFChannel;
+        import mx.rpc.events.FaultEvent;
+        import mx.rpc.events.ResultEvent;
+        import mx.rpc.remoting.mxml.RemoteObject;
+		import mx.controls.Alert;
+		import mx.events.MenuEvent;	
+
+        [Bindable]
+        private var userService:RemoteObject;
+        [Bindable]
+        private var companyService:RemoteObject;
+
+        public function initializeService():void {
+            userService = new RemoteObject();
+            companyService = new RemoteObject();
+
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:8080/commons-user-webapp/messagebroker/amf");
+            var channelSet:ChannelSet = new ChannelSet();
+            channelSet.addChannel(channel);
+            userService.channelSet = channelSet;
+            companyService.channelSet = channelSet;
+
+
+            userService.destination = "userService";
+            userService.addEventListener(FaultEvent.FAULT, faultHandler);
+            userService.addEventListener(ResultEvent.RESULT, resultHandler);
+            userService.getUsers();
+            companyService.destination = "companyService";
+            companyService.addEventListener(FaultEvent.FAULT, faultHandler);
+            companyService.addEventListener(ResultEvent.RESULT, companyResultHandler);
+            companyService.getCompanies();
+        }
+
+        private function faultHandler(faultEvent:FaultEvent):void {
+            trace("faultEvent: " + faultEvent.message);
+            trace("faultEvent: " + faultEvent.fault.toString());
+            showRegistrationLoginWindow();
+        }
+
+        private function resultHandler(resultEvent:ResultEvent):void {
+            var data:ArrayCollection = resultEvent.result as ArrayCollection;
+            grid.dataProvider = data;
+        }
+
+        private function companyResultHandler(resultEvent:ResultEvent):void {
+            var data:ArrayCollection = resultEvent.result as ArrayCollection;
+            companyGrid.dataProvider = data;
+        }
+
+        private function handleItemClick():void {
+            var selectedItem:UserDTO = grid.selectedItem as UserDTO;
+            fName.text = selectedItem.firstName;
+            mName.text = selectedItem.middleName;
+            lName.text = selectedItem.lastName;
+            username.text = selectedItem.username;
+            password.text = selectedItem.password;
+            identifier.text = String(selectedItem.id);
+        }
+
+        var regAndLoginWindow:IFlexDisplayObject = null;
+        protected function showRegistrationLoginWindow():void {
+            regAndLoginWindow = PopUpManager.createPopUp(this as DisplayObject, RegistrationAndLoginWindow, true);
+            PopUpManager.centerPopUp(regAndLoginWindow);
+        }
+
+        public function hideRegistrationLoginWindow(security:Object):void {
+            PopUpManager.removePopUp(regAndLoginWindow);
+
+            if(security.hasOwnProperty("name")) {
+                usernameLbl.text = security.name;
+            }
+            initializeService();
+        }
+
+        public function logout() {
+            var userService:RemoteObject = new RemoteObject();
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:8080/commons-user-webapp/messagebroker/amf");
+            var channelSet:ChannelSet = new ChannelSet();
+            channelSet.addChannel(channel);
+            userService.channelSet = channelSet;
+            userService.destination = "userService";
+            channelSet.logout();
+            showRegistrationLoginWindow();
+            usernameLbl.text = "Not Logged In";
+        }
+			[Bindable]
+			public var menuBarCollection:XMLListCollection;
+			
+			private var menubarXML:XMLList =
+				<>
+					<menuitem label="admin" data="top">
+						<menuitem label="Manage Users" data="1A"/>
+						<menuitem label="Add Users" data="1B"/>
+					</menuitem>
+					<menuitem label="Expenses" data="">
+						<menuitem label="See Expenses" data="2A"/>
+						<menuitem label="Reports"/>
+					</menuitem>
+					<menuitem label="Settings" data="">
+						<menuitem label="Update User Information" data="2A"/>
+						<menuitem type="Update Company Information"/>
+					</menuitem>
+				</>;
+			
+			// Event handler to initialize the MenuBar control.
+			private function initCollections():void {
+				menuBarCollection = new XMLListCollection(menubarXML);
+			}
+			
+			// Event handler for the MenuBar control's itemClick event.
+			private function menuHandler(evt:MenuEvent):void  {
+				// Don't open the Alert for a menu bar item that 
+				// opens a popup submenu.
+				if (evt.item.@data != "top") {
+					Alert.show("Label: " + evt.item.@label + "\n" + 
+						"Data: " + evt.item.@data, "Clicked menu item");
+				}
+			}
+			
+		]]>
+	</mx:Script>
+
+
+    <mx:HBox width="100%" horizontalAlign="right">
+        <mx:MenuBar width="259" x="1" labelField="@label" dataProvider="{menuBarCollection}">
+		</mx:MenuBar>
+        <mx:Label id="usernameLbl" text="Not Logged In"/>
+        <mx:Button label="Logout" id="showRegistrationLoginWindowBtn" click="{logout()}"/>
+    </mx:HBox>
+    <mx:HBox width="100%" height="100%">
+        <mx:VBox>
+                <flexlib:PromptingTextInput id="identifier" editable="false" prompt="NoId"/>
+                <flexlib:PromptingTextInput id="fName" prompt="First Name"/>
+                <flexlib:PromptingTextInput id="mName" prompt="Middle Name"/>
+                <flexlib:PromptingTextInput id="lName" prompt="Last Name"/>
+                <flexlib:PromptingTextInput id="username" prompt="Username"/>
+                <flexlib:PromptingTextInput id="password" prompt="Password" displayAsPassword="true"/>
+        </mx:VBox>
+	    <mx:AdvancedDataGrid
+                id="grid"
+                width="100%"
+                height="25%"
+                itemClick="{handleItemClick()}"
+                >
+            <mx:columns>
+                <mx:AdvancedDataGridColumn
+                        id="fNameCol"
+                        dataField="firstName"
+                        headerText="First Name"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="mNameCol"
+                        dataField="middleName"
+                        headerText="Middle Name"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="lNameCol"
+                        dataField="lastName"
+                        headerText="Last Name"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="usernameCol"
+                        dataField="username"
+                        headerText="Username"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="actions"
+                        headerText="Actions"
+                        itemRenderer="com.neosavvy.user.Actions"
+                        />
+            </mx:columns>
+        </mx:AdvancedDataGrid>
+	    <mx:AdvancedDataGrid
+                id="companyGrid"
+                width="100%"
+                height="25%"
+                itemClick="{handleItemClick()}"
+                >
+            <mx:columns>
+                <mx:AdvancedDataGridColumn
+                        id="cNameCol"
+                        dataField="companyName"
+                        headerText="Company Name"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="a1NameCol"
+                        dataField="addressOne"
+                        headerText="Main Address"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="a2NameCol"
+                        dataField="addressTwo"
+                        headerText="Address Two"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="cityCol"
+                        dataField="city"
+                        headerText="City"
+                        />
+                <!--<mx:AdvancedDataGridColumn-->
+                        <!--id="actions"-->
+                        <!--headerText="Actions"-->
+                        <!--itemRenderer="com.neosavvy.user.Actions"-->
+                        <!--/>-->
+            </mx:columns>
+        </mx:AdvancedDataGrid>
+	</mx:HBox>
+</mx:Application>

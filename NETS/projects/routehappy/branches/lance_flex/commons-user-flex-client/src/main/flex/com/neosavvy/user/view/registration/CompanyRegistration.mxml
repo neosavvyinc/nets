@@ -1,0 +1,283 @@
+<?xml version="1.0" ?>
+<mx:Application
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        preinitialize="{companyRegPopupCreate()}">
+<mx:Style
+        >
+    .solidBorder { border-style: solid; }
+
+    .solidBorderPadded
+    {
+        padding-top: 12;
+        padding-bottom: 12;
+        padding-left: 12;
+        padding-right: 12;
+        border-style: solid;
+    }
+
+    .rowHeight
+    {
+        height: 600;
+    }
+</mx:Style>        
+<mx:VBox>
+
+    <mx:Script><![CDATA[
+        import com.neosavvy.user.dto.UserDTO;
+        import com.neosavvy.user.dto.CompanyDTO;
+
+        import com.neosavvy.user.view.registration.event.RegistrationFailedEvent;
+
+        import mx.collections.ArrayCollection;
+        import mx.messaging.ChannelSet;
+        import mx.messaging.channels.AMFChannel;
+        import mx.rpc.events.FaultEvent;
+        import mx.rpc.events.ResultEvent;
+        import mx.rpc.remoting.mxml.RemoteObject;
+        import mx.controls.Alert;
+
+
+        [Bindable]
+        private var numEmployeesRangeService:RemoteObject;
+        [Bindable]
+        private var numEmployeesRanges:ArrayCollection;
+
+        protected function handleCreate():void {
+
+            if (!validatePasswordsMatch()) {
+                errorBox.text = "Passwords must match and be at least 6 characters";
+                return;
+            }
+            addUser()
+            dispatchEvent(new Event("createClicked", true));
+        }
+
+        protected function handleCancel():void {
+            clearFields();
+            dispatchEvent(new Event("cancelClicked", true));
+        }
+
+        /**
+         * Validate the two password fields
+         *
+         * @return isPasswordValid if the two passwords match, are not null, and exceed at least 6 characters
+         */
+        protected function validatePasswordsMatch():Boolean {
+            var isPasswordValid:Boolean = false;
+            if (password.text && password.text.length >= 6 &&
+                confirmPassword.text && confirmPassword.text.length >= 6 &&
+                password.text == confirmPassword.text
+                    ) {
+                isPasswordValid = true
+            }
+            return isPasswordValid;
+        }
+
+        protected function clearFields():void {
+            firstName.text = null;
+            middleName.text = null;
+            lastName.text = null;
+            username.text = null;
+            password.text = null;
+            emailAddress.text = null;
+            confirmPassword.text = null;
+            errorBox.text = null;
+        }
+
+        protected function getUserFromTextInput():UserDTO {
+            var userFromTextInputs:UserDTO = new UserDTO();
+            userFromTextInputs.firstName = firstName.text;
+            userFromTextInputs.middleName = middleName.text;
+            userFromTextInputs.lastName = lastName.text;
+            userFromTextInputs.username = username.text;
+            userFromTextInputs.password = password.text;
+            userFromTextInputs.emailAddress = emailAddress.text;
+            return userFromTextInputs;
+        }
+
+        protected function getCompanyFromTextInput():CompanyDTO{
+            var companyFromTextInputs:CompanyDTO = new CompanyDTO();
+            companyFromTextInputs.companyName = companyName.text;
+            companyFromTextInputs.addressOne = addressOne.text;
+            companyFromTextInputs.addressTwo = addressTwo.text;
+            companyFromTextInputs.city = city.text;
+            companyFromTextInputs.postalCode = postalCode.text;
+            companyFromTextInputs.state = state.text;
+            companyFromTextInputs.country = country.text;
+            var ranges:Array = numEmployeesRanges.toArray()
+            for(var i = 0; i < ranges.length; i++){
+                if(num_employees.selectedValue == ranges[i].id){
+                    companyFromTextInputs.numEmployeesRange = ranges[i];
+                }
+            }
+            return companyFromTextInputs;
+        }
+        
+        protected function addUser():void {
+            var companyService:RemoteObject = new RemoteObject();
+
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:8080/commons-user-webapp/messagebroker/amf");
+            var channelSet:ChannelSet = new ChannelSet();
+            channelSet.addChannel(channel);
+            companyService.channelSet = channelSet;
+
+            companyService.destination = "companyService";
+            companyService.addEventListener(FaultEvent.FAULT, savefaultHandler);
+            companyService.addEventListener(ResultEvent.RESULT, saveresultHandler);
+            companyService.addCompany(getCompanyFromTextInput(),getUserFromTextInput());
+        }
+
+        protected function companyRegPopupCreate():void {
+            numEmployeesRangeService = new RemoteObject();
+
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:8080/commons-user-webapp/messagebroker/amf");
+            var channelSet:ChannelSet = new ChannelSet();
+            channelSet.addChannel(channel);
+            
+            numEmployeesRangeService.channelSet = channelSet;
+            numEmployeesRangeService.destination = "numEmployeesRangeService";
+            numEmployeesRangeService.addEventListener(FaultEvent.FAULT, faultHandler);
+            numEmployeesRangeService.addEventListener(ResultEvent.RESULT, numEmployeesRangeResultHandler);
+            numEmployeesRangeService.getNumEmployeesRange();
+        }
+
+        private function numEmployeesRangeResultHandler(resultEvent:ResultEvent):void {
+            numEmployeesRanges = resultEvent.result as ArrayCollection;
+        }
+
+        private function faultHandler(faultEvent:FaultEvent):void {
+            trace("faultEvent: " + faultEvent.message);
+            trace("faultEvent: " + faultEvent.fault.toString());
+            Alert.show("CompanyReg result fault " + faultEvent.message + " full message is " + faultEvent.fault.toString());
+        }
+        
+        private function savefaultHandler(faultEvent:FaultEvent):void {
+            trace("faultEvent: " + faultEvent.message);
+            trace("faultEvent: " + faultEvent.fault.toString());
+            Alert.show("CompanyReg result fault " + faultEvent.message + " full message is " + faultEvent.fault.toString());
+            var event:RegistrationFailedEvent = new RegistrationFailedEvent(faultEvent.message.toString(), faultEvent.fault.toString());
+            dispatchEvent(event);
+        }
+
+        private function saveresultHandler(resultEvent:ResultEvent):void {
+            dispatchEvent(new Event("userConfirmed", true));
+        }
+
+        ]]></mx:Script>
+
+    <mx:Grid id="myGrid">
+    <mx:GridRow styleName="rowHeight" id="row1">
+    <mx:GridItem>
+    <mx:VBox
+        styleName="solidBorderPadded" >
+        <mx:Text>
+            <mx:text>
+                Start Here By Introducing Your company
+            </mx:text>
+        </mx:Text>
+    <flexlib:PromptingTextInput
+        id="companyName"
+        prompt="Company Name"
+        />
+    <flexlib:PromptingTextInput
+        id="addressOne"
+        prompt="Address Main"
+        />
+    <flexlib:PromptingTextInput
+        id="addressTwo"
+        prompt="Address Extended"
+        />
+    <flexlib:PromptingTextInput
+        id="city"
+        prompt="City"
+        />
+    <flexlib:PromptingTextInput
+        id="state"
+        prompt="State"
+        />
+   <flexlib:PromptingTextInput
+        id="postalCode"
+        prompt="Postal Code"
+        />
+    <flexlib:PromptingTextInput
+        id="country"
+        prompt="Country"
+        />
+    </mx:VBox>
+    </mx:GridItem>
+    <mx:GridItem>
+    <mx:RadioButtonGroup id="num_employees" />
+
+    <mx:Form>
+        <mx:FormItem>
+            <mx:Text id="employees_range"
+                    text="For how many employees do you want to track expenses?" />
+        </mx:FormItem>
+        <mx:FormItem>
+            <mx:Repeater id="numEmployeesRepeater" dataProvider="{numEmployeesRanges}">
+            <mx:RadioButton id="num" label="{numEmployeesRepeater.currentItem.rangeDescription}" value="{numEmployeesRepeater.currentItem.id}" group="{num_employees}"/>
+            </mx:Repeater>
+        </mx:FormItem>
+    </mx:Form>
+    </mx:GridItem>
+    </mx:GridRow>
+    <mx:GridRow>
+    <mx:GridItem>
+    <mx:VBox
+        styleName="solidBorderPadded" >
+        <mx:Text>
+            <mx:text>
+                We Need An Administrative User For Your Account
+            </mx:text>
+        </mx:Text>
+    <flexlib:PromptingTextInput
+        id="username"
+        prompt="Username"
+        />
+    <flexlib:PromptingTextInput
+        id="firstName"
+        prompt="First Name"
+        />
+    <flexlib:PromptingTextInput
+        id="middleName"
+        prompt="Middle Name"
+        />
+    <flexlib:PromptingTextInput
+        id="lastName"
+        prompt="Last Name"
+        />
+    <flexlib:PromptingTextInput
+        id="emailAddress"
+        prompt="Email Address"
+        />
+    <flexlib:PromptingTextInput
+        id="password"
+        prompt="Password"
+        displayAsPassword="true"
+        />
+    <flexlib:PromptingTextInput
+        id="confirmPassword"
+        prompt="Confirm Password"
+        displayAsPassword="true"
+        />
+		<mx:Text id="errorBox" width="{confirmPassword.width}"/>
+		
+		<mx:HBox>
+			<mx:Button id="createButton" label="Create" click="{handleCreate()}"/>
+			<mx:Button id="cancelButton" label="Cancel" click="{handleCancel()}"/>
+		</mx:HBox>		
+    </mx:VBox>
+    
+    </mx:GridItem>
+        <mx:GridItem>
+        <mx:Text>
+            <mx:text>
+                Hello
+            </mx:text>
+        </mx:Text>
+        </mx:GridItem>
+    </mx:GridRow>
+    </mx:Grid>
+</mx:VBox>
+</mx:Application>

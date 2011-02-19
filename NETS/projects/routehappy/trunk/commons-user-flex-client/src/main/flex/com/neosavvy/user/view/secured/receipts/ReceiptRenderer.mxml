@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<mx:VBox
+        horizontalAlign="center"
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        mouseOver="onMouseOver()"
+        horizontalScrollPolicy="off"
+        verticalScrollPolicy="off"
+        xmlns:controls="qs.controls.*">
+
+    <mx:Metadata>
+        [Event(name="addReceiptToExpenseReportEvent"
+                ,type="com.neosavvy.user.view.secured.receipts.AddReceiptToExpenseReportEvent")]
+
+        [Event(name="createExpenseReportAndAddReceiptEvent"
+                ,type="com.neosavvy.user.view.secured.receipts.CreateExpenseReportAndAddRecentEvent")]
+    </mx:Metadata>
+
+    <mx:Script>
+        <![CDATA[
+        import com.neosavvy.user.ApplicationFacade;
+        import com.neosavvy.user.ProxyConstants;
+        import com.neosavvy.user.dto.companyManagement.UserDTO;
+        import com.neosavvy.user.dto.project.ExpenseReport;
+
+        import fineline.focal.common.types.v1.StorageServiceFileRef;
+
+        import mx.collections.ArrayCollection;
+        import mx.events.FlexMouseEvent;
+        import mx.rpc.Responder;
+        import mx.rpc.events.FaultEvent;
+        import mx.rpc.events.ResultEvent;
+
+        protected override function createChildren():void {
+            super.createChildren();
+
+            addEventListener(FlexMouseEvent.MOUSE_DOWN_OUTSIDE, onMouseOut);
+            addEventListener(FlexMouseEvent.MOUSE_WHEEL_OUTSIDE, onMouseOut);
+        }
+
+        protected override function commitProperties():void {
+            super.commitProperties();
+
+
+            if (data) {
+                loadImage();
+            }
+        }
+
+        [Bindable]
+        private var _imageUrl:String;
+
+        [Bindable]
+        private var _openExpenseReports:ArrayCollection;
+        private var cacheKey:Number = 0;
+
+        private function onMouseOver():void {
+            _openExpenseReports = (parentDocument as ReceiptManager).openExenseReports;
+            expenseReportSelector.visible = true;
+            addReceiptToExpenseReport.visible = true;
+            viewReceipt.visible = true;
+            deleteReceipt.visible = true;
+        }
+
+        private function handleViewReceiptClicked(event:MouseEvent):void {
+            trace("view receipt");
+        }
+
+        private function handleDeleteReceiptClicked(event:MouseEvent):void {
+
+            if (data) {
+                var fileRef:StorageServiceFileRef = data as StorageServiceFileRef;
+
+                var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/delete/" + fileRef.bucket + "/" + fileRef.key + "?rabbitHole=" + ApplicationFacade.getSecurityProxy().sessionId;
+
+                trace(fileUrl);
+                _imageUrl = fileUrl;
+
+                var user:UserDTO = ApplicationFacade.getSecurityProxy().activeUser;
+                ApplicationFacade.getUserProxy().disassociateReceiptUploadWithUser(user, fileRef, new mx.rpc.Responder(
+                        function (result:ResultEvent):void {
+                            trace("called dis-associate success");
+
+                            dispatchEvent(new Event("reloadReceiptData", true));
+                        },
+                        function (fault:FaultEvent):void {
+                            trace("failed dis-association");
+                        }
+                ));
+
+            }
+
+
+        }
+
+
+        private function onDeleteResult(event:ResultEvent):void {
+            trace("result for delete");
+        }
+
+        private function onDeleteFault(event:FaultEvent):void {
+            trace("fault for delete");
+        }
+
+        private function onMouseOut(event:Event):void {
+            expenseReportSelector.visible = false;
+            addReceiptToExpenseReport.visible = false;
+            viewReceipt.visible = false;
+            deleteReceipt.visible = false;
+        }
+
+        private function onAddReceipt(event:MouseEvent):void {
+
+            var selectedExpenseReport:ExpenseReport = expenseReportSelector.selectedItem as ExpenseReport;
+            var selectedFileRef:StorageServiceFileRef = data as StorageServiceFileRef;
+            if (expenseReportSelector.selectedIndex >= 1) {
+                dispatchEvent(new AddReceiptToExpenseReportEvent(selectedExpenseReport, selectedFileRef));
+            }
+            else {
+                dispatchEvent(new CreateExpenseReportAndAddRecentEvent(selectedExpenseReport, selectedFileRef));
+            }
+
+        }
+
+        private function rotateLeft(event:MouseEvent):void {
+            if (data) {
+                var fileRef:StorageServiceFileRef = data as StorageServiceFileRef;
+                var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/rotate/" + fileRef.bucket + "/" + fileRef.key + "/left?rabbitHole=" + ApplicationFacade.getSecurityProxy().sessionId;
+
+                var urlLoader:URLLoader = new URLLoader();
+                var request:URLRequest = new URLRequest(fileUrl);
+                request.method = URLRequestMethod.GET;
+                urlLoader.load(request);
+                urlLoader.addEventListener(IOErrorEvent.IO_ERROR, handleIoError);
+            }
+        }
+
+        private function rotateRight(event:MouseEvent):void {
+            if (data) {
+                var fileRef:StorageServiceFileRef = data as StorageServiceFileRef;
+                var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/rotate/" + fileRef.bucket + "/" + fileRef.key + "/right?rabbitHole=" + ApplicationFacade.getSecurityProxy().sessionId;
+
+                var urlLoader:URLLoader = new URLLoader();
+                var request:URLRequest = new URLRequest(fileUrl);
+                request.method = URLRequestMethod.GET;
+                urlLoader.load(request);
+                urlLoader.addEventListener(IOErrorEvent.IO_ERROR, handleIoError);
+            }
+        }
+
+        /***
+         * This is a bug in that it receives an error but it did successfully
+         * handle the rotating of the image.
+         *
+         * This needs to be fixed.
+         *
+         * @param event
+         */
+        private function handleIoError(event:IOErrorEvent):void {
+            trace("Error: " + event.toString());
+            loadImage(true);
+        }
+
+        private function loadImage(incrementCacheKey:Boolean = false):void {
+
+            if (incrementCacheKey) {
+                cacheKey = cacheKey + 1;
+            }
+            var fileRef:StorageServiceFileRef = data as StorageServiceFileRef;
+            var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "/viewable?cacheKey=" + cacheKey;
+            trace(fileUrl);
+            _imageUrl = fileUrl;
+        }
+        ]]></mx:Script>
+
+    <controls:SuperImage id="receiptImg" source="{_imageUrl}" width="100%" height="100%"/>
+
+    <mx:HBox horizontalAlign="center" width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+        <mx:Button label="L" click="rotateLeft(event)"/>
+        <mx:Spacer width="100%"/>
+        <mx:Button label="R" click="rotateRight(event)"/>
+    </mx:HBox>
+
+    <mx:HBox horizontalAlign="center" width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+        <mx:ComboBox
+                id="expenseReportSelector"
+                width="100%"
+                dataProvider="{_openExpenseReports}"
+                visible="false"
+                labelField="displayString"
+                />
+        <mx:Button
+                id="addReceiptToExpenseReport"
+                width="45"
+                label="Add"
+                visible="false"
+                click="onAddReceipt(event)"
+                />
+    </mx:HBox>
+
+
+    <mx:HBox horizontalAlign="center" width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+        <mx:Button id="viewReceipt" width="50%" label="View Receipt" visible="false"
+                   click="handleViewReceiptClicked(event)"/>
+        <mx:Button id="deleteReceipt" width="50%" label="Delete Receipt" visible="false"
+                   click="handleDeleteReceiptClicked(event)"/>
+    </mx:HBox>
+
+</mx:VBox>

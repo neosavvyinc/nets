@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<mx:VBox xmlns:mx="http://www.adobe.com/2006/mxml"
+         xmlns:flexlib="http://code.google.com/p/flexlib/" xmlns:parsley="http://www.spicefactory.org/parsley">
+
+    <mx:Metadata>
+        [Event(name="get",type="com.neosavvy.user.event.UserEvent")]
+        [Event(name="userModelChanged",type="com.neosavvy.user.event.UserEvent")]
+        [ManagedEvents("get,userModelChanged")]
+    </mx:Metadata>
+
+    <parsley:Configure/>
+
+    <mx:Script>
+        <![CDATA[
+
+        import com.neosavvy.user.model.UserModel;
+        import com.neosavvy.user.dto.UserDTO;
+
+        import com.neosavvy.user.event.UserEvent;
+
+        import mx.core.IFlexDisplayObject;
+        import mx.managers.PopUpManager;
+
+        import org.spicefactory.parsley.core.context.Context;
+
+        [Inject]
+        public var context:Context;
+
+        [Bindable]
+        [Inject]
+        public var userModel:UserModel;
+
+        [MessageHandler(selector="userModelChanged")]
+        public function handleUserModelChanged( userEvent:UserEvent ):void
+        {
+            this.grid.dataProvider = userModel.users;
+        }
+
+
+        private function handleItemClick():void {
+            var selectedItem:UserDTO = grid.selectedItem as UserDTO;
+            fName.text = selectedItem.firstName;
+            mName.text = selectedItem.middleName;
+            lName.text = selectedItem.lastName;
+            username.text = selectedItem.username;
+            password.text = selectedItem.password;
+            identifier.text = String(selectedItem.id);
+        }
+
+        protected function showRegistrationLoginWindow():void {
+            var regAndLoginWindow:RegistrationAndLoginWindow = new RegistrationAndLoginWindow();
+            context.viewManager.addViewRoot(regAndLoginWindow);
+            PopUpManager.addPopUp(regAndLoginWindow as IFlexDisplayObject, this, true);
+            PopUpManager.centerPopUp(regAndLoginWindow);
+        }
+
+        [Init]
+        public function refreshGridHandler():void {
+            dispatchEvent(new UserEvent(UserEvent.TYPE_GET, true, true));
+        }
+
+        ]]>
+    </mx:Script>
+
+    <mx:HBox>
+        <mx:Button id="showRegistrationLoginWindowBtn" click="{showRegistrationLoginWindow()}"
+                   label="Show Register/Login"/>
+        <mx:Button id="refreshGrid" click="{refreshGridHandler()}" label="Refresh Grid"/>
+    </mx:HBox>
+
+    <mx:HBox width="100%" height="100%">
+        <mx:VBox>
+            <flexlib:PromptingTextInput id="identifier" editable="false" prompt="NoId"/>
+            <flexlib:PromptingTextInput id="fName" prompt="First Name"/>
+            <flexlib:PromptingTextInput id="mName" prompt="Middle Name"/>
+            <flexlib:PromptingTextInput id="lName" prompt="Last Name"/>
+            <flexlib:PromptingTextInput id="username" prompt="Username"/>
+            <flexlib:PromptingTextInput id="password" prompt="Password" displayAsPassword="true"/>
+        </mx:VBox>
+        <mx:AdvancedDataGrid
+                id="grid"
+                width="100%"
+                height="25%"
+                itemClick="{handleItemClick()}"
+                >
+            <mx:columns>
+                <mx:AdvancedDataGridColumn
+                        id="fNameCol"
+                        dataField="firstName"
+                        headerText="First Name"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="mNameCol"
+                        dataField="middleName"
+                        headerText="Middle Name"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="lNameCol"
+                        dataField="lastName"
+                        headerText="Last Name"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="usernameCol"
+                        dataField="username"
+                        headerText="Username"
+                        />
+                <mx:AdvancedDataGridColumn
+                        id="actions"
+                        headerText="Actions"
+                        itemRenderer="com.neosavvy.user.view.Actions"
+                        />
+            </mx:columns>
+        </mx:AdvancedDataGrid>
+    </mx:HBox>
+
+</mx:VBox>

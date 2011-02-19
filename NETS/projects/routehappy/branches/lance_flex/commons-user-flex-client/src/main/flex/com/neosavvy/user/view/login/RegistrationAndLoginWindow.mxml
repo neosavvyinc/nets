@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<mx:TitleWindow
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:login="com.neosavvy.user.view.login.*"
+        layout="horizontal"
+        title="Commons User Registration / Login"
+        initialize="{init()}"
+        >
+
+    <mx:Script>
+        <![CDATA[
+        import com.neosavvy.user.view.login.event.RegistrationFailedEvent;
+
+        import mx.events.CloseEvent;
+        import mx.managers.PopUpManager;
+
+        protected function close(event:CloseEvent):void {
+            PopUpManager.removePopUp(this);
+        }
+
+        protected function init():void {
+            addEventListener("newUser", newUserEvent);
+            addEventListener("cancelClicked", cancelButtonEvent);
+            addEventListener("userConfirmed", userConfirmedEvent);
+            addEventListener(RegistrationFailedEvent.TYPE, userFailedEvent);
+            addEventListener(CloseEvent.CLOSE, close);
+        }
+
+        protected function newUserEvent(event:Event):void {
+            newUserReg.visible = false;
+            userReg.visible = true;
+            userConfirmed.visible = false;
+            userFailed.visible = false;
+        }
+
+        protected function cancelButtonEvent(event:Event):void {
+            newUserReg.visible = false;
+            userReg.visible = true;
+            userConfirmed.visible = false;
+            userFailed.visible = false;
+        }
+
+        protected function userConfirmedEvent(event:Event):void {
+            newUserReg.visible = false;
+            userReg.visible = false;
+            userConfirmed.visible = true;
+            userFailed.visible = false;
+        }
+
+        protected function userFailedEvent(event:RegistrationFailedEvent):void {
+            newUserReg.visible = false;
+            userReg.visible = false;
+            userConfirmed.visible = false;
+            userFailed.visible = true;
+        }
+
+
+        ]]>
+    </mx:Script>
+
+    <mx:Canvas>
+        <login:UserRegistration visible="false" id="userReg" width="185"/>
+        <login:NewUserRegistration id="newUserReg" width="185"/>
+        <login:UserConfirmed visible="false" id="userConfirmed" width="185"/>
+        <login:UserFailed visible="false" id="userFailed" width="185"/>
+    </mx:Canvas>
+    <mx:VRule height="95%"/>
+    <login:Login/>
+
+</mx:TitleWindow>

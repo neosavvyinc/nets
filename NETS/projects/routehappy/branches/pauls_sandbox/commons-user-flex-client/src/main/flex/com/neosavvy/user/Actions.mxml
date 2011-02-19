@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml">
+
+    <mx:Script>
+        <![CDATA[
+        import com.neosavvy.user.dto.UserDTO;
+
+        import mx.core.Application;
+        import mx.messaging.ChannelSet;
+        import mx.messaging.channels.AMFChannel;
+        import mx.rpc.events.FaultEvent;
+        import mx.rpc.events.ResultEvent;
+        import mx.rpc.remoting.RemoteObject;
+
+        protected var userService:RemoteObject;
+
+        protected function deleteHandler() {
+            userService = new RemoteObject();
+
+            var channel:AMFChannel = new AMFChannel("user-amf", "http://localhost:9090/commons-user-webapp/messagebroker/amf");
+            var channelSet:ChannelSet = new ChannelSet();
+            channelSet.addChannel(channel);
+            userService.channelSet = channelSet;
+
+
+            userService.destination = "userService";
+            userService.addEventListener(FaultEvent.FAULT, deletefaultHandler);
+            userService.addEventListener(ResultEvent.RESULT, deleteresultHandler);
+            userService.deleteUser(data as UserDTO);
+
+        }
+
+        protected function deletefaultHandler( faultEvent:FaultEvent ):void {
+				trace("faultEvent: " + faultEvent.message );
+				trace("faultEvent: " + faultEvent.fault.toString() );
+			}
+
+        protected function deleteresultHandler( resultEvent:ResultEvent ):void {
+				var data:Array = resultEvent.result as Array;
+				main(Application.application).initializeService();
+        }
+        ]]>
+    </mx:Script>
+    <mx:Button id="deleteBtn" label="Delete" click="{deleteHandler()}"/>
+</mx:HBox>
