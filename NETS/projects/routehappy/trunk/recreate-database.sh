@@ -1,6 +1,6 @@
 #!/bin/sh
-psql -d commonsuser -U commonsuser -c "DROP SCHEMA commonsuser CASCADE;"
-psql -d commonsuser -U commonsuser -c "CREATE SCHEMA commonsuser;"
-psql -d commonstest -U commonstest -c "DROP SCHEMA commonstest CASCADE;"
-psql -d commonstest -U commonstest -c "CREATE SCHEMA commonstest;"
+psql -d routehappy -U routehappy -c "DROP SCHEMA routehappy CASCADE;"
+psql -d routehappy -U routehappy -c "CREATE SCHEMA routehappy;"
+#psql -d routehappytest -U routehappytest -c "DROP SCHEMA routehappytest CASCADE;"
+#psql -d routehappytest -U routehappytest -c "CREATE SCHEMA routehappytest;"
 

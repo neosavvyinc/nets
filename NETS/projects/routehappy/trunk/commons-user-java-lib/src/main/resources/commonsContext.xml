@@ -28,6 +28,10 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <bean id="projectDAO" class="com.neosavvy.user.dao.project.ProjectDAOImpl" parent="abstractDao"/>
     <bean id="expenseDAO" class="com.neosavvy.user.dao.project.ExpenseDAOImpl" parent="abstractDao"/>
 
+
+    <bean id="abstractRouteHappyDAO" class="com.routehappy.dao.BaseDAO" abstract="true"/>
+    <bean id="reviewDAO" class="com.routehappy.dao.ReviewDAOImpl" parent="abstractRouteHappyDAO"/>
+
     <bean id="mobileService" class="com.neosavvy.user.service.MobileServiceImpl">
         <property name="expenseService" ref="expenseReportService"/>
         <property name="userService" ref="userService"/>

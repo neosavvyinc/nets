@@ -20,14 +20,14 @@
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
-                <db.url>jdbc:postgresql://localhost/commonsuser?schema=commonsuser</db.url>
-                <db.username>commonsuser</db.username>
-                <db.password>commonsuser</db.password>
-                <db.schema>commonsuser</db.schema>
-                <test.db.url>jdbc:postgresql://localhost/commonstest?schema=commonstest</test.db.url>
-                <test.db.username>commonstest</test.db.username>
-                <test.db.password>commonstest</test.db.password>
-                <test.db.schema>commonstest</test.db.schema>
+                <db.url>jdbc:postgresql://localhost/routehappy?schema=routehappy</db.url>
+                <db.username>routehappy</db.username>
+                <db.password>routehappy</db.password>
+                <db.schema>routehappy</db.schema>
+                <test.db.url>jdbc:postgresql://localhost/routehappytest?schema=routehappytest</test.db.url>
+                <test.db.username>routehappytest</test.db.username>
+                <test.db.password>routehappytest</test.db.password>
+                <test.db.schema>routehappytest</test.db.schema>
             </properties>
         </profile>
     </profiles>

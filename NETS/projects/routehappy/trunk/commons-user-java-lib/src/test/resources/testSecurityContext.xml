@@ -5,7 +5,6 @@
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
-             http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
     <import resource="classpath*:commonsContext.xml" />
@@ -14,9 +13,9 @@
 
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/commonstest"/>
-        <property name="username" value="commonstest"/>
-        <property name="password" value="commonstest"/>
+        <property name="url" value="jdbc:postgresql://localhost:5432/routehappy"/>
+        <property name="username" value="routehappy"/>
+        <property name="password" value="routehappy"/>
         <property name="initialSize" value="5"/>
         <property name="maxActive" value="10"/>
         <property name="testOnBorrow" value="true"/>
