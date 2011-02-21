@@ -20,7 +20,6 @@
 
     function getOutBoundReturnCode( $tripType )
     {
-        echo "getOutBoundReturnCode". $tripType;
         switch( $tripType )
         {
             case "there":
@@ -35,7 +34,6 @@
 
     function getNumStops( $nonStopOrStop )
     {
-        echo "getNumStops". $nonStopOrStop;
         $numStops = 0;
         switch( $nonStopOrStop )
         {
