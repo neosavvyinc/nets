@@ -20,6 +20,9 @@ package com.routehappy.dto; /***************************************************
 import fineline.focal.common.types.v1.EntityListenerManager;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.Date;
 import java.util.Set;
 
@@ -37,35 +40,44 @@ import java.util.Set;
     }
 )
 @EntityListeners(EntityListenerManager.class)
+@XmlRootElement
 public class ReviewDTO {
 
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RH_REVIEW_SEQ")
-    @SequenceGenerator(name = "RH_REVIEW_SEQ", sequenceName = "RH_REVIEW_SEQ", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rh_review_seq")
+    @SequenceGenerator(name = "rh_review_seq", sequenceName = "rh_review_seq", allocationSize=1)
 	@Column(name="REVIEW_ID")
     private Integer id;
 
+    
     @Column(name="CREATION_DATE")
     @Temporal(TemporalType.DATE)
     private Date creationDate;
 
+    
     @Column(name="TRIP_DATE")
     @Temporal(TemporalType.DATE)
     private Date tripDate;
 
-    @ManyToOne
+    
+    @ManyToOne( cascade = CascadeType.PERSIST )
     @JoinColumn(name="TRIP_ID")
     private TripDTO trip;
 
-    @OneToMany(mappedBy="review", fetch= FetchType.LAZY)
+    
+    @OneToMany(mappedBy="review", fetch= FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<SegmentDTO> segments;
 
+    
     @Column(name="NUM_STOPS")
     private Integer numberStops;
 
+    
     @Column(name="OUTBOUND_OR_RETURN_CODE")
     private Integer outboundReturnCode;
 
+    @XmlElement( required = true )
     public Integer getId() {
         return id;
     }
@@ -74,6 +86,7 @@ public class ReviewDTO {
         this.id = id;
     }
 
+    @XmlElement( required = true )
     public Date getCreationDate() {
         return creationDate;
     }
@@ -82,6 +95,7 @@ public class ReviewDTO {
         this.creationDate = creationDate;
     }
 
+    @XmlElement( required = true )
     public Date getTripDate() {
         return tripDate;
     }
@@ -90,14 +104,7 @@ public class ReviewDTO {
         this.tripDate = tripDate;
     }
 
-//    public TripDTO getTrip() {
-//        return trip;
-//    }
-//
-//    public void setTrip(TripDTO trip) {
-//        this.trip = trip;
-//    }
-
+    @XmlElement( required = true )
     public Integer getNumberStops() {
         return numberStops;
     }
@@ -106,6 +113,7 @@ public class ReviewDTO {
         this.numberStops = numberStops;
     }
 
+    @XmlElement( required = true )
     public Integer getOutboundReturnCode() {
         return outboundReturnCode;
     }
@@ -114,6 +122,7 @@ public class ReviewDTO {
         this.outboundReturnCode = outboundReturnCode;
     }
 
+    @XmlTransient
     public TripDTO getTrip() {
         return trip;
     }
@@ -122,11 +131,19 @@ public class ReviewDTO {
         this.trip = trip;
     }
 
+    @XmlElement( required = true )
     public Set<SegmentDTO> getSegments() {
         return segments;
     }
 
     public void setSegments(Set<SegmentDTO> segments) {
+        if( segments != null )
+        {
+            for ( SegmentDTO segment : segments )
+            {
+                segment.setReview(this);
+            }
+        }
         this.segments = segments;
     }
 }

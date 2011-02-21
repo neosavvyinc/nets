@@ -20,6 +20,8 @@ package com.routehappy.dto; /***************************************************
 import fineline.focal.common.types.v1.EntityListenerManager;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import java.util.Set;
 
@@ -31,17 +33,18 @@ import java.util.Set;
  */
 @Entity
 @Table(
-    name="RH_TRIP" ,
+    name="rh_trip" ,
     uniqueConstraints = {
             @UniqueConstraint(columnNames = {"TRIP_ID"})
     }
 )
 @EntityListeners(EntityListenerManager.class)
+@XmlRootElement
 public class TripDTO {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "RH_TRIP_SEQ")
-    @SequenceGenerator(name = "RH_TRIP_SEQ", sequenceName = "RH_TRIP_SEQ", allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "rh_trip_seq")
+    @SequenceGenerator(name = "rh_trip_seq", sequenceName = "rh_trip_seq", allocationSize=1)
 	@Column(name="TRIP_ID")
     private Integer id;
 
@@ -60,14 +63,15 @@ public class TripDTO {
     private String description;
 
     @Column(name="REASON_CODE")
-    private char reason;
+    private String reason;
 
     @Column(name="PARTY_CODE")
-    private char partyCode;
+    private String partyCode;
 
-    @OneToMany(mappedBy="trip", fetch= FetchType.LAZY)
+    @OneToMany(mappedBy="trip", fetch= FetchType.LAZY, cascade = CascadeType.PERSIST)
     private Set<ReviewDTO> reviews;
 
+    @XmlElement( required = true )
     public Integer getId() {
         return id;
     }
@@ -76,14 +80,7 @@ public class TripDTO {
         this.id = id;
     }
 
-//    public Integer getMemberId() {
-//        return memberId;
-//    }
-//
-//    public void setMemberId(Integer memberId) {
-//        this.memberId = memberId;
-//    }
-
+    @XmlElement( required = true )
     public Date getCreateDate() {
         return createDate;
     }
@@ -92,6 +89,7 @@ public class TripDTO {
         this.createDate = createDate;
     }
 
+    @XmlElement( required = true )
     public String getDescription() {
         return description;
     }
@@ -100,27 +98,37 @@ public class TripDTO {
         this.description = description;
     }
 
-    public char getReason() {
+    @XmlElement( required = true )
+    public String getReason() {
         return reason;
     }
 
-    public void setReason(char reason) {
+    public void setReason(String reason) {
         this.reason = reason;
     }
 
-    public char getPartyCode() {
+    @XmlElement( required = true )
+    public String getPartyCode() {
         return partyCode;
     }
 
-    public void setPartyCode(char partyCode) {
+    public void setPartyCode(String partyCode) {
         this.partyCode = partyCode;
     }
 
+    @XmlElement( required = true )
     public Set<ReviewDTO> getReviews() {
         return reviews;
     }
 
     public void setReviews(Set<ReviewDTO> reviews) {
+        if( reviews != null )
+        {
+            for ( ReviewDTO review : reviews )
+            {
+                review.setTrip(this);
+            }
+        }
         this.reviews = reviews;
     }
 }

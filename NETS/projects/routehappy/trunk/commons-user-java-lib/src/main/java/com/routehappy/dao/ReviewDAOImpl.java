@@ -18,6 +18,7 @@ package com.routehappy.dao; /***************************************************
  **************************************************************************/
 
 import com.routehappy.dto.ReviewDTO;
+import com.routehappy.dto.TripDTO;
 
 /**
  * Created by IntelliJ IDEA.
@@ -36,5 +37,17 @@ public class ReviewDAOImpl extends BaseDAO implements ReviewDAO {
 
         getEntityManager().flush();
         return review;
+    }
+
+    public TripDTO saveTrip(TripDTO trip) {
+        if (trip.getId() == null) {
+            getEntityManager().persist(trip);
+        }
+        else {
+            trip = getEntityManager().merge(trip);
+        }
+
+        getEntityManager().flush();
+        return trip;
     }
 }

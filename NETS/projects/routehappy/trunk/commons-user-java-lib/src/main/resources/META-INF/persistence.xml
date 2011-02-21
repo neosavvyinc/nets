@@ -2,7 +2,7 @@
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
     <persistence-unit name="NetsPU" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-        <jta-data-source>jdbc/CommonsUserDS</jta-data-source>
+        <jta-data-source>jdbc/RouteHappyDS</jta-data-source>
         
         <class>com.neosavvy.user.dto.base.BaseUserDTO</class>
         <class>com.neosavvy.user.dto.companyManagement.AbstractCompany</class>
@@ -40,6 +40,10 @@
         <class>fineline.focal.common.types.v1.StorageServiceFileRef</class>
         <class>fineline.focal.common.types.v1.UrlFileRef</class>
         <class>com.routehappy.dto.ReviewDTO</class>
+        <class>com.routehappy.dto.AirlineDTO</class>
+        <class>com.routehappy.dto.AirportDTO</class>
+        <class>com.routehappy.dto.TripDTO</class>
+        <class>com.routehappy.dto.SegmentDTO</class>
 
         <properties>
             <property name="eclipselink.logging.level" value="INFO"/>
@@ -87,7 +91,11 @@
         <class>fineline.focal.common.types.v1.StorageServiceFileRef</class>
         <class>fineline.focal.common.types.v1.UrlFileRef</class>
         <class>com.routehappy.dto.ReviewDTO</class>
-
+        <class>com.routehappy.dto.ReviewDTO</class>
+        <class>com.routehappy.dto.AirlineDTO</class>
+        <class>com.routehappy.dto.AirportDTO</class>
+        <class>com.routehappy.dto.TripDTO</class>
+        <class>com.routehappy.dto.SegmentDTO</class>
 
     </persistence-unit>
 </persistence>

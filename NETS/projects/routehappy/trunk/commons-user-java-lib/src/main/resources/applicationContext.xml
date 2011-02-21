@@ -17,6 +17,6 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <context:load-time-weaver />
     <jee:jndi-lookup id="entityManagerFactory" jndi-name="java:comp/env/NetsPU" />
-    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/CommonsUserDS"/>
+    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/RouteHappyDS"/>
 
 </beans>

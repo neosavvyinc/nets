@@ -4,12 +4,12 @@ CREATE TABLE RH_TRIP
 --   MEMBER_ID    NUMERIC(10)                       NOT NULL,
   CREATE_DATE  DATE                             NOT NULL,
 --   TRIP_TYPE    VARCHAR(10)                NOT NULL,
-  REASON_CODE  CHAR(1),
-  PARTY_CODE   CHAR(1),
+  REASON_CODE  VARCHAR(10),
+  PARTY_CODE   VARCHAR(10),
   -- moved description from trip type table temporarily
   DESCRIPTION  VARCHAR(100)               NOT NULL
 );
-
+CREATE SEQUENCE RH_TRIP_SEQ START 1;
 
 CREATE TABLE RH_STATE_PROV
 (
@@ -28,6 +28,7 @@ CREATE TABLE RH_REVIEW
   NUM_STOPS                NUMERIC(1),
   OUTBOUND_OR_RETURN_CODE  CHAR(1)     NOT NULL
 );
+CREATE SEQUENCE RH_REVIEW_SEQ START 1;
 
 
 CREATE TABLE RH_COUNTRY
@@ -44,7 +45,7 @@ CREATE TABLE RH_AIRLINE
   DISPLAYED_NAME  VARCHAR(100),
   NUM_ROUTES      NUMERIC(5)
 );
-
+CREATE SEQUENCE RH_AIRLINE_SEQ START 1;
 
 CREATE TABLE RH_AIRPORT
 (
@@ -52,7 +53,7 @@ CREATE TABLE RH_AIRPORT
   LAT                        NUMERIC,
   LON                        NUMERIC,
   NAME                       VARCHAR(100),
-  COUNTRY_CODE               VARCHAR(2),
+  COUNTRY_CODE               VARCHAR(4), --country code was 2
   STATE_PROV                 VARCHAR(2),
   NUM_ROUTES                 NUMERIC(5),
   CITY                       VARCHAR(100),
@@ -62,6 +63,7 @@ CREATE TABLE RH_AIRPORT
   ID                         NUMERIC(10)         NOT NULL,
   CONSTRUCTED_NAME           VARCHAR(200)
 );
+CREATE SEQUENCE RH_AIRPORT_SEQ START 1;
 
 
 CREATE TABLE RH_MEMBER
@@ -118,9 +120,9 @@ CREATE TABLE RH_TRIP_TYPE
 CREATE TABLE RH_REVIEW_SEGMENT
 (
   REVIEW_ID            NUMERIC(10)               NOT NULL,
---   AIRLINE_ID           NUMERIC(10)               NOT NULL,
---   AIRPORT_ORIG         VARCHAR(3)         NOT NULL,
---   AIRPORT_DEST         VARCHAR(3)         NOT NULL,
+  AIRLINE_ID           NUMERIC(10)               NOT NULL,
+  AIRPORT_ORIG         NUMERIC(10)         NOT NULL,
+  AIRPORT_DEST         NUMERIC(10)         NOT NULL,
   CABIN                CHAR(1)         NOT NULL,
   TRIP_DATE            DATE                     NOT NULL,
   RATING               CHAR(1)         NOT NULL,
@@ -130,7 +132,7 @@ CREATE TABLE RH_REVIEW_SEGMENT
   SEGMENT              NUMERIC(1)
 --   ROUTE_ID             NUMERIC(10)               NOT NULL
 );
-
+CREATE SEQUENCE RH_REVIEW_SEGMENT_SEQ START 1;
 
 CREATE TABLE RH_RATING_CATEGORY_TYPE
 (

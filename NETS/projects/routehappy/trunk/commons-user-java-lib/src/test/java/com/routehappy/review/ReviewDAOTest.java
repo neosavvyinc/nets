@@ -18,9 +18,7 @@ package com.routehappy.review; /************************************************
  **************************************************************************/
 
 import com.routehappy.dao.ReviewDAO;
-import com.routehappy.dto.ReviewDTO;
-import com.routehappy.dto.SegmentDTO;
-import com.routehappy.dto.TripDTO;
+import com.routehappy.dto.*;
 import org.apache.batik.dom.util.TriplyIndexedTable;
 import org.junit.Assert;
 import org.junit.Test;
@@ -46,6 +44,7 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
     @Autowired
     private ReviewDAO dao;
 
+
     public ReviewDAO getDao() {
         return dao;
     }
@@ -62,8 +61,8 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
         trip.setCreateDate(new Date());
         trip.setDescription("Sample description");
         trip.setId(1);
-        trip.setPartyCode('p');
-        trip.setReason('r');
+        trip.setPartyCode("p");
+        trip.setReason("r");
 
         SegmentDTO segmentDTO = new SegmentDTO();
         segmentDTO.setCabinCode(1);
@@ -82,15 +81,55 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
         testReview.setTripDate(new Date());
         testReview.setTrip(trip);
 
+
+        AirlineDTO airlineDTO = new AirlineDTO();
+        airlineDTO.setAirlineName("Adam's Airline");
+        airlineDTO.setDisplayedName("Adam's wicked awesome airline");
+        airlineDTO.setId(1);
+        airlineDTO.setNumRoutes(2382);
+
         HashSet<ReviewDTO> reviewDTOs = new HashSet<ReviewDTO>();
         HashSet<SegmentDTO> segmentDTOs = new HashSet<SegmentDTO>();
         reviewDTOs.add(testReview);
         segmentDTOs.add(segmentDTO);
         trip.setReviews(reviewDTOs);
+
         testReview.setSegments(segmentDTOs);
         segmentDTO.setReview( testReview );
+        segmentDTO.setAirline( airlineDTO );
 
-        dao.saveReview( testReview );
+        AirportDTO destAirport = new AirportDTO();
+        destAirport.setAdditionalSearchPhrases("Test Phrase");
+        destAirport.setAirportWebsite("http://blah.com");
+        destAirport.setCityName("Brooklyn");
+        destAirport.setCode("BKL");
+        destAirport.setConstructedName("Constructedname?");
+        destAirport.setCountry("USA");
+        destAirport.setId(1);
+        destAirport.setLatitude(49);
+        destAirport.setLongitude(89);
+        destAirport.setName("Brooklyn downtown nonexistent airport");
+        destAirport.setStateOrProvinceCode("NY");
+        destAirport.setWiki("http://bk.wiki.com");
+
+        AirportDTO origAirport = new AirportDTO();
+        origAirport.setAdditionalSearchPhrases("Test Phrase 2");
+        origAirport.setAirportWebsite("http://blah.com 2");
+        origAirport.setCityName("Brooklyn 2");
+        origAirport.setCode("BKL");
+        origAirport.setConstructedName("Constructedname? 2");
+        origAirport.setCountry("USA");
+        origAirport.setId(2);
+        origAirport.setLatitude(49);
+        origAirport.setLongitude(89);
+        origAirport.setName("Brooklyn downtown nonexistent airport 2");
+        origAirport.setStateOrProvinceCode("NY");
+        origAirport.setWiki("http://bk.wiki.com 2");
+
+        segmentDTO.setAirportDest( destAirport );
+        segmentDTO.setAirportOrig( origAirport );
+
+        dao.saveTrip( trip );
 
         int numRowsSaved = countRowsInTable("RH_REVIEW");
         Assert.assertEquals("Should be one row in the table", numRowsSaved, 1);
@@ -100,6 +139,12 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
 
         int numRowsSegmentSaved = countRowsInTable("RH_REVIEW_SEGMENT");
         Assert.assertEquals("Should be one row in the table", numRowsSegmentSaved, 1);
+
+        int numRowsAirlineSaved = countRowsInTable("RH_AIRLINE");
+        Assert.assertEquals("Should be one row in the table", numRowsAirlineSaved, 1);
+
+        int numRowsAirportSaved = countRowsInTable("RH_AIRPORT");
+        Assert.assertEquals("Should be one row in the table", numRowsAirportSaved, 2);
     }
 
 

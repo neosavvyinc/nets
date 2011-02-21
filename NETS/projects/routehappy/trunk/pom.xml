@@ -41,17 +41,17 @@
 
     <modules>
         <module>commons-user-config</module>
-        <module>commons-user-icons-api</module>
-        <module>commons-user-icons</module>
+        <!--<module>commons-user-icons-api</module>-->
+        <!--<module>commons-user-icons</module>-->
         <module>commons-java-lib</module>
         <module>commons-user-java-lib</module>
-        <module>commons-user-flex-model-lib</module>
-        <module>commons-user-flex-client</module>
+        <!--<module>commons-user-flex-model-lib</module>-->
+        <!--<module>commons-user-flex-client</module>-->
         <module>commons-user-webapp</module>
-        <module>storage-service</module>
+        <!--<module>storage-service</module>-->
         <module>commons-user-enterprise-application</module>
-        <module>commons-user-groovy-templates</module>
-        <module>nets-theme</module>
+        <!--<module>commons-user-groovy-templates</module>-->
+        <!--<module>nets-theme</module>-->
     </modules>
 
     <properties>

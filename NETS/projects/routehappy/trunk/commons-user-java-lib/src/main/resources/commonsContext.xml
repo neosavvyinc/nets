@@ -17,99 +17,12 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
          access to EntityManagerFactory/EntityManager -->
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
 
-    <bean id="abstractDao" class="com.neosavvy.user.dao.base.BaseDAO" abstract="true"/>
-    <bean id="userCompanyRoleDAO" class="com.neosavvy.user.dao.companyManagement.UserCompanyRoleDAOImpl" parent="abstractDao"/>
-    <bean id="userDAO" class="com.neosavvy.user.dao.companyManagement.UserDAOImpl" parent="abstractDao"/>
-    <bean id="userInviteDAO" class="com.neosavvy.user.dao.companyManagement.UserInviteDAOImpl" parent="abstractDao"/>
-    <bean id="companyDAO" class="com.neosavvy.user.dao.companyManagement.CompanyDAOImpl" parent="abstractDao"/>
-    <bean id="roleDAO" class="com.neosavvy.user.dao.companyManagement.RoleDAOImpl" parent="abstractDao"/>
-    <bean id="clientUserContactDAO" class="com.neosavvy.user.dao.project.ClientUserContactDAOImpl" parent="abstractDao"/>
-    <bean id="clientCompanyDAO" class="com.neosavvy.user.dao.project.ClientCompanyDAOImpl" parent="abstractDao"/>
-    <bean id="projectDAO" class="com.neosavvy.user.dao.project.ProjectDAOImpl" parent="abstractDao"/>
-    <bean id="expenseDAO" class="com.neosavvy.user.dao.project.ExpenseDAOImpl" parent="abstractDao"/>
-
 
     <bean id="abstractRouteHappyDAO" class="com.routehappy.dao.BaseDAO" abstract="true"/>
     <bean id="reviewDAO" class="com.routehappy.dao.ReviewDAOImpl" parent="abstractRouteHappyDAO"/>
-
-    <bean id="mobileService" class="com.neosavvy.user.service.MobileServiceImpl">
-        <property name="expenseService" ref="expenseReportService"/>
-        <property name="userService" ref="userService"/>
-        <property name="authManager" ref="org.springframework.security.authenticationManager"/>
-        <property name="sessionManager" ref="sessionManager"/>
+    <bean id="reviewService" class="com.routehappy.service.ReviewServiceImpl">
+        <property name="reviewDAO" ref="reviewDAO"/>
     </bean>
-
-    <bean id="userService" class="com.neosavvy.user.service.UserServiceImpl">
-        <property name="userDao" ref="userDAO"/>
-        <property name="authManager" ref="org.springframework.security.authenticationManager" />
-        <property name="mailService" ref="mailService"/>
-    </bean>
-
-    <bean id="companyService" class="com.neosavvy.user.service.CompanyServiceImpl">
-        <property name="companyDao" ref="companyDAO"/>
-        <property name="userDao" ref="userDAO"/>
-        <property name="roleDao" ref="roleDAO"/>
-        <property name="userCompanyRoleDao" ref="userCompanyRoleDAO"/>
-        <property name="userInviteDao" ref="userInviteDAO"/>
-        <property name="mailService" ref="mailService"/>
-        <property name="aclSecurityUtil" ref="aclSecurityUtil" />
-        <property name="adminExecutor" ref="runAsExecutor" />
-    </bean>
-
-    <bean id="clientService" class="com.neosavvy.user.service.ClientServiceImpl">
-        <property name="clientCompanyDAO" ref="clientCompanyDAO"/>
-        <property name="clientUserContactDAO" ref="clientUserContactDAO"/>
-        <property name="aclSecurityUtil" ref="aclSecurityUtil" />
-        <property name="adminExecutor" ref="runAsExecutor" />
-    </bean>
-
-    <bean id="projectService" class="com.neosavvy.user.service.ProjectServiceImpl">
-        <property name="projectDAO" ref="projectDAO"/>
-        <property name="userDAO" ref="userDAO"/>
-        <property name="aclSecurityUtil" ref="aclSecurityUtil" />
-        <property name="adminExecutor" ref="runAsExecutor" />
-    </bean>
-
-    <bean id="expenseReportService" class="com.neosavvy.user.service.ExpenseServiceImpl">
-        <property name="expenseDAO" ref="expenseDAO" />
-        <property name="securityUtil" ref="aclSecurityUtil" />
-        <property name="userDAO" ref="userDAO"/>
-        <property name="userService" ref="userService"/>        
-    </bean>
-
-    <bean id="mailService" class="com.neosavvy.user.service.MailServiceImpl">
-        <property name="mailSender" ref="focalJavaMailSender"/>
-        <property name="docGenerator" ref="docGenerator"/>
-        <property name="resetPasswordForUserEmail" value="${templatesRoot}/resetPasswordForUserEmail.gsp" />
-        <property name="newUserConfirmationTokenEmail" value="${templatesRoot}/newUserConfirmationTokenEmail.gsp" />
-        <property name="sendInvite" value="${templatesRoot}/sendInvite.gsp" />
-        <property name="newUserConfirmationEmail" value="${templatesRoot}/newUserConfirmationEmail.gsp" />
-        <property name="systemMailTemplate" value="${templatesRoot}/systemMailTemplateEmail.gsp" />
-        <property name="systemConfirmationMailTemplate" value="${templatesRoot}/systemConfirmationEmail.gsp" />
-    </bean>
-    <bean id="focalJavaMailSender" class="com.neosavvy.user.service.mail.FocalMailSender">
-        <property name="test" value="false"/>
-        <property name="testRecipients" value="aparrish@neosavvy.com"/>
-
-        <property name="host" value="secure.emailsrvr.com"/>
-        <property name="username" value="nets@neosavvy.com"/>
-        <property name="password" value="ne0s4vvy_rabbit"/>
-        <property name="javaMailProperties">
-            <props>
-                <prop key="mail.smtp.port">465</prop>
-                <prop key="mail.smtp.socketFactory.port">465</prop>
-                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
-                <prop key="mail.smtp.socketFactory.fallback">false</prop>
-                <prop key="mail.smtp.starttls.enable">true</prop>
-                <prop key="mail.smtp.auth">true</prop>
-                <prop key="mail.smtp.connectiontimeout">10000</prop>
-            </props>
-        </property>
-    </bean>
-    <bean id="docGenerator" class="com.neosavvy.user.service.mail.DocumentGenerator"/>
-
-    <bean id="flexInitializerBean" class="com.neosavvy.user.util.FlexInitializer"/>
-
 
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="ignoreResourceNotFound" value="true"/>

@@ -1,4 +1,4 @@
-package com.routehappy.dao; /*************************************************************************
+package com.routehappy.service; /*************************************************************************
  *
  * NEOSAVVY CONFIDENTIAL
  * __________________
@@ -19,17 +19,27 @@ package com.routehappy.dao; /***************************************************
 
 import com.routehappy.dto.ReviewDTO;
 import com.routehappy.dto.TripDTO;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 
 /**
  * Created by IntelliJ IDEA.
  * User: adamparrish
  * Date: 2/19/11
- * Time: 10:09 AM
+ * Time: 3:47 PM
  */
-public interface ReviewDAO {
+@Path("/rh")
+@Scope("singleton")
+@Component
+public interface ReviewService {
 
-    public ReviewDTO saveReview( ReviewDTO review );
-
-    public TripDTO saveTrip( TripDTO trip );
+    @POST
+    @Produces({MediaType.TEXT_PLAIN})
+    @Consumes( { MediaType.APPLICATION_JSON })
+    @Path("/saveReview")
+    public String saveReview( TripDTO trip );
 
 }
