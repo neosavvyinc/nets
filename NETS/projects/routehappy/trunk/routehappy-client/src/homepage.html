@@ -1,0 +1,256 @@
+<!doctype html>  
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--><html lang="en" class="no-js"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>Routehappy: Air Travel Ratings & Reviews to Help You Fly Better</title>
+	<meta name="description" content="routehappy">
+	<meta name="author" content="routehappy">
+	
+	<!--  Mobile viewport optimized: j.mp/bplateviewport -->
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+	
+	<!-- Place favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
+	<link rel="shortcut icon" href="/favicon.ico">
+	<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+	
+	
+	<link rel="stylesheet" href="c/global.css?v=1">
+	<link rel="stylesheet" href="c/jquery-ui-1.8.9.custom.css">
+	
+	<!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+	<script src="j/libs/modernizr-1.6.min.js"></script>
+	<style>
+	/* move me to bottom of jquery-ui css when this is all figured out*/
+	.fr .ui-selectmenu-item-icon {background: url(i/flags.gif) no-repeat 0 4px;}
+	.en .ui-selectmenu-item-icon {background: url(i/flags.gif) no-repeat 0 -36px}
+	.es .ui-selectmenu-item-icon {background: url(i/flags.gif) no-repeat 0 -77px;}
+	.de .ui-selectmenu-item-icon {background: url(i/flags.gif) no-repeat 0 -116px;}
+	.ui-selectmenu-menu li.ui-selectmenu-hasIcon a, .ui-selectmenu-hasIcon .ui-selectmenu-status {font-size:11px;}
+	</style>
+
+</head>
+
+<body id="homepage">
+
+  <div id="container">
+		<style>
+		</style>
+<!-- Header -->
+    <header>
+    	<ul class="float-r list-horiz small">
+    		<li><a href="#"><img id="fb-login" src="i/temp/fb.gif" alt="Login with Facebook"></a></li>
+    		<li><a href="#" class="btn b-primary"><span>Sign Up</span></a></li>
+    		<li><a href="#" class="btn b-primary"><span>Sign In</span></a></li>
+    		<li>
+    			<select name="lang" id="lang-select">
+    				<option selected="selected" class="en">English</option>
+						<option class="fr">French</option>
+						<option class="es">Spanish</option>
+						<option class="de">German</option>
+    			</select>
+    		</li>
+		</ul>
+    	<h3><a href="#">Routehappy</a></h3>
+    	<h4>Air Travel Ratings & Reviews to Help You Fly Better</h4>
+    </header>
+<!-- end Header -->
+    
+<!-- Global Navigation -->
+    <ul id="nav-main" class="list-horiz">
+    	<li class="active"><a href="#">Home</a></li>
+    	<li><a href="#">Routes</a></li>
+    	<li><a href="#">Airlines</a></li>
+    	<li><a href="#">Airports</a></li>
+    	<li><a href="#">Write a Review</a></li>
+    	<li><a href="#">Profile</a></li>
+    	<li><a href="#">Mobile</a></li>
+    </ul>
+<!-- end Global Navigation -->
+    
+    <div id="main" class="clear">
+    	<div class="column span-9 first">
+        <div id="callout">
+          <div class="search-select">
+            <input type="radio" name="review" id="read" /><label for="read">Read Reviews</label>
+            <input type="radio" name="review" id="write"/><label for="write">Write Reviews</label>
+            <span>from flyers like you</span>
+          </div>
+          <div class="search-input">
+            <label>Departure</label>
+            <input type="text" value="London, UK or other city name" onFocus="clearText(this)" onBlur="clearText(this)"/>
+            <img src="i/temp/arrow.png" alt="to" class="arrow"/>
+          </div>
+          <div class="search-input">
+            <label>Arrival</label>
+            <input type="text" value="City name" onFocus="clearText(this)" onBlur="clearText(this)"/>
+          </div>
+          <div class="search-input optional">
+            <label>Airline (optional, leave blank to see all options)</label>
+            <input type="text" />
+          </div>
+					<h3 class="clear">Your air travel <span>experience</span> matters too</h3>
+          <a href="#">Go</a>
+          <a href="#">Advanced Search</a>
+      	</div>
+      </div>
+      
+    	<div id="tour" class="column span-3 last">
+    	  <p>Join fellow flyers to share your <strong>experiences and learn</strong> from each other to make flying better.</p>
+    	  <p class="align-c"><a href="#">Take a Tour</a></p>
+    	</div>
+
+        <div id="latest-reviews" class="column span-5 first">
+          <h3>Latest Reviews from London</h3>
+          <span>updated constantly</span>
+        
+          <div class="review">
+            Virgin Atlantic
+            <img />
+            <a href="#">London to Johannesburg "Airport and flight experience both top-notch..."</a>
+            from <a href="#">Susan B</a> in Premium Economy
+            2 minutes ago
+            <img />
+          </div>
+          <div class="review">
+            Virgin Atlantic
+            <img />
+            <a href="#">London to Johannesburg "Airport and flight experience both top-notch..."</a>
+            from <a href="#">Susan B</a> in Premium Economy
+            2 minutes ago
+            <img />
+          </div>
+        </div>
+
+        <div id="experts" class="column span-4">
+          <h3>Read from London's Route Experts</h3>
+          <span>updated daily</span>
+          <div class="expert">
+            <p class="align-c"><b>Expert:</b>	London to Paris</p>
+            <img src="i/temp/IMG_0197.jpg" width="60" height="60" alt="Member Name"/>
+            Anna P
+						<p><b>Latest review:</b> London to Edinburgh on easyJet</p>
+          </div>
+          <div class="expert">
+            <p class="align-c"><b>Expert:</b>	London to Bangkok</p>
+            <img src="i/temp/IMG_0197.jpg" width="60" height="60" alt="Member Name"/>
+            Sankar S
+            <p><b>Latest review:</b> London to Bangkok on Eva</p>
+          </div>
+          <div class="expert">
+            <p class="align-c"><b>Expert:</b>	London to NYC</p>
+            <img src="i/temp/IMG_0197.jpg" width="60" height="60" alt="Member Name"/>
+            Ranat S
+						<p><b>Latest review:</b> London to Paris on Air France</p>
+          </div>
+          <p class="clear">
+						<a href="#">Become an expert</a> |
+          	<a href="#">Read experts who can help you</a>
+					</p>
+        </div>
+
+      <div id="top-routes" class="column span-3 last">
+        <h3>London's Top Routes</h3>
+        <span>updated hourly</span>
+        <ol>
+          <li><a href="#">London to Paris</a></li>
+          <li><a href="#">London to New York</a></li>
+          <li><a href="#">London to Tokyo</a></li>
+          <li><a href="#">London to Buenos Aires</a></li>
+          <li><a href="#">London to Edinburgh</a></li>
+          <li><a href="#">London to Las Vegas</a></li>
+          <li><a href="#">London to Bangkok</a></li>
+          <li><a href="#">London to Marrakesh</a></li>
+          <li><a href="#">London to Dublin</a></li>
+          <li><a href="#">London to Madrid</a></li>
+        </ol>
+      </div>
+    </div>
+    
+    <footer class="small">
+    	<ul class="float-r list-horiz">
+    		<li><a href="#">About Us</a></li>
+    		<li><a href="#">Site Map</a></li>
+    		<li><a href="#">Blog</a></li>
+    		<li><a href="#">Help</a></li>
+    		<li><a href="#">Contact</a></li>
+    		<li><a href="#">Partners</a></li>
+    		<li><a href="#">Mobile</a></li>
+    		<li>Join Us <a href="#">Twitter</a> & <a href="#">Facebook</a></li>
+    		<li><a href="#">Terms</a></li>
+    		<li><a href="#">Privacy</a></li>
+    	</ul>
+    	&copy; 2011 Routehappy
+
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <!-- Javascript at the bottom for fast page loading -->
+
+  <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+	<!-- to be concatted -->
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.4/jquery.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.9/jquery-ui.min.js"></script>
+	<script src="j/libs/jquery.ui.widget.js"></script>
+	<script src="j/libs/jquery.ui.position.js"></script>
+	<script src="j/libs/jquery.ui.selectmenu.js"></script>
+  <script>!window.jQuery && document.write('<script src="j/libs/jquery-1.4.4.js"><'+'/script>');</script>
+  <script>
+  	function clearText(field)
+  {
+  	if (field.defaultValue == field.value) {
+
+  		field.value = '';
+  		field.style.color = '#000000';
+
+  	} else if (field.value == '') {
+
+  		field.value = field.defaultValue;
+  		field.style.color = '#888888';
+  	}
+  }
+
+	$(function(){
+		$('#lang\\-select').selectmenu({
+			width: 92,
+			icons: [
+							{find: '.en'},
+							{find: '.fr'},
+							{find: '.jp'},
+							{find: '.de'},
+							{find: '.es'}
+			]
+		});
+	});
+  </script>
+  <!-- scripts concatenated and minified via ant build script
+  <script src="js/plugins.js"></script>
+  <script src="js/script.js"></script>
+  end concatenated and minified scripts-->
+  
+  
+  <!--[if lt IE 7 ]>
+    <script src="j/libs/dd_belatedpng.js"></script>
+    <script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+  <![endif]-->
+
+  <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
+       change the UA-XXXXX-X to be your site's ID
+  <script>
+   var _gaq = [['_setAccount', 'UA-XXXXX-X'], ['_trackPageview']];
+   (function(d, t) {
+    var g = d.createElement(t),
+        s = d.getElementsByTagName(t)[0];
+    g.async = true;
+    g.src = ('https:' == location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    s.parentNode.insertBefore(g, s);
+   })(document, 'script');
+  </script> -->
+  
+</body>
+</html>
