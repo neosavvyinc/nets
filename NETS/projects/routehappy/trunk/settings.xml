@@ -1,10 +1,15 @@
 <settings>
+  <servers>
+    <server>
+      <id>nexus</id>
+    </server>
+  </servers>
   <mirrors>
     <mirror>
       <!--This sends everything else to /public -->
       <id>nexus</id>
       <mirrorOf>*</mirrorOf>
-	<url>http://maven.neosavvy.com/nexus/content/groups/public</url>
+	<url>http://maven.neosavvy.com:8081/nexus/content/groups/public</url>
     </mirror>
   </mirrors>
   <profiles>
