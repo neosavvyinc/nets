@@ -8,9 +8,7 @@
              http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
 
     <import resource="classpath*:commonsContext.xml" />
-    <import resource="classpath*:commons-beans.xml" />
-    <import resource="classpath:securityAuthorizationContext.xml" />
-
+    
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url" value="jdbc:postgresql://localhost:5432/routehappy"/>
@@ -23,12 +21,7 @@
 
     </bean>
 
-    <bean id="sessionManager" class="fineline.focal.common.security.UserSessionManager">
-      <property name="sessionCookieName" value="NETSSESSIONID"/>
-      <property name="cookieDomain" value="${cookieDomain}"/>
-      <property name="commandService" ref="commandService"/>
-    </bean>
-
+    
     <bean id="commandService" class="fineline.focal.common.service.DefaultCommandService" />
 
     <bean id="entityManagerFactory"
@@ -54,25 +47,6 @@
     <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
-    <security:authentication-manager>
-        <security:authentication-provider>
-            <security:password-encoder hash="plaintext"/>
-            <security:user-service>
-                <security:user name="empl1" password="pass1" authorities="ROLE_EMPLOYEE"/>
-                <security:user name="empl2" password="pass2" authorities="ROLE_EMPLOYEE"/>
-                <security:user name="empl3" password="pass3" authorities="ROLE_EMPLOYEE"/>
-                <security:user name="empl4" password="pass4" authorities="ROLE_EMPLOYEE"/>
-                <security:user name="manager1" password="pass1" authorities="ROLE_MANAGER"/>
-                <security:user name="manager2" password="pass2" authorities="ROLE_MANAGER"/>
-                <security:user name="testUser" password="" authorities=""/>
-                <security:user name="admin" password="admin" authorities="ROLE_ADMIN"/>
-                <security:user name="admin2" password="admin2" authorities="ROLE_ADMIN"/>
-            </security:user-service>
-        </security:authentication-provider>
-    </security:authentication-manager>
-    <security:global-method-security secured-annotations="enabled" jsr250-annotations="enabled" access-decision-manager-ref="businessAccessDecisionManager">
-        <security:after-invocation-provider ref="afterAclRead"/>
-        <security:after-invocation-provider ref="afterAclCollectionRead"/>
-    </security:global-method-security>
+    
 
 </beans>

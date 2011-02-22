@@ -56,6 +56,12 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
     @Test
     public void testSave()
     {
+        deleteFromTables("RH_REVIEW");
+        deleteFromTables("RH_TRIP");
+        deleteFromTables("RH_REVIEW_SEGMENT");
+        deleteFromTables("RH_AIRLINE");
+        deleteFromTables("RH_AIRPORT");
+        deleteFromTables("RH_REVIEW_OPTIONAL_RATINGS");
 
         TripDTO trip = new TripDTO();
         trip.setCreateDate(new Date());
