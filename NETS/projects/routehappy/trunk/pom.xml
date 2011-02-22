@@ -41,7 +41,7 @@
 
     <modules>
         <module>commons-java-lib</module>
-        <module>commons-user-java-lib</module>
+        <module>routehappy-java-lib</module>
         <module>routehappy-webapp</module>
     </modules>
 
