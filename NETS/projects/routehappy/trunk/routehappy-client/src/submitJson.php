@@ -88,6 +88,23 @@
         return $result;
     }
 
+    $optionalRatings = array(
+         "departureGettingToAirport" => $HTTP_POST_VARS['departureGettingToAirport']
+         ,"departureCheckinSecurity" => $HTTP_POST_VARS['departureCheckinSecurity']
+         ,"departureAirportFoodShop" => $HTTP_POST_VARS['departureAirportFoodShop']
+         ,"departureGateAndBoarding" => $HTTP_POST_VARS['departureGateAndBoarding']
+         ,"airportLoung" => $HTTP_POST_VARS['airportLoung']
+         ,"firstFlightAirplainComfort" => $HTTP_POST_VARS['firstFlightAirplainComfort']
+         ,"firstFlightCleanliness" => $HTTP_POST_VARS['firstFlightCleanliness']
+         ,"firstFlightCabinCrew" => $HTTP_POST_VARS['firstFlightCabinCrew']
+         ,"firstFlightFood" => $HTTP_POST_VARS['firstFlightFood']
+         ,"firstFlightEntertainment" => $HTTP_POST_VARS['firstFlightEntertainment']
+         ,"arrivalGettingOffPlane" => $HTTP_POST_VARS['arrivalGettingOffPlane']
+         ,"arrivalBaggageClaim" => $HTTP_POST_VARS['arrivalBaggageClaim']
+         ,"arrivalBaggageHandling" => $HTTP_POST_VARS['arrivalBaggageHandling']
+         ,"arrivalImmigrationCustoms" => $HTTP_POST_VARS['arrivalImmigrationCustoms']
+         ,"leavingAirport" => $HTTP_POST_VARS['leavingAirport']
+    );
 
     $airPortSource = array(
         "constructedName"=> $HTTP_POST_VARS['legOneAirportSource'],
@@ -106,9 +123,9 @@
 
     $segment1 = array(
         "cabinCode" => getCabinCode($HTTP_POST_VARS['cabinSelection']),
-        "rating" => "97", //todo
-        "ratingAirportDest" => "65",//todo
-        "ratingAirportOrig" => "52", //todo
+        "rating" => $HTTP_POST_VARS['ratings-airline'],
+        "ratingAirportDest" => $HTTP_POST_VARS['ratings-arrival'],
+        "ratingAirportOrig" => $HTTP_POST_VARS['ratings-departure'],
         "segment" => "1",
         "tripDate" => getTripDate($HTTP_POST_VARS['flightDate']),
         "airline" => $airLine,
@@ -121,6 +138,7 @@
         ,"outboundReturnCode" => getOutBoundReturnCode($HTTP_POST_VARS['trip_type'])
         ,"tripDate" => getTripDate($HTTP_POST_VARS['flightDate'])
         ,"segments" => array($segment1)
+        ,"optionalRatings" => $optionalRatings
     );
 
     $trip = array(
@@ -133,4 +151,6 @@
     $json = json_encode($trip);
     $result = curl_post("http://localhost:8080/nets/expense/services/rh/saveReview", array($json));
 
+    echo $json . "<br><br><br>";
+    echo $result;
 ?>

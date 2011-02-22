@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.neosavvy.commons.user</groupId>
-    <artifactId>maven-flex-webapp-commons-user-toplevel</artifactId>
+    <artifactId>routehappy-application</artifactId>
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>maven-flex-webapp-commons-user-toplevel</name>
+    <name>RouteHappy Application</name>
 
     <parent>
         <groupId>org.sonatype.flexmojos</groupId>
@@ -42,7 +42,7 @@
     <modules>
         <module>commons-java-lib</module>
         <module>commons-user-java-lib</module>
-        <module>commons-user-webapp</module>
+        <module>routehappy-webapp</module>
     </modules>
 
     <properties>
@@ -62,43 +62,7 @@
     <build>
         <pluginManagement>
             <plugins>
-                <plugin>
-                    <groupId>org.sonatype.flexmojos</groupId>
-                    <artifactId>flexmojos-maven-plugin</artifactId>
-                    <version>${flex.mojos.maven.version}</version>
-                    <configuration>
-                        <debug>true</debug>
-                        <licenses>
-                            <flexbuilder3>1377-4001-0346-3601-2775-6383</flexbuilder3>
-                        </licenses>
-                        <locales>
-                            <param>en_US</param>
-                        </locales>
-                    </configuration>
-                    <dependencies>
-                        <dependency>
-                            <groupId>com.adobe.flex</groupId>
-                            <artifactId>compiler</artifactId>
-                            <version>${flex.version}</version>
-                            <type>pom</type>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.adobe.flex.license</groupId>
-                            <artifactId>license-flexbuilder-pro</artifactId>
-                            <version>${flex.version}</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>org.sonatype.flexmojos</groupId>
-                            <artifactId>flexmojos-generator-graniteds-1.1.0</artifactId>
-                            <version>3.5.0.patch04</version>
-                        </dependency>
-                        <dependency>
-                            <groupId>com.neosavvy.commons.flex</groupId>
-                            <artifactId>commons-flex-annotations</artifactId>
-                            <version>1.0</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
+                
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>

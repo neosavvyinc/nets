@@ -105,11 +105,6 @@
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjrt</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.neosavvy.commons.flex</groupId>
-            <artifactId>commons-flex-annotations</artifactId>
-        </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>

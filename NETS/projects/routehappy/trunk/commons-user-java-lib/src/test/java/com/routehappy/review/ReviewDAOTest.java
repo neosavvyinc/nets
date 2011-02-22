@@ -67,11 +67,23 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
         SegmentDTO segmentDTO = new SegmentDTO();
         segmentDTO.setCabinCode(1);
         segmentDTO.setId(1);
-        segmentDTO.setRating('a');
-        segmentDTO.setRatingAirportDest('A');
-        segmentDTO.setRatingAirportOrig('4');
+        segmentDTO.setRating(2);
+        segmentDTO.setRatingAirportDest(3);
+        segmentDTO.setRatingAirportOrig(5);
         segmentDTO.setSegment(1);
         segmentDTO.setTripDate(new Date());
+
+        OptionalRatingsDTO ratingsDTO = new OptionalRatingsDTO();
+        ratingsDTO.setAirportLoung(9);
+        ratingsDTO.setArrivalBaggageClaim(7);
+        ratingsDTO.setArrivalBaggageHandling(4);
+        ratingsDTO.setArrivalGettingOffPlane(3);
+        ratingsDTO.setArrivalImmigrationCustoms(3);
+        ratingsDTO.setDepartureAirportFoodShop(2);
+        ratingsDTO.setDepartureCheckinSecurity(4);
+        ratingsDTO.setDepartureGateAndBoarding(4);
+        ratingsDTO.setFirstFlightAirplainComfort(4);
+
 
         ReviewDTO testReview = new ReviewDTO();
         testReview.setCreationDate(new Date());
@@ -80,6 +92,7 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
         testReview.setOutboundReturnCode(0);
         testReview.setTripDate(new Date());
         testReview.setTrip(trip);
+        testReview.setOptionalRatings(ratingsDTO);
 
 
         AirlineDTO airlineDTO = new AirlineDTO();
@@ -145,6 +158,10 @@ public class ReviewDAOTest extends AbstractTransactionalJUnit4SpringContextTests
 
         int numRowsAirportSaved = countRowsInTable("RH_AIRPORT");
         Assert.assertEquals("Should be one row in the table", numRowsAirportSaved, 2);
+
+        int numOptionaRatingsSaved = countRowsInTable("RH_REVIEW_OPTIONAL_RATINGS");
+        Assert.assertEquals("Should be one row in the table", numOptionaRatingsSaved, 1);
+
     }
 
 

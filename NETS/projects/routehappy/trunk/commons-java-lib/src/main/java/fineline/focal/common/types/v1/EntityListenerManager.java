@@ -13,8 +13,6 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlTransient;
 
-import flex.messaging.annotations.FlexField;
-import flex.messaging.annotations.FlexField.FlexFieldType;
 
 /**
  * This class is a derivative work of Fineline via Tommy Odom.
@@ -24,14 +22,14 @@ import flex.messaging.annotations.FlexField.FlexFieldType;
 public class EntityListenerManager
 {
     private static List<EntityListener> listeners = new ArrayList<EntityListener>();
-    
-    // This getter/setter is intended to be used by Spring to inject Spring-managed EntityListeners
-    @Transient
-    @XmlTransient
-    @FlexField(fieldType = FlexFieldType.Excluded)
-    public List<EntityListener> getListeners() {
-        return listeners;
-    }
+//
+//    This getter/setter is intended to be used by Spring to inject Spring-managed EntityListeners
+//    @Transient
+//    @XmlTransient
+//    @FlexField(fieldType = FlexFieldType.Excluded)
+//    public List<EntityListener> getListeners() {
+//        return listeners;
+//    }
     
     public void setListeners(List<EntityListener> listeners) {
         EntityListenerManager.listeners = listeners;

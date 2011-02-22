@@ -69,13 +69,13 @@ public class SegmentDTO {
     private Date tripDate;
 
     @Column(name="RATING")
-    private char rating;
+    private Integer rating;
 
     @Column(name="RATING_AIRPORT_ORIG")
-    private char ratingAirportOrig;
+    private Integer ratingAirportOrig;
 
     @Column(name="RATING_AIRPORT_DEST")
-    private char ratingAirportDest;
+    private Integer ratingAirportDest;
 
     @ManyToOne
     @JoinColumn(name="REVIEW_ID")
@@ -111,29 +111,29 @@ public class SegmentDTO {
     }
 
     @XmlElement( required = true )
-    public char getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(char rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 
     @XmlElement( required = true )
-    public char getRatingAirportOrig() {
+    public Integer getRatingAirportOrig() {
         return ratingAirportOrig;
     }
 
-    public void setRatingAirportOrig(char ratingAirportOrig) {
+    public void setRatingAirportOrig(Integer ratingAirportOrig) {
         this.ratingAirportOrig = ratingAirportOrig;
     }
 
     @XmlElement( required = true )
-    public char getRatingAirportDest() {
+    public Integer getRatingAirportDest() {
         return ratingAirportDest;
     }
 
-    public void setRatingAirportDest(char ratingAirportDest) {
+    public void setRatingAirportDest(Integer ratingAirportDest) {
         this.ratingAirportDest = ratingAirportDest;
     }
 

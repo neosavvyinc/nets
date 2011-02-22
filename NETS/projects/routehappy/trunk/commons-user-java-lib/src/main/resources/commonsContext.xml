@@ -9,6 +9,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
+    <tx:jta-transaction-manager />
     <context:annotation-config/>
     <tx:annotation-driven />
     <context:component-scan base-package="com.neosavvy.user.service"/>
@@ -16,7 +17,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <!-- enables interpretation of the @PersistenceUnit/@PersistenceContext annotations providing convenient
          access to EntityManagerFactory/EntityManager -->
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
-
+    <bean id="entityListenerManager" class="fineline.focal.common.types.v1.EntityListenerManager" autowire="byType" />
 
     <bean id="abstractRouteHappyDAO" class="com.routehappy.dao.BaseDAO" abstract="true"/>
     <bean id="reviewDAO" class="com.routehappy.dao.ReviewDAOImpl" parent="abstractRouteHappyDAO"/>

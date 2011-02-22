@@ -77,6 +77,10 @@ public class ReviewDTO {
     @Column(name="OUTBOUND_OR_RETURN_CODE")
     private Integer outboundReturnCode;
 
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name="REVIEW_OPTIONAL_RATING_ID")
+    private OptionalRatingsDTO optionalRatings;
+
     @XmlElement( required = true )
     public Integer getId() {
         return id;
@@ -145,5 +149,14 @@ public class ReviewDTO {
             }
         }
         this.segments = segments;
+    }
+
+    @XmlElement( required = true )
+    public OptionalRatingsDTO getOptionalRatings() {
+        return optionalRatings;
+    }
+
+    public void setOptionalRatings(OptionalRatingsDTO optionalRatings) {
+        this.optionalRatings = optionalRatings;
     }
 }

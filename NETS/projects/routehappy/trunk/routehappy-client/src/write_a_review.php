@@ -104,7 +104,7 @@
     							<label for="back">The way back</label>
     						</li>
     						<li>
-    							<input type="radio" name="trip_type" id="both" value="both"/>
+    							<input type="radio" name="trip_type" id="both" value="both" disabled="true"/>
     							<label for="both">Both ways</label>
     						</li>
     					</ul>
@@ -118,17 +118,16 @@
     		<fieldset class="form-step clear">
     			<legend>Step <span>2</span></legend>
     			<h3>Your flight details</h3>
-    			<h4>Outbound (the way there)</h4>
     			<ul>
     				<li>
     					<label>Stops</label>
     					<ul class="form-radio list-horiz">
     						<li>
-    							<input type="radio" name="stops" id="nonstop" value="non-stop"/>
+    							<input type="radio" name="stops" id="nonstop" value="non-stop" checked="true"/>
     							<label for="nonstop">I flew non-stop</label>
     						</li>
     						<li>
-    							<input type="radio" name="stops" id="oneway" value="stops"/>
+    							<input type="radio" name="stops" id="oneway" value="stops" disabled="true"/>
     							<label for="oneway">I made a stop</label>
     						</li>
     					</ul>
@@ -160,7 +159,7 @@
                         </div>
     				</li>
     				<li>
-    					<label>Connection</label>
+    					<label>To</label>
     					<div class="form-text">
                             <span>
                                 <input
@@ -239,6 +238,355 @@
     				</li>
     			</ul>
     		</fieldset>
+
+            <fieldset class="form-step clear">
+    			<legend>Step <span>3</span></legend>
+    			<h3>Your ratings <span>Rate from <em class="icn i-con">1 Terrible</em> to <em class="icn i-pro">10 Excellent</em></span></h3>
+    			<ul>
+    				<li>
+    					<label>1st Flight</label>
+    					<ul class="form-ratings list-horiz">
+    						<li class="first">
+    							<input type="radio" name="ratings-airline" id="airlinerat1" value="1"/>
+    							<label for="airlinerat1">1</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-airline" id="airlinerat2" value="2"/>
+    							<label for="airlinerat23">2</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-airline" id="airlinerat3" value="3"/>
+    							<label for="airlinerat">3</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-airline" id="airlinerat4" value="4"/>
+    							<label for="airlinerat4">4</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-airline" id="airlinerat5" value="5"/>
+    							<label for="airlinerat5">5</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-airline" id="airlinerat6" value="6"/>
+    							<label for="airlinerat6">6</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-airline" id="airlinerat7" value="7"/>
+    							<label for="airlinerat7">7</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-airline" id="airlinerat8" value="8"/>
+    							<label for="airlinerat8">8</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-airline" id="airlinerat9" value="9"/>
+    							<label for="airlinerat9">9</label>
+    						</li>
+    						<li class="last">
+    							<input type="radio" name="ratings-airline" id="airlinerat10" value="10"/>
+    							<label for="airlinerat10">10</label>
+    						</li>
+    					</ul>
+    				</li>
+<!--    				<li>-->
+<!--    					<label>2nd Flight</label>-->
+<!--    					<ul class="form-ratings list-horiz">-->
+<!--    						<li class="first">-->
+<!--    							<input type="radio" name="ratings-airline2" id="airline2rat1"/>-->
+<!--    							<label for="airline2rat1">1</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-airline2" id="airline2rat2"/>-->
+<!--    							<label for="airline2rat2">2</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-airline2" id="airline2rat3"/>-->
+<!--    							<label for="airline2rat3">3</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-airline2" id="airline2rat4"/>-->
+<!--    							<label for="airline2rat4">4</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-airline2" id="airline2rat5"/>-->
+<!--    							<label for="airline2rat5">5</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-airline2" id="airline2rat6"/>-->
+<!--    							<label for="airline2rat6">6</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-airline2" id="airline2rat7"/>-->
+<!--    							<label for="airline2rat7">7</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-airline2" id="airline2rat8"/>-->
+<!--    							<label for="airline2rat8">8</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-airline2" id="airline2rat9"/>-->
+<!--    							<label for="airline2rat9">9</label>-->
+<!--    						</li>-->
+<!--    						<li class="last">-->
+<!--    							<input type="radio" name="ratings-airline2" id="airline2rat10"/>-->
+<!--    							<label for="airline2rat10">10</label>-->
+<!--    						</li>-->
+<!--    					</ul>-->
+<!--    				</li>-->
+    				<li>
+    					<label>Departure Airport</label>
+    					<ul class="form-ratings list-horiz">
+    						<li class="first">
+    							<input type="radio" name="ratings-departure" id="departurerat1" value="1"/>
+    							<label for="departurerat1">1</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-departure" id="departurerat2" value="2"/>
+    							<label for="departurerat23">2</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-departure" id="departurerat3" value="3"/>
+    							<label for="departurerat">3</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-departure" id="departurerat4" value="4"/>
+    							<label for="departurerat4">4</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-departure" id="departurerat5" value="5"/>
+    							<label for="departurerat5">5</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-departure" id="departurerat6" value="6"/>
+    							<label for="departurerat6">6</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-departure" id="departurerat7" value="7"/>
+    							<label for="departurerat7">7</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-departure" id="departurerat8" value="8"/>
+    							<label for="departurerat8">8</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-departure" id="departurerat9" value="9"/>
+    							<label for="departurerat9">9</label>
+    						</li>
+    						<li class="last">
+    							<input type="radio" name="ratings-departure" id="departurerat10" value="10"/>
+    							<label for="departurerat10">10</label>
+    						</li>
+    					</ul>
+    				</li>
+<!--    				<li>-->
+<!--    					<label>Connection Airport</label>-->
+<!--    					<ul class="form-ratings list-horiz">-->
+<!--    						<li class="first">-->
+<!--    							<input type="radio" name="ratings-connection" id="connectionrat1"/>-->
+<!--    							<label for="connectionrat1">1</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-connection" id="connectionrat2"/>-->
+<!--    							<label for="connectionrat23">2</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-connection" id="connectionrat3"/>-->
+<!--    							<label for="connectionrat">3</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-connection" id="connectionrat4"/>-->
+<!--    							<label for="connectionrat4">4</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-connection" id="connectionrat5"/>-->
+<!--    							<label for="connectionrat5">5</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-connection" id="connectionrat6"/>-->
+<!--    							<label for="connectionrat6">6</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-connection" id="connectionrat7"/>-->
+<!--    							<label for="connectionrat7">7</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-connection" id="connectionrat8"/>-->
+<!--    							<label for="connectionrat8">8</label>-->
+<!--    						</li>-->
+<!--    						<li>-->
+<!--    							<input type="radio" name="ratings-connection" id="connectionrat9"/>-->
+<!--    							<label for="connectionrat9">9</label>-->
+<!--    						</li>-->
+<!--    						<li class="last">-->
+<!--    							<input type="radio" name="ratings-connection" id="connectionrat10"/>-->
+<!--    							<label for="connectionrat10">10</label>-->
+<!--    						</li>-->
+<!--    					</ul>-->
+<!--    				</li>-->
+    				<li>
+    					<label>Arrival Airport</label>
+    					<ul class="form-ratings list-horiz last">
+    						<li class="first">
+    							<input type="radio" name="ratings-arrival" id="arrivalrat1" value="1"/>
+    							<label for="arrivalrat1">1</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-arrival" id="arrivalrat2" value="2"/>
+    							<label for="arrivalrat23">2</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-arrival" id="arrivalrat3" value="3"/>
+    							<label for="arrivalrat">3</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-arrival" id="arrivalrat4" value="4"/>
+    							<label for="arrivalrat4">4</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-arrival" id="arrivalrat5" value="5"/>
+    							<label for="arrivalrat5">5</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-arrival" id="arrivalrat6" value="6"/>
+    							<label for="arrivalrat6">6</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-arrival" id="arrivalrat7" value="7"/>
+    							<label for="arrivalrat7">7</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-arrival" id="arrivalrat8" value="8"/>
+    							<label for="arrivalrat8">8</label>
+    						</li>
+    						<li>
+    							<input type="radio" name="ratings-arrival" id="arrivalrat9" value="9"/>
+    							<label for="arrivalrat9">9</label>
+    						</li>
+    						<li class="last">
+    							<input type="radio" name="ratings-arrival" id="arrivalrat10" value="10"/>
+    							<label for="arrivalrat10">10</label>
+    						</li>
+    					</ul>
+    				</li>
+
+
+    				<li class="form-options" id="optionalFormItems">
+    					<a href="#" onclick="" class="float-r small">Hide</a>
+    					<h3>Optional <span>Rate as many categories as you want from <em>1 Terrible</em> to <em>10 Excellent</em></h3>
+    					<dl class="option-set tiny">
+    						<dt>Departure</dt>
+    						<dd>
+    							<input type="text" class="float-r" name="departureGettingToAirport">
+    							Getting to the airport
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="departureCheckinSecurity">
+    							Check in and security
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="departureAirportFoodShop">
+    							Airport food & shop
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="departureGateAndBoarding">
+    							Gate & boarding
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="airportLoung">
+    							Private airport lounge
+    						</dd>
+    					</dl>
+    					<dl class="option-set tiny">
+    						<dt>On Flight</dt>
+    						<dd>
+    							<input type="text" class="float-r" name="firstFlightAirplainComfort">
+    							Airplane comfort
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="firstFlightCleanliness">
+    							Airplane cleanliness
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="firstFlightCabinCrew">
+    							Cabin crew
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="firstFlightFood">
+    							Food
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="firstFlightEntertainment">
+    							Entertainment
+    						</dd>
+    					</dl>
+<!--    					<dl class="option-set tiny">-->
+<!--    						<dt>Connecting airport</dt>-->
+<!--    						<dd>-->
+<!--    							<input type="text" class="float-r">-->
+<!--    							Getting to the gate-->
+<!--    						</dd>-->
+<!--    						<dd>-->
+<!--    							<input type="text" class="float-r">-->
+<!--    							Airport food & shops-->
+<!--    						</dd>-->
+<!--    						<dd>-->
+<!--    							<input type="text" class="float-r">-->
+<!--    							Gate & boarding-->
+<!--    						</dd>-->
+<!--    						<dd>-->
+<!--    							<input type="text" class="float-r">-->
+<!--    							Private airport lounge-->
+<!--    						</dd>-->
+<!--    					</dl>-->
+<!--    					<dl class="option-set tiny">-->
+<!--    						<dt>On 2nd Flight</dt>-->
+<!--    						<dd>-->
+<!--    							<input type="text" class="float-r">-->
+<!--    							Airplane comfort-->
+<!--    						</dd>-->
+<!--    						<dd>-->
+<!--    							<input type="text" class="float-r">-->
+<!--    							Airplane cleanliness-->
+<!--    						</dd>-->
+<!--    						<dd>-->
+<!--    							<input type="text" class="float-r">-->
+<!--    							Cabin crew-->
+<!--    						</dd>-->
+<!--    						<dd>-->
+<!--    							<input type="text" class="float-r">-->
+<!--    							Food-->
+<!--    						</dd>-->
+<!--    						<dd>-->
+<!--    							<input type="text" class="float-r">-->
+<!--    							Entertainment-->
+<!--    						</dd>-->
+<!--    					</dl>-->
+    					<dl class="option-set tiny last">
+    						<dt>Arrival</dt>
+    						<dd>
+    							<input type="text" class="float-r" name="arrivalGettingOffPlane">
+    							Getting off plane
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="arrivalBaggageClaim">
+    							Getting to baggage claim
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="arrivalBaggageHandling">
+    							Getting/handling baggage
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="arrivalImmigrationCustoms">
+    							Immigration & customs
+    						</dd>
+    						<dd>
+    							<input type="text" class="float-r" name="leavingAirport">
+    							Leaving the airport
+    						</dd>
+    					</dl>
+    				</li>
+    			</ul>
+    		</fieldset>     
 
     		
     		<fieldset class="form-submit clear-alt">

@@ -9,9 +9,9 @@
     </parent>
 
     <groupId>com.neosavvy.commons.user</groupId>
-    <artifactId>commons-user-java-lib</artifactId>
+    <artifactId>routehappy-service-lib</artifactId>
     <packaging>jar</packaging>
-    <name>commons-user-java-lib</name>
+    <name>RouteHappy Services</name>
 
     <profiles>
         <profile>
