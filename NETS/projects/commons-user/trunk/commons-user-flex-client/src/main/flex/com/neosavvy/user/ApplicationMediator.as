@@ -123,7 +123,7 @@ package com.neosavvy.user {
             this.navigationViewStack.selectedIndex = LANDING_NAVIGATION_INDEX;
             toggleHeader(true);
             toggleSecuredHeader(false);
-            sendNotification(ApplicationFacade.INITIALIZE_SECURED_VIEW);
+            sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
         }
 
         private function toggleSecuredHeader( toggleValue:Boolean ):void {

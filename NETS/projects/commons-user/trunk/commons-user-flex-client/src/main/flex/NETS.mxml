@@ -69,7 +69,7 @@
                 <mx:Label text="Already Registered?" styleName="greenLinkButton"/>
                 <!--<flexlib:PromptingTextInput visible="false" prompt="User name" id="userName"/>-->
                 <!--<flexlib:PromptingTextInput visible="false" prompt="Password" id="password" displayAsPassword="true"/>-->
-                <mx:Button label="Log In" id="loginButton"/>
+                <mx:Button label="Log In" id="loginButton" styleName="orangeSmallButton" />
             </mx:HBox>
         </mx:VBox>
     </mx:HBox>
@@ -86,7 +86,7 @@
         <mx:Spacer width="100%"/>
         <mx:Label id="welcomeLabel" text="Welcome "/>
         <mx:Label id="loggedInUser"/>
-        <mx:Button label="Log Out" id="logoutButton"/>
+        <mx:Button label="Log Out" id="logoutButton" styleName="orangeSmallButton" />
     </mx:HBox>
 
     <mx:ViewStack

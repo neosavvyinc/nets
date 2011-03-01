@@ -9,7 +9,10 @@
         <mx:Label text="Information about you"/>
     </mx:HBox>
 
-    <mx:Button id="changePassword" label="Change Password"/>
+    <mx:Button
+            id="changePassword"
+            label="Change Password"
+            styleName="orangeMediumButton" />
 
     <code:PromptingTextInput id="currentPassword" prompt="Current Password"
             displayAsPassword="true"
@@ -30,8 +33,10 @@
     <mx:Label id="passwordStrengthErrorLabel" text="Password must be at least 8 characters"
             visible="false" includeInLayout="false"/>
 
-    <mx:Button id="changePasswordConfirmed" label="Save Changes"
-            visible="false"/>
+    <mx:Button id="changePasswordConfirmed"
+            label="Save Changes"
+            visible="false"
+            styleName="orangeMediumButton" />
 
 
 </mx:VBox>

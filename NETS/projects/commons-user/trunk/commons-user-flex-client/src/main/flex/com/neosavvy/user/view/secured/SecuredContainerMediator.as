@@ -91,66 +91,69 @@ package com.neosavvy.user.view.secured {
         }
 
         override public function handleNotification(notification:INotification):void {
-            switch (notification.getName()) {
-                case ApplicationFacade.NAVIGATE_TO_WELCOME:
-                    navigationViewStack.selectedIndex = NAV_INDEX_WELCOME;
-                    break;
-                case ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES:
-                    navigationViewStack.selectedIndex = NAV_INDEX_INVITE_EMPLOYEES;
-                    break;
-                case ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT:
-                    navigationViewStack.selectedIndex = NAV_INDEX_CLIENT_MANAGEMENT;
-                    break;
-                case ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS:
-                    navigationViewStack.selectedIndex = NAV_INDEX_PROJECT_MANAGEMENT;
-                    break;
-                case ApplicationFacade.NAVIGATE_TO_ASSIGNMENTS:
-                    navigationViewStack.selectedIndex = NAV_INDEX_ASSIGNMENTS_MANAGEMENT;
-                    break;
-                case ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT:
-                case ApplicationFacade.NAVIGATE_TO_EDIT_EXPENSE_REPORT:
-                    navigationViewStack.selectedIndex = NAV_INDEX_CREATE_EXPENSE_REPORT;
-                    break;
-                case ApplicationFacade.NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS:
-                    navigationViewStack.selectedIndex = NAV_INDEX_VIEW_OPEN_EXPENSES;
-                    break;
+            if( navigationViewStack )
+            {
+                switch (notification.getName()) {
+                    case ApplicationFacade.NAVIGATE_TO_WELCOME:
+                        navigationViewStack.selectedIndex = NAV_INDEX_WELCOME;
+                        break;
+                    case ApplicationFacade.NAVIGATE_TO_INVITE_EMPLOYEES:
+                        navigationViewStack.selectedIndex = NAV_INDEX_INVITE_EMPLOYEES;
+                        break;
+                    case ApplicationFacade.NAVIGATE_TO_CLIENT_MANAGEMENT:
+                        navigationViewStack.selectedIndex = NAV_INDEX_CLIENT_MANAGEMENT;
+                        break;
+                    case ApplicationFacade.NAVIGATE_TO_MANAGE_PROJECTS:
+                        navigationViewStack.selectedIndex = NAV_INDEX_PROJECT_MANAGEMENT;
+                        break;
+                    case ApplicationFacade.NAVIGATE_TO_ASSIGNMENTS:
+                        navigationViewStack.selectedIndex = NAV_INDEX_ASSIGNMENTS_MANAGEMENT;
+                        break;
+                    case ApplicationFacade.NAVIGATE_TO_CREATE_EXPENSE_REPORT:
+                    case ApplicationFacade.NAVIGATE_TO_EDIT_EXPENSE_REPORT:
+                        navigationViewStack.selectedIndex = NAV_INDEX_CREATE_EXPENSE_REPORT;
+                        break;
+                    case ApplicationFacade.NAVIGATE_TO_VIEW_OPEN_EXPENSE_REPORTS:
+                        navigationViewStack.selectedIndex = NAV_INDEX_VIEW_OPEN_EXPENSES;
+                        break;
 
-                case ApplicationFacade.NAVIGATE_TO_VIEW_SUBMITTED_EXPENSE_REPORTS:
-                    navigationViewStack.selectedIndex = NAV_INDEX_VIEW_APPROVED_EXPENSES;
-                    break;
-                case ApplicationFacade.NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS:
-                    navigationViewStack.selectedIndex = NAV_INDEX_RECONCILE_EXPENSES;
-                    break;                
+                    case ApplicationFacade.NAVIGATE_TO_VIEW_SUBMITTED_EXPENSE_REPORTS:
+                        navigationViewStack.selectedIndex = NAV_INDEX_VIEW_APPROVED_EXPENSES;
+                        break;
+                    case ApplicationFacade.NAVIGATE_TO_RECONCILE_EXPENSE_REPORTS:
+                        navigationViewStack.selectedIndex = NAV_INDEX_RECONCILE_EXPENSES;
+                        break;
 
-                case ApplicationFacade.ALL_EMPLOYEES_SUCCESS:
-                case ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS:
-                case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:
-                    navigationViewStack.selectedIndex = NAV_INDEX_USER_MANAGEMENT;
-                    break;
-                case ApplicationFacade.NAVIGATE_TO_VIEW_AWAITING_EXPENSE_REPORTS:
-                    navigationViewStack.selectedIndex = NAV_INDEX_APPROVE_EXPENSES;
-                    break;
+                    case ApplicationFacade.ALL_EMPLOYEES_SUCCESS:
+                    case ApplicationFacade.NON_ACTIVE_EMPLOYEES_SUCCESS:
+                    case ApplicationFacade.ACTIVE_EMPLOYEES_SUCCESS:
+                        navigationViewStack.selectedIndex = NAV_INDEX_USER_MANAGEMENT;
+                        break;
+                    case ApplicationFacade.NAVIGATE_TO_VIEW_AWAITING_EXPENSE_REPORTS:
+                        navigationViewStack.selectedIndex = NAV_INDEX_APPROVE_EXPENSES;
+                        break;
 
-                case ApplicationFacade.REQUEST_LOGOUT:
-                    navigationViewStack.selectedIndex = NAV_INDEX_WELCOME;
-                    break;
+                    case ApplicationFacade.REQUEST_LOGOUT:
+                        navigationViewStack.selectedIndex = NAV_INDEX_WELCOME;
+                        break;
 
-                case ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS:
-                    navigationViewStack.selectedIndex = NAV_INDEX_MANAGE_RECEIPTS;
-                    break;
-                case ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION:
-                    navigationViewStack.selectedIndex = NAV_INDEX_YOUR_INFORMATION;
-                    break;
+                    case ApplicationFacade.NAVIGATE_TO_MANAGE_RECEIPTS:
+                        navigationViewStack.selectedIndex = NAV_INDEX_MANAGE_RECEIPTS;
+                        break;
+                    case ApplicationFacade.NAVIGATE_TO_YOUR_INFORMATION:
+                        navigationViewStack.selectedIndex = NAV_INDEX_YOUR_INFORMATION;
+                        break;
 
-                case ApplicationFacade.USER_LOGIN_STARTUP_COMPLETE:
-                    if( _securityProxy.activeUser && _securityProxy.activeUser.passwordReset )
-                    {
-                        var passwordChangedReminder : IFlexDisplayObject =
-                                PopUpManager.createPopUp(Application.application as DisplayObject,PasswordChangedReminder);
-                        PopUpManager.centerPopUp( passwordChangedReminder );
-                        passwordChangedReminder.addEventListener( "changePasswordNow", onChangePassword);
-                    }
-                    break;
+                    case ApplicationFacade.USER_LOGIN_STARTUP_COMPLETE:
+                        if( _securityProxy.activeUser && _securityProxy.activeUser.passwordReset )
+                        {
+                            var passwordChangedReminder : IFlexDisplayObject =
+                                    PopUpManager.createPopUp(Application.application as DisplayObject,PasswordChangedReminder);
+                            PopUpManager.centerPopUp( passwordChangedReminder );
+                            passwordChangedReminder.addEventListener( "changePasswordNow", onChangePassword);
+                        }
+                        break;
+                }
             }
         }
 
