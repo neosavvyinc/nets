@@ -45,7 +45,7 @@ package com.components.drawer {
         public static const ALIGN_RIGHT : String = "right";
 
         private var parent : Container;
-        private var move : Effect;//WorkingMove;
+        private var move : WorkingMove;
         private var parentCreated : Boolean;
         private var drawCreated : Boolean;
 
@@ -187,14 +187,14 @@ package com.components.drawer {
 
             if( animate )
             {
-//                move = new WorkingMove(
-//                    drawerInstance,
-//                    drawerInstance.x,
-//                    xTo,
-//                    drawerInstance.y,
-//                    drawerInstance.y,
-//                    500
-//                );
+                move = new WorkingMove(
+                    drawerInstance,
+                    drawerInstance.x,
+                    xTo,
+                    drawerInstance.y,
+                    drawerInstance.y,
+                    500
+                );
                 move.play();
 
                 move.addEventListener( TweenEvent.TWEEN_END, onOpened );
@@ -219,14 +219,14 @@ package com.components.drawer {
 
             if( animate )
             {
-//                move = new WorkingMove(
-//                    drawerInstance,
-//                    drawerInstance.x,
-//                    xTo,
-//                    drawerInstance.y,
-//                    drawerInstance.y,
-//                    500
-//                );
+                move = new WorkingMove(
+                    drawerInstance,
+                    drawerInstance.x,
+                    xTo,
+                    drawerInstance.y,
+                    drawerInstance.y,
+                    500
+                );
                 move.play();
 
                 move.addEventListener( TweenEvent.TWEEN_END, onClosed );

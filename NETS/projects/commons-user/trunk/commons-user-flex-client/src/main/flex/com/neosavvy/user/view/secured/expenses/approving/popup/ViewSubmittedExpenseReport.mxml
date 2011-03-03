@@ -185,12 +185,15 @@
         <mx:Spacer width="100%"/>
         <mx:Button styleName="orangeLargeButton" label="Close" click="close()"/>
         <mx:Button styleName="orangeLargeButton" label="Decline" click="confirmDecline()"/>
+
+        <mx:Button label="toggle drawer" click="{drawer.open = (!drawer.open)}"/>
     </mx:HBox>
 
     <drawer:DrawerOpener
         id="drawer"
         alignment="right"
         open="true"
+        animate="true"
         drawer="com.neosavvy.user.view.secured.expenses.approving.popup.ConfirmExpenseReportDeclined"/>
 
 </mx:Panel>

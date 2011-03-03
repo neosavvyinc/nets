@@ -24,8 +24,57 @@
  * Time: 12:10 AM
  */
 package com.components.drawer {
-    public class WorkingMove {
-        public function WorkingMove() {
+    import flash.display.DisplayObject;
+
+    public class WorkingMove extends AbstractWorkingEffect {
+        private var _xFrom :Number;
+        private var _xTo:Number;
+        private var _yFrom:Number;
+        private var _yTo:Number;
+        public function WorkingMove(
+                target : DisplayObject
+                ,xFrom : Number, xTo : Number
+                ,yFrom : Number, yTo : Number
+                ,duration : int
+                ,easingFunction : Function = null
+                ,interval : int = 25
+                )
+        {
+            super( target, 0, 1, duration, easingFunction, interval );
+
+            _xFrom = xFrom;
+            _xTo = xTo;
+            _yFrom = yFrom;
+            _yTo = yTo;
+        }
+
+
+        public function get xFrom():Number {
+            return _xFrom;
+        }
+
+        public function get xTo():Number {
+            return _xTo;
+        }
+
+        public function get yFrom():Number {
+            return _yFrom;
+        }
+
+        public function get yTo():Number {
+            return _yTo;
+        }
+
+        override protected function performUpdate( value : Number ) : void
+        {
+            if( !isNaN( xFrom )  && !isNaN( xTo ) )
+            {
+                target.x = interpolateValue( xFrom, xTo, value );
+            }
+            if( !isNaN( yFrom) && !isNaN( yTo ) )
+            {
+                target.y = interpolateValue( yFrom, yTo, value );
+            }
         }
     }
 }
