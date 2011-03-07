@@ -3,6 +3,9 @@ package com.neosavvy.user.view.secured.progress {
 
     import flash.display.DisplayObject;
 
+    import flash.events.TimerEvent;
+    import flash.utils.Timer;
+
     import mx.controls.ProgressBar;
     import mx.controls.ProgressBarMode;
     import mx.core.Application;
@@ -32,9 +35,16 @@ package com.neosavvy.user.view.secured.progress {
             this.viewComponent = value;
         }
 
+        var progressBarTimer : Timer;
+
         private function showLoading():void
         {
             if( _progressBar == null ) {
+
+                progressBarTimer = new Timer(10000, 1);
+                progressBarTimer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimeout);
+                progressBarTimer.start();
+
                 var _progressBar:ProgressBar = new ProgressBar();
                 _progressBar.width = 200;
                 _progressBar.indeterminate = true;
@@ -50,10 +60,17 @@ package com.neosavvy.user.view.secured.progress {
             }
         }
 
+        protected function onTimeout( event : TimerEvent ) : void
+        {
+            sendNotification(ApplicationFacade.DISPLAY_ERROR);
+            hideLoading();
+        }
+
         private function hideLoading():void {
 
             PopUpManager.removePopUp(progressBar);
             this.progressBar = null;
+            progressBarTimer = null;
 
         }
 
