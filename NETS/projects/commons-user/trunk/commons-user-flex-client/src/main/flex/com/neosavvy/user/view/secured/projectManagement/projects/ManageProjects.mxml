@@ -18,6 +18,9 @@
         import mx.events.CollectionEvent;
 
         [Bindable]
+        public var idHolder : Number;
+
+        [Bindable]
         private var _clientCompanies:ArrayCollection
 
         public function get clientCompanies():ArrayCollection {
@@ -71,6 +74,7 @@
 
             <mx:HBox horizontalAlign="right" verticalAlign="bottom" height="100%" width="100%">
                 <mx:Button id="saveProject" label="Save Project"/>
+                <mx:Button id="reset" label="Reset"/>
             </mx:HBox>
         </mx:VBox>
     </mx:HBox>

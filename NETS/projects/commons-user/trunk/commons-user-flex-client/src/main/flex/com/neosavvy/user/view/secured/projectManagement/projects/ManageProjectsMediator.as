@@ -9,9 +9,12 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
 
     import flash.events.MouseEvent;
 
+    import mx.collections.ArrayCollection;
     import mx.controls.Button;
     import mx.controls.ComboBox;
     import mx.controls.DataGrid;
+    import mx.events.ItemClickEvent;
+    import mx.events.ListEvent;
     import mx.logging.ILogger;
     import mx.logging.Log;
 
@@ -36,7 +39,10 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
             _projectProxy = facade.retrieveProxy(ProjectServiceProxy.NAME) as ProjectServiceProxy;
             _clientProxy = facade.retrieveProxy(ClientServiceProxy.NAME) as ClientServiceProxy;
             saveProjectButton.addEventListener(MouseEvent.CLICK, handleSaveButtonClickedHandler);
+            projectmanagementGrid.addEventListener(ListEvent.ITEM_CLICK, handleItemClickedEvent);
+            resetButton.addEventListener(MouseEvent.CLICK, handleResetClickHandler);
         }
+
 
         override public function onRemove():void {
             _companyProxy = null;
@@ -50,6 +56,10 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
 
         public function get saveProjectButton():Button {
             return manageProjects.saveProject;
+        }
+
+        public function get resetButton():Button {
+            return manageProjects.reset;
         }
 
         public function get clientSelectorDropdown():ComboBox {
@@ -69,12 +79,49 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
             sendNotification(ApplicationFacade.SAVE_PROJECT_REQUEST, params);
         }
 
+
+        private function handleItemClickedEvent(event:ListEvent):void {
+
+            var item : Object = ArrayCollection(projectmanagementGrid.dataProvider).getItemAt(event.rowIndex);
+            var selectedProject : Project;
+            if( item is Project )
+            {
+                selectedProject = item as Project;
+            }
+
+            manageProjects.startDate.selectedDate = selectedProject.startDate;
+            manageProjects.endDate.selectedDate = selectedProject.endDate;
+            manageProjects.projectName.text = selectedProject.name;
+            manageProjects.projectCode.text = selectedProject.code;
+            manageProjects.idHolder = selectedProject.idNumber;
+            clientSelectorDropdown.selectedIndex = findIndexForClient(selectedProject.client);
+
+        }
+
+        private function handleResetClickHandler(event:MouseEvent):void {
+            resetForm();
+        }
+
+        private function findIndexForClient(client:ClientCompany):int {
+            var index : Number = 0;
+            for each ( var clientFromDropdown : ClientCompany in clientSelectorDropdown.dataProvider )
+            {
+                if( clientFromDropdown.idNumber == client.idNumber )
+                {
+                    return index;
+                }
+                index++;
+            }
+            return 0;
+        }
+
         private function getClientCompany():ClientCompany {
             return clientSelectorDropdown.selectedItem as ClientCompany;
         }
 
         private function getProject():Project {
             var project:Project = new Project();
+            project.idNumber = manageProjects.idHolder;
             project.startDate = manageProjects.startDate.selectedDate;
             project.endDate = manageProjects.endDate.selectedDate;
             project.name = manageProjects.projectName.text;
@@ -91,6 +138,7 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
             manageProjects.projectName.errorString = null;
             manageProjects.projectCode.text = null;
             manageProjects.projectCode.errorString = null;
+            manageProjects.idHolder = NaN;
 //            manageProjects.ongoingProject.selected = false;
 //            manageProjects.ongoingProject.errorString = null;
             clientSelectorDropdown.selectedIndex = 0;
@@ -131,6 +179,5 @@ package com.neosavvy.user.view.secured.projectManagement.projects {
             }
 
         }
-
     }
 }
