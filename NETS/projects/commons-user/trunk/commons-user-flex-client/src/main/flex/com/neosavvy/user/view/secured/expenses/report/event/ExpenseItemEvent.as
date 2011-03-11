@@ -9,6 +9,7 @@ package com.neosavvy.user.view.secured.expenses.report.event {
         public static const ACTION_DELETE:String = "delete";
         public static const ACTION_EDIT:String = "edit";
         public static const ACTION_UPLOAD_RECEIPT:String = "uploadReceipt";
+        public static const ACTION_COPY:String = "copy";
 
         private var _expenseItem:ExpenseItem;
         private var _action:String;

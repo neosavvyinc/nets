@@ -338,6 +338,13 @@
 	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_editDisabled.png');		
 }
 
+.copyLinkButton {
+	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_submit.png');
+	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_submit.png');
+	down-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_submit.png');
+	disabled-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_submit.png');
+}
+
 .redFlagLinkButton {
 	up-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_redFlagUp.png');
 	over-icon: Embed('com/neosavvy/nets/theme/icons/Icon_16_redFlagUp.png');

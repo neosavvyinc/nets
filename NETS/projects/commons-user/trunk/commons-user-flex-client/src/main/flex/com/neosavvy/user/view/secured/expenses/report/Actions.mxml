@@ -9,6 +9,7 @@
         import com.neosavvy.user.dto.project.ExpenseItem;
         import com.neosavvy.user.model.SecurityProxy;
         import com.neosavvy.user.util.StringUtils;
+        import com.neosavvy.user.view.secured.expenses.report.event.ExpenseItemEvent;
         import com.neosavvy.user.view.secured.expenses.report.popup.ReceiptView;
 
         import fineline.focal.common.types.v1.StorageServiceFileRef;
@@ -89,11 +90,19 @@
             (createPopUp as ReceiptView).imageUrl = fileUrl;
 
         }
+
+        private function copyExpenseItem():void {
+            dispatchEvent( new ExpenseItemEvent(ExpenseItemEvent.ACTION_COPY, data as ExpenseItem) );
+        }
         ]]>
     </mx:Script>
+
+    <mx:Button id="copyBtn" styleName="copyLinkButton" toolTip="Copy Item"
+               click="{copyExpenseItem()}"/>
     <mx:Button id="editBtn" styleName="editLinkButton" toolTip="Add Receipt"
                click="{uploadReceiptToExpenseItem()}"/>
     <mx:Button id="viewBtn" visible="false" styleName="submitButton" toolTip="View Receipt"
                    click="{viewReceiptItem()}"/>
+
 
 </mx:HBox>

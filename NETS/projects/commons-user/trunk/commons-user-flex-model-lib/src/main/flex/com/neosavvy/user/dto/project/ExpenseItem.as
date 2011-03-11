@@ -13,5 +13,19 @@ package com.neosavvy.user.dto.project {
         public function ExpenseItem() {
             super();
         }
+
+        public function clone():ExpenseItem
+        {
+            var expenseItem : ExpenseItem = new ExpenseItem();
+
+            expenseItem.expenseDate = new Date(expenseDate);
+            expenseItem.amount = new Number(amountNumber);
+            expenseItem.expenseItemType = expenseItemType;
+            expenseItem.expenseReport = expenseReport;
+            expenseItem.paymentMethod = paymentMethod;
+            expenseItem.projectType = projectType;
+            
+            return expenseItem;
+        }
     }
 }

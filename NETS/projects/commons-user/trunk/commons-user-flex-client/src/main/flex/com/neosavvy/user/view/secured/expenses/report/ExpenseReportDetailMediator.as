@@ -14,6 +14,7 @@ package com.neosavvy.user.view.secured.expenses.report {
     import com.neosavvy.user.model.UserServiceProxy;
     import com.neosavvy.user.util.StringUtils;
     import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
+    import com.neosavvy.user.view.secured.expenses.report.event.ExpenseItemEvent;
     import com.neosavvy.user.view.secured.expenses.report.popup.DeleteConfirmationPanel;
 
     import flash.display.DisplayObject;
@@ -65,7 +66,10 @@ package com.neosavvy.user.view.secured.expenses.report {
 
             expenseReportDetail.expenseTypeCmb.addEventListener(Event.CHANGE, handleExpenseItemTypeChange);
             expenseReportDetail.expenseReportGrid.addEventListener(Event.CHANGE, handleExpenseItemSelectionChanged);
+
+            expenseReportDetail.expenseReportGrid.addEventListener(ExpenseItemEvent.TYPE, handleCopyExpenseItem);
         }
+
 
         override public function onRemove():void {
             _projectProxy = null;
@@ -339,6 +343,20 @@ package com.neosavvy.user.view.secured.expenses.report {
         private function handleCancelExpenseItemButtonClicked(event:MouseEvent):void {
             _activeExpenseItem = null;
             resetExpenseItemForm();
+        }
+
+
+        private function handleCopyExpenseItem(event:ExpenseItemEvent):void {
+
+            if( event.action == ExpenseItemEvent.ACTION_COPY )
+            {
+                var item : ExpenseItem = event.expenseItem;
+                var newItem : ExpenseItem = item.clone();
+
+                _expenseItems.addItem(newItem);
+                expenseItemGrid.dataProvider = _expenseItems;
+            }
+
         }
 
         private function expenseItemValueSort(a:Object, b:Object, fields:Array = null):int {

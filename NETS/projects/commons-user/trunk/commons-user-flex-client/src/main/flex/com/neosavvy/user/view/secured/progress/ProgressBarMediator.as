@@ -70,6 +70,7 @@ package com.neosavvy.user.view.secured.progress {
 
             PopUpManager.removePopUp(progressBar);
             this.progressBar = null;
+            progressBarTimer.removeEventListener( TimerEvent.TIMER_COMPLETE, onTimeout);
             progressBarTimer = null;
 
         }
