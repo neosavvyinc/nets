@@ -8,7 +8,6 @@ package com.neosavvy.user.view.secured.expenses.approving {
     import com.neosavvy.user.view.secured.expenses.approving.popup.ViewSubmittedExpenseReport;
 
     import flash.display.DisplayObject;
-    import flash.display.DisplayObject;
 
     import mx.core.Application;
     import mx.core.IFlexDisplayObject;
@@ -114,9 +113,10 @@ package com.neosavvy.user.view.secured.expenses.approving {
 
         }
 
-        private function handleView( selectedReport:ExpenseReport ):void {
+        private function handleView(selectedReport:ExpenseReport, isAdminMode:Boolean):void {
             viewExpenseReportPopup = PopUpManager.createPopUp(DisplayObject(Application.application), ViewSubmittedExpenseReport, true);
             (viewExpenseReportPopup as ViewSubmittedExpenseReport).expenseReport = selectedReport;
+            ViewSubmittedExpenseReport(viewExpenseReportPopup).adminMode = isAdminMode;
             viewExpenseReportPopup.addEventListener(ExpenseReportApproveEvent.TYPE, handleViewEvent);
             PopUpManager.centerPopUp(viewExpenseReportPopup);
             sendNotification(ApplicationFacade.INITIALIZE_VIEW_EXPENSE_REPORT_VIEW, selectedReport.id);
@@ -134,16 +134,24 @@ package com.neosavvy.user.view.secured.expenses.approving {
         }
 
         override public function handleNotification(notification:INotification):void {
-            var selectedReport:ExpenseReport = notification.getBody() as ExpenseReport
+
             switch (notification.getName()) {
                 case ApplicationFacade.SHOW_APPROVE_DIALOG:
-                    handleApproval( selectedReport );
+                    handleApproval(
+                        notification.getBody()[0] as ExpenseReport
+                    );
                     break;
                 case ApplicationFacade.SHOW_DECLINE_DIALOG:
-                    handleDecline( selectedReport );
+                    handleDecline(
+                        notification.getBody()[0] as ExpenseReport
+                    );
                     break;
                 case ApplicationFacade.SHOW_VIEW_DIALOG:
-                    handleView( selectedReport );
+
+                    handleView(
+                        notification.getBody()[0] as ExpenseReport,
+                        notification.getBody()[1] ? notification.getBody()[1] : false
+                    );
                     break;
                 case ApplicationFacade.INITIALIZE_VIEW_EXPENSE_REPORT_VIEW_COMPLETE:
                     if( viewExpenseReportPopup )

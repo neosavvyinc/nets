@@ -3,6 +3,7 @@ package com.neosavvy.user.view.secured.expenses.submitted {
     import com.neosavvy.user.dto.project.ExpenseReport;
     import com.neosavvy.user.model.ExpenseReportServiceProxy;
     import com.neosavvy.user.model.UserServiceProxy;
+    import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
     import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
     import com.neosavvy.user.view.secured.expenses.submitted.popup.ReopenConfirmationPanel;
 
@@ -36,6 +37,8 @@ package com.neosavvy.user.view.secured.expenses.submitted {
             _expenseServiceProxy = facade.retrieveProxy(ExpenseReportServiceProxy.NAME) as ExpenseReportServiceProxy;
 
             submittedExpenseReportGrid.addEventListener(ExpenseReportEvent.TYPE, handleExpenseReportEvent);
+
+            submittedExpenseReportGrid.addEventListener(ExpenseReportApproveEvent.TYPE, handleExpenseReportApprovalEvent);
         }
 
         override public function onRemove():void {
@@ -77,6 +80,16 @@ package com.neosavvy.user.view.secured.expenses.submitted {
                     break;
             }
 
+        }
+
+        private function handleExpenseReportApprovalEvent( event : ExpenseReportApproveEvent ) : void
+        {
+            switch ( event.action )
+            {
+                case ExpenseReportApproveEvent.ACTION_VIEW:
+                    sendNotification(ApplicationFacade.SHOW_VIEW_DIALOG, [event.expenseReport, false]);
+                    break;
+            }
         }
 
         private function handleExpenseReportEvent(event:ExpenseReportEvent):void {

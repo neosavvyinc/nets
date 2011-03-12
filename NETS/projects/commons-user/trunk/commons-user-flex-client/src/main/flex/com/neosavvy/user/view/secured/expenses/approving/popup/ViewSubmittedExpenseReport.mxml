@@ -23,6 +23,9 @@
         import mx.collections.ListCollectionView;
         import mx.managers.PopUpManager;
 
+        [Bindable]
+        public var adminMode:Boolean;
+
         private function close():void {
             PopUpManager.removePopUp(this);
         }
@@ -172,8 +175,8 @@
                     </datagridclasses:DataGridColumn>
                 </mx:columns>
             </mx:DataGrid>
-            <mx:Label text="Approve/Decline Comment:"/>
-            <mx:TextArea id="commentText" width="100%" height="150"/>
+            <mx:Label text="Approve/Decline Comment:" visible="{adminMode}" includeInLayout="{adminMode}"/>
+            <mx:TextArea id="commentText" width="100%" height="150" visible="{adminMode}" includeInLayout="{adminMode}"/>
         </mx:VBox>
     </mx:HBox>
 
@@ -181,10 +184,10 @@
             styleName="formSectionContainer"
             horizontalAlign="right"
             width="100%">
-        <mx:Button styleName="orangeLargeButton" label="Approve" click="confirmApprove()"/>
+        <mx:Button styleName="orangeLargeButton" label="Approve" click="confirmApprove()" visible="{adminMode}" includeInLayout="{adminMode}"/>
         <mx:Spacer width="100%"/>
         <mx:Button styleName="orangeLargeButton" label="Close" click="close()"/>
-        <mx:Button styleName="orangeLargeButton" label="Decline" click="confirmDecline()"/>
+        <mx:Button styleName="orangeLargeButton" label="Decline" click="confirmDecline()" visible="{adminMode}" includeInLayout="{adminMode}"/>
 
         <!--<mx:Button label="toggle drawer" click="{drawer.open = (!drawer.open)}"/>-->
     </mx:HBox>

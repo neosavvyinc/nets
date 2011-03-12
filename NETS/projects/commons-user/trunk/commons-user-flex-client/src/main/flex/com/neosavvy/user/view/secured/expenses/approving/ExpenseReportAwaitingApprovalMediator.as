@@ -80,13 +80,13 @@ package com.neosavvy.user.view.secured.expenses.approving {
             switch ( event.action )
             {
                 case ExpenseReportApproveEvent.ACTION_APPROVE_REQUEST:
-                    sendNotification(ApplicationFacade.SHOW_APPROVE_DIALOG, event.expenseReport);
+                    sendNotification(ApplicationFacade.SHOW_APPROVE_DIALOG, [event.expenseReport, true]);
                     break;
                 case ExpenseReportApproveEvent.ACTION_DECLINE_REQUEST:
-                    sendNotification(ApplicationFacade.SHOW_DECLINE_DIALOG, event.expenseReport);
+                    sendNotification(ApplicationFacade.SHOW_DECLINE_DIALOG, [event.expenseReport, true]);
                     break;
                 case ExpenseReportApproveEvent.ACTION_VIEW:
-                    sendNotification(ApplicationFacade.SHOW_VIEW_DIALOG, event.expenseReport);
+                    sendNotification(ApplicationFacade.SHOW_VIEW_DIALOG, [event.expenseReport, true]);
                     break;
             }
         }
