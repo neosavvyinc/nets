@@ -64,6 +64,7 @@ package com.neosavvy.user.view.companyManagement {
                 ,ApplicationFacade.SAVE_COMPANY_SUCCESS
                 ,ApplicationFacade.CONFIRM_ACCOUNT_FAILED
                 ,ApplicationFacade.CONFIRM_ACCOUNT_SUCCESS
+                ,ApplicationFacade.SAVE_COMPANY_FAILED_DUPLICATE_USER
             ];
         }
 
@@ -87,6 +88,10 @@ package com.neosavvy.user.view.companyManagement {
                 case ApplicationFacade.CONFIRM_ACCOUNT_SUCCESS:
                     LOGGER.debug("Account confirmation succeeded");
                     signupViewStack.selectedIndex = CONFIRMATION_SUCCESS_INDEX;
+                    break;
+                case ApplicationFacade.SAVE_COMPANY_FAILED_DUPLICATE_USER:
+                    signup.signupPanel.administrativeUser.errorString = "This username is already used, please choose another";
+                    signup.signupPanel.administrativeUser.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
                     break;
             }
         }

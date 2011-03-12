@@ -204,6 +204,7 @@ package com.neosavvy.user {
         public static const SAVE_COMPANY_REQUEST:String = "saveCompanyRequest";
         public static const SAVE_COMPANY_SUCCESS:String = "saveCompanySuccess";
         public static const SAVE_COMPANY_FAILED:String = "saveCompanyFailed";
+        public static const SAVE_COMPANY_FAILED_DUPLICATE_USER:String = "saveCompanyFailedDupeUser";
 
         public static const INVITE_USER_TO_COMPANY_REQUEST:String = "inviteEmployeeToCompanyRequest";
         public static const INVITE_USER_TO_COMPANY_SUCCESS:String = "inviteEmployeeToCompanySuccess";
