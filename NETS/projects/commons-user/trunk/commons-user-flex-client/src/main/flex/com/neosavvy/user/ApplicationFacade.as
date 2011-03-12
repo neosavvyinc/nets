@@ -213,6 +213,7 @@ package com.neosavvy.user {
         public static const SAVE_USER_TO_COMPANY_REQUEST:String = "saveEmployeeToCompanyRequest";
         public static const SAVE_USER_TO_COMPANY_SUCCESS:String = "saveEmployeeToCompanySuccess";
         public static const SAVE_USER_TO_COMPANY_FAILED:String = "saveEmployeeToCompanyFailed";
+        public static const SAVE_USER_TO_COMPANY_FAILED_DUPLICATE:String = "saveEmployeeToCompanyFailedDuplicate";
 
         public static const CONFIRM_ACCOUNT_REQUEST:String = "confirmAccountRequest";
         public static const CONFIRM_ACCOUNT_SUCCESS:String = "confirmAccountSuccess";

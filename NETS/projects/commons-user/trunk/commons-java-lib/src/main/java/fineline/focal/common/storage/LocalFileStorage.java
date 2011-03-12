@@ -225,19 +225,48 @@ public class LocalFileStorage implements FileStorage {
         // create the operation, add images and operators/options
         IMOperation op = new IMOperation();
         String sourceImage = parentDir.getAbsolutePath() + "/" + ref.getKey();
-        String destinationImage = sourceImage.replaceFirst(".jpg", "-thumb.jpg");
-        op.addImage(sourceImage);
-        op.resize(200,300);
-        op.addImage(destinationImage);
+        String destinationImage = null;
 
-        try {
-            cmd.run(op);
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IM4JavaException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        if( sourceImage.endsWith("jpg") )
+        {
+            destinationImage = sourceImage.replaceFirst(".jpg", "-thumb.jpg");
+        }
+        else if( sourceImage.endsWith("png") )
+        {
+            destinationImage = sourceImage.replaceFirst(".png", "-thumb.png");
+        }
+        else if( sourceImage.endsWith("gif") )
+        {
+            destinationImage = sourceImage.replaceFirst(".gif", "-thumb.gif");
+        }
+        else if( sourceImage.endsWith("bmp") )
+        {
+            destinationImage = sourceImage.replaceFirst(".bmp", "-thumb.bmp");
+        }
+        else if( sourceImage.endsWith("jpeg") )
+        {
+            destinationImage = sourceImage.replaceFirst(".jpeg", "-thumb.jpeg");
+        }
+        else
+        {
+            System.out.print("FAILED TO SAVE VIEWABLE IMAGE");
+        }
+
+        if( destinationImage != null )
+        {
+            op.addImage(sourceImage);
+            op.resize(200,300);
+            op.addImage(destinationImage);
+
+            try {
+                cmd.run(op);
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (IM4JavaException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
         }
     }
 
@@ -249,20 +278,51 @@ public class LocalFileStorage implements FileStorage {
         // create the operation, add images and operators/options
         IMOperation op = new IMOperation();
         String sourceImage = parentDir.getAbsolutePath() + "/" + ref.getKey();
-        String destinationImage = sourceImage.replaceFirst(".jpg", "-viewable.jpg");
-        op.addImage(sourceImage);
-        op.resize(640,480);
-        op.addImage(destinationImage);
+        String destinationImage = null;
 
-        try {
-            cmd.run(op);
-        } catch (IOException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        } catch (IM4JavaException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        if( sourceImage.endsWith("jpg") )
+        {
+            destinationImage = sourceImage.replaceFirst(".jpg", "-viewable.jpg");
         }
+        else if( sourceImage.endsWith("png") )
+        {
+            destinationImage = sourceImage.replaceFirst(".png","-viewable.png" );
+        }
+        else if( sourceImage.endsWith("gif") )
+        {
+            destinationImage = sourceImage.replaceFirst(".gif","-viewable.gif" );
+        }
+        else if( sourceImage.endsWith("bmp") )
+        {
+            destinationImage = sourceImage.replaceFirst(".bmp","-viewable.bmp" );
+        }
+        else if( sourceImage.endsWith("jpeg") )
+        {
+            destinationImage = sourceImage.replaceFirst(".jpeg","-viewable.jpeg" );
+        }
+        else
+        {
+            System.out.print("FAILED TO SAVE VIEWABLE IMAGE");
+        }
+
+        if( destinationImage != null )
+        {
+            op.addImage(sourceImage);
+            op.resize(640,480);
+            op.addImage(destinationImage);
+
+            try {
+                cmd.run(op);
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            } catch (IM4JavaException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+
+        }
+
     }
 
     @Transactional(propagation = Propagation.REQUIRES_NEW, rollbackFor={ResourceNotFoundException.class, IOException.class})

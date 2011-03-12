@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="http://java.sun.com/xml/ns/persistence" version="1.0">
+
+    <!--
+     Logging info
+     http://glassfish.java.net/javaee5/persistence/entity-persistence-support.html#Logging
+    -->
+
     <persistence-unit name="NetsPU" transaction-type="JTA">
         <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
         <jta-data-source>jdbc/CommonsUserDS</jta-data-source>

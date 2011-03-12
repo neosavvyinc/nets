@@ -82,7 +82,7 @@
             var fileRef:StorageServiceFileRef = (data as ExpenseItem).receiptFileRef as StorageServiceFileRef;
             var instance:ApplicationFacade = ApplicationFacade.getInstance(ApplicationFacade.defaultApplicationKey);
             var securityProxy:SecurityProxy = instance.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
-            var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "?noCache=" + (new Date().getMilliseconds());
+            var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "/viewable?noCache=" + (new Date().getMilliseconds());
             trace(fileUrl);
 
             var createPopUp = PopUpManager.createPopUp(Application.application as DisplayObject, ReceiptView, true);

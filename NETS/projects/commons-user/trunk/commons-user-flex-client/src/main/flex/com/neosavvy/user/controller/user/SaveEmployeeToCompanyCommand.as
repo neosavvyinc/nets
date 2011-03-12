@@ -29,10 +29,21 @@ package com.neosavvy.user.controller.user {
         }
 
         override protected function faultHandler(faultEvent:FaultEvent):void {
+
+            var faultString : String = faultEvent.fault.faultString;
+            if( faultString.indexOf("javax.persistence.PersistenceException") > -1 &&
+                faultString.indexOf("duplicate key value violates unique constraint") > -1 )
+            {
+                sendNotification(ApplicationFacade.SAVE_USER_TO_COMPANY_FAILED_DUPLICATE);
+            }
+            else
+            {
+                var faultParts:Array = faultString.split(":");
+                sendNotification(ApplicationFacade.SAVE_USER_TO_COMPANY_FAILED, faultParts[1]);
+            }
+
             RemoteObjectUtils.logRemoteServiceFault(faultEvent, LOGGER);
-            var faultString:String = faultEvent.fault.faultString;
-            var faultParts:Array = faultString.split(":");
-            sendNotification(ApplicationFacade.SAVE_USER_TO_COMPANY_FAILED, faultParts[1]);
+                        
         }
     }
 }
