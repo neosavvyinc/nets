@@ -100,6 +100,7 @@ public class ProjectTestUtil {
         user.setMiddleName("Adam");
         user.setLastName("Parrish");
         user.setPassword("admin");
+        user.setPasswordReset(false);
         user.setEmailAddress("aparrish1@neosavvy.com");
 
         return user;
@@ -112,6 +113,7 @@ public class ProjectTestUtil {
         user.setMiddleName("Adam");
         user.setLastName("Parrish");
         user.setPassword("admin2");
+        user.setPasswordReset(false);
         user.setEmailAddress("aparrishAdmin2@neosavvy.com");
 
         return user;
@@ -124,6 +126,7 @@ public class ProjectTestUtil {
         user.setMiddleName("Adam");
         user.setLastName("Parrish");
         user.setPassword("pass1");
+        user.setPasswordReset(false);
         user.setEmailAddress("aparrish1@neosavvy.com");
 
         return user;
@@ -136,6 +139,7 @@ public class ProjectTestUtil {
         user.setMiddleName("Adam");
         user.setLastName("Parrish");
         user.setPassword("pass2");
+        user.setPasswordReset(false);
         user.setEmailAddress("aparrish1@neosavvy.com");
 
         return user;
@@ -159,6 +163,7 @@ public class ProjectTestUtil {
         user.setLastName("Parrish");
         user.setUsername("aparrish");
         user.setPassword("testPassword");
+        user.setPasswordReset(false);
         user.setEmailAddress("aparrish1@neosavvy.com");
         return user;
     }
@@ -176,6 +181,7 @@ public class ProjectTestUtil {
         user.setLastName("Odom");
         user.setUsername("todom");
         user.setPassword("test");
+        user.setPasswordReset(false);
         user.setEmailAddress("todom1@neosavvy.com");
         return user;
     }
@@ -186,6 +192,7 @@ public class ProjectTestUtil {
         user.setLastName("Hamlett");
         user.setUsername("dhamlett");
         user.setPassword("test");
+        user.setPasswordReset(false);
         user.setEmailAddress("dhamlett1@neosavvy.com");
         return user;
     }
@@ -196,6 +203,7 @@ public class ProjectTestUtil {
         user.setLastName("Odom");
         user.setUsername("wodom");
         user.setPassword("test");
+        user.setPasswordReset(false);
         user.setEmailAddress("wodom@neosavvy.com");
         return user;
     }
@@ -206,6 +214,7 @@ public class ProjectTestUtil {
         user.setLastName("Odom");
         user.setUsername("todom2");
         user.setPassword("testPassword");
+        user.setPasswordReset(false);
         user.setEmailAddress("tommy.odom@gmail.com");
         return user;
     }
