@@ -81,7 +81,7 @@
 		]]>
 	</fx:Script>
 	
-	<s:TextInput id="user" width="100%" text="adamparrish"/>
+	<s:TextInput id="user" width="100%" text="neosavvy"/>
 	<s:TextInput id="password" displayAsPassword="true" width="100%" text="winter69"/>
 	<s:Button id="loginButton" label="Login" click="loginClicked(event)" />
 	<s:Label id="message"/>
