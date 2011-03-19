@@ -8,6 +8,7 @@
 
     <mx:HBox width="100%" horizontalAlign="right" styleName="headingTitleBox">
         <mx:Button id="refreshReceipts" label="Refresh"/>
+        <mx:Button id="uploadReceipt" label="Upload Receipt"/>
         <mx:Spacer width="100%"/>
         <mx:Label text="Manage Your Uncategorized Receipts"/>
     </mx:HBox>

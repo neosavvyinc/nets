@@ -22,10 +22,16 @@
         import com.neosavvy.user.dto.companyManagement.UserDTO;
         import com.neosavvy.user.dto.project.ExpenseReport;
 
+        import com.neosavvy.user.model.SecurityProxy;
+        import com.neosavvy.user.view.secured.expenses.report.popup.ReceiptView;
+
         import fineline.focal.common.types.v1.StorageServiceFileRef;
 
         import mx.collections.ArrayCollection;
+        import mx.core.Application;
+        import mx.core.IFlexDisplayObject;
         import mx.events.FlexMouseEvent;
+        import mx.managers.PopUpManager;
         import mx.rpc.Responder;
         import mx.rpc.events.FaultEvent;
         import mx.rpc.events.ResultEvent;
@@ -62,7 +68,23 @@
         }
 
         private function handleViewReceiptClicked(event:MouseEvent):void {
-            trace("view receipt");
+            viewReceiptItem();
+        }
+
+        var createPopUp:IFlexDisplayObject;
+
+        private function viewReceiptItem():void {
+
+            var fileRef:StorageServiceFileRef = (data as StorageServiceFileRef);
+            var instance:ApplicationFacade = ApplicationFacade.getInstance(ApplicationFacade.defaultApplicationKey);
+            var securityProxy:SecurityProxy = instance.retrieveProxy(SecurityProxy.NAME) as SecurityProxy;
+            var fileUrl:String = ProxyConstants.getUrlForEnvironment() + "/nets/storage/file/" + fileRef.bucket + "/" + fileRef.key + "/viewable?noCache=" + (new Date().getMilliseconds());
+            trace(fileUrl);
+
+            var createPopUp = PopUpManager.createPopUp(Application.application as DisplayObject, ReceiptView, true);
+            PopUpManager.centerPopUp(createPopUp);
+            (createPopUp as ReceiptView).imageUrl = fileUrl;
+
         }
 
         private function handleDeleteReceiptClicked(event:MouseEvent):void {

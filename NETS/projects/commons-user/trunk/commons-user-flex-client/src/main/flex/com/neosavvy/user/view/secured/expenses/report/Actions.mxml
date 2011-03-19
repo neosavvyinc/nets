@@ -62,6 +62,8 @@
             invalidateProperties();
         }
 
+
+
         protected function createStorageServiceFileRef(parsedJsonObject:Object):StorageServiceFileRef {
             var fileRef:StorageServiceFileRef = new StorageServiceFileRef();
             fileRef.id = parsedJsonObject.id;
