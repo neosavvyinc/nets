@@ -16,10 +16,10 @@
     </parent>
 
     <scm>
-        <connection>scm:svn:http://www.neosavvy.com/svn/neosavvy/projects/commons-user/trunk/</connection>
-        <developerConnection>scm:svn:http://www.neosavvy.com/svn/neosavvy/projects/commons-user/trunk/
+        <connection>scm:svn:http://neosavvy.jira.com/svn/NETS/projects/commons-user/trunk/</connection>
+        <developerConnection>scm:svn:http://neosavvy.jira.com/svn/NETS/projects/commons-user/trunk/
         </developerConnection>
-        <url>http://www.neosavvy.com/svn/neosavvy/projects/commons-user/trunk/</url>
+        <url>http://neosavvy.jira.com/svn/NETS/projects/commons-user/trunk/</url>
     </scm>
 
     <distributionManagement>

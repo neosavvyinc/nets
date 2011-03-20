@@ -10,6 +10,15 @@
         [Event(name="goHomeClicked", type="flash.events.Event")]
     </mx:Metadata>
 
+    <mx:Script><![CDATA[
+        // stores the svn build number
+        public static const BUILD_NUMBER:Number = BUILD::buildNumber;
+        // stores the timestamp of the last build
+        public static const BUILD_TIMESTAMP:Date = new Date(BUILD::timestamp);
+        // stores the maven version of the current build
+        public static const BUILD_MAVEN_VERSION:String = String(BUILD::mavenVersion);
+        ]]></mx:Script>
+
     <security:LoginStack id="stack">
         <mx:Panel id="loginPanel"
                   width="330"
@@ -41,6 +50,7 @@
                                             displayAsPassword="true"/>
                 <mx:Button styleName="orangeLargeButton" width="100%" id="loginButton" label="Login"/>
                 <mx:Label id="errorLbl" includeInLayout="false"/>
+                <mx:Label fontSize="8" styleName="contentLabelBold" text="Build: {BUILD::buildNumber} {BUILD::mavenVersion} {BUILD::timestamp}" />
             </mx:VBox>
 
         </mx:Panel>
@@ -48,5 +58,7 @@
     </security:LoginStack>
     <mx:LinkButton label="Close Login Screen" click="{dispatchEvent(new Event('goHomeClicked',true))}"/>
     <mx:LinkButton label="Forgot Password" click="stack.toggle()"/>
+
+
 
 </mx:VBox>
