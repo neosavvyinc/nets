@@ -66,6 +66,7 @@ package com.neosavvy.user.view.newUserManagement {
             return [
                 ApplicationFacade.SAVE_USER_TO_COMPANY_FAILED
                 ,ApplicationFacade.SAVE_USER_TO_COMPANY_SUCCESS
+                ,ApplicationFacade.SAVE_USER_TO_COMPANY_FAILED_DUPLICATE
             ];
         }
 
@@ -78,6 +79,10 @@ package com.neosavvy.user.view.newUserManagement {
                 case ApplicationFacade.SAVE_USER_TO_COMPANY_SUCCESS:
                     confirmationSuccessPanel.confirmationText.text = notification.getBody().toString();
                     activateView(confirmationSuccessPanel);
+                    break;
+                case ApplicationFacade.SAVE_USER_TO_COMPANY_FAILED_DUPLICATE:
+                    confirmationPanel.username.errorString = "This username is already used, please choose another";
+                    confirmationPanel.username.dispatchEvent(new MouseEvent(MouseEvent.MOUSE_OVER));
                     break;
             }
         }
