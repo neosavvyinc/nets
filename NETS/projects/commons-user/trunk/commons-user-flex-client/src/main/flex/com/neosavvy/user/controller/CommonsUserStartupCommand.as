@@ -11,7 +11,7 @@ package com.neosavvy.user.controller {
     public class CommonsUserStartupCommand extends MacroCommand implements ICommand {
 
         override protected function initializeMacroCommand():void {
-            initLogging();
+            //initLogging();
             addSubCommand(ModelPrepCommand);
             addSubCommand(ViewPrepCommand);
             addSubCommand(LoadGraphicalAssets);
