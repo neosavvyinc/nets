@@ -32,10 +32,6 @@
             <name>Nexus Snapshots Repository</name>
             <url>http://maven.neosavvy.com:8081/nexus/content/repositories/snapshots</url>
         </snapshotRepository>
-        <site>
-            <id>www.neosavvy.com</id>
-            <url>scp://www.neosavvy.com/var/www/commons-user/</url>
-        </site>
     </distributionManagement>
 
     <modules>
