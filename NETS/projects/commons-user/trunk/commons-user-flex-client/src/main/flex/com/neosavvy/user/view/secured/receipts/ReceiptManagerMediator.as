@@ -155,14 +155,12 @@ package com.neosavvy.user.view.secured.receipts {
         }
 
         private function completeHandler(event:DataEvent):void {
+
+            reference = null;
             var rawData:String = String(event.data);
             var storageFileRef : StorageServiceFileRef = createStorageServiceFileRef((JSON.decode(rawData)));
-
             var url:String = ProxyConstants.getUrlForEnvironment();
-
-
             var userService : RemoteObject = new RemoteObject("userService");
-
             var channelSet : ChannelSet = new ChannelSet();
             var channel:AMFChannel = new AMFChannel("user-amf");
             channel.url = url + ProxyConstants.expenseContextRoot + "/messagebroker/amf";
