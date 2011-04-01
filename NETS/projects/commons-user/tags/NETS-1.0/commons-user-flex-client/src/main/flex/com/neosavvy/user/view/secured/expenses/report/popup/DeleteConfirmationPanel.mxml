@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<mx:Panel
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    width="400"
+    height="170"
+    paddingLeft="0"
+    paddingRight="0"
+    paddingTop="0"
+    paddingBottom="0"
+    verticalGap="0"
+    horizontalScrollPolicy="off"
+    verticalScrollPolicy="off"
+    styleName="grayToGrayViewContainer"
+    layout="vertical">
+
+    <mx:Script>
+        <![CDATA[
+        import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
+
+        import mx.managers.PopUpManager;
+
+        private function confirmDelete():void {
+            dispatchEvent(new ExpenseReportEvent(ExpenseReportEvent.ACTION_DELETE));
+            close();
+        }
+
+        private function close():void {
+            PopUpManager.removePopUp(this);
+        }
+        ]]>
+    </mx:Script>
+
+    <mx:HBox
+            width="100%"
+            paddingLeft="10"
+            paddingRight="10"
+            paddingTop="10"
+            paddingBottom="10"
+            styleName="formWindow"
+            horizontalScrollPolicy="off"
+            verticalScrollPolicy="off">
+        <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_16_alert.png')"/>
+        <mx:VBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
+            <mx:Label styleName="secondaryTitle" text="Delete Expense Report Confirmation"/>
+        </mx:VBox>
+    </mx:HBox>
+    <mx:VBox
+            styleName="formSectionContainer"
+            horizontalAlign="right"
+            height="100%"
+            width="100%">
+
+        <mx:Text width="100%">
+            <mx:text>
+                Are you sure that you want to delete this expense report, your changes will be lost forever?
+            </mx:text>
+        </mx:Text>
+        <mx:HBox width="100%" height="100%" verticalAlign="bottom">
+            <mx:Button label="Delete Forever" styleName="orangeLargeButton" click="confirmDelete()"/>
+            <mx:Spacer width="100%"/>
+            <mx:Button label="No" styleName="orangeLargeButton" click="close()"/>
+        </mx:HBox>
+    </mx:VBox>
+</mx:Panel>

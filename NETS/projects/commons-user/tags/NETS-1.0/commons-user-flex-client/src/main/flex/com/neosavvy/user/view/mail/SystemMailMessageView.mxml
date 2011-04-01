@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<mx:TitleWindow
+        width="400"
+        height="450"
+        styleName="grayToGrayViewContainer"
+        showCloseButton="true"
+        close="{close()}"
+        layout="vertical"
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:code="http://code.google.com/p/flexlib/">
+
+    <mx:Metadata>
+        [Event(name="mailMessageEvent",type="com.neosavvy.user.view.mail.MailMessageEvent")]
+    </mx:Metadata>
+
+    <mx:Script>
+        <![CDATA[
+
+        [Bindable]
+        public var titleString : String;
+
+        ]]>
+    </mx:Script>
+
+    <mx:Label
+        styleName="secondaryTitle"
+        text="{titleString}"/>
+
+    <mx:Text
+        width="100%"
+        text="Explain the nature of your problem so that we can help you resolve it. We will try to respond within 24 hours to help you with your request"/>
+
+    <mx:EmailValidator
+        id="emailValidator" source="{fromAddress}" property="text"/>
+    <mx:StringValidator
+        id="minSubjectValidator" source="{subject}" property="text" minLength="1"/>
+    <mx:StringValidator
+        id="minMessageValidator" source="{message}" property="text" minLength="1"/>
+
+    <mx:Form
+        id="emailForm"
+        width="100%"
+        height="100%"
+        >
+
+        <mx:FormItem
+                width="100%">
+            <code:PromptingTextInput
+                width="100%"
+                id="fromAddress" prompt="Enter Your Email Address"/>
+        </mx:FormItem>
+        <mx:FormItem
+                width="100%">
+            <code:PromptingTextInput
+                width="100%"
+                id="subject" prompt="Subject"/>
+        </mx:FormItem>
+        <mx:FormItem
+                width="100%"
+                height="100%">
+            <code:PromptingTextArea
+                width="100%"
+                height="100%"
+                id="message" prompt="Enter Your Message..."/>
+        </mx:FormItem>
+
+    </mx:Form>
+
+    <mx:HBox horizontalAlign="right" width="100%">
+        <mx:Button
+            styleName="orangeLargeButton"
+            id="sendMail"
+            label="Send"
+            click="sendMailEvent()"/>
+    </mx:HBox>
+
+    <mx:Script><![CDATA[
+        import com.neosavvy.user.controller.mail.SendSystemMail;
+
+        import mx.managers.PopUpManager;
+
+        private function close():void {
+
+            PopUpManager.removePopUp(this);
+
+        }
+
+        private function sendMailEvent():void {
+
+            var parameterObject:Object = SendSystemMail.buildParameterObject(
+                    fromAddress.text
+                    , message.text
+                    , subject.text
+            );
+
+            dispatchEvent(new MailMessageEvent(parameterObject));
+
+            close();
+
+        }
+        ]]></mx:Script>
+</mx:TitleWindow>

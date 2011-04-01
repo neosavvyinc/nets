@@ -1,0 +1,13 @@
+.textInputError {
+    borderColor: red;
+    borderThickness: 1;
+    borderStyle: solid;
+}
+
+Form {
+    paddingBottom: 0;
+    paddingLeft: 0;
+    paddingRight: 0;
+    paddingTop: 0;
+}
+
