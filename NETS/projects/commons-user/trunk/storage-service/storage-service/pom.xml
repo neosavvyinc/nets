@@ -3,12 +3,12 @@
     <parent>
         <groupId>fineline.focal.storage</groupId>
         <artifactId>storage-service-parent</artifactId>
-        <version>1.0</version>
+        <version>1.1.0-SNAPSHOT</version>
     </parent>
     <groupId>fineline.focal.storage</groupId>
     <artifactId>storage-service</artifactId>
     <packaging>jar</packaging>
-    <version>1.0</version>
+    <version>1.1.0-SNAPSHOT</version>
     <name>Storage Service</name>
 
     <build>
@@ -48,7 +48,7 @@
         <dependency>
             <groupId>com.neosavvy.commons.user</groupId>
             <artifactId>commons-java-lib</artifactId>
-            <version>1.0</version>
+            <version>1.1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
