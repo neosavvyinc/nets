@@ -1,0 +1,68 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                      http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                      http://www.springframework.org/schema/security
+                      http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+    <beans:import resource="classpath:securityAuthorizationContext.xml"/>
+
+    <http entry-point-ref="preAuthenticatedEntryPoint" use-expressions="true">
+        <custom-filter position="FORM_LOGIN_FILTER" ref="userSessionPreAuthenticatedProcessingFilter" />
+    </http>
+
+    <beans:bean id="preAuthenticatedEntryPoint"
+                class="org.springframework.security.web.authentication.preauth.PreAuthenticatedProcessingFilterEntryPoint"/>
+
+	<beans:bean id="preAuthProvider"
+		class="org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationProvider">
+		<beans:property name="preAuthenticatedUserDetailsService">
+            <beans:bean id="preAuthenticatedUserDetailsService" class="org.springframework.security.core.userdetails.UserDetailsByNameServiceWrapper">
+              <beans:property name="userDetailsService" ref="authenticationDao"/>
+            </beans:bean>
+        </beans:property>
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+
+    <authentication-manager>
+        <authentication-provider user-service-ref="authenticationDao"/>
+        <authentication-provider ref="preAuthProvider" />
+    </authentication-manager>
+
+    <beans:bean id="authenticationDao" class="org.springframework.security.core.userdetails.jdbc.JdbcDaoImpl">
+        <beans:property name="dataSource" ref="dataSource"/>
+        <beans:property name="usersByUsernameQuery">
+            <beans:value>
+                SELECT USERNAME, PASSWORD, (CONFIRMED_REGISTRATION AND ACTIVE) AS ENABLED FROM USERS WHERE USERNAME=?
+            </beans:value>
+        </beans:property>
+        <beans:property name="authoritiesByUsernameQuery">
+            <beans:value>
+                SELECT USERNAME, SHORT_NAME AS PRIVILEGE FROM USERS U, USER_COMPANY_ROLE UCR, ROLE R WHERE U.ID =
+                UCR.USER_FK AND UCR.ROLE_FK = R.ID AND USERNAME=?
+            </beans:value>
+        </beans:property>
+    </beans:bean>
+
+    <beans:bean id="userSessionPreAuthenticatedProcessingFilter" class="fineline.focal.common.security.UserSessionPreAuthenticatedProcessingFilter">
+      <beans:property name="sessionManager" ref="sessionManager"/>
+      <beans:property name="authenticationManager" ref="org.springframework.security.authenticationManager"/>
+      <beans:property name="paramName" value="rabbitHole"/>
+    </beans:bean>
+
+    <beans:bean id="sessionManager" class="fineline.focal.common.security.UserSessionManager">
+      <beans:property name="sessionCookieName" value="NETSSESSIONID"/>
+      <beans:property name="cookieDomain" value="${cookieDomain}"/>
+      <beans:property name="commandService" ref="commandService"/>
+    </beans:bean>
+
+    <beans:bean id="commandService" class="fineline.focal.common.service.DefaultCommandService" />
+
+    <global-method-security secured-annotations="enabled" jsr250-annotations="enabled"
+                            access-decision-manager-ref="businessAccessDecisionManager">
+        <after-invocation-provider ref="afterAclRead"/>
+        <after-invocation-provider ref="afterAclCollectionRead"/>
+    </global-method-security>
+
+</beans:beans>

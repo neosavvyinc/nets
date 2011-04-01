@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="NETS">
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	
+	<fx:Script>
+		<![CDATA[
+			import com.neosavvy.Constants;
+			import com.neosavvy.model.SessionState;
+			import com.neosavvy.user.dto.companyManagement.SecurityWrapperDTO;
+			import com.neosavvy.user.dto.companyManagement.UserDTO;
+			
+			import mx.messaging.ChannelSet;
+			import mx.messaging.channels.AMFChannel;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			import mx.rpc.remoting.mxml.RemoteObject;
+			
+			private var sessionId : String;
+			private var userDTO : UserDTO;  
+			
+			private var remoteObject : RemoteObject;
+			protected function loginClicked( event : Event ) : void 
+			{
+				var channelSet : ChannelSet = new ChannelSet();
+				var channel:AMFChannel = new AMFChannel("user-amf");
+				channel.url = Constants.AMF_URL;
+				channelSet.addChannel(channel);
+				channelSet.login( user.text, password.text );
+				channelSet.addEventListener(ResultEvent.RESULT, handleResult);
+				channelSet.addEventListener(FaultEvent.FAULT, handleFault);
+				
+				remoteObject = new RemoteObject("userService");					
+				remoteObject.channelSet = channelSet; 
+				
+			}
+			
+			protected function handleResult( result : ResultEvent ) : void
+			{
+				trace("User Logged in...");
+				remoteObject.addEventListener(ResultEvent.RESULT, onUserDetailsResult);
+				remoteObject.addEventListener(FaultEvent.FAULT, onUserDetailsFault);
+				remoteObject.getUserDetails();
+				
+			}
+			
+			protected function handleFault( fault : FaultEvent ) : void
+			{
+				trace("User Login failed...");
+				message.text = "Failed login, try again";
+			}
+			
+			protected function onUserDetailsResult(event:ResultEvent):void
+			{
+				trace("User details were retrieved");
+				var securityWrapper:SecurityWrapperDTO = event.result as SecurityWrapperDTO;
+				sessionId = securityWrapper.sessionId;
+				userDTO = securityWrapper.user;
+				
+				var sessionState : SessionState = new SessionState();
+				sessionState.user = userDTO;
+				sessionState.securityWrapper = securityWrapper;
+				
+				this.data = sessionState;
+				
+				navigator.pushView( DashboardView, sessionState );
+			}
+			
+			
+			protected function onUserDetailsFault(event:FaultEvent):void
+			{
+				trace("Failed to retrieve user details: " + event.fault.faultString);
+			}
+			
+			
+		]]>
+	</fx:Script>
+	
+	<s:TextInput id="user" width="100%" text="neosavvy"/>
+	<s:TextInput id="password" displayAsPassword="true" width="100%" text="winter69"/>
+	<s:Button id="loginButton" label="Login" click="loginClicked(event)" />
+	<s:Label id="message"/>
+			 
+</s:View>

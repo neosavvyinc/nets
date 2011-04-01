@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    
+    <parent>
+		<groupId>com.neosavvy.commons.user</groupId>
+        <artifactId>maven-flex-webapp-commons-user-toplevel</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.neosavvy.commons.user</groupId>
+	<artifactId>commons-user-flex-model-lib</artifactId>
+	<name>commons-user-flex-model-lib</name>
+    <packaging>swc</packaging>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<version>${flex.mojos.maven.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+                            <baseOutputDirectory>${project.build.directory}/generated-sources/flex-mojos</baseOutputDirectory>
+                            <outputDirectory>${project.build.sourceDirectory}</outputDirectory>
+                            <outputEnumToBaseOutputDirectory>true</outputEnumToBaseOutputDirectory>
+
+							<includeJavaClasses>
+								<includeClass>com.neosavvy.user.dto.*</includeClass>
+                                <includeClass>com.neosavvy.user.dto.base.*</includeClass>
+                                <includeClass>com.neosavvy.user.dto.project.*</includeClass>
+                                <includeClass>com.neosavvy.user.service.exception.*</includeClass>
+                                <includeClass>fineline.focal.common.types.v1.*</includeClass>
+                            </includeJavaClasses>
+                            <excludeJavaClasses>
+                                <excludeJavaClass>fineline.focal.common.types.v1.IdentifiableEntity</excludeJavaClass>
+                            </excludeJavaClasses>
+                            <entityTemplate>
+                                 <param>${basedir}/src/main/template/entityBase.gsp</param>
+                                 <param>${basedir}/src/main/template/entity.gsp</param>
+                             </entityTemplate>
+                             <beanTemplate>
+                                 <param>${basedir}/src/main/template/beanBase.gsp</param>
+                                 <param>${basedir}/src/main/template/bean.gsp</param>
+                             </beanTemplate>
+                             <interfaceTemplate>
+                                 <param>${basedir}/src/main/template/interfaceBase.gsp</param>
+                                 <param>${basedir}/src/main/template/interface.gsp</param>
+                             </interfaceTemplate>
+                             <enumTemplate>
+                                 <param>${basedir}/src/main/template/enum.gsp</param>
+                             </enumTemplate>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+                    <configurationReport>true</configurationReport>
+					<debug>true</debug>
+					<locales>
+						<param>en_US</param>
+					</locales>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.neosavvy.commons.user</groupId>
+			<artifactId>commons-user-java-lib</artifactId>
+			<version>1.0</version>
+			<scope>provided</scope>
+		</dependency>
+        <dependency>
+            <groupId>com.neosavvy.commons.user</groupId>
+            <artifactId>commons-java-lib</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
+        </dependency>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex.version}</version>
+			<type>pom</type>
+		</dependency>
+        <dependency>
+            <groupId>com.adobe.flex.framework</groupId>
+            <artifactId>playerglobal</artifactId>
+            <classifier>10</classifier>
+            <type>swc</type>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.persistence</groupId>
+            <artifactId>org.eclipse.persistence.core</artifactId>
+        </dependency>
+        
+	</dependencies>
+</project>

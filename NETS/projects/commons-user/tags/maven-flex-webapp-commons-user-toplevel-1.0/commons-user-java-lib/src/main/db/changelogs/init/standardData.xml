@@ -1,0 +1,412 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+  xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.9"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.9
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.9.xsd">
+    <changeSet id="1" author="tommy">
+        <insert tableName="ROLE">
+            <column name="LONG_NAME" value="Company Administrator"/>
+            <column name="SHORT_NAME" value="ROLE_ADMIN"/>
+        </insert>
+        <insert tableName="ROLE">
+            <column name="LONG_NAME" value="Company Employee"/>
+            <column name="SHORT_NAME" value="ROLE_EMPLOYEE"/>
+        </insert>
+        <insert tableName="PROJECT_TYPE">
+            <column name="TYPE" value="Administrative" />
+        </insert>
+        <insert tableName="PROJECT_TYPE">
+            <column name="TYPE" value="Non-Billable" />
+        </insert>
+        <insert tableName="PROJECT_TYPE">
+            <column name="TYPE" value="Billable" />            
+        </insert>
+
+        <insert tableName="PAYMENT_METHOD">
+            <column name="ID" value="1" />
+            <column name="TYPE" value="STANDARD" />
+            <column name="NAME" value="Employee Paid" />
+            <column name="DESCRIPTION" value="Expense to be reimbursed to employee" />
+        </insert>
+
+        <insert tableName="STANDARD_PAYMENT_METHOD">
+            <column name="ID" value="1" />
+        </insert>
+
+        <insert tableName="PAYMENT_METHOD">
+            <column name="ID" value="2" />
+            <column name="TYPE" value="STANDARD" />
+            <column name="NAME" value="Company Paid" />
+            <column name="DESCRIPTION" value="Expense will not be reimbursed to employee" />
+        </insert>
+
+        <insert tableName="STANDARD_PAYMENT_METHOD">
+            <column name="ID" value="2" />
+        </insert>
+
+        <insert tableName="PAYMENT_METHOD">
+            <column name="ID" value="3" />
+            <column name="TYPE" value="STANDARD" />
+            <column name="NAME" value="Corp Card" />
+            <column name="DESCRIPTION" value="Expense was on the corporate card and will not be reimbursed" />
+        </insert>
+
+        <insert tableName="STANDARD_PAYMENT_METHOD">
+            <column name="ID" value="3" />            
+        </insert>
+
+        <alterSequence sequenceName="payment_method_id_seq" incrementBy="3"/>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="1" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Advance" />
+            <column name="DESCRIPTION" value="Cash Advances made by the employee for cash related purchases" />
+            <column name="SORT_ORDER" value="1" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="1" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="2" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Air &amp; Rail" />
+            <column name="DESCRIPTION" value="Air and Rail travel expenses" />
+            <column name="SORT_ORDER" value="2" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="2" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="3" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Auto Parking" />
+            <column name="DESCRIPTION" value="Parking related expenses for garage, street, or valet parking" />
+            <column name="SORT_ORDER" value="3" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="3" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="4" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Auto Rental" />
+            <column name="DESCRIPTION" value="Car rentals for business travel" />
+            <column name="SORT_ORDER" value="4" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="4" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="5" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Auto tolls" />
+            <column name="DESCRIPTION" value="Toll fees" />
+            <column name="SORT_ORDER" value="5" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="5" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="6" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Cell Phone" />
+            <column name="DESCRIPTION" value="Personal Cell phone expenses for business use" />
+            <column name="SORT_ORDER" value="6" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="6" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="7" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Computer Supplies" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="7" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="7" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="8" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Entertainment" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="8" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="8" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="9" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Home Office" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="9" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="9" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="10" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Incidentals" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="10" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="10" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="11" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Local Transportation" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="11" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="11" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="12" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Lodging" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="12" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="12" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="13" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Lodging Apartments" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="13" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="13" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="14" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Lodging Per Diem" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="14" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="14" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="15" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Meals (Actual)" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="15" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="15" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="16" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Meals (Per Diem)" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="16" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="16" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="17" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Mileage" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="17" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="17" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="18" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Office Supplies" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="18" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="18" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="19" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Paid on behalf of others" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="19" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="19" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="20" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Breakfast" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="20" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="20" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="21" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Lunch (Per Diem)" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="21" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="21" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="22" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Dinner (Per Diem)" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="22" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="22" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="23" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Postage Delivery" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="23" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="23" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="24" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Printing Copying" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="24" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="24" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="25" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Marketing" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="25" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="25" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="26" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Teleconference" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="26" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="26" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="27" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Telephone" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="27" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="27" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="28" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Education" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="28" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="28" />
+        </insert>
+
+        <insert tableName="EXPENSE_ITEM_TYPE">
+            <column name="ID" value="29" />
+            <column name="TYPE" value="STANDARD_EXPENSE_ITEM_TYPE" />
+            <column name="NAME" value="Miscellaneous" />
+            <column name="DESCRIPTION" value="" />
+            <column name="SORT_ORDER" value="29" />
+        </insert>
+
+        <insert tableName="STANDARD_EXPENSE_ITEM_TYPE">
+            <column name="ID" value="29" />
+        </insert>
+
+        <alterSequence sequenceName="expense_item_type_id_seq" incrementBy="50"/>
+    </changeSet>
+</databaseChangeLog>

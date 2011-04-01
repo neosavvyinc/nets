@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<mx:VBox
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:datagridclasses="mx.controls.dataGridClasses.*"
+        styleName="applicationView"
+        verticalScrollPolicy="off"
+        horizontalScrollPolicy="off">
+
+    <mx:HBox width="100%" horizontalAlign="right" styleName="headingTitleBox">
+        <mx:Label text="View Employees For Your Company"/>
+    </mx:HBox>
+
+    <mx:HBox width="100%" horizontalAlign="right">
+        <mx:ToggleButtonBar id="userStatusFilterButtonBar">
+            <mx:dataProvider>
+                <mx:String>All</mx:String>
+                <mx:String>Active</mx:String>
+                <mx:String>Inactive</mx:String>
+            </mx:dataProvider>
+        </mx:ToggleButtonBar>
+        <!--<mx:Button id="deactivateAllSelected" label="Deactivate All Selected"/>-->
+        <!--<mx:Button id="activateAllSelected" label="Activate All Selected"/>-->
+
+    </mx:HBox>
+
+    <mx:DataGrid
+            id="grid"
+            width="100%"
+            height="100%"
+            >
+        <mx:columns>
+            <datagridclasses:DataGridColumn
+                    id="fNameCol"
+                    dataField="firstName"
+                    headerText="First Name"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="mNameCol"
+                    dataField="middleName"
+                    headerText="Middle Name"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="lNameCol"
+                    dataField="lastName"
+                    headerText="Last Name"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="usernameCol"
+                    dataField="username"
+                    headerText="Username"
+                    />
+            <datagridclasses:DataGridColumn
+                    id="actions"
+                    headerText="Actions"
+                    itemRenderer="com.neosavvy.user.view.secured.userManagement.Actions"
+                    />
+        </mx:columns>
+    </mx:DataGrid>
+</mx:VBox>
