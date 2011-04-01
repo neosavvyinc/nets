@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:View xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		xmlns:s="library://ns.adobe.com/flex/spark" title="BaseNETSView">
+	
+	<fx:Script>
+		<![CDATA[
+			import com.neosavvy.Constants;
+			
+			import mx.messaging.ChannelSet;
+			import mx.messaging.channels.AMFChannel;
+			import mx.rpc.events.FaultEvent;
+			import mx.rpc.events.ResultEvent;
+			
+			import spark.transitions.SlideViewTransition;
+			
+			protected function logout_clickHandler(event:MouseEvent):void
+			{
+				
+				logoutHandler();
+			}
+			
+			private function logoutHandler():void
+			{
+				var channelSet : ChannelSet = new ChannelSet();
+				var channel:AMFChannel = new AMFChannel("user-amf");
+				channel.url = Constants.AMF_URL;
+				channelSet.addChannel(channel);
+				channelSet.logout();
+				channelSet.addEventListener(ResultEvent.RESULT, handleLogoutResult);
+				channelSet.addEventListener(FaultEvent.FAULT, handleLogoutFault);
+			}
+			
+			protected function handleLogoutResult(event:ResultEvent):void
+			{
+				navigator.pushView( LoginView, null, new SlideViewTransition() );
+			}
+			
+			protected function handleLogoutFault(event:FaultEvent):void
+			{
+			}
+		]]>
+	</fx:Script>
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	<s:actionContent>
+		<s:Button label="Logout" click="logout_clickHandler( event )"/>
+	</s:actionContent>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+</s:View>

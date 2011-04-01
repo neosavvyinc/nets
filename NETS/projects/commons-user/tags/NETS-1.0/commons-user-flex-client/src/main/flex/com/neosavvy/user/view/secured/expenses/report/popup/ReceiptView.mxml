@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<mx:TitleWindow xmlns:mx="http://www.adobe.com/2006/mxml"
+        verticalAlign="middle"
+        horizontalAlign="center"
+        showCloseButton="true"
+        close="{close()}"
+        maxWidth="1000"
+        maxHeight="700"
+        >
+    <mx:Script><![CDATA[
+        import mx.core.IFlexDisplayObject;
+        import mx.managers.PopUpManager;
+
+        private function close():void {
+            PopUpManager.removePopUp(this);
+        }
+
+        [Bindable]
+        private var _imageUrl:String;
+
+
+        public function get imageUrl():String {
+            return _imageUrl;
+        }
+
+        public function set imageUrl(value:String):void {
+            receiptImg.addEventListener(Event.COMPLETE, handleImageComplete);
+            _imageUrl = value;
+        }
+
+        private function handleImageComplete(event:Event):void {
+
+            if (receiptImg.bytesLoaded == receiptImg.bytesTotal) {
+                callLater(PopUpManager.centerPopUp, [this as IFlexDisplayObject]);
+                receiptImg.removeEventListener(Event.COMPLETE, handleImageComplete);
+            }
+        }
+        ]]></mx:Script>
+
+    <mx:Image id="receiptImg" source="{_imageUrl}" width="95%" height="100%"/>
+</mx:TitleWindow>
