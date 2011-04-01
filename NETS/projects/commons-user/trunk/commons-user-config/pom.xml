@@ -3,7 +3,7 @@
 	
     <parent>
 		<groupId>com.neosavvy.commons.user</groupId>
-        <artifactId>maven-flex-webapp-commons-user-toplevel</artifactId>
+        <artifactId>NETS</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
 	
