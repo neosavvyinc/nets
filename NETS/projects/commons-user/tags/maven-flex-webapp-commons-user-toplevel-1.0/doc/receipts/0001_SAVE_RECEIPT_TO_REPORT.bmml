@@ -1,0 +1,23 @@
+<mockup version="1.0" skin="sketch" measuredW="810" measuredH="348" mockupW="722" mockupH="319">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::Image" x="97" y="34" w="172" h="196" measuredW="77" measuredH="79" zOrder="1" locked="false" isInGroup="-1"/>
+    <control controlID="1" controlTypeID="com.balsamiq.mockups::Canvas" x="78" y="19" w="210" h="319" measuredW="100" measuredH="70" zOrder="0" locked="false" isInGroup="-1"/>
+    <control controlID="2" controlTypeID="com.balsamiq.mockups::Button" x="97" y="295" w="79" h="28" measuredW="63" measuredH="28" zOrder="2" locked="false" isInGroup="-1"/>
+    <control controlID="3" controlTypeID="com.balsamiq.mockups::Button" x="191" y="295" w="78" h="28" measuredW="63" measuredH="28" zOrder="3" locked="false" isInGroup="-1"/>
+    <control controlID="4" controlTypeID="com.balsamiq.mockups::ComboBox" x="97" y="257" w="121" h="-1" measuredW="111" measuredH="23" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Add%20to%20new...</text>
+      </controlProperties>
+    </control>
+    <control controlID="5" controlTypeID="com.balsamiq.mockups::Button" x="218" y="254" w="51" h="28" measuredW="50" measuredH="28" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>ADD</text>
+      </controlProperties>
+    </control>
+    <control controlID="6" controlTypeID="com.balsamiq.mockups::TextArea" x="321" y="19" w="479" h="319" measuredW="200" measuredH="140" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>If%20the%20user%20wishes%20to%20create%20a%20new%20expense%20item%20in%20an%20existing%20report%20they%20just%20select%20the%20open%20expense%20report%20from%20the%20dropdown%20and%20click%20add.%20%0A%20%0AThe%20UI%20will%20navigate%20to%20the%20expense%20report%20and%20create%20a%20new%20item%20for%20it.%20The%20user%20will%20be%20required%20to%20populate%20the%20necessary%20fields.%20%0A%20%0AThe%20user%20may%20also%20add%20to%20a%20new%20expense%20report%20by%20clicking%20%22add%20to%20new%22%20which%20will%20create%20an%20expense%20report%20and%20one%20item.%20The%20user%20will%20be%20required%20to%20populate%20the%20name%20and%20all%20information%20about%20the%20expense%20report%20item.%20</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>

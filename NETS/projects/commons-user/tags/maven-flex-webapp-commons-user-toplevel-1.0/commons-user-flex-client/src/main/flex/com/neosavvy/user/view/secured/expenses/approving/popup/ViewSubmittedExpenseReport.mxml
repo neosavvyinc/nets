@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<mx:Panel
+        xmlns:mx="http://www.adobe.com/2006/mxml" xmlns:datagridclasses="mx.controls.dataGridClasses.*"
+        xmlns:drawer="com.components.drawer.*"
+        styleName="grayToGrayViewContainer"
+        layout="vertical"
+        width="800"
+        verticalGap="0"
+        paddingLeft="0"
+        paddingRight="0"
+        paddingTop="0"
+        paddingBottom="0"
+        horizontalScrollPolicy="off"
+        verticalScrollPolicy="off"
+        >
+
+
+    <mx:Script><![CDATA[
+        import com.neosavvy.user.dto.project.ExpenseItem;
+        import com.neosavvy.user.dto.project.ExpenseReport;
+        import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
+
+        import mx.collections.ListCollectionView;
+        import mx.managers.PopUpManager;
+
+        [Bindable]
+        public var adminMode:Boolean;
+
+        private function close():void {
+            PopUpManager.removePopUp(this);
+        }
+
+        private function confirmApprove():void {
+
+            dispatchEvent(new ExpenseReportApproveEvent(
+                    ExpenseReportApproveEvent.ACTION_APPROVE_CONFIRM
+                    , _expenseReport
+                    , commentText.text
+            ))
+
+            close();
+        }
+
+        private function confirmDecline():void {
+
+            dispatchEvent(new ExpenseReportApproveEvent(
+                    ExpenseReportApproveEvent.ACTION_DECLINE_CONFIRM
+                    , _expenseReport
+                    , commentText.text
+            ))
+
+            close();
+        }
+
+        private var _expenseReport:ExpenseReport
+
+        private var _expenseReportItems:ListCollectionView;
+
+        public function get expenseReport():ExpenseReport {
+            return _expenseReport;
+        }
+
+        public function set expenseReport(value:ExpenseReport):void {
+            _expenseReport = value;
+
+            projectNameLabel.text = _expenseReport.project.name;
+            locationLabel.text = _expenseReport.location;
+            purposeLabel.text = _expenseReport.purpose;
+        }
+
+        public function get expenseReportItems():ListCollectionView {
+            return _expenseReportItems;
+        }
+
+        public function set expenseReportItems(value:ListCollectionView):void {
+            _expenseReportItems = value;
+
+            expenseReportGrid.dataProvider = value;
+        }
+
+        private function projectTypeLabelFunction(data:Object, column:DataGridColumn):String {
+            if (data is ExpenseItem && (data as ExpenseItem).projectType) {
+                return (data as ExpenseItem).projectType.type;
+            }
+            return null;
+        }
+
+        private function paymentMethodLabelFunction(data:Object, column:DataGridColumn):String {
+            if (data is ExpenseItem && (data as ExpenseItem).paymentMethod) {
+                return (data as ExpenseItem).paymentMethod.name;
+            }
+            return null;
+        }
+
+        private function expenseTypeLabelFunction(data:Object, column:DataGridColumn):String {
+            if (data is ExpenseItem && (data as ExpenseItem).expenseItemType) {
+                return (data as ExpenseItem).expenseItemType.name;
+            }
+            return null;
+        }
+        private function formatDate(item:Object, column:DataGridColumn):String {
+            return dateFormat.format(ExpenseItem(item).expenseDate);
+        }
+        ]]></mx:Script>
+    <mx:DateFormatter id="dateFormat" formatString="MM-DD-YYYY"/>
+    <mx:HBox
+            width="100%"
+            paddingLeft="10"
+            paddingRight="10"
+            paddingTop="10"
+            paddingBottom="10"
+            styleName="formWindow"
+            horizontalScrollPolicy="off"
+            verticalScrollPolicy="off">
+        <mx:VBox horizontalScrollPolicy="off" verticalScrollPolicy="off" width="100%">
+            <mx:Label styleName="secondaryTitle" text="Viewing Submitted Expense Report"/>
+
+            <mx:Form id="expenseReportSummaryForm" width="100%">
+                <mx:FormItem id="projectFormItem" label="Project:">
+                    <mx:Label id="projectNameLabel"/>
+                </mx:FormItem>
+                <mx:FormItem id="purposeFormItem" label="Purpose:">
+                    <mx:Label id="purposeLabel"/>
+                </mx:FormItem>
+                <mx:FormItem id="locationFormItem" label="Location:">
+                    <mx:Label id="locationLabel"/>
+                </mx:FormItem>
+            </mx:Form>
+
+            <mx:DataGrid
+                    sortableColumns="false"
+                    id="expenseReportGrid"
+                    width="100%"
+                    height="100%">
+                <mx:columns>
+                    <datagridclasses:DataGridColumn
+                            id="dateColumn"
+                            headerText="Date"
+                            dataField="expenseDate"
+                            labelFunction="formatDate"
+                            />
+                    <datagridclasses:DataGridColumn
+                            id="expenseTypeColumn"
+                            headerText="Expense Type"
+                            dataField="expenseItemType"
+                            labelFunction="{expenseTypeLabelFunction}"
+                            />
+                    <datagridclasses:DataGridColumn
+                            id="paymentMethodColumn"
+                            headerText="Payment Method"
+                            dataField="paymentMethod"
+                            labelFunction="{paymentMethodLabelFunction}"
+                            />
+                    <datagridclasses:DataGridColumn
+                            id="projectTypeColumn"
+                            headerText="Project Type"
+                            dataField="projectType"
+                            labelFunction="{projectTypeLabelFunction}"
+                            />
+                    <datagridclasses:DataGridColumn
+                            id="amountColumn"
+                            headerText="Amount"
+                            dataField="amountNumber"
+                            >
+                        <datagridclasses:itemRenderer>
+                            <mx:Component>
+                                <mx:HBox horizontalAlign="right" paddingRight="5">
+                                    <mx:Label text="{StringUtils.formatCurrency( data.amount )}"/>
+                                    <mx:Script><![CDATA[
+                                        import com.neosavvy.user.util.StringUtils;
+                                        ]]></mx:Script>
+                                </mx:HBox>
+                            </mx:Component>
+                        </datagridclasses:itemRenderer>
+                    </datagridclasses:DataGridColumn>
+                </mx:columns>
+            </mx:DataGrid>
+            <mx:Label text="Approve/Decline Comment:" visible="{adminMode}" includeInLayout="{adminMode}"/>
+            <mx:TextArea id="commentText" width="100%" height="150" visible="{adminMode}" includeInLayout="{adminMode}"/>
+        </mx:VBox>
+    </mx:HBox>
+
+    <mx:HBox
+            styleName="formSectionContainer"
+            horizontalAlign="right"
+            width="100%">
+        <mx:Button styleName="orangeLargeButton" label="Approve" click="confirmApprove()" visible="{adminMode}" includeInLayout="{adminMode}"/>
+        <mx:Spacer width="100%"/>
+        <mx:Button styleName="orangeLargeButton" label="Close" click="close()"/>
+        <mx:Button styleName="orangeLargeButton" label="Decline" click="confirmDecline()" visible="{adminMode}" includeInLayout="{adminMode}"/>
+
+        <!--<mx:Button label="toggle drawer" click="{drawer.open = (!drawer.open)}"/>-->
+    </mx:HBox>
+
+    <!--<drawer:DrawerOpener-->
+        <!--id="drawer"-->
+        <!--alignment="right"-->
+        <!--open="true"-->
+        <!--animate="true"-->
+        <!--drawer=""/>-->
+
+</mx:Panel>
+
+

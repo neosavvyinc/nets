@@ -1,0 +1,135 @@
+<mockup version="1.0" skin="sketch" measuredW="1534" measuredH="788" mockupW="1464" mockupH="768">
+  <controls>
+    <control controlID="0" controlTypeID="com.balsamiq.mockups::TitleWindow" x="60" y="10" w="1024" h="768" measuredW="450" measuredH="400" zOrder="0" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Expense%20Tracking%20System</text>
+        <topheight>45</topheight>
+      </controlProperties>
+    </control>
+    <control controlID="72" controlTypeID="com.balsamiq.mockups::ComboBox" x="535" y="137" w="-1" h="-1" measuredW="114" measuredH="23" zOrder="13" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Project%20Name</text>
+      </controlProperties>
+    </control>
+    <control controlID="73" controlTypeID="com.balsamiq.mockups::Label" x="306" y="139" w="232" h="23" measuredW="232" measuredH="23" zOrder="14" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20Project%20to%20Assign%20Participants%3A</text>
+      </controlProperties>
+    </control>
+    <control controlID="77" controlTypeID="com.balsamiq.mockups::Label" x="305" y="165" w="729" h="49" measuredW="1326" measuredH="23" zOrder="15" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Create%20an%20approval%20workflow%20that%20submitted%20expense%20forms%20for%20this%20project%20will%20go%20through.%20It%20can%20be%20as%20simple%20as%20submitting%20to%20one%20user%20before%20being%20queued%20for%20client%20invoicing%20or%20it%20can%20go%20through%20multiple%20approvers.</text>
+      </controlProperties>
+    </control>
+    <control controlID="78" controlTypeID="com.balsamiq.mockups::Button" x="957" y="663" w="-1" h="-1" measuredW="52" measuredH="28" zOrder="16" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Save</text>
+      </controlProperties>
+    </control>
+    <control controlID="15" controlTypeID="com.balsamiq.mockups::TextArea" x="1127" y="10" w="397" h="627" measuredW="200" measuredH="140" zOrder="1" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>This%20will%20be%20a%20simple%20project%20specific%20workflow%20that%20will%20allow%20for%20one%20or%20more%20people%20to%20become%20the%20approvers%20for%20a%20submitted%20expense%20form.%0A%20%0AA%20dynamic%20simple%20expression%20will%20be%20generated%20to%20explain%20in%20plain%20english%20what%20will%20happen%20when%20an%20expense%20is%20submitted.%0A%20%0AThe%20order%20of%20approvers%20can%20be%20drag/dropped%20reordered%20like%20a%20linked-list.%0A%20%0ARemovel%20of%20a%20user%20is%20as%20simple%20as%20dragging%20them%20out%20of%20the%20list%20and%20dropping%20or%20selecting%20the%20delete%20button%20beside%20their%20name.%0A%20%0AClicking%20save%20will%20persist%20all%20changes%20and%20navigation%20away%20from%20this%20screen%20will%20try%20to%20prompt%20a%20user%20to%20save%20their%20changes%20or%20discard%20them.</text>
+      </controlProperties>
+    </control>
+    <control controlID="21" controlTypeID="com.balsamiq.mockups::TitleWindow" x="75" y="63" w="192" h="298" measuredW="450" measuredH="400" zOrder="2" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Admin%20Navigation</text>
+        <topheight>26</topheight>
+      </controlProperties>
+    </control>
+    <control controlID="22" controlTypeID="com.balsamiq.mockups::TitleWindow" x="75" y="372" w="192" h="259" measuredW="450" measuredH="400" zOrder="3" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Employee%20Navigation</text>
+        <topheight>26</topheight>
+      </controlProperties>
+    </control>
+    <control controlID="24" controlTypeID="com.balsamiq.mockups::Button" x="90" y="94" w="162" h="-1" measuredW="77" measuredH="28" zOrder="4" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Welcome</text>
+      </controlProperties>
+    </control>
+    <control controlID="25" controlTypeID="com.balsamiq.mockups::Button" x="90" y="128" w="162" h="-1" measuredW="125" measuredH="28" zOrder="5" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Invite%20Employees</text>
+      </controlProperties>
+    </control>
+    <control controlID="90" controlTypeID="com.balsamiq.mockups::Icon" x="304" y="252" w="-1" h="-1" measuredW="24" measuredH="24" zOrder="17" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>CircledPlusIcon%7Csmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="27" controlTypeID="com.balsamiq.mockups::Button" x="90" y="198" w="162" h="-1" measuredW="158" measuredH="28" zOrder="7" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>View%20Active%20Employees</text>
+      </controlProperties>
+    </control>
+    <control controlID="28" controlTypeID="com.balsamiq.mockups::Button" x="90" y="235" w="162" h="-1" measuredW="170" measuredH="28" zOrder="8" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>View%20Inactive%20Employees</text>
+      </controlProperties>
+    </control>
+    <control controlID="29" controlTypeID="com.balsamiq.mockups::Button" x="90" y="269" w="162" h="-1" measuredW="125" measuredH="28" zOrder="9" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Manage%20Projects</text>
+      </controlProperties>
+    </control>
+    <control controlID="30" controlTypeID="com.balsamiq.mockups::Button" x="90" y="303" w="162" h="-1" measuredW="116" measuredH="28" zOrder="10" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Manage%20Clients</text>
+      </controlProperties>
+    </control>
+    <control controlID="31" controlTypeID="com.balsamiq.mockups::TitleWindow" x="279" y="60" w="783" h="680" measuredW="450" measuredH="400" zOrder="11" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Manage%20Projects</text>
+        <topheight>26</topheight>
+      </controlProperties>
+    </control>
+    <control controlID="96" controlTypeID="com.balsamiq.mockups::Icon" x="504" y="313" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="22" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>CircledXIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="97" controlTypeID="com.balsamiq.mockups::Icon" x="504" y="328" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="23" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>CircledXIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="98" controlTypeID="com.balsamiq.mockups::TextArea" x="1127" y="652" w="395" h="126" measuredW="200" measuredH="140" zOrder="24" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Author%3A%20Adam%20Parrish%0ACompany%3A%20Neosavvy%2C%20Inc.%0AEmail%3A%20aparrish@neosavvy.com%0A%20%0ACompany%20Confidential%20-%20Do%20not%20distribute%20without%20prior%20consent%20from%20author</text>
+      </controlProperties>
+    </control>
+    <control controlID="91" controlTypeID="com.balsamiq.mockups::ComboBox" x="328" y="252" w="225" h="-1" measuredW="251" measuredH="23" zOrder="18" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Select%20User%20For%20Approval%20Work%20Flow</text>
+      </controlProperties>
+    </control>
+    <control controlID="93" controlTypeID="com.balsamiq.mockups::List" x="306" y="290" w="247" h="386" measuredW="100" measuredH="126" zOrder="19" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Approver%20One%0AApprover%20Two%0AApprover%20Three</text>
+        <verticalScrollbar>true</verticalScrollbar>
+      </controlProperties>
+    </control>
+    <control controlID="94" controlTypeID="com.balsamiq.mockups::Label" x="568" y="290" w="250" h="125" measuredW="1201" measuredH="23" zOrder="20" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Dynamic%20Verbal%20Explanation%20of%20Workflow%3A%20Approver%20One%20will%20first%20approve%20expenses%2C%20Approver%20Two%20will%20approver%20expenses%20second%2C%20and%20finally%20Approver%20Three%20will%20finalize%20expenses%20for%20%3CCLIENTNAME%3E</text>
+      </controlProperties>
+    </control>
+    <control controlID="95" controlTypeID="com.balsamiq.mockups::Icon" x="504" y="297" w="-1" h="-1" measuredW="16" measuredH="16" zOrder="21" locked="false" isInGroup="-1">
+      <controlProperties>
+        <icon>CircledXIcon%7Cxsmall</icon>
+      </controlProperties>
+    </control>
+    <control controlID="26" controlTypeID="com.balsamiq.mockups::Button" x="90" y="162" w="162" h="-1" measuredW="117" measuredH="28" zOrder="6" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>View%20Employees</text>
+        <bold>false</bold>
+      </controlProperties>
+    </control>
+    <control controlID="58" controlTypeID="com.balsamiq.mockups::TabBar" x="291" y="94" w="758" h="611" measuredW="519" measuredH="100" zOrder="12" locked="false" isInGroup="-1">
+      <controlProperties>
+        <text>Manage%20Projects%2C%20Manage%20Assignments%2C%20Manage%20Approval%20Workflow</text>
+      </controlProperties>
+    </control>
+  </controls>
+</mockup>
