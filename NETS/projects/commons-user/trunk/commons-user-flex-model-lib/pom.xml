@@ -63,6 +63,11 @@
 					<locales>
 						<param>en_US</param>
 					</locales>
+                    <sourcePaths>
+                        <path>${basedir}/src/main/flex</path>
+                        <path>${basedir}/src/main/resources</path>
+                        <path>${basedir}/target/generated-sources/flex-mojos</path>
+                    </sourcePaths>
 				</configuration>
 			</plugin>
 		</plugins>
