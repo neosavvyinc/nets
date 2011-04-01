@@ -5,7 +5,7 @@
     <groupId>com.neosavvy.commons.user</groupId>
     <artifactId>maven-flex-webapp-commons-user-toplevel</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <name>maven-flex-webapp-commons-user-toplevel</name>
 
     <parent>
@@ -15,10 +15,10 @@
     </parent>
 
     <scm>
-        <connection>scm:svn:http://neosavvy.jira.com/svn/NETS/projects/commons-user/trunk/</connection>
-        <developerConnection>scm:svn:http://neosavvy.jira.com/svn/NETS/projects/commons-user/trunk/
+        <connection>scm:svn:http://neosavvy.jira.com/svn/NETS/projects/commons-user/tags/maven-flex-webapp-commons-user-toplevel-1.0</connection>
+        <developerConnection>scm:svn:http://neosavvy.jira.com/svn/NETS/projects/commons-user/tags/maven-flex-webapp-commons-user-toplevel-1.0
         </developerConnection>
-        <url>http://neosavvy.jira.com/svn/NETS/projects/commons-user/trunk/</url>
+        <url>http://neosavvy.jira.com/svn/NETS/projects/commons-user/tags/maven-flex-webapp-commons-user-toplevel-1.0</url>
     </scm>
 
     <distributionManagement>
