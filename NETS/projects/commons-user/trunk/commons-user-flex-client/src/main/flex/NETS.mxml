@@ -10,8 +10,6 @@
         styleName="altApplicationBackground"
         height="100%"
         xmlns:mx="http://www.adobe.com/2006/mxml"
-        xmlns:flexlib="http://code.google.com/p/flexlib/"
-        xmlns:local="*"
         xmlns:companyManagement="com.neosavvy.user.view.companyManagement.*"
         xmlns:security="com.neosavvy.user.view.security.*"
         xmlns:secured="com.neosavvy.user.view.secured.*">
@@ -32,47 +30,9 @@
             navigationViewStack.selectedIndex = event.index;
         }
 
-        protected function handleGettingStartedClicked():void {
-            navigationViewStack.selectedIndex = 2;
-            navigationToggleBar.selectedIndex = 2;
-        }
         ]]>
     </mx:Script>
 
-
-    <mx:HBox
-            id="headerBar"
-            width="960"
-            horizontalGap="0"
-            verticalAlign="bottom"
-            horizontalScrollPolicy="off"
-            verticalScrollPolicy="off"
-            includeInLayout="true">
-        <mx:ToggleButtonBar
-                id="navigationToggleBar"
-                buttonWidth="89"
-                buttonHeight="73"
-                styleName="noGradientHomeNavigation"
-                itemClick="{handleNavigationChange(event)}">
-            <mx:dataProvider>
-                <mx:Array>
-                    <mx:String>HOME</mx:String>
-                    <mx:String>PRICING</mx:String>
-                    <mx:String>SIGN-UP</mx:String>
-                </mx:Array>
-            </mx:dataProvider>
-        </mx:ToggleButtonBar>
-        <mx:VBox horizontalAlign="right" width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
-            <mx:LinkButton id="havingTrouble" label="Having Trouble?" styleName="greenLinkButton"/>
-            <mx:HBox styleName="grayToGrayViewContainer" width="100%" horizontalAlign="right"
-                     horizontalScrollPolicy="off" verticalScrollPolicy="off">
-                <mx:Label text="Already Registered?" styleName="greenLinkButton"/>
-                <!--<flexlib:PromptingTextInput visible="false" prompt="User name" id="userName"/>-->
-                <!--<flexlib:PromptingTextInput visible="false" prompt="Password" id="password" displayAsPassword="true"/>-->
-                <mx:Button label="Log In" id="loginButton" styleName="orangeSmallButton" />
-            </mx:HBox>
-        </mx:VBox>
-    </mx:HBox>
     <mx:HBox
             id="secureHeaderBar"
             width="960"
@@ -96,10 +56,8 @@
             height="100%"
             minHeight="600"
             selectedIndex="0">
-        <local:Home id="homeContent" height="100%" width="100%" verticalGap="-1" getStartedClicked="handleGettingStartedClicked()"/>
-        <local:Pricing id="pricingContent" height="100%" width="100%" verticalGap="-1" getStartedClicked="handleGettingStartedClicked()"/>
-        <companyManagement:Signup id="signupContent" height="100%" width="100%" verticalGap="-1"/>
         <security:Login id="login" width="100%" height="100%"/>
+        <companyManagement:Signup id="signupContent" height="100%" width="100%" verticalGap="-1"/>
         <secured:SecuredContainer id="securedContainer" width="100%" height="100%"/>
     </mx:ViewStack>
 

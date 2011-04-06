@@ -30,14 +30,8 @@ package com.neosavvy.user {
     public class ApplicationMediator extends Mediator implements IMediator {
 
         public static var LANDING_NAVIGATION_INDEX:Number = 0;
-        public static var COMPANY_MANAGEMENT_NAVIGATION_INDEX:Number = 1;
-
-        public static var EMPLOYEE_MANAGEMENT_NAVIGATION_INDEX:Number = 3;
-        public static var NEW_USER_CONFIRMATION_INDEX:Number = 5;
-
-
-        public static var LOGIN_NAVIGATION_INDEX:Number = 3;
-        public static var SECURED_CONTAINER_NAVIGATION_INDEX:Number = 4;
+        public static var LOGIN_NAVIGATION_INDEX:Number = 1;
+        public static var SECURED_CONTAINER_NAVIGATION_INDEX:Number = 2;
 
 
         public function ApplicationMediator(viewComponent:NETS)
@@ -61,14 +55,6 @@ package com.neosavvy.user {
             return app.login;
         }
 
-        public function get loginButton():Button {
-            return app.loginButton;
-        }
-
-        public function get headerBar():Box {
-            return app.headerBar;
-        }
-
         public function get secureHeaderBar():Box {
             return app.secureHeaderBar;
         }
@@ -77,29 +63,10 @@ package com.neosavvy.user {
             return app.securedContainer;
         }
 
-        public function get logoutButton():Button {
-            return app.logoutButton;
-        }
-
-        public function get havingTroubleButton():LinkButton {
-            return app.havingTrouble;
-        }
-
-        public function get contactUsButton():LinkButton {
-            return app.pricingContent.contactUsButton;
-        }
-
         override public function onRegister():void
         {
-            this.loginButton.addEventListener(MouseEvent.CLICK, loginButtonClickedHandler);
-            this.logoutButton.addEventListener(MouseEvent.CLICK, logoutButtonClickedHandler)
             this.login.addEventListener("goHomeClicked",goHomeClickHandler);
-            this.havingTroubleButton.addEventListener(MouseEvent.CLICK, havingTroubleButtonClickedHandler);
-            this.contactUsButton.addEventListener(MouseEvent.CLICK,contactUsButtonClickedHandler);
         }
-
-
-
 
         override public function listNotificationInterests():Array {
             return [
@@ -113,7 +80,6 @@ package com.neosavvy.user {
 
         private function displayLogin():void {
             this.navigationViewStack.selectedIndex = LOGIN_NAVIGATION_INDEX;
-            toggleHeader(false);
             toggleSecuredHeader(false);
             sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
         }
@@ -121,7 +87,6 @@ package com.neosavvy.user {
         public function hideLogin():void
         {
             this.navigationViewStack.selectedIndex = LANDING_NAVIGATION_INDEX;
-            toggleHeader(true);
             toggleSecuredHeader(false);
             sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
         }
@@ -142,17 +107,11 @@ package com.neosavvy.user {
             }
         }
 
-        private function toggleHeader( toggleValue:Boolean ):void {
-            this.headerBar.visible = toggleValue;
-            this.headerBar.includeInLayout = toggleValue;
-        }
-
         override public function handleNotification(notification:INotification):void {
             switch (notification.getName()) {
                 case ApplicationFacade.USER_LOGIN_SUCCESS:
                 case ApplicationFacade.USER_LOGGED_IN:
                     this.navigationViewStack.selectedIndex = SECURED_CONTAINER_NAVIGATION_INDEX;
-                    toggleHeader(false);
                     toggleSecuredHeader(true);
                     sendNotification(ApplicationFacade.INITIALIZE_SECURED_VIEW, securedContainer);
                     break;
@@ -195,23 +154,6 @@ package com.neosavvy.user {
 
         }
 
-        var contactUs:IFlexDisplayObject;
-
-        private function contactUsButtonClickedHandler(event:MouseEvent):void {
-            mailMessageView = PopUpManager.createPopUp(this.app, SystemMailMessageView, true);
-            PopUpManager.centerPopUp( mailMessageView );
-            (mailMessageView as SystemMailMessageView).titleString = "Contact Us!";
-
-            mailMessageView.addEventListener(MailMessageEvent.TYPE, handleContactUsMailMessage);
-
-
-        }
-
-        private function handleContactUsMailMessage(event:MailMessageEvent):void {
-
-            sendNotification(ApplicationFacade.SEND_SYSTEM_MAIL, event.message);
-
-        }
 
     }
 

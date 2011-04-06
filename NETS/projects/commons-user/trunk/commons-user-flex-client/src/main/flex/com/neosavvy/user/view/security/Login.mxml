@@ -6,10 +6,6 @@
         verticalAlign="middle"
         horizontalAlign="center">
 
-    <mx:Metadata>
-        [Event(name="goHomeClicked", type="flash.events.Event")]
-    </mx:Metadata>
-
     <mx:Script><![CDATA[
         // stores the svn build number
         public static const BUILD_NUMBER:Number = BUILD::buildNumber;
@@ -56,9 +52,6 @@
         </mx:Panel>
         <popup:ForgotPasswordPopup id="forgotPasswordPopup"/>
     </security:LoginStack>
-    <mx:LinkButton label="Close Login Screen" click="{dispatchEvent(new Event('goHomeClicked',true))}"/>
     <mx:LinkButton label="Forgot Password" click="stack.toggle()"/>
-
-
 
 </mx:VBox>
