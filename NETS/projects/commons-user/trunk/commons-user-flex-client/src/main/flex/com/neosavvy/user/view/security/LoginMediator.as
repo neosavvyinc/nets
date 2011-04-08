@@ -103,7 +103,7 @@ package com.neosavvy.user.view.security {
         }
 
         private function handleForgotPasswordFault(notification:INotification):void {
-            login.stack.toggle();
+            login.stack.flipBackwards();
             login.stack.addEventListener("endFlip", onFlipFinishedFault);
 
         }
@@ -114,7 +114,7 @@ package com.neosavvy.user.view.security {
         }
 
         private function handleForgotPasswordSuccess(notification:INotification):void {
-            login.stack.toggle();
+            login.stack.flipBackwards();
             login.stack.addEventListener("endFlip", onFlipFinishedSuccess);
         }
 

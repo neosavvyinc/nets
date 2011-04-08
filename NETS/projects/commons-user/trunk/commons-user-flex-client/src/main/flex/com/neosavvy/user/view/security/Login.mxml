@@ -51,7 +51,9 @@
 
         </mx:Panel>
         <popup:ForgotPasswordPopup id="forgotPasswordPopup"/>
+        <popup:RegisterNewCompany id="registerCompany"/>
     </security:LoginStack>
-    <mx:LinkButton label="Forgot Password" click="stack.toggle()"/>
+    <mx:LinkButton label="Forgot Password" click="stack.flipForward()"/>
+    <mx:LinkButton label="Login" click="stack.flipBackwards()"/>
 
 </mx:VBox>

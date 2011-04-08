@@ -11,11 +11,17 @@
 
         private var isFlipping:Boolean;
 
-        private function flipBackwards():void {
+        private var selectedChildIndex : Number = selectedIndex;
 
-            if (numChildren != 2) return;
+        public function flipBackwards():void {
+
+            selectedChildIndex == 0
+                    ? selectedChildIndex = numChildren - 1
+                    : (selectedChildIndex--);
+
+            //if (numChildren != 2) return;
             isFlipping = true;
-            var flip:Flip = new Flip(getChildAt(0));
+            var flip:Flip = new Flip(getChildAt(selectedChildIndex));
             flip.siblings = [getChildAt(1)];
             flip.direction = DistortionConstants.RIGHT;
             flip.duration = 500;
@@ -29,10 +35,15 @@
 
         }
 
-        private function flipForward():void {
-            if (numChildren != 2) return;
+        public function flipForward():void {
+            //if (numChildren != 2) return;
+
+            selectedChildIndex == numChildren - 1
+                    ? selectedChildIndex = 0
+                    : (selectedChildIndex++);
+
             isFlipping = true;
-            var flip:Flip = new Flip(getChildAt(1));
+            var flip:Flip = new Flip(getChildAt(selectedChildIndex));
             flip.siblings = [getChildAt(0)];
             flip.direction = DistortionConstants.LEFT;
             flip.duration = 500;
@@ -47,21 +58,12 @@
         }
 
         private function flipEnd(event:EffectEvent):void {
-            if (numChildren == 2) {
-                selectedIndex = selectedIndex == 0 ? 1 : 0;
-            }
+            selectedIndex = selectedChildIndex;
+
             isFlipping = false;
             dispatchEvent(new Event("endFlip"));
 
         }
 
-        public function toggle():void {
-            if (selectedChild == getChildAt(0)) {
-                flipBackwards();
-            }
-            else {
-                flipForward();
-            }
-        }
         ]]></mx:Script>
 </mx:ViewStack>

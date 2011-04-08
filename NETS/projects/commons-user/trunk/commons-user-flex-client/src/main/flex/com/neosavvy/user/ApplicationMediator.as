@@ -29,9 +29,8 @@ package com.neosavvy.user {
      */
     public class ApplicationMediator extends Mediator implements IMediator {
 
-        public static var LANDING_NAVIGATION_INDEX:Number = 0;
-        public static var LOGIN_NAVIGATION_INDEX:Number = 1;
-        public static var SECURED_CONTAINER_NAVIGATION_INDEX:Number = 2;
+        public static var LOGIN_NAVIGATION_INDEX:Number = 0;
+        public static var SECURED_CONTAINER_NAVIGATION_INDEX:Number = 1;
 
 
         public function ApplicationMediator(viewComponent:NETS)
@@ -63,9 +62,13 @@ package com.neosavvy.user {
             return app.securedContainer;
         }
 
+        public function get logoutButton():Button {
+            return app.logoutButton;
+        }
+
         override public function onRegister():void
         {
-            this.login.addEventListener("goHomeClicked",goHomeClickHandler);
+            this.logoutButton.addEventListener(MouseEvent.CLICK, logoutButtonClickedHandler)
         }
 
         override public function listNotificationInterests():Array {
@@ -84,12 +87,6 @@ package com.neosavvy.user {
             sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
         }
 
-        public function hideLogin():void
-        {
-            this.navigationViewStack.selectedIndex = LANDING_NAVIGATION_INDEX;
-            toggleSecuredHeader(false);
-            sendNotification(ApplicationFacade.DEINITIALIZE_SECURED_VIEW);
-        }
 
         private function toggleSecuredHeader( toggleValue:Boolean ):void {
             this.secureHeaderBar.visible = toggleValue;
@@ -130,10 +127,6 @@ package com.neosavvy.user {
         private function logoutButtonClickedHandler(event:MouseEvent):void {
             sendNotification(ApplicationFacade.REQUEST_LOGOUT);
             displayLogin();
-        }
-
-        private function goHomeClickHandler(event:Event):void {
-            hideLogin();
         }
 
         var mailMessageView:IFlexDisplayObject;
