@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<parent>
+		<groupId>com.truviso.report.viewer</groupId>
+	    <artifactId>truview-report-viewer-toplevel</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.truviso.report.viewer</groupId>
+	<artifactId>truview-report-viewer-client</artifactId>
+	<name>TruView Report Viewer Client</name>
+	<packaging>swf</packaging>
+
+	<build>
+        <sourceDirectory>src/main/flex</sourceDirectory>
+		<plugins>
+			<plugin>
+				<groupId>org.sonatype.flexmojos</groupId>
+				<artifactId>flexmojos-maven-plugin</artifactId>
+				<version>${flexmojos.version}</version>
+                <extensions>true</extensions>
+				<executions>
+					<execution>
+						<goals>
+							<goal>wrapper</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<debug>true</debug>
+					<licenses>
+						<!-- Windows -->
+						<!--<flexbuilder3>1377-4008-6804-0543-0443-9238</flexbuilder3>-->
+						<!-- Mac OS X -->
+						<!--<charts>1377-4001-0346-3601-2775-6383</charts>-->
+						<flexbuilder3>1377-4001-0346-3601-2775-6383</flexbuilder3>
+					</licenses>
+					<locales>
+						<param>en_US</param>
+					</locales>
+					<contextRoot>svn-analytics-webapp</contextRoot>
+					<sourceFile>./TVReportViewer.mxml</sourceFile>
+                    <configurationReport>true</configurationReport>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.adobe.flex</groupId>
+						<artifactId>compiler</artifactId>
+						<version>${flex.version}</version>
+						<type>pom</type>
+					</dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack-config</id>
+						<goals>
+							<goal>unpack-dependencies</goal>
+						</goals>
+						<phase>generate-resources</phase>
+						<configuration>
+							<outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
+							<includeArtifacIds>truview-report-viewer-config</includeArtifacIds>
+							<includeGroupIds>${project.groupId}</includeGroupIds>
+							<excludeTransitive>true</excludeTransitive>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+
+		<resources>
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>${basedir}/target/generated-resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+	</build>
+
+	<dependencies>
+		<dependency>
+			<groupId>com.truviso.report.viewer</groupId>
+			<artifactId>truview-report-viewer-model</artifactId>
+			<version>${project.version}</version>
+			<type>swc</type>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.flex.framework</groupId>
+			<artifactId>flex-framework</artifactId>
+			<version>${flex.version}</version>
+			<type>pom</type>
+		</dependency>
+
+        <dependency>
+              <groupId>org.robotlegs</groupId>
+              <artifactId>robotlegs-framework</artifactId>
+              <version>1.4.0</version>
+              <type>swc</type>
+        </dependency>
+	</dependencies>
+
+</project>

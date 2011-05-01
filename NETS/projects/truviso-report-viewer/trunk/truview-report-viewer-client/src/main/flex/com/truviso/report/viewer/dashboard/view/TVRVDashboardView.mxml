@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<s:SkinnableContainer
+    xmlns:fx="http://ns.adobe.com/mxml/2009"
+    xmlns:s="library://ns.adobe.com/flex/spark"
+    xmlns:mx="library://ns.adobe.com/flex/mx">
+
+    <s:layout>
+        <s:VerticalLayout/> 
+    </s:layout>
+
+    <s:Label text="Viewable Domains"/>
+
+    <s:Label text="Search:"/>
+    <s:TextInput id="searchTextInput"/>
+    <s:Button id="searchButton" label="Search"/>
+
+    <mx:DataGrid
+            id="viewableDomainsGrid"
+            width="100%"
+            height="100%"
+            >
+
+        <mx:columns>
+            <mx:DataGridColumn
+                    id="domainColumn"/>
+
+            <mx:DataGridColumn
+                    id="impressionsColumn"/>
+
+            <mx:DataGridColumn
+                    id="contentVolumnColumn"/>
+            <mx:DataGridColumn
+                    id="actionColumn"/>
+
+        </mx:columns>
+
+    </mx:DataGrid>
+
+</s:SkinnableContainer>
