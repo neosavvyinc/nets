@@ -15,7 +15,7 @@
 
 	<build>
         <sourceDirectory>src/main/flex</sourceDirectory>
-		<plugins>
+        <plugins>
 			<plugin>
 				<groupId>org.sonatype.flexmojos</groupId>
 				<artifactId>flexmojos-maven-plugin</artifactId>

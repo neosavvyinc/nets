@@ -7,7 +7,7 @@
         xmlns:view2="com.truviso.report.viewer.domainPerformance.view.*"
         xmlns:view3="com.truviso.report.viewer.visitorSegmentation.view.*" xmlns:local="*">
 
-    <fx:Style source="reportViewer.css"/>
+    <fx:Style source="/reportViewer.css"/>
 
     <fx:Declarations>
         <local:TVReportViewerContext contextView="{this}"/>
