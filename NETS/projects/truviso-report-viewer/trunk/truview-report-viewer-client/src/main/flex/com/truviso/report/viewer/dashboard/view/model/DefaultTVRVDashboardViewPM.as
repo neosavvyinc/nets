@@ -6,10 +6,24 @@
  * Time: 3:45 PM
  */
 package com.truviso.report.viewer.dashboard.view.model {
+    import com.truviso.report.viewer.control.GetDomainPerformanceDataCommand;
+    import com.truviso.report.viewer.dashboard.control.DomainPerformanceSelectedSignal;
+    import com.truviso.report.viewer.dashboard.control.VisitorSegmentationSelectedSignal;
     import com.truviso.report.viewer.dashboard.view.*;
+
+    import flash.events.Event;
+
     import mx.collections.ArrayCollection;
 
+    import org.robotlegs.mvcs.Actor;
+
     public class DefaultTVRVDashboardViewPM implements ITVRVDashboardViewPM {
+
+        [Inject]
+        public var navigateToDomainPerformance : DomainPerformanceSelectedSignal;
+
+        [Inject]
+        public var navigateToVisitorSegmentation : VisitorSegmentationSelectedSignal;
 
         public function DefaultTVRVDashboardViewPM()
         {
@@ -17,6 +31,7 @@ package com.truviso.report.viewer.dashboard.view.model {
         }
 
         private var _domainsDashboardData : ArrayCollection = new ArrayCollection();
+
 
         public function get domainsDashboardData():ArrayCollection {
 
@@ -34,11 +49,11 @@ package com.truviso.report.viewer.dashboard.view.model {
         }
 
         public function onDomainPerformanceClicked():void {
-            trace("onDomainPerformanceClicked()");
+            navigateToDomainPerformance.dispatch();
         }
 
         public function onVisitorSegmentsClicked():void {
-            trace("onVisitorSegmentsClicked()");
+            navigateToVisitorSegmentation.dispatch();
         }
     }
 }

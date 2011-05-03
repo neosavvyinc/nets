@@ -7,8 +7,6 @@
 package com.truviso.report.viewer.dashboard.control {
     import org.osflash.signals.Signal;
 
-    public class DomainPerformanceSelectedSignal extends Signal {
-        public function DomainPerformanceSelectedSignal() {
-        }
+    public class DomainPerformanceSelectedSignal extends Signal {
     }
 }

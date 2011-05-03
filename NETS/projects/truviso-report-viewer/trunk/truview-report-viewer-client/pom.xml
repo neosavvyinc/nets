@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<parent>
 		<groupId>com.truviso.report.viewer</groupId>
@@ -42,7 +44,6 @@
 					<locales>
 						<param>en_US</param>
 					</locales>
-					<contextRoot>svn-analytics-webapp</contextRoot>
 					<sourceFile>./TVReportViewer.mxml</sourceFile>
                     <configurationReport>true</configurationReport>
                     <keepAs3Metadatas>
@@ -59,36 +60,8 @@
 					</dependency>
 				</dependencies>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack-config</id>
-						<goals>
-							<goal>unpack-dependencies</goal>
-						</goals>
-						<phase>generate-resources</phase>
-						<configuration>
-							<outputDirectory>${project.build.directory}/generated-resources</outputDirectory>
-							<includeArtifacIds>truview-report-viewer-config</includeArtifacIds>
-							<includeGroupIds>${project.groupId}</includeGroupIds>
-							<excludeTransitive>true</excludeTransitive>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+			
 		</plugins>
-
-		<resources>
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-			</resource>
-			<resource>
-				<directory>${basedir}/target/generated-resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
 	</build>
 
 	<dependencies>
@@ -118,6 +91,14 @@
             <version>0.8</version>
             <type>swc</type>
         </dependency>
+
+        <dependency>
+            <groupId>org.robotlegs</groupId>
+            <artifactId>signals-extension-SignalsCommandMap</artifactId>
+            <version>0.4</version>
+            <type>swc</type>
+        </dependency>
+
 
 	</dependencies>
 
