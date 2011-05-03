@@ -11,6 +11,11 @@ package com.truviso.report.viewer.dashboard.view.model {
 
     public class DefaultTVRVDashboardViewPM implements ITVRVDashboardViewPM {
 
+        public function DefaultTVRVDashboardViewPM()
+        {
+            super();
+        }
+
         private var _domainsDashboardData : ArrayCollection = new ArrayCollection();
 
         public function get domainsDashboardData():ArrayCollection {

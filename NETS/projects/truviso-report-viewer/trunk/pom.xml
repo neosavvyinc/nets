@@ -79,6 +79,7 @@
                     <extensions>true</extensions>
 
                     <configuration>
+                        <strict>true</strict>
                         <debug>true</debug>
                         <licenses>
                             <flexbuilder3>${flexbuilder.license}</flexbuilder3>
