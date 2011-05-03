@@ -43,6 +43,10 @@
 					<contextRoot>svn-analytics-webapp</contextRoot>
 					<sourceFile>./TVReportViewer.mxml</sourceFile>
                     <configurationReport>true</configurationReport>
+                    <keepAs3Metadatas>
+                      <name>Inject</name>
+                      <name>PostConstruct</name>
+                    </keepAs3Metadatas>
 				</configuration>
 				<dependencies>
 					<dependency>

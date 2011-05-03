@@ -32,7 +32,6 @@
     </distributionManagement>
 
     <modules>
-        <module>truview-report-viewer-model</module>
         <module>truview-report-viewer-client</module>
     </modules>
 

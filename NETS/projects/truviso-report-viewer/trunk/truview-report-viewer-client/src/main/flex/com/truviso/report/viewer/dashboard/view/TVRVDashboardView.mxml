@@ -40,15 +40,23 @@
         <mx:columns>
             <mx:DataGridColumn
                     id="domainColumn"
-                    dataField="domain"/>
+                    dataField="domain"
+                    headerText="Domain"
+                    width="200"/>
             <mx:DataGridColumn
                     id="impressionsColumn"
-                    dataField="impressions"/>
+                    dataField="impressions"
+                    headerText="Impressions"
+                    width="120"/>
             <mx:DataGridColumn
                     id="contentVolumnColumn"
-                    dataField="contentVolume"/>
+                    dataField="contentVolume"
+                    headerText="Content Volume"
+                    width="120"/>
             <mx:DataGridColumn
-                    id="actionColumn"/>
+                    id="actionColumn"
+                    headerText="Available Reports (click to view)"
+                    itemRenderer="com.truviso.report.viewer.dashboard.view.renderer.ActionRenderer"/>
         </mx:columns>
     </mx:DataGrid>
 
