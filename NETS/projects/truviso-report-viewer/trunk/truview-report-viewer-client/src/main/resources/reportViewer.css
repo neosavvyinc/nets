@@ -1,3 +1,8 @@
+.headingLabel {
+    fontSize: 18pt;
+    color: #503366;
+}
+
 .paddedSkinnableContainer {
     paddingBottom: 10;
     paddingLeft: 10;

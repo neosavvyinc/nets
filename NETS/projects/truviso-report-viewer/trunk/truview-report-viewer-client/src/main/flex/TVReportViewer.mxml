@@ -12,29 +12,31 @@
 
     <fx:Style source="/reportViewer.css"/>
 
-
-
     <s:states>
         <s:State name="dashboardState"/>
         <s:State name="domainPerformanceState"/>
         <s:State name="visitorSegmentationState"/>
     </s:states>
 
+    <s:VGroup width="1024" horizontalAlign="left">
+        <s:Label text="Dashboard" styleName="headingLabel"/>
+    </s:VGroup>
+    
     <view:TVRVDashboardView
         id="dashboardView"
-        width="100%"
+        width="1024"
         height="100%"
         includeIn="dashboardState"/>
 
     <view2:TVRVDomainPerformanceView
         id="domainPerformanceView"
-        width="100%"
+        width="1024"
         height="100%"
         includeIn="domainPerformanceState"/>
 
     <view3:TVRVVisitorSegmentationView
         id="visitorSegmentationView"
-        width="100%"
+        width="1024"
         height="100%"
         includeIn="visitorSegmentationState"/>
 
