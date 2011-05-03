@@ -5,7 +5,22 @@
     horizontalScrollPolicy="off"
     verticalScrollPolicy="off">
 
-    <mx:LinkButton label="Domain Performance"/>
-    <mx:LinkButton label="Visitor Segments"/>
+    <mx:LinkButton label="Domain Performance" click="onDomainPerformanceClicked()"/>
+    <mx:LinkButton label="Visitor Segments" click="onVisitorSegmentsClicked()"/>
 
+    <fx:Script><![CDATA[
+        import com.truviso.report.viewer.dashboard.view.TVRVDashboardView;
+
+        private function onDomainPerformanceClicked():void
+        {
+            var dashboardView : TVRVDashboardView = parentDocument as TVRVDashboardView;
+            dashboardView.tvrvDashboardViewPM.onDomainPerformanceClicked();
+        }
+
+        private function onVisitorSegmentsClicked():void
+        {
+            var dashboardView : TVRVDashboardView = parentDocument as TVRVDashboardView;
+            dashboardView.tvrvDashboardViewPM.onVisitorSegmentsClicked();
+        }
+        ]]></fx:Script>
 </mx:HBox>

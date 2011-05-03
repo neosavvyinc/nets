@@ -11,6 +11,8 @@ package com.truviso.report.viewer.dashboard.view.model {
 
         function get domainsDashboardData() : ArrayCollection;
         function set domainsDashboardData( value : ArrayCollection ) : void;
-        
+
+        function onDomainPerformanceClicked():void;
+        function onVisitorSegmentsClicked():void;
     }
 }
