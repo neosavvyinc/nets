@@ -2,38 +2,54 @@
 <s:SkinnableContainer
     xmlns:fx="http://ns.adobe.com/mxml/2009"
     xmlns:s="library://ns.adobe.com/flex/spark"
-    xmlns:mx="library://ns.adobe.com/flex/mx">
+    xmlns:mx="library://ns.adobe.com/flex/mx"
+    skinClass="com.truviso.report.viewer.dashboard.view.skin.TVRVDashboardViewSkin">
 
-    <s:layout>
-        <s:VerticalLayout/> 
-    </s:layout>
+    <fx:Script>
+        <![CDATA[
+        import com.truviso.report.viewer.dashboard.view.model.ITVRVDashboardViewPM;
 
-    <s:Label text="Viewable Domains"/>
+        private var _tvrvDashboardViewPM:ITVRVDashboardViewPM;
 
-    <s:Label text="Search:"/>
-    <s:TextInput id="searchTextInput"/>
-    <s:Button id="searchButton" label="Search"/>
+        public function get tvrvDashboardViewPM():ITVRVDashboardViewPM {
+            return _tvrvDashboardViewPM;
+        }
+
+        [Bindable]
+        [Inject(name="defaultTVRVDashboardViewPM")]
+        public function set tvrvDashboardViewPM(value:ITVRVDashboardViewPM):void {
+            _tvrvDashboardViewPM = value;
+        }
+        ]]>
+    </fx:Script>
+
+    <s:HGroup width="100%">
+        <s:Label text="Viewable Domains"/>
+        <mx:Spacer width="100%"/>
+        <s:Label text="Search:"/>
+        <s:TextInput id="searchTextInput"/>
+        <s:Button id="searchButton" label="Search"/>
+    </s:HGroup>
 
     <mx:DataGrid
             id="viewableDomainsGrid"
             width="100%"
             height="100%"
+            dataProvider="{tvrvDashboardViewPM.domainsDashboardData}"
             >
-
         <mx:columns>
             <mx:DataGridColumn
-                    id="domainColumn"/>
-
+                    id="domainColumn"
+                    dataField="domain"/>
             <mx:DataGridColumn
-                    id="impressionsColumn"/>
-
+                    id="impressionsColumn"
+                    dataField="impressions"/>
             <mx:DataGridColumn
-                    id="contentVolumnColumn"/>
+                    id="contentVolumnColumn"
+                    dataField="contentVolume"/>
             <mx:DataGridColumn
                     id="actionColumn"/>
-
         </mx:columns>
-
     </mx:DataGrid>
 
 </s:SkinnableContainer>

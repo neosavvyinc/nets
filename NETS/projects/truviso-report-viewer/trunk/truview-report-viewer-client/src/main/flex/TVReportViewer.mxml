@@ -5,13 +5,14 @@
         xmlns:mx="library://ns.adobe.com/flex/mx"
         xmlns:view="com.truviso.report.viewer.dashboard.view.*"
         xmlns:view2="com.truviso.report.viewer.domainPerformance.view.*"
-        xmlns:view3="com.truviso.report.viewer.visitorSegmentation.view.*" xmlns:local="*">
+        xmlns:view3="com.truviso.report.viewer.visitorSegmentation.view.*"
+        xmlns:local="*"
+        preinitialize="onPreinit()"
+        skinClass="TVReportViewerSkin">
 
     <fx:Style source="/reportViewer.css"/>
 
-    <fx:Declarations>
-        <local:TVReportViewerContext contextView="{this}"/>
-    </fx:Declarations>
+
 
     <s:states>
         <s:State name="dashboardState"/>
@@ -37,4 +38,12 @@
         height="100%"
         includeIn="visitorSegmentationState"/>
 
+    <fx:Script><![CDATA[
+        private var context : TVReportViewerContext;
+
+        private function onPreinit():void {
+            context = new TVReportViewerContext();
+            context.contextView = this;
+        }
+        ]]></fx:Script>
 </s:Application>
