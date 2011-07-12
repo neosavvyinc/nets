@@ -4,7 +4,7 @@
         xmlns:code="http://code.google.com/p/flexlib/"
         styleName="grayToGrayViewContainer"
         layout="vertical"
-        width="330"
+        width="400"
         verticalGap="0"
         paddingLeft="0"
         paddingRight="0"
@@ -23,20 +23,19 @@
             styleName="formWindow"
             horizontalScrollPolicy="off"
             verticalScrollPolicy="off">
-        <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_48_lock.png')"/>
+        <mx:Image source="@Embed(source='com/neosavvy/nets/theme/icons/Icon_48_signup.png')"/>
         <mx:VBox horizontalScrollPolicy="off" verticalScrollPolicy="off">
-            <mx:Label styleName="secondaryTitle" text="Reset your password"/>
-            <mx:Text styleName="bodyText" width="200" text="Provide your username below and the system will send your new password to your email address on file."/>
+            <mx:Label styleName="secondaryTitle" text="Register Your Company, It's Simple"/>
+            <mx:Text styleName="bodyText" width="300" text="Just provide your company name, email address, and desired username."/>
         </mx:VBox>
     </mx:HBox>
     <mx:VBox
             styleName="formSectionContainer"
             horizontalAlign="right"
             width="100%">
-        <code:PromptingTextInput prompt="Company Name" automationName="Username" id="companyName" width="100%"/>
-        <code:PromptingTextInput prompt="Username" automationName="userName" id="userName" width="100%"/>
-        <code:PromptingTextInput prompt="password" automationName="Username" id="password" width="100%"/>
-        <code:PromptingTextInput prompt="confirmPassword" automationName="Username" id="confirmPassword" width="100%"/>
+        <code:PromptingTextInput prompt="Company Name" id="companyName" width="100%"/>
+        <code:PromptingTextInput prompt="Email Address" id="emailAddress" width="100%"/>
+        <code:PromptingTextInput prompt="Username" id="username" width="100%"/>
         <mx:Button
                 id="registerCompany"
                 width="100%"

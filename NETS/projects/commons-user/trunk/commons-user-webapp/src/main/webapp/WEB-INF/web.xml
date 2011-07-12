@@ -10,6 +10,7 @@
         <listener-class>flex.messaging.HttpFlexSession</listener-class>
     </listener>
 
+
     <persistence-unit-ref>
         <persistence-unit-ref-name>NetsPU</persistence-unit-ref-name>
         <persistence-unit-name>NetsPU</persistence-unit-name>
@@ -67,6 +68,15 @@
         <servlet-class>com.sun.jersey.spi.spring.container.servlet.SpringServlet</servlet-class>
     </servlet>
 
+    <servlet>
+        <servlet-name>dwr</servlet-name>
+        <servlet-class>org.directwebremoting.spring.DwrSpringServlet</servlet-class>
+        <init-param>
+            <param-name>debug</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>nets</servlet-name>
         <url-pattern>/messagebroker/*</url-pattern>
@@ -76,4 +86,10 @@
         <servlet-name>rest</servlet-name>
         <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>dwr</servlet-name>
+        <url-pattern>/dwr/*</url-pattern>
+    </servlet-mapping>
+
 </web-app>

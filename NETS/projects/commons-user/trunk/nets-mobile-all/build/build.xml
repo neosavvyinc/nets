@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="iPad test" default="publish-debug" basedir=".">
+	
+	<property file="local.properties" />
+	<property file="build.properties" />
+	
+	<target name="clean">
+		<delete dir="${app.builddir}"/>
+		<delete dir="${app.releasedir}"/>
+		<mkdir dir="${app.builddir}"/>
+		<mkdir dir="${app.releasedir}"/>
+	</target>
+	
+	<target name="copy" depends="clean">
+		<copy todir="${app.builddir}" preservelastmodified="true" >
+			 <fileset dir="${app.sourcedir}">
+				<patternset>
+					<include name="assets/*.*"/>
+					<include name="photos/*.*"/>
+					<include name="sampledata/*.*"/>
+				</patternset>
+			 </fileset>
+		</copy>
+	</target>
+	
+	<target name="compile" depends="">
+		<exec executable="${MXMLC}">
+			<arg line="
+				${app.source}
+				-output=${app.builddir}/${app.rootfile}
+				-source-path+=${app.rootdir}/src
+				-static-link-runtime-shared-libraries=true
+				-library-path+='C:\Program Files (x86)\Adobe\Burrito\Adobe Flash Builder Burrito\eclipse\plugins\com.adobe.flexbuilder.dcrad_4.5.0.287807\fiberSwcs\4.0\libs\fiber.swc'
+				-library-path+='C:\Program Files (x86)\Adobe\Burrito\Adobe Flash Builder Burrito\eclipse\plugins\com.adobe.flexbuilder.dcrad_4.5.0.287807\fiberSwcs\4.0\locale\fiber_rb.swc'
+				-library-path+='C:\Program Files (x86)\Adobe\Burrito\Adobe Flash Builder Burrito\eclipse\plugins\com.adobe.flexbuilder.dcrad_4.5.0.287807\fiberSwcs\4.0\libs\playerfds.swc'
+				-library-path+='C:/Program Files (x86)/Adobe/Burrito/Adobe Flash Builder Burrito/eclipse/plugins/com.adobe.flexbuilder.dcrad_4.5.0.287807/dcradSwcs/4.0/libs/fds.swc'
+				-library-path+='C:/Program Files (x86)/Adobe/Burrito/Adobe Flash Builder Burrito/eclipse/plugins/com.adobe.flexbuilder.dcrad_4.5.0.287807/dcradSwcs/4.0/libs/serializers.swc'
+				-library-path+='C:/Program Files (x86)/Adobe/Burrito/Adobe Flash Builder Burrito/eclipse/plugins/com.adobe.flexbuilder.dcrad_4.5.0.287807/dcradSwcs/4.0/locale/fds_rb.swc'
+				-library-path+='C:/Program Files (x86)/Adobe/Burrito/Adobe Flash Builder Burrito/eclipse/plugins/com.adobe.flexbuilder.dcrad_4.5.0.287807/dcradSwcs/4.0/locale/serializers_rb.swc'
+				+configname=airmobile 
+			"/>
+		</exec>
+	</target>
+	
+	<target name="publish-debug" depends="copy, compile">
+		<exec executable="${ADT}">
+			<arg line="-package
+						-target ipa-debug
+						-storetype ${build.storetype}
+						-keystore ${build.keystore}
+						-storepass ${build.storepass}
+						-provisioning-profile ${build.mobileprofile}
+						${app.releasedir}/${build.name}
+						${app.descriptor}
+						-C ${app.builddir} ${app.rootfile} assets photos sampledata
+			"/>
+		</exec>
+	</target>
+	
+</project>

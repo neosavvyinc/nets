@@ -251,6 +251,10 @@
             <artifactId>im4java</artifactId>
             <version>1.1.0</version>
         </dependency>
+        <dependency>
+            <groupId>dwr</groupId>
+            <artifactId>dwr</artifactId>
+        </dependency>
 	</dependencies>
 
 </project>
