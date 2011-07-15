@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<mx:VBox
+    xmlns:mx="http://www.adobe.com/2006/mxml"
+    xmlns:panels="com.neosavvy.user.view.companyManagement.panels.*"
+    xmlns:newusermanagement="com.neosavvy.user.view.newUserManagement.*"
+    horizontalScrollPolicy="off"
+    verticalScrollPolicy="off"
+    xmlns:flexlib="http://code.google.com/p/flexlib/"
+        >
+
+
+    <mx:VBox
+            id="homeBody1"
+            verticalAlign="middle"
+            styleName="greenCrossHatchBox"
+            width="100%"
+            height="150"
+            horizontalScrollPolicy="off"
+            verticalScrollPolicy="off">
+        <mx:Label
+                text="Setting up NETS is simple, just fill out the form below and"
+                styleName="whiteText"/>
+        <mx:Label
+                text="respond to our registration email."
+                styleName="whiteText"/>
+        <mx:HBox>
+            <mx:ToggleButtonBar
+                    id="signupToggleBar"
+                    itemClick="{signupViewStack.selectedIndex = signupToggleBar.selectedIndex}">
+                <mx:dataProvider>
+                    <mx:String>Register a company?</mx:String>
+                    <mx:String>Confirm a company?</mx:String>
+                    <mx:String>Been Invited?</mx:String>
+                </mx:dataProvider>
+            </mx:ToggleButtonBar>
+        </mx:HBox>
+    </mx:VBox>
+    <mx:ViewStack
+            id="signupViewStack"
+            width="100%"
+            height="100%"
+            creationPolicy="all"
+            horizontalScrollPolicy="off"
+            verticalScrollPolicy="off">
+        <panels:SignupPanel id="signupPanel"/>
+        <panels:ConfirmAccountPanel id="confirmAccountPanel"/>
+        <newusermanagement:ConfirmUserRegistration id="confirmUserRegistration"/>
+        <panels:SuccessPanel id="successPanel"/>
+        <panels:ErrorPanel id="errorPanel"/>
+    </mx:ViewStack>
+
+</mx:VBox>

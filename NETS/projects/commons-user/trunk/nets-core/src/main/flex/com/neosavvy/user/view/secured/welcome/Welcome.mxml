@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<mx:VBox
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        horizontalAlign="center"
+        verticalAlign="top"
+        >
+
+        <mx:HBox
+                paddingTop="40"
+                paddingBottom="40"
+                width="100%"
+                styleName="dashboardBackground"
+                horizontalAlign="center">
+            <mx:VBox horizontalAlign="left">
+                <mx:Label styleName="calloutTextBold" text="Welcome to NETS"/>
+                <mx:Label styleName="calloutText" text="Complete the following steps to"/>
+                <mx:Label styleName="calloutText" text="setup your expense tracking system."/>
+            </mx:VBox>
+        </mx:HBox>
+
+
+        <mx:Canvas>
+            <mx:Canvas y="{dashboardBox.height / 4}" styleName="formSectionContainer" cornerRadius="10" width="{dashboardBox.width}" height="{dashboardBox.height}"/>
+            <mx:HBox y="0" id="dashboardBox" paddingLeft="10" paddingRight="10">
+
+                <mx:VBox horizontalAlign="center">
+                    <mx:Image source="@Embed(source='../../../../../../../../../../nets-theme/src/main/resources/com/neosavvy/nets/theme/icons/Icon_48_addUserUp.png')"/>
+                    <mx:LinkButton id="inviteEmployeesBtn" label="Invite Employees"/>
+                    <mx:Label paddingLeft="48" text="1" styleName="numberedStepLabel"/>
+                </mx:VBox>
+
+                <mx:VBox horizontalAlign="center">
+                    <mx:Image source="@Embed(source='../../../../../../../../../../nets-theme/src/main/resources/com/neosavvy/nets/theme/icons/Icon_48_clientUp.png')"/>
+                    <mx:LinkButton id="setupClientsBtn" label="Setup Clients"/>
+                    <mx:Label paddingLeft="48" text="2" styleName="numberedStepLabel"/>
+                </mx:VBox>
+
+                <mx:VBox horizontalAlign="center">
+                    <mx:Image source="@Embed(source='../../../../../../../../../../nets-theme/src/main/resources/com/neosavvy/nets/theme/icons/Icon_48_customizeUp.png')"/>
+                    <mx:LinkButton id="setupProjectsBtn" label="Setup Projects"/>
+                    <mx:Label paddingLeft="48" text="3" styleName="numberedStepLabel"/>
+                </mx:VBox>
+
+            </mx:HBox>
+
+        </mx:Canvas>
+
+
+</mx:VBox>

@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<mx:VBox
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/"
+        xmlns:controls="controls.*"
+        xmlns:neosavvy="com.neosavvy.grid.*"
+        styleName="applicationView"
+        width="100%" height="100%"
+        horizontalScrollPolicy="off"
+        verticalScrollPolicy="off">
+
+    <mx:HBox width="100%" horizontalAlign="right" styleName="headingTitleBox">
+        <mx:Label text="Invite Your Employees"/>
+    </mx:HBox>
+
+    <mx:VBox id="errorContainer"/>
+    <mx:HBox width="100%">
+        <flexlib:PromptingTextInput id="empFName" prompt="First Name" width="100%"/>
+        <flexlib:PromptingTextInput id="empLName" prompt="Last Name" width="100%"/>
+        <flexlib:PromptingTextInput id="empEmail" prompt="Email" width="100%"/>
+        <mx:Button id="addUserButton" label="Add User"/>
+    </mx:HBox>
+
+    <mx:DataGrid
+            id="employeesQueuedToInvite"
+            width="100%"
+            height="100%"
+            >
+        <mx:columns>
+            <mx:DataGridColumn
+                    id="firstNameCol"
+                    dataField="firstName"
+                    headerText="First Name"
+                    />
+            <mx:DataGridColumn
+                    id="lastNameCol"
+                    dataField="lastName"
+                    headerText="Last Name"
+                    />
+            <mx:DataGridColumn
+                    id="emailCol"
+                    dataField="emailAddress"
+                    headerText="Email"
+                    />
+            <mx:DataGridColumn
+                    id="actionsCol"
+                    headerText="Actions"
+                    itemRenderer="com.neosavvy.user.view.secured.employeeInvitation.Actions"/>
+        </mx:columns>
+    </mx:DataGrid>
+</mx:VBox>

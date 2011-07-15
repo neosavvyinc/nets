@@ -1,0 +1,59 @@
+<?xml version="1.0" ?>
+<mx:VBox
+        xmlns:mx="http://www.adobe.com/2006/mxml"
+        xmlns:flexlib="http://code.google.com/p/flexlib/" xmlns:security="com.neosavvy.user.view.security.*"
+        xmlns:popup="com.neosavvy.user.view.security.popup.*"
+        verticalAlign="middle"
+        horizontalAlign="center">
+
+    <mx:Script><![CDATA[
+        // stores the svn build number
+        public static const BUILD_NUMBER:Number = BUILD::buildNumber;
+        // stores the timestamp of the last build
+        public static const BUILD_TIMESTAMP:Date = new Date(BUILD::timestamp);
+        // stores the maven version of the current build
+        public static const BUILD_MAVEN_VERSION:String = String(BUILD::mavenVersion);
+        ]]></mx:Script>
+
+    <security:LoginStack id="stack">
+        <mx:Panel id="loginPanel"
+                  width="330"
+                  verticalGap="0"
+                  paddingLeft="0"
+                  paddingRight="0"
+                  paddingTop="0"
+                  paddingBottom="0"
+                  horizontalScrollPolicy="off"
+                  verticalScrollPolicy="off">
+
+            <mx:HBox width="100%"
+                     paddingLeft="10"
+                     paddingRight="10"
+                     paddingTop="10"
+                     paddingBottom="10"
+                     styleName="formWindow"
+                     horizontalScrollPolicy="off"
+                     verticalScrollPolicy="off">
+                <mx:Image source="@Embed(source='../../../../../../../../../nets-theme/src/main/resources/com/neosavvy/nets/theme/icons/Icon_48_lock.png')"/>
+                <mx:VBox width="100%" horizontalScrollPolicy="off" verticalScrollPolicy="off">
+                    <mx:Text styleName="secondaryTitle" text="Welcome to NETS"/>
+                    <mx:Text styleName="bodyText" width="200" text="Login with your username and password here"/>
+                </mx:VBox>
+            </mx:HBox>
+            <mx:VBox styleName="formSectionContainer" width="100%">
+                <flexlib:PromptingTextInput prompt="Username" automationName="username" id="username" width="100%"/>
+                <flexlib:PromptingTextInput prompt="Password" automationName="password" id="password" width="100%"
+                                            displayAsPassword="true"/>
+                <mx:Button styleName="orangeLargeButton" width="100%" id="loginButton" label="Login"/>
+                <mx:Label id="errorLbl" includeInLayout="false"/>
+                <mx:Label fontSize="8" styleName="contentLabelBold" text="Build: {BUILD::buildNumber} {BUILD::mavenVersion} {BUILD::timestamp}" />
+            </mx:VBox>
+
+        </mx:Panel>
+        <popup:ForgotPasswordPopup id="forgotPasswordPopup"/>
+        <popup:RegisterNewCompany id="registerCompany"/>
+    </security:LoginStack>
+    <mx:LinkButton label="Forgot Password" click="stack.flipForward()"/>
+    <mx:LinkButton label="Login" click="stack.flipBackwards()"/>
+
+</mx:VBox>

@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<mx:HBox xmlns:mx="http://www.adobe.com/2006/mxml" horizontalAlign="center">
+
+    <mx:Script>
+        <![CDATA[
+        import com.neosavvy.user.dto.project.ExpenseReport;
+        import com.neosavvy.user.view.secured.expenses.approving.event.ExpenseReportApproveEvent;
+        import com.neosavvy.user.view.secured.expenses.open.event.ExpenseReportEvent;
+
+        private function submitExpenseHandler():void {
+            dispatchEvent(new ExpenseReportEvent(ExpenseReportEvent.ACTION_REOPEN, data as ExpenseReport));
+        }
+
+        protected function viewExpenseReportHandler():void {
+            dispatchEvent(new ExpenseReportApproveEvent(ExpenseReportApproveEvent.ACTION_VIEW, data as ExpenseReport));
+        }
+        ]]>
+    </mx:Script>
+    <mx:LinkButton id="submitBtn" styleName="refreshButton" toolTip="Reopen Expense Report" click="{submitExpenseHandler()}"/>
+    <mx:LinkButton id="viewBtn" styleName="editLinkButton" toolTip="View Expense Report" click="{viewExpenseReportHandler()}"/>
+</mx:HBox>

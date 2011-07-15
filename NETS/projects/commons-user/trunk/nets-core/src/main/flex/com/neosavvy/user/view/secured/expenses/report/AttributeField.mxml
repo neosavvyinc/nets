@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml">
+    <mx:TextInput id="textInput" x="0" y="0" visible="false" />
+    <mx:CheckBox id="booleanInput" x="0" y="0" visible="false" />
+    <mx:ComboBox id="enumInput" x="0" y="0" visible="false" prompt="Select value..." labelField="value" />
+
+    <mx:Script><![CDATA[
+        import com.neosavvy.user.dto.base.Attribute;
+        import com.neosavvy.user.dto.base.AttributeEnumValue;
+        import com.neosavvy.user.dto.base.AttributeType;
+
+        import mx.collections.ListCollectionView;
+        import mx.collections.Sort;
+        import mx.collections.SortField;
+
+        private var _attribute:Attribute;
+
+        public function updateAttributeValue():void {
+            if (_attribute.descriptor.valueType.equals(AttributeType.ENUMERATED)) {
+                _attribute.enumValue = enumInput.selectedItem as AttributeEnumValue;
+            }
+            else if (_attribute.descriptor.valueType.equals(AttributeType.BOOLEAN)) {
+                _attribute.stringValue = String(booleanInput.selected);
+            }
+            else {
+                _attribute.stringValue = textInput.text;
+            }
+        }
+
+        public function get attribute():Attribute {
+            return _attribute;
+        }
+
+        public function set attribute(value:Attribute):void {
+            _attribute = value;
+
+            textInput.visible = false;
+            enumInput.visible = false;
+            booleanInput.visible = false;
+
+            if (_attribute.descriptor.valueType.equals(AttributeType.ENUMERATED)) {
+                enumInput.visible = true;
+                setupEnumValue();
+            }
+            else if (_attribute.descriptor.valueType.equals(AttributeType.BOOLEAN)) {
+                booleanInput.visible = true;
+                booleanInput.selected = _attribute.stringValue == "true";
+            }
+            else {
+                textInput.visible = true;
+                setupTextValue();
+            }
+        }
+
+        private function setupTextValue():void {
+            if (_attribute.descriptor.valueType.equals(AttributeType.INTEGER)) {
+                textInput.text = String(int(_attribute.stringValue));
+            }
+            else if (_attribute.descriptor.valueType.equals(AttributeType.FLOAT)) {
+                textInput.text = Number(_attribute.stringValue).toFixed(_attribute.descriptor.precision);
+            }
+            else {
+                textInput.text = _attribute.stringValue;
+            }
+        }
+
+        private function setupEnumValue():void {
+            _attribute.descriptor.possibleValues.sort = new Sort();
+            _attribute.descriptor.possibleValues.sort.fields = [new SortField('sortOrder')];
+            _attribute.descriptor.possibleValues.refresh();
+
+            enumInput.dataProvider = _attribute.descriptor.possibleValues;
+
+            if (_attribute.enumValue != null) {
+                for (var i:int = 0; i < enumInput.dataProvider.length; i++) {
+                    var value:AttributeEnumValue = ListCollectionView(enumInput.dataProvider).getItemAt(i) as AttributeEnumValue;
+
+                    if (value.idNumber == _attribute.enumValue.idNumber) {
+                        enumInput.selectedIndex = i;
+                        break;
+                    }
+                }
+            }
+            else {
+                enumInput.selectedIndex = -1;
+            }
+        }
+
+        protected override function updateDisplayList(unscaledWidth:Number, unscaledHeight:Number):void {
+            super.updateDisplayList(unscaledWidth, unscaledHeight);
+            textInput.width = unscaledWidth;
+            textInput.height = unscaledHeight;
+            enumInput.width = unscaledWidth;
+            enumInput.height = unscaledHeight;
+            booleanInput.width = unscaledWidth;
+            booleanInput.height = unscaledHeight;
+        }
+        ]]></mx:Script>
+</mx:Canvas>
