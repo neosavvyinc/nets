@@ -12,7 +12,8 @@
         xmlns:mx="http://www.adobe.com/2006/mxml"
         xmlns:companyManagement="com.neosavvy.user.view.companyManagement.*"
         xmlns:security="com.neosavvy.user.view.security.*"
-        xmlns:secured="com.neosavvy.user.view.secured.*">
+        xmlns:secured="com.neosavvy.user.view.secured.*"
+        implements="INETS">
 
     <mx:Style source="/commonsUser.css"/>
     <mx:Style source="mxTypeSelectors.css"/>
@@ -22,6 +23,8 @@
         <![CDATA[
         import com.neosavvy.user.ApplicationFacade;
 
+        import mx.containers.Box;
+
         import mx.events.ItemClickEvent;
 
         private var facade:ApplicationFacade = ApplicationFacade.getInstance(ApplicationFacade.defaultApplicationKey);
@@ -30,11 +33,39 @@
             navigationViewStack.selectedIndex = event.index;
         }
 
+
+        public function get navigationViewStack():ViewStack {
+            return null;
+        }
+
+        public function get login():Login {
+            return _login;
+        }
+
+        public function get secureHeaderBar():Box {
+            return _secureHeaderBar;
+        }
+
+        public function get securedContainer():SecuredContainer {
+            return _securedContainer;
+        }
+
+        public function get logoutButton():Button {
+            return _logoutButton;
+        }
+
+        public function get companyNameHeader():Label {
+            return _companyNameHeader;
+        }
+
+        public function get loggedInUser():Label {
+            return _loggedInUser;
+        }
         ]]>
     </mx:Script>
 
     <mx:HBox
-            id="secureHeaderBar"
+            id="_secureHeaderBar"
             width="960"
             horizontalGap="0"
             verticalAlign="middle"
@@ -42,23 +73,23 @@
             verticalScrollPolicy="off"
             includeInLayout="false"
             visible="false">
-        <mx:Label id="companyNameHeader" styleName="calloutTextBold"/>
+        <mx:Label id="_companyNameHeader" styleName="calloutTextBold"/>
         <mx:Spacer width="100%"/>
         <mx:Label id="welcomeLabel" text="Welcome "/>
-        <mx:Label id="loggedInUser"/>
-        <mx:Button label="Log Out" id="logoutButton" styleName="orangeSmallButton" />
+        <mx:Label id="_loggedInUser"/>
+        <mx:Button label="Log Out" id="_logoutButton" styleName="orangeSmallButton" />
     </mx:HBox>
 
     <mx:ViewStack
             creationPolicy="all"
-            id="navigationViewStack"
+            id="_navigationViewStack"
             width="960"
             height="100%"
             minHeight="600"
             selectedIndex="0">
-        <security:Login id="login" width="100%" height="100%"/>
+        <security:Login id="_login" width="100%" height="100%"/>
         <!--<companyManagement:Signup id="signupContent" height="100%" width="100%" verticalGap="-1"/>-->
-        <secured:SecuredContainer id="securedContainer" width="100%" height="100%"/>
+        <secured:SecuredContainer id="_securedContainer" width="100%" height="100%"/>
     </mx:ViewStack>
 
 

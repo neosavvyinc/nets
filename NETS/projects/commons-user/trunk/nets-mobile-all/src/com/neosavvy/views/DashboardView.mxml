@@ -16,78 +16,11 @@
 			
 			import fineline.focal.common.types.v1.StorageServiceFileRef;
 			
-			import mx.graphics.codec.PNGEncoder;
 			import mx.messaging.ChannelSet;
 			import mx.messaging.channels.AMFChannel;
 			import mx.rpc.events.FaultEvent;
 			import mx.rpc.events.ResultEvent;
 			import mx.rpc.remoting.RemoteObject;
-			
-			import spark.components.Image;
-			
-			private var mpLoader : Loader;
-			
-			private var imageDisplay : Image;
-			
-			private function onLaunchCameraUI(e:Event):void
-			{
-				var cameraUI:CameraUI = new CameraUI();
-				cameraUI.addEventListener(MediaEvent.COMPLETE, onCameraUIComplete);
-				//cameraUI.addEventListener(Event.CANCEL, onCameraUICanceled);
-				//cameraUI.addEventListener(ErrorEvent.ERROR, onCameraError);
-				cameraUI.launch(MediaType.IMAGE);
-			}
-			
-			private function onCameraUIComplete(e:MediaEvent):void
-			{
-				var cameraUI:CameraUI = e.target as CameraUI;
-				cameraUI.removeEventListener(MediaEvent.COMPLETE, onCameraUIComplete);
-				//cameraUI.removeEventListener(Event.CANCEL, onCameraUICanceled);
-				//cameraUI.removeEventListener(ErrorEvent.ERROR, onCameraError);
-				
-				var mediaPromise:MediaPromise = e.data;
-				
-				this.mpLoader = new Loader();
-				this.mpLoader.contentLoaderInfo.addEventListener(Event.COMPLETE, onMediaPromiseLoaded);
-				//this.mpLoader.addEventListener(IOErrorEvent.IO_ERROR, onMediaPromiseLoadError);
-				this.mpLoader.loadFilePromise(mediaPromise);
-			}
-			
-			private function onMediaPromiseLoaded(e:Event):void
-			{
-				var mpLoaderInfo:LoaderInfo = e.target as LoaderInfo;
-				mpLoaderInfo.removeEventListener(Event.COMPLETE, onMediaPromiseLoaded);
-				
-				
-				var bitmap:BitmapData = (mpLoaderInfo.content as Bitmap).bitmapData;
-				var png:PNGEncoder = new PNGEncoder();
-				var byteArray:ByteArray = png.encode(bitmap);
-				//mpLoaderInfo.loader.removeEventListener(IOErrorEvent.IO_ERROR, onMediaPromiseLoadError);
-				
-				var temp : File = new File(File.applicationStorageDirectory.nativePath + File.separator + "nets-mobile.png");  //Creates a new temp file
-				
-				var fs : FileStream = new FileStream();
-				fs.open( temp, FileMode.WRITE )
-				fs.writeBytes( byteArray );
-				
-				var uploadUrl:String = Constants.MOBILE_URL + (data as SessionState).securityWrapper.sessionId;	
-				var urlRequest : URLRequest = new URLRequest(uploadUrl);
-				urlRequest.method = URLRequestMethod.POST;
-				urlRequest.contentType = "text/xml";
-				
-				var fileReference : FileReference = FileReference( temp );
-				fileReference.upload( urlRequest ); 
-				fileReference.addEventListener( DataEvent.UPLOAD_COMPLETE_DATA, upCompleteHandler );
-				fileReference.addEventListener( IOErrorEvent.IO_ERROR, upIoErrorHandler ); 
-				fileReference.addEventListener( ProgressEvent.PROGRESS, progressHandler );
-				
-				uploadProgressManager = new UploadProgressManager();
-				uploadProgressManager.startProgress( this );
-				
-				
-			}
-			
-			
 			protected function captureReceiptClicked(event:MouseEvent):void
 			{
 				if( CameraUI.isSupported )
@@ -234,5 +167,5 @@
 		<!-- Place non-visual elements (e.g., services, value objects) here -->
 	</fx:Declarations>
 	
-	<s:Button width="100%" label="Capture Receipt" click="onLaunchCameraUI(event)"/>
+	<s:Button width="100%" label="Capture Receipt" click="captureReceiptClicked(event)"/>
 </views:BaseNETSView>

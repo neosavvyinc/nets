@@ -8,6 +8,8 @@ package com.neosavvy.user {
     import com.neosavvy.user.view.secured.SecuredContainer;
     import com.neosavvy.user.view.security.Login;
 
+    import flash.display.DisplayObject;
+
     import flash.events.Event;
     import flash.events.MouseEvent;
 
@@ -33,16 +35,16 @@ package com.neosavvy.user {
         public static var SECURED_CONTAINER_NAVIGATION_INDEX:Number = 1;
 
 
-        public function ApplicationMediator(viewComponent:NETS)
+        public function ApplicationMediator(viewComponent:INETS)
         {
             super(NAME, viewComponent);
         }
 
 
 
-        public function get app():NETS
+        public function get app():INETS
         {
-            return viewComponent as NETS;
+            return viewComponent as INETS;
         }
 
         public function get navigationViewStack():ViewStack {
@@ -132,7 +134,7 @@ package com.neosavvy.user {
         var mailMessageView:IFlexDisplayObject;
 
         private function havingTroubleButtonClickedHandler(event:MouseEvent):void {
-            mailMessageView = PopUpManager.createPopUp(this.app, SystemMailMessageView, true);
+            mailMessageView = PopUpManager.createPopUp(this.app as DisplayObject, SystemMailMessageView, true);
             PopUpManager.centerPopUp( mailMessageView );
             (mailMessageView as SystemMailMessageView).titleString = "Having Trouble";
 

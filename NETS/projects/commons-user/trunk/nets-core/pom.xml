@@ -11,7 +11,7 @@
 
     <groupId>com.neosavvy.commons.user</groupId>
     <artifactId>nets-core</artifactId>
-    <name>commons-user flex client</name>
+    <name>nets-core</name>
     <packaging>swc</packaging>
 
     <build>

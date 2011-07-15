@@ -44,9 +44,10 @@
         <module>commons-user-flex-client</module>
         <module>commons-user-webapp</module>
         <module>storage-service</module>
-        <module>commons-user-enterprise-application</module>
         <module>commons-user-groovy-templates</module>
         <module>nets-theme</module>
+        <module>nets-air-client</module>
+        <module>nets-core</module>
     </modules>
 
     <properties>
@@ -86,11 +87,11 @@
                             <version>${flex.version}</version>
                             <type>pom</type>
                         </dependency>
-                        <dependency>
-                            <groupId>com.adobe.flex.license</groupId>
-                            <artifactId>license-flexbuilder-pro</artifactId>
-                            <version>${flex.version}</version>
-                        </dependency>
+                        <!--<dependency>-->
+                            <!--<groupId>com.adobe.flex.license</groupId>-->
+                            <!--<artifactId>license-flexbuilder-pro</artifactId>-->
+                            <!--<version>${flex.version}</version>-->
+                        <!--</dependency>-->
                         <dependency>
                             <groupId>org.sonatype.flexmojos</groupId>
                             <artifactId>flexmojos-generator-graniteds-1.1.0</artifactId>

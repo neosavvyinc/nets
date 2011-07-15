@@ -55,6 +55,8 @@ package com.neosavvy.user {
     import com.neosavvy.user.model.SecurityProxy;
     import com.neosavvy.user.model.UserServiceProxy;
 
+    import mx.core.Application;
+
     import org.puremvc.as3.multicore.patterns.facade.Facade;
 
     public class ApplicationFacade extends Facade
@@ -154,7 +156,7 @@ package com.neosavvy.user {
          *
          * @param app a reference to the application component
          */
-        public function startup(app:NETS):void
+        public function startup(app:Application):void
         {
             sendNotification(STARTUP, app);
         }

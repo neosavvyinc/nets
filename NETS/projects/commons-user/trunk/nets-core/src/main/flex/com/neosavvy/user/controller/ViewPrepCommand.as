@@ -9,7 +9,7 @@ package com.neosavvy.user.controller {
     public class ViewPrepCommand extends SimpleCommand {
 
         override public function execute(notification:INotification):void {
-            var application:NETS = notification.getBody() as NETS;
+            var application:INETS = notification.getBody() as INETS;
             facade.registerMediator(new ApplicationMediator(application));
             facade.registerMediator(new ProgressBarMediator(null));
 //            facade.registerMediator(new SignupMediator(application.signupContent));
