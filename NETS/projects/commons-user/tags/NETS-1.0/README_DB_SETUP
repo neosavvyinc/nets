@@ -1,0 +1,17 @@
+PostgreSQL Setup
+Create database
+psql -d template1 -U postgres
+CREATE DATABASE commonsuser;
+CREATE USER commonsuser WITH PASSWORD 'commonsuser';
+GRANT ALL PRIVILEGES ON DATABASE commonsuser TO commonsuser;
+CREATE DATABASE commonstest;
+CREATE USER commonstest WITH PASSWORD 'commonstest';
+GRANT ALL PRIVILEGES ON DATABASE commonstest TO commonstest;
+\q
+ vi /var/lib/pgsql/data/pg_hba.conf
+change
+host    all         all         127.0.0.1/32          ident
+to
+host    all         all         127.0.0.1/32          trust
+psql -d commonsuser -U commonsuser
+CREATE SCHEMA commonsuser; 
