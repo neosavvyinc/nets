@@ -23,6 +23,11 @@
 
     <dependencyManagement>
         <dependencies>
+<dependency>
+  <groupId>org.springframework</groupId>
+  <artifactId>spring-instrument</artifactId>
+  <version>3.0.1.RELEASE</version>
+</dependency>
             <dependency>
                 <groupId>org.apache.cxf</groupId>
                 <artifactId>cxf-rt-frontend-jaxws</artifactId>
